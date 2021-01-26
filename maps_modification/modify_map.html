@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="styles.css?version=1" />
+    <script type="text/javascript" src="../d3/topojson.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+  </head>
+
+  <body>
+    <a href="#" onclick="prev()">&laquo; Previous</a>
+    <a href="#" onclick="next()">Next &raquo;</a>
+    <h5 id="pol">Poligon num: </h5>
+    <h5 id="arcs">Arcs num: </h5>
+    <div id="map-view">
+      <div>
+        <svg class="view-map" id="svg-map">
+          <g id="all-map">
+            <g id="map"></g>
+            <g id="map2"></g>
+          </g>
+
+          <g class="zoom-controls" transform="translate(10, 10)">
+            <g id="zoom-in" transform="translate(0, 0)">
+              <rect width="30" height="30" fill="rgba(0,0,0,1.0)"></rect>
+              <line x1="5" y1="15" x2="25" y2="15" style="stroke: white"></line>
+              <line x1="15" y1="5" x2="15" y2="25" style="stroke: white"></line>
+            </g>
+            <g id="zoom-out" transform="translate(31, 0)">
+              <rect width="30" height="30" fill="rgba(0,0,0,1.0)"></rect>
+              <line x1="5" y1="15" x2="25" y2="15" style="stroke: white"></line>
+            </g>
+            <g id="zoom-reset" transform="translate(62, 0)">
+              <rect width="30" height="30" fill="rgba(0,0,0,1.0)"></rect>
+              <text x="10" y="20" fill="white">R</text>
+            </g>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <script
+      type="application/javascript"
+      src="modify_map.js?version=1"
+    ></script>
+  </body>
+</html>
