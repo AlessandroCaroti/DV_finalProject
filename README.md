@@ -3,7 +3,7 @@
 
 <b>Contributors:</b>
 <ul>
- <li>Caroti Alessandro</li>
- <li>Campisi Simone</li>
- <li>Dapueto Jacopo</li>
+ <li>Alessandro Caroti</li>
+ <li><a href="https://github.com/simocampi">Simone Campisi</a></li>
+ <li><a href="https://github.com/LazyRacc00n">Jacopo Dapueto</a></li>
 </ul>
