@@ -1,8 +1,23 @@
 /* MAP */
 
-#svg-map{
-  border: 0.1px solid black;
+#svg-map {
+  border: 0.0px solid black;
   padding: 0px;
+}
+
+#div-map {
+  align-content: center;
+}
+
+.background {
+  fill: #5ccec500;
+}
+
+.content {
+  margin: auto;
+  width: 70%;
+  padding: 10px;
+  align-items: center;
 }
 
 .country {
@@ -11,8 +26,13 @@
   fill: #ececec;
 }
 
-.highlighted_country{
+.highlighted_country {
   stroke: #00ff00;
+  stroke-width: 1px;
+}
+
+.selected_country {
+  stroke: red;
   stroke-width: 1px;
   fill: #ececec;
 }
@@ -40,18 +60,20 @@
   flex-wrap: nowrap;
 }
 
+span {
+  padding: 1em;
+}
 
 .slider {
-  -webkit-appearance: none;  /* Override default CSS styles */
-  appearance: none;
-  width: 100%; /* Full-width */
-  height: 15px;
+  -webkit-appearance: none;
+  width: 500px;
+  height: 2px;
   border-radius: 5px;
-  background: #d3d3d3; /* Grey background */
-  outline: none; /* Remove outline */
-  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
-  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
-  transition: opacity .2s;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
 }
 
 /* Mouse-over effects */
@@ -61,15 +83,22 @@
 
 /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
 .slider::-webkit-slider-thumb {
-  -webkit-appearance: none; /* Override default look */
+  -webkit-appearance: none;
   appearance: none;
-  width: 200px; /* Set a specific slider handle width */
-  height: 30px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  background: #4CAF50; /* Green background */
-  cursor: pointer; /* Cursor on hover */
+  background: #4caf50;
+  cursor: pointer;
 }
 
+.slider::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #4caf50;
+  cursor: pointer;
+}
 
 /*
 input# {
