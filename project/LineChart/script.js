@@ -1,54 +1,3 @@
-function tooltip(svg){
-
-      var focus = svg.append("g")
-      .attr("class", "focus")
-      .style("display", "none");
-
-      focus.append("circle")
-      .attr("r", 5);
-
-      focus.append("rect")
-      .attr("class", "tooltip")
-      .attr("width", 100)
-      .attr("height", 50)
-      .attr("x", 10)
-      .attr("y", -22)
-      .attr("rx", 4)
-      .attr("ry", 4);
-
-      focus.append("text")
-      .attr("class", "tooltip-date")
-      .attr("x", 18)
-      .attr("y", -2);
-
-      focus.append("text")
-      .attr("x", 18)
-      .attr("y", 18)
-      .text("Likes:");
-
-      focus.append("text")
-      .attr("class", "tooltip-likes")
-      .attr("x", 60)
-      .attr("y", 18);
-
-      return focus
-
-}
-
-function mousemove(svg, x, y) {
-  
-  var focus = tooltip(svg);
-  
-  var x0 = x.invert(d3.mouse(this)[0]),
-      i = bisectDate(data, x0, 1),
-      d0 = data[i - 1],
-      d1 = data[i],
-      d = x0 - d0.date > d1.date - x0 ? d1 : d0;
-  focus.attr("transform", "translate(" + x(d.date) + "," + y(d.likes) + ")");
-  focus.select(".tooltip-date").text(dateFormatter(d.date));
-  focus.select(".tooltip-likes").text(formatValue(d.likes));
-}
-
 
   function changeData() {
    
@@ -92,17 +41,31 @@ function mousemove(svg, x, y) {
         svg.append("g")
             .call(d3.axisLeft(y))
         
+        var valueline = d3.line()
+            .x(function(d) { return x(d.date); })
+            .y(function(d) { return y(d.value); });
+        //create tooltips
+        var tooltip = d3.select("body")
+                          .append("div")
+                          .attr("class", "tooltip");
+        
             // Add the line
-        svg.append("path")
-            .datum(data)
+        var line = svg.append("path")
+            .data([data])
             .attr("fill", "none")
             .attr("stroke", "steelblue")
             .attr("stroke-width", 1.5)
-            .attr("d", d3.line()
-            .x(function(d) { return x(d.date) })
-            .y(function(d) { return y(d.value) })
-        )
+            .attr("d", valueline);
 
+        line.on("mouseover", (event, d)=>{
+          console.log(d)
+          tooltip.transition();
+          tooltip.style("left", (event.pageX) + "px")
+                 .style("top", (event.pageY - 20) + "px")
+                 .style("display", "block")
+                 .html("<b> date: " + d.date+", value: "+d.value+"</b>")
+
+        })
         
        })
        .catch((error) =>{
