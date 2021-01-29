@@ -9,7 +9,37 @@
   </head>
 
   <body>
-    <svg width="600" height="400"></svg>
     <script type="application/javascript" src="script.js?version=1"></script>
+
+
+    <div id="tab_menu">
+      
+      <div class="tab">
+        
+        <button class="tablinks" onclick="click_tab(event, 'linechart')">Line Chart</button>
+        <button class="tablinks" onclick="click_tab(event, 'stripechart')">Stripes Chart</button>
+      </div>
+
+      <div id="starting_tab_content"></div>
+
+      <div id="linechart" class="tabcontent">
+        <h3>Line Chart</h3>
+        <p> 
+          <ul> 
+              <li> Line Chart - 10 years average with uncertainty </li>
+              <li> Line Chart - 12 month  </li>
+              <li> tooltip  </li>
+
+          </ul> 
+      </p>
+      </div>
+      
+      <div id="stripechart" class="tabcontent">
+        <h3>Stripes Chart</h3>
+        <p> Stripe chart for specific country</p> 
+      </div>
+  </div>
+    
+
   </body>
 </html>
