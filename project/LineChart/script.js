@@ -15,10 +15,13 @@
           height = 500 - margin.top - margin.bottom;
 
           data.forEach(d => {
+            console.log(d.date)
             d.date = d3.timeParse("%Y-%m-%d")(d.date) 
-            d.value = parseFloat(d.value);
+            d.value = d.value;
+            console.log(d.date)
           });
         
+          
         //select svg
         var svg = d3.select("#line_chart_graph")
           .append("svg")
@@ -29,10 +32,10 @@
                   "translate(" + margin.left + "," + margin.top + ")");
         
         // Now I can use this dataset:
-        data =>{
+        data_ =>{
           // Add X axis --> it is a date format
           var x = d3.scaleTime()
-            .domain(d3.extent(data, function(d) { return d.date; }))
+            .domain(d3.extent(data_, function(d) { return d.date; }))
             .range([ 0, width ]);
           svg.append("g")
             .attr("transform", "translate(0," + height + ")")
@@ -40,14 +43,14 @@
 
           // Add Y axis
           var y = d3.scaleLinear()
-            .domain([0, d3.max(data, function(d) { return +d.value; })])
+            .domain([0, d3.max(data_, function(d) { return +d.value; })])
             .range([ height, 0 ]);
           svg.append("g")
             .call(d3.axisLeft(y));
 
           // Add the line
           svg.append("path")
-            .datum(data)
+            .datum(data_)
             .attr("fill", "none")
             .attr("stroke", "steelblue")
             .attr("stroke-width", 1.5)
