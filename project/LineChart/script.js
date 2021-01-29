@@ -1,5 +1,4 @@
 
-
 function click_tab(evt, cityName) {
     
     document.getElementById("starting_tab_content").style.display = "none"
