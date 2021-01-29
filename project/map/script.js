@@ -90,14 +90,12 @@ function country_selected(country) {
 // LOAD COUNTRIES MENU
 
 
-var countries = d3.select("#selectCountry")
-        .append("datalist")
-        .attr("id", "countryList")
-        .data(["Internet Explorer", "Firefox", "Chrome", "Opera", "Safari"]);
+var countries = d3.select("datalist#countryList")
+        .data([("Internet Explorer"), ("Firefox"), ("Chrome"), ("Opera"), ("Safari")]);
         
 countries.enter()
           .append("option")
-          .attr("value", d => d)
+          .attr("value", d => d);
 
 
 
@@ -113,6 +111,10 @@ slider.oninput = function () {
 };
 
 // UPDATE COUNTRY
+
+function changeCountry(){
+  console.log("bubi")
+}
 
 // *******************************************************************
 // FILES LOADING
