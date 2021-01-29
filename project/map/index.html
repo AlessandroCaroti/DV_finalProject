@@ -8,9 +8,29 @@
   </head>
 
   <body>
-    <svg class="view-map" id="svg-map">
-      <g id="map"></g>
-    </svg>
+    <div id="all_map" class="col_wrapper">
+
+      <div class = "row_wrapper">
+        Year: 
+        <div id="outputYear">
+        </div>
+      </div>
+
+      <div class = "row_wrapper" width="200">
+        <span>
+          <input type="range" min="1700" max="2020" value="50" class="slider" id="selectYear" />
+        </span>
+
+        <span>
+          <label>Country:</label>
+          <input list="countryList" id="selectCountry" onclick="changeCountry()" />
+        </span>
+      </div>
+
+      <svg class="view-map" id="svg-map">
+        <g id="map"></g>
+      </svg>
+    </div>
 
     <script type="application/javascript" src="script.js?version=1"></script>
   </body>

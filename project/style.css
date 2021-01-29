@@ -1,9 +1,86 @@
 /* MAP */
 
 #svg-map{
-  border: 0px solid black;
+  border: 0.1px solid black;
   padding: 0px;
 }
 
+.country {
+  stroke: #000000;
+  stroke-width: 0.5px;
+  fill: #ececec;
+}
+
+.highlighted_country{
+  stroke: #00ff00;
+  stroke-width: 1px;
+  fill: #ececec;
+}
+
+.grat_2 {
+  fill: none;
+  stroke: #777;
+  stroke-width: 0.1px;
+  stroke-opacity: 0.5;
+}
+
+.col_wrapper {
+  float: left;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.row_wrapper {
+  float: left;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+
+.slider {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 15px;
+  border-radius: 5px;
+  background: #d3d3d3; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 200px; /* Set a specific slider handle width */
+  height: 30px;
+  border-radius: 50%;
+  background: #4CAF50; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+
+/*
+input# {
+     position:absolute;
+     top:0px;
+     left:0px;
+     width:100px;
+     padding:1px;
+     font-size:12px;
+     border:none;
+ }
+*/
 
 /* END MAP */
