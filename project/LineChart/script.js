@@ -45,7 +45,7 @@
     var margin = {top: 10, right: 30, bottom: 30, left: 60}
     
     var formatTime = d3.timeFormat("%e %B");
-    var parseTime = d3.timeParse("%Y-%m-%d");
+    var parseTime;
           
     width = 500 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
@@ -55,14 +55,32 @@
                 .attr("height", height + margin.top + margin.bottom)
                 .append("g")
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-            
-    d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/3_TwoNumOrdered_comma.csv")
-      .then( function(data){
+    
+          
 
+    var dataFile = document.getElementById('dataset').value;
+    console.log("Dataset Name: ", dataFile);
+    var dataset_csv;
+    
+    if( dataFile == "dataset_1"){
+      parseTime = d3.timeParse("%Y-%m-%d");
+      dataset_csv = "https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/3_TwoNumOrdered_comma.csv";
+    }
+    else{  
+      dataset_csv = "anscombe_I.csv";
+      parseTime = d3.timeParse("%d-%m-%Y");
+    }
+  
+    d3.csv(dataset_csv)
+      .then( function(data){
+        console.log(data)
           data.forEach(function(d){
             
+            console.log(d.date)
             d.date = parseTime(d.date);
-            d.value = +d.value;   
+            //console.log(d.date)
+            d.value = +d.value;
+               
           
           });
           
@@ -95,8 +113,6 @@
                         .attr("stroke-width", 1.5)
                         .attr("d", valueline);       
               
-          
-          
           var tooltip = d3.select("body")
                           .append("div")
                           .attr("class", "tooltip");      
