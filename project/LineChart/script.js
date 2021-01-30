@@ -184,14 +184,24 @@ function drawCircles(svg, data, x, y){
                               .attr("d", valueline(data))
                               .transition().duration(2000);      
                   
-                  var svg =  d3.select("#line_chart_graph");       
+                       
                   
                   var tooltip = d3.select("body")
                                   .append("div")
                                   .attr("class", "tooltip");      
                         
                   
-                  var circles = drawCircles(svg, data, x, y);
+                  var circles = d3.selectAll("circle")
+                                  .data(data)  // Update with new data
+                                  .attr("cx", function(d) { return x(d.date); })
+                                  .attr("cy", function(d) { return y(d.value); })
+                                  .attr("r", 5)
+                                  .classed("unselected_circle", true)
+                                  .transition().duration(300)
+                                
+                  var svg = d3.select("#line_chart_graph");
+                  
+                  circles = drawCircles(svg, data, x, y)
                                       
                   circles.on("mouseenter", function(event, d){
                                   tooltip_circle_enter(this, event, d, tooltip)              
