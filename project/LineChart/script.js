@@ -2,36 +2,40 @@
 
   function drawCircles(svg, data, x, y){
     
-    circle = svg.selectAll("dot")
-                .data(data)
-                .enter().append("circle")
-                .attr("r", 5)
-                .attr("cx", function(d) { return x(d.date); })
-                .attr("cy", function(d) { return y(d.value); });
+  var circle = svg.selectAll("circle")
+                    .data(data)
+                    .enter().append("circle")
+                    .attr("cx", function(d) { return x(d.date); })
+                    .attr("cy", function(d) { return y(d.value); })
+                    .attr("r", 5)
+                    .classed("unselected_circle", true)
     
     return circle;
   }
 
 
-  function add_corresponding_circle(id_chart, data, x, y, radius_dot, color ){
-        
-    d3.select(id_chart)
-        .selectAll("circle")
-        .data(data)
-        .enter().append("circle")
-        .attr("cx", function(d) { return x(d.date); })
-        .attr("cy", function(d) { return y(d.value); })
-        .attr("r", radius_dot)
-        .style("fill", color);
-}
+  function tooltip_circle_enter(self, event, d, tooltip_div){
+    
+    tooltip_div.transition().duration(200);
+          
+    tooltip_div.html("<b> Year: " + d.date.getFullYear()+"<br/>" +"<br/>" +"Value: "+d.value+"</b>")
+           .style("left", (event.pageX) + "px")
+           .style("top", (event.pageY) + "px")
+           .style("opacity", .9)
+           .style("display", "inline")
 
-function remove_corresponding_circle(id_chart){
+    d3.select(self).classed("selected_circle", true)
 
-    d3.select(id_chart).select("circle").remove();
-
-}
-
-
+  }
+  
+  
+  function tooltip_circle_leave(self, tooltip_div){
+    
+    d3.select(self).classed("selected_circle", false)
+    tooltip_div.transition()
+    .duration(500)
+    .style("opacity", 0);
+  }
 
   function changeData() {
    
@@ -83,62 +87,29 @@ function remove_corresponding_circle(id_chart){
                             .x(function(d) { return x(d.date); })
                             .y(function(d) { return y(d.value); });
           
-          //create tooltips
-          var div_tooltip = d3.select("body")
-                            .append("div")
-                            .attr("class", "div_tooltip");
-          
-          var tooltip = div_tooltip
-                            .append("div")
-                            .attr("class", "tooltip");
-          
-              // Add the line
+          // Draw the line the line
           var line = svg.append("path")
                         .data([data])
                         .attr("fill", "none")
                         .attr("stroke", "steelblue")
                         .attr("stroke-width", 1.5)
-                        .attr("d", valueline);             
+                        .attr("d", valueline);       
+              
           
           
-          var circles =  svg.selectAll("circle")
-                        .data(data)
-                        .enter().append("circle")
-                        .attr("cx", function(d) { return x(d.date); })
-                        .attr("cy", function(d) { return y(d.value); })
-                        .attr("r", 5)
-                        .classed("unselected_circle", true)
-                        .on("mouseenter", function(event, d){
-                          
-                        tooltip.transition()
-                                        .duration(200);
+          var tooltip = d3.select("body")
+                          .append("div")
+                          .attr("class", "tooltip");      
           
-                        tooltip.html("<b> Year: " + d.date.getFullYear()+"<br/>" +"<br/>" +"Value: "+d.value+"</b>")
-                                      .style("left", (event.pageX) + "px")
-                                      .style("top", (event.pageY) + "px")
-                                      .style("opacity", .9)
-                                      .style("display", "inline")
-                                      .style(width, tooltip.width+20+"px")
-
-                          
-                          d3.select(this).classed("selected_circle", true)
-                        })
-                        .on("mouseleave", function(){
-                          
-                          d3.select(this).classed("selected_circle", false)
-                          tooltip.transition()
-                          .duration(500)
-                          .style("opacity", 0);
-                        })
+          var circles = drawCircles(svg, data, x, y);
                         
-                      
-      
-                          /*
-                            
-                            */
-          
-        
-        })
+          circles.on("mouseenter", function(event, d){
+                    tooltip_circle_enter(this, event, d, tooltip)              
+                  })
+                  .on("mouseleave", function(){
+                    tooltip_circle_leave(this, tooltip)
+                  })
+          })
           .catch((error) =>{
               console.log(error);
               //alert("Unable To Load The Dataset!!");

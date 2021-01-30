@@ -89,9 +89,9 @@ svg {
   width: auto;
   height: auto;
   padding: 10px;
-  font-size: 12px sans-serif;
+  font-size: 11px sans-serif;
   border: 1px solid black;
-  background: rgba(138, 138, 209, 0.7);
+  background: lightsteelblue;
   border-radius: 8px;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
   display: none;
