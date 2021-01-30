@@ -99,5 +99,14 @@ svg {
   display: none;
 }
 
+.unselected_circle{
+   opacity: 0;
+}
+
+.selected_circle{
+  opacity: 0.5;
+  fill: red;
+
+}
 
 /* END TAB MENU LINECHART */

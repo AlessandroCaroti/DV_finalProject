@@ -13,6 +13,25 @@
   }
 
 
+  function add_corresponding_circle(id_chart, data, x, y, radius_dot, color ){
+        
+    d3.select(id_chart)
+        .selectAll("circle")
+        .data(data)
+        .enter().append("circle")
+        .attr("cx", function(d) { return x(d.date); })
+        .attr("cy", function(d) { return y(d.value); })
+        .attr("r", radius_dot)
+        .style("fill", color);
+}
+
+function remove_corresponding_circle(id_chart){
+
+    d3.select(id_chart).select("circle").remove();
+
+}
+
+
 
   function changeData() {
    
@@ -77,41 +96,40 @@
                         .attr("fill", "none")
                         .attr("stroke", "steelblue")
                         .attr("stroke-width", 1.5)
-                        .attr("d", valueline);
-
-          line.on("mouseover", function(event, d){
-            
-            d3.select(".mouse-line")
-              .style("opacity", "1");
-            
-            d3.selectAll(".mouse-per-line circle")
-              .style("opacity", "1");
-            
-            d3.selectAll(".mouse-per-line text")
-              .style("opacity", "1");
+                        .attr("d", valueline);             
           
-            /*
-            tooltip.transition()
-                        .duration(200);
+          
+          var circles =  svg.selectAll("circle")
+                        .data(data)
+                        .enter().append("circle")
+                        .attr("cx", function(d) { return x(d.date); })
+                        .attr("cy", function(d) { return y(d.value); })
+                        .attr("r", 3)
+                        .classed("unselected_circle", true)
+                        .on("mouseenter", function(){
+                          d3.select(this).classed("selected_circle", true)
+                        })
+                        .on("mouseleave", function(){
+                          
+                          d3.select(this).classed("unselected_circle", true)
+                        })
+                        
+                        
+                        //.style("display", "none")
+                        
+      
+                          /*
+                            console.log("d.date", d);
+                            tooltip.transition()
+                                        .duration(200);
 
-            tooltip.html(formatTime(d.date) + "<br/>" + d.close)
-                      .style("left", (event.pageX) + "px")
-                      .style("top", (event.pageY - 20) + "px")
-                      .style("display", "block")
-                      .html("<b> date: " + d.date+"\n\nvalue: "+d.value+"</b>")
-            */
-          }) 
-          .on('mousemove', function(event) { // mouse moving over canvas
-              console.log(event)
-              var mouse = d3.pointer(event);
-              d3.select(".mouse-line")
-                .attr("d", function() {
-                    
-                   var d = "M" + mouse[1] + "," + height;
-                      d += " " + mouse[1] + "," + 0;
-                    return d;
-                  })
-          })
+                            tooltip.html(formatTime(d.date) + "<br/>" + d.close)
+                                      .style("left", (event.pageX) + "px")
+                                      .style("top", (event.pageY - 20) + "px")
+                                      .style("display", "block")
+                                      .html("<b> date: " + d.date+"\n\nvalue: "+d.value+"</b>")
+                            */
+          
         
         })
           .catch((error) =>{
