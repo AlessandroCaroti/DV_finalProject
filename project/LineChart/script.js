@@ -1,4 +1,19 @@
 
+
+  function drawCircles(svg, data, x, y){
+    
+    circle = svg.selectAll("dot")
+                .data(data)
+                .enter().append("circle")
+                .attr("r", 5)
+                .attr("cx", function(d) { return x(d.date); })
+                .attr("cy", function(d) { return y(d.value); });
+    
+    return circle;
+  }
+
+
+
   function changeData() {
    
     // prendere dati da mappa selezionata o dropdown menu
@@ -6,7 +21,10 @@
     //test
     dataFile = "anscombe_I"
            //select svg
-    var margin = {top: 10, right: 30, bottom: 30, left: 60},
+    var margin = {top: 10, right: 30, bottom: 30, left: 60}
+    
+    var formatTime = d3.timeFormat("%e %B");
+    var parseTime = d3.timeParse("%Y-%m-%d");
           
     width = 500 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
@@ -18,11 +36,13 @@
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
             
     d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/3_TwoNumOrdered_comma.csv")
-      .then(  (data) => {
+      .then( function(data){
 
-          data.forEach(d => {
-            d.date = d3.timeParse("%Y-%m-%d")(d.date) 
-            d.value = d.value;   
+          data.forEach(function(d){
+            
+            d.date = parseTime(d.date);
+            d.value = +d.value;   
+          
           });
           
             // Add X axis --> it is a date format
@@ -30,49 +50,75 @@
             .domain(d3.extent(data, function(d) { return d.date; }))
             .range([ 0, width ]);
         
-        svg.append("g")
-            .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(x));
+          svg.append("g")
+              .attr("transform", "translate(0," + height + ")")
+              .call(d3.axisBottom(x));
 
-          // Add Y axis
+            // Add Y axis
           var y = d3.scaleLinear()
-            .domain([0, d3.max(data, function(d) { return +d.value; })])
-            .range([ height, 0 ]);
-        svg.append("g")
-            .call(d3.axisLeft(y))
-        
-        var valueline = d3.line()
-            .x(function(d) { return x(d.date); })
-            .y(function(d) { return y(d.value); });
-        //create tooltips
-        var tooltip = d3.select("body")
-                          .append("div")
-                          .attr("class", "tooltip");
-        
-            // Add the line
-        var line = svg.append("path")
-            .data([data])
-            .attr("fill", "none")
-            .attr("stroke", "steelblue")
-            .attr("stroke-width", 1.5)
-            .attr("d", valueline);
+              .domain([0, d3.max(data, function(d) { return + d.value; })])
+              .range([ height, 0 ]);
+          
+          svg.append("g")
+              .call(d3.axisLeft(y))
+          
+          var valueline = d3.line()
+                            .x(function(d) { return x(d.date); })
+                            .y(function(d) { return y(d.value); });
+          
+          //create tooltips
+          var tooltip = d3.select("body")
+                            .append("div")
+                            .attr("class", "tooltip");
+          
+              // Add the line
+          var line = svg.append("path")
+                        .data([data])
+                        .attr("fill", "none")
+                        .attr("stroke", "steelblue")
+                        .attr("stroke-width", 1.5)
+                        .attr("d", valueline);
 
-        line.on("mouseover", (event, d)=>{
-          console.log(d)
-          tooltip.transition();
-          tooltip.style("left", (event.pageX) + "px")
-                 .style("top", (event.pageY - 20) + "px")
-                 .style("display", "block")
-                 .html("<b> date: " + d.date+", value: "+d.value+"</b>")
+          line.on("mouseover", function(event, d){
+            
+            d3.select(".mouse-line")
+              .style("opacity", "1");
+            
+            d3.selectAll(".mouse-per-line circle")
+              .style("opacity", "1");
+            
+            d3.selectAll(".mouse-per-line text")
+              .style("opacity", "1");
+          
+            /*
+            tooltip.transition()
+                        .duration(200);
 
+            tooltip.html(formatTime(d.date) + "<br/>" + d.close)
+                      .style("left", (event.pageX) + "px")
+                      .style("top", (event.pageY - 20) + "px")
+                      .style("display", "block")
+                      .html("<b> date: " + d.date+"\n\nvalue: "+d.value+"</b>")
+            */
+          }) 
+          .on('mousemove', function(event) { // mouse moving over canvas
+              console.log(event)
+              var mouse = d3.pointer(event);
+              d3.select(".mouse-line")
+                .attr("d", function() {
+                    
+                   var d = "M" + mouse[1] + "," + height;
+                      d += " " + mouse[1] + "," + 0;
+                    return d;
+                  })
+          })
+        
         })
-        
-       })
-       .catch((error) =>{
-          console.log(error);
-          //alert("Unable To Load The Dataset!!");
-          throw(error)
-       })
+          .catch((error) =>{
+              console.log(error);
+              //alert("Unable To Load The Dataset!!");
+              throw(error)
+          })
     
 }
 
