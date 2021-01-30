@@ -20,7 +20,7 @@
 
     <span>
       <label>Dataset:</label>
-      <select name="Dataset" id="dataset">
+      <select name="Dataset" id="dataset" onchange="changeData()">
         <option value="dataset_1"> Dataset 1</option>
         <option value="dataset_2"> Dataset 2</option>
       </select>
@@ -47,13 +47,7 @@
         <svg class="graphics" id= stripes_chart_graph></svg>          
       
       </div>
-    </div>
-
-    
-    <script> 
-      document.getElementById("dataset").onchange = changeData;
-    </script>
-    
+    </div>  
 
   </body>
 </html>

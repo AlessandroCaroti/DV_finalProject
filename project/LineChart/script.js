@@ -63,8 +63,6 @@ function drawCircles(svg, data, x, y){
 
   function createDefaultLineChart(data){
 
-    
-    console.log(data)
     var svg = d3.select("#line_chart_graph")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -98,6 +96,7 @@ function drawCircles(svg, data, x, y){
     // Draw the line the line
     var line = svg.append("path")
                 .data([data])
+                .attr("class","line_chart")
                 .attr("fill", "none")
                 .attr("stroke", "steelblue")
                 .attr("stroke-width", 1.5)
@@ -120,73 +119,83 @@ function drawCircles(svg, data, x, y){
   }
 
 
-  function changeData(data) {
+  function changeData() {
     
-
-    var dataFile = document.getElementById('dataset').value;
-    console.log("Dataset Name: ", dataFile);
-
-    //only to test the update
-    if( dataFile == "dataset_1")
-      parseTime = d3.timeParse("%Y-%m-%d");
-    else
-      parseTime = d3.timeParse("%m-%d-%Y");
     
     // prendere dati da mappa selezionata o dropdown menu
-  
+    var dataFile = document.getElementById('dataset').value;
+    
+    //quando cambio dati, devo leggere un nuovo csv
+
+    var csv;
+    //only to test the update
+    if( dataFile == "dataset_1"){
+      parseTime = d3.timeParse("%Y-%m-%d");
+      csv = "https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/3_TwoNumOrdered_comma.csv"
+    }
+    else{
+      parseTime = d3.timeParse("%m-%d-%Y");
+      csv = "anscombe_I.csv"
+    }
+    console.log(csv);
     //select svg
     
-    var svg = d3.select("#line_chart_graph")
-                .attr("width", width + margin.left + margin.right)
-                .attr("height", height + margin.top + margin.bottom)
-                .append("g")
-                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-    
-            // Add X axis --> it is a date format
-            // extent reuturn [min-max]
-    var x = d3.scaleTime()
-              .domain(d3.extent(data, function(d) { return d.date; }))
-              .range([ 0, width ]);
-        
-    svg.append("g")
-        .attr("transform", "translate(0," + height + ")")
-        .attr("class", "x_axis")
-        .call(d3.axisBottom(x));
+    d3.csv(csv)
+      .then( function(data){ 
 
-            // Add Y axis
-            var y= d3.scaleLinear()
-              .domain(d3.extent(data, function(d) { return d.value; }))
-              .range([ height, 0 ]);
-          
-          svg.append("g")
-              .attr("class", "y_axis")
-              .call(d3.axisLeft(y))
-          
-          var valueline = d3.line()
-                            .x(function(d) { return x(d.date); })
-                            .y(function(d) { return y(d.value); });
-          
-          // Draw the line the line
-          var line = svg.append("path")
-                        .data([data])
-                        .attr("fill", "none")
-                        .attr("stroke", "steelblue")
-                        .attr("stroke-width", 1.5)
-                        .attr("d", valueline);       
-              
-          var tooltip = d3.select("body")
-                          .append("div")
-                          .attr("class", "tooltip");      
-          
-          var circles = drawCircles(svg, data, x, y);
+                  data.forEach(d => {
+                
+                    d.date = parseTime(d.date);
+                    d.value = +d.value;
+                  });
+                  
+                  var x = d3.scaleTime()
+                            .domain(d3.extent(data, function(d) { return d.date; }))
+                            .range([ 0, width ]);
+                      
+                        // Add Y axis
+                  var y= d3.scaleLinear()
+                        .domain(d3.extent(data, function(d) { return d.value; }))
+                        .range([ height, 0 ]);
+
+                  // Select the section we want to apply our changes to
+                  var div = d3.select("#line_chart_graph").transition().duration(2000);
+                              
                         
-          circles.on("mouseenter", function(event, d){
-                    tooltip_circle_enter(this, event, d, tooltip)              
-                  })
-                  .on("mouseleave", function(){
-                    tooltip_circle_leave(this, tooltip)
-                  })
-         
+                  var valueline = d3.line()
+                                    .x(function(d) { return x(d.date); })
+                                    .y(function(d) { return y(d.value); });
+                        
+                  // Draw the line the line
+                  var svg = d3.select(".line_chart")
+                              .attr("fill", "none")
+                              .attr("stroke", "steelblue")
+                              .attr("stroke-width", 1.5)
+                              .attr("d", valueline(data))
+                              .transition()
+                              .duration(2000);      
+                  
+                  /*
+                  var tooltip = d3.select("body")
+                                  .append("div")
+                                  .attr("class", "tooltip");      
+                        
+                  
+                  var circles = drawCircles(svg, data, x, y);
+                                      
+                  circles.on("mouseenter", function(event, d){
+                                  tooltip_circle_enter(this, event, d, tooltip)              
+                                })
+                          .on("mouseleave", function(){
+                                  tooltip_circle_leave(this, tooltip)
+                                })
+                  */
+      })
+      .catch((error) =>{
+        console.log(error);
+        //alert("Unable To Load The Dataset!!");
+        throw(error)
+    })  
 }
 
 
@@ -208,8 +217,6 @@ d3.csv(dataset_1)
     //alert("Unable To Load The Dataset!!");
     throw(error)
 })
-
-
 
 
 
