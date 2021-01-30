@@ -23,7 +23,7 @@
 .country {
   stroke: #000000;
   stroke-width: 0.5px;
-  fill: #ececec;
+  fill: #999999;
 }
 
 .highlighted_country {

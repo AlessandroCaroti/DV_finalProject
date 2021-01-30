@@ -9,6 +9,9 @@ dataYear_folder = "./data/data_year"
 
 global_dict = {}
 
+max = -9999
+min = 99999
+
 
 def group_year(year_list):
 
@@ -46,7 +49,15 @@ for i, country in enumerate(country_list):
 for year in global_dict.keys():
     if not os.path.exists(dataYear_folder+"/"+str(year)):
                 os.makedirs(dataYear_folder+"/"+str(year))
+    curr_max = np.max(global_dict[year]["Anomaly"])
+    curr_min = np.min(global_dict[year]["Anomaly"])
+    if(curr_max > max):
+        max = curr_max
+    if(curr_min < min):
+        min = curr_min
     global_dict[year].to_csv(dataYear_folder+"/"+str(year)+"/Annual_mean.csv")
+
+print(min, max)
 
 
 
