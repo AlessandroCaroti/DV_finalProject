@@ -1,6 +1,16 @@
+//Global Variable
+
+var margin = {top: 10, right: 30, bottom: 30, left: 60}
+width = 500 - margin.left - margin.right,
+height = 500 - margin.top - margin.bottom;
+var parseTime = d3.timeParse("%Y-%m-%d");
+  
 
 
-  function drawCircles(svg, data, x, y){
+
+
+
+function drawCircles(svg, data, x, y){
     
   var circle = svg.selectAll("circle")
                     .data(data)
@@ -37,18 +47,94 @@
     .style("opacity", 0);
   }
 
-  function changeData() {
-   
+
+  function updateAxis(x_axis_class, y_axis_class){
+    
+    var x = d3.scaleTime()
+            .domain(d3.extent(data, function(d) { return d.date; }))
+            .range([ 0, width ]);
+
+    var y = d3.scaleLinear()
+              .domain(d3.extent(data, function(d) { return d.value; }))
+              .range([ height, 0 ]);
+
+    
+  }
+
+  function createDefaultLineChart(data){
+
+    
+    console.log(data)
+    var svg = d3.select("#line_chart_graph")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    // Add X axis --> it is a date format
+    // extent reuturn [min-max]
+    var x = d3.scaleTime()
+              .domain(d3.extent(data, function(d) { return d.date; }))
+              .range([ 0, width ]);
+
+    svg.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .attr("class", "x_axis")
+      .call(d3.axisBottom(x));
+
+    // Add Y axis
+    var y= d3.scaleLinear()
+      .domain(d3.extent(data, function(d) { return d.value; }))
+      .range([ height, 0 ]);
+
+    svg.append("g")
+      .attr("class", "y_axis")
+      .call(d3.axisLeft(y))
+
+    var valueline = d3.line()
+                    .x(function(d) { return x(d.date); })
+                    .y(function(d) { return y(d.value); });
+
+    // Draw the line the line
+    var line = svg.append("path")
+                .data([data])
+                .attr("fill", "none")
+                .attr("stroke", "steelblue")
+                .attr("stroke-width", 1.5)
+                .attr("d", valueline);       
+      
+    var tooltip = d3.select("body")
+                  .append("div")
+                  .attr("class", "tooltip");      
+
+    var circles = drawCircles(svg, data, x, y);
+                
+    circles.on("mouseenter", function(event, d){
+            tooltip_circle_enter(this, event, d, tooltip)              
+          })
+          .on("mouseleave", function(){
+            tooltip_circle_leave(this, tooltip)
+          })
+
+
+  }
+
+
+  function changeData(data) {
+    
+
+    var dataFile = document.getElementById('dataset').value;
+    console.log("Dataset Name: ", dataFile);
+
+    //only to test the update
+    if( dataFile == "dataset_1")
+      parseTime = d3.timeParse("%Y-%m-%d");
+    else
+      parseTime = d3.timeParse("%m-%d-%Y");
+    
     // prendere dati da mappa selezionata o dropdown menu
   
-           //select svg
-    var margin = {top: 10, right: 30, bottom: 30, left: 60}
-    
-    var formatTime = d3.timeFormat("%e %B");
-    var parseTime;
-          
-    width = 500 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+    //select svg
     
     var svg = d3.select("#line_chart_graph")
                 .attr("width", width + margin.left + margin.right)
@@ -56,49 +142,24 @@
                 .append("g")
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     
-          
-
-    var dataFile = document.getElementById('dataset').value;
-    console.log("Dataset Name: ", dataFile);
-    var dataset_csv;
-    
-    if( dataFile == "dataset_1"){
-      parseTime = d3.timeParse("%Y-%m-%d");
-      dataset_csv = "https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/3_TwoNumOrdered_comma.csv";
-    }
-    else{  
-      dataset_csv = "anscombe_I.csv";
-      parseTime = d3.timeParse("%d-%m-%Y");
-    }
-  
-    d3.csv(dataset_csv)
-      .then( function(data){
-        console.log(data)
-          data.forEach(function(d){
-            
-            console.log(d.date)
-            d.date = parseTime(d.date);
-            //console.log(d.date)
-            d.value = +d.value;
-               
-          
-          });
-          
             // Add X axis --> it is a date format
-            var x = d3.scaleTime()
-            .domain(d3.extent(data, function(d) { return d.date; }))
-            .range([ 0, width ]);
+            // extent reuturn [min-max]
+    var x = d3.scaleTime()
+              .domain(d3.extent(data, function(d) { return d.date; }))
+              .range([ 0, width ]);
         
-          svg.append("g")
-              .attr("transform", "translate(0," + height + ")")
-              .call(d3.axisBottom(x));
+    svg.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .attr("class", "x_axis")
+        .call(d3.axisBottom(x));
 
             // Add Y axis
-          var y = d3.scaleLinear()
-              .domain([0, d3.max(data, function(d) { return + d.value; })])
+            var y= d3.scaleLinear()
+              .domain(d3.extent(data, function(d) { return d.value; }))
               .range([ height, 0 ]);
           
           svg.append("g")
+              .attr("class", "y_axis")
               .call(d3.axisLeft(y))
           
           var valueline = d3.line()
@@ -125,17 +186,36 @@
                   .on("mouseleave", function(){
                     tooltip_circle_leave(this, tooltip)
                   })
-          })
-          .catch((error) =>{
-              console.log(error);
-              //alert("Unable To Load The Dataset!!");
-              throw(error)
-          })
-    
+         
 }
 
 
 
+//Di default c'è dataset 1
+dataset_1 = "https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/3_TwoNumOrdered_comma.csv";
+d3.csv(dataset_1)
+  .then( function(data){ 
+
+    data.forEach(d => {
+      
+      d.date = parseTime(d.date);
+      d.value = +d.value;
+    });
+    createDefaultLineChart(data)
+  })
+  .catch((error) =>{
+    console.log(error);
+    //alert("Unable To Load The Dataset!!");
+    throw(error)
+})
+
+
+
+
+
+
+
+//------------EVENTS FOR CLICKING TAB MEU ----------------------------------
 function click_tab_linechart(evt, graphic_name) {
     
   document.getElementById("starting_tab_content").style.display = "none"
@@ -152,7 +232,6 @@ function click_tab_linechart(evt, graphic_name) {
   document.getElementById(graphic_name).style.display = "block";
   evt.currentTarget.className += " active";
 
-  changeData()
 }
 
 
