@@ -64,10 +64,10 @@ function drawCircles(svg, data, x, y){
   function createDefaultLineChart(data){
 
     var svg = d3.select("#line_chart_graph")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     // Add X axis --> it is a date format
     // extent reuturn [min-max]
@@ -165,17 +165,27 @@ function drawCircles(svg, data, x, y){
                   var valueline = d3.line()
                                     .x(function(d) { return x(d.date); })
                                     .y(function(d) { return y(d.value); });
-                        
+                
+                   // update Axis
+                  d3.select(".x_axis")
+                    .transition().duration(500)
+                    .call(d3.axisBottom(x));                 
+                  
+                  d3.select(".y_axis")
+                    .transition().duration(500)
+                    .call(d3.axisLeft(y));               
+
+
                   // Draw the line the line
-                  var svg = d3.select(".line_chart")
+                   d3.select(".line_chart")
                               .attr("fill", "none")
                               .attr("stroke", "steelblue")
                               .attr("stroke-width", 1.5)
                               .attr("d", valueline(data))
-                              .transition()
-                              .duration(2000);      
+                              .transition().duration(2000);      
                   
-                  /*
+                  var svg =  d3.select("#line_chart_graph");       
+                  
                   var tooltip = d3.select("body")
                                   .append("div")
                                   .attr("class", "tooltip");      
@@ -189,7 +199,7 @@ function drawCircles(svg, data, x, y){
                           .on("mouseleave", function(){
                                   tooltip_circle_leave(this, tooltip)
                                 })
-                  */
+                  
       })
       .catch((error) =>{
         console.log(error);
