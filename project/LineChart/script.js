@@ -36,9 +36,7 @@ function remove_corresponding_circle(id_chart){
   function changeData() {
    
     // prendere dati da mappa selezionata o dropdown menu
-   
-    //test
-    dataFile = "anscombe_I"
+  
            //select svg
     var margin = {top: 10, right: 30, bottom: 30, left: 60}
     
@@ -86,7 +84,11 @@ function remove_corresponding_circle(id_chart){
                             .y(function(d) { return y(d.value); });
           
           //create tooltips
-          var tooltip = d3.select("body")
+          var div_tooltip = d3.select("body")
+                            .append("div")
+                            .attr("class", "div_tooltip");
+          
+          var tooltip = div_tooltip
                             .append("div")
                             .attr("class", "tooltip");
           
@@ -104,30 +106,35 @@ function remove_corresponding_circle(id_chart){
                         .enter().append("circle")
                         .attr("cx", function(d) { return x(d.date); })
                         .attr("cy", function(d) { return y(d.value); })
-                        .attr("r", 3)
+                        .attr("r", 5)
                         .classed("unselected_circle", true)
-                        .on("mouseenter", function(){
+                        .on("mouseenter", function(event, d){
+                          
+                        tooltip.transition()
+                                        .duration(200);
+          
+                        tooltip.html("<b> Year: " + d.date.getFullYear()+"<br/>" +"<br/>" +"Value: "+d.value+"</b>")
+                                      .style("left", (event.pageX) + "px")
+                                      .style("top", (event.pageY) + "px")
+                                      .style("opacity", .9)
+                                      .style("display", "inline")
+                                      .style(width, tooltip.width+20+"px")
+
+                          
                           d3.select(this).classed("selected_circle", true)
                         })
                         .on("mouseleave", function(){
                           
-                          d3.select(this).classed("unselected_circle", true)
+                          d3.select(this).classed("selected_circle", false)
+                          tooltip.transition()
+                          .duration(500)
+                          .style("opacity", 0);
                         })
                         
-                        
-                        //.style("display", "none")
-                        
+                      
       
                           /*
-                            console.log("d.date", d);
-                            tooltip.transition()
-                                        .duration(200);
-
-                            tooltip.html(formatTime(d.date) + "<br/>" + d.close)
-                                      .style("left", (event.pageX) + "px")
-                                      .style("top", (event.pageY - 20) + "px")
-                                      .style("display", "block")
-                                      .html("<b> date: " + d.date+"\n\nvalue: "+d.value+"</b>")
+                            
                             */
           
         
