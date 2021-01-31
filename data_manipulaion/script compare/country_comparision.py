@@ -48,4 +48,10 @@ with open('C:\\Users\\simoc\\Documents\\GitHub\\DV_finalProject\\data\\data_temp
     writer = csv.writer(file)
     writer.writerow(["Country"])
     for c in country:
+        
+        file = (os.listdir(r"C:\\Users\\simoc\\Documents\\GitHub\\DV_finalProject\\data\\data_temp\\"+c))
+        
+        filename = file[0].split(".csv")[0].split("_")[0]
+        print(filename)
+
         writer.writerow([str(c)])
