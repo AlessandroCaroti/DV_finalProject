@@ -26,8 +26,10 @@ var zoom = d3
 map_file = "../../data/countries-50m.json";
 tmp_file = "../../data/data_year/2019/Annual_mean.csv";
 
-//                END GLOBAL VARIABLE                //
-// ************************************************* //
+//                    END GLOBAL VARIABLE                   //
+// ******************************************************** //
+// ******************************************************** //
+//                START FUNCTION FOR THE MAP                //
 
 function drawMap(world) {
   console.log("DRAW-MAP");
@@ -50,7 +52,7 @@ function drawMap(world) {
     .append("path")
     .attr("class", "country")
     .attr("id", (d) => {
-      country_list.append(d.properties.name);
+      country_list.push(d.properties.name);
       return d.properties.name;
     })
     .attr("d", geoGenerator);
@@ -124,6 +126,9 @@ function country_selected(country) {
       d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale)
     );
 }
+
+//                END FUNCTION FOR THE MAP                //
+// ****************************************************** //
 
 // LOAD COUNTRIES MENU
 
