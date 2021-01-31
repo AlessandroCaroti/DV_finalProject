@@ -7,20 +7,25 @@ var parseTime = d3.timeParse("%Y-%m-%d");
   
 
 
-
-
-
-function drawCircles(svg, data, x, y){
-    
+function drawCircles(svg, data, x, y, tooltip){
+  
   var circle = svg.selectAll("circle")
                     .data(data)
                     .enter().append("circle")
                     .attr("cx", function(d) { return x(d.date); })
                     .attr("cy", function(d) { return y(d.value); })
                     .attr("r", 5)
+                    .attr("class","scatter")
                     .classed("unselected_circle", true)
+                    .on("mouseenter", function(event, d){
+                      tooltip_circle_enter(this, event, d, tooltip)              
+                    })
+                    .on("mouseleave", function(){
+                      tooltip_circle_leave(this, tooltip)
+                    })
+                
     
-    return circle;
+  return circle;
   }
 
 
@@ -48,17 +53,18 @@ function drawCircles(svg, data, x, y){
   }
 
 
-  function updateAxis(x_axis_class, y_axis_class){
+  function updateAxis(x_axis_class, y_axis_class, x, y){
     
-    var x = d3.scaleTime()
-            .domain(d3.extent(data, function(d) { return d.date; }))
-            .range([ 0, width ]);
-
-    var y = d3.scaleLinear()
-              .domain(d3.extent(data, function(d) { return d.value; }))
-              .range([ height, 0 ]);
-
-    
+                // update  x Axis
+      d3.select(x_axis_class)
+        .transition().duration(500)
+        .call(d3.axisBottom(x));                 
+                  
+                  // update  y Axis
+      d3.select(y_axis_class)
+        .transition().duration(500)
+        .call(d3.axisLeft(y));    
+ 
   }
 
   function createDefaultLineChart(data){
@@ -67,7 +73,8 @@ function drawCircles(svg, data, x, y){
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
                 .append("g")
-                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+                .attr("id", "svg");
 
     // Add X axis --> it is a date format
     // extent reuturn [min-max]
@@ -106,21 +113,14 @@ function drawCircles(svg, data, x, y){
                   .append("div")
                   .attr("class", "tooltip");      
 
-    var circles = drawCircles(svg, data, x, y);
-                
-    circles.on("mouseenter", function(event, d){
-            tooltip_circle_enter(this, event, d, tooltip)              
-          })
-          .on("mouseleave", function(){
-            tooltip_circle_leave(this, tooltip)
-          })
-
+    drawCircles(svg, data, x, y, tooltip);
+    
+  
 
   }
 
 
   function changeData() {
-    
     
     // prendere dati da mappa selezionata o dropdown menu
     var dataFile = document.getElementById('dataset').value;
@@ -143,86 +143,66 @@ function drawCircles(svg, data, x, y){
     d3.csv(csv)
       .then( function(data){ 
 
-                  data.forEach(d => {
+        data.forEach(d => {
                 
-                    d.date = parseTime(d.date);
-                    d.value = +d.value;
-                  });
+                  d.date = parseTime(d.date);
+                  d.value = +d.value;
+              });
                   
-                  var x = d3.scaleTime()
-                            .domain(d3.extent(data, function(d) { return d.date; }))
-                            .range([ 0, width ]);
+          var x = d3.scaleTime()
+                        .domain(d3.extent(data, function(d) { return d.date; }))
+                        .range([ 0, width ]);
                       
                         // Add Y axis
-                  var y= d3.scaleLinear()
-                        .domain(d3.extent(data, function(d) { return d.value; }))
-                        .range([ height, 0 ]);
-
-                  // Select the section we want to apply our changes to
-                  var div = d3.select("#line_chart_graph").transition().duration(2000);
-                              
-                        
-                  var valueline = d3.line()
-                                    .x(function(d) { return x(d.date); })
-                                    .y(function(d) { return y(d.value); });
+          var y= d3.scaleLinear()
+                       .domain(d3.extent(data, function(d) { return d.value; }))
+                       .range([ height, 0 ]);
+                  
+          
+          updateAxis(".x_axis", ".y_axis", x, y);       
                 
-                   // update Axis
-                  d3.select(".x_axis")
-                    .transition().duration(500)
-                    .call(d3.axisBottom(x));                 
-                  
-                  d3.select(".y_axis")
-                    .transition().duration(500)
-                    .call(d3.axisLeft(y));               
-
-
-                  // Draw the line the line
-                   d3.select(".line_chart")
-                              .attr("fill", "none")
-                              .attr("stroke", "steelblue")
-                              .attr("stroke-width", 1.5)
-                              .attr("d", valueline(data))
-                              .transition().duration(2000);      
-                  
-                       
-                  
-                  var tooltip = d3.select("body")
-                                  .append("div")
-                                  .attr("class", "tooltip");      
+          var svg = d3.select("#svg");
+              console.log(svg);               
                         
+          var valueline = d3.line()
+                                .x(function(d) { return x(d.date); })
+                                .y(function(d) { return y(d.value); });
+                
+                 
+          // Draw the line the line
+          svg.select(".line_chart")
+                 .attr("fill", "none")
+                 .attr("stroke", "steelblue")
+                 .attr("stroke-width", 1.5)
+                 .attr("d", valueline(data))
+                 .transition().duration();      
+                              
                   
-                  var circles = d3.selectAll("circle")
-                                  .data(data)  // Update with new data
-                                  .attr("cx", function(d) { return x(d.date); })
-                                  .attr("cy", function(d) { return y(d.value); })
-                                  .attr("r", 5)
-                                  .classed("unselected_circle", true)
-                                  .transition().duration(300)
-                                
-                  var svg = d3.select("#line_chart_graph");
-                  
-                  circles = drawCircles(svg, data, x, y)
-                                      
-                  circles.on("mouseenter", function(event, d){
-                                  tooltip_circle_enter(this, event, d, tooltip)              
-                                })
-                          .on("mouseleave", function(){
-                                  tooltip_circle_leave(this, tooltip)
-                                })
-                  
+          var tooltip = d3.select("body")
+                              .append("div")
+                              .attr("class", "tooltip");      
+                             
+          //remove old circles
+          svg.selectAll(".scatter").remove();
+
+          drawCircles(svg, data, x, y, tooltip);
+          
+         
       })
       .catch((error) =>{
         console.log(error);
         //alert("Unable To Load The Dataset!!");
-        throw(error)
+        throw(error);
     })  
 }
 
 
 
-//Di default c'è dataset 1
-dataset_1 = "https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/3_TwoNumOrdered_comma.csv";
-d3.csv(dataset_1)
+function default_dataset(){
+
+  //Di default c'è dataset 1
+  dataset_1 = "https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/3_TwoNumOrdered_comma.csv";
+  d3.csv(dataset_1)
   .then( function(data){ 
 
     data.forEach(d => {
@@ -230,13 +210,40 @@ d3.csv(dataset_1)
       d.date = parseTime(d.date);
       d.value = +d.value;
     });
-    createDefaultLineChart(data)
+    
+    createDefaultLineChart(data);
+    })
+    .catch((error) =>{
+      console.log(error);
+      //alert("Unable To Load The Dataset!!");
+      throw(error);
   })
-  .catch((error) =>{
-    console.log(error);
-    //alert("Unable To Load The Dataset!!");
-    throw(error)
-})
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
