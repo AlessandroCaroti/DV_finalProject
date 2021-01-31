@@ -2,54 +2,56 @@
 
 //var margin = {top: 10, right: 30, bottom: 30, left: 60}
 console.log(d3.select("#line_chart_graph"))
-var full_width = 500
-if( full_width === null ) { full_width = 800; }
 
-full_width = d3.max( [full_width, 400] );
-full_width = d3.min( [full_width, 900] );
 
-var margin = {top: 40, right: 70, bottom: 30, left: 20};
+var full_width = 900
+var margin = {top: 40, right: 70, bottom: 30, left: 50};
 var width = full_width - margin.left - margin.right;
 var height = full_width*9/16 - margin.top - margin.bottom;
 
-
-//width = 500 - margin.left - margin.right,
-//height = 500 - margin.top - margin.bottom;
 var parseTime = d3.timeParse("%Y-%m-%d");
 
 var baseline;
 var baseline_unc;
 
 
-d3.json("/../../data/data_temp/Afghanistan/Afghanistan_info.json")
-  .then( (data =>{
-
-      baseline = +data["absolute_temp(C)"];
-      baseline_unc = +data["absTemp_unc(C)"];
-
-      console.log(baseline, "\n", baseline_unc)
-
+function initBaseline(){
   
-  }))
+  var dataFile = document.getElementById('dataset').value;
+  console.log(dataFile);
+
+  d3.json("/../../data/data_temp/"+dataFile+"/"+dataFile+"_info.json")
+    .then( (data =>{
+  
+        baseline = +data["absolute_temp(C)"];
+        baseline_unc = +data["absTemp_unc(C)"];
+  
+        console.log(baseline, "\n", baseline_unc)
+  
+    
+    }))
+
+}
+
 
 
 function drawCircles(svg, data, x, y, tooltip){
   
   var circle = svg.selectAll("circle")
-                    .data(data)
-                    .enter().append("circle")
-                    .attr("cx", function(d) { return x(d.date); })
-                    .attr("cy", function(d) { return y(d.value); })
-                    .attr("r", 5)
-                    .attr("class","scatter")
-                    .classed("unselected_circle", true)
-                    .on("mouseenter", function(event, d){
-                      tooltip_circle_enter(this, event, d, tooltip)              
-                    })
-                    .on("mouseleave", function(){
-                      tooltip_circle_leave(this, tooltip)
-                    })
-                
+                  .data(data)
+                  .enter().append("circle")
+                  .attr("cx", function(d) { return x(d.date); })
+                  .attr("cy", function(d) { return y(d.value); })
+                  .attr("r", 5)
+                  .attr("class","scatter")
+                  .classed("unselected_circle", true)
+                  .on("mouseenter", function(event, d){
+                        tooltip_circle_enter(this, event, d, tooltip)              
+                      })
+                  .on("mouseleave", function(){
+                        tooltip_circle_leave(this, tooltip)
+                      })
+                  
     
   return circle;
   }
@@ -95,12 +97,14 @@ function drawCircles(svg, data, x, y, tooltip){
 
   function createDefaultLineChart(data){
 
-    var svg = d3.select("#line_chart_graph")
+    var svg = d3.select("#linechart")
+                .append("svg")
+                .attr("class","graphics")
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
                 .append("g")
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-                .attr("id", "svg");
+  
 
     // Add X axis --> it is a date format
     // extent reuturn [min-max]
@@ -122,7 +126,7 @@ function drawCircles(svg, data, x, y, tooltip){
       .attr("class", "y_axis")
       .call(d3.axisLeft(y))
 
-      var valueline = d3.line()
+    var valueline = d3.line()
         .x(function(d) { return x(d.date); })
         .y(function(d) { return y(d.value); })
         .defined( (d) => { return ( !isNaN(d.value) ) } );        
@@ -131,9 +135,6 @@ function drawCircles(svg, data, x, y, tooltip){
     svg.append("path")
               .data([data])
               .attr("class","line_chart")
-              .attr("fill", "none")
-              .attr("stroke", "steelblue")
-              .attr("stroke-width", 1.5)
               .attr("d", valueline);       
       
     var tooltip = d3.select("body")
@@ -150,8 +151,9 @@ function drawCircles(svg, data, x, y, tooltip){
 
   function changeData() {
     
-    // prendere dati da mappa selezionata o dropdown menu
+      // prendere dati da mappa selezionata o dropdown menu
     var dataFile = document.getElementById('dataset').value;
+    if( dataFile != "dataset_1") initBaseline();
     
     //quando cambio dati, devo leggere un nuovo csv
 
@@ -159,14 +161,11 @@ function drawCircles(svg, data, x, y, tooltip){
     //only to test the update
  
     parseTime = d3.timeParse("%Y");
-    
-    csv = "../../data/data_temp/Afghanistan/Afghanistan_anomalyTable.csv"
+    csv = "/../../data/data_temp/"+dataFile+"/"+"/"+dataFile+"_anomalyTable.csv"
  
     d3.csv(csv)
       .then( (data) =>{ 
-
-        
-          console.log(data, "\nbaseline", baseline, "\nbaseline_unc: ", baseline_unc)
+          
           data.forEach(d => {
                   
             d.date = parseTime(d.Year);
@@ -188,7 +187,7 @@ function drawCircles(svg, data, x, y, tooltip){
             
         updateAxis(".x_axis", ".y_axis", x, y);       
                   
-        var svg = d3.select("#svg");               
+        var svg = d3.select(".graphics");               
                           
         var valueline = d3.line()
                         .x(function(d) { return x(d.date); })
@@ -199,9 +198,6 @@ function drawCircles(svg, data, x, y, tooltip){
         // Draw the line the line
         svg.select(".line_chart")
           .data([data])
-          .attr("fill", "none")
-          .attr("stroke", "steelblue")
-          .attr("stroke-width", 1.5)
           .attr("d", valueline)
           .transition().duration();      
                                 

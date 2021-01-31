@@ -18,16 +18,17 @@ svg {
 #tab_menu{
 
   float: center;
-  width: 500px;
+  width: 900px;
   height: 500px;
   /* border: 1px lightgray solid; */
   margin: auto;
 
 }
 
+
 #starting_tab_content{
     
-  width: 474px;
+  width: 500px;
   height: 130px;
   border: 1px solid lightgray;
 
@@ -69,20 +70,26 @@ svg {
 .tabcontent {
   display: none;
   border: 1px solid #ccc;
-  width: 530px;
+  width: 900;
 }
 
 .graphics{
 
-  width: 500px;
+  width: 900px;
   height: 500px;
-  border: solid black 2px;
   margin-top: 12px;
   margin-left: 12px;
   margin-right: 12px;
   margin-bottom: 12px;
 }
 
+.graphics .line_chart{
+
+  stroke-width: 1px;
+  stroke: steelblue;
+  fill: none;
+
+}
 
 .tooltip{
   position: absolute;
@@ -96,6 +103,8 @@ svg {
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
   display: none;
 }
+
+
 
 .unselected_circle{
    opacity: 0;

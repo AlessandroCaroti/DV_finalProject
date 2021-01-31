@@ -22,7 +22,6 @@
       <label>Dataset:</label>
       <select name="Dataset" id="dataset" onchange="changeData()">
         <option value="dataset_1"> Dataset 1</option>
-        <option value="dataset_2"> Dataset 2</option>
       </select>
     </span>
 
@@ -32,45 +31,42 @@
         
         <button class="tablinks" style="border-right: none;" onclick="click_tab_linechart(event, 'linechart')">Line Chart</button>
         <button class="tablinks" onclick="click_tab_stripechart(event, 'stripechart')">Stripes Chart</button>
+      
       </div>
 
       <div id="starting_tab_content"></div>
 
-      <div id="linechart" class="tabcontent">
-        
-      <svg class="graphics" id=line_chart_graph> </svg>
-        
-      </div>
+      <div id="linechart" class="tabcontent"> </div>
       
-      <div id="stripechart" class="tabcontent">
-        
-        <svg class="graphics" id= stripes_chart_graph></svg>          
-      
-      </div>
+      <div id="stripechart" class="tabcontent"></div>
+   
     </div>
     <script>
         
-        window.onload = default_dataset(); 
+        window.onload = default_dataset();
+        window.onload = () =>{
+          
+          const countries = '../../data/table.csv';
         
-        
-        const countries = '../../data/table.csv';
-        
-        d3.csv(countries)
-          .then((data)=>{
-            
-              data.forEach( d => {
+          d3.csv(countries)
+            .then((data)=>{
+              
+                data.forEach( d => {
 
-                var dropdown = document.getElementById("dataset");
-                
-                var option =  document.createElement("option");
-                option.setAttribute("value", d.Country);
-                option.innerHTML = d.Country;
+                  var dropdown = document.getElementById("dataset");
+                  
+                  var option =  document.createElement("option");
+                  option.setAttribute("value", d.Country);
+                  option.innerHTML = d.Country;
+                  dropdown.append(option)
 
-                console.log(d.Country)
-
-              });
-
+                });
           })
+
+          window.onload = initBaseline();
+
+        }
+        
         
         
         
