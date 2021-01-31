@@ -1,8 +1,20 @@
 //Global Variable
 
-var margin = {top: 10, right: 30, bottom: 30, left: 60}
-width = 500 - margin.left - margin.right,
-height = 500 - margin.top - margin.bottom;
+//var margin = {top: 10, right: 30, bottom: 30, left: 60}
+console.log(d3.select("#line_chart_graph"))
+var full_width = 500
+if( full_width === null ) { full_width = 800; }
+
+full_width = d3.max( [full_width, 400] );
+full_width = d3.min( [full_width, 900] );
+
+var margin = {top: 40, right: 70, bottom: 30, left: 20};
+var width = full_width - margin.left - margin.right;
+var height = full_width*9/16 - margin.top - margin.bottom;
+
+
+//width = 500 - margin.left - margin.right,
+//height = 500 - margin.top - margin.bottom;
 var parseTime = d3.timeParse("%Y-%m-%d");
 
 var baseline;
@@ -111,7 +123,7 @@ function drawCircles(svg, data, x, y, tooltip){
       .call(d3.axisLeft(y))
 
       var valueline = d3.line()
-        .x(function(d) { console.log(d.date); return x(d.date); })
+        .x(function(d) { return x(d.date); })
         .y(function(d) { return y(d.value); })
         .defined( (d) => { return ( !isNaN(d.value) ) } );        
 
@@ -128,7 +140,7 @@ function drawCircles(svg, data, x, y, tooltip){
                   .append("div")
                   .attr("class", "tooltip");      
 
-    //drawCircles(svg, data, x, y, tooltip);
+    drawCircles(svg, data, x, y, tooltip);
     
   
    
@@ -149,12 +161,9 @@ function drawCircles(svg, data, x, y, tooltip){
     parseTime = d3.timeParse("%Y");
     
     csv = "../../data/data_temp/Afghanistan/Afghanistan_anomalyTable.csv"
-    
-    console.log(csv);
-    //select svg
-    
+ 
     d3.csv(csv)
-      .then( function(data){ 
+      .then( (data) =>{ 
 
         
           console.log(data, "\nbaseline", baseline, "\nbaseline_unc: ", baseline_unc)
@@ -184,12 +193,10 @@ function drawCircles(svg, data, x, y, tooltip){
         var valueline = d3.line()
                         .x(function(d) { return x(d.date); })
                         .y(function(d) { return y(d.value); })
-                        .defined( (d) => { return ( !isNaN(d.value) )});
-        
-        console.log(valueline(data));              
+                        .defined( (d) => { return ( !isNaN(d.value) )});          
         
                   
-            // Draw the line the line
+        // Draw the line the line
         svg.select(".line_chart")
           .data([data])
           .attr("fill", "none")

@@ -57,7 +57,19 @@
         
         d3.csv(countries)
           .then((data)=>{
-            console.log(data)
+            
+              data.forEach( d => {
+
+                var dropdown = document.getElementById("dataset");
+                
+                var option =  document.createElement("option");
+                option.setAttribute("value", d.Country);
+                option.innerHTML = d.Country;
+
+                console.log(d.Country)
+
+              });
+
           })
         
         
