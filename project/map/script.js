@@ -206,30 +206,68 @@ function click_viwe() {
 //                END FUNCTION MAP CONTROL                //
 // ****************************************************** //
 
-// LOAD COUNTRIES MENU
-
-var countries = d3
-  .select("datalist#countryList")
-  .data(["Internet Explorer", "Firefox", "Chrome", "Opera", "Safari"]);
-
-countries
-  .enter()
-  .append("option")
-  .attr("value", (d) => d);
-
 // UPDATE YEAR
+function init_slider(min, max){
+
+  var sliderAlternativeHandle = d3
+    .sliderBottom()
+    .min(min)
+    .max(max)
+    .step(1)
+    .width(400)
+    .tickFormat(d3.format('0'))
+    .ticks(10)
+    .default(0.015)
+    .handle(
+      d3
+        .symbol()
+        .type(d3.symbolCircle)
+        .size(200)()
+    )
+    .on('onchange', val => {
+      d3.select('p#sliderLabel').text("Year: " + d3.format('0')(val));
+    });
+
+  var g2 = d3
+    .select('div#sliderYear')
+    .append('svg')
+    .attr('width', 500)
+    .attr('height', 100)
+    .append('g')
+    .attr('transform', 'translate(30,30)');
+
+  g2.call(sliderAlternativeHandle);
+
+  d3.select('p#sliderLabel').text("Year: " + sliderAlternativeHandle.value());
+  
+  //d3.select("g#parameter-value").selectAll("text").attr("y", "-30");
+
+}
+
+// LOAD COUNTRIES MENU
+function init_dropdown_menu(list_countries){
+
+  var countries = d3.select("datalist#countryList")
+                              .selectAll("option")
+                              .data(list_countries);
+  countries.enter()
+            .append("option")
+            .attr("value", (d) => d);
+
+}
 
 // select slider
-var slider = document.getElementById("selectYear");
+/*var slider = document.getElementById("selectYear");
 var output = document.getElementById("outputYear");
 
 // Update the current slider value (each time you drag the slider handle)
 slider.oninput = function () {
   output.innerHTML = this.value;
-};
+
+  // cosa deve fare se un anno è selezionato???
+};*/
 
 // UPDATE COUNTRY
-
 function changeCountry() {
   console.log("bubi");
 }
@@ -275,4 +313,10 @@ function load_map() {
 //                  DOVE INIZIA TUTTO                  //
 
 load_tempYear(tmp_file);
+
 init_map_controls();
+
+init_slider(1700, 2020);
+
+console.log(country_list.length);
+init_dropdown_menu(["Internet Explorer", "Firefox", "Chrome", "Opera", "Safari"]); // non riesco ad usare country_list mannaggia al clero, perchè cazzo dice che non ha elementi???!!!
