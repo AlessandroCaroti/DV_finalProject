@@ -1,6 +1,7 @@
-console.log("STO CAZZO");
+// *************************************************** //
+//                START GLOBAL VARIABLE                //
 
-// MODIFICARE PER CAMBIARE LE DIMENSIONI DELLA MAPPA
+// MAP DIMANSION
 var w = 1000;
 var h = 500;
 
@@ -11,6 +12,8 @@ var colorsRange = ["rgb(5, 48, 97)", "white", "rgb(103, 0, 31)"];
 
 var geoGenerator;
 
+var tmp_data;
+
 var zoom = d3
   .zoom()
   .on("zoom", (event) => {
@@ -18,14 +21,17 @@ var zoom = d3
   })
   .scaleExtent([1, 8]);
 
+// FILES & DIRECTORY PATH VARIABLE
 map_file = "../../data/countries-50m.json";
 tmp_file = "../../data/data_year/2019/Annual_mean.csv";
-var tmp_data;
+
+//                END GLOBAL VARIABLE                //
+// ************************************************* //
 
 function drawMap(world) {
   console.log("DRAW-MAP");
 
-  svg = d3.select("#svg-map").attr("width", "100%").attr("height", h); //.call(zoom);
+  var svg = d3.select("#svg-map").attr("width", "100%").attr("height", h); //.call(zoom);
   map_container = svg.select("#map");
 
   projection = d3
@@ -35,7 +41,7 @@ function drawMap(world) {
 
   geoGenerator = d3.geoPath().projection(projection);
 
-  // Draw the background (country outlines)
+  // Draw the country outlines
   map_container
     .selectAll("path")
     .data(topojson.feature(world, world.objects.countries).features)
@@ -52,25 +58,31 @@ function drawMap(world) {
 
   var maps = map_container.selectAll("path.grat_2").data(graticule.lines());
   maps.enter().append("path").classed("grat_2", true).attr("d", geoGenerator);
+  /*map_container
+    .selectAll("path")
+    .data(graticule.lines())
+    .enter()
+    .append("path")
+    .classed("grat_2", true)
+    .attr("d", geoGenerator);
+    */
 
   //Associate to each county a color proportionate to it's anomaly
   update_colors();
 
-  //Define the events associated with the country area in the maps(Es, mouseover, click...)
+  //Define the events of the countries(Es, mouseover, click...)
   country_events();
 }
 
 function update_colors() {
-  //[-2.5169, 0, +3.1986]
-  //-2.5168333333333335 3.1985000000000006
-
+  //GLOBAL MIN & MAX
+  //[-2.5168333333333335, 3.1985000000000006] [-2.5169, 0, +3.1986]
 
   var colorScale = d3
     .scaleLinear()
     //.domain([-5, 0, +5])
     .domain([-2.5169, 0, +3.1986])
     .range(colorsRange);
-  console.log(d3.interpolateRdBu(1))
 
   tmp_data.forEach(function (d) {
     var element = document.getElementById(d.Country);
@@ -147,23 +159,25 @@ function changeCountry() {
   console.log("bubi");
 }
 
-// *******************************************************************
-// FILES LOADING
+// ******************************************** //
+//                FILES LOADING                //
 
-d3.csv(tmp_file)
-  .then(function (data) {
-    console.log("LOAD TEMP");
+function load_tempYear(temp_file) {
+  d3.csv(temp_file)
+    .then(function (data) {
+      console.log("LOAD TEMP");
 
-    data.forEach((d) => {
-      d.ANOMALY = parseFloat(d.Anomaly);
+      data.forEach((d) => {
+        d.ANOMALY = parseFloat(d.Anomaly);
+      });
+      tmp_data = data;
+      load_map();
+    })
+    .catch(function (error) {
+      console.log(error);
+      throw error;
     });
-    tmp_data = data;
-    load_map();
-  })
-  .catch(function (error) {
-    console.log(error);
-    throw error;
-  });
+}
 
 function load_map() {
   d3.json(map_file)
@@ -181,3 +195,8 @@ function load_map() {
       throw error;
     });
 }
+
+// ******************************************** //
+//              DOVE INIZIA TUTTO              //
+
+load_tempYear(tmp_file);
