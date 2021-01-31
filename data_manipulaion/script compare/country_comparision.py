@@ -44,14 +44,16 @@ country = (os.listdir(r"C:\\Users\\simoc\\Documents\\GitHub\\DV_finalProject\\da
 
 
 import csv
-with open('C:\\Users\\simoc\\Documents\\GitHub\\DV_finalProject\\data\\data_temp\\Countries.csv', 'w', newline='') as file:
+with open('C:\\Users\\simoc\\Documents\\GitHub\\DV_finalProject\\data\\Countries.csv', 'w', newline='') as file:
     writer = csv.writer(file)
     writer.writerow(["Country"])
     for c in country:
-        
-        file = (os.listdir(r"C:\\Users\\simoc\\Documents\\GitHub\\DV_finalProject\\data\\data_temp\\"+c))
-        
-        filename = file[0].split(".csv")[0].split("_")[0]
-        print(filename)
+        if c != "desktop.ini":
+            file = (os.listdir(r"C:\\Users\\simoc\\Documents\\GitHub\\DV_finalProject\\data\\data_temp\\"+c))
+            filename=""
+            for f in file:
+                if f.split(".")[-1] == "csv":
+                    filename = f.split(".csv")[0].split("_")[0]
+                    break
 
-        writer.writerow([str(c)])
+            writer.writerow([filename])
