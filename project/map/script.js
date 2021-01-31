@@ -13,6 +13,7 @@ var colorsRange = ["rgb(5, 48, 97)", "white", "rgb(103, 0, 31)"];
 var geoGenerator;
 
 var tmp_data;
+var country_list = []; //List of the name of the countries present in the map
 
 var zoom = d3
   .zoom()
@@ -49,6 +50,7 @@ function drawMap(world) {
     .append("path")
     .attr("class", "country")
     .attr("id", (d) => {
+      country_list.append(d.properties.name);
       return d.properties.name;
     })
     .attr("d", geoGenerator);
@@ -116,7 +118,7 @@ function country_selected(country) {
 
   map_container
     .transition()
-    .duration(750)
+    .duration(1000)
     .call(
       zoom.transform,
       d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale)
