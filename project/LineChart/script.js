@@ -111,9 +111,9 @@ function drawCircles(svg, data, x, y, tooltip){
       .call(d3.axisLeft(y))
 
       var valueline = d3.line()
-        .x(function(d) { return x(d.date); })
+        .x(function(d) { console.log(d.date); return x(d.date); })
         .y(function(d) { return y(d.value); })
-        .defined( (d) => { return ( !isNaN(d.value) )});        
+        .defined( (d) => { return ( !isNaN(d.value) ) } );        
 
     // Draw the line the line
     svg.append("path")
@@ -131,7 +131,7 @@ function drawCircles(svg, data, x, y, tooltip){
     //drawCircles(svg, data, x, y, tooltip);
     
   
-    console.log("EGEGEEGEG")
+   
   }
 
 
@@ -220,7 +220,8 @@ function drawCircles(svg, data, x, y, tooltip){
 function default_dataset(){
 
   //Di default c'è dataset 1
-  dataset_1 = "https://raw.githubusercontent.com/holtzy//master/Example_dataset/3_TwoNumOrdered_comma.csv";
+  dataset_1 = "anscombe_I.csv";
+  parseTime = d3.timeParse("%m-%d-%Y");
   d3.csv(dataset_1)
   .then( function(data){ 
 
