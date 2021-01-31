@@ -30,7 +30,7 @@ function update() {
   d3.select("#text").html(region_name);
 
   info_flie_path =
-    "./data_temp/" + region_name + "/" + region_name + "_info.json";
+    "../../data/data_temp/" + region_name + "/" + region_name + "_info.json";
   d3.json(info_flie_path, function (error, info) {
     if (error) {
       console.log(error);
@@ -157,7 +157,7 @@ zoomManager();
 
 var region_list = [];
 
-d3.json("./maps_modification/countries-10m_V10.json", function (error, world) {
+d3.json("../../data/countries-50m.json", function (error, world) {
   if (error) {
     console.log(error);
     throw error;
@@ -196,7 +196,7 @@ function get_differece(smaller_list, bigger_list) {
 }
 
 // Load CSV files
-d3.csv("./data/table.csv", function (error, csv) {
+d3.csv("../../data/table.csv", function (error, csv) {
   if (error) {
     console.log(error);
     throw error;

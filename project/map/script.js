@@ -15,6 +15,8 @@ var geoGenerator;
 var tmp_data;
 var country_list = []; //List of the name of the countries present in the map
 
+var selected_country = null;
+
 var zoom = d3
   .zoom()
   .on("zoom", (event) => {
@@ -38,8 +40,11 @@ function drawMap(world) {
   map_container = svg.select("#map");
 
   projection = d3
-    .geoEquirectangular()
-    .scale(140)
+    //.geoEquirectangular()
+    //.geoMercator()
+    //.geoEqualEarth()
+    .geoNaturalEarth1()
+    .scale(120)
     .translate([w / 2, h / 2]);
 
   geoGenerator = d3.geoPath().projection(projection);
@@ -58,16 +63,20 @@ function drawMap(world) {
     .attr("d", geoGenerator);
 
   // Draw gridlines
-  var graticule = d3.geoGraticule();
-
-  var maps = map_container.selectAll("path.grat_2").data(graticule.lines());
-  maps.enter().append("path").classed("grat_2", true).attr("d", geoGenerator);
+  drwaGridlines();
 
   //Associate to each county a color proportionate to it's anomaly
   update_colors();
 
   //Define the events of the countries(Es, mouseover, click...)
   country_events();
+}
+
+function drwaGridlines() {
+  var graticule = d3.geoGraticule();
+
+  var maps = map_container.selectAll("path.grat_2").data(graticule.lines());
+  maps.enter().append("path").classed("grat_2", true).attr("d", geoGenerator);
 }
 
 function update_colors() {
@@ -110,6 +119,15 @@ function country_events() {
 }
 
 function country_selected(country) {
+  selected_country = country;
+
+  zoom_in(selected_country);
+  // update the button that manage the zoom
+  global_view = false;
+  changeImage_view();
+}
+
+function zoom_in(country) {
   var bounds = geoGenerator.bounds(country),
     dx = bounds[1][0] - bounds[0][0],
     dy = bounds[1][1] - bounds[0][1],
@@ -127,7 +145,65 @@ function country_selected(country) {
     );
 }
 
-//                END FUNCTION FOR THE MAP                //
+function reset_zoom() {
+  map_container
+    .transition()
+    .duration(1000)
+    .call(zoom.transform, d3.zoomIdentity.translate(0, 0).scale(1));
+}
+
+//                 END FUNCTION FOR THE MAP                 //
+// ******************************************************** //
+// ******************************************************** //
+//                START FUNCTION MAP CONTROL                //
+
+function init_map_controls() {
+  over_viwe();
+  click_viwe();
+}
+
+//CHANGE VIEW
+var global_view = false; //if TRUE => the current view of the map is global (NO ZOOM)
+const global_img = "../../data/images/globe_32px.ico";
+const country_img = "../../data/images/country_32px.ico";
+
+//EVENT OVER
+function over_viwe() {
+  d3.select("#change_view_img").on("mouseover", function (event, b) {
+    d3.select("#change_view_btn").style("fill", "Gainsboro");
+  });
+  d3.select("#change_view_img").on("mouseleave", function (event, b) {
+    d3.select("#change_view_btn").style("fill", "none");
+  });
+}
+
+function changeImage_view() {
+  if (selected_country == null) {
+    global_view = !global_view;
+    console.log("NESSUNO STATO SELEZIONARO");
+    console.log("IMPOSSIBILE CAMBIARE LA VISTA");
+  } else {
+    if (global_view) {
+      d3.select("#change_view_img").attr("xlink:href", country_img);
+      console.log("RESET ZOOM");
+      reset_zoom();
+    } else {
+      d3.select("#change_view_img").attr("xlink:href", global_img);
+      console.log("ZOOM IN");
+      zoom_in(selected_country);
+    }
+  }
+}
+
+//EVENT CLICK
+function click_viwe() {
+  d3.select("#change_view_img").on("click", function (event, b) {
+    global_view = !global_view;
+    changeImage_view();
+  });
+}
+
+//                END FUNCTION MAP CONTROL                //
 // ****************************************************** //
 
 // LOAD COUNTRIES MENU
@@ -158,8 +234,8 @@ function changeCountry() {
   console.log("bubi");
 }
 
-// ******************************************** //
-//                FILES LOADING                //
+// **************************************************** //
+//                    FILES LOADING                    //
 
 function load_tempYear(temp_file) {
   d3.csv(temp_file)
@@ -195,7 +271,8 @@ function load_map() {
     });
 }
 
-// ******************************************** //
-//              DOVE INIZIA TUTTO              //
+// **************************************************** //
+//                  DOVE INIZIA TUTTO                  //
 
 load_tempYear(tmp_file);
+init_map_controls();

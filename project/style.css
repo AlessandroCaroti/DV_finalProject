@@ -9,6 +9,12 @@
   align-content: center;
 }
 
+.btn {
+  fill: none;
+  stroke: black;
+  stroke-width: 1;
+}
+
 .background {
   fill: #5ccec500;
 }
