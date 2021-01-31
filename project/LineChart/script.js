@@ -110,11 +110,10 @@ function drawCircles(svg, data, x, y, tooltip){
       .attr("class", "y_axis")
       .call(d3.axisLeft(y))
 
-    var valueline = d3.line()
-                    .defined( (d) => { return ( !isNaN(d.value) )})
-                    .x(function(d) { return x(d.date) })
-                    .y(function(d) { return y(d.value)})
-                    
+      var valueline = d3.line()
+        .x(function(d) { return x(d.date); })
+        .y(function(d) { return y(d.value); })
+        .defined( (d) => { return ( !isNaN(d.value) )});        
 
     // Draw the line the line
     svg.append("path")
@@ -146,77 +145,67 @@ function drawCircles(svg, data, x, y, tooltip){
 
     var csv;
     //only to test the update
-    if( dataFile == "dataset_1"){
-      parseTime = d3.timeParse("%Y-%m-%d");
-      csv = "https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/3_TwoNumOrdered_comma.csv"
-    }
-    else{
-      parseTime = d3.timeParse("%Y");
-      csv = "../../data/data_temp/Afghanistan/Afghanistan_anomalyTable.csv"
-    }
+ 
+    parseTime = d3.timeParse("%Y");
+    
+    csv = "../../data/data_temp/Afghanistan/Afghanistan_anomalyTable.csv"
+    
     console.log(csv);
     //select svg
     
     d3.csv(csv)
       .then( function(data){ 
 
-        if( dataFile == "dataset1"){
-          data.forEach(d => {
-                
-            d.date = parseTime(d.date);
-            d.value = +d.value;
-        });
         
-      }else{
-          console.log(data, "\nbaseline", baseline, "\n", baseline_unc)
+          console.log(data, "\nbaseline", baseline, "\nbaseline_unc: ", baseline_unc)
           data.forEach(d => {
                   
             d.date = parseTime(d.Year);
             d.value = baseline + parseFloat(d["Annual Anomaly"]);
             d.uncertainty = baseline_unc + parseFloat(d["Annual Unc."]);
-        });
-
-      }
+          })
        
 
                   
-      var x = d3.scaleTime()
-                .domain(d3.extent(data, function(d) { return d.date; }))
-                .range([ 0, width ]);
-                      
-                        // Add Y axis
-      var y= d3.scaleLinear()
-               .domain(d3.extent(data, function(d) { return d.value; }))
-               .range([ height, 0 ]);
-                  
-          
-      updateAxis(".x_axis", ".y_axis", x, y);       
-                
-      var svg = d3.select("#svg");               
+        var x = d3.scaleTime()
+                  .domain(d3.extent(data, function(d) { return d.date; }))
+                  .range([ 0, width ]);
                         
-      var valueline = d3.line()
-                      .x(function(d) { return x(d.date); })
-                      .y(function(d) { return y(d.value); })
-                      .defined( (d) => { return ( !isNaN(d.value) )});
-      console.log(valueline(data));   
-                 
-          // Draw the line the line
-      svg.select(".line_chart")
-         .attr("fill", "none")
-         .attr("stroke", "steelblue")
-         .attr("stroke-width", 1.5)
-         .attr("d", valueline(data))
-         .transition().duration();      
-                              
+                          // Add Y axis
+        var y= d3.scaleLinear()
+                .domain(d3.extent(data, function(d) { return d.value; }))
+                .range([ height, 0 ]);
+                    
+            
+        updateAxis(".x_axis", ".y_axis", x, y);       
                   
-      var tooltip = d3.select("body")
-                      .append("div")
-                      .attr("class", "tooltip");      
-                             
-      //remove old circles and update
-      svg.selectAll(".scatter").remove();
-      drawCircles(svg, data, x, y, tooltip);
-          
+        var svg = d3.select("#svg");               
+                          
+        var valueline = d3.line()
+                        .x(function(d) { return x(d.date); })
+                        .y(function(d) { return y(d.value); })
+                        .defined( (d) => { return ( !isNaN(d.value) )});
+        
+        console.log(valueline(data));              
+        
+                  
+            // Draw the line the line
+        svg.select(".line_chart")
+          .data([data])
+          .attr("fill", "none")
+          .attr("stroke", "steelblue")
+          .attr("stroke-width", 1.5)
+          .attr("d", valueline)
+          .transition().duration();      
+                                
+                    
+        var tooltip = d3.select("body")
+                        .append("div")
+                        .attr("class", "tooltip");      
+                              
+        //remove old circles and update
+        svg.selectAll(".scatter").remove();
+        drawCircles(svg, data, x, y, tooltip);  
          
       })
       .catch((error) =>{
@@ -231,14 +220,14 @@ function drawCircles(svg, data, x, y, tooltip){
 function default_dataset(){
 
   //Di default c'è dataset 1
-  dataset_1 = csv = "../../data/data_temp/Afghanistan/Afghanistan_anomalyTable.csv";
+  dataset_1 = "https://raw.githubusercontent.com/holtzy//master/Example_dataset/3_TwoNumOrdered_comma.csv";
   d3.csv(dataset_1)
   .then( function(data){ 
 
     data.forEach(d => {
-      d.date = parseTime(d.Year);      
-      d.value = baseline + parseFloat(d["Annual Anomaly"]);
-      d.uncertainty = baseline_unc + parseFloat(d["Annual Unc."]);
+      d.date = parseTime(d.date);
+      d.value = +d.value;
+    
     });
     
     createDefaultLineChart(data);

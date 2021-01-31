@@ -47,7 +47,19 @@
         <svg class="graphics" id= stripes_chart_graph></svg>          
       
       </div>
-    </div>  
-    <script>window.onload = default_dataset(); </script>
+    </div>
+    <script>
+        
+        const countries = '../../data/table.csv';
+        
+        d3.csv(countries)
+          .then((data)=>{
+            console.log(data)
+          })
+        
+        
+         //window.onload = default_dataset(); 
+        
+    </script>
   </body>
 </html>
