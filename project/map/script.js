@@ -13,7 +13,7 @@ var colorsRange = ["rgb(5, 48, 97)", "white", "rgb(103, 0, 31)"];
 var geoGenerator;
 
 var tmp_data;
-var country_list = []; //List of the name of the countries present in the map
+var country_list = new Array(); //List of the name of the countries present in the map
 
 var selected_country = null;
 
@@ -206,21 +206,19 @@ function click_viwe() {
 //                END FUNCTION MAP CONTROL                //
 // ****************************************************** //
 
-// UPDATE YEAR
+// LOAD SLIDER YEAR
 function init_slider(min, max){
 
-  var sliderAlternativeHandle = d3
-    .sliderBottom()
+  var sliderAlternativeHandle = d3.sliderBottom()
     .min(min)
     .max(max)
     .step(1)
-    .width(400)
+    .width(500)
     .tickFormat(d3.format('0'))
     .ticks(10)
     .default(0.015)
     .handle(
-      d3
-        .symbol()
+      d3.symbol()
         .type(d3.symbolCircle)
         .size(200)()
     )
@@ -228,19 +226,19 @@ function init_slider(min, max){
       d3.select('p#sliderLabel').text("Year: " + d3.format('0')(val));
     });
 
-  var g2 = d3
-    .select('div#sliderYear')
+  var g2 = d3.select('div#sliderYear')
     .append('svg')
-    .attr('width', 500)
+    .attr('width', 600)
     .attr('height', 100)
     .append('g')
-    .attr('transform', 'translate(30,30)');
+    .attr('transform', 'translate(40,40)');
 
   g2.call(sliderAlternativeHandle);
 
   d3.select('p#sliderLabel').text("Year: " + sliderAlternativeHandle.value());
   
-  //d3.select("g#parameter-value").selectAll("text").attr("y", "-30");
+  d3.select("div#sliderYear").select("g .parameter-value").select("text").attr("y", -35);
+
 
 }
 
@@ -256,16 +254,6 @@ function init_dropdown_menu(list_countries){
 
 }
 
-// select slider
-/*var slider = document.getElementById("selectYear");
-var output = document.getElementById("outputYear");
-
-// Update the current slider value (each time you drag the slider handle)
-slider.oninput = function () {
-  output.innerHTML = this.value;
-
-  // cosa deve fare se un anno è selezionato???
-};*/
 
 // UPDATE COUNTRY
 function changeCountry() {
@@ -318,5 +306,6 @@ init_map_controls();
 
 init_slider(1700, 2020);
 
-console.log(country_list.length);
+console.log(country_list);
+// ["Internet Explorer", "Firefox", "Chrome", "Opera", "Safari"]
 init_dropdown_menu(["Internet Explorer", "Firefox", "Chrome", "Opera", "Safari"]); // non riesco ad usare country_list mannaggia al clero, perchè cazzo dice che non ha elementi???!!!
