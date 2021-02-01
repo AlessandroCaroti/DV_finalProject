@@ -32,8 +32,24 @@ function initBaseline(dataFile){
 
 }
 
-function drawCircles(svg, data, x, y, tooltip){
+function parseDataAttributes(data){
   
+  data.forEach(d => {
+      
+    d.date = parseTime(d.Year);
+    d.value = baseline + parseFloat(d["Annual Anomaly"]);
+    d.uncertainty = baseline_unc + parseFloat(d["Annual Unc."]);
+  })
+}
+
+
+function drawCircles(svg, data, x, y){
+  
+  var tooltip = d3.select("body")
+                  .append("div")
+                  .attr("class", "tooltip");  
+
+
   var circle = svg.selectAll("circle")
                   .data(data)
                   .enter().append("circle")
@@ -134,11 +150,8 @@ function drawCircles(svg, data, x, y, tooltip){
               .attr("class","line_chart")
               .attr("d", valueline);       
       
-    var tooltip = d3.select("body")
-                  .append("div")
-                  .attr("class", "tooltip");      
-
-    drawCircles(svg, data, x, y, tooltip);
+        
+    drawCircles(svg, data, x, y);
     
   
    
@@ -150,6 +163,7 @@ function drawCircles(svg, data, x, y, tooltip){
     parseTime = d3.timeParse("%Y");
     // prendere dati da mappa selezionata o dropdown menu
     var dataFile = document.getElementById('dataset').value;
+    document.getElementById("country_t").innerHTML= dataFile;
     
     initBaseline(dataFile);
     
@@ -167,15 +181,8 @@ function drawCircles(svg, data, x, y, tooltip){
     d3.csv(csv)
       .then( (data) =>{ 
           
-          data.forEach(d => {
-                  
-            d.date = parseTime(d.Year);
-            d.value = baseline + parseFloat(d["Annual Anomaly"]);
-            d.uncertainty = baseline_unc + parseFloat(d["Annual Unc."]);
-          })
-       
-
-                  
+        parseDataAttributes(data);
+                
         var x = d3.scaleTime()
                   .domain(d3.extent(data, function(d) { return d.date; }))
                   .range([ 0, width ]);
@@ -203,13 +210,10 @@ function drawCircles(svg, data, x, y, tooltip){
           .transition().duration();      
                                 
                     
-        var tooltip = d3.select("body")
-                        .append("div")
-                        .attr("class", "tooltip");      
-                              
+       
         //remove old circles and update
         svg.selectAll(".scatter").remove();
-        drawCircles(svg, data, x, y, tooltip);  
+        drawCircles(svg, data, x, y);  
          
       })
       .catch((error) =>{
@@ -224,6 +228,7 @@ function default_dataset(){
 
   var dataFile = "Afghanistan"
 
+  document.getElementById("country_t").innerHTML= dataFile;
   var folder;
  
   
@@ -236,17 +241,11 @@ function default_dataset(){
   //Di default c'è dataset 1
   d3.csv(csv)
   .then( function(data){ 
-
-    data.forEach(d => {
-      
-      d.date = parseTime(d.Year);
-      d.value = baseline + parseFloat(d["Annual Anomaly"]);
-      d.uncertainty = baseline_unc + parseFloat(d["Annual Unc."]);
     
-    });
-    
+    parseDataAttributes(data);
     createDefaultLineChart(data);
-    })
+    
+  })
     .catch((error) =>{
       console.log(error);
       //alert("Unable To Load The Dataset!!");
@@ -256,6 +255,7 @@ function default_dataset(){
 
 
 }
+
 
 
 
