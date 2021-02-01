@@ -68,7 +68,6 @@ svg {
 
 /* Style the tab content */
 .tabcontent {
-  display: none;
   border: 1px solid #ccc;
   width: 900;
 }

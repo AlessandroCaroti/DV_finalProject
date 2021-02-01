@@ -44,7 +44,7 @@ country = (os.listdir(r"C:\\Users\\simoc\\Documents\\GitHub\\DV_finalProject\\da
 
 
 import csv
-with open('C:\\Users\\simoc\\Documents\\GitHub\\DV_finalProject\\data\\Countries.csv', 'w', newline='') as file:
+with open('C:\\Users\\simoc\\Documents\\GitHub\\DV_finalProject\\data\\Countries.csv', 'w', newline='', encoding='utf-8') as file:
     writer = csv.writer(file)
     writer.writerow(["Country"])
     for c in country:
