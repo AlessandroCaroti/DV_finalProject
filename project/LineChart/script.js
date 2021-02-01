@@ -122,6 +122,45 @@ function UpdateUncertainty(data, x, y){
 }
 
 
+function createLegend(svg){
+
+ 
+  legend = svg.append( "g" ).attr("class", "legend" );
+  
+  legend.append( "rect" )
+  .attr("x", 10).attr("width", 237)
+  .attr("y", 10).attr("height", 40)
+  .attr("class", "legend");
+
+  legend.append( "line" )
+      .attr("x1", 15).attr("x2", 30)
+      .attr("y1", 20).attr("y2", 20)
+      .attr("class", "line_chart_annual");
+
+  legend.append( "text" )
+      .attr("x", 37)
+      .attr("y", 20)
+      .attr("class", "legend")
+      .text("Annual Average Temperature");
+
+  legend.append( "rect" )
+        .attr("x", 15).attr("width", 15)
+        .attr("y", 29).attr("height", 16)
+        .attr("class", "uncertainty");
+        
+  legend.append( "line" )
+        .attr("x1", 15).attr("x2", 30)
+        .attr("y1", 37).attr("y2", 37)
+        .attr("class", "line_chart_ten_years");
+
+  legend.append( "text" )
+        .attr("x", 37)
+        .attr("y", 37)
+        .attr("class", "legend")
+        .text("10-years Average Temperature");
+
+}
+
 
 
 function updateAxis(x_axis_class, y_axis_class, x, y){
@@ -192,6 +231,7 @@ function updateAxis(x_axis_class, y_axis_class, x, y){
               .attr("class","line_chart_ten_years")
               .attr("d", valueline_ten_years);       
     
+    createLegend(svg);
     
     var tooltipLine = svg.append('line').attr("class","line_tip");
     

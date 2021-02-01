@@ -127,4 +127,32 @@ svg {
 #dropdown{
   margin: auto;
 }
+
+/*LEGENDS*/
+
+.legend {
+  fill: #fff;
+  stroke: #000;
+  stroke-width: 0.8px;
+}
+
+text.legend {
+  
+  fill: #000;
+  stroke: #000;
+  font-size: 12px;
+  alignment-baseline: central;
+
+}
+
+.legend .line_chart_annual {
+  stroke-width: 2px;
+}
+
+.legend .line_chart_ten_years {
+  stroke-width: 3px;
+}
+
+
+
 /* END TAB MENU LINECHART */
