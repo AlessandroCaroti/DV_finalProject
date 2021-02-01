@@ -22,7 +22,7 @@ function initBaseline(dataFile){
   else
       folder = dataFile;
   
-  console.log("Folder: ", folder, "\nDatafile: ", dataFile);
+ 
   d3.json("/../../data/data_temp/"+folder+"/"+dataFile+"_info.json")
     .then( (data =>{
   
@@ -45,67 +45,6 @@ function parseDataAttributes(data){
   })
 }
 
-
-function tooltip_circle_enter(self, event, d, tooltip_div, svg, x){
-    
-  tooltip_div.transition().duration(200);
-
-  var date = x.invert(d3.mouse(tipBox.node())[0]);
-  item = data.find( d => d.date - date  == 0 );
-  
- 
-  
-  tooltipLine.attr('stroke', 'black')
-      .attr('x1', x(date))
-      .attr('x2', x(date))
-      .attr('y1', 0)
-      .attr('y2', height);
-      
-  
-  tooltip_div.html("<b> Year: " + d.date.getFullYear()+"<br/>" +"<br/>" +
-                   "Annual Average Temperature: "+d.annual_value.toFixed(2) +" &deg;C " +
-                   " &plusmn; " +  d.annual_unc.toFixed(2) + " "+
-                   "<br/>" +"<br/>" +
-                   "Ten Years Average Temperature: "+d.ten_years_value.toFixed(2) +" &deg;C " +
-                   " &plusmn; " +  d.ten_years_unc.toFixed(2) + "</b>  ")
-              
-              .style("left", (event.pageX) + "px")
-              .style("top", (event.pageY) + "px")
-              .style("opacity", .9)
-              .style("display", "inline")
-
-  d3.select(self).classed("selected_circle", true)
-
-}
-
-
-
-function drawCircles(svg, data, x, y){
-  
-  var tooltip = d3.select("body")
-                  .append("div")
-                  .attr("class", "tooltip");  
-
-  
-  var circle = svg.selectAll("circle")
-                  .data(data)
-                  .enter().append("circle")
-                  .attr("cx", function(d) { return x(d.date); })
-                  .attr("cy", function(d) { return y(d.annual_value); })
-                  .attr("r", 5)
-                  .attr("class","scatter")
-                  .classed("unselected_circle", true)
-                  
-                  .on("mouseenter", function(event, d){
-                        tooltip_circle_enter(this, event, d, tooltip, svg, x)              
-                      })
-                  .on("mouseleave", function(){
-                        tooltip_circle_leave(this, tooltip)
-                      })              
-    
-    return circle;
-  }
-
 function removeTooltip(tooltipLine) {
   
   if (tooltip) tooltip.style('display', 'none');
@@ -117,9 +56,8 @@ function drawTooltip(self, event, x, data, tooltipLine) {
   const date = x.invert(d3.pointer(event, self.node())[0]);
   
 
-  //find element 
+  //find date correspondece comparing difference in milliseconds
   var elem = data.find( (d) =>  Math.abs( d.date - date ) < 1000*60*60*24*16 );
-
 
   tooltipLine.attr('stroke', 'black')
       .attr('x1', x(date))
@@ -127,6 +65,7 @@ function drawTooltip(self, event, x, data, tooltipLine) {
       .attr('y1', 0)
       .attr('y2', height);
   
+
 
   var tipText =  String(
     "<b> Year: " + elem.date.getFullYear()+"<br/>" +"<br/>" +
@@ -145,15 +84,44 @@ function drawTooltip(self, event, x, data, tooltipLine) {
       .html( tipText );
 }
 
- 
-  
-function tooltip_circle_leave(self, tooltip_div){
+function drawUncertainty(data, svg, x, y){
     
-    d3.select(self).classed("selected_circle", false)
-    tooltip_div.transition()
-    .duration(500)
-    .style("opacity", 0);
-  }
+
+  var areaUncGenerator = d3.area()
+                           .x(function(d) { return x(d.date) })
+                           .y0(function(d) { return y(d.ten_years_value + d.ten_years_unc ) })
+                           .y1(function(d) { return y(d.ten_years_value - d.ten_years_unc ) })
+                           .defined( (d) => { return ( !isNaN(d.ten_years_unc ) ) } );
+
+
+  svg.append("path")
+    .datum(data)
+    .attr("class", "uncertainty")
+    .attr("d", areaUncGenerator)
+    
+    
+
+}
+
+function UpdateUncertainty(data, x, y){
+    
+  
+  var areaUncGenerator = d3.area()
+                           .x(function(d) { return x(d.date) })
+                           .y0(function(d) { return y(d.ten_years_value + d.ten_years_unc ) })
+                           .y1(function(d) { return y(d.ten_years_value - d.ten_years_unc ) })
+                           .defined( (d) => { return ( !isNaN(d.ten_years_unc ) ) } );
+
+
+
+  d3.select(".uncertainty")
+    .datum(data)
+    .attr("d", areaUncGenerator)
+    
+  
+}
+
+
 
 
 function updateAxis(x_axis_class, y_axis_class, x, y){
@@ -211,6 +179,8 @@ function updateAxis(x_axis_class, y_axis_class, x, y){
         .y(function(d) { return y(d.ten_years_value ); })
         .defined( (d) => { return ( !isNaN(d.ten_years_value ) ) } );        
 
+
+    drawUncertainty(data, svg, x, y);
     // Draw the line the line
     svg.append("path")
               .data([data])
@@ -221,7 +191,8 @@ function updateAxis(x_axis_class, y_axis_class, x, y){
               .data([data])
               .attr("class","line_chart_ten_years")
               .attr("d", valueline_ten_years);       
-      
+    
+    
     var tooltipLine = svg.append('line').attr("class","line_tip");
     
     var tipBox = svg.append('rect')
@@ -233,6 +204,7 @@ function updateAxis(x_axis_class, y_axis_class, x, y){
                     .on('mouseout', () => removeTooltip(tooltipLine));
 
   }
+
 
 
 function changeData() {
@@ -279,7 +251,9 @@ function changeData() {
                                     .x(function(d) { return x(d.date); })
                                     .y(function(d) { return y(d.ten_years_value ); })
                                     .defined( (d) => { return ( !isNaN(d.ten_years_value ) ) } );        
-                                      
+        
+
+        UpdateUncertainty(data, x, y);
         // Draw the line the line
         svg.select(".line_chart_annual")
           .data([data])
@@ -290,12 +264,13 @@ function changeData() {
           .data([data])
           .attr("d", valueline_ten_years)
           .transition().duration();      
+        
+        
 
-          var tooltipLine = d3.select(".line_tip");
-          var tipBox = d3.select("#tipbox")
+        var tooltipLine = d3.select(".line_tip");
+        var tipBox = d3.select("#tipbox")
                          .on('mousemove', (event) => drawTooltip(tipBox, event, x, data, tooltipLine))
-                         .on('mouseout', () => removeTooltip(tooltipLine));
-                     
+                         .on('mouseout', () => removeTooltip(tooltipLine));             
          
       })
       .catch((error) =>{

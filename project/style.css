@@ -26,17 +26,10 @@ svg {
 }
 
 
-#starting_tab_content{
-    
-  width: 500px;
-  height: 130px;
-  border: 1px solid lightgray;
-
-}
-
 .tab {
+  
   overflow: hidden;
-   /* #ccc;*/
+
 }
 
 /* Style the buttons inside the tab */
@@ -97,6 +90,14 @@ svg {
   fill: none;
 
 }
+
+
+.uncertainty {
+
+    fill: lightgray;
+    stroke: none;
+}
+
 
 .tooltip{
   position: absolute;
