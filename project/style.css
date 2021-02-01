@@ -82,10 +82,18 @@ svg {
   margin-bottom: 12px;
 }
 
-.graphics .line_chart{
+.graphics .line_chart_annual{
 
   stroke-width: 1px;
   stroke: steelblue;
+  fill: none;
+
+}
+
+.graphics .line_chart_ten_years{
+
+  stroke-width: 3px;
+  stroke: red;
   fill: none;
 
 }

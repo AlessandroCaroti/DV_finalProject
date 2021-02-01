@@ -23,11 +23,7 @@ function initBaseline(dataFile){
     .then( (data =>{
   
         baseline = +data["absolute_temp(C)"];
-        baseline_unc = +data["absTemp_unc(C)"];
-  
-        console.log(baseline, "\n", baseline_unc)
-  
-    
+   
     }))
 
 }
@@ -37,10 +33,48 @@ function parseDataAttributes(data){
   data.forEach(d => {
       
     d.date = parseTime(d.Year);
-    d.value = baseline + parseFloat(d["Annual Anomaly"]);
-    d.uncertainty = baseline_unc + parseFloat(d["Annual Unc."]);
+    d.annual_value = baseline + parseFloat(d["Annual Anomaly"]);
+    d.annual_unc =parseFloat(d["Annual Unc."]);
+    d.ten_years_value =  baseline + parseFloat(d["Ten-year Anomaly"])
+    d.ten_years_unc =  parseFloat(d["Ten-year Unc."])
+  
   })
 }
+
+
+function tooltip_circle_enter(self, event, d, tooltip_div, svg, x){
+    
+  tooltip_div.transition().duration(200);
+
+  const date = x.invert(d3.mouse(tipBox.node())[0]);
+  item = data.find( d => Math.abs( d.date - date ) < 1000*60*60*24*16 );
+  
+  const tooltipLine = svg.append('line');
+  
+  
+  tooltipLine.attr('stroke', 'black')
+      .attr('x1', x(date))
+      .attr('x2', x(date))
+      .attr('y1', 0)
+      .attr('y2', height);
+      
+  
+  tooltip_div.html("<b> Year: " + d.date.getFullYear()+"<br/>" +"<br/>" +
+                   "Annual Average Temperature: "+d.annual_value.toFixed(2) +" &deg;C " +
+                   " &plusmn; " +  d.annual_unc.toFixed(2) + " "+
+                   "<br/>" +"<br/>" +
+                   "Ten Years Average Temperature: "+d.ten_years_value.toFixed(2) +" &deg;C " +
+                   " &plusmn; " +  d.ten_years_unc.toFixed(2) + "</b>  ")
+              
+              .style("left", (event.pageX) + "px")
+              .style("top", (event.pageY) + "px")
+              .style("opacity", .9)
+              .style("display", "inline")
+
+  d3.select(self).classed("selected_circle", true)
+
+}
+
 
 
 function drawCircles(svg, data, x, y){
@@ -49,17 +83,18 @@ function drawCircles(svg, data, x, y){
                   .append("div")
                   .attr("class", "tooltip");  
 
-
+  
   var circle = svg.selectAll("circle")
                   .data(data)
                   .enter().append("circle")
                   .attr("cx", function(d) { return x(d.date); })
-                  .attr("cy", function(d) { return y(d.value); })
+                  .attr("cy", function(d) { return y(d.annual_value); })
                   .attr("r", 5)
                   .attr("class","scatter")
                   .classed("unselected_circle", true)
+                  
                   .on("mouseenter", function(event, d){
-                        tooltip_circle_enter(this, event, d, tooltip)              
+                        tooltip_circle_enter(this, event, d, tooltip, svg, x)              
                       })
                   .on("mouseleave", function(){
                         tooltip_circle_leave(this, tooltip)
@@ -70,19 +105,7 @@ function drawCircles(svg, data, x, y){
   }
 
 
-  function tooltip_circle_enter(self, event, d, tooltip_div){
-    
-    tooltip_div.transition().duration(200);
-            
-    tooltip_div.html("<b> Year: " + d.date.getFullYear()+"<br/>" +"<br/>" +"Value: "+d.value+"</b>")
-            .style("left", (event.pageX) + "px")
-            .style("top", (event.pageY) + "px")
-            .style("opacity", .9)
-            .style("display", "inline")
-
-    d3.select(self).classed("selected_circle", true)
-
-  }
+ 
   
 
   function tooltip_circle_leave(self, tooltip_div){
@@ -132,26 +155,37 @@ function drawCircles(svg, data, x, y){
 
     // Add Y axis
     var y= d3.scaleLinear()
-      .domain(d3.extent(data, function(d) { return d.value; }))
+      .domain(d3.extent(data, function(d) { return d.annual_value; }))
       .range([ height, 0 ]);
 
     svg.append("g")
       .attr("class", "y_axis")
       .call(d3.axisLeft(y))
 
-    var valueline = d3.line()
+    var valueline_annual = d3.line()
         .x(function(d) { return x(d.date); })
-        .y(function(d) { return y(d.value); })
-        .defined( (d) => { return ( !isNaN(d.value) ) } );        
+        .y(function(d) { return y(d.annual_value); })
+        .defined( (d) => { return ( !isNaN(d.annual_value) ) } );        
+    
+    var valueline_ten_years = d3.line()
+        .x(function(d) { return x(d.date); })
+        .y(function(d) { return y(d.ten_years_value ); })
+        .defined( (d) => { return ( !isNaN(d.ten_years_value ) ) } );        
 
     // Draw the line the line
     svg.append("path")
               .data([data])
-              .attr("class","line_chart")
-              .attr("d", valueline);       
+              .attr("class","line_chart_annual")
+              .attr("d", valueline_annual);       
+      
+    svg.append("path")
+              .data([data])
+              .attr("class","line_chart_ten_years")
+              .attr("d", valueline_ten_years);       
       
         
-    drawCircles(svg, data, x, y);
+        
+    //drawCircles(svg, data, x, y);
     
   
    
@@ -189,7 +223,7 @@ function drawCircles(svg, data, x, y){
                         
                           // Add Y axis
         var y= d3.scaleLinear()
-                .domain(d3.extent(data, function(d) { return d.value; }))
+                .domain(d3.extent(data, function(d) { return d.annual_value; }))
                 .range([ height, 0 ]);
                     
             
@@ -197,23 +231,32 @@ function drawCircles(svg, data, x, y){
                   
         var svg = d3.select(".graphics");               
                           
-        var valueline = d3.line()
+        var valueline_annual = d3.line()
                         .x(function(d) { return x(d.date); })
-                        .y(function(d) { return y(d.value); })
-                        .defined( (d) => { return ( !isNaN(d.value) )});          
+                        .y(function(d) { return y(d.annual_value); })
+                        .defined( (d) => { return ( !isNaN(d.annual_value) )}); 
+        var valueline_ten_years = d3.line()
+                                    .x(function(d) { return x(d.date); })
+                                    .y(function(d) { return y(d.ten_years_value ); })
+                                    .defined( (d) => { return ( !isNaN(d.ten_years_value ) ) } );        
+                         
         
                   
         // Draw the line the line
-        svg.select(".line_chart")
+        svg.select(".line_chart_annual")
           .data([data])
-          .attr("d", valueline)
+          .attr("d", valueline_annual)
           .transition().duration();      
                                 
-                    
+        svg.select(".line_chart_ten_years")
+          .data([data])
+          .attr("d", valueline_ten_years)
+          .transition().duration();      
+                                        
        
         //remove old circles and update
-        svg.selectAll(".scatter").remove();
-        drawCircles(svg, data, x, y);  
+        //svg.selectAll(".scatter").remove();
+        //drawCircles(svg, data, x, y);  
          
       })
       .catch((error) =>{
