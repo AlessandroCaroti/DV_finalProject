@@ -12,7 +12,8 @@ function changeData() {
     
     // prendere dati da mappa selezionata o dropdown menu
     var dataFile = document.getElementById('dataset').value;
-    document.getElementById("country_t").innerHTML= dataFile;
+    document.getElementById("country_line").innerHTML= dataFile;
+    document.getElementById("country_stripe").innerHTML= dataFile;
     
     initBaseline(dataFile);
     
@@ -48,7 +49,8 @@ function default_dataset(){
 
   var dataFile = "Afghanistan"
 
-  document.getElementById("country_t").innerHTML= dataFile;
+  document.getElementById("country_line").innerHTML= dataFile;
+  document.getElementById("country_stripe").innerHTML= dataFile;
   var folder;
  
   
