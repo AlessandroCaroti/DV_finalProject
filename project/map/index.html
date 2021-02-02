@@ -1,14 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <title>MAP PAGE</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="../style.css" />
     <script type="text/javascript" src="../../d3/topojson.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.5.0/d3.min.js"></script>
+    <script src="https://unpkg.com/d3-simple-slider"></script>
+
   </head>
 
   <body>
-    <svg  class="view-map" id="svg-map"></svg>
+    <div class="content">
+      <div id="all_map" class="col_wrapper">
+
+        <div class="row_wrapper" width="1200" height = "100">
+          <span>
+            <div class="all-slider" id="svg-slider" class="row_wrapper">
+              
+              <div class="col-sm"><div id="sliderYear"></div></div>
+            </div>
+
+          </span>
+
+          <span>
+            <div class="row_wrapper">
+              <p class="label" font-size="50px">Country:</p>
+              <input list="countryList" id="selectCountry" onclick="changeCountry()" > </input>
+              <datalist id="countryList" ></datalist>
+            </div>
+          </span>
+        </div>
+
+        <div class="col-sm-2" ><p id="sliderLabel" ></p></div>
+        <svg class="view-map" id="svg-map">
+          
+          <rect class="background" width="100%" height="100%"></rect>
+          
+          <g id="map" x="0" y="0" width="100%" height="100%"></g>
+          
+          <g class="zoom-controls" transform="translate(10, 10)">
+            <g id="zoom-reset" transform="translate(0, 0)">
+              <rect id="change_view_btn" width="32px" height="32px" class="btn"></rect>
+              <image
+                xlink:href="../../data/images/globe_32px.ico"
+                id="change_view_img"
+                width="32px"
+                height="32px"
+              />
+            </g>
+          </g>
+        </svg>
+      </div>
+    </div>
+
     <script type="application/javascript" src="script.js?version=1"></script>
+    
   </body>
 </html>
