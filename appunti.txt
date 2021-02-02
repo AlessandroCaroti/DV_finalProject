@@ -1,0 +1,6 @@
+TODO
+-zoom manuale
+-pad manuale
+
+TOFIX:
+-i confini del paese selezionato devono rimanere sempre sopra agli altri
