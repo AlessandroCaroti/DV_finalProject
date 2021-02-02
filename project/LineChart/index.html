@@ -9,7 +9,10 @@
   </head>
 
   <body>
-    <script type="application/javascript" src="script.js?version=1"></script>
+    <script type="application/javascript" src="plotTemeratures.js"></script>
+    <script type="application/javascript" src="support_charts.js"></script>
+    <script type="application/javascript" src="lineChartSupport.js"></script>
+    <script type="application/javascript" src="eventsTabMenu.js"></script>
 
     <p> 
       <h2 >NOTES: </h2>
@@ -27,8 +30,8 @@
       
       <div class="tab">
         
-        <button class="tablinks active" style="border-right: none;" onclick="click_tab_linechart(event, 'linechart')">Line Chart</button>
-        <button class="tablinks" onclick="click_tab_stripechart(event, 'stripechart')">Stripes Chart</button>
+        <button class="tablinks active" style="border-right: none;" onclick="click_tab(event, 'linechart')">Line Chart</button>
+        <button class="tablinks" onclick="click_tab(event, 'stripechart')">Stripes Chart</button>
       
       </div>
 
