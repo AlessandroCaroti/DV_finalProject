@@ -93,8 +93,8 @@ function getScales(data){
                         
                           // Add Y axis
     var y = d3.scaleLinear()
-             .domain([d3.min(data, function(d) { return d.annual_value - d.ten_years_unc; }), 
-                          d3.max(data, function(d) { return d.annual_value + d.ten_years_unc; })])
+             .domain([d3.min(data, function(d) { return d.annual_value - d.ten_years_unc - 0.5; }), 
+                          d3.max(data, function(d) { return d.annual_value + d.ten_years_unc + 0.5; })])
              .range([ height, 0 ]);
     
     return [x, y];
