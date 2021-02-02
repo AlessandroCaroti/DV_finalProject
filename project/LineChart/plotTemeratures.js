@@ -8,6 +8,7 @@ var parseTime = d3.timeParse("%Y-%m");
 var tooltip = d3.select("body")
                 .append("div")
                 .attr("class", "tooltip");
+
 var baseline;
 
 
