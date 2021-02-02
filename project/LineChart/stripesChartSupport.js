@@ -1,3 +1,6 @@
+var margin_stripes = {'top': 30, 'right': 70, 'bottom': 40, 'left': 70};
+var width_stripe = full_width - margin_stripes.left - margin_stripes.right;
+var height_stripe = full_width*9/31 - margin_stripes.top - margin_stripes.bottom;
 
 //the annual average from January to December 1950 is reported at June 1950. 
 function getAnnualData(data){
@@ -6,7 +9,7 @@ function getAnnualData(data){
 
     data.forEach((d) => {
         
-        if( d.Month == 5 && !isNaN(d.annual_anomaly) ) data_annnual.push(d)
+        if( d.Month == 5  ) data_annnual.push(d)
     });
     
     return data_annnual;
@@ -66,12 +69,12 @@ function createDefaultStripesChart(data){
     
     var svg = d3.select("#stripechart")
                 .append("svg")
-                .attr("width", width + margin.left + margin.right)
-                .attr("height", height + margin.top + margin.bottom)
+                .attr("width", width_stripe + margin_stripes.left + margin_stripes.right)
+                .attr("height", height_stripe + margin_stripes.top + margin_stripes.bottom)
                 .append("g")
-                .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+                .attr("transform", "translate(" + margin_stripes.left + "," + margin_stripes.top + ")")
     
-    var stripe_width = x(data_annnual[1].date.getFullYear()) - x(data_annnual[0].date.getFullYear());
+    var stripe_width = (width_stripe / data_annnual.length)+2;
     
     var colorScale = d3.scaleLinear()
                        .domain(d3.extent(data_annnual, (d) => d.annual_anomaly))
@@ -86,7 +89,7 @@ function createDefaultStripesChart(data){
                      .attr("width",  stripe_width)
                      .attr("y",  y(0))
                      .attr("height", y(0.8))
-                     .attr("fill", (d) => d3.interpolateRdBu( colorScale(d.annual_anomaly) ) )
+                     .attr("fill", (d)  => colorStripes(data_annnual, d) ) 
 
     
     //Events Tooltip
@@ -96,6 +99,17 @@ function createDefaultStripesChart(data){
   
 }
 
+
+function colorStripes(data_annnual, d){
+    
+    var colorScale = d3.scaleLinear()
+                       .domain(d3.extent(data_annnual, (d) => d.annual_anomaly))
+                       .range([1,0])
+
+    if( isNaN(d.annual_anomaly) ) return "rgb(245,245,245)";
+    else
+        return d3.interpolateRdBu( colorScale(d.annual_anomaly))
+}
 
 
 function updateStripesChart(data){
@@ -109,11 +123,9 @@ function updateStripesChart(data){
 
              
     
-    var stripe_width = width / data_annnual.length;
+    var stripe_width = (width_stripe / data_annnual.length)+2;
     
-    var colorScale = d3.scaleLinear()
-                       .domain(d3.extent(data_annnual, (d) => d.annual_anomaly))
-                       .range([1,0])
+    
     
     var svg = d3.select("#stripechart");
 
@@ -123,7 +135,7 @@ function updateStripesChart(data){
                      .attr("width",  stripe_width)
                      .attr("y",  y(0))
                      .attr("height", y(0.8))
-                     .attr("fill", (d) => d3.interpolateRdBu( colorScale(d.annual_anomaly) ) )
+                     .attr("fill", (d) => colorStripes(data_annnual, d) )
                      .on("mouseover", stripesEnter)
                      .on("mouseout", stripesLeave)
                     
