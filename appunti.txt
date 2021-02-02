@@ -1,6 +1,9 @@
 TODO
+-discutere come caricare i file
+-discutere come implementare lo zoom e il pad
 -zoom manuale
 -pad manuale
+-controllare la funzione .fitExtent() https://www.d3indepth.com/geographic/
 
 TOFIX:
 -i confini del paese selezionato devono rimanere sempre sopra agli altri
