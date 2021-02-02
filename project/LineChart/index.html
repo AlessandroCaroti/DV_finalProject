@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../style.css" />
+    <script type="text/javascript" src="../../d3/topojson.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.5.0/d3.min.js"></script>
+    <title>Line Chart</title>
+  </head>
+
+  <body>
+    <script type="application/javascript" src="plotTemeratures.js"></script>
+    <script type="application/javascript" src="support_charts.js"></script>
+    <script type="application/javascript" src="lineChartSupport.js"></script>
+    <script type="application/javascript" src="eventsTabMenu.js"></script>
+    <script type="application/javascript" src="stripesChartSupport.js"></script>
+
+    <p> 
+      <h2 >NOTES: </h2>
+      <ul>
+        <li> Mettere come default dati globali</li>
+      </ul> 
+    </p>
+
+    <span>
+      <label>Dataset:</label>
+      <select name="Dataset" id="dataset" onchange="changeData()"> </select>
+    </span>
+    <h1 id="country_tt" style="text-align: center; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; color: blue"> </h1>
+    <div id="tab_menu">
+      
+      <div class="tab">
+        
+        <button class="tablinks active" style="border-right: none;" onclick="click_tab(event, 'linechart')">Line Chart</button>
+        <button class="tablinks" onclick="click_tab(event, 'stripechart')">Stripes Chart</button>
+      
+      </div>
+
+        <div id="linechart" class="tabcontent"> <h1 id="country_line" class="country_t"></h1> <div class="tooltip" id="tooltip_line"> </div> </div>
+        
+        <div id="stripechart" class="tabcontent"> <h1 id="country_stripe" class="country_t"></h1> <div class="tooltip" id="tooltip_stripes"> </div> </div>
+
+        
+   
+    </div>
+    <script>
+        
+        window.onload = () =>{
+          
+          const countries = '../../data/Countries.csv';
+        
+          d3.csv(countries)
+            .then((data)=>{
+              
+                data.forEach( d => {
+
+                  var dropdown = document.getElementById("dataset");
+                  
+                  var option =  document.createElement("option");
+                  option.setAttribute("value", d.Country);
+                  option.innerHTML = d.Country;
+                  dropdown.append(option)
+
+                });
+          })
+
+          default_dataset();
+
+        }
+        
+        
+        
+        
+        
+    </script>
+  </body>
+</html>

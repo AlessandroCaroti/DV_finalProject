@@ -1,11 +1,6 @@
-from geopy.geocoders import Nominatim
-from geopy.exc import GeocoderTimedOut
-from functools import partial
-import pycountry
-import numpy as np
-import pgeocode
 import pandas as pd
-
+import os
+'''
 def country_to_iso(country_name):
     try:
         result = pycountry.countries.search_fuzzy(country_name)
@@ -43,4 +38,22 @@ country["Country Not In Region"] = list_country
 #country.to_csv("Comparision_countries_regions.csv",index=False)
 
 print(country.values.tolist())
+'''
+country = (os.listdir(r"C:\\Users\\simoc\\Documents\\GitHub\\DV_finalProject\\data\\data_temp"))
 
+
+
+import csv
+with open('C:\\Users\\simoc\\Documents\\GitHub\\DV_finalProject\\data\\Countries.csv', 'w', newline='', encoding='utf-8') as file:
+    writer = csv.writer(file)
+    writer.writerow(["Country"])
+    for c in country:
+        if c != "desktop.ini":
+            file = (os.listdir(r"C:\\Users\\simoc\\Documents\\GitHub\\DV_finalProject\\data\\data_temp\\"+c))
+            filename=""
+            for f in file:
+                if f.split(".")[-1] == "csv":
+                    filename = f.split(".csv")[0].split("_")[0]
+                    break
+
+            writer.writerow([filename])
