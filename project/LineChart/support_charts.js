@@ -5,10 +5,12 @@
 
 // Functions to Draw and Remove the tooltip
 // given the x position find the corresponding value 
-function drawTooltip(self, event, x, data, tooltipLine) {
-  
-    const date = x.invert(d3.pointer(event, self.node())[0]);
+function drawTooltip(self, event, x, data, tooltipLine, id_chart, height) {
+
+    var tooltip = d3.select(id_chart+" .tooltip")
+                  .attr("id", "tooltip");
     
+    const date = x.invert(d3.pointer(event, self.node())[0]);
   
     //find date correspondece comparing difference in milliseconds
     var elem = data.find( (d) =>  Math.abs( d.date - date ) < 1000*60*60*24*16 );
@@ -39,8 +41,9 @@ function drawTooltip(self, event, x, data, tooltipLine) {
   }
   
 
-function removeTooltip(tooltipLine) {
-  
+function removeTooltip(tooltipLine, id_chart) {
+    
+  var tooltip = d3.select(id_chart+" .tooltip")
     if (tooltip) tooltip.style('display', 'none');
     if (tooltipLine) tooltipLine.attr('stroke', 'none');
   }
@@ -73,8 +76,9 @@ function parseDataAttributes(data){
     data.forEach(d => {
         
       d.date = parseTime(d.Year+"-"+d.Month);
+      d.annual_anomaly = parseFloat(d["Annual Anomaly"])
+      d.annual_unc = parseFloat(d["Annual Unc."]);
       d.annual_value = baseline + parseFloat(d["Annual Anomaly"]);
-      d.annual_unc =parseFloat(d["Annual Unc."]);
       d.ten_years_value =  baseline + parseFloat(d["Ten-year Anomaly"])
       d.ten_years_unc =  parseFloat(d["Ten-year Unc."])
     

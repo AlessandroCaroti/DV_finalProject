@@ -152,6 +152,7 @@ function createDefaultLineChart(data){
 
 
     drawUncertainty(data, svg, x, y);
+    
     // Draw the line the line
     svg.append("path")
               .data([data])
@@ -171,9 +172,9 @@ function createDefaultLineChart(data){
                     .attr('width', width)
                     .attr('height', height)
                     .attr('opacity', 0)
-                    .attr('id','tipbox')
-                    .on('mousemove', (event) => drawTooltip(tipBox, event, x, data, tooltipLine))
-                    .on('mouseout', () => removeTooltip(tooltipLine));
+                    .attr('class','tipbox')
+                    .on('mousemove', (event) => drawTooltip(tipBox, event, x, data, tooltipLine,"#linechart", height))
+                    .on('mouseout', () => removeTooltip(tooltipLine,"#linechart"));
 
   }
 
@@ -228,9 +229,9 @@ function updateLineChart(data, grafic_class){
     
     //Update The tooltip
     var tooltipLine = d3.select(".line_tip");
-    var tipBox = d3.select("#tipbox")
-                         .on('mousemove', (event) => drawTooltip(tipBox, event, x, data, tooltipLine))
-                         .on('mouseout', () => removeTooltip(tooltipLine)); 
+    var tipBox = d3.select(".tipbox")
+                         .on('mousemove', (event) => drawTooltip(tipBox, event, x, data, tooltipLine, "#linechart", height))
+                         .on('mouseout', () => removeTooltip(tooltipLine,"#linechart")); 
 
 
 }

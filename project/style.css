@@ -68,6 +68,10 @@ svg {
   width: 900;
 }
 
+#stripechart{
+  display: none;
+}
+
 /*--------------------------------- END TAB MENU STYLE -------------------------------------*/
 
 
@@ -159,3 +163,12 @@ text.legend {
 
 
 /* END TAB MENU LINECHART */
+
+
+/* START STYLE STRIPE CHART */
+
+  .stripes{
+
+  
+  }
+/* START STYLE STRIPE CHART */

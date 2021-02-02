@@ -5,10 +5,6 @@ var width = full_width - margin.left - margin.right;
 var height = full_width*9/16 - margin.top - margin.bottom;
 var parseTime = d3.timeParse("%Y-%m");
 
-var tooltip = d3.select("body")
-                .append("div")
-                .attr("class", "tooltip");
-
 var baseline;
 
 
@@ -36,6 +32,8 @@ function changeData() {
          
         //Update the LineChart
         updateLineChart(data, ".graphics");
+        //Update StripesChart
+        updateStripesChart(data)
            
                      
       })
@@ -66,6 +64,7 @@ function default_dataset(){
     
     parseDataAttributes(data);
     createDefaultLineChart(data);
+    createDefaultStripesChart(data);
     
   })
     .catch((error) =>{
