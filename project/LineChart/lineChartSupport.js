@@ -1,4 +1,4 @@
-//Support function for the LineChart
+//Support functions for the LineChart
 
 
 
@@ -11,7 +11,7 @@ function createLineChartLegend(svg){
     legend = svg.append( "g" ).attr("class", "legend" );
     
     legend.append( "rect" )
-    .attr("x", 10).attr("width", 237)
+    .attr("x", 10).attr("width", 200)
     .attr("y", 10).attr("height", 40)
     .attr("class", "legend");
   

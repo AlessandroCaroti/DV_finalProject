@@ -1,3 +1,7 @@
+//Support Functions for  the two kid of charts
+
+
+
 
 // Functions to Draw and Remove the tooltip
 // given the x position find the corresponding value 

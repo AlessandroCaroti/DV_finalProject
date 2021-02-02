@@ -14,12 +14,9 @@ svg {
 
 /* TAB MENU LINECHART */
 
-#country_t{
-  text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 35px;
-}
 
+
+/*--------------------------------- TAB MENU STYLE -------------------------------------*/
 
 
 #tab_menu{
@@ -31,7 +28,6 @@ svg {
   margin: auto;
 
 }
-
 
 .tab {
   
@@ -72,17 +68,25 @@ svg {
   width: 900;
 }
 
+/*--------------------------------- END TAB MENU STYLE -------------------------------------*/
+
+
+/*------------------- CHART STYLE -------------------------------*/
+
 .graphics{
 
   width: 900px;
   height: 500px;
-  margin-top: 12px;
-  margin-left: 12px;
-  margin-right: 12px;
-  margin-bottom: 12px;
+  margin: 12px;
   
-
 }
+
+#country_t{
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  color: blue;
+}
+
 
 .graphics .line_chart_annual{
 
@@ -100,14 +104,13 @@ svg {
 
 }
 
-
 .uncertainty {
 
     fill: lightgray;
     stroke: none;
 }
 
-
+/*Tooltip Style*/
 .tooltip{
   position: absolute;
   width: auto;
@@ -121,23 +124,14 @@ svg {
   display: none;
 }
 
+/* -----------------------------END CHART STYLE--------------------------------------*/
 
-
-.unselected_circle{
-   opacity: 0;
-}
-
-.selected_circle{
-  opacity: 0.5;
-  fill: red;
-
-}
-
+/*Dropdown menu -> to remove at the end, only for testing*/
 #dropdown{
   margin: auto;
 }
 
-/*LEGENDS*/
+/*--------------- LEGEND STYLE -------------------------------------------*/
 
 .legend {
   fill: #fff;
