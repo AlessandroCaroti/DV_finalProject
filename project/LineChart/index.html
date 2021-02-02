@@ -25,7 +25,7 @@
       <label>Dataset:</label>
       <select name="Dataset" id="dataset" onchange="changeData()"> </select>
     </span>
-    <h1 id="country_t" style="text-align: center; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; color: blue"> </h1>
+    <h1 id="country_tt" style="text-align: center; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; color: blue"> </h1>
     <div id="tab_menu">
       
       <div class="tab">
@@ -36,16 +36,40 @@
       </div>
 
 
-      <div id="linechart" class="tabcontent"> </div>
+      <div id="linechart" class="tabcontent"> <h1 id="country_t"></h1> </div>
       
       <div id="stripechart" class="tabcontent"></div>
    
     </div>
     <script>
         
-        window.onload = readCountries();
-        window.onload = default_dataset(); 
-    
+        window.onload = () =>{
+          
+          const countries = '../../data/Countries.csv';
+        
+          d3.csv(countries)
+            .then((data)=>{
+              
+                data.forEach( d => {
+
+                  var dropdown = document.getElementById("dataset");
+                  
+                  var option =  document.createElement("option");
+                  option.setAttribute("value", d.Country);
+                  option.innerHTML = d.Country;
+                  dropdown.append(option)
+
+                });
+          })
+
+          default_dataset();
+
+        }
+        
+        
+        
+        
+        
     </script>
   </body>
 </html>

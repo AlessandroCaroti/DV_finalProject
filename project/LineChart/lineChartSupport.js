@@ -97,10 +97,25 @@ function getScales(data){
                           d3.max(data, function(d) { return d.annual_value + d.ten_years_unc; })])
              .range([ height, 0 ]);
     
-    return [x, y]
+    return [x, y];
 
 }
 
+function getLineGenerators(x, y){
+    
+    var valueline_annual = d3.line()
+                            .x(function(d) { return x(d.date); })
+                            .y(function(d) { return y(d.annual_value); })
+                            .defined( (d) => { return ( !isNaN(d.annual_value) ) } );        
+    
+    var valueline_ten_years = d3.line()
+                                .x(function(d) { return x(d.date); })
+                                .y(function(d) { return y(d.ten_years_value ); })
+                                .defined( (d) => { return ( !isNaN(d.ten_years_value ) ) } );  
+    
+    return [valueline_annual, valueline_ten_years];
+
+}
 
 
 
@@ -131,15 +146,9 @@ function createDefaultLineChart(data){
       .attr("class", "y_axis")
       .call(d3.axisLeft(y))
 
-    var valueline_annual = d3.line()
-        .x(function(d) { return x(d.date); })
-        .y(function(d) { return y(d.annual_value); })
-        .defined( (d) => { return ( !isNaN(d.annual_value) ) } );        
-    
-    var valueline_ten_years = d3.line()
-        .x(function(d) { return x(d.date); })
-        .y(function(d) { return y(d.ten_years_value ); })
-        .defined( (d) => { return ( !isNaN(d.ten_years_value ) ) } );        
+    var lineGenerators = getLineGenerators(x,y);
+    var valueline_annual = lineGenerators[0] 
+    var valueline_ten_years = lineGenerators[1]
 
 
     drawUncertainty(data, svg, x, y);
@@ -199,15 +208,9 @@ function updateLineChart(data, grafic_class){
     
     //re-define the lines generator
     // .defined(...) => are not considered the NaN values
-    var valueline_annual = d3.line()
-                        .x(function(d) { return x(d.date); })
-                        .y(function(d) { return y(d.annual_value); })
-                        .defined( (d) => { return ( !isNaN(d.annual_value) )}); 
-        
-    var valueline_ten_years = d3.line()
-                                .x(function(d) { return x(d.date); })
-                                .y(function(d) { return y(d.ten_years_value ); })
-                                .defined( (d) => { return ( !isNaN(d.ten_years_value ) ) } );
+    var lineGenerators = getLineGenerators(x,y);
+    var valueline_annual = lineGenerators[0] 
+    var valueline_ten_years = lineGenerators[1]
     
     //Update the area that represents the uncertainty                      
     UpdateUncertainty(data, x, y);

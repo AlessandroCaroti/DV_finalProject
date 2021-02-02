@@ -19,23 +19,3 @@ function click_tab(evt, graphic_name) {
   
   }
   
-//onload events: read Countries.csv and initialize the dropdown
-function readCountries(){
-    
-    const countries = '../../data/Countries.csv';
-        
-          d3.csv(countries)
-            .then((data)=>{
-              
-                data.forEach( d => {
-
-                  var dropdown = document.getElementById("dataset");
-                  
-                  var option =  document.createElement("option");
-                  option.setAttribute("value", d.Country);
-                  option.innerHTML = d.Country;
-                  dropdown.append(option)
-
-                });
-         })
-}
