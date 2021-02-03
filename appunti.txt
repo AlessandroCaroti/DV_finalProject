@@ -10,6 +10,7 @@ TO DO:
 -fare in modo che la mappa si veda tutta all'inizio
 -dare dei contorni alla box dei country
 -cambiare il cursore sullo slider
+-fare i tooltips più compatti
 
 TOFIX:
 -i confini del paese selezionato devono rimanere sempre sopra agli altri
