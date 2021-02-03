@@ -16,7 +16,7 @@
 }
 
 .background {
-  fill: #5ccec500;
+  fill: #e4e1d43b;
 }
 
 .content {
@@ -115,5 +115,164 @@ input#selectCountry {
 
 
 
+/* TAB MENU LINECHART */
 
-/* END MAP */
+
+
+/*--------------------------------- TAB MENU STYLE -------------------------------------*/
+
+
+#tab_menu{
+
+  float: center;
+  width: 900px;
+  height: 500px;
+  /* border: 1px lightgray solid; */
+  margin: auto;
+
+}
+
+.tab {
+  
+  overflow: hidden;
+
+}
+
+/* Style the buttons inside the tab */
+.tablinks {
+  
+  background-color: inherit;
+  float: left;
+  border: 1px solid lightgray;
+  border-bottom: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+  font-family: sans-serif;
+  font-weight: bold;
+
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  border: 1px solid #ccc;
+  width: 900;
+}
+
+#stripechart{
+  display: none;
+}
+
+/*--------------------------------- END TAB MENU STYLE -------------------------------------*/
+
+
+/*------------------- CHART STYLE -------------------------------*/
+
+.graphics{
+
+  width: 900px;
+  height: 500px;
+  margin: 12px;
+  
+}
+
+.country_t{
+  
+  text-align: center;
+  color: #111; font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 50px; font-weight: 700;
+  line-height: 64px; 
+  margin: 0 0 0; 
+  padding: 20px 30px;
+  color: black;
+  -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+ 
+}
+
+
+.graphics .line_chart_annual{
+
+  stroke-width: 1px;
+  stroke: steelblue;
+  fill: none;
+
+}
+
+.graphics .line_chart_ten_years{
+
+  stroke-width: 2px;
+  stroke: red;
+  fill: none;
+
+}
+
+.uncertainty {
+
+    fill: lightgray;
+    stroke: none;
+}
+
+/*Tooltip Style*/
+.tooltip{
+  position: absolute;
+  width: auto;
+  height: auto;
+  padding: 10px;
+  font-size: 11px sans-serif;
+  border: 1px solid black;
+  background: lightsteelblue;
+  border-radius: 8px;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+  display: none;
+}
+
+/* -----------------------------END CHART STYLE--------------------------------------*/
+
+/*Dropdown menu -> to remove at the end, only for testing*/
+#dropdown{
+  margin: auto;
+}
+
+/*--------------- LEGEND STYLE -------------------------------------------*/
+
+.legend {
+  fill: #fff;
+  stroke: #000;
+  stroke-width: 0.8px;
+}
+
+text.legend {
+  
+  fill: #000;
+  stroke: #000;
+  font-size: 12px;
+  alignment-baseline: central;
+
+}
+
+.legend .line_chart_annual {
+  stroke-width: 2px;
+}
+
+.legend .line_chart_ten_years {
+  stroke-width: 3px;
+}
+
+
+
+/* END TAB MENU LINECHART */
+
