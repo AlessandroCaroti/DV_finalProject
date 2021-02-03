@@ -87,7 +87,7 @@ function update_colors() {
   var colorScale = d3
     .scaleLinear()
     //.domain([-5, 0, +5])
-    .domain([-2.5169, 0, +3.1986])
+    .domain([-3.0, 0, +3.8])
     .range(colorsRange);
 
   tmp_data.forEach(function (d) {
