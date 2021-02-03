@@ -47,8 +47,8 @@ function changeData() {
 
 function default_dataset(dataFile=""){
 
-  //var dataFile = "Afghanistan"
-  //dataFile = default_data;
+  if( dataFile == "") dataFile = "Afghanistan";
+
   
   document.getElementById("country_line").innerHTML= dataFile;
   document.getElementById("country_stripe").innerHTML= dataFile;

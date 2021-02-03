@@ -22,7 +22,8 @@ function click_tab(evt, graphic_name) {
   }
   
   function loadData(){ 
-        
+    
+    var dataset = "";
     d3.csv(countries)
       .then((data)=>{
 
@@ -39,10 +40,11 @@ function click_tab(evt, graphic_name) {
               dropdown.selectedIndex = i;
               dropdown.options[i].selected = true;
               // set Italy default dataset
-              default_dataset(option.value);
+              dataset = option.value;
+              
             }
             i++;
-
           });
+          default_dataset(dataset);
     })
 }

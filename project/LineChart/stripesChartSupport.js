@@ -39,7 +39,7 @@ function stripesEnter(event, d){
     tooltip.transition();
     var tipText =  String(
         "<b> Year: " + d.date.getFullYear()+"<br/>" +"<br/>" +
-        "Annual Average Temperature: "+d.annual_anomaly.toFixed(2) +" &deg;C " +
+        "Annual Average Anomaly: "+d.annual_anomaly.toFixed(2) +" &deg;C " +
         " &plusmn; " +  d.annual_unc.toFixed(2) + " </b>"
       )
     
