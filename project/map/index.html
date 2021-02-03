@@ -26,7 +26,7 @@
           <span>
             <div class="row_wrapper">
               <p class="label" font-size="50px">Country:</p>
-              <input list="countryList" id="selectCountry" onclick="changeCountry()" > </input>
+              <input list="countryList" id="selectCountry" onchange="changeCountry()" > </input>
               <datalist id="countryList" ></datalist>
             </div>
           </span>
@@ -54,7 +54,14 @@
       </div>
     </div>
 
-    <script type="application/javascript" src="script.js?version=1"></script>
+
+    <script type="application/javascript" src="script.js?version=1">
+        //window.onload = init_page();
+
+    </script>
     
+    <script>
+      window.onload = init_page
+    </script>
   </body>
 </html>

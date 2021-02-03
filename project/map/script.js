@@ -26,7 +26,8 @@ var zoom = d3
 
 // FILES & DIRECTORY PATH VARIABLE
 map_file = "../../data/countries-50m.json";
-tmp_file = "../../data/data_year/2019/Annual_mean.csv";
+tmp_file_prefix = "../../data/data_year/";
+tmp_file_suffix = "/Annual_mean.csv";
 
 //                    END GLOBAL VARIABLE                   //
 // ******************************************************** //
@@ -114,6 +115,7 @@ function country_events() {
     d3.select(".selected_country").classed("selected_country", false);
 
     d3.select(this).classed("selected_country", true);
+    console.log(b)
     country_selected(b);
   });
 }
@@ -215,15 +217,16 @@ function init_slider(min, max){
     .step(1)
     .width(500)
     .tickFormat(d3.format('0'))
-    .ticks(10)
-    .default(0.015)
+    .ticks(7)
+    .default(2019)
     .handle(
       d3.symbol()
         .type(d3.symbolCircle)
         .size(200)()
     )
-    .on('onchange', val => {
+    .on('end', val => {
       d3.select('p#sliderLabel').text("Year: " + d3.format('0')(val));
+      load_tempYear(tmp_file_prefix + val + tmp_file_suffix);
     });
 
   var g2 = d3.select('div#sliderYear')
@@ -248,7 +251,10 @@ function init_dropdown_menu(list_countries){
   var countries = d3.select("datalist#countryList")
                               .selectAll("option")
                               .data(list_countries);
+  countries.exit().remove();   
+
   countries.enter()
+            .merge(countries)
             .append("option")
             .attr("value", (d) => d);
 
@@ -257,7 +263,26 @@ function init_dropdown_menu(list_countries){
 
 // UPDATE COUNTRY
 function changeCountry() {
-  console.log("bubi");
+
+  var listInput = document.getElementById('selectCountry');
+
+  // get country name
+  var name = listInput.value;
+
+  console.log("SELECTED COUNTRY: " + name)
+
+  //check is a country is selected
+  if(name.length == 0)
+    return;
+
+  // find path
+  country = document.getElementById(name);
+
+  // fake click()
+  var evObj = document.createEvent('Events');
+  evObj.initEvent('click', true, false);
+  country.dispatchEvent(evObj);
+  
 }
 
 // **************************************************** //
@@ -273,6 +298,7 @@ function load_tempYear(temp_file) {
       });
       tmp_data = data;
       load_map();
+
     })
     .catch(function (error) {
       console.log(error);
@@ -290,6 +316,8 @@ function load_map() {
       topology = topojson.simplify(topology, 0.05);
 
       drawMap(topology);
+      init_dropdown_menu(country_list); 
+
     })
     .catch((error) => {
       console.log(error);
@@ -300,12 +328,12 @@ function load_map() {
 // **************************************************** //
 //                  DOVE INIZIA TUTTO                  //
 
-load_tempYear(tmp_file);
+function init_page(){
+  
+  load_tempYear(tmp_file_prefix + "2019" + tmp_file_suffix);
 
-init_map_controls();
+  init_map_controls();
+  // trovare modo automatico per trovare min e max
+  init_slider(1743, 2020);
+}
 
-init_slider(1700, 2020);
-
-console.log(country_list);
-// ["Internet Explorer", "Firefox", "Chrome", "Opera", "Safari"]
-init_dropdown_menu(["Internet Explorer", "Firefox", "Chrome", "Opera", "Safari"]); // non riesco ad usare country_list mannaggia al clero, perchè cazzo dice che non ha elementi???!!!
