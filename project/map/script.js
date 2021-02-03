@@ -115,7 +115,7 @@ function country_events() {
     d3.select(".selected_country").classed("selected_country", false);
 
     d3.select(this).classed("selected_country", true);
-    console.log(this.id, this);
+    console.log(this.id);
     country_selected(this.__data__);
   });
 }
