@@ -3,9 +3,9 @@ var full_width = 900
 var margin = {top: 40, right: 70, bottom: 30, left: 50};
 var width = full_width - margin.left - margin.right;
 var height = full_width*9/16 - margin.top - margin.bottom;
-var parseTime = d3.timeParse("%Y-%m");
 
-var baseline;
+
+
 
 
 function changeData() {

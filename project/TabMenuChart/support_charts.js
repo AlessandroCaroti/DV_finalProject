@@ -1,6 +1,6 @@
 //Support Functions for  the two kid of charts
-
-
+var parseTime = d3.timeParse("%Y-%m");
+var baseline;
 
 
 // Functions to Draw and Remove the tooltip
