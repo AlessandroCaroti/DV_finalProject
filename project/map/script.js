@@ -82,7 +82,7 @@ function drwaGridlines() {
 
 function update_colors() {
   //GLOBAL MIN & MAX
-  //[-2.5168333333333335, 3.1985000000000006] [-2.5169, 0, +3.1986]
+  // [-2.998, +3.7969999999999997]
 
   var colorScale = d3
     .scaleLinear()
