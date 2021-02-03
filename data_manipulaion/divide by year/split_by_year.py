@@ -34,8 +34,6 @@ for i, country in enumerate(country_list):
     year_group = group_year(df.loc[:,"Year": "Month"])
 
     for year in year_group.keys():
-        print(year, df.iloc[year_group[year], 5])
-
         year_mean = df.iloc[year_group[year], 5]
         unc_mean = df.iloc[year_group[year], 6]
 
@@ -45,7 +43,6 @@ for i, country in enumerate(country_list):
         year_df = global_dict[year]
         new_row = {"Country": country, "Anomaly": year_mean, "Unc.": unc_mean}
         global_dict[year] = year_df.append(new_row, ignore_index=True)
-    exit()
 
 for year in global_dict.keys():
     if not os.path.exists(dataYear_folder+"/"+str(year)):
