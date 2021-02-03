@@ -106,7 +106,7 @@ function colorStripes(data_annnual, d){
                        .domain(d3.extent(data_annnual, (d) => d.annual_anomaly))
                        .range([1,0])
 
-    if( isNaN(d.annual_anomaly) ) return "rgb(245,245,245)";
+    if( isNaN(d.annual_anomaly) ) return "rgb(153,153,153)";
     else
         return d3.interpolateRdBu( colorScale(d.annual_anomaly))
 }
