@@ -1,5 +1,11 @@
 
 const countries = '../../data/Countries.csv';
+//Global Variables
+var full_width = 900
+var margin_table = {top: 40, right: 70, bottom: 30, left: 50};
+var width_table = full_width - margin_table.left - margin_table.right;
+var height_table = full_width*9/16 - margin_table.top - margin_table.bottom;
+
 
 
 function loadData(){ 
@@ -55,6 +61,7 @@ function default_dataset(dataFile=""){
     .then( function(data){ 
       
       parseDataAttributes(data);
+      createDefaultTable(data)
    
       
     })
