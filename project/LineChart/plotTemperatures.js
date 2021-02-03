@@ -45,14 +45,15 @@ function changeData() {
 }
 
 
-function default_dataset(){
+function default_dataset(dataFile=""){
 
-  var dataFile = "Afghanistan"
-
+  //var dataFile = "Afghanistan"
+  //dataFile = default_data;
+  
   document.getElementById("country_line").innerHTML= dataFile;
   document.getElementById("country_stripe").innerHTML= dataFile;
   var folder;
- 
+  
   
   if( dataFile.charAt(dataFile.length  - 1) == '.' ) folder = dataFile.slice(0,-1);
   else

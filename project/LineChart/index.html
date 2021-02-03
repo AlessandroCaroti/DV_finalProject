@@ -44,14 +44,15 @@
    
     </div>
     <script>
-        
+        var default_data;
         window.onload = () =>{
           
           const countries = '../../data/Countries.csv';
         
           d3.csv(countries)
             .then((data)=>{
-              
+
+                var i = 0;
                 data.forEach( d => {
 
                   var dropdown = document.getElementById("dataset");
@@ -60,11 +61,18 @@
                   option.setAttribute("value", d.Country);
                   option.innerHTML = d.Country;
                   dropdown.append(option)
+                  if( option.value == "Italy"){
+                    dropdown.selectedIndex = i;
+                    dropdown.options[i].selected = true;
+                    // set Italy default dataset
+                    default_dataset(option.value);
+                  }
+                  i++;
 
                 });
           })
 
-          default_dataset();
+          
 
         }
         
