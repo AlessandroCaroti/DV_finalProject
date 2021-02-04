@@ -33,15 +33,19 @@ function dataEvery50Years(data){
 }
 
 
-function data_to_table(data_2){
+function table_data(data_country, data_emisphere=null, data_continet=null, data_global=null){
 
-    var header_cols = [];
-    
-    header_cols["Region:"]=data_2[0].region;
-    
-    data_2.forEach( (d) => header_cols[String(d.date.getFullYear())] = d.annual_value.toFixed(2) );
+    //TODO:SARA DA RICHIAMARE ANCHE PER I DATAI SUI CONTINENTE, EMISFERO, GLOBALI 
+    //data for each region
+    var data_table = [];
+    data_table["Regions"] = data_country[0].region;
 
-    return header_cols;
+    data_country.forEach((d) => data_table[ String(d.date.getFullYear()) ] = d.annual_value.toFixed(2))
+
+
+    console.log(data_table.sort("desc"));
+   
+    return data_table;
 }
 
 function getRowTable(data_2){
@@ -68,23 +72,15 @@ function createDefaultTable(data){
                 thead = table.append("thead"),
                 tbody = table.append("tbody");
     
-   
-    var data_table = data_to_table(data_2);
-    console.log(data_table);
-    var header_cols = Object.keys( data_table);
+
+
     
-    header_cols.unshift("Region:");
-    header_cols.pop();
+    var data_table = table_data(data_2);
+
    
-    
+   
     
 
-    var header =  thead.append("tr")
-                      .selectAll("th")
-                      .data(header_cols).enter()
-                      .append("th")
-                      .text((d) => String( d ))
-    
     
     console.log()
     
@@ -92,24 +88,7 @@ function createDefaultTable(data){
 
     
 
-    var rows = tbody.selectAll("tr")
-                    .data(data_table).enter()
-                    .append("th")
-                    .on("mouseover", function(d){
-                          d3.select(this)
-                              .style("background-color", "#ffffcc");
-                    })
-                    .on("mouseout", function(d){
-                          d3.select(this)
-                              .style("background-color","transparent");
-                    });
-                
-    var cells = rows.selectAll("td")
-                    .data( ( col) =>{ console.log("55555",col); header_cols.map( (d)=> col[d])})
-                    .enter()
-                    .append("td")
-                    .html(function(d){ return d.annual_value;});    
-;
+
 }
 
 
