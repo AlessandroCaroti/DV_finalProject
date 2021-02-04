@@ -69,6 +69,8 @@ function roundedRect(x, y, width, height, radius) {
 
 
 /*
+// DECOMMENTARE QUESTA PARTE DI CODICE PER VEDERE IL RISULTATO SU roundedRect.html
+
 var svg = d3.select("body").append("svg")
     .attr("width", 960)
     .attr("height", 500)
