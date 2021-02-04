@@ -24,18 +24,24 @@ function dataEvery50Years(data){
     var annual_data = getAnnualData(data);
     var data_2 = [];
 
+    
+
     for( i=0; i < annual_data.length; i= i+50){  data_2.push(annual_data[i]);}
+    
 
     return data_2;
 }
 
 
-function getHeader(data_2){
+function data_to_table(data_2){
 
-    var header_cols = ["Region:"];
-    data_2.forEach( (d) => header_cols.push(d.date.getFullYear()) );
+    var header_cols = [];
+    
+    header_cols["Region:"]=data_2[0].region;
+    
+    data_2.forEach( (d) => header_cols[String(d.date.getFullYear())] = d.annual_value.toFixed(2) );
+
     return header_cols;
-
 }
 
 function getRowTable(data_2){
@@ -48,8 +54,6 @@ function getRowTable(data_2){
 function createDefaultTable(data){
 
     data_2 = dataEvery50Years(data);
-
-    console.log(data_2);
  
     var svg = d3.select("#table_container")
                 .attr("width", width_table + margin_table.left + margin_table.right)
@@ -65,7 +69,14 @@ function createDefaultTable(data){
                 tbody = table.append("tbody");
     
    
-    var header_cols = getHeader(data_2);
+    var data_table = data_to_table(data_2);
+    console.log(data_table);
+    var header_cols = Object.keys( data_table);
+    
+    header_cols.unshift("Region:");
+    header_cols.pop();
+   
+    
     
 
     var header =  thead.append("tr")
@@ -75,21 +86,30 @@ function createDefaultTable(data){
                       .text((d) => String( d ))
     
     
-    var row = getRowTable(data_2)
-    tbody.selectAll("tr")
-                    .data(row).enter()
+    console.log()
+    
+    //var row_data = getRowTable(data_2)
+
+    
+
+    var rows = tbody.selectAll("tr")
+                    .data(data_table).enter()
                     .append("th")
-                    .html((d) => "<br/>"+String( d))
                     .on("mouseover", function(d){
                           d3.select(this)
-                              .style("background-color", "orange");
+                              .style("background-color", "#ffffcc");
                     })
                     .on("mouseout", function(d){
                           d3.select(this)
                               .style("background-color","transparent");
                     });
-    
-
+                
+    var cells = rows.selectAll("td")
+                    .data( ( col) =>{ console.log("55555",col); header_cols.map( (d)=> col[d])})
+                    .enter()
+                    .append("td")
+                    .html(function(d){ return d.annual_value;});    
+;
 }
 
 

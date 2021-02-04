@@ -300,7 +300,25 @@ div span{
     width: 70%;
 }
 
+/* Zebra striping */
+tr:nth-of-type(odd) { 
+  background: white; 
+}
 
+th { 
+    
+    background:lightgray; 
+    color: black; 
+    font-weight: bold; 
+    background-repeat: no-repeat;
+    background-position: 3% center;
+}
+
+td, th { 
+  padding: 6px; 
+  border: 1px solid #ccc; 
+  text-align: left; 
+}
 
 
 
