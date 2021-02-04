@@ -1,5 +1,6 @@
 
 const countries = '../../data/Countries.csv';
+
 //Global Variables
 var full_width = 900
 var margin_table = {top: 40, right: 70, bottom: 30, left: 50};
