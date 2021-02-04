@@ -27,7 +27,7 @@ function bottomRoundedRect(x, y, width, height, radius) {
 function topRoundedRect(x, y, width, height, radius) {
     y = y + radius;
 
-    return "M" + (x) + "," + (y)
+    return "M" + x + "," + y
             + "a" + radius + "," + radius + " 0 0 1 " + (radius) + "," + (-radius)
             + "h" + (width - 2* radius)
             + "a" + radius + "," + radius + " 0 0 1 " + (radius) + "," + radius
@@ -39,9 +39,7 @@ function topRoundedRect(x, y, width, height, radius) {
 // Returns path data for a rectangle with rounded left corners.
 // The top-left corner is ⟨x,y⟩.
 function leftRoundedRect(x, y, width, height, radius) {
-    y = y + radius;
-
-    return "M" + (x) + "," + (y)
+    return "M" + x + "," + (y + radius)
             + "a" + radius + "," + radius + " 0 0 1 " + (radius) + "," + (-radius)
             + "h" + (width - radius)
             + "v" + height
@@ -53,9 +51,7 @@ function leftRoundedRect(x, y, width, height, radius) {
 // Returns path data for a rectangle with all rounded corners.
 // The top-left corner is ⟨x,y⟩.
 function roundedRect(x, y, width, height, radius) {
-    y = y + radius;
-
-    return "M" + x + "," + y
+    return "M" + x + "," + (y + radius)
             + "a" + radius + "," + radius + " 0 0 1 " + (radius) + "," + (-radius)
             + "h" + (width - 2*radius)
             + "a" + radius + "," + radius + " 0 0 1 " + (radius) + "," + (radius)
