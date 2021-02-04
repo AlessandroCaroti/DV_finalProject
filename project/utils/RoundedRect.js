@@ -68,7 +68,7 @@ function roundedRect(x, y, width, height, radius) {
 
 
 
-/**/ 
+/*
 var svg = d3.select("body").append("svg")
     .attr("width", 960)
     .attr("height", 500)
@@ -81,4 +81,4 @@ var rect_3 = svg.append("path").attr("d", topRoundedRect(-50, -200, 40, 70, 15))
 var rect_4 = svg.append("path").attr("d", leftRoundedRect(0, -200, 70, 40, 15));
 var rect_5 = svg.append("path").attr("d", roundedRect(-130, -100, 130, 60, 20));
 
-/**/ 
+*/ 
