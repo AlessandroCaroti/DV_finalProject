@@ -83,8 +83,8 @@ span {
 
 .col-sm-2 {
   font-size: 30px;
-  position: relative;
-  left: 450px;
+  /*position: relative;
+  left: 450px;*/
 }
 
 .label {

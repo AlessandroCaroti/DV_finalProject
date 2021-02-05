@@ -24,17 +24,16 @@
           </span>
 
           <span>
-            <div class="row_wrapper">
+            <div class="row_wrapper" >
               <p class="label" font-size="50px">Country:</p>
-              <input list="countryList" id="selectCountry" onchange="changeCountry()" > </input>
+              <input list="countryList" id="selectCountry" onchange="changeCountry()" placeholder="select a country" > </input>
               <datalist id="countryList" ></datalist>
             </div>
           </span>
         </div>
 
-        <div class="col-sm-2" ><p id="sliderLabel" ></p></div>
+        
         <svg class="view-map" id="svg-map">
-          
           <rect class="background" width="100%" height="100%"></rect>
           
           <g id="map" x="0" y="0" width="100%" height="100%"></g>
@@ -49,6 +48,9 @@
                 height="32px"
               />
             </g>
+          </g>
+          <g class="col-sm-2">
+            <text id="sliderLabel" x="45%" y="50"> </text>
           </g>
         </svg>
       </div>

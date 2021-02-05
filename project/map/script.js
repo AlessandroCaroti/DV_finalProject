@@ -225,7 +225,7 @@ function init_slider(min, max){
         .size(200)()
     )
     .on('end', val => {
-      d3.select('p#sliderLabel').text("Year: " + d3.format('0')(val));
+      d3.select('#sliderLabel').text("Year: " + d3.format('0')(val));
       load_tempYear(tmp_file_prefix + val + tmp_file_suffix);
     });
 
@@ -238,7 +238,7 @@ function init_slider(min, max){
 
   g2.call(sliderAlternativeHandle);
 
-  d3.select('p#sliderLabel').text("Year: " + sliderAlternativeHandle.value());
+  d3.select('#sliderLabel').text("Year: " + sliderAlternativeHandle.value());
   
   d3.select("div#sliderYear").select("g .parameter-value").select("text").attr("y", -35);
 
