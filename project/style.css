@@ -10,9 +10,13 @@
 }
 
 .btn {
-  fill: none;
+  fill: rgb(172, 172, 172);
   stroke: black;
   stroke-width: 1;
+}
+
+.btn:hover {
+  fill: rgb(233, 233, 233);
 }
 
 .background {
