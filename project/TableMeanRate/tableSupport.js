@@ -5,34 +5,62 @@ function getAnnualData(data){
 
     var data_annual = [];
 
+    
     data.forEach((d) => {
         
         if( d.Month == 5  ){
             d["region"] = document.getElementById('dataset').value;
             data_annual.push(d);
-            
         }
+
     });
     
     return data_annual;
 }
 
 
+function existYear(data, year){
+    
+    var x = false;
+    data.forEach( (d) =>{
+        if( d.Year == year)  x = true;
+    });
+    
+    return x;
+}
+
 
 function dataEvery50Years(data){
 
     var annual_data = getAnnualData(data);
+    
     var data_2 = [];
 
-    for( i=0; i < annual_data.length; i= i+50){  data_2.push(annual_data[i]);}
+    var years = ["1750","1800","1850","1900","1950","2000"];
+
+    years.forEach( (year) =>{
+
+        annual_data.forEach( (d)=>{
+
+            if( d.Year == year ) data_2.push(d); 
+            
+        })
+        
+        if(!existYear(annual_data, year)){
+            // missing year
+            data_2.push({ Year: year, annual_value:NaN, region: annual_data[0].region})
+        }       
+        
+    })
+    
     return data_2;
 }
 
 
-//TODO: Calculate mean rate of change respect to the 50 previous years
-function getMeanRateOfChange(){
-    
-    //TODO: TO BE IMPLEMENTED YET
+
+function getMeanRateOfChange(temp1,temp2, year_temp1, year_temp2){
+  
+    return (temp2 - temp1) / (year_temp2 - year_temp1);
 }
 
 
@@ -46,8 +74,28 @@ function table_data(data_country, data_emisphere=null, data_continet=null, data_
     
     row["Regions"] = data_country[0].region;
 
-    data_country.forEach((d) => row[ String(d.date.getFullYear()) ] = d.annual_value.toFixed(2))
+    data_country.forEach((d) => row[ String(d.Year) ] = d.annual_value.toFixed(2))
     data_table.push(row)
+    
+    var starting_year = 1750;
+    var step_year = 50;
+    
+    var year_1 = starting_year;
+    console.log(25353653)
+    data_table.forEach((d) =>{
+        
+        console.log( Object.keys(d).length);
+        
+        for( var j =0; j < Object.keys(d).length - 1; j = j+ 1){
+         
+            var year_2 = year_1 + step_year;
+        
+            d[year_2] = getMeanRateOfChange(d[year_1], d[year_2], year_1, year_2).toFixed(3);
+            //year_1 =  year_1 + step_year;
+        }
+          
+        
+    });
 
     return data_table;
 }
@@ -127,7 +175,11 @@ function createDefaultTable(data){
                     .enter()
                     .append("td")
                     .attr("class","cells_table")
-                    .html(function(d){ return d.value;});
+                    .html(function(d){ 
+                        
+                        if( String(d.value) == "NaN" ) return "-";
+                        else
+                        return d.value;});
 
 }
 
