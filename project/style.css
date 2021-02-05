@@ -301,6 +301,7 @@ div span{
 }
 
 /* Zebra striping */
+
 tr:nth-of-type(odd) { 
   background: white; 
 }
@@ -319,6 +320,21 @@ td, th {
   border: 1px solid #ccc; 
   text-align: left; 
 }
+
+
+.cells_table{
+  
+  text-align: center;
+}
+
+.header_table{
+  text-align: center;
+}
+
+.rows_table{
+  text-align: center;
+}
+
 
 
 

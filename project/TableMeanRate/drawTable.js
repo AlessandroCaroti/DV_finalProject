@@ -97,7 +97,7 @@ function changeDataTable(){
        .then( (data) =>{ 
          
          parseDataAttributes(data);
-          
+         UpdateTable(data);
 
        })
        .catch((error) =>{

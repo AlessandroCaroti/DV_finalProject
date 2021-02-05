@@ -49,8 +49,6 @@ function table_data(data_country, data_emisphere=null, data_continet=null, data_
     data_country.forEach((d) => row[ String(d.date.getFullYear()) ] = d.annual_value.toFixed(2))
     data_table.push(row)
 
-    console.log(data_table);
-   
     return data_table;
 }
 
@@ -65,7 +63,6 @@ function createDefaultTable(data){
 
     data_2 = dataEvery50Years(data);
 
-    console.log("Data 2: ", data_2);
  
     var svg = d3.select("#table_container")
                 .attr("width", width_table + margin_table.left + margin_table.right)
@@ -77,12 +74,13 @@ function createDefaultTable(data){
     var table = svg
                 .append("table")
                 .attr("class", "mean_rate"),
-                thead = table.append("thead"),
-                tbody = table.append("tbody");
+                thead = table.append("thead").attr("class","thead_table"),
+                tbody = table.append("tbody").attr("class","tbody_table");
     
-
+    
+    //get data for the table and the columns for the header
+    
     var data_table = table_data(data_2);
-
     var columns = Object.keys(data_table[0]);
   
     if( columns[ columns.length - 1 ] == "Regions" ){
@@ -97,18 +95,20 @@ function createDefaultTable(data){
 		              .selectAll("th")
 		              .data(columns)
 		              .enter()
-		              .append("th")
+                      .append("th")
+                      .attr("class","header_table")
 			          .text((d) => d);
 		
     var rows = tbody.selectAll("tr")
                     .data(data_table)
                     .enter()
                     .append("tr")
+                    .attr("class","rows_table")
                     .on("mouseover", function(d){
                         
-                        console.log("DDD ", d);
+                        
                         d3.select(this)
-                          .style("background-color", "orange");
+                          .style("background-color", "#fff2cc");
                     })
                     .on("mouseout", function(d){
                         
@@ -116,7 +116,6 @@ function createDefaultTable(data){
                         .style("background-color","transparent");
                     });
     
-  
 
     var cells = rows.selectAll("td")
                     .data(function(row){
@@ -127,10 +126,8 @@ function createDefaultTable(data){
                     })
                     .enter()
                     .append("td")
+                    .attr("class","cells_table")
                     .html(function(d){ return d.value;});
-
-
-
 
 }
 
@@ -138,5 +135,56 @@ function createDefaultTable(data){
 
 function UpdateTable(data){
 
-    //TODO:TO BE IMPLEMENTED YET
+    data_2 = dataEvery50Years(data);
+
+      //get data for the table and the columns for the header
+    
+      var data_table = table_data(data_2);
+      var columns = Object.keys(data_table[0]);
+    
+      if( columns[ columns.length - 1 ] == "Regions" ){
+  
+          var tmp = columns[columns.length - 1];
+          columns.unshift(tmp);
+          columns.pop();
+      }
+      
+    //var thead = d3.select(".thead_table");
+    //var tbody = d3.select(".tbody_table");
+    
+    var header = d3.select(".header_table")
+		            .data(columns)
+			        .text((d) => d);
+		
+    var rows = d3.select(".rows_table")
+                .data(data_table)
+                .on("mouseover", function(d){
+                        
+                        
+                    d3.select(this)
+                      .style("background-color", "#fff2cc");
+                })
+                .on("mouseout", function(d){
+                    
+                    d3.select(this)
+                    .style("background-color","transparent");
+                });
+
+    
+
+    var cells = rows.selectAll("td")
+                    .data(function(row){
+                        return columns.map(function(d, i){
+                           
+                            return {i: d, value: row[d]};
+                        });
+                    })
+                    .html(function(d){ 
+                        
+                        if( String(d.value) == "NaN" ) return "-";
+                        else
+                            return d.value;
+                    
+                    });
+
 }
