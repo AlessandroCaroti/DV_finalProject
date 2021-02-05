@@ -24,11 +24,7 @@ function dataEvery50Years(data){
     var annual_data = getAnnualData(data);
     var data_2 = [];
 
-    
-
     for( i=0; i < annual_data.length; i= i+50){  data_2.push(annual_data[i]);}
-    
-
     return data_2;
 }
 
