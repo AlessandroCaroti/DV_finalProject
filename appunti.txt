@@ -13,6 +13,6 @@ TO DO:
 -fare i tooltips più compatti
 
 TOFIX:
--i confini del paese selezionato devono rimanere sempre sopra agli altri
+-i confini del paese selezionato devono rimanere sempre sopra agli altri DONE
 -la grid scompare quando si passa sopra ad un paese (si può corregerla mettendo la grid sempre sotto)
 -se un paese senza dati per quell'anno viene selezionato, il colore cambia in bianco (guarda 2020)

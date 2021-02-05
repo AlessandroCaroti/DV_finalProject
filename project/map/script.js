@@ -105,9 +105,26 @@ function country_events() {
     d3.select(this).raise();
     d3.select(this).classed("highlighted_country", true);
   });
+
   map_container.selectAll(".country").on("mouseleave ", function (event, b) {
     d3.select(".highlighted_country").classed("highlighted_country", false);
+    d3.select(".selected_country").moveToFront();
+
+    // revome tooltip
+    //map_container.select(".tooltip")
   });
+
+  // MOUSE-OVER: tooltip
+  map_container.selectAll(".country").on("mouseover", function(event, b){
+    // show tooltip
+    let x, y = d3.pointer(event);
+    d3.select(".tooltip")
+      .attr("x", x)
+      .attr("y", y)
+      .classed("tooltip", false)
+      .classed("tooltip-show", true)
+      .html("PINOOOOOO")
+  })
 
   //CLICK EVENT:
   map_container.selectAll(".country").on("click", function (event, b) {
@@ -115,6 +132,9 @@ function country_events() {
     d3.select(".selected_country").classed("selected_country", false);
 
     d3.select(this).classed("selected_country", true);
+    d3.select(this).moveToFront();
+    d3.select("#selectCountry").attr("value", this.id);
+
     console.log(this.id);
     country_selected(this.__data__);
   });
@@ -205,6 +225,13 @@ function click_viwe() {
   });
 }
 
+// funtion to move path in front of the charts
+d3.selection.prototype.moveToFront = function() {
+  return this.each(function(){
+    this.parentNode.appendChild(this);
+  });
+};
+
 //                END FUNCTION MAP CONTROL                //
 // ****************************************************** //
 
@@ -219,19 +246,13 @@ function init_slider(min, max) {
     .tickFormat(d3.format("0"))
     .ticks(7)
     .default(2019)
-    .handle(
-      d3.symbol()
-        .type(d3.symbolCircle)
-        .size(200)()
-    )
+    .handle(d3.symbol().type(d3.symbolCircle).size(200)())
     .on('end', val => {
       d3.select('#sliderLabel').text("Year: " + d3.format('0')(val));
       load_tempYear(tmp_file_prefix + val + tmp_file_suffix);
     });
 
-  var g2 = d3
-    .select("div#sliderYear")
-    .append("svg")
+  var g2 = d3.select("div#sliderYear").append("svg")
     .attr("width", 600)
     .attr("height", 100)
     .append("g")
@@ -241,8 +262,6 @@ function init_slider(min, max) {
 
   d3.select('#sliderLabel').text("Year: " + sliderAlternativeHandle.value());
   
-  d3.select("div#sliderYear").select("g .parameter-value").select("text").attr("y", -35);
-
 
   d3.select("div#sliderYear")
     .select("g .parameter-value")
@@ -263,6 +282,11 @@ function init_dropdown_menu(list_countries) {
     .merge(countries)
     .append("option")
     .attr("value", (d) => d);
+}
+
+// MAKE LEGEND
+function init_legend(){
+  return;
 }
 
 // UPDATE COUNTRY
@@ -317,6 +341,10 @@ function load_map() {
 
       drawMap(topology);
       init_dropdown_menu(country_list);
+
+      // hide the tooltip
+      map_container.append("div")
+                .classed("tooltip", true);
     })
     .catch((error) => {
       console.log(error);

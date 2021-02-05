@@ -83,8 +83,6 @@ span {
 
 .col-sm-2 {
   font-size: 30px;
-  /*position: relative;
-  left: 450px;*/
 }
 
 .label {
@@ -240,6 +238,18 @@ input#selectCountry {
   display: none;
 }
 
+.tooltip-show{
+  position: absolute;
+  width: auto;
+  height: auto;
+  padding: 10px;
+  font-size: 11px sans-serif;
+  border: 1px solid black;
+  background: lightsteelblue;
+  border-radius: 8px;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+  display: block;
+}
 /* -----------------------------END CHART STYLE--------------------------------------*/
 
 /*Dropdown menu -> to remove at the end, only for testing*/
