@@ -29,17 +29,27 @@ function dataEvery50Years(data){
 }
 
 
+//TODO: Calculate mean rate of change respect to the 50 previous years
+function getMeanRateOfChange(){
+    
+    //TODO: TO BE IMPLEMENTED YET
+}
+
+
+
 function table_data(data_country, data_emisphere=null, data_continet=null, data_global=null){
 
     //TODO:SARA DA RICHIAMARE ANCHE PER I DATAI SUI CONTINENTE, EMISFERO, GLOBALI 
     //data for each region
     var data_table = [];
-    data_table["Regions"] = data_country[0].region;
+    var row={}
+    
+    row["Regions"] = data_country[0].region;
 
-    data_country.forEach((d) => data_table[ String(d.date.getFullYear()) ] = d.annual_value.toFixed(2))
+    data_country.forEach((d) => row[ String(d.date.getFullYear()) ] = d.annual_value.toFixed(2))
+    data_table.push(row)
 
-
-    console.log(data_table.sort("desc"));
+    console.log(data_table);
    
     return data_table;
 }
@@ -54,6 +64,8 @@ function getRowTable(data_2){
 function createDefaultTable(data){
 
     data_2 = dataEvery50Years(data);
+
+    console.log("Data 2: ", data_2);
  
     var svg = d3.select("#table_container")
                 .attr("width", width_table + margin_table.left + margin_table.right)
@@ -69,20 +81,55 @@ function createDefaultTable(data){
                 tbody = table.append("tbody");
     
 
-
-    
     var data_table = table_data(data_2);
 
-   
-   
-    
+    var columns = Object.keys(data_table[0]);
+  
+    if( columns[ columns.length - 1 ] == "Regions" ){
 
-    
-    console.log()
-    
-    //var row_data = getRowTable(data_2)
+        var tmp = columns[columns.length - 1];
+        columns.unshift(tmp);
+        columns.pop();
+    }
 
+ 
+	var header = thead.append("tr")
+		              .selectAll("th")
+		              .data(columns)
+		              .enter()
+		              .append("th")
+			          .text((d) => d);
+		
+    var rows = tbody.selectAll("tr")
+                    .data(data_table)
+                    .enter()
+                    .append("tr")
+                    .on("mouseover", function(d){
+                        
+                        console.log("DDD ", d);
+                        d3.select(this)
+                          .style("background-color", "orange");
+                    })
+                    .on("mouseout", function(d){
+                        
+                        d3.select(this)
+                        .style("background-color","transparent");
+                    });
     
+  
+
+    var cells = rows.selectAll("td")
+                    .data(function(row){
+                        return columns.map(function(d, i){
+                           
+                            return {i: d, value: row[d]};
+                        });
+                    })
+                    .enter()
+                    .append("td")
+                    .html(function(d){ return d.value;});
+
+
 
 
 }
