@@ -80,22 +80,27 @@ function table_data(data_country, data_emisphere=null, data_continet=null, data_
     var starting_year = 1750;
     var step_year = 50;
     
-    var year_1 = starting_year;
-    console.log(25353653)
-    data_table.forEach((d) =>{
+    
+    
+    for(var i=0; i<data_table.length; i++){
         
-        console.log( Object.keys(d).length);
+        var year_1 = starting_year;
+        data_table[i][year_1] = 0;
+        var year_2 = starting_year + step_year;
+        for( var j =0; j < Object.keys(data_table[i]).length - 2; j++){
         
-        for( var j =0; j < Object.keys(d).length - 1; j = j+ 1){
-         
-            var year_2 = year_1 + step_year;
-        
-            d[year_2] = getMeanRateOfChange(d[year_1], d[year_2], year_1, year_2).toFixed(3);
+            // = getMeanRateOfChange(data_table[i][year_1], data_table[i][year_2], year_1, year_2).toFixed(3);
             //year_1 =  year_1 + step_year;
+           
+            //console.log(year_1)
+            data_table[i][year_2] = (getMeanRateOfChange(data_table[i][year_1], data_table[i][year_2], year_1, year_2).toFixed(3))
+
+            year_1 += step_year;
+            year_2 = year_1 + step_year;
+            
         }
-          
-        
-    });
+              
+    }
 
     return data_table;
 }
