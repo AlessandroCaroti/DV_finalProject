@@ -16,16 +16,14 @@ min = 99999
 def group_year(year_list):
 
     year_dict = {}
-    for idx, year in enumerate(year_list):
-        if year in year_dict:
-            year_dict[year].append(idx)
-        else:
-            year_dict[year] = [idx]
+    for idx, (year, month) in enumerate(year_list.values.tolist()):
+        if year not in year_dict or month == 5:
+            year_dict[year] = idx
     return year_dict
 
 country_list = os.listdir(dataTmp_folder)
 for i, country in enumerate(country_list):
-    print("[{}/{}]".format(i, len(country_list)))
+    print("[{}/{}] {}".format(i, len(country_list), country))
     try:
         df = pd.read_csv(dataTmp_folder+"/" + country +
                          "/" + country+"_anomalyTable.csv")
@@ -33,11 +31,11 @@ for i, country in enumerate(country_list):
         df = pd.read_csv(dataTmp_folder+"/" + country +
                          "/" + country+"._anomalyTable.csv")
 
-    year_group = group_year(df["Year"])
+    year_group = group_year(df.loc[:,"Year": "Month"])
 
     for year in year_group.keys():
-        year_mean = df.iloc[year_group[year], 5].mean()
-        unc_mean = df.iloc[year_group[year], 6].mean()
+        year_mean = df.iloc[year_group[year], 5]
+        unc_mean = df.iloc[year_group[year], 6]
 
         if year not in global_dict:
             global_dict[year] = pd.DataFrame(columns=["Country", "Anomaly", "Unc."])

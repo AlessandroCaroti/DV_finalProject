@@ -82,12 +82,12 @@ function drwaGridlines() {
 
 function update_colors() {
   //GLOBAL MIN & MAX
-  //[-2.5168333333333335, 3.1985000000000006] [-2.5169, 0, +3.1986]
+  // [-2.998, +3.7969999999999997]
 
   var colorScale = d3
     .scaleLinear()
     //.domain([-5, 0, +5])
-    .domain([-2.5169, 0, +3.1986])
+    .domain([-3.0, 0, +3.8])
     .range(colorsRange);
 
   tmp_data.forEach(function (d) {
@@ -115,8 +115,8 @@ function country_events() {
     d3.select(".selected_country").classed("selected_country", false);
 
     d3.select(this).classed("selected_country", true);
-    console.log(b)
-    country_selected(b);
+    console.log(this.id);
+    country_selected(this.__data__);
   });
 }
 
@@ -187,11 +187,11 @@ function changeImage_view() {
   } else {
     if (global_view) {
       d3.select("#change_view_img").attr("xlink:href", country_img);
-      console.log("RESET ZOOM");
+      console.log("RESET ZOOM\n-------------------------------");
       reset_zoom();
     } else {
       d3.select("#change_view_img").attr("xlink:href", global_img);
-      console.log("ZOOM IN");
+      console.log("ZOOM IN\n-------------------------------");
       zoom_in(selected_country);
     }
   }
@@ -209,14 +209,14 @@ function click_viwe() {
 // ****************************************************** //
 
 // LOAD SLIDER YEAR
-function init_slider(min, max){
-
-  var sliderAlternativeHandle = d3.sliderBottom()
+function init_slider(min, max) {
+  var sliderAlternativeHandle = d3
+    .sliderBottom()
     .min(min)
     .max(max)
     .step(1)
     .width(500)
-    .tickFormat(d3.format('0'))
+    .tickFormat(d3.format("0"))
     .ticks(7)
     .default(2019)
     .handle(
@@ -229,12 +229,13 @@ function init_slider(min, max){
       load_tempYear(tmp_file_prefix + val + tmp_file_suffix);
     });
 
-  var g2 = d3.select('div#sliderYear')
-    .append('svg')
-    .attr('width', 600)
-    .attr('height', 100)
-    .append('g')
-    .attr('transform', 'translate(40,40)');
+  var g2 = d3
+    .select("div#sliderYear")
+    .append("svg")
+    .attr("width", 600)
+    .attr("height", 100)
+    .append("g")
+    .attr("transform", "translate(40,40)");
 
   g2.call(sliderAlternativeHandle);
 
@@ -243,46 +244,46 @@ function init_slider(min, max){
   d3.select("div#sliderYear").select("g .parameter-value").select("text").attr("y", -35);
 
 
+  d3.select("div#sliderYear")
+    .select("g .parameter-value")
+    .select("text")
+    .attr("y", -35);
 }
 
 // LOAD COUNTRIES MENU
-function init_dropdown_menu(list_countries){
+function init_dropdown_menu(list_countries) {
+  var countries = d3
+    .select("datalist#countryList")
+    .selectAll("option")
+    .data(list_countries);
+  countries.exit().remove();
 
-  var countries = d3.select("datalist#countryList")
-                              .selectAll("option")
-                              .data(list_countries);
-  countries.exit().remove();   
-
-  countries.enter()
-            .merge(countries)
-            .append("option")
-            .attr("value", (d) => d);
-
+  countries
+    .enter()
+    .merge(countries)
+    .append("option")
+    .attr("value", (d) => d);
 }
-
 
 // UPDATE COUNTRY
 function changeCountry() {
-
-  var listInput = document.getElementById('selectCountry');
+  var listInput = document.getElementById("selectCountry");
 
   // get country name
   var name = listInput.value;
 
-  console.log("SELECTED COUNTRY: " + name)
+  console.log("SELECTED COUNTRY: " + name);
 
   //check is a country is selected
-  if(name.length == 0)
-    return;
+  if (name.length == 0) return;
 
   // find path
   country = document.getElementById(name);
 
   // fake click()
-  var evObj = document.createEvent('Events');
-  evObj.initEvent('click', true, false);
+  var evObj = document.createEvent("Events");
+  evObj.initEvent("click", true, false);
   country.dispatchEvent(evObj);
-  
 }
 
 // **************************************************** //
@@ -298,7 +299,6 @@ function load_tempYear(temp_file) {
       });
       tmp_data = data;
       load_map();
-
     })
     .catch(function (error) {
       console.log(error);
@@ -316,8 +316,7 @@ function load_map() {
       topology = topojson.simplify(topology, 0.05);
 
       drawMap(topology);
-      init_dropdown_menu(country_list); 
-
+      init_dropdown_menu(country_list);
     })
     .catch((error) => {
       console.log(error);
@@ -328,12 +327,10 @@ function load_map() {
 // **************************************************** //
 //                  DOVE INIZIA TUTTO                  //
 
-function init_page(){
-  
+function init_page() {
   load_tempYear(tmp_file_prefix + "2019" + tmp_file_suffix);
 
   init_map_controls();
   // trovare modo automatico per trovare min e max
   init_slider(1743, 2020);
 }
-

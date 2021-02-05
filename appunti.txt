@@ -1,9 +1,18 @@
-TODO
+TO DO:
 -discutere come caricare i file
 -discutere come implementare lo zoom e il pad
 -zoom manuale
 -pad manuale
+-aggiunta dei comandi di zoom fisici (dei bottoni) 
 -controllare la funzione .fitExtent() https://www.d3indepth.com/geographic/
+-transizione dei colori quando cambia l'anno
+-contorno mondo di colore diverso (più scuro)
+-fare in modo che la mappa si veda tutta all'inizio
+-dare dei contorni alla box dei country
+-cambiare il cursore sullo slider
+-fare i tooltips più compatti
 
 TOFIX:
 -i confini del paese selezionato devono rimanere sempre sopra agli altri
+-la grid scompare quando si passa sopra ad un paese (si può corregerla mettendo la grid sempre sotto)
+-se un paese senza dati per quell'anno viene selezionato, il colore cambia in bianco (guarda 2020)
