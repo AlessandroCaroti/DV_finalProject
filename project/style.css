@@ -226,18 +226,22 @@ input#selectCountry {
     stroke: none;
 }
 
+
+
 /*Tooltip Style*/
 .tooltip{
   position: absolute;
   width: auto;
   height: auto;
-  padding: 10px;
-  font-size: 11px sans-serif;
-  border: 1px solid black;
-  background: lightsteelblue;
+  padding: 10px 18px;
+  font: 10px sans-serif;
+  background-color: rgba(59, 72, 80, 0.9);
   border-radius: 8px;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
   display: none;
+
+  color: #fff;
+
 }
 
 /* -----------------------------END CHART STYLE--------------------------------------*/
