@@ -85,14 +85,11 @@ function table_data(data_country, data_emisphere=null, data_continet=null, data_
     for(var i=0; i<data_table.length; i++){
         
         var year_1 = starting_year;
-        data_table[i][year_1] = 0;
+        
         var year_2 = starting_year + step_year;
         for( var j =0; j < Object.keys(data_table[i]).length - 2; j++){
         
-            // = getMeanRateOfChange(data_table[i][year_1], data_table[i][year_2], year_1, year_2).toFixed(3);
-            //year_1 =  year_1 + step_year;
-           
-            //console.log(year_1)
+            console.log(data_table[i][year_1], "\n", data_table[i]);
             data_table[i][year_2] = (getMeanRateOfChange(data_table[i][year_1], data_table[i][year_2], year_1, year_2).toFixed(3))
 
             year_1 += step_year;
