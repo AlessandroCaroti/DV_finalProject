@@ -6,9 +6,8 @@ var r = 5;
 /*                       ZOOM IN                                                          */
 var zoom_in = d3.select("#zoom-in");
 zoom_in
-  .append("path")
-  .attr("d", topRoundedRect(0, 0, width, height, r))
-  .classed("btn", true);
+  .select("path")
+  .attr("d", topRoundedRect(0, 0, width, height, r));
 zoom_in
   .append("line")
   .attr("x1", width / 2 - 7)
@@ -33,9 +32,8 @@ zoom_in
 /*                       ZOOM OUT                                                         */
 var zoom_out = d3.select("#zoom-out");
 zoom_out
-  .append("path")
-  .attr("d", bottomRoundedRect(0, 0, width, height, r))
-  .classed("btn", true);
+  .select("path")
+  .attr("d", bottomRoundedRect(0, 0, width, height, r));
 zoom_out
   .append("line")
   .attr("x1", width / 2 - 7)
@@ -50,10 +48,9 @@ zoom_out
 /*                       ZOOM RESET                                                       */
 var zoom_reset = d3.select("#zoom-reset");
 zoom_reset
-  .append("rect")
+  .select("rect")
   .attr("width", width)
-  .attr("height", height)
-  .classed("btn", true);
+  .attr("height", height);
 
 zoom_reset
   .append("circle")
@@ -70,5 +67,5 @@ zoom_reset
   .attr("cy", height / 2)
   .style("fill", "none")
   .style("stroke", "black")
-  .style("stroke-width", 2)
+  .style("stroke-width", 1)
   .attr("pointer-events", "none");
