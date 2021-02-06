@@ -2,8 +2,8 @@
 //                START GLOBAL VARIABLE                //
 
 // MAP DIMANSION
-var w = 1000;
-var h = 500;
+const w = 1000,
+ h = 500;
 
 var projection;
 var map_container;
@@ -39,7 +39,7 @@ tmp_file_suffix = "/Annual_mean.csv";
 //                START FUNCTION FOR THE MAP                //
 
 function drawMap(world) {
-  console.log("DRAW-MAP");
+  debug_log("DRAW-MAP");
 
   svg = d3.select("#svg-map").attr("width", "100%").attr("height", h); //.call(zoom);
   map_container = svg.select("#map");
@@ -85,7 +85,6 @@ function drwaGridlines() {
 }
 
 function update_colors() {
-  
   tmp_data.forEach(function (d) {
     var element = document.getElementById(d.Country);
 
@@ -107,26 +106,26 @@ function country_events() {
     d3.select(".selected_country").moveToFront();
 
     // hide tooltip
-    d3.select(".tooltip-map")
-    .style("display", "none")
+    d3.select(".tooltip-map").style("display", "none");
   });
 
   // MOUSE-OVER: tooltip
-  map_container.selectAll(".country")
-                .on("mouseover", function (event, b) {
-                        // show tooltip
-                        d3.select(".tooltip-map")
-                          .style("top", (event.pageY + 13) + "px")
-                          .style("left", (event.pageX + 13 ) + "px" )
-                          .style("display", "block")
-                          .html(b.properties.name)
-                })
-                .on("mousemove", function(event,b ){
-                        // update position tooltip
-                        d3.select(".tooltip-map")
-                          .style("top", (event.pageY + 13) + "px")
-                          .style("left", (event.pageX + 13)  + "px" )
-                });
+  map_container
+    .selectAll(".country")
+    .on("mouseover", function (event, b) {
+      // show tooltip
+      d3.select(".tooltip-map")
+        .style("top", event.pageY + 13 + "px")
+        .style("left", event.pageX + 13 + "px")
+        .style("display", "block")
+        .html(b.properties.name);
+    })
+    .on("mousemove", function (event, b) {
+      // update position tooltip
+      d3.select(".tooltip-map")
+        .style("top", event.pageY + 13 + "px")
+        .style("left", event.pageX + 13 + "px");
+    });
 
   //CLICK EVENT:
   map_container.selectAll(".country").on("click", function (event, b) {
@@ -147,42 +146,8 @@ function country_selected(country) {
   zoom_in(selected_country);
 }
 
-//                 END FUNCTION FOR THE MAP                 //
-// ******************************************************** //
-// ******************************************************** //
-//                    START ZOOM SECTION                    //
-var zoomIn_scale = 1.2,
-  zoomOut_scale = 0.8;
-
-function reset_zoom() {
-  map_container
-    .transition()
-    .duration(1000)
-    .call(zoom.transform, d3.zoomIdentity.translate(0, 0).scale(1));
-}
-
-function zoom_in(country) {
-  var bounds = geoGenerator.bounds(country),
-    dx = bounds[1][0] - bounds[0][0],
-    dy = bounds[1][1] - bounds[0][1],
-    x = (bounds[0][0] + bounds[1][0]) / 2,
-    y = (bounds[0][1] + bounds[1][1]) / 2,
-    scale = Math.max(1, Math.min(max_zoom, 0.9 / Math.max(dx / w, dy / h))),
-    translate = [w / 2 - scale * x, h / 2 - scale * y];
-
-  map_container
-    .transition()
-    .duration(1000)
-    .call(
-      zoom.transform,
-      d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale)
-    );
-}
-
-
-
 // define the anomaly color space
-function set_colorScale(){
+function set_colorScale() {
   //GLOBAL MIN & MAX
   // [-2.998, +3.7969999999999997]
 
@@ -192,32 +157,31 @@ function set_colorScale(){
     .domain([-3.0, 0, +3.8])
     .range(colorsRange);*/
 
-  // da trovare modo per trovare min e max automaticamente 
+  // da trovare modo per trovare min e max automaticamente
   let min = -3.0;
   let max = +3.8;
-  let step = (max - min)/7.0;
-  let step_color_list = []
-  let step_bar_list = []
-  let step_list = []
+  let step = (max - min) / 7.0;
+  let step_color_list = [];
+  let step_bar_list = [];
+  let step_list = [];
   let width = 300; // width of the legend axis
-  
-  var colorBase = d3.scaleDiverging(t => d3.interpolateRdBu(1 - t))
-                      .domain([min, 0, max]);
+
+  var colorBase = d3
+    .scaleDiverging((t) => d3.interpolateRdBu(1 - t))
+    .domain([min, 0, max]);
   // color quantization
-  for(let i = min; i <= max; i += step){
-      let num = parseFloat(i.toFixed(2));
-      step_list.push(num);
-      step_color_list.push(colorBase(num));
+  for (let i = min; i <= max; i += step) {
+    let num = parseFloat(i.toFixed(2));
+    step_list.push(num);
+    step_color_list.push(colorBase(num));
   }
   // axis quantization
-  for(let i = 0; i <= width; i += width/7.0){
+  for (let i = 0; i <= width; i += width / 7.0) {
     step_bar_list.push(i);
   }
-  colorScale = d3.scaleQuantize()
-                      .domain([min, max])
-                      .range(step_color_list);
+  colorScale = d3.scaleQuantize().domain([min, max]).range(step_color_list);
 
-                      /*
+  /*
   var quantizeBarScale = d3.scaleQuantize()
                                 .domain([min, max])
                                 .range(step_bar_list );
@@ -268,19 +232,37 @@ function draw_legend(){
         .append("rect");
 }*/
 
-
 //                 END FUNCTION FOR THE MAP                 //
 // ******************************************************** //
 // ******************************************************** //
 //                    START ZOOM SECTION                    //
-var zoomIn_scale = 1.2
-var zoomOut_scale = 0.8
+
+var zoomIn_scale = 1.2;
+var zoomOut_scale = 0.8;
 
 function reset_zoom() {
   map_container
     .transition()
     .duration(1000)
     .call(zoom.transform, d3.zoomIdentity.translate(0, 0).scale(1));
+}
+
+function zoom_in(country) {
+  var bounds = geoGenerator.bounds(country),
+    dx = bounds[1][0] - bounds[0][0],
+    dy = bounds[1][1] - bounds[0][1],
+    x = (bounds[0][0] + bounds[1][0]) / 2,
+    y = (bounds[0][1] + bounds[1][1]) / 2,
+    scale = Math.max(1, Math.min(max_zoom, 0.9 / Math.max(dx / w, dy / h))),
+    translate = [w / 2 - scale * x, h / 2 - scale * y];
+
+  map_container
+    .transition()
+    .duration(1000)
+    .call(
+      zoom.transform,
+      d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale)
+    );
 }
 
 //                      END ZOOM SECTION                    //
@@ -334,7 +316,7 @@ d3.selection.prototype.moveToFront = function () {
   });
 };
 
-//                END FUNCTION MAP CONTROL                //
+//                END FUNCTION MAP OVERLAY                //
 // ****************************************************** //
 
 // LOAD SLIDER YEAR
@@ -413,8 +395,8 @@ function changeCountry() {
   country.dispatchEvent(evObj);
 }
 
-// **************************************************** //
-//                    FILES LOADING                    //
+// ******************************************************** //
+//                   START FILES LOADING                    //
 
 function load_tempYear(temp_file) {
   d3.csv(temp_file)
@@ -442,7 +424,6 @@ function load_map() {
       topology = topojson.presimplify(topology);
       topology = topojson.simplify(topology, 0.05);
 
-
       drawMap(topology);
       init_dropdown_menu(country_list);
     })
@@ -452,8 +433,10 @@ function load_map() {
     });
 }
 
-// **************************************************** //
-//                  DOVE INIZIA TUTTO                  //
+//                   END FILES LOADING                    //
+// ****************************************************** //
+// ****************************************************** //
+//                   DOVE INIZIA TUTTO                    //
 
 function init_page() {
   set_colorScale();
@@ -464,5 +447,4 @@ function init_page() {
   // trovare modo automatico per trovare min e max
   init_slider(1743, 2020);
   //draw_legend();
-
 }
