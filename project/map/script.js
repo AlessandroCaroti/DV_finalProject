@@ -115,16 +115,17 @@ function country_events() {
   });
 
   // MOUSE-OVER: tooltip
-  map_container.selectAll(".country").on("mouseover", function(event, b){
+  map_container.selectAll(".country").on("mouseover", function (event, b) {
     // show tooltip
-    let x, y = d3.pointer(event);
+    let x,
+      y = d3.pointer(event);
     d3.select(".tooltip")
       .attr("x", x)
       .attr("y", y)
       .classed("tooltip", false)
       .classed("tooltip-show", true)
-      .html("PINOOOOOO")
-  })
+      .html("PINOOOOOO");
+  });
 
   //CLICK EVENT:
   map_container.selectAll(".country").on("click", function (event, b) {
@@ -177,27 +178,16 @@ function reset_zoom() {
 //                 END FUNCTION FOR THE MAP                 //
 // ******************************************************** //
 // ******************************************************** //
-//                START FUNCTION MAP CONTROL                //
+//                START FUNCTION MAP OVERLAY                //
 
 function init_map_controls() {
-  over_viwe();
-  click_viwe();
+  init_changeView();
 }
 
 //CHANGE VIEW
 var global_view = false; //if TRUE => the current view of the map is global (NO ZOOM)
 const global_img = "../../data/images/globe_32px.ico";
 const country_img = "../../data/images/country_32px.ico";
-
-//EVENT OVER
-function over_viwe() {
-  d3.select("#change_view_img").on("mouseover", function (event, b) {
-    d3.select("#change_view_btn").style("fill", "Gainsboro");
-  });
-  d3.select("#change_view_img").on("mouseleave", function (event, b) {
-    d3.select("#change_view_btn").style("fill", "none");
-  });
-}
 
 function changeImage_view() {
   if (selected_country == null) {
@@ -206,28 +196,29 @@ function changeImage_view() {
     console.log("IMPOSSIBILE CAMBIARE LA VISTA");
   } else {
     if (global_view) {
-      d3.select("#change_view_img").attr("xlink:href", country_img);
       console.log("RESET ZOOM\n-------------------------------");
+      no_zoom();
       reset_zoom();
     } else {
-      d3.select("#change_view_img").attr("xlink:href", global_img);
       console.log("ZOOM IN\n-------------------------------");
+      local_zoom();
       zoom_in(selected_country);
     }
   }
 }
 
-//EVENT CLICK
-function click_viwe() {
-  d3.select("#change_view_img").on("click", function (event, b) {
-    global_view = !global_view;
-    changeImage_view();
-  });
+function init_changeView() {
+  d3.select("#zoom-reset")
+    .select("rect")
+    .on("click", function (event, b) {
+      global_view = !global_view;
+      changeImage_view();
+    });
 }
 
 // funtion to move path in front of the charts
-d3.selection.prototype.moveToFront = function() {
-  return this.each(function(){
+d3.selection.prototype.moveToFront = function () {
+  return this.each(function () {
     this.parentNode.appendChild(this);
   });
 };
@@ -247,12 +238,14 @@ function init_slider(min, max) {
     .ticks(7)
     .default(2019)
     .handle(d3.symbol().type(d3.symbolCircle).size(200)())
-    .on('end', val => {
-      d3.select('#sliderLabel').text("Year: " + d3.format('0')(val));
+    .on("end", (val) => {
+      d3.select("#sliderLabel").text("Year: " + d3.format("0")(val));
       load_tempYear(tmp_file_prefix + val + tmp_file_suffix);
     });
 
-  var g2 = d3.select("div#sliderYear").append("svg")
+  var g2 = d3
+    .select("div#sliderYear")
+    .append("svg")
     .attr("width", 600)
     .attr("height", 100)
     .append("g")
@@ -260,8 +253,7 @@ function init_slider(min, max) {
 
   g2.call(sliderAlternativeHandle);
 
-  d3.select('#sliderLabel').text("Year: " + sliderAlternativeHandle.value());
-  
+  d3.select("#sliderLabel").text("Year: " + sliderAlternativeHandle.value());
 
   d3.select("div#sliderYear")
     .select("g .parameter-value")
@@ -285,7 +277,7 @@ function init_dropdown_menu(list_countries) {
 }
 
 // MAKE LEGEND
-function init_legend(){
+function init_legend() {
   return;
 }
 
@@ -343,8 +335,7 @@ function load_map() {
       init_dropdown_menu(country_list);
 
       // hide the tooltip
-      map_container.append("div")
-                .classed("tooltip", true);
+      map_container.append("div").classed("tooltip", true);
     })
     .catch((error) => {
       console.log(error);
