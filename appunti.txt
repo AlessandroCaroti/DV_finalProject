@@ -19,3 +19,6 @@ TOFIX:
 -i confini del paese selezionato devono rimanere sempre sopra agli altri                           DONE
 -la grid scompare quando si passa sopra ad un paese (si può corregerla mettendo la grid sempre sotto)
 -se un paese senza dati per quell'anno viene selezionato, il colore cambia in bianco (guarda 2020)
+-TOOLTIP MAP quando si è su uno stato e si clicca su un altro, se non si muove il mouse
+ il tooltips rimane con il nome dello stato su cui era prima il cursore, anche se la mappa si muove
+ e quindi il cursore non è più sullo stato che segna il tooltip
