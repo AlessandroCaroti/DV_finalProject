@@ -17,12 +17,15 @@ var country_list = new Array(); //List of the name of the countries present in t
 
 var selected_country = null;
 
+const max_zoom = 8;
+var zommed = false;
 var zoom = d3
   .zoom()
   .on("zoom", (event) => {
+    zommed = event.transform.k != 1.0;
     map_container.attr("transform", event.transform);
   })
-  .scaleExtent([1, 8]);
+  .scaleExtent([1, max_zoom]);
 
 // FILES & DIRECTORY PATH VARIABLE
 map_file = "../../data/countries-50m.json";
@@ -115,29 +118,30 @@ function country_events() {
   });
 
   // MOUSE-OVER: tooltip
-  map_container.selectAll(".country")
-                .on("mouseover", function (event, b) {
-                        // show tooltip
-                        let coord = d3.pointer(event);
-                        let x= coord[0]
-                        let y = coord[1];
+  map_container
+    .selectAll(".country")
+    .on("mouseover", function (event, b) {
+      // show tooltip
+      let coord = d3.pointer(event);
+      let x = coord[0];
+      let y = coord[1];
 
-                        d3.select(".tooltip")
-                          .style("top", event.pageY + "px")
-                          .style("left", event.pageX  + "px" )
-                          .style("display", "block")
-                          .html("PINOOOOOO")
-                })
-                .on("mousemove", function(event,b ){
-                        // update position tooltip
-                        let coord = d3.pointer(event);
-                        let x= coord[0]
-                        let y = coord[1];
+      d3.select(".tooltip")
+        .style("top", event.pageY + "px")
+        .style("left", event.pageX + "px")
+        .style("display", "block")
+        .html("PINOOOOOO");
+    })
+    .on("mousemove", function (event, b) {
+      // update position tooltip
+      let coord = d3.pointer(event);
+      let x = coord[0];
+      let y = coord[1];
 
-                        d3.select(".tooltip")
-                          .style("top", event.pageY + "px")
-                          .style("left", event.pageX  + "px" )
-                })
+      d3.select(".tooltip")
+        .style("top", event.pageY + "px")
+        .style("left", event.pageX + "px");
+    });
 
   //CLICK EVENT:
   map_container.selectAll(".country").on("click", function (event, b) {
@@ -148,26 +152,22 @@ function country_events() {
     d3.select(this).moveToFront();
     d3.select("#selectCountry").attr("value", this.id);
 
-    debug_log("CLICK ON "+this.id);
+    debug_log("CLICK ON " + this.id);
     country_selected(this.__data__);
   });
 }
 
 function country_selected(country) {
   selected_country = country;
-
   zoom_in(selected_country);
-  // update the button that manage the zoom
-  global_view = false;
-  changeImage_view();
 }
 
 //                 END FUNCTION FOR THE MAP                 //
 // ******************************************************** //
 // ******************************************************** //
 //                    START ZOOM SECTION                    //
-var zoomIn_scale = 1.2
-var zoomOut_scale = 0.8
+var zoomIn_scale = 1.2,
+  zoomOut_scale = 0.8;
 
 function reset_zoom() {
   map_container
@@ -182,7 +182,7 @@ function zoom_in(country) {
     dy = bounds[1][1] - bounds[0][1],
     x = (bounds[0][0] + bounds[1][0]) / 2,
     y = (bounds[0][1] + bounds[1][1]) / 2,
-    scale = Math.max(1, Math.min(8, 0.9 / Math.max(dx / w, dy / h))),
+    scale = Math.max(1, Math.min(max_zoom, 0.9 / Math.max(dx / w, dy / h))),
     translate = [w / 2 - scale * x, h / 2 - scale * y];
 
   map_container
@@ -203,25 +203,16 @@ function init_map_controls() {
   init_zoomBtns();
 }
 
-//CHANGE VIEW
-var global_view = false; //if TRUE => the current view of the map is global (NO ZOOM)
-const global_img = "../../data/images/globe_32px.ico";
-const country_img = "../../data/images/country_32px.ico";
-
 function changeImage_view() {
-  if (selected_country == null) {
-    global_view = !global_view;
-    debug_log("No country selected. Impossible to change the view!");
-  } else {
-    if (global_view) {
-      debug_log("RESET_ZOOM")
-      no_zoom();
-      reset_zoom();
-    } else {
-      debug_log("ZOOM COUNTRY")
-      local_zoom();
-      zoom_in(selected_country);
-    }
+  console.log(zommed);
+  if (zommed) {
+    debug_log("RESET_ZOOM");
+    no_zoom();
+    reset_zoom();
+  } else if (selected_country != null) {
+    debug_log("ZOOM COUNTRY");
+    local_zoom();
+    zoom_in(selected_country);
   }
 }
 
@@ -229,7 +220,6 @@ function init_zoomBtns() {
   d3.select("#zoom-reset")
     .select("rect")
     .on("click", function (event, b) {
-      global_view = !global_view;
       changeImage_view();
     });
 
@@ -257,7 +247,6 @@ d3.selection.prototype.moveToFront = function () {
 
 //                END FUNCTION MAP CONTROL                //
 // ****************************************************** //
-
 
 // LOAD SLIDER YEAR
 function init_slider(min, max) {
@@ -366,7 +355,6 @@ function load_map() {
 
       drawMap(topology);
       init_dropdown_menu(country_list);
-
     })
     .catch((error) => {
       console.log(error);
