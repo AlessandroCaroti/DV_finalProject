@@ -1,18 +1,19 @@
 // function support for the table
+
+//Global variable
 var years = ["1750","1800","1850","1900","1950","2000","2019"];
 
+//get annual average data, saved at every june
 function getAnnualData(data){
 
     var data_annual = [];
 
-    
     data.forEach((d) => {
         
         if( d.Month == 5  ){
             d["region"] = document.getElementById('dataset').value;
             data_annual.push(d);
         }
-
     });
     
     return data_annual;
@@ -29,11 +30,10 @@ function existYear(data, year){
     return x;
 }
 
-
+//Get data every 50 years with also the 2019 at the end
 function dataEvery50Years(data){
 
-    var annual_data = getAnnualData(data);
-    
+    var annual_data = getAnnualData(data);   
     var data_2 = [];
 
     years.forEach( (year) =>{
@@ -45,7 +45,7 @@ function dataEvery50Years(data){
         })
         
         if(!existYear(annual_data, year)){
-            // missing year
+            // handle missing year
             data_2.push({ Year: year, annual_value:NaN, region: annual_data[0].region})
         }       
         
@@ -55,13 +55,13 @@ function dataEvery50Years(data){
 }
 
 
-
+//compute mean rate of changes
 function getMeanRateOfChange(temp1,temp2, year_temp1, year_temp2){
   
     return (temp2 - temp1) / (year_temp2 - year_temp1);
 }
 
-
+//save temperature to compute mean rate of changes
 function getYearTemperatures(row_table){
 
     var temperatures = [];
@@ -73,13 +73,18 @@ function getYearTemperatures(row_table){
 }
 
 
-
+// Return a table in which the keys are the Region and all the years
+// Each row contains the name of the country (or cointient, or emisphere or global) and the annual average temperature
+// Each row correspond to a csv (specific countri, emisphere, continet, global)
 function table_data(data_country, data_emisphere=null, data_continet=null, data_global=null){
 
-    //TODO:SARA DA RICHIAMARE ANCHE PER I DATAI SUI CONTINENTE, EMISFERO, GLOBALI 
-    //data for each region
     
+    //data for each region
     var dataCountry50 = dataEvery50Years(data_country);
+    //TODO:SCARICARE DATI SUI CONTINENTE, EMISFERO, GLOBALI 
+    var dataEmisphere50 = [];
+    var dataContinent50 = [];
+    var dataGlobal50 = [];
 
  
     var data_table = [];
@@ -90,35 +95,29 @@ function table_data(data_country, data_emisphere=null, data_continet=null, data_
     dataCountry50.forEach((d) => row[ String(d.Year) ] = d.annual_value.toFixed(2))
     data_table.push(row)
     
-    var starting_year = 1750;
     
     for(var i=0; i<data_table.length; i++){
         
-      
-
+        //get list of temperature to calculate the mean rate of change
         var temperatures = getYearTemperatures(data_table[i]);
         var year_list = Object.keys(temperatures);
         
         var index_year = 0;
         var year_1 = year_list[index_year];    
         var year_2 = year_list[index_year+1];
-        console.log(year_list)
-
-
-
+ 
         for( var j =0; j < Object.keys(data_table[i]).length - 2; j++){
 
-       
-            if( isNaN(data_table[i][year_1]) && data_table[i][year_2] )  data_table[i][year_1] = temperatures[year_1]  ;
+            // set starting temperature in the first non null cell of the row
+            if( isNaN(data_table[i][year_1]) && data_table[i][year_2] )  data_table[i][year_1] = temperatures[year_1];
             
+            //comuputing mean rate of change
             data_table[i][year_2] = getMeanRateOfChange(temperatures[year_1], temperatures[year_2], year_1, year_2).toFixed(3)
             
+            //update years
             index_year++;
             year_1 = year_list[index_year];
-            year_2 = year_list[index_year+1];
-
-           
-            
+            year_2 = year_list[index_year+1];     
         }
               
     }
