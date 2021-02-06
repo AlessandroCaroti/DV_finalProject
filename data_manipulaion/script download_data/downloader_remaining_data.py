@@ -14,7 +14,7 @@ REGION_INFO = "http://berkeleyearth.lbl.gov/regions/"
 DATE_FORMAT = "%d-%b-%Y %H:%M:%S"
 
 
-def pars_file(web_content, regName):
+def pars_file(web_content, web_content_2, regName):
     
     country_info = {"LastUpdate": None, "Name": None, "LatitudeRange": None,
                     "LongitudeRange": None, "Area(Km^2)": None, "global_landArea(%)": None,
@@ -22,12 +22,33 @@ def pars_file(web_content, regName):
                     "absolute_temp(C)": None, "absTemp_unc(C)": None}
     monthly_temp = None
     anomaly_table = None
-
+    mean_rate_table= ""
     c = 0
     while True:
-        end_line = web_content.find("\n")
-        line = web_content[:end_line]
+        end_line = web_content_2.find("\n")
+        line = web_content_2[:end_line]
 
+        title = "Mean Rate of Change ( &deg;C / Century )"
+        end_table = "</table>"
+       
+        
+        if line.find(title) != -1:
+            
+            while line.find(end_table) == -1:
+                
+                web_content_2 = web_content_2[end_line+1:]
+                line = web_content_2[:end_line]
+                mean_rate_table+=line
+           
+            break 
+        web_content_2 = web_content_2[end_line+1:]
+       
+    links_table = re.findall("\"\w+://\w+.\w+.\w+/\w+/\w+-\w+\"",mean_rate_table)
+    print(links_table)
+
+       
+       
+    """
         s1 = "This analysis was run on "
         s2 = "Name: "
         s3 = "Latitude Range: "
@@ -128,10 +149,11 @@ def pars_file(web_content, regName):
     f = open(path.join(data_folder, country_info["Name"]+"_info.json"), "w")
     f.write(json_f)
     f.close()
-
+"""
 
 if __name__ == "__main__":
     df = pd.read_csv("./data/table.csv")
+    #df = pd.read_csv("./data/table_remaining_data.csv")
     error = []
 
     #continent = ["Asia", "Europe", "Africa", "North America", "South America","Oceania"]
@@ -140,27 +162,36 @@ if __name__ == "__main__":
         country_name = row[1]
         
         response = requests.get(row[2], allow_redirects=True)
+        
         if response.status_code == 200:
             webContent = response.content.decode("utf-8", "backslashreplace")
             p1 = webContent.find("Data Table")
             p2 = webContent[:p1].rfind("href=")
             url = webContent[p2+6:p1-2]
+            url2 = REGION_INFO + country_name.lower()
         else:  # if is notpossible try to infer the url using only the country name
             print("ELSE")
-            #url = URL_ROOT + DATA_FOLDER + country_name.lower() + "-TAVG-Trend.txt"
-
-            url2 = REGION_INFO + DATA_FOLDER + country_name.lower() + "-TAVG-Trend.txt"
+            url = URL_ROOT + DATA_FOLDER + country_name.lower() + "-TAVG-Trend.txt"
+            url2 = REGION_INFO + country_name.lower() 
 
         print("{}/{}  {}".format(index, len(df), country_name))
 
         # download thw document
         response = requests.get(url, allow_redirects=True)
+        response2 = requests.get(url2, allow_redirects=True)
+
         if response.status_code != 200:
             error.append((index, country_name))
             continue
+        
+        if response2.status_code != 200:
+            error.append((index, country_name))
+            continue
+        
         webContent = response.content.decode("utf-8", "backslashreplace")
-
-        pars_file(webContent, country_name)
+        webContent2 = response2.content.decode("utf-8", "backslashreplace")
+        print("\n\n", country_name, "\n\n")
+        pars_file(webContent, webContent2, country_name)
 
     print("ERROR({}):".format(len(error)), error)
    
