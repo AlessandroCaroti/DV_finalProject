@@ -1,9 +1,9 @@
-// *************************************************** //
-//                START GLOBAL VARIABLE                //
+// *********************************************************** //
+//                    START GLOBAL VARIABLE                    //
 
 // MAP DIMANSION
-const w = 1000,
- h = 500;
+const w = 1000
+const h = 500;
 
 var projection;
 var map_container;
@@ -54,6 +54,8 @@ function drawMap(world) {
 
   geoGenerator = d3.geoPath().projection(projection);
 
+  drawGlobeBackground();
+
   // Draw the background (country outlines)
   map_container
     .selectAll("path")
@@ -68,7 +70,7 @@ function drawMap(world) {
     .attr("d", geoGenerator);
 
   // Draw gridlines
-  drwaGridlines();
+  drawGridlines();
 
   //Associate to each county a color proportionate to it's anomaly
   update_colors();
@@ -77,11 +79,19 @@ function drawMap(world) {
   country_events();
 }
 
-function drwaGridlines() {
+function drawGridlines() {
   var graticule = d3.geoGraticule();
 
   var maps = map_container.selectAll("path.grat_2").data(graticule.lines());
   maps.enter().append("path").classed("grat_2", true).attr("d", geoGenerator);
+}
+
+function drawGlobeBackground() {
+  map_container
+    .append("path")
+    .datum({ type: "Sphere" })
+    .attr("d", geoGenerator)
+    .classed("background_globe", true);
 }
 
 function update_colors() {
