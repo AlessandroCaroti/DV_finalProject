@@ -47,7 +47,7 @@ zoom_reset.select("rect").attr("width", width).attr("height", height);
 
 var inner_circle = zoom_reset
   .append("circle")
-  .attr("r", 3)
+  .attr("r", 1)
   .attr("cx", width / 2)
   .attr("cy", height / 2)
   .attr("fill", "black")
@@ -60,15 +60,15 @@ var outer_circle = zoom_reset
   .attr("cy", height / 2)
   .style("fill", "none")
   .style("stroke", "black")
-  .style("stroke-width", 1)
+  .style("stroke-width", 3)
   .attr("pointer-events", "none");
 
 function no_zoom() {
-  inner_circle.attr("r", 3);
+  inner_circle.attr("r", 4);
   outer_circle.style("stroke-width", 1);
 }
 
 function local_zoom() {
-  inner_circle.attr("r", 2);
+  inner_circle.attr("r", 1);
   outer_circle.style("stroke-width", 3);
 }
