@@ -2,7 +2,7 @@
 //                    START GLOBAL VARIABLE                    //
 
 // MAP DIMANSION
-const w = 1000
+var w = 1000
 const h = 500;
 
 var projection;
