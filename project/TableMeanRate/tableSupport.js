@@ -1,5 +1,5 @@
 // function support for the table
-
+var years = ["1750","1800","1850","1900","1950","2000"];
 
 function getAnnualData(data){
 
@@ -36,8 +36,6 @@ function dataEvery50Years(data){
     
     var data_2 = [];
 
-    var years = ["1750","1800","1850","1900","1950","2000"];
-
     years.forEach( (year) =>{
 
         annual_data.forEach( (d)=>{
@@ -64,36 +62,56 @@ function getMeanRateOfChange(temp1,temp2, year_temp1, year_temp2){
 }
 
 
+function getYearTemperatures(row_table, years){
+
+    var temperatures = [];
+    years.forEach((year)=>{
+
+        temperatures[year] = row_table[year];
+    })
+
+    return temperatures;
+}
+
+
 
 function table_data(data_country, data_emisphere=null, data_continet=null, data_global=null){
 
     //TODO:SARA DA RICHIAMARE ANCHE PER I DATAI SUI CONTINENTE, EMISFERO, GLOBALI 
     //data for each region
+    
+    var dataCountry50 = dataEvery50Years(data_country);
+
+    console.log("DATA 2: ", dataCountry50 );
     var data_table = [];
     var row={}
     
-    row["Regions"] = data_country[0].region;
+    row["Regions"] = dataCountry50 [0].region;
 
-    data_country.forEach((d) => row[ String(d.Year) ] = d.annual_value.toFixed(2))
+    dataCountry50.forEach((d) => row[ String(d.Year) ] = d.annual_value.toFixed(2))
     data_table.push(row)
     
     var starting_year = 1750;
     var step_year = 50;
     
-    
-    
     for(var i=0; i<data_table.length; i++){
         
-        var year_1 = starting_year;
-        
+        var year_1 = starting_year;    
         var year_2 = starting_year + step_year;
+
+        var temperatures = getYearTemperatures(data_table[i], years);
+
         for( var j =0; j < Object.keys(data_table[i]).length - 2; j++){
-        
-            console.log(data_table[i][year_1], "\n", data_table[i]);
-            data_table[i][year_2] = (getMeanRateOfChange(data_table[i][year_1], data_table[i][year_2], year_1, year_2).toFixed(3))
+
+       
+            if( isNaN(data_table[i][year_1]) && data_table[i][year_2] )  data_table[i][year_1] = temperatures[year_1]  ;
+            
+            data_table[i][year_2] = getMeanRateOfChange(temperatures[year_1], temperatures[year_2], year_1, year_2).toFixed(3)
 
             year_1 += step_year;
-            year_2 = year_1 + step_year;
+            year_2 += step_year;
+
+           
             
         }
               
@@ -111,7 +129,7 @@ function getRowTable(data_2){
 
 function createDefaultTable(data){
 
-    data_2 = dataEvery50Years(data);
+    
 
  
     var svg = d3.select("#table_container")
@@ -129,8 +147,10 @@ function createDefaultTable(data){
     
     
     //get data for the table and the columns for the header
-    
-    var data_table = table_data(data_2);
+
+    var data_table = table_data(data);
+    console.log("UPDATE",data_table);
+
     var columns = Object.keys(data_table[0]);
   
     if( columns[ columns.length - 1 ] == "Regions" ){
@@ -190,12 +210,13 @@ function createDefaultTable(data){
 
 function UpdateTable(data){
 
-    data_2 = dataEvery50Years(data);
 
-      //get data for the table and the columns for the header
+
+    //get data for the table and the columns for the header
     
-      var data_table = table_data(data_2);
-      var columns = Object.keys(data_table[0]);
+    var data_table = table_data(data);
+
+    var columns = Object.keys(data_table[0]);
     
       if( columns[ columns.length - 1 ] == "Regions" ){
   
@@ -204,8 +225,6 @@ function UpdateTable(data){
           columns.pop();
       }
       
-    //var thead = d3.select(".thead_table");
-    //var tbody = d3.select(".tbody_table");
     
     var header = d3.select(".header_table")
 		            .data(columns)
