@@ -2,7 +2,7 @@
 //                    START GLOBAL VARIABLE                    //
 
 // MAP DIMANSION
-var w = 1000
+var w = 1000;
 const h = 500;
 
 var projection;
@@ -88,7 +88,7 @@ function drawGridlines() {
 
 function drawGlobeBackground() {
   map_container
-    .append("path")
+    .select(".background_globe")
     .datum({ type: "Sphere" })
     .attr("d", geoGenerator)
     .classed("background_globe", true);
