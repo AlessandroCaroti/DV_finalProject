@@ -148,7 +148,7 @@ function country_events() {
     d3.select(this).moveToFront();
     d3.select("#selectCountry").attr("value", this.id);
 
-    console.log(this.id);
+    debug_log("CLICK ON "+this.id);
     country_selected(this.__data__);
   });
 }
@@ -160,6 +160,20 @@ function country_selected(country) {
   // update the button that manage the zoom
   global_view = false;
   changeImage_view();
+}
+
+//                 END FUNCTION FOR THE MAP                 //
+// ******************************************************** //
+// ******************************************************** //
+//                    START ZOOM SECTION                    //
+var zoomIn_scale = 1.2
+var zoomOut_scale = 0.8
+
+function reset_zoom() {
+  map_container
+    .transition()
+    .duration(1000)
+    .call(zoom.transform, d3.zoomIdentity.translate(0, 0).scale(1));
 }
 
 function zoom_in(country) {
@@ -178,20 +192,6 @@ function zoom_in(country) {
       zoom.transform,
       d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale)
     );
-}
-
-//                 END FUNCTION FOR THE MAP                 //
-// ******************************************************** //
-// ******************************************************** //
-//                    START ZOOM SECTION                    //
-var zoomIn_scale = 1.2
-var zoomOut_scale = 0.8
-
-function reset_zoom() {
-  map_container
-    .transition()
-    .duration(1000)
-    .call(zoom.transform, d3.zoomIdentity.translate(0, 0).scale(1));
 }
 
 //                      END ZOOM SECTION                    //
