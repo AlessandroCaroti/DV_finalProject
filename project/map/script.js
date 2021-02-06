@@ -180,6 +180,13 @@ function zoom_in(country) {
     );
 }
 
+//                 END FUNCTION FOR THE MAP                 //
+// ******************************************************** //
+// ******************************************************** //
+//                    START ZOOM SECTION                    //
+var zoomIn_scale = 1.2
+var zoomOut_scale = 0.8
+
 function reset_zoom() {
   map_container
     .transition()
@@ -187,13 +194,13 @@ function reset_zoom() {
     .call(zoom.transform, d3.zoomIdentity.translate(0, 0).scale(1));
 }
 
-//                 END FUNCTION FOR THE MAP                 //
+//                      END ZOOM SECTION                    //
 // ******************************************************** //
 // ******************************************************** //
 //                START FUNCTION MAP OVERLAY                //
 
 function init_map_controls() {
-  init_changeView();
+  init_zoomBtns();
 }
 
 //CHANGE VIEW
@@ -204,27 +211,40 @@ const country_img = "../../data/images/country_32px.ico";
 function changeImage_view() {
   if (selected_country == null) {
     global_view = !global_view;
-    console.log("NESSUNO STATO SELEZIONARO");
-    console.log("IMPOSSIBILE CAMBIARE LA VISTA");
+    debug_log("No country selected. Impossible to change the view!");
   } else {
     if (global_view) {
-      console.log("RESET ZOOM\n-------------------------------");
+      debug_log("RESET_ZOOM")
       no_zoom();
       reset_zoom();
     } else {
-      console.log("ZOOM IN\n-------------------------------");
+      debug_log("ZOOM COUNTRY")
       local_zoom();
       zoom_in(selected_country);
     }
   }
 }
 
-function init_changeView() {
+function init_zoomBtns() {
   d3.select("#zoom-reset")
     .select("rect")
     .on("click", function (event, b) {
       global_view = !global_view;
       changeImage_view();
+    });
+
+  d3.select("#zoom-in")
+    .select("path")
+    .on("click", function (event, b) {
+      debug_log("ZOOM_IN");
+      map_container.transition().call(zoom.scaleBy, zoomIn_scale);
+    });
+
+  d3.select("#zoom-out")
+    .select("path")
+    .on("click", function (event, b) {
+      debug_log("ZOOM_OUT");
+      map_container.transition().call(zoom.scaleBy, zoomOut_scale);
     });
 }
 
@@ -237,6 +257,7 @@ d3.selection.prototype.moveToFront = function () {
 
 //                END FUNCTION MAP CONTROL                //
 // ****************************************************** //
+
 
 // LOAD SLIDER YEAR
 function init_slider(min, max) {
