@@ -3,17 +3,19 @@ TO DO:
 -discutere come implementare lo zoom e il pad
 -zoom manuale
 -pad manuale
--aggiunta dei comandi di zoom fisici (dei bottoni) 
+-aggiunta dei comandi di zoom fisici (dei bottoni)                                                 DONE
 -controllare la funzione .fitExtent() https://www.d3indepth.com/geographic/
 -transizione dei colori quando cambia l'anno
 -contorno del mondo di colore diverso (più scuro)
 -fare in modo che la mappa si veda tutta all'inizio
--dare dei contorni alla box dei country
+-dare dei contorni alla box di selezione dei country (quella affienco allo slider)
 -cambiare il cursore sullo slider
--fare i tooltips più compatti
+-fare i tooltips di simo più compatti
 -fare in modo che la mappa occupi tutta la larghezza della schermo
+-fare i contorni degli stati proporzionali allo zoom
+-se non da problemi gestire l'hover dei paese con i css
 
 TOFIX:
--i confini del paese selezionato devono rimanere sempre sopra agli altri DONE
+-i confini del paese selezionato devono rimanere sempre sopra agli altri                           DONE
 -la grid scompare quando si passa sopra ad un paese (si può corregerla mettendo la grid sempre sotto)
 -se un paese senza dati per quell'anno viene selezionato, il colore cambia in bianco (guarda 2020)
