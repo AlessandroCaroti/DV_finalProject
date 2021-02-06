@@ -20,31 +20,71 @@ def pars_file(web_content, web_content_2, regName):
                     "LongitudeRange": None, "Area(Km^2)": None, "global_landArea(%)": None,
                     "Num_stations": None, "Num_observations": None,
                     "absolute_temp(C)": None, "absTemp_unc(C)": None}
+    
+    portion_continent_list =["southern-asia","northem-asia","central-america"]
+    continent_list = ["europe","asia","oceania","north-america","south-america","africa"]
+    hemisphere_list = ["northern-hemisphere", "southern-hemisphere"]
+  
+    
     monthly_temp = None
     anomaly_table = None
     mean_rate_table= ""
     c = 0
+    
     while True:
-        end_line = web_content_2.find("\n")
+        end_line = web_content_2.find("<br/>")
         line = web_content_2[:end_line]
 
         title = "Mean Rate of Change ( &deg;C / Century )"
         end_table = "</table>"
        
-        
+        """
         if line.find(title) != -1:
             
             while line.find(end_table) == -1:
                 
+                print(line)
                 web_content_2 = web_content_2[end_line+1:]
                 line = web_content_2[:end_line]
                 mean_rate_table+=line
+
            
             break 
         web_content_2 = web_content_2[end_line+1:]
-       
-    links_table = re.findall("\"\w+://\w+.\w+.\w+/\w+/\w+-\w+\"",mean_rate_table)
-    print(links_table)
+       """
+        all_elem = portion_continent_list+continent_list+hemisphere_list
+        print(all_elem)
+        links_table=[]
+        for e in all_elem:
+            if(web_content_2.find(REGION_INFO+e) != -1):
+                link = re.findall(REGION_INFO+e, web_content_2)
+                links_table.append(link)
+        #print(links_table)
+        
+    
+    #print(mean_rate_table)
+    
+    
+    #print(links_table)
+    
+    """
+    for i,l in enumerate(links_table):
+        links_table[i] = l.replace("\"",'')
+
+    for link in links_table:
+
+        if link.split("/")[-1] in continent_list:
+            print("Continent: ", link)
+        
+        if link.split("/")[-1] in portion_continent_list:
+            print("Portion Continent: ", link)
+        
+        if link.split("/")[-1] in hemisphere_list:
+            print("Hemisphere: ", link)
+    """
+    #data_cols = {"region":regName, "portion-continet":None, "continent":None, "emisphere":None}
+    #missing_link_df = pd.DataFrame(data_cols)
+
 
        
        
