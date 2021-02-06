@@ -115,17 +115,29 @@ function country_events() {
   });
 
   // MOUSE-OVER: tooltip
-  map_container.selectAll(".country").on("mouseover", function (event, b) {
-    // show tooltip
-    let x,
-      y = d3.pointer(event);
-    d3.select(".tooltip")
-      .attr("x", x)
-      .attr("y", y)
-      .classed("tooltip", false)
-      .classed("tooltip-show", true)
-      .html("PINOOOOOO");
-  });
+  map_container.selectAll(".country")
+                .on("mouseover", function (event, b) {
+                        // show tooltip
+                        let coord = d3.pointer(event);
+                        let x= coord[0]
+                        let y = coord[1];
+
+                        d3.select(".tooltip")
+                          .style("top", event.pageY + "px")
+                          .style("left", event.pageX  + "px" )
+                          .style("display", "block")
+                          .html("PINOOOOOO")
+                })
+                .on("mousemove", function(event,b ){
+                        // update position tooltip
+                        let coord = d3.pointer(event);
+                        let x= coord[0]
+                        let y = coord[1];
+
+                        d3.select(".tooltip")
+                          .style("top", event.pageY + "px")
+                          .style("left", event.pageX  + "px" )
+                })
 
   //CLICK EVENT:
   map_container.selectAll(".country").on("click", function (event, b) {
@@ -355,8 +367,6 @@ function load_map() {
       drawMap(topology);
       init_dropdown_menu(country_list);
 
-      // hide the tooltip
-      map_container.append("div").classed("tooltip", true);
     })
     .catch((error) => {
       console.log(error);
