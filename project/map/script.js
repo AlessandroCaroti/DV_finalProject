@@ -90,8 +90,7 @@ function drawGlobeBackground() {
   map_container
     .select(".background_globe")
     .datum({ type: "Sphere" })
-    .attr("d", geoGenerator)
-    .classed("background_globe", true);
+    .attr("d", geoGenerator);
 }
 
 function update_colors() {
