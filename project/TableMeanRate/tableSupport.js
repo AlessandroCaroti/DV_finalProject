@@ -1,5 +1,5 @@
 // function support for the table
-var years = ["1750","1800","1850","1900","1950","2000"];
+var years = ["1750","1800","1850","1900","1950","2000","2019"];
 
 function getAnnualData(data){
 
@@ -62,11 +62,10 @@ function getMeanRateOfChange(temp1,temp2, year_temp1, year_temp2){
 }
 
 
-function getYearTemperatures(row_table, years){
+function getYearTemperatures(row_table){
 
     var temperatures = [];
     years.forEach((year)=>{
-
         temperatures[year] = row_table[year];
     })
 
@@ -82,7 +81,7 @@ function table_data(data_country, data_emisphere=null, data_continet=null, data_
     
     var dataCountry50 = dataEvery50Years(data_country);
 
-    console.log("DATA 2: ", dataCountry50 );
+ 
     var data_table = [];
     var row={}
     
@@ -92,14 +91,20 @@ function table_data(data_country, data_emisphere=null, data_continet=null, data_
     data_table.push(row)
     
     var starting_year = 1750;
-    var step_year = 50;
     
     for(var i=0; i<data_table.length; i++){
         
-        var year_1 = starting_year;    
-        var year_2 = starting_year + step_year;
+      
 
-        var temperatures = getYearTemperatures(data_table[i], years);
+        var temperatures = getYearTemperatures(data_table[i]);
+        var year_list = Object.keys(temperatures);
+        
+        var index_year = 0;
+        var year_1 = year_list[index_year];    
+        var year_2 = year_list[index_year+1];
+        console.log(year_list)
+
+
 
         for( var j =0; j < Object.keys(data_table[i]).length - 2; j++){
 
@@ -107,9 +112,10 @@ function table_data(data_country, data_emisphere=null, data_continet=null, data_
             if( isNaN(data_table[i][year_1]) && data_table[i][year_2] )  data_table[i][year_1] = temperatures[year_1]  ;
             
             data_table[i][year_2] = getMeanRateOfChange(temperatures[year_1], temperatures[year_2], year_1, year_2).toFixed(3)
-
-            year_1 += step_year;
-            year_2 += step_year;
+            
+            index_year++;
+            year_1 = year_list[index_year];
+            year_2 = year_list[index_year+1];
 
            
             
