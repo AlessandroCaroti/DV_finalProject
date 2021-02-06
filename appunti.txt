@@ -6,11 +6,12 @@ TO DO:
 -aggiunta dei comandi di zoom fisici (dei bottoni) 
 -controllare la funzione .fitExtent() https://www.d3indepth.com/geographic/
 -transizione dei colori quando cambia l'anno
--contorno mondo di colore diverso (più scuro)
+-contorno del mondo di colore diverso (più scuro)
 -fare in modo che la mappa si veda tutta all'inizio
 -dare dei contorni alla box dei country
 -cambiare il cursore sullo slider
 -fare i tooltips più compatti
+-fare in modo che la mappa occupi tutta la larghezza della schermo
 
 TOFIX:
 -i confini del paese selezionato devono rimanere sempre sopra agli altri DONE
