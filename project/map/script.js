@@ -8,6 +8,7 @@ var h = 500;
 var projection;
 var map_container;
 var colorsRange = ["rgb(5, 48, 97)", "white", "rgb(103, 0, 31)"];
+var colorScale;
 //var colorsRange = ["blue", "white", "red"];
 
 var geoGenerator;
@@ -81,15 +82,7 @@ function drwaGridlines() {
 }
 
 function update_colors() {
-  //GLOBAL MIN & MAX
-  // [-2.998, +3.7969999999999997]
-
-  var colorScale = d3
-    .scaleLinear()
-    //.domain([-5, 0, +5])
-    .domain([-3.0, 0, +3.8])
-    .range(colorsRange);
-
+  
   tmp_data.forEach(function (d) {
     var element = document.getElementById(d.Country);
 
@@ -110,34 +103,27 @@ function country_events() {
     d3.select(".highlighted_country").classed("highlighted_country", false);
     d3.select(".selected_country").moveToFront();
 
-    // revome tooltip
-    //map_container.select(".tooltip")
+    // hide tooltip
+    d3.select(".tooltip-map")
+    .style("display", "none")
   });
 
   // MOUSE-OVER: tooltip
   map_container.selectAll(".country")
                 .on("mouseover", function (event, b) {
                         // show tooltip
-                        let coord = d3.pointer(event);
-                        let x= coord[0]
-                        let y = coord[1];
-
-                        d3.select(".tooltip")
-                          .style("top", event.pageY + "px")
-                          .style("left", event.pageX  + "px" )
+                        d3.select(".tooltip-map")
+                          .style("top", (event.pageY + 13) + "px")
+                          .style("left", (event.pageX + 13 ) + "px" )
                           .style("display", "block")
-                          .html("PINOOOOOO")
+                          .html(b.properties.name)
                 })
                 .on("mousemove", function(event,b ){
                         // update position tooltip
-                        let coord = d3.pointer(event);
-                        let x= coord[0]
-                        let y = coord[1];
-
-                        d3.select(".tooltip")
-                          .style("top", event.pageY + "px")
-                          .style("left", event.pageX  + "px" )
-                })
+                        d3.select(".tooltip-map")
+                          .style("top", (event.pageY + 13) + "px")
+                          .style("left", (event.pageX + 13)  + "px" )
+                });
 
   //CLICK EVENT:
   map_container.selectAll(".country").on("click", function (event, b) {
@@ -179,6 +165,96 @@ function zoom_in(country) {
       d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale)
     );
 }
+
+
+
+// define the anomaly color space
+function set_colorScale(){
+  //GLOBAL MIN & MAX
+  // [-2.998, +3.7969999999999997]
+
+  /*var colorScale = d3
+    .scaleLinear()
+    //.domain([-5, 0, +5])
+    .domain([-3.0, 0, +3.8])
+    .range(colorsRange);*/
+
+  // da trovare modo per trovare min e max automaticamente 
+  let min = -3.0;
+  let max = +3.8;
+  let step = (max - min)/7.0;
+  let step_color_list = []
+  let step_bar_list = []
+  let step_list = []
+  let width = 300; // width of the legend axis
+  
+  var colorBase = d3.scaleDiverging(t => d3.interpolateRdBu(1 - t))
+                      .domain([min, 0, max]);
+  // color quantization
+  for(let i = min; i <= max; i += step){
+      let num = parseFloat(i.toFixed(2));
+      step_list.push(num);
+      step_color_list.push(colorBase(num));
+  }
+  // axis quantization
+  for(let i = 0; i <= width; i += width/7.0){
+    step_bar_list.push(i);
+  }
+  colorScale = d3.scaleQuantize()
+                      .domain([min, max])
+                      .range(step_color_list);
+
+                      /*
+  var quantizeBarScale = d3.scaleQuantize()
+                                .domain([min, max])
+                                .range(step_bar_list );
+  // draw anomaly legend
+  var anomaly_axis = d3.axisBottom().scale(quantizeBarScale)
+                                      .tickValues(step_list);
+
+  console.log(colorScale.ticks(5));
+  d3.select('.axis-anomaly')
+            .attr("transform", "translate(" + 500 +","+ 475 +" )")
+	          .call(anomaly_axis);
+            
+  var rects = d3.select(".legend-anomaly")
+            .selectAll("rect")
+            .data(colorScale.ticks(5));
+
+  rects.enter()
+        .append("rect")
+        .attr("width", width/5.0)
+        .attr("height", "20px")
+        .style("fill", d => colorScale(d))
+*/
+}
+
+/*
+// draw the anomaly legend
+function draw_legend(){
+
+  let width = 200;
+  // Construct axis
+  var anomaly_axis = d3.axisBottom().scale(quantizeAnomalyScale)
+                                      .tickValues();
+
+  d3.select('.axis-anomaly')
+            .attr("transform", "translate(" + 500 +","+ 475 +" )")
+	          .call(anomaly_axis)
+            
+            .selectAll("text")
+            .attr("y", 0)
+            .attr("x", 25)
+            .attr("dy", ".35em");
+
+  console.log(quantizeAnomalyScale.ticks(5))
+  var rects = d3.select(".legend-anomaly")
+            .selectAll("rect")
+            .data(quantizeAnomalyScale.ticks(5));
+  rects.enter()
+        .append("rect");
+}*/
+
 
 //                 END FUNCTION FOR THE MAP                 //
 // ******************************************************** //
@@ -364,8 +440,11 @@ function load_map() {
       topology = topojson.presimplify(topology);
       topology = topojson.simplify(topology, 0.05);
 
+
       drawMap(topology);
       init_dropdown_menu(country_list);
+
+
 
     })
     .catch((error) => {
@@ -378,9 +457,13 @@ function load_map() {
 //                  DOVE INIZIA TUTTO                  //
 
 function init_page() {
+  set_colorScale();
+
   load_tempYear(tmp_file_prefix + "2019" + tmp_file_suffix);
 
   init_map_controls();
   // trovare modo automatico per trovare min e max
   init_slider(1743, 2020);
+  //draw_legend();
+
 }
