@@ -10,13 +10,13 @@
 }
 
 .btn {
-  fill: rgb(172, 172, 172);
+  fill: rgb(202, 202, 202);
   stroke: black;
-  stroke-width: 1;
+  stroke-width: 0.8;
 }
 
 .btn:hover {
-  fill: rgb(233, 233, 233);
+  fill: rgb(243, 243, 243);
 }
 
 .background {
@@ -40,6 +40,7 @@
 
 .highlighted_country {
   stroke: #00ff00;
+  stroke: #ffffff;
   stroke-width: 1px;
 }
 
