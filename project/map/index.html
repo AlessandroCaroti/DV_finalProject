@@ -4,63 +4,67 @@
     <title>MAP PAGE</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="../style.css" />
-    <script type="text/javascript" src="../../d3/topojson.js"></script>
+    <!-- D3 script -->
+    <script src="../../d3/topojson.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.5.0/d3.min.js"></script>
     <script src="https://unpkg.com/d3-simple-slider"></script>
+    <!-- our script -->
+    <script src="../utils/RoundedRect.js"></script>
 
   </head>
 
   <body>
     <div class="content">
       <div id="all_map" class="col_wrapper">
-
-        <div class="row_wrapper" width="1200" height = "100">
+        <div class="row_wrapper" width="1200" height="100">
           <span>
             <div class="all-slider" id="svg-slider" class="row_wrapper">
-              
               <div class="col-sm"><div id="sliderYear"></div></div>
             </div>
-
           </span>
 
           <span>
-            <div class="row_wrapper" >
+            <div class="row_wrapper">
               <p class="label" font-size="50px">Country:</p>
-              <input list="countryList" id="selectCountry" onchange="changeCountry()" placeholder="select a country" > </input>
-              <datalist id="countryList" ></datalist>
+              <input
+                list="countryList"
+                id="selectCountry"
+                onchange="changeCountry()"
+                placeholder="select a country"
+              />
+              <datalist id="countryList"></datalist>
             </div>
           </span>
         </div>
 
-        
         <svg class="view-map" id="svg-map">
           <rect class="background" width="100%" height="100%"></rect>
-          
-          <g id="map" x="0" y="0" width="100%" height="100%"></g>
-          
+
+          <g id="map"></g>
+
           <g class="zoom-controls" transform="translate(10, 10)">
-            <g id="zoom-reset" transform="translate(0, 0)">
-              <rect id="change_view_btn" width="32px" height="32px" class="btn"></rect>
-              <image
-                xlink:href="../../data/images/globe_32px.ico"
-                id="change_view_img"
-                width="32px"
-                height="32px"
-              />
+            <g id="zoom-in" transform="translate(0, 0)">
+              <path class="btn" d=""></path>
+            </g>
+            <g id="zoom-reset" transform="translate(0, 31)">
+              <rect class="btn" width="5" height="5"></rect>
+            </g>
+            <g id="zoom-out" transform="translate(0, 62)">
+              <path class="btn" d=""></path>
             </g>
           </g>
           <g class="col-sm-2">
-            <text id="sliderLabel" x="45%" y="50"> </text>
+            <text id="sliderLabel" x="45%" y="50"></text>
           </g>
         </svg>
       </div>
     </div>
 
+    <script src="map_btn.js?version=1"></script>
+    <script src="script.js?version=1"></script>
 
-    <script type="application/javascript" src="script.js?version=1"></script>
-    
     <script>
-      window.onload = init_page
+      window.onload = init_page;
     </script>
   </body>
 </html>
