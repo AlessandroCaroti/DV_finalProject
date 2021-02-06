@@ -179,7 +179,8 @@ function createDefaultTable(data){
                         
                         if( String(d.value) == "NaN" ) return "-";
                         else
-                        return d.value;});
+                        return d.value;
+                    });
 
 }
 
