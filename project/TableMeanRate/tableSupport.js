@@ -1,7 +1,7 @@
 // function support for the table
 
 //Global variable
-var years = ["1750","1800","1850","1900","1950","2000","2019"];
+var years = ["1750","1800","1850","1900","1950","2000","2020"];
 
 //get annual average data, saved at every june
 function getAnnualData(data){

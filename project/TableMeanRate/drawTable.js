@@ -56,7 +56,8 @@ function default_dataset(dataFile=""){
         folder = dataFile;
     
     initBaseline(dataFile);
-    var csv = "/../../data/data_temp/"+folder+"/"+dataFile+"_anomalyTable.csv"
+    //var csv = "/../../data/data_temp/"+folder+"/"+dataFile+"_anomalyTable.csv"
+    var csv = "/../../remaining_data/data_new/"+folder+"/"+dataFile+"_anomalyTable.csv";
     //Di default c'è dataset 1
     d3.csv(csv)
     .then( function(data){ 
@@ -91,7 +92,8 @@ function changeDataTable(){
          folder = dataFile;
      
     
-     var csv = "/../../data/data_temp/"+folder+"/"+dataFile+"_anomalyTable.csv"
+     //var csv = "/../../data/data_temp/"+folder+"/"+dataFile+"_anomalyTable.csv"
+     var csv = "/../../remaining_data/data_new/"+folder+"/"+dataFile+"_anomalyTable.csv";
   
      d3.csv(csv)
        .then( (data) =>{ 
