@@ -165,7 +165,15 @@ function createDefaultLineChart(data){
               .attr("d", valueline_ten_years);       
     
     createLineChartLegend(svg);
+
     
+    /*
+
+    svg.call(d3.zoom()
+    .extent([[0, 0], [width, height]])
+    .scaleExtent([1, 8])
+    .on("dblclick.zoom", ({transform}) => svg.attr("transform", transform) ))
+    */
     var tooltipLine = svg.append('line').attr("class","line_tip");
     
     var tipBox = svg.append('rect')
