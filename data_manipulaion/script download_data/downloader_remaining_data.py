@@ -14,7 +14,20 @@ REGION_INFO = "http://berkeleyearth.lbl.gov/regions/"
 DATE_FORMAT = "%d-%b-%Y %H:%M:%S"
 
 
-def pars_file(web_content, web_content_2, regName):
+
+def exists(l1, l2):
+
+    for x in l1:
+        country = x.split("/")[-1]
+        for y in l2:
+            print(country, " ==  ", y,": ", str(country == y))
+            if country == y:
+                return True
+    return False 
+
+
+
+def pars_file(web_content, web_content_2, regName, ):
     
     country_info = {"LastUpdate": None, "Name": None, "LatitudeRange": None,
                     "LongitudeRange": None, "Area(Km^2)": None, "global_landArea(%)": None,
@@ -28,49 +41,36 @@ def pars_file(web_content, web_content_2, regName):
     
     monthly_temp = None
     anomaly_table = None
-    mean_rate_table= ""
     c = 0
     
-    while True:
-        end_line = web_content_2.find("<br/>")
-        line = web_content_2[:end_line]
-
-        title = "Mean Rate of Change ( &deg;C / Century )"
-        end_table = "</table>"
-       
-        """
-        if line.find(title) != -1:
-            
-            while line.find(end_table) == -1:
-                
-                print(line)
-                web_content_2 = web_content_2[end_line+1:]
-                line = web_content_2[:end_line]
-                mean_rate_table+=line
-
-           
-            break 
-        web_content_2 = web_content_2[end_line+1:]
-       """
-        all_elem = portion_continent_list+continent_list+hemisphere_list
-        print(all_elem)
-        links_table=[]
-        for e in all_elem:
-            if(web_content_2.find(REGION_INFO+e) != -1):
-                link = re.findall(REGION_INFO+e, web_content_2)
-                links_table.append(link)
-        #print(links_table)
-        
+    url_regex = "http:\/\/\w+.\w+.\w+\/\w+\/\w+-*\w+"
     
-    #print(mean_rate_table)
+    title = "Mean Rate of Change ( &deg;C / Century )"
+    end_table = "</table>"
+    links_table= ""
+        
+    index_start_table = web_content_2.find(title)
+    index_end_table = web_content_2.find(end_table)
+
+    mean_rate_html_table = web_content_2[index_start_table: index_end_table]
+
+    links_table = re.findall(url_regex, mean_rate_html_table)
+    
+    
+    while True:
+        end_line = web_content_2.find("\n")
+
+        line = web_content_2[:end_line]
+        
+
+        break
+      
     
     
     #print(links_table)
     
     """
-    for i,l in enumerate(links_table):
-        links_table[i] = l.replace("\"",'')
-
+ 
     for link in links_table:
 
         if link.split("/")[-1] in continent_list:
@@ -190,11 +190,18 @@ def pars_file(web_content, web_content_2, regName):
     f.write(json_f)
     f.close()
 """
+    return links_table
 
 if __name__ == "__main__":
-    df = pd.read_csv("./data/table.csv")
+    df = pd.read_csv("./data/table_remaining_data.csv")
     #df = pd.read_csv("./data/table_remaining_data.csv")
     error = []
+
+
+    regions=[]
+    portion_continents=[]
+    hemispheres=[]
+    continents=[]
 
     #continent = ["Asia", "Europe", "Africa", "North America", "South America","Oceania"]
     for index, row in df.iterrows():
@@ -231,7 +238,54 @@ if __name__ == "__main__":
         webContent = response.content.decode("utf-8", "backslashreplace")
         webContent2 = response2.content.decode("utf-8", "backslashreplace")
         print("\n\n", country_name, "\n\n")
-        pars_file(webContent, webContent2, country_name)
+       
+        links_table = pars_file(webContent, webContent2, country_name)
+
+     
+        
+        regions.append(country_name)
+       
+        portion_continent_list =["southern-asia","northem-asia","central-america"]
+        continent_list = ["europe","asia","oceania","north-america","south-america","africa"]
+        hemisphere_list = ["northern-hemisphere", "southern-hemisphere"]
+        
+        for link in links_table:
+            
+            if link.split("/")[-1] in continent_list:
+
+                print("Continent: ", link)
+                continents.append(link)
+            
+            if link.split("/")[-1] in portion_continent_list:
+                print("Portion Continent: ", link)
+                portion_continents.append(link)
+            
+            if link.split("/")[-1] in hemisphere_list:
+                print("Hemisphere: ", link)
+                hemispheres.append(link)
+
+        if  not exists(continents, continent_list):
+            continents.append("NaN")
+        
+        if  not exists(portion_continents, portion_continent_list ):
+            portion_continents.append("NaN")
+        
+        if  not exists(hemispheres,hemisphere_list):  
+                hemispheres.append("NaN")
+        
+    
+        print("region: ", len(regions))
+        print("continents: ", len(continents))
+        print("portion continents: ", len(portion_continents))
+        print("hemisphere : ", len(hemispheres))
+        
+
+    missing_link_df = pd.DataFrame(columns=["region", "portion-continent", "continent", "hemisphere"] )
+    missing_link_df["region"]=regions
+    missing_link_df["portion-continent"]= portion_continents
+    missing_link_df["continent"]=continents
+    missing_link_df["hemisphere"]= hemispheres
+    missing_link_df.to_csv("./remaining_data/missing_links.csv")
 
     print("ERROR({}):".format(len(error)), error)
    
