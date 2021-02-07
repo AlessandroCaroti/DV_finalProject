@@ -8,7 +8,7 @@
 6,Angola,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/southern-hemisphere
 7,Anguilla,NaN,NaN,NaN
 8,Antarctica,NaN,NaN,http://berkeleyearth.lbl.gov/regions/southern-hemisphere
-9,Antigua and Barbuda,NaN,NaN,NaN
+9,Antigua and Barb.,NaN,NaN,NaN
 10,Argentina,NaN,http://berkeleyearth.lbl.gov/regions/asia,http://berkeleyearth.lbl.gov/regions/southern-hemisphere
 11,Armenia,NaN,http://berkeleyearth.lbl.gov/regions/south-america,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 12,Aruba,NaN,http://berkeleyearth.lbl.gov/regions/oceania,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
@@ -27,20 +27,20 @@
 25,Bhutan,http://berkeleyearth.lbl.gov/regions/southern-asia,http://berkeleyearth.lbl.gov/regions/south-america,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 26,Bolivia,NaN,http://berkeleyearth.lbl.gov/regions/south-america,http://berkeleyearth.lbl.gov/regions/southern-hemisphere
 27,"Bonaire, Saint Eustatius and Saba",NaN,http://berkeleyearth.lbl.gov/regions/europe,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
-28,Bosnia and Herzegovina,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+28,Bosnia and Herz.,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 29,Botswana,NaN,http://berkeleyearth.lbl.gov/regions/south-america,http://berkeleyearth.lbl.gov/regions/southern-hemisphere
 30,Brazil,NaN,NaN,http://berkeleyearth.lbl.gov/regions/southern-hemisphere
-31,British Virgin Islands,NaN,http://berkeleyearth.lbl.gov/regions/europe,NaN
+31,British Virgin Is.,NaN,http://berkeleyearth.lbl.gov/regions/europe,NaN
 32,Bulgaria,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 33,Burkina Faso,NaN,http://berkeleyearth.lbl.gov/regions/asia,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
-34,Burma,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+34,Myanmar,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 35,Burundi,NaN,http://berkeleyearth.lbl.gov/regions/asia,http://berkeleyearth.lbl.gov/regions/southern-hemisphere
 36,Cambodia,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 37,Cameroon,NaN,http://berkeleyearth.lbl.gov/regions/north-america,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 38,Canada,NaN,NaN,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
-39,Cape Verde,NaN,NaN,NaN
-40,Cayman Islands,NaN,http://berkeleyearth.lbl.gov/regions/africa,NaN
-41,Central African Republic,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+39,Cabo Verde,NaN,NaN,NaN
+40,Cayman Is.,NaN,http://berkeleyearth.lbl.gov/regions/africa,NaN
+41,Central African Rep.,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 42,Chad,NaN,http://berkeleyearth.lbl.gov/regions/south-america,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 43,Chile,NaN,http://berkeleyearth.lbl.gov/regions/asia,http://berkeleyearth.lbl.gov/regions/southern-hemisphere
 44,China,NaN,NaN,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
@@ -48,36 +48,36 @@
 46,Colombia,NaN,NaN,NaN
 47,Comoros,NaN,http://berkeleyearth.lbl.gov/regions/africa,NaN
 48,Congo,NaN,http://berkeleyearth.lbl.gov/regions/africa,NaN
-49,Congo (Democratic Republic of the),NaN,http://berkeleyearth.lbl.gov/regions/north-america,NaN
+49,Dem. Rep. Congo,NaN,http://berkeleyearth.lbl.gov/regions/north-america,NaN
 50,Costa Rica,http://berkeleyearth.lbl.gov/regions/central-america,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 51,Côte d'Ivoire,NaN,http://berkeleyearth.lbl.gov/regions/europe,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 52,Croatia,NaN,http://berkeleyearth.lbl.gov/regions/north-america,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 53,Cuba,NaN,http://berkeleyearth.lbl.gov/regions/south-america,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 54,Curaçao,NaN,http://berkeleyearth.lbl.gov/regions/asia,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 55,Cyprus,NaN,http://berkeleyearth.lbl.gov/regions/europe,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
-56,Czech Republic,NaN,http://berkeleyearth.lbl.gov/regions/north-america,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+56,Czechia,NaN,http://berkeleyearth.lbl.gov/regions/north-america,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 57,Denmark,NaN,http://berkeleyearth.lbl.gov/regions/europe,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
-58,Denmark (Europe),NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+58,Denmark,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 59,Djibouti,NaN,http://berkeleyearth.lbl.gov/regions/north-america,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 60,Dominica,NaN,http://berkeleyearth.lbl.gov/regions/north-america,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
-61,Dominican Republic,NaN,http://berkeleyearth.lbl.gov/regions/south-america,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+61,Dominican Rep.,NaN,http://berkeleyearth.lbl.gov/regions/south-america,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 62,Ecuador,NaN,http://berkeleyearth.lbl.gov/regions/africa,NaN
 63,Egypt,NaN,http://berkeleyearth.lbl.gov/regions/north-america,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 64,El Salvador,http://berkeleyearth.lbl.gov/regions/central-america,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
-65,Equatorial Guinea,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+65,Eq. Guinea,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 66,Eritrea,NaN,http://berkeleyearth.lbl.gov/regions/europe,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 67,Estonia,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 68,Ethiopia,NaN,http://berkeleyearth.lbl.gov/regions/south-america,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
-69,Falkland Islands (Islas Malvinas),NaN,NaN,http://berkeleyearth.lbl.gov/regions/southern-hemisphere
-70,Faroe Islands,NaN,NaN,NaN
-71,Federated States of Micronesia,NaN,http://berkeleyearth.lbl.gov/regions/oceania,NaN
+69,Falkland Is.,NaN,NaN,http://berkeleyearth.lbl.gov/regions/southern-hemisphere
+70,Faeroe Is.,NaN,NaN,NaN
+71,Micronesia,NaN,http://berkeleyearth.lbl.gov/regions/oceania,NaN
 72,Fiji,NaN,http://berkeleyearth.lbl.gov/regions/europe,http://berkeleyearth.lbl.gov/regions/southern-hemisphere
 73,Finland,NaN,NaN,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 74,France,NaN,http://berkeleyearth.lbl.gov/regions/europe,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
-75,France (Europe),NaN,http://berkeleyearth.lbl.gov/regions/south-america,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+75,France,NaN,http://berkeleyearth.lbl.gov/regions/south-america,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 76,French Guiana,NaN,NaN,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
-77,French Polynesia,NaN,NaN,NaN
-78,French Southern and Antarctic Lands,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/southern-hemisphere
+77,Fr. Polynesia,NaN,NaN,NaN
+78,Fr. S. Antarctic Lands,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/southern-hemisphere
 79,Gabon,NaN,http://berkeleyearth.lbl.gov/regions/africa,NaN
 80,Gambia,NaN,http://berkeleyearth.lbl.gov/regions/asia,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 81,Gaza Strip,NaN,http://berkeleyearth.lbl.gov/regions/asia,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
@@ -95,7 +95,7 @@
 93,Guinea-Bissau,NaN,http://berkeleyearth.lbl.gov/regions/south-america,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 94,Guyana,NaN,http://berkeleyearth.lbl.gov/regions/north-america,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 95,Haiti,NaN,NaN,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
-96,Heard Island and McDonald Islands,NaN,http://berkeleyearth.lbl.gov/regions/north-america,NaN
+96,Heard I. and McDonald Is.,NaN,http://berkeleyearth.lbl.gov/regions/north-america,NaN
 97,Honduras,http://berkeleyearth.lbl.gov/regions/central-america,http://berkeleyearth.lbl.gov/regions/asia,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 98,Hong Kong,NaN,http://berkeleyearth.lbl.gov/regions/europe,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 99,Hungary,NaN,http://berkeleyearth.lbl.gov/regions/europe,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
@@ -127,7 +127,7 @@
 125,Liechtenstein,NaN,http://berkeleyearth.lbl.gov/regions/europe,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 126,Lithuania,NaN,http://berkeleyearth.lbl.gov/regions/europe,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 127,Luxembourg,NaN,http://berkeleyearth.lbl.gov/regions/asia,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
-128,Macau,NaN,http://berkeleyearth.lbl.gov/regions/europe,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+128,Macao,NaN,http://berkeleyearth.lbl.gov/regions/europe,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 129,Macedonia,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 130,Madagascar,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/southern-hemisphere
 131,Malawi,NaN,http://berkeleyearth.lbl.gov/regions/asia,http://berkeleyearth.lbl.gov/regions/southern-hemisphere
@@ -149,7 +149,7 @@
 147,Namibia,NaN,http://berkeleyearth.lbl.gov/regions/asia,http://berkeleyearth.lbl.gov/regions/southern-hemisphere
 148,Nepal,http://berkeleyearth.lbl.gov/regions/southern-asia,http://berkeleyearth.lbl.gov/regions/europe,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 149,Netherlands,NaN,http://berkeleyearth.lbl.gov/regions/europe,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
-150,Netherlands (Europe),NaN,http://berkeleyearth.lbl.gov/regions/oceania,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+150,Netherlands,NaN,http://berkeleyearth.lbl.gov/regions/oceania,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 151,New Caledonia,NaN,http://berkeleyearth.lbl.gov/regions/oceania,http://berkeleyearth.lbl.gov/regions/southern-hemisphere
 152,New Zealand,NaN,http://berkeleyearth.lbl.gov/regions/north-america,http://berkeleyearth.lbl.gov/regions/southern-hemisphere
 153,Nicaragua,http://berkeleyearth.lbl.gov/regions/central-america,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
@@ -157,12 +157,12 @@
 155,Nigeria,NaN,NaN,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 156,Niue,NaN,http://berkeleyearth.lbl.gov/regions/asia,NaN
 157,North Korea,NaN,NaN,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
-158,Northern Mariana Islands,NaN,http://berkeleyearth.lbl.gov/regions/europe,NaN
+158,N. Mariana Is.,NaN,http://berkeleyearth.lbl.gov/regions/europe,NaN
 159,Norway,NaN,http://berkeleyearth.lbl.gov/regions/asia,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 160,Oman,NaN,http://berkeleyearth.lbl.gov/regions/asia,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 161,Pakistan,http://berkeleyearth.lbl.gov/regions/southern-asia,NaN,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 162,Palau,NaN,NaN,NaN
-163,Palestina,NaN,NaN,NaN
+163,Palestine,NaN,NaN,NaN
 164,Palmyra Atoll,NaN,http://berkeleyearth.lbl.gov/regions/north-america,NaN
 165,Panama,http://berkeleyearth.lbl.gov/regions/central-america,http://berkeleyearth.lbl.gov/regions/oceania,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 166,Papua New Guinea,NaN,http://berkeleyearth.lbl.gov/regions/south-america,http://berkeleyearth.lbl.gov/regions/southern-hemisphere
@@ -177,15 +177,15 @@
 175,Romania,NaN,http://berkeleyearth.lbl.gov/regions/asia,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 176,Russia,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 177,Rwanda,NaN,NaN,http://berkeleyearth.lbl.gov/regions/southern-hemisphere
-178,Saint Barthélemy,NaN,NaN,NaN
-179,Saint Kitts and Nevis,NaN,NaN,NaN
+178,St-Barthélemy,NaN,NaN,NaN
+179,St. Kitts and Nevis,NaN,NaN,NaN
 180,Saint Lucia,NaN,NaN,NaN
-181,Saint Martin,NaN,http://berkeleyearth.lbl.gov/regions/south-america,NaN
-182,Saint Pierre and Miquelon,NaN,http://berkeleyearth.lbl.gov/regions/north-america,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
-183,Saint Vincent and the Grenadines,NaN,NaN,NaN
+181,St-Martin,NaN,http://berkeleyearth.lbl.gov/regions/south-america,NaN
+182,St. Pierre and Miquelon,NaN,http://berkeleyearth.lbl.gov/regions/north-america,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+183,St. Vin. and Gren.,NaN,NaN,NaN
 184,Samoa,NaN,http://berkeleyearth.lbl.gov/regions/oceania,http://berkeleyearth.lbl.gov/regions/southern-hemisphere
 185,San Marino,NaN,http://berkeleyearth.lbl.gov/regions/europe,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
-186,Sao Tome and Principe,NaN,NaN,NaN
+186,São Tomé and Principe,NaN,NaN,NaN
 187,Saudi Arabia,NaN,http://berkeleyearth.lbl.gov/regions/asia,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 188,Senegal,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 189,Serbia,NaN,http://berkeleyearth.lbl.gov/regions/europe,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
@@ -195,17 +195,17 @@
 193,Sint Maarten,NaN,NaN,NaN
 194,Slovakia,NaN,http://berkeleyearth.lbl.gov/regions/europe,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 195,Slovenia,NaN,http://berkeleyearth.lbl.gov/regions/europe,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
-196,Solomon Islands,NaN,http://berkeleyearth.lbl.gov/regions/oceania,http://berkeleyearth.lbl.gov/regions/southern-hemisphere
+196,Solomon Is.,NaN,http://berkeleyearth.lbl.gov/regions/oceania,http://berkeleyearth.lbl.gov/regions/southern-hemisphere
 197,Somalia,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 198,South Africa,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/southern-hemisphere
-199,South Georgia and the South Sandwich Isla,NaN,NaN,http://berkeleyearth.lbl.gov/regions/southern-hemisphere
+199,S. Geo. and the Is,NaN,NaN,http://berkeleyearth.lbl.gov/regions/southern-hemisphere
 200,South Korea,NaN,http://berkeleyearth.lbl.gov/regions/asia,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 201,Spain,NaN,http://berkeleyearth.lbl.gov/regions/europe,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 202,Sri Lanka,http://berkeleyearth.lbl.gov/regions/southern-asia,http://berkeleyearth.lbl.gov/regions/asia,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 203,Sudan,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 204,Suriname,NaN,http://berkeleyearth.lbl.gov/regions/south-america,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 205,Svalbard and Jan Mayen,NaN,http://berkeleyearth.lbl.gov/regions/europe,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
-206,Swaziland,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/southern-hemisphere
+206,eSwatini,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/southern-hemisphere
 207,Sweden,NaN,http://berkeleyearth.lbl.gov/regions/europe,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 208,Switzerland,NaN,http://berkeleyearth.lbl.gov/regions/europe,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 209,Syria,NaN,http://berkeleyearth.lbl.gov/regions/asia,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
@@ -220,19 +220,19 @@
 218,Tunisia,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 219,Turkey,NaN,http://berkeleyearth.lbl.gov/regions/asia,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 220,Turkmenistan,NaN,http://berkeleyearth.lbl.gov/regions/asia,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
-221,Turks and Caicas Islands,NaN,NaN,NaN
+221,Turks and Caicos Is.,NaN,NaN,NaN
 222,Uganda,NaN,http://berkeleyearth.lbl.gov/regions/africa,NaN
 223,Ukraine,NaN,http://berkeleyearth.lbl.gov/regions/europe,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 224,United Arab Emirates,NaN,http://berkeleyearth.lbl.gov/regions/asia,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 225,United Kingdom,NaN,http://berkeleyearth.lbl.gov/regions/europe,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
-226,United Kingdom (Europe),NaN,http://berkeleyearth.lbl.gov/regions/europe,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
-227,United States,NaN,http://berkeleyearth.lbl.gov/regions/north-america,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+226,United Kingdom,NaN,http://berkeleyearth.lbl.gov/regions/europe,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+227,United States of America,NaN,http://berkeleyearth.lbl.gov/regions/north-america,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 228,Uruguay,NaN,http://berkeleyearth.lbl.gov/regions/south-america,http://berkeleyearth.lbl.gov/regions/southern-hemisphere
 229,Uzbekistan,NaN,http://berkeleyearth.lbl.gov/regions/asia,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 230,Venezuela,NaN,http://berkeleyearth.lbl.gov/regions/south-america,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 231,Vietnam,NaN,http://berkeleyearth.lbl.gov/regions/asia,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
-232,Virgin Islands,NaN,NaN,NaN
-233,Western Sahara,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+232,U.S. Virgin Is.,NaN,NaN,NaN
+233,W. Sahara,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 234,Yemen,NaN,http://berkeleyearth.lbl.gov/regions/asia,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
 235,Zambia,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/southern-hemisphere
 236,Zimbabwe,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/southern-hemisphere

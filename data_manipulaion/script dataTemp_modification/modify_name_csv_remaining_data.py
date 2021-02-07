@@ -8,7 +8,7 @@ from numpy.lib.function_base import _i0_dispatcher
 
 data_temp_folder = "./data_temp"
 
-data_csv_table = "./remaining_data/missing_links.csv""
+data_csv_table = "./remaining_data/missing_links.csv"
 if __name__ == "__main__":
     
     country_csv = pd.read_csv("./data_manipulaion/script compare/compare data/to_modify.csv")
@@ -22,8 +22,8 @@ if __name__ == "__main__":
         
         #print(original,"->",new_name)
         idx = table_csv["region"].tolist().index(original)
-        print(country[idx])
+
         table_csv.at[idx, 'region'] = new_name
-        
-        
-    table_csv.to_csv("./remaining_data/missing_links_modified.csv")
+
+    table_csv.drop(columns=["Unnamed: 0"], inplace=True)
+    table_csv.to_csv("./remaining_data/missing_links_modified.csv", na_rep="NaN")

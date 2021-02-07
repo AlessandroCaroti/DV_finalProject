@@ -283,20 +283,14 @@ if __name__ == "__main__":
         
         if country_name == "Saint Pierre and Miquelon":
             continents.pop( continents.index(REGION_INFO+"south-america"))
-
-    
-        print("region: ", len(regions))
-        print("continents: ", len(continents))
-        print("portion continents: ", len(portion_continents))
-        print("hemisphere : ", len(hemispheres))
         
-
+    """
     missing_link_df = pd.DataFrame(columns=["region", "portion-continent", "continent", "hemisphere"] )
     missing_link_df["region"]=regions
     missing_link_df["portion-continent"]= portion_continents
     missing_link_df["continent"]=continents
     missing_link_df["hemisphere"]= hemispheres
     missing_link_df.to_csv("./remaining_data/missing_links.csv")
-
+    """
     print("ERROR({}):".format(len(error)), error)
    
