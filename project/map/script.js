@@ -320,9 +320,17 @@ function init_zoomBtns() {
 }
 
 function init_yearSpace() {
+  var w_1 = 230,
+    w_2 = 160;
+  x = d3.select(".col-sm-2").select("text").attr("x");
+  x2 = d3.select(".col-sm-2").select("text").attr("width");
+  console.log(x,x2);
   d3.select(".col-sm-2")
     .select("path")
-    .attr("d", roundedFigure_1(200, -1, 200, 160, 30));
+    .attr("d", roundedFigure_1(285, -1, w_1, w_2, 35))
+    .style("fill", "rgb(202, 202, 202)")
+    .style("stroke", "black")
+    .style("stroke-width", 1);
 }
 
 // funtion to move path in front of the charts
