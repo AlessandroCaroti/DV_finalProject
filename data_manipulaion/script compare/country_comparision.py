@@ -38,6 +38,8 @@ country["Country Not In Region"] = list_country
 #country.to_csv("Comparision_countries_regions.csv",index=False)
 
 print(country.values.tolist())
+
+
 '''
 country = (os.listdir(r"C:\\Users\\simoc\\Documents\\GitHub\\DV_finalProject\\data\\data_temp"))
 

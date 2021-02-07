@@ -1,6 +1,6 @@
 //Support Functions for  the two kid of charts
-
-
+var parseTime = d3.timeParse("%Y-%m");
+var baseline;
 
 
 // Functions to Draw and Remove the tooltip
@@ -81,6 +81,7 @@ function parseDataAttributes(data){
       d.annual_value = baseline + parseFloat(d["Annual Anomaly"]);
       d.ten_years_value =  baseline + parseFloat(d["Ten-year Anomaly"])
       d.ten_years_unc =  parseFloat(d["Ten-year Unc."])
+      
     
     })
   }
