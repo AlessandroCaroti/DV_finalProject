@@ -6,6 +6,7 @@ import json
 from os import path
 import os
 import numpy as np
+import csv
 
 URL_ROOT = "http://berkeleyearth.lbl.gov"
 DATA_FOLDER = "/auto/Regional/TAVG/Text/"
@@ -29,11 +30,12 @@ def exists(l1, l2):
 
 def add_missing_info_in_json(country_info):
     
-    data_folder = "./remaining_data"
-    data_folder = os.path.join(data_folder,"missing_links.csv")
     
-    missing_links = pd.read_csv(data_folder)
-
+    data_folder = "./remaining_data/missing_links_2.csv"
+    print("oooooooooooooo")
+    missing_links = pd.read_csv(data_folder,error_bad_lines=False)
+    print("UUUUUUUUUUUUUUU")
+   
     idx_country = missing_links["region"].tolist().index(country_info["Name"])
 
     correspondence = missing_links.at[idx_country, "region"] == country_info["Name"]
@@ -84,7 +86,7 @@ def pars_file(web_content, web_content_2, regName):
     c = 0
     
     #Uncomment to create csv of missing links -> see main
-    
+    """
     url_regex = "http:\/\/\w+.\w+.\w+\/\w+\/\w+-*\w+"
     
     title = "Mean Rate of Change ( &deg;C / Century )"
@@ -97,12 +99,12 @@ def pars_file(web_content, web_content_2, regName):
     mean_rate_html_table = web_content_2[index_start_table: index_end_table]
 
     links_table = re.findall(url_regex, mean_rate_html_table)
-    
+    """
     while True:
         end_line = web_content.find("\n")
         line = web_content[:end_line]
-        break
-        """
+        
+        
         s1 = "This analysis was run on "
         s2 = "Name: "
         s3 = "Latitude Range: "
@@ -210,8 +212,8 @@ def pars_file(web_content, web_content_2, regName):
     f = open(path.join(data_folder, country_info["Name"]+"_info.json"), "w")
     f.write(json_f)
     f.close()
-    """
-    return links_table
+    
+    #return links_table
 
 
 
@@ -265,7 +267,7 @@ if __name__ == "__main__":
         links_table = pars_file(webContent, webContent2, country_name)
         
         #Uncomment to create the links of the missing data continents, emisphere, ec..
-    
+        """
         regions.append(country_name)
        
         portion_continent_list =["southern-asia","northem-asia","central-america"]
@@ -275,6 +277,8 @@ if __name__ == "__main__":
         continents_tmp = []
         portion_continents_tmp=[]
         hemispheres_tmp = []
+        regions_tmp=[]
+        regions_tmp.append(country_name)
         
         for link in links_table:
             
@@ -296,18 +300,29 @@ if __name__ == "__main__":
 
         if  not exists(continents_tmp, continent_list):
             continents.append("NaN")
+            continents_tmp.append("NaN")
              
         if  not exists(portion_continents_tmp, portion_continent_list ):
             portion_continents.append("NaN")
+            portion_continents_tmp.append("NaN")
         
         if  not exists(hemispheres_tmp, hemisphere_list):  
             hemispheres.append("NaN")
+            hemispheres_tmp.append("NaN")
         x=0
         if country_name == "Saint Pierre and Miquelon":
             x+=1
             print("NNNNNNNNN:",x)
             continents.pop( continents.index(REGION_INFO+"south-america"))
+
+        if not os.path.isfile("./remaining_data/missing_links_2.csv"):
+            pd.DataFrame(columns=['region', 'portion-continent', 'continent', 'hemisphere']).to_csv("./remaining_data/missing_links_2.csv",
+                                                                                                index=False, header=True)
         
+        with open("./remaining_data/missing_links_2.csv", 'a', newline='', encoding='utf-8') as csvfile:
+            writer = csv.writer(csvfile, delimiter=',')
+            writer.writerow(regions_tmp + portion_continents_tmp + continents_tmp + hemispheres_tmp)
+       
    
     missing_link_df = pd.DataFrame(columns=["region", "portion-continent", "continent", "hemisphere"] )
     missing_link_df["region"]=regions
@@ -315,6 +330,7 @@ if __name__ == "__main__":
     missing_link_df["continent"]=continents
     missing_link_df["hemisphere"]= hemispheres
     missing_link_df.to_csv("./remaining_data/missing_links.csv")
-    
+    """ 
+
     print("ERROR({}):".format(len(error)), error)
    
