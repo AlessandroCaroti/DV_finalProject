@@ -181,92 +181,7 @@ function zoom_in(country) {
 
 
 
-// define the anomaly color space
-function set_colorScale(){
-  //GLOBAL MIN & MAX
-  // [-2.998, +3.7969999999999997]
 
-  /*var colorScale = d3
-    .scaleLinear()
-    //.domain([-5, 0, +5])
-    .domain([-3.0, 0, +3.8])
-    .range(colorsRange);*/
-
-  // da trovare modo per trovare min e max automaticamente 
-  let min = -3.0;
-  let max = +3.8;
-  let step = (max - min)/7.0;
-  let step_color_list = []
-  let step_bar_list = []
-  let step_list = []
-  let width = 300; // width of the legend axis
-  
-  var colorBase = d3.scaleDiverging(t => d3.interpolateRdBu(1 - t))
-                      .domain([min, 0, max]);
-  // color quantization
-  for(let i = min; i <= max; i += step){
-      let num = parseFloat(i.toFixed(2));
-      step_list.push(num);
-      step_color_list.push(colorBase(num));
-  }
-  // axis quantization
-  for(let i = 0; i <= width; i += width/7.0){
-    step_bar_list.push(i);
-  }
-  colorScale = d3.scaleQuantize()
-                      .domain([min, max])
-                      .range(step_color_list);
-
-                      /*
-  var quantizeBarScale = d3.scaleQuantize()
-                                .domain([min, max])
-                                .range(step_bar_list );
-  // draw anomaly legend
-  var anomaly_axis = d3.axisBottom().scale(quantizeBarScale)
-                                      .tickValues(step_list);
-
-  console.log(colorScale.ticks(5));
-  d3.select('.axis-anomaly')
-            .attr("transform", "translate(" + 500 +","+ 475 +" )")
-	          .call(anomaly_axis);
-            
-  var rects = d3.select(".legend-anomaly")
-            .selectAll("rect")
-            .data(colorScale.ticks(5));
-
-  rects.enter()
-        .append("rect")
-        .attr("width", width/5.0)
-        .attr("height", "20px")
-        .style("fill", d => colorScale(d))
-*/
-}
-
-/*
-// draw the anomaly legend
-function draw_legend(){
-
-  let width = 200;
-  // Construct axis
-  var anomaly_axis = d3.axisBottom().scale(quantizeAnomalyScale)
-                                      .tickValues();
-
-  d3.select('.axis-anomaly')
-            .attr("transform", "translate(" + 500 +","+ 475 +" )")
-	          .call(anomaly_axis)
-            
-            .selectAll("text")
-            .attr("y", 0)
-            .attr("x", 25)
-            .attr("dy", ".35em");
-
-  console.log(quantizeAnomalyScale.ticks(5))
-  var rects = d3.select(".legend-anomaly")
-            .selectAll("rect")
-            .data(quantizeAnomalyScale.ticks(5));
-  rects.enter()
-        .append("rect");
-}*/
 
 
 //                 END FUNCTION FOR THE MAP                 //
@@ -463,6 +378,6 @@ function init_page() {
   init_map_controls();
   // trovare modo automatico per trovare min e max
   init_slider(1743, 2020);
-  //draw_legend();
+  draw_legend();
 
 }
