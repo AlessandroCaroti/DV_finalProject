@@ -76,10 +76,6 @@ function createDefaultStripesChart(data){
     
     var stripe_width = (width_stripe / data_annnual.length)+2;
     
-    var colorScale = d3.scaleLinear()
-                       .domain(d3.extent(data_annnual, (d) => d.annual_anomaly))
-                       .range([1,0])
-                       
 
     var stripes = svg.selectAll('rect')
                      .data(data_annnual)
@@ -95,8 +91,7 @@ function createDefaultStripesChart(data){
     //Events Tooltip
     stripes.on("mouseover", stripesEnter)
            .on("mouseout", stripesLeave)
-
-  
+ 
 }
 
 

@@ -3,14 +3,14 @@ import shutil
 import pandas as pd
 
 
-data_temp_folder = "./data_temp"
+data_temp_folder = "./remaining_data/data_new"
 
-data_temp_remove = "./data_temp_removed"
+data_temp_remove = "./remaining_data/data_new_removed"
 
 
 if __name__ == "__main__":
 
-    remove_csv = pd.read_csv("to_remove.csv")
+    remove_csv = pd.read_csv("./data_manipulaion/script compare/compare data/to_remove.csv")
 
     remove_list = remove_csv.values.tolist()  
     for [region]  in remove_list:

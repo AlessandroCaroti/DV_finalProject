@@ -1,9 +1,9 @@
-// *************************************************** //
-//                START GLOBAL VARIABLE                //
+// *********************************************************** //
+//                    START GLOBAL VARIABLE                    //
 
 // MAP DIMANSION
 var w = 1000;
-var h = 500;
+const h = 500;
 
 var projection;
 var map_container;
@@ -39,7 +39,7 @@ tmp_file_suffix = "/Annual_mean.csv";
 //                START FUNCTION FOR THE MAP                //
 
 function drawMap(world) {
-  console.log("DRAW-MAP");
+  debug_log("DRAW-MAP");
 
   svg = d3.select("#svg-map").attr("width", "100%").attr("height", h); //.call(zoom);
   map_container = svg.select("#map");
@@ -53,6 +53,8 @@ function drawMap(world) {
     .translate([w / 2, h / 2]);
 
   geoGenerator = d3.geoPath().projection(projection);
+
+  drawGlobeBackground();
 
   // Draw the background (country outlines)
   map_container
@@ -68,7 +70,7 @@ function drawMap(world) {
     .attr("d", geoGenerator);
 
   // Draw gridlines
-  drwaGridlines();
+  drawGridlines();
 
   //Associate to each county a color proportionate to it's anomaly
   update_colors();
@@ -77,15 +79,21 @@ function drawMap(world) {
   country_events();
 }
 
-function drwaGridlines() {
+function drawGridlines() {
   var graticule = d3.geoGraticule();
 
   var maps = map_container.selectAll("path.grat_2").data(graticule.lines());
   maps.enter().append("path").classed("grat_2", true).attr("d", geoGenerator);
 }
 
+function drawGlobeBackground() {
+  map_container
+    .select(".background_globe")
+    .datum({ type: "Sphere" })
+    .attr("d", geoGenerator);
+}
+
 function update_colors() {
-  
   tmp_data.forEach(function (d) {
     var element = document.getElementById(d.Country);
 
@@ -107,26 +115,26 @@ function country_events() {
     d3.select(".selected_country").moveToFront();
 
     // hide tooltip
-    d3.select(".tooltip-map")
-    .style("display", "none")
+    d3.select(".tooltip-map").style("display", "none");
   });
 
   // MOUSE-OVER: tooltip
-  map_container.selectAll(".country")
-                .on("mouseover", function (event, b) {
-                        // show tooltip
-                        d3.select(".tooltip-map")
-                          .style("top", (event.pageY + 13) + "px")
-                          .style("left", (event.pageX + 13 ) + "px" )
-                          .style("display", "block")
-                          .html(b.properties.name)
-                })
-                .on("mousemove", function(event,b ){
-                        // update position tooltip
-                        d3.select(".tooltip-map")
-                          .style("top", (event.pageY + 13) + "px")
-                          .style("left", (event.pageX + 13)  + "px" )
-                });
+  map_container
+    .selectAll(".country")
+    .on("mouseover", function (event, b) {
+      // show tooltip
+      d3.select(".tooltip-map")
+        .style("top", event.pageY + 13 + "px")
+        .style("left", event.pageX + 13 + "px")
+        .style("display", "block")
+        .html(b.properties.name);
+    })
+    .on("mousemove", function (event, b) {
+      // update position tooltip
+      d3.select(".tooltip-map")
+        .style("top", event.pageY + 13 + "px")
+        .style("left", event.pageX + 13 + "px");
+    });
 
   //CLICK EVENT:
   map_container.selectAll(".country").on("click", function (event, b) {
@@ -183,19 +191,37 @@ function zoom_in(country) {
 
 
 
-
 //                 END FUNCTION FOR THE MAP                 //
 // ******************************************************** //
 // ******************************************************** //
 //                    START ZOOM SECTION                    //
-var zoomIn_scale = 1.2
-var zoomOut_scale = 0.8
+
+var zoomIn_scale = 1.2;
+var zoomOut_scale = 0.8;
 
 function reset_zoom() {
   map_container
     .transition()
     .duration(1000)
     .call(zoom.transform, d3.zoomIdentity.translate(0, 0).scale(1));
+}
+
+function zoom_in(country) {
+  var bounds = geoGenerator.bounds(country),
+    dx = bounds[1][0] - bounds[0][0],
+    dy = bounds[1][1] - bounds[0][1],
+    x = (bounds[0][0] + bounds[1][0]) / 2,
+    y = (bounds[0][1] + bounds[1][1]) / 2,
+    scale = Math.max(1, Math.min(max_zoom, 0.9 / Math.max(dx / w, dy / h))),
+    translate = [w / 2 - scale * x, h / 2 - scale * y];
+
+  map_container
+    .transition()
+    .duration(1000)
+    .call(
+      zoom.transform,
+      d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale)
+    );
 }
 
 //                      END ZOOM SECTION                    //
@@ -249,7 +275,7 @@ d3.selection.prototype.moveToFront = function () {
   });
 };
 
-//                END FUNCTION MAP CONTROL                //
+//                END FUNCTION MAP OVERLAY                //
 // ****************************************************** //
 
 // LOAD SLIDER YEAR
@@ -328,8 +354,8 @@ function changeCountry() {
   country.dispatchEvent(evObj);
 }
 
-// **************************************************** //
-//                    FILES LOADING                    //
+// ******************************************************** //
+//                   START FILES LOADING                    //
 
 function load_tempYear(temp_file) {
   d3.csv(temp_file)
@@ -357,7 +383,6 @@ function load_map() {
       topology = topojson.presimplify(topology);
       topology = topojson.simplify(topology, 0.05);
 
-
       drawMap(topology);
       init_dropdown_menu(country_list);
     })
@@ -367,8 +392,10 @@ function load_map() {
     });
 }
 
-// **************************************************** //
-//                  DOVE INIZIA TUTTO                  //
+//                   END FILES LOADING                    //
+// ****************************************************** //
+// ****************************************************** //
+//                   DOVE INIZIA TUTTO                    //
 
 function init_page() {
   set_colorScale();
