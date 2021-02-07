@@ -257,6 +257,8 @@ function reset_zoom() {
 }
 
 function zoom_in(country) {
+  debug_log("ZOOM IN "+country.properties.name);
+
   var bounds = geoGenerator.bounds(country),
     dx = bounds[1][0] - bounds[0][0],
     dy = bounds[1][1] - bounds[0][1],
@@ -320,17 +322,19 @@ function init_zoomBtns() {
 }
 
 function init_yearSpace() {
-  var w_1 = 230,
-    w_2 = 160;
-  x = d3.select(".col-sm-2").select("text").attr("x");
-  x2 = d3.select(".col-sm-2").select("text").attr("width");
-  console.log(x,x2);
+  var bBox = document.getElementById("sliderLabel").getBBox();
+
+  var gap = 40,
+    w_1 = bBox.width + gap * 2,
+    w_2 = bBox.width,
+    x = bBox.x - gap;
+
   d3.select(".col-sm-2")
     .select("path")
-    .attr("d", roundedFigure_1(285, -1, w_1, w_2, 35))
+    .attr("d", roundedFigure_1(x, -1, w_1, w_2, 37))
     .style("fill", "rgb(202, 202, 202)")
     .style("stroke", "black")
-    .style("stroke-width", 1);
+    .style("stroke-width", 1.5);
 }
 
 // funtion to move path in front of the charts
@@ -467,8 +471,8 @@ function init_page() {
 
   load_tempYear(tmp_file_prefix + "2019" + tmp_file_suffix);
 
-  init_map_controls();
   // trovare modo automatico per trovare min e max
   init_slider(1743, 2020);
   //draw_legend();
+  init_map_controls();
 }
