@@ -6,15 +6,16 @@ import pandas as pd
 
 from numpy.lib.function_base import _i0_dispatcher
 
-data_temp_folder = "./data_temp"
+#data_temp_folder = "./data_temp"
+data_temp_folder = "./remaining_data/data_new"
 
 if __name__ == "__main__":
     
-    country_csv = pd.read_csv("to_modify.csv")
+    country_csv = pd.read_csv("./data_manipulaion/script compare/compare data/to_modify.csv")
 
-   
-    
+
     modify_list = country_csv.values.tolist()#[("Antigua and Barb.", "Antigua and Barbuda")]
+    
     i=0
     for new_name, original  in modify_list:
         print(original,"->",new_name)

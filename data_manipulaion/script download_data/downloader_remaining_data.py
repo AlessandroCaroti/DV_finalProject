@@ -195,7 +195,7 @@ def pars_file(web_content, web_content_2, regName):
     print("COUNTRY INFO\n:",country_info)
 
 
-    """
+    
     # SAVE ALL DATA
     data_folder = "./remaining_data/data_new"
     data_folder = data_folder+"/"+country_info["Name"]
@@ -209,7 +209,7 @@ def pars_file(web_content, web_content_2, regName):
     f = open(path.join(data_folder, country_info["Name"]+"_info.json"), "w")
     f.write(json_f)
     f.close()
-    """
+    
     #return links_table
 
 
