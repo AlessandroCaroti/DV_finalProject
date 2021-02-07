@@ -422,6 +422,5 @@ function init_page() {
   init_slider(1743, 2020);
   draw_legend();
 
-  //draw_legend();
   init_map_controls();
 }
