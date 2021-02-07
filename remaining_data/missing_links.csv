@@ -1,1 +1,58 @@
-,region,portion-continet,continent,emisphere
+,region,portion-continent,continent,hemisphere
+0,Saint Lucia,NaN,NaN,NaN
+1,Saint Martin,NaN,NaN,NaN
+2,Saint Pierre and Miquelon,NaN,http://berkeleyearth.lbl.gov/regions/north-america,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+3,Saint Vincent and the Grenadines,NaN,NaN,NaN
+4,Samoa,NaN,http://berkeleyearth.lbl.gov/regions/oceania,http://berkeleyearth.lbl.gov/regions/southern-hemisphere
+5,San Marino,NaN,http://berkeleyearth.lbl.gov/regions/europe,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+6,Sao Tome and Principe,NaN,NaN,NaN
+7,Saudi Arabia,NaN,http://berkeleyearth.lbl.gov/regions/asia,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+8,Senegal,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+9,Serbia,NaN,http://berkeleyearth.lbl.gov/regions/europe,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+10,Seychelles,NaN,NaN,NaN
+11,Sierra Leone,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+12,Singapore,NaN,http://berkeleyearth.lbl.gov/regions/asia,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+13,Sint Maarten,NaN,NaN,NaN
+14,Slovakia,NaN,http://berkeleyearth.lbl.gov/regions/europe,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+15,Slovenia,NaN,http://berkeleyearth.lbl.gov/regions/europe,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+16,Solomon Islands,NaN,http://berkeleyearth.lbl.gov/regions/oceania,http://berkeleyearth.lbl.gov/regions/southern-hemisphere
+17,Somalia,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+18,South Africa,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/southern-hemisphere
+19,South Georgia and the South Sandwich Isla,NaN,NaN,http://berkeleyearth.lbl.gov/regions/southern-hemisphere
+20,South Korea,NaN,http://berkeleyearth.lbl.gov/regions/asia,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+21,Spain,NaN,http://berkeleyearth.lbl.gov/regions/europe,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+22,Sri Lanka,http://berkeleyearth.lbl.gov/regions/southern-asia,http://berkeleyearth.lbl.gov/regions/asia,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+23,Sudan,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+24,Suriname,NaN,http://berkeleyearth.lbl.gov/regions/south-america,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+25,Svalbard and Jan Mayen,NaN,http://berkeleyearth.lbl.gov/regions/europe,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+26,Swaziland,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/southern-hemisphere
+27,Sweden,NaN,http://berkeleyearth.lbl.gov/regions/europe,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+28,Switzerland,NaN,http://berkeleyearth.lbl.gov/regions/europe,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+29,Syria,NaN,http://berkeleyearth.lbl.gov/regions/asia,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+30,Taiwan,NaN,http://berkeleyearth.lbl.gov/regions/asia,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+31,Tajikistan,NaN,http://berkeleyearth.lbl.gov/regions/asia,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+32,Tanzania,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/southern-hemisphere
+33,Thailand,NaN,http://berkeleyearth.lbl.gov/regions/asia,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+34,Timor-Leste,NaN,http://berkeleyearth.lbl.gov/regions/asia,http://berkeleyearth.lbl.gov/regions/southern-hemisphere
+35,Togo,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+36,Tonga,NaN,NaN,NaN
+37,Trinidad and Tobago,NaN,http://berkeleyearth.lbl.gov/regions/south-america,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+38,Tunisia,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+39,Turkey,NaN,http://berkeleyearth.lbl.gov/regions/asia,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+40,Turkmenistan,NaN,http://berkeleyearth.lbl.gov/regions/asia,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+41,Turks and Caicas Islands,NaN,NaN,NaN
+42,Uganda,NaN,http://berkeleyearth.lbl.gov/regions/africa,NaN
+43,Ukraine,NaN,http://berkeleyearth.lbl.gov/regions/europe,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+44,United Arab Emirates,NaN,http://berkeleyearth.lbl.gov/regions/asia,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+45,United Kingdom,NaN,http://berkeleyearth.lbl.gov/regions/europe,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+46,United Kingdom (Europe),NaN,http://berkeleyearth.lbl.gov/regions/europe,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+47,United States,NaN,http://berkeleyearth.lbl.gov/regions/north-america,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+48,Uruguay,NaN,http://berkeleyearth.lbl.gov/regions/south-america,http://berkeleyearth.lbl.gov/regions/southern-hemisphere
+49,Uzbekistan,NaN,http://berkeleyearth.lbl.gov/regions/asia,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+50,Venezuela,NaN,http://berkeleyearth.lbl.gov/regions/south-america,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+51,Vietnam,NaN,http://berkeleyearth.lbl.gov/regions/asia,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+52,Virgin Islands,NaN,NaN,NaN
+53,Western Sahara,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+54,Yemen,NaN,http://berkeleyearth.lbl.gov/regions/asia,http://berkeleyearth.lbl.gov/regions/northern-hemisphere
+55,Zambia,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/southern-hemisphere
+56,Zimbabwe,NaN,http://berkeleyearth.lbl.gov/regions/africa,http://berkeleyearth.lbl.gov/regions/southern-hemisphere

@@ -193,8 +193,8 @@ def pars_file(web_content, web_content_2, regName, ):
     return links_table
 
 if __name__ == "__main__":
+    #df = pd.read_csv("./remaining_data/remai")
     df = pd.read_csv("./data/table_remaining_data.csv")
-    #df = pd.read_csv("./data/table_remaining_data.csv")
     error = []
 
 
@@ -241,13 +241,17 @@ if __name__ == "__main__":
        
         links_table = pars_file(webContent, webContent2, country_name)
 
-     
-        
+           
         regions.append(country_name)
        
         portion_continent_list =["southern-asia","northem-asia","central-america"]
         continent_list = ["europe","asia","oceania","north-america","south-america","africa"]
         hemisphere_list = ["northern-hemisphere", "southern-hemisphere"]
+
+
+        continents_tmp = []
+        portion_continents_tmp=[]
+        hemispheres_tmp = []
         
         for link in links_table:
             
@@ -255,24 +259,31 @@ if __name__ == "__main__":
 
                 print("Continent: ", link)
                 continents.append(link)
+                continents_tmp.append(link)
             
             if link.split("/")[-1] in portion_continent_list:
                 print("Portion Continent: ", link)
                 portion_continents.append(link)
+                portion_continents_tmp.append(link)
             
             if link.split("/")[-1] in hemisphere_list:
                 print("Hemisphere: ", link)
                 hemispheres.append(link)
+                hemispheres_tmp.append(link)
 
-        if  not exists(continents, continent_list):
+        if  not exists(continents_tmp, continent_list):
             continents.append("NaN")
+            
         
-        if  not exists(portion_continents, portion_continent_list ):
+        if  not exists(portion_continents_tmp, portion_continent_list ):
             portion_continents.append("NaN")
         
-        if  not exists(hemispheres,hemisphere_list):  
-                hemispheres.append("NaN")
+        if  not exists(hemispheres_tmp, hemisphere_list):  
+            hemispheres.append("NaN")
         
+        if country_name == "Saint Pierre and Miquelon":
+            continents.pop( continents.index(REGION_INFO+"south-america"))
+
     
         print("region: ", len(regions))
         print("continents: ", len(continents))

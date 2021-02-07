@@ -11,6 +11,8 @@ data_temp_folder = "./data_temp"
 if __name__ == "__main__":
     
     country_csv = pd.read_csv("to_modify.csv")
+
+   
     
     modify_list = country_csv.values.tolist()#[("Antigua and Barb.", "Antigua and Barbuda")]
     i=0
