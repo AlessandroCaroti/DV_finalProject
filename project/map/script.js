@@ -18,16 +18,6 @@ var country_list = new Array(); //List of the name of the countries present in t
 
 var selected_country = null;
 
-const max_zoom = 8;
-var zommed = false;
-var zoom = d3
-  .zoom()
-  .on("zoom", (event) => {
-    zommed = event.transform.k != 1.0;
-    map_container.attr("transform", event.transform);
-  })
-  .scaleExtent([1, max_zoom]);
-
 // FILES & DIRECTORY PATH VARIABLE
 map_file = "../../data/countries-50m.json";
 tmp_file_prefix = "../../data/data_year/";
@@ -159,8 +149,19 @@ function country_selected(country) {
 // ******************************************************** //
 // ******************************************************** //
 //                    START ZOOM SECTION                    //
+
+const max_zoom = 8;
 var zoomIn_scale = 1.2,
-  zoomOut_scale = 0.8;
+  zoomOut_scale = 0.8,
+  zommed = false;
+
+var zoom = d3
+  .zoom()
+  .on("zoom", (event) => {
+    zommed = event.transform.k != 1.0;
+    map_container.attr("transform", event.transform);
+  })
+  .scaleExtent([1, max_zoom]);
 
 function reset_zoom() {
   map_container
@@ -170,44 +171,7 @@ function reset_zoom() {
 }
 
 function zoom_in(country) {
-  var bounds = geoGenerator.bounds(country),
-    dx = bounds[1][0] - bounds[0][0],
-    dy = bounds[1][1] - bounds[0][1],
-    x = (bounds[0][0] + bounds[1][0]) / 2,
-    y = (bounds[0][1] + bounds[1][1]) / 2,
-    scale = Math.max(1, Math.min(max_zoom, 0.9 / Math.max(dx / w, dy / h))),
-    translate = [w / 2 - scale * x, h / 2 - scale * y];
-
-  map_container
-    .transition()
-    .duration(1000)
-    .call(
-      zoom.transform,
-      d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale)
-    );
-}
-
-
-
-
-
-//                 END FUNCTION FOR THE MAP                 //
-// ******************************************************** //
-// ******************************************************** //
-//                    START ZOOM SECTION                    //
-
-var zoomIn_scale = 1.2;
-var zoomOut_scale = 0.8;
-
-function reset_zoom() {
-  map_container
-    .transition()
-    .duration(1000)
-    .call(zoom.transform, d3.zoomIdentity.translate(0, 0).scale(1));
-}
-
-function zoom_in(country) {
-  debug_log("ZOOM IN "+country.properties.name);
+  debug_log("ZOOM IN " + country.properties.name);
 
   var bounds = geoGenerator.bounds(country),
     dx = bounds[1][0] - bounds[0][0],
@@ -346,8 +310,6 @@ function init_dropdown_menu(list_countries) {
     .append("option")
     .attr("value", (d) => d);
 }
-
-
 
 // UPDATE COUNTRY
 function changeCountry() {
