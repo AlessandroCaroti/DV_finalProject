@@ -5,6 +5,7 @@ import re
 import json
 from os import path
 import os
+import numpy as np
 
 URL_ROOT = "http://berkeleyearth.lbl.gov"
 DATA_FOLDER = "/auto/Regional/TAVG/Text/"
@@ -26,23 +27,64 @@ def exists(l1, l2):
     return False 
 
 
+def add_missing_info_in_json(country_info):
+    
+    data_folder = "./remaining_data"
+    data_folder = os.path.join(data_folder,"missing_links.csv")
+    
+    missing_links = pd.read_csv(data_folder)
 
-def pars_file(web_content, web_content_2, regName, ):
+    idx_country = missing_links["region"].tolist().index(country_info["Name"])
+
+    correspondence = missing_links.at[idx_country, "region"] == country_info["Name"]
+
+    print("\n\n region correspondence: ",str(correspondence),"\n\n")
+
+    if not correspondence:
+        print("\n\n\n\nERRRRRRORORORORRRREEEEEEEEEEEEEEEEEEEEEEEEEEEE\n\n\n\n")
+        return
+    
+    if not pd.isna(missing_links.at[idx_country, "portion-continent"]):
+        country_info["portion-continent"] = missing_links.at[idx_country, "portion-continent"].split("/")[-1]
+    else:
+        country_info["portion-continent"] = "NaN"
+    
+    if not pd.isna(missing_links.at[idx_country, "continent"]):
+        country_info["continent"] = missing_links.at[idx_country, "continent"].split("/")[-1]
+    else:
+        country_info["continent"] = "NaN"
+    
+    if not pd.isna(missing_links.at[idx_country, "hemisphere"]):
+        country_info["hemisphere"] = missing_links.at[idx_country, "hemisphere"].split("/")[-1]
+    else:
+        country_info["hemisphere"] = "NaN"
+
+
+
+
+def pars_file(web_content, web_content_2, regName):
     
     country_info = {"LastUpdate": None, "Name": None, "LatitudeRange": None,
                     "LongitudeRange": None, "Area(Km^2)": None, "global_landArea(%)": None,
                     "Num_stations": None, "Num_observations": None,
-                    "absolute_temp(C)": None, "absTemp_unc(C)": None}
+                    "absolute_temp(C)": None, "absTemp_unc(C)": None, "region":None, "portion-continent":None,
+                    "continent": None, "hemisphere": None}
     
+    
+    
+    #Uncomment to create csv of missing links -> see main
+    '''
     portion_continent_list =["southern-asia","northem-asia","central-america"]
     continent_list = ["europe","asia","oceania","north-america","south-america","africa"]
     hemisphere_list = ["northern-hemisphere", "southern-hemisphere"]
-  
+    '''
     
     monthly_temp = None
     anomaly_table = None
     c = 0
     
+    #Uncomment to create csv of missing links -> see main
+    """
     url_regex = "http:\/\/\w+.\w+.\w+\/\w+\/\w+-*\w+"
     
     title = "Mean Rate of Change ( &deg;C / Century )"
@@ -55,40 +97,11 @@ def pars_file(web_content, web_content_2, regName, ):
     mean_rate_html_table = web_content_2[index_start_table: index_end_table]
 
     links_table = re.findall(url_regex, mean_rate_html_table)
-    
-    
+    """
     while True:
-        end_line = web_content_2.find("\n")
+        end_line = web_content.find("\n")
+        line = web_content[:end_line]
 
-        line = web_content_2[:end_line]
-        
-
-        break
-      
-    
-    
-    #print(links_table)
-    
-    """
- 
-    for link in links_table:
-
-        if link.split("/")[-1] in continent_list:
-            print("Continent: ", link)
-        
-        if link.split("/")[-1] in portion_continent_list:
-            print("Portion Continent: ", link)
-        
-        if link.split("/")[-1] in hemisphere_list:
-            print("Hemisphere: ", link)
-    """
-    #data_cols = {"region":regName, "portion-continet":None, "continent":None, "emisphere":None}
-    #missing_link_df = pd.DataFrame(data_cols)
-
-
-       
-       
-    """
         s1 = "This analysis was run on "
         s2 = "Name: "
         s3 = "Latitude Range: "
@@ -176,8 +189,15 @@ def pars_file(web_content, web_content_2, regName, ):
         print("\tWarning: Ragion Name Not Found!!!")
         country_info["Name"] = regName
 
+
+    add_missing_info_in_json(country_info)
+    
+    print("COUNTRY INFO\n:",country_info)
+
+
+    """
     # SAVE ALL DATA
-    data_folder = "./data_complete"
+    data_folder = "./remaining_data/data_new"
     data_folder = data_folder+"/"+country_info["Name"]
     os.makedirs(data_folder)
     anomaly_table.to_csv(
@@ -189,8 +209,10 @@ def pars_file(web_content, web_content_2, regName, ):
     f = open(path.join(data_folder, country_info["Name"]+"_info.json"), "w")
     f.write(json_f)
     f.close()
-"""
-    return links_table
+    """
+    #return links_table
+
+
 
 if __name__ == "__main__":
     #df = pd.read_csv("./remaining_data/remai")
@@ -241,13 +263,15 @@ if __name__ == "__main__":
        
         links_table = pars_file(webContent, webContent2, country_name)
 
-           
+        """
+        
+        #Uncomment to create the links of the missing data continents, emisphere, ec..
+    
         regions.append(country_name)
        
         portion_continent_list =["southern-asia","northem-asia","central-america"]
         continent_list = ["europe","asia","oceania","north-america","south-america","africa"]
         hemisphere_list = ["northern-hemisphere", "southern-hemisphere"]
-
 
         continents_tmp = []
         portion_continents_tmp=[]
@@ -273,8 +297,7 @@ if __name__ == "__main__":
 
         if  not exists(continents_tmp, continent_list):
             continents.append("NaN")
-            
-        
+             
         if  not exists(portion_continents_tmp, portion_continent_list ):
             portion_continents.append("NaN")
         
@@ -284,7 +307,7 @@ if __name__ == "__main__":
         if country_name == "Saint Pierre and Miquelon":
             continents.pop( continents.index(REGION_INFO+"south-america"))
         
-    """
+   
     missing_link_df = pd.DataFrame(columns=["region", "portion-continent", "continent", "hemisphere"] )
     missing_link_df["region"]=regions
     missing_link_df["portion-continent"]= portion_continents
