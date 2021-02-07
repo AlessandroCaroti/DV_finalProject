@@ -1,6 +1,4 @@
-body {
-  transform: scale(1.0);
-}
+
 /* MAP */
 
 #svg-map {
@@ -37,6 +35,7 @@ body {
   width: 70%;
   padding: 10px;
   align-items: center;
+  align-content: center;
   left: 50%;
   right: 50%;
 }
@@ -307,10 +306,6 @@ text.legend {
 
 
 /*-----------------------------------START STYLE TABLE-----------------------------------*/
-
-div span{
-  margin-left: 400px;
-}
 
 #table_container{
 

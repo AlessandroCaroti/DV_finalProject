@@ -1,7 +1,7 @@
  // da trovare modo per trovare min e max automaticamente 
  var min = -3.0;
  var max = +3.8;
- var width_legend = 350; // width of the legend axis
+ var width_legend = 400; // width of the legend axis
  var n_ticks = 11;
  var step_list = [];
  var step_color_list = [];
@@ -34,7 +34,6 @@ function set_colorScale(){
 
         ranges.add(colorScale.invertExtent(element)[0]);
         ranges.add(colorScale.invertExtent(element)[1]);
-        //console.log(colorScale.invertExtent(element))
     });
     
              
@@ -46,9 +45,7 @@ function set_colorScale(){
     
     // axis quantization
     let ticks = Array.from(ranges);
-    //let step = (max - min)/parseFloat(n_ticks);
 
-    //step_list = d3.range(min, max + step , step).map(d => parseFloat(d.toFixed(2)) );
     let step_bar_list = d3.range(0, width_legend +  width_legend/parseFloat(step_color_list.length), width_legend/parseFloat(step_color_list.length)).map(d => parseFloat(d.toFixed(2)) );
     
     var quantizeBarScale = d3.scaleQuantize()
@@ -60,7 +57,6 @@ function set_colorScale(){
                                         .tickFormat(d3.format(".2f"))
                                         
   
-    //console.log(quantizeBarScale.ticks(n_ticks));
     d3.select('.axis-anomaly')
               .attr("transform", "translate(" + (500 -width_legend / 2) +","+ 475  +" )")
               .call(anomaly_axis);

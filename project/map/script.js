@@ -328,10 +328,7 @@ function init_dropdown_menu(list_countries) {
     .attr("value", (d) => d);
 }
 
-// MAKE LEGEND
-function init_legend() {
-  return;
-}
+
 
 // UPDATE COUNTRY
 function changeCountry() {
