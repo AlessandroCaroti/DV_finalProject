@@ -73,18 +73,18 @@ def pars_file(web_content, web_content_2, regName):
     
     
     #Uncomment to create csv of missing links -> see main
-    '''
+    
     portion_continent_list =["southern-asia","northem-asia","central-america"]
     continent_list = ["europe","asia","oceania","north-america","south-america","africa"]
     hemisphere_list = ["northern-hemisphere", "southern-hemisphere"]
-    '''
+    
     
     monthly_temp = None
     anomaly_table = None
     c = 0
     
     #Uncomment to create csv of missing links -> see main
-    """
+    
     url_regex = "http:\/\/\w+.\w+.\w+\/\w+\/\w+-*\w+"
     
     title = "Mean Rate of Change ( &deg;C / Century )"
@@ -97,11 +97,12 @@ def pars_file(web_content, web_content_2, regName):
     mean_rate_html_table = web_content_2[index_start_table: index_end_table]
 
     links_table = re.findall(url_regex, mean_rate_html_table)
-    """
+    
     while True:
         end_line = web_content.find("\n")
         line = web_content[:end_line]
-
+        break
+        """
         s1 = "This analysis was run on "
         s2 = "Name: "
         s3 = "Latitude Range: "
@@ -209,8 +210,8 @@ def pars_file(web_content, web_content_2, regName):
     f = open(path.join(data_folder, country_info["Name"]+"_info.json"), "w")
     f.write(json_f)
     f.close()
-    
-    #return links_table
+    """
+    return links_table
 
 
 
@@ -262,8 +263,6 @@ if __name__ == "__main__":
         print("\n\n", country_name, "\n\n")
        
         links_table = pars_file(webContent, webContent2, country_name)
-
-        """
         
         #Uncomment to create the links of the missing data continents, emisphere, ec..
     
@@ -303,8 +302,10 @@ if __name__ == "__main__":
         
         if  not exists(hemispheres_tmp, hemisphere_list):  
             hemispheres.append("NaN")
-        
+        x=0
         if country_name == "Saint Pierre and Miquelon":
+            x+=1
+            print("NNNNNNNNN:",x)
             continents.pop( continents.index(REGION_INFO+"south-america"))
         
    
@@ -314,6 +315,6 @@ if __name__ == "__main__":
     missing_link_df["continent"]=continents
     missing_link_df["hemisphere"]= hemispheres
     missing_link_df.to_csv("./remaining_data/missing_links.csv")
-    """
+    
     print("ERROR({}):".format(len(error)), error)
    
