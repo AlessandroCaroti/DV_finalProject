@@ -281,6 +281,7 @@ function zoom_in(country) {
 
 function init_map_controls() {
   init_zoomBtns();
+  init_yearSpace();
 }
 
 function changeImage_view() {
@@ -316,6 +317,12 @@ function init_zoomBtns() {
       debug_log("ZOOM_OUT");
       map_container.transition().call(zoom.scaleBy, zoomOut_scale);
     });
+}
+
+function init_yearSpace() {
+  d3.select(".col-sm-2")
+    .select("path")
+    .attr("d", roundedFigure_1(200, -1, 200, 160, 30));
 }
 
 // funtion to move path in front of the charts
