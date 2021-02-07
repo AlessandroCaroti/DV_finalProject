@@ -32,9 +32,9 @@ def add_missing_info_in_json(country_info):
     
     
     data_folder = "./remaining_data/missing_links_2.csv"
-    print("oooooooooooooo")
-    missing_links = pd.read_csv(data_folder,error_bad_lines=False)
-    print("UUUUUUUUUUUUUUU")
+  
+    missing_links = pd.read_csv(data_folder)
+   
    
     idx_country = missing_links["region"].tolist().index(country_info["Name"])
 
