@@ -236,7 +236,7 @@ function init_map_controls() {
   init_yearSpace();
 }
 
-function changeImage_view() {
+function changeView() {
   console.log(zommed);
   if (zommed) {
     debug_log("RESET_ZOOM");
@@ -253,7 +253,7 @@ function init_zoomBtns() {
   d3.select("#zoom-reset")
     .select("rect")
     .on("click", function (event, b) {
-      changeImage_view();
+      changeView();
     });
 
   d3.select("#zoom-in")
