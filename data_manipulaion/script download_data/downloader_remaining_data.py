@@ -31,7 +31,7 @@ def exists(l1, l2):
 def add_missing_info_in_json(country_info):
     
     
-    data_folder = "./remaining_data/missing_links_2.csv"
+    data_folder = "./remaining_data/missing_links.csv"
   
     missing_links = pd.read_csv(data_folder)
    
@@ -76,7 +76,8 @@ def pars_file(web_content, web_content_2, regName):
     
     #Uncomment to create csv of missing links -> see main
     
-    portion_continent_list =["southern-asia","northem-asia","central-america"]
+    portion_continent_list =["southern-asia","central-america","south-eastern-asia","eastern-asia",
+                                "southern-africa","eastern-africa","northern-africa","western-africa","central-asia",]
     continent_list = ["europe","asia","oceania","north-america","south-america","africa"]
     hemisphere_list = ["northern-hemisphere", "southern-hemisphere"]
     
@@ -195,21 +196,21 @@ def pars_file(web_content, web_content_2, regName):
 
     add_missing_info_in_json(country_info)
     
-    print("COUNTRY INFO\n:",country_info)
+    print("\nCOUNTRY INFO\n:",country_info)
 
 
     
     # SAVE ALL DATA
-    data_folder = "./remaining_data/data_new"
-    data_folder = data_folder+"/"+country_info["Name"]
+    data_folder = "./remaining_data/general_data"
+    data_folder = data_folder+"/"+country_info["Name"]#country_name#
     os.makedirs(data_folder)
     anomaly_table.to_csv(
-        path.join(data_folder, country_info["Name"]+"_anomalyTable.csv"))
+        path.join(data_folder, country_info["Name"]+"_anomalyTable.csv"))# country_info["Name"]+"_anomalyTable.csv"))
     monthly_temp.to_csv(
-        path.join(data_folder, country_info["Name"]+"_monthlyAbsoluteTemperature.csv"))
+        path.join(data_folder,  country_info["Name"]+"_monthlyAbsoluteTemperature.csv"))#country_info["Name"]+"_monthlyAbsoluteTemperature.csv"))
 
     json_f = json.dumps(country_info)
-    f = open(path.join(data_folder, country_info["Name"]+"_info.json"), "w")
+    f = open(path.join(data_folder, country_info["Name"]+"_info.json"), "w")#country_info["Name"]+"_info.json"), "w")
     f.write(json_f)
     f.close()
     
@@ -270,7 +271,9 @@ if __name__ == "__main__":
         """
         regions.append(country_name)
        
-        portion_continent_list =["southern-asia","northem-asia","central-america"]
+        portion_continent_list =["southern-asia","central-america","south-eastern-asia","eastern-asia",
+                                "southern-africa","eastern-africa","northern-africa","western-africa","central-asia"]
+        
         continent_list = ["europe","asia","oceania","north-america","south-america","africa"]
         hemisphere_list = ["northern-hemisphere", "southern-hemisphere"]
 
@@ -309,28 +312,21 @@ if __name__ == "__main__":
         if  not exists(hemispheres_tmp, hemisphere_list):  
             hemispheres.append("NaN")
             hemispheres_tmp.append("NaN")
-        x=0
+   
         if country_name == "Saint Pierre and Miquelon":
-            x+=1
-            print("NNNNNNNNN:",x)
             continents.pop( continents.index(REGION_INFO+"south-america"))
+            #continents_tmp.pop( continents_tmp.index(REGION_INFO+"south-america"))
 
-        if not os.path.isfile("./remaining_data/missing_links_2.csv"):
-            pd.DataFrame(columns=['region', 'portion-continent', 'continent', 'hemisphere']).to_csv("./remaining_data/missing_links_2.csv",
+
+        missing_links_filename ="./remaining_data/missing_links.csv"
+        if not os.path.isfile(missing_links_filename):
+            pd.DataFrame(columns=['region', 'portion-continent', 'continent', 'hemisphere']).to_csv(missing_links_filename,
                                                                                                 index=False, header=True)
         
-        with open("./remaining_data/missing_links_2.csv", 'a', newline='', encoding='utf-8') as csvfile:
+        with open(missing_links_filename, 'a', newline='', encoding='utf-8') as csvfile:
             writer = csv.writer(csvfile, delimiter=',')
             writer.writerow(regions_tmp + portion_continents_tmp + continents_tmp + hemispheres_tmp)
-       
-   
-    missing_link_df = pd.DataFrame(columns=["region", "portion-continent", "continent", "hemisphere"] )
-    missing_link_df["region"]=regions
-    missing_link_df["portion-continent"]= portion_continents
-    missing_link_df["continent"]=continents
-    missing_link_df["hemisphere"]= hemispheres
-    missing_link_df.to_csv("./remaining_data/missing_links.csv")
-    """ 
-
+    
+        """
     print("ERROR({}):".format(len(error)), error)
    
