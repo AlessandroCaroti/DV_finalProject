@@ -89,16 +89,18 @@ function default_dataset(dataFile=""){
     d3.csv(csv_country)
       .then( (data_country) =>{
 
-        console.log(data_country)
+      
         parseDataAttributes(data_country);
-        createDefaultTable(data_country) 
+        console.log("C",data_country);
+        //createDefaultTable(data_country) 
     
           var csv_global = "/../../remaining_data/general_data/global-land/global-land_anomalyTable.csv";
         d3.csv(csv_global)
           .then( (data_global) =>{
-              //TODO: DA AGGIUSTARE
-              console.log(data_global)
+
+              
               parseDataAttributes(data_global);
+              console.log("G",data_global);
               
                 d3.json("/../../remaining_data/data_new/"+folder+"/"+dataFile+"_info.json")
                 .then( (info) =>{
@@ -108,24 +110,35 @@ function default_dataset(dataFile=""){
                   var portion_continent = info["portion-continent"];
                   var hemisphere = info["hemisphere"];
                   
+                  //case continet not null
+                
+                  
+                  if( !isNan(continent) && !isNan(hemisphere) && !isNan(portion_continent))
+                      readDataAllNonNull(continent,portion_continent,hemisphere, data_country, data_global)
+                  
+                  if( !isNan(continent) && isNan(hemisphere) && isNan(portion_continent)) readDataOnlyContinent(continent, data_country, data_global);  
+                  if( isNan(continent) && isNan(hemisphere) && !isNan(portion_continent)) readDataOnlyPortionContinent(portion_continent, data_country, data_global);
+                  if( isNan(continent) && !isNan(hemisphere) && isNan(portion_continent)) readDataOnlyContinent(hemisphere, data_country, data_global);
+                  
+                  if(isNan(continent) && !isNan(hemisphere) && !isNan(portion_continent)) readDataContinentNull(portion_continent,hemisphere, data_country, data_global);
+                  if(!isNan(continent) && isNan(hemisphere) && !isNan(portion_continent)) readDataHemisphereNull(continent,portion_continent, data_country, data_global);
+                  if(!isNan(continent) &&  !isNan(hemisphere) && isNan(portion_continent)) readDataPortionContinentNull(continent,hemisphere, data_country, data_global);
+                 
                   console.log("Continent: ", continent,"\nPortion Continent: ", portion_continent,"\nHemisphere: ", hemisphere);
 
-
-                  var csv_portion_continent = "/../../remaining_data/general_data/"+ portion_continent+"/"+portion_continent+"_anomalyTable.csv";
-                  var csv_hemisphere = "/../../remaining_data/general_data/"+ portion_continent+"/"+portion_continent+"_anomalyTable.csv";
-                  //TODO: CHECK WHERE THE DATA IS MISSING AND LOAD THE AVAILABLE DATA
-                })
+            
+                  
+                
 
             })
               .catch((error) =>{
                 console.log(error);
                 //alert("Unable To Load The Dataset!!");
                 throw(error);
-            })
-    
+              })
           })
-
-          
+    
+        })    
            
 }
 
@@ -140,9 +153,8 @@ function changeDataTable(){
      
      initBaselineAndInfo(dataFile);
 
-     console.log("Continent: ", continent);
-     console.log("Portion Continent: ", portion_continent);
-     console.log("Hemisphere: ", hemisphere);
+
+
      
      var folder;
   
