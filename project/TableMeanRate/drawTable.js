@@ -100,6 +100,22 @@ function default_dataset(dataFile=""){
           throw(error);
       })
     
+    var csv_global = "/../../remaining_data/general_data/global-land/global-land_anomalyTable.csv";
+    d3.csv(csv_global)
+      .then( (data_country) =>{
+
+        console.log(data_country)
+        parseDataAttributes(data_country);
+        createDefaultTable(data_country)
+
+      })
+        .catch((error) =>{
+          console.log(error);
+          //alert("Unable To Load The Dataset!!");
+          throw(error);
+      })
+    
+    
 
     d3.json("/../../remaining_data/data_new/"+folder+"/"+dataFile+"_info.json")
       .then( (info) =>{
