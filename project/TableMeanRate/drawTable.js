@@ -1,6 +1,6 @@
 
 const countries = '../../data/Countries.csv';
-//var continent, portion_continent, hemisphere;
+var continent, portion_continent, hemisphere;
 
 
 //Global Variables
@@ -23,9 +23,9 @@ function initGenericInfoCountry(dataFile){
   d3.json("/../../remaining_data/data_new/"+folder+"/"+dataFile+"_info.json")
     .then( (data =>{
         
-        continent = data["continent"];
-        portion_continent = data["portion-continent"];
-        hemisphere = data["hemisphere"];
+        window.continent = data["continent"];
+        window.portion_continent = data["portion-continent"];
+        window.hemisphere = data["hemisphere"];
         
       }))
 
@@ -79,36 +79,37 @@ function default_dataset(dataFile=""){
     else
         folder = dataFile;
     
-    initGenericInfoCountry(dataFile)
-    
-    var continent, portion_continent, hemisphere;
-    
-    initBaselineAndInfo(dataFile);
+    //nitGenericInfoCountry(dataFile);
+    initBaselineAndInfo(dataFile)
    
     //var csv = "/../../data/data_temp/"+folder+"/"+dataFile+"_anomalyTable.csv"
     var csv_country = "/../../remaining_data/data_new/"+folder+"/"+dataFile+"_anomalyTable.csv";
-    var csv_portion_continent = "/../../remaining_data/general_data/"+ portion_continent+"/"+portion_continent+"_anomalyTable.csv";
-    var csv_hemisphere = "/../../remaining_data/general_data/"+ portion_continent+"/"+portion_continent+"_anomalyTable.csv";
+
     //Di default c'è dataset 1
     d3.csv(csv_country)
-      
-    .then( (data) =>{
- 
-      console.log(data)
-      parseDataAttributes(data);
-      createDefaultTable(data)
+      .then( (data_country) =>{
 
-    })
-      .catch((error) =>{
-        console.log(error);
-        //alert("Unable To Load The Dataset!!");
-        throw(error);
-    })
+        console.log(data_country)
+        parseDataAttributes(data_country);
+        createDefaultTable(data_country)
 
-    console.log("Continent: ", continent);
-    console.log("Portion Continent: ", portion_continent);
-    console.log("Hemisphere: ", hemisphere);
-  
+      })
+        .catch((error) =>{
+          console.log(error);
+          //alert("Unable To Load The Dataset!!");
+          throw(error);
+      })
+    
+
+    d3.json("/../../remaining_data/data_new/"+folder+"/"+dataFile+"_info.json")
+      .then( (info) =>{
+
+        var csv_portion_continent = "/../../remaining_data/general_data/"+ portion_continent+"/"+portion_continent+"_anomalyTable.csv";
+        var csv_hemisphere = "/../../remaining_data/general_data/"+ portion_continent+"/"+portion_continent+"_anomalyTable.csv";
+        //TODO: CHECK WHERE THE DATA IS MISSING AND LOAD THE AVAILABLE DATA
+      })
+          
+           
 }
 
 
