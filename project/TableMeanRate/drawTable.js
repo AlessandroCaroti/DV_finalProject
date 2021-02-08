@@ -103,7 +103,7 @@ function default_dataset(dataFile=""){
     var csv_global = "/../../remaining_data/general_data/global-land/global-land_anomalyTable.csv";
     d3.csv(csv_global)
       .then( (data_country) =>{
-
+        //TODO: DA AGGIUSTARE
         console.log(data_country)
         parseDataAttributes(data_country);
         createDefaultTable(data_country)
