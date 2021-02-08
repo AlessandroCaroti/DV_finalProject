@@ -132,7 +132,7 @@ function getRowTable(data_2){
     return row
 }
 
-function createDefaultTable(data){
+function createDefaultTable(data, data_emisphere=null, data_continet=null, data_global=null){
 
     
 

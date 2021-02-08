@@ -23,9 +23,9 @@ function initGenericInfoCountry(dataFile){
   d3.json("/../../remaining_data/data_new/"+folder+"/"+dataFile+"_info.json")
     .then( (data =>{
         
-        window.continent = data["continent"];
-        window.portion_continent = data["portion-continent"];
-        window.hemisphere = data["hemisphere"];
+        continent = data["continent"];
+        portion_continent = data["portion-continent"];
+       hemisphere = data["hemisphere"];
         
       }))
 
@@ -102,6 +102,14 @@ function default_dataset(dataFile=""){
               
                 d3.json("/../../remaining_data/data_new/"+folder+"/"+dataFile+"_info.json")
                 .then( (info) =>{
+
+                   
+                  var continent = info["continent"];
+                  var portion_continent = info["portion-continent"];
+                  var hemisphere = info["hemisphere"];
+                  
+                  console.log("Continent: ", continent,"\nPortion Continent: ", portion_continent,"\nHemisphere: ", hemisphere);
+
 
                   var csv_portion_continent = "/../../remaining_data/general_data/"+ portion_continent+"/"+portion_continent+"_anomalyTable.csv";
                   var csv_hemisphere = "/../../remaining_data/general_data/"+ portion_continent+"/"+portion_continent+"_anomalyTable.csv";
