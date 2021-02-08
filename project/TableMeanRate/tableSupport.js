@@ -93,7 +93,7 @@ function table_data(data_country, data_global=null, data_hemisphere=null, data_c
     //data for each region
     var dataCountry50 = dataEvery50Years(data_country);
     //global data
-    //var dataGlobal50 = dataEvery50Years(data_global);
+    var dataGlobal50 = dataEvery50Years(data_global);
     var dataHemisphere50 = null;
     var dataContinent50 = null;
     var dataPartialContinent50 = null;

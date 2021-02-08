@@ -91,16 +91,15 @@ function default_dataset(dataFile=""){
 
       
         parseDataAttributes(data_country);
-        console.log("C",data_country);
-        //createDefaultTable(data_country) 
     
-          var csv_global = "/../../remaining_data/general_data/global-land/global-land_anomalyTable.csv";
+    
+        var csv_global = "/../../remaining_data/general_data/global-land/global-land_anomalyTable.csv";
         d3.csv(csv_global)
           .then( (data_global) =>{
 
               
               parseDataAttributes(data_global);
-              console.log("G",data_global);
+           
               
                 d3.json("/../../remaining_data/data_new/"+folder+"/"+dataFile+"_info.json")
                 .then( (info) =>{
