@@ -127,8 +127,9 @@ input#selectCountry {
   position: absolute;
   width: auto;
   height: auto;
-  padding: 10px;
-  font-size: 11px sans-serif;
+  padding: 5px;
+  text-align: center;
+  font-size: 11px;
   border: 1px solid gray;
   background: white;
   border-radius: 8px;
@@ -137,6 +138,15 @@ input#selectCountry {
   opacity: 0.95;
 }
 
+.tooltip-name{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.tooltip-anomaly{
+  font-size: 16px;
+  text-align: center;
+}
 
 /* TAB MENU LINECHART */
 

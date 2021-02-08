@@ -88,7 +88,8 @@ function update_colors() {
     var element = document.getElementById(d.Country);
 
     if (typeof element != "undefined" && element != null) {
-      d3.select(element).style("fill", colorScale(d["ANOMALY"]));
+      d3.select(element).style("fill", colorScale(d["ANOMALY"]))
+                        .attr("anomaly", d["ANOMALY"]);
     }
   });
 }
@@ -112,12 +113,23 @@ function country_events() {
   map_container
     .selectAll(".country")
     .on("mouseover", function (event, b) {
+      let anomaly = d3.select(this).attr("anomaly");
+
       // show tooltip
       d3.select(".tooltip-map")
         .style("top", event.pageY + 13 + "px")
         .style("left", event.pageX + 13 + "px")
         .style("display", "block")
+        .select(".tooltip-name")
         .html(b.properties.name);
+
+      d3.select(".tooltip-map").select(".tooltip-anomaly").datum(anomaly)
+        .html(d =>{
+          if (typeof d != "undefined"){
+              return parseFloat(d).toFixed(2) + " °C";
+          }
+          return "unknown"
+        });
     })
     .on("mousemove", function (event, b) {
       // update position tooltip
