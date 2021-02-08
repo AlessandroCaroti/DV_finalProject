@@ -22,7 +22,8 @@ function getAnnualData(data){
     data.forEach((d) => {
         
         if( d.Month == 5  ){
-            d["region"] = document.getElementById('dataset').value;
+            
+            console.log(d.region)
             data_annual.push(d);
         }
     });
@@ -98,6 +99,17 @@ function table_data(data_country, data_global=null, data_hemisphere=null, data_c
     var dataContinent50 = null;
     var dataPartialContinent50 = null;
     
+    var data_table = [];
+    var row={}
+    
+    row["Regions"] = dataCountry50 [0].region;
+
+    dataCountry50.forEach((d) => row[ String(d.Year) ] = d.annual_value.toFixed(2))
+    data_table.push(row)
+    
+    
+
+    
     if( data_hemisphere != null )
         var dataHemisphere50 = dataEvery50Years(data_hemisphere);
      
@@ -109,14 +121,7 @@ function table_data(data_country, data_global=null, data_hemisphere=null, data_c
     
 
  
-    var data_table = [];
-    var row={}
-    
-    row["Regions"] = dataCountry50 [0].region;
-
-    dataCountry50.forEach((d) => row[ String(d.Year) ] = d.annual_value.toFixed(2))
-    data_table.push(row)
-    
+   
     
     for(var i=0; i<data_table.length; i++){
         
@@ -154,7 +159,7 @@ function getRowTable(data_2){
     return row
 }
 
-function createDefaultTable(data_country, data_hemisphere=null, data_continent=null, data_global=null, data_partial_continet = null){
+function createDefaultTable(data_country, data_hemisphere=null, data_continent=null, data_global, data_partial_continet = null){
 
     
 
@@ -175,7 +180,7 @@ function createDefaultTable(data_country, data_hemisphere=null, data_continent=n
     
     //get data for the table and the columns for the header
 
-    var data_table = table_data(data_country);
+    var data_table = table_data(data_country, data_global=data_global);
     console.log("UPDATE",data_table);
 
     var columns = Object.keys(data_table[0]);
@@ -300,13 +305,16 @@ function readDataAllNonNull(continent,portion_continent,hemisphere, data_country
     
     d3.csv(csv_continent)
       .then( (data_continent) =>{
-              
+        parseDataAttributes(data_continent, continent);
+        
         d3.csv(csv_portion_continent)
         .then((data_portion_continent)=>{
-          
+            
+          parseDataAttributes(data_portion_continent, portion_continent );
           d3.csv(csv_hemisphere)
             .then((data_hemisphere)=>{          
                 
+                parseDataAttributes(data_hemisphere, hemisphere);
                 createDefaultTable(data_country, data_hemisphere, 
                                     data_continent, data_global, data_portion_continent);
             })
@@ -325,10 +333,12 @@ function readDataContinentNull(portion_continent,hemisphere, data_country, data_
   
         d3.csv(csv_portion_continent)
         .then((data_portion_continent)=>{
-        
-          d3.csv(csv_hemisphere)
+            
+            parseDataAttributes(data_portion_continent, portion_continent );
+            d3.csv(csv_hemisphere)
             .then((data_hemisphere)=>{          
                 
+                parseDataAttributes(data_hemisphere, hemisphere);
                 createDefaultTable(data_country, data_hemisphere, 
                                     null, data_global, data_portion_continent);
             })
@@ -346,10 +356,12 @@ function readDataHemisphereNull(continent,portion_continent, data_country, data_
     
     d3.csv(csv_continent)
       .then( (data_continent) =>{
-              
+           
+        parseDataAttributes(data_continent, continent );
         d3.csv(csv_portion_continent)
         .then((data_portion_continent)=>{
 
+            parseDataAttributes(data_portion_continent, portion_continent );
             createDefaultTable(data_country, null, data_continent, data_global, data_portion_continent);
 
         })
@@ -364,10 +376,12 @@ function readDataPortionContinentNull(continent,hemisphere, data_country, data_g
     
      d3.csv(csv_continent)
         .then((data_continent)=>{
-          
+           
+            parseDataAttributes(data_continent, continent );
             d3.csv(csv_hemisphere)
                 .then((data_hemisphere)=>{          
-                console.log("HAHHAHAHAHAHA", data_hemisphere)
+                
+                parseDataAttributes(data_hemisphere, hemisphere);
                 createDefaultTable(data_country, data_hemisphere, 
                                     data_continent, data_global, null);
             })
@@ -384,7 +398,8 @@ function readDataOnlyContinent(continent, data_country, data_global){
     
      d3.csv(csv_continent)
         .then((data_continent)=>{
-          
+            
+            parseDataAttributes(data_continent, continent);
             createDefaultTable(data_country, null, data_continent, data_global, null);  
 
         })
@@ -396,7 +411,8 @@ function readDataOnlyPortionContinent(portion_continent, data_country, data_glob
     
      d3.csv(csv_portion_continent)
         .then((data_portion_continent)=>{
-          
+            
+            parseDataAttributes(data_portion_continent, portion_continent);
             createDefaultTable(data_country, null, null, data_global, data_portion_continent);  
 
         })
@@ -409,7 +425,8 @@ function readDataOnlyHemisphere(hemisphere, data_country, data_global){
     
      d3.csv(csv_hemisphere)
         .then((data_hemisphere)=>{
-          
+            
+            parseDataAttributes(data_hemisphere, hemisphere);
             createDefaultTable(data_country, data_hemisphere, null, data_global, null);  
 
         })

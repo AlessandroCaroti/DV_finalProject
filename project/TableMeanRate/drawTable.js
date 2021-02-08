@@ -90,7 +90,7 @@ function default_dataset(dataFile=""){
       .then( (data_country) =>{
 
       
-        parseDataAttributes(data_country);
+        parseDataAttributes(data_country,dataFile);
     
     
         var csv_global = "/../../remaining_data/general_data/global-land/global-land_anomalyTable.csv";
@@ -98,7 +98,7 @@ function default_dataset(dataFile=""){
           .then( (data_global) =>{
 
               
-              parseDataAttributes(data_global);
+              parseDataAttributes(data_global,"global-land");
            
               
                 d3.json("/../../remaining_data/data_new/"+folder+"/"+dataFile+"_info.json")

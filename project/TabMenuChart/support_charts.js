@@ -72,7 +72,7 @@ function initBaselineAndInfo(dataFile){
 
 // parse the attribitues useful for the chart and add the baseline
 // to the annual_value and ten_years_value
-function parseDataAttributes(data){
+function parseDataAttributes(data, region="NaN"){
 
     data.forEach(d => {
         
@@ -82,6 +82,7 @@ function parseDataAttributes(data){
       d.annual_value = baseline + parseFloat(d["Annual Anomaly"]);
       d.ten_years_value =  baseline + parseFloat(d["Ten-year Anomaly"])
       d.ten_years_unc =  parseFloat(d["Ten-year Unc."])
+      d["region"] = region;
       
     
     })
