@@ -88,7 +88,7 @@ function getYearTemperatures(row_table){
 // Return a table in which the keys are the Region and all the years
 // Each row contains the name of the country (or cointient, or emisphere or global) and the annual average temperature
 // Each row correspond to a csv (specific countri, emisphere, continet, global)
-function table_data(data_country, data_global=null, data_hemisphere=null, data_continent=null, data_partial_continet = null){
+function table_data(data_country, data_hemisphere=null, data_continent=null, data_global=null,  data_partial_continent = null){
 
     
     //data for each region
@@ -97,30 +97,50 @@ function table_data(data_country, data_global=null, data_hemisphere=null, data_c
     var dataGlobal50 = dataEvery50Years(data_global);
     var dataHemisphere50 = null;
     var dataContinent50 = null;
-    var dataPartialContinent50 = null;
+    var dataPortionContinent50 = null;
     
     var data_table = [];
-    var row={}
     
-    row["Regions"] = dataCountry50 [0].region;
-
+    var row={}
+    row["Regions"] = dataCountry50[0].region;
     dataCountry50.forEach((d) => row[ String(d.Year) ] = d.annual_value.toFixed(2))
     data_table.push(row)
     
+    row={}
+    row["Regions"] = dataGlobal50[0].region;
+    dataGlobal50.forEach((d) => row[ String(d.Year) ] = d.annual_value.toFixed(2))
+    data_table.push(row)
     
+    console.log("DARA: ", data_hemisphere);
 
     
-    if( data_hemisphere != null )
-        var dataHemisphere50 = dataEvery50Years(data_hemisphere);
-     
-    if( data_continent != null)
-        var dataContinent50 = dataEvery50Years(data_continent);
-    
-    if( data_partial_continet != null)
-        var dataPartialContinent50 = dataEvery50Years(data_partial_continet);
-    
+    if( data_hemisphere != null ){
+        row={}
+        row["Regions"] = dataHemisphere50[0].region;
+        dataHemisphere50 = dataEvery50Years(data_hemisphere);
+        dataHemisphere50.forEach((d) => row[ String(d.Year) ] = d.annual_value.toFixed(2))
+        data_table.push(row)
+        
 
- 
+    }
+
+    if( data_continent != null){
+        
+        row={}
+        row["Regions"] = dataContinent50[0].region;
+        dataContinent50 = dataEvery50Years(data_continent);
+        dataContinent50.forEach((d) => row[ String(d.Year) ] = d.annual_value.toFixed(2))
+        data_table.push(row)
+    }
+
+    if( data_partial_continet != null){
+
+        row={}
+        row["Regions"] = dataPortionContinent50[0].region;
+        dataPortionContinent50 = dataEvery50Years(data_partial_continent);
+        dataPortionContinent50.forEach((d) => row[ String(d.Year) ] = d.annual_value.toFixed(2));
+        data_table.push(row);
+    }
    
     
     for(var i=0; i<data_table.length; i++){
@@ -159,7 +179,7 @@ function getRowTable(data_2){
     return row
 }
 
-function createDefaultTable(data_country, data_hemisphere=null, data_continent=null, data_global, data_partial_continet = null){
+function createDefaultTable(data_country, data_hemisphere=null, data_continent=null, data_global=null,  data_partial_continent = null){
 
     
 
@@ -180,7 +200,9 @@ function createDefaultTable(data_country, data_hemisphere=null, data_continent=n
     
     //get data for the table and the columns for the header
 
-    var data_table = table_data(data_country, data_global=data_global);
+    var data_table = table_data(data_country, data_global=data_global, data_hemisphere=data_hemisphere, 
+                                    data_continent=data_continent, data_partial_continet = data_partial_continent);
+
     console.log("UPDATE",data_table);
 
     var columns = Object.keys(data_table[0]);
