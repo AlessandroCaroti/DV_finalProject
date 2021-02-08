@@ -194,7 +194,7 @@ def pars_file(web_content, web_content_2, regName):
         country_info["Name"] = regName
 
 
-    add_missing_info_in_json(country_info)
+    #add_missing_info_in_json(country_info)
     
     print("\nCOUNTRY INFO\n:",country_info)
 
@@ -202,15 +202,15 @@ def pars_file(web_content, web_content_2, regName):
     
     # SAVE ALL DATA
     data_folder = "./remaining_data/general_data"
-    data_folder = data_folder+"/"+country_info["Name"]#country_name#
+    data_folder = data_folder+"/"+country_name#country_name#
     os.makedirs(data_folder)
     anomaly_table.to_csv(
-        path.join(data_folder, country_info["Name"]+"_anomalyTable.csv"))# country_info["Name"]+"_anomalyTable.csv"))
+        path.join(data_folder, country_name+"_anomalyTable.csv"))# country_info["Name"]+"_anomalyTable.csv"))
     monthly_temp.to_csv(
-        path.join(data_folder,  country_info["Name"]+"_monthlyAbsoluteTemperature.csv"))#country_info["Name"]+"_monthlyAbsoluteTemperature.csv"))
+        path.join(data_folder,  country_name+"_monthlyAbsoluteTemperature.csv"))#country_info["Name"]+"_monthlyAbsoluteTemperature.csv"))
 
     json_f = json.dumps(country_info)
-    f = open(path.join(data_folder, country_info["Name"]+"_info.json"), "w")#country_info["Name"]+"_info.json"), "w")
+    f = open(path.join(data_folder, country_name+"_info.json"), "w")#country_info["Name"]+"_info.json"), "w")
     f.write(json_f)
     f.close()
     
@@ -220,7 +220,7 @@ def pars_file(web_content, web_content_2, regName):
 
 if __name__ == "__main__":
     #df = pd.read_csv("./remaining_data/remai")
-    df = pd.read_csv("./data/table_remaining_data.csv")
+    df = pd.read_csv("./data/table_general_data.csv")
     error = []
 
 
