@@ -215,13 +215,13 @@ function createDefaultTable(data_country, data_hemisphere=null, data_continent=n
     }
 
  
-	var header = thead.append("tr")
-		              .selectAll("th")
-		              .data(columns)
-		              .enter()
-                      .append("th")
-                      .attr("class","header_table")
-			          .text((d) => d);
+	thead.append("tr")
+		 .selectAll("th")
+		 .data(columns)
+		 .enter()
+         .append("th")
+         .attr("class","header_table")
+		 .text((d) => d);
 		
     
     var rows = tbody.selectAll("tr").data(data_table);
@@ -247,11 +247,11 @@ function createDefaultTable(data_country, data_hemisphere=null, data_continent=n
     var columns = tbody.selectAll("tr")
                         .selectAll("td")
                         .data(function(row){
-                                
+                       
                             return columns.map(function(d, i){
                                                 return {i: d, value: row[d]};
                                               
-                                                });
+                                             });
                         })
                                        
                       
