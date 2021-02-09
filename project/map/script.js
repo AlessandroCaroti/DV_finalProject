@@ -86,30 +86,36 @@ function drawGlobeBackground() {
 }
 
 function update_colors(temperatures) {
+
   // define the transition
   var temp_transition = d3.transition()
                             .duration(500)
                             .ease(d3.easeLinear);
 
-
-  var countries = map_container.selectAll("path.country")
-
-  // set to unkown anomaly each country
-  countries.transition(temp_transition)
-            .style("fill", unknown_temp)
-            .attr("anomaly", "NaN");
+  var updated_countries = new Set();
 
   // set new anomalies
   temperatures.forEach(function (d) {
     var element = document.getElementById(d.Country);
-
+    
     if (typeof element != "undefined" && element != null) {
+
+      updated_countries.add(d.Country);
+      // update anomaly
       d3.select(element).transition(temp_transition)
                         .style("fill", colorScale(d["ANOMALY"]))
                         .attr("anomaly", d["ANOMALY"]);
     }
     
   });
+
+   // set to unkown anomaly each country with no data
+   var countries = map_container.selectAll("path.country")
+                                .filter(function(d) {return !updated_countries.has(d.properties.name); });
+
+   countries.transition(temp_transition)
+                .style("fill", unknown_temp )
+                .attr("anomaly", "NaN");
 }
 
 function country_events() {

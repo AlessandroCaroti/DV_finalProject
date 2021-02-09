@@ -12,7 +12,7 @@ TO DO:
 -cambiare il cursore sullo slider
 -fare i tooltips di simo più compatti
 -fare in modo che la mappa occupi tutta la larghezza della schermo
--fare i contorni degli stati proporzionali allo zoom
+-fare i contorni degli stati proporzionali allo zoom, anche lo spessore della griglia
 -se non da problemi gestire l'hover dei paese con i css
 
 TOFIX:
