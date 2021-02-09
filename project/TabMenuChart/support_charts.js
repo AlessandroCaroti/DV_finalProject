@@ -82,6 +82,9 @@ function parseDataAttributes(data, region="NaN"){
       d.annual_value = baseline + parseFloat(d["Annual Anomaly"]);
       d.ten_years_value =  baseline + parseFloat(d["Ten-year Anomaly"])
       d.ten_years_unc =  parseFloat(d["Ten-year Unc."])
+      
+     // res = region.split("-");
+      //console.log("RES: ", res);
       d["region"] = region;
       
     

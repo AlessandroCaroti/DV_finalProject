@@ -1,7 +1,7 @@
 
 //------------EVENTS HTML ELEMENTS----------------------------------
 
-const countries = 'remaining_data/data_new';
+const countries = '../../remaining_data/data_new/Countries.csv';
 
 
 function click_tab(evt, graphic_name) {

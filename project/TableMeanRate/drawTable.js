@@ -1,5 +1,5 @@
 
-const countries = '../../data/Countries.csv';
+const countries = '../../remaining_data/data_new/Countries.csv'
 var continent, portion_continent, hemisphere;
 
 
