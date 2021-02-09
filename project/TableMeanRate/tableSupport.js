@@ -1,14 +1,20 @@
 // function support for the table
 
 
-//Global variable
+//Global variables
 var years = ["1750","1800","1850","1900","1950","2000","2020"];
+
+var full_width = 900
+var margin_table = {top: 10, right: 10, bottom: 10, left: 20};
+var width_table = full_width - margin_table.left - margin_table.right;
+var height_table = full_width*9/16 - margin_table.top - margin_table.bottom;
 
 
 function isNan(json_field){
 
     return json_field == "NaN";
 }
+
 
 //get annual average data, saved at every june
 function getAnnualData(data){
@@ -38,6 +44,7 @@ function existYear(data, year){
     
     return x;
 }
+
 
 //Get data every 50 years with also the 2019 at the end
 function dataEvery50Years(data){
@@ -82,13 +89,24 @@ function getYearTemperatures(row_table){
 }
 
 
+function fisrtLetterUpperCase(name){
+    return  name.charAt(0).toUpperCase()+ name.slice(1);
+}
+
 
 
 function addRowTable(dataRegion50, data_region, data_table){
 
     var row={}
     dataRegion50 = dataEvery50Years(data_region);
-    row["Regions"] = dataRegion50[0].region;
+    
+    res = dataRegion50[0].region.split("-");
+    var regionName;
+    if( res.length == 2) regionName= fisrtLetterUpperCase(res[0])+"-"+fisrtLetterUpperCase(res[1]);
+    else
+        regionName = fisrtLetterUpperCase(res[0])
+    
+    row["Regions"] = regionName;
     dataRegion50.forEach((d) => row[ String(d.Year) ] = d.annual_value.toFixed(2))
     data_table.push(row)
 
@@ -111,16 +129,19 @@ function table_data(data_country, data_hemisphere=null, data_continent=null, dat
     
     var data_table = [];
     
+    //COUNTRY
     addRowTable(dataCountry50, data_country, data_table);
     
+    // CONTINENT IF IS AVAILABLE
     if( data_continent != null) addRowTable(dataContinent50, data_continent, data_table);
-        
+    
+    // HEMISPHERE IF IS AVAILABLE
     if( data_hemisphere != null ) addRowTable(dataHemisphere50, data_hemisphere, data_table);
     
-
+    // PARTIAL CONTINENT IF IS AVAILABLE
     if( data_partial_continent != null) addRowTable(dataPortionContinent50, data_partial_continent, data_table);
 
-    //global data
+    //GLOBAL DATA
     addRowTable(dataGlobal50, data_global, data_table);
     
     for(var i=0; i<data_table.length; i++){

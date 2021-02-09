@@ -282,10 +282,6 @@ text.legend {
 
 /*-----------------------------------START STYLE TABLE-----------------------------------*/
 
-div span{
-  margin-left: 400px;
-}
-
 #table_container{
 
   width: 900px;
@@ -300,7 +296,9 @@ div span{
 
 .mean_rate{
     margin: auto;
-    width: 70%;
+    width: 90%;
+    height: 55%;
+
 }
 
 /* Zebra striping */
@@ -320,8 +318,8 @@ th {
 
 td, th { 
   padding: 6px; 
-  border: 1px solid #ccc; 
-  text-align: left; 
+  border: 1px solid #ccc;
+  border-radius: 2px; 
 }
 
 

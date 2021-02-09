@@ -3,34 +3,6 @@ const countries = '../../remaining_data/data_new/Countries.csv'
 var continent, portion_continent, hemisphere;
 
 
-//Global Variables
-var full_width = 900
-var margin_table = {top: 40, right: 70, bottom: 30, left: 50};
-var width_table = full_width - margin_table.left - margin_table.right;
-var height_table = full_width*9/16 - margin_table.top - margin_table.bottom;
-
-
-function initGenericInfoCountry(dataFile){
-
-  var folder;
-  //var continent, portion_continent, hemisphere;
-   
-  if( dataFile.charAt(dataFile.length  - 1) == '.' ) folder = dataFile.slice(0,-1);
-  else
-      folder = dataFile;
-  
- 
-  d3.json("/../../remaining_data/data_new/"+folder+"/"+dataFile+"_info.json")
-    .then( (data =>{
-        
-        continent = data["continent"];
-        portion_continent = data["portion-continent"];
-       hemisphere = data["hemisphere"];
-        
-      }))
-
-}
-
 
 function loadData_table(){ 
     
@@ -41,13 +13,12 @@ function loadData_table(){
           var i = 0;
           data.forEach( d => {
 
-            var dropdown = document.getElementById("dataset");
-            
+            var dropdown = document.getElementById("dataset");   
             var option =  document.createElement("option");
             option.setAttribute("value", d.Country);
             option.innerHTML = d.Country;
             dropdown.append(option)
-            if( option.value == "Guinea"){
+            if( option.value == "Italy"){
               dropdown.selectedIndex = i;
               dropdown.options[i].selected = true;
               // set Italy default dataset
@@ -78,14 +49,12 @@ function default_dataset(dataFile=""){
     if( dataFile.charAt(dataFile.length  - 1) == '.' ) folder = dataFile.slice(0,-1);
     else
         folder = dataFile;
-    
-    //nitGenericInfoCountry(dataFile);
+
     initBaselineAndInfo(dataFile)
    
-    //var csv = "/../../data/data_temp/"+folder+"/"+dataFile+"_anomalyTable.csv"
+
     var csv_country = "/../../remaining_data/data_new/"+folder+"/"+dataFile+"_anomalyTable.csv";
 
-    //Di default c'è dataset 1
     d3.csv(csv_country)
       .then( (data_country) =>{
 
