@@ -9,6 +9,7 @@ var projection;
 var map_container;
 var colorsRange = ["rgb(5, 48, 97)", "white", "rgb(103, 0, 31)"];
 var colorScale;
+var unknown_temp = "#999999" // color indicating there is no data for such country in that year
 //var colorsRange = ["blue", "white", "red"];
 
 var geoGenerator;
@@ -62,9 +63,6 @@ function drawMap(world) {
   // Draw gridlines
   drawGridlines();
 
-  //Associate to each county a color proportionate to it's anomaly
-  update_colors();
-
   //Define the events of the countries(Es, mouseover, click...)
   country_events();
 }
@@ -83,14 +81,23 @@ function drawGlobeBackground() {
     .attr("d", geoGenerator);
 }
 
-function update_colors() {
-  tmp_data.forEach(function (d) {
+function update_colors(temperatures) {
+
+  var countries = map_container.selectAll("path.country")
+
+  // set to unkown anomaly each country
+  countries.style("fill", unknown_temp)
+            .attr("anomaly", "NaN");
+  
+  // set new anomalies
+  temperatures.forEach(function (d) {
     var element = document.getElementById(d.Country);
 
     if (typeof element != "undefined" && element != null) {
       d3.select(element).style("fill", colorScale(d["ANOMALY"]))
                         .attr("anomaly", d["ANOMALY"]);
     }
+    
   });
 }
 
@@ -125,7 +132,7 @@ function country_events() {
 
       d3.select(".tooltip-map").select(".tooltip-anomaly").datum(anomaly)
         .html(d =>{
-          if (typeof d != "undefined"){
+          if (typeof d != "undefined" && d != null && d != "NaN"){
               return parseFloat(d).toFixed(2) + " °C";
           }
           return "unknown"
@@ -350,19 +357,22 @@ function changeCountry() {
 function load_tempYear(temp_file) {
   d3.csv(temp_file)
     .then(function (data) {
-      console.log("LOAD TEMP");
+      console.log("LOAD TEMP: " + temp_file);
 
       data.forEach((d) => {
         d.ANOMALY = parseFloat(d.Anomaly);
       });
-      tmp_data = data;
-      load_map();
+
+      //Associate to each county a color proportionate to it's anomaly
+      update_colors(data);
     })
     .catch(function (error) {
       console.log(error);
       throw error;
     });
 }
+
+
 
 function load_map() {
   d3.json(map_file)
@@ -388,13 +398,18 @@ function load_map() {
 //                   DOVE INIZIA TUTTO                    //
 
 function init_page() {
-  set_colorScale();
+
+  // load map
+  load_map();
 
   load_tempYear(tmp_file_prefix + "2019" + tmp_file_suffix);
 
-  // trovare modo automatico per trovare min e max
-  init_slider(1743, 2020);
+  // set colorscale and  legend
+  set_colorScale();
   draw_legend();
 
+  // trovare modo automatico per trovare min e max
+  init_slider(1743, 2020);
+  
   init_map_controls();
 }
