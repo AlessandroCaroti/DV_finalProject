@@ -251,17 +251,16 @@ function createDefaultTable(data_country, data_hemisphere=null, data_continent=n
                 return "start_value_table";
 
             if( d.i == years[idx_year] && isNaN(d.value)){
-
+                
                 count_nan++;
                 idx_year++;
                 previous_idx = i; 
-                console.log(i)
+                
             }
 
             if(d.i == years[idx_year] && !isNaN(d.value) && d.value != columns_head[0] ) 
             if( previous_idx == (i-1)){
-                    console.log("shshssh")
-                    console.log(d)
+            
                     count_nan = 0;
                     idx_year=0;
                     return "start_value_table";
@@ -338,7 +337,7 @@ function UpdateTable(data_country, data_hemisphere=null, data_continent=null, da
     .attr("class", function(d,i){
 
         if(d.i == columns_head[0]) return "region_cell";
-        
+
         if(d.i == years[0] && !isNaN(d.value) && d.value != columns_head[0])
             return "start_value_table";
 
@@ -347,13 +346,11 @@ function UpdateTable(data_country, data_hemisphere=null, data_continent=null, da
             count_nan++;
             idx_year++;
             previous_idx = i; 
-            console.log(i)
         }
 
         if(d.i == years[idx_year] && !isNaN(d.value) && d.value != columns_head[0] ) 
         if( previous_idx == (i-1)){
-                console.log("shshssh")
-                console.log(d)
+               
                 count_nan = 0;
                 idx_year=0;
                 return "start_value_table";
