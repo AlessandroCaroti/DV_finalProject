@@ -21,9 +21,19 @@ function readDataAllNonNull(continent,portion_continent,hemisphere, data_country
                 if(update) UpdateTable(data_country, data_hemisphere, data_continent, data_global, data_portion_continent);
                 else
                     createDefaultTable(data_country, data_hemisphere, data_continent, data_global, data_portion_continent);
-            })
+            }).catch((error) =>{
+                console.log(error);
+                throw(error);
+              })
 
-        })
+        }).catch((error) =>{
+            console.log(error);
+            throw(error);
+          })
+
+      }).catch((error) =>{
+        console.log(error);
+        throw(error);
       })
 
 
@@ -47,9 +57,15 @@ function readDataContinentNull(portion_continent,hemisphere, data_country, data_
                 if(update) UpdateTable(data_country, data_hemisphere, null, data_global, data_portion_continent);
                 else
                     createDefaultTable(data_country, data_hemisphere, null, data_global, data_portion_continent);
-            })
+            }).catch((error) =>{
+                console.log(error);
+                throw(error);
+              })
 
-        })
+        }).catch((error) =>{
+            console.log(error);
+            throw(error);
+          })
 
 
 }
@@ -74,7 +90,13 @@ function readDataHemisphereNull(continent,portion_continent, data_country, data_
             else
                 createDefaultTable(data_country, null, data_continent, data_global, data_portion_continent);
 
-        })
+        }).catch((error) =>{
+            console.log(error);
+            throw(error);
+          })
+      }).catch((error) =>{
+        console.log(error);
+        throw(error);
       })
 
 }
@@ -97,9 +119,15 @@ function readDataPortionContinentNull(continent,hemisphere, data_country, data_g
                 if(update) UpdateTable(data_country, data_hemisphere, data_continent, data_global, null);
                 else
                     createDefaultTable(data_country, data_hemisphere, data_continent, data_global, null);
-            })
+            }).catch((error) =>{
+                console.log(error);
+                throw(error);
+              })
 
-        })
+        }).catch((error) =>{
+            console.log(error);
+            throw(error);
+          })
      
 }
 
@@ -119,7 +147,11 @@ function readDataOnlyContinent(continent, data_country, data_global,update=false
             else
                 createDefaultTable(data_country, null, data_continent, data_global, null);  
 
-        })
+        }).catch((error) =>{
+            console.log(error);
+            throw(error);
+          })
+     
      
 }
 function readDataOnlyPortionContinent(portion_continent, data_country, data_global, update=false){
@@ -136,7 +168,11 @@ function readDataOnlyPortionContinent(portion_continent, data_country, data_glob
             else
                 createDefaultTable(data_country, null, null, data_global, data_portion_continent);  
 
-        })
+        }).catch((error) =>{
+            console.log(error);
+            throw(error);
+          })
+     
      
 }
 
@@ -153,6 +189,9 @@ function readDataOnlyHemisphere(hemisphere, data_country, data_global,update=fal
             else
                 createDefaultTable(data_country, data_hemisphere, null, data_global, null);  
 
-        })
-     
+        }).catch((error) =>{
+            console.log(error);
+            throw(error);
+          })
+       
 }

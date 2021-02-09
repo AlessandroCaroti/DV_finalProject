@@ -202,42 +202,49 @@ function createDefaultTable(data_country, data_hemisphere=null, data_continent=n
                       .attr("class","header_table")
 			          .text((d) => d);
 		
-    var rows = tbody.selectAll("tr")
-                    .data(data_table)
-                    .enter()
-                    .append("tr")
-                    .attr("class","rows_table")
-                    .on("mouseover", function(d){
-                        
-                        
-                        d3.select(this)
-                          .style("background-color", "#fff2cc");
-                    })
-                    .on("mouseout", function(d){
-                        
-                        d3.select(this)
-                        .style("background-color","transparent");
-                    });
     
+    var rows = tbody.selectAll("tr").data(data_table);
 
-    var cells = rows.selectAll("td")
-                    .data(function(row){
-                        return columns.map(function(d, i){
-                           
-                            return {i: d, value: row[d]};
-                        });
+
+    rows.enter().append("tr")
+                .attr("class","rows_table")
+                .on("mouseover", function(d){
+                                          
+                    d3.select(this)
+                    .style("background-color", "#fff2cc");
                     })
-                    .enter()
-                    .append("td")
-                    .attr("class","cells_table")
-                    .html(function(d){ 
-                        
-                        if( String(d.value) == "NaN" ) return "-";
-                        else
-                        return d.value;
+                                      
+                .on("mouseout", function(d){
+                                                  
+                    d3.select(this)
+                      .style("background-color","transparent");
                     });
+                      
+   
     
-    rows.exit().remove();
+    //draw columns
+    var columns = tbody.selectAll("tr")
+                        .selectAll("td")
+                        .data(function(row){
+                                
+                            return columns.map(function(d, i){
+                                                return {i: d, value: row[d]};
+                                              
+                                                });
+                        })
+                                       
+                      
+    columns.enter().append("td");
+
+    tbody.selectAll("td")
+         .attr("class","cells_table")
+          .html(function(d){ 
+                                              
+            if( String(d.value) == "NaN" ) return "-";
+            else
+                return d.value;
+                          
+        })
 }
 
 
@@ -270,11 +277,12 @@ function UpdateTable(data_country, data_hemisphere=null, data_continent=null, da
 
     rows.enter().append("tr")
                 .attr("class","rows_table")
-                .on("mouseover", (d)=>{
+                .on("mouseover", function(d){
                         
                     d3.select(this)
                     .style("background-color", "#fff2cc");
                     })
+
                 .on("mouseout", function(d){
                                 
                     d3.select(this)
