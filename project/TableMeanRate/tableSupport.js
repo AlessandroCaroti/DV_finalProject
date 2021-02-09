@@ -231,8 +231,9 @@ function createDefaultTable(data_country, data_hemisphere=null, data_continent=n
     columns.enter().append("td");
 
     tbody.selectAll("td")
+         .attr("id", (d,i)=> console.log("Data:"+d.value, "-N°:"+i))
          .attr("class","columns_table")
-          .html(function(d){ 
+         .html(function(d){ 
                                               
             if( String(d.value) == "NaN" ) return "-";
             else

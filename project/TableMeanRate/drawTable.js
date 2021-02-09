@@ -66,10 +66,8 @@ function default_dataset(dataFile=""){
         d3.csv(csv_global)
           .then( (data_global) =>{
 
-              
-              parseDataAttributes(data_global,"global-land");
+                parseDataAttributes(data_global,"global-land");
            
-              
                 d3.json("/../../remaining_data/data_new/"+folder+"/"+dataFile+"_info.json")
                 .then( (info) =>{
 
@@ -80,7 +78,6 @@ function default_dataset(dataFile=""){
                   
                   //case continet not null
                 
-                  
                   if( !isNan(continent) && !isNan(hemisphere) && !isNan(portion_continent))
                       readDataAllNonNull(continent,portion_continent,hemisphere, data_country, data_global)
                   
