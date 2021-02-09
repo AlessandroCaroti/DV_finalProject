@@ -81,20 +81,31 @@ function drawGlobeBackground() {
     .attr("d", geoGenerator);
 }
 
+
+
 function update_colors(temperatures) {
+  // define the transition
+  var temp_transition = d3.transition()
+                            .duration(500)
+                            .ease(d3.easeLinear);
+
 
   var countries = map_container.selectAll("path.country")
 
   // set to unkown anomaly each country
-  countries.style("fill", unknown_temp)
+  countries.transition(temp_transition)
+            .style("fill", unknown_temp)
             .attr("anomaly", "NaN");
   
+  
+
   // set new anomalies
   temperatures.forEach(function (d) {
     var element = document.getElementById(d.Country);
 
     if (typeof element != "undefined" && element != null) {
-      d3.select(element).style("fill", colorScale(d["ANOMALY"]))
+      d3.select(element).transition(temp_transition)
+                        .style("fill", colorScale(d["ANOMALY"]))
                         .attr("anomaly", d["ANOMALY"]);
     }
     
