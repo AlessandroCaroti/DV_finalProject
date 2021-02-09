@@ -148,6 +148,12 @@ input#selectCountry {
   text-align: center;
 }
 
+text#label-legend{
+  font-size: 13px;
+  text-align: center;
+  font-weight: bold;
+}
+
 /* TAB MENU LINECHART */
 
 

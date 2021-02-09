@@ -56,9 +56,10 @@ function set_colorScale(){
                                         .tickValues(ticks)
                                         .tickFormat(d3.format(".2f"))
                                         .tickSize(-10);
+
     var axis = d3.select('.axis-anomaly')
     // generate axis
-    axis.attr("transform", "translate(" +  ((width_legend / 2) + 90) +","+ 15  +" )") //.attr("transform", "translate(" + (500 -width_legend / 2) +","+ 485  +" )")
+    axis.attr("transform", "translate(" +  ((width_legend / 2) + 90) +","+ 25  +" )") //.attr("transform", "translate(" + (500 -width_legend / 2) +","+ 485  +" )")
         .call(anomaly_axis);
 
     // draw bars
@@ -105,6 +106,12 @@ function set_colorScale(){
           .moveToFront();
 
     axis.select(".domain").remove();
+
+    // move label
+    d3.select("#label-legend")
+            .attr("x", ((width_legend / 2) + 90))
+            .attr("y", "11")
+            .moveToFront();
 
     //init_legendSpace();
   }
