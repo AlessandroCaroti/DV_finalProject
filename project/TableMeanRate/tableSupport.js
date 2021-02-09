@@ -19,10 +19,11 @@ function getAnnualData(data){
         
         if( d.Month == 5  ){
             
-            console.log(d.region)
             data_annual.push(d);
         }
     });
+
+    data[0].region;
     
     return data_annual;
 }
@@ -102,7 +103,7 @@ function table_data(data_country, data_hemisphere=null, data_continent=null, dat
 
     
     //data for each region
-    var dataCountry50 = dataEvery50Years(data_country);
+    var dataCountry50 = null
     var dataGlobal50 = null;
     var dataHemisphere50 = null;
     var dataContinent50 = null;
@@ -110,12 +111,8 @@ function table_data(data_country, data_hemisphere=null, data_continent=null, dat
     
     var data_table = [];
     
-    var row={}
-    row["Regions"] = dataCountry50[0].region;
-    dataCountry50.forEach((d) => row[ String(d.Year) ] = d.annual_value.toFixed(2))
-    data_table.push(row)
+    addRowTable(dataCountry50, data_country, data_table);
     
-
     if( data_continent != null) addRowTable(dataContinent50, data_continent, data_table);
         
     if( data_hemisphere != null ) addRowTable(dataHemisphere50, data_hemisphere, data_table);
@@ -239,7 +236,8 @@ function createDefaultTable(data_country, data_hemisphere=null, data_continent=n
                         else
                         return d.value;
                     });
-
+    
+    rows.exit().remove();
 }
 
 
@@ -262,40 +260,57 @@ function UpdateTable(data_country, data_hemisphere=null, data_continent=null, da
       }
       
     
-    var header = d3.select(".header_table")
-		            .data(columns)
-			        .text((d) => d);
+   //var tbody =  d3.select(".tbody_table");
 		
-    var rows = d3.select(".rows_table")
-                .data(data_table)
-                .on("mouseover", function(d){
-                        
+  
+    var tbody= d3.select(".tbody_table")
+
+    var rows = tbody.selectAll("tr").data(data_table);
+
+
+    rows.enter().append("tr")
+                .attr("class","rows_table")
+                .on("mouseover", (d)=>{
                         
                     d3.select(this)
-                      .style("background-color", "#fff2cc");
-                })
+                    .style("background-color", "#fff2cc");
+                    })
                 .on("mouseout", function(d){
-                    
+                                
                     d3.select(this)
                     .style("background-color","transparent");
-                });
-
-    
-
-    var cells = rows.selectAll("td")
-                    .data(function(row){
-                        return columns.map(function(d, i){
-                           
-                            return {i: d, value: row[d]};
-                        });
-                    })
-                    .html(function(d){ 
-                        
-                        if( String(d.value) == "NaN" ) return "-";
-                        else
-                            return d.value;
-                    
                     });
+    
+    //remove placeholders in exit
+    rows.exit().remove();
+    
+    //bind the data to columns in each row
+    var columns = tbody.selectAll("tr")
+                         .selectAll("td")
+                         .data(function(row){
+                            return columns.map(function(d, i){
+                            
+                                return {i: d, value: row[d]};
+                            });
+                        })
+                     
+    
+    columns.enter().append("td");
+    columns.exit().remove();
 
+
+    //finally update the columns
+    tbody.selectAll("td")
+        .attr("class","cells_table")
+        .html(function(d){ 
+                            
+            if( String(d.value) == "NaN" ) return "-";
+            else
+                return d.value;
+        
+        })
+      
+
+   
 }
 
