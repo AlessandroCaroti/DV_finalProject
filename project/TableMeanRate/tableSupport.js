@@ -245,11 +245,15 @@ function createDefaultTable(data_country, data_hemisphere=null, data_continent=n
     tbody.selectAll("td")
          .attr("class", function(d,i){
 
+            //find cells with regions name
             if(d.i == columns_head[0]) return "region_cell";
-
+            
+            //first available values: case fisrt year non null
             if(d.i == years[0] && !isNaN(d.value) )
                 return "start_value_table";
-
+            
+            // first available values: case first year null
+            //need to calculate where is the fisrt non NaN value
             if( d.i == years[idx_year] && isNaN(d.value)){
                 
                 count_nan++;
