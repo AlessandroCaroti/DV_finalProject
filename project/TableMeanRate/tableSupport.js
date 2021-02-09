@@ -169,6 +169,13 @@ function table_data(data_country, data_hemisphere=null, data_continent=null, dat
 }
 
 
+
+function getStartingValueTable(d, i, columns_head, count_nan, idx_year, previous_idx) {
+    
+   
+            
+}
+
 function createDefaultTable(data_country, data_hemisphere=null, data_continent=null, data_global=null,  data_partial_continent = null){
  
     var svg = d3.select("#table_container")
@@ -188,18 +195,18 @@ function createDefaultTable(data_country, data_hemisphere=null, data_continent=n
     //getting data for the table and the columns for the header
     var data_table = table_data( data_country, data_hemisphere, data_continent, data_global,  data_partial_continent);
 
-    var columns = Object.keys(data_table[0]);
+    var columns_head = Object.keys(data_table[0]);
     //Move Regions as first column
-    if( columns[ columns.length - 1 ] == "Region" ){
+    if( columns_head[ columns_head.length - 1 ] == "Region" ){
 
-        var tmp = columns[columns.length - 1];
-        columns.unshift(tmp);
-        columns.pop();
+        var tmp = columns_head[columns_head.length - 1];
+        columns_head.unshift(tmp);
+        columns_head.pop();
     }
 
 	thead.append("tr")
 		 .selectAll("th")
-		 .data(columns)
+		 .data(columns_head)
 		 .enter()
          .append("th")
          .attr("class","header_table")
@@ -221,7 +228,7 @@ function createDefaultTable(data_country, data_hemisphere=null, data_continent=n
                         .selectAll("td")
                         .data(function(row){
                        
-                            return columns.map(function(d, i){
+                            return columns_head.map(function(d, i){
                                                 return {i: d, value: row[d]};
                                               
                                              });
@@ -229,10 +236,39 @@ function createDefaultTable(data_country, data_hemisphere=null, data_continent=n
                                        
                       
     columns.enter().append("td");
+    
 
+    var count_nan = 0;
+    var idx_year = 0;
+    var previous_idx;
+    
     tbody.selectAll("td")
-         .attr("id", (d,i)=> console.log("Data:"+d.value, "-N°:"+i))
-         .attr("class","columns_table")
+         .attr("class", function(d,i){
+
+            if(d.i == columns_head[0]) return "region_cell";
+
+            if(d.i == years[0] && !isNaN(d.value) )
+                return "start_value_table";
+
+            if( d.i == years[idx_year] && isNaN(d.value)){
+
+                count_nan++;
+                idx_year++;
+                previous_idx = i; 
+                console.log(i)
+            }
+
+            if(d.i == years[idx_year] && !isNaN(d.value) && d.value != columns_head[0] ) 
+            if( previous_idx == (i-1)){
+                    console.log("shshssh")
+                    console.log(d)
+                    count_nan = 0;
+                    idx_year=0;
+                    return "start_value_table";
+            }
+            
+        })
+        .attr("id", "cell")
          .html(function(d){ 
                                               
             if( String(d.value) == "NaN" ) return "-";
@@ -240,6 +276,8 @@ function createDefaultTable(data_country, data_hemisphere=null, data_continent=n
                 return d.value;
                           
         })
+
+        console.log(d3.select(".start_value_table"))
 }
 
 
@@ -252,13 +290,13 @@ function UpdateTable(data_country, data_hemisphere=null, data_continent=null, da
     
     var data_table = table_data(data_country, data_hemisphere, data_continent, data_global,  data_partial_continent);
 
-    var columns = Object.keys(data_table[0]);
+    var columns_head = Object.keys(data_table[0]);
     
-      if( columns[ columns.length - 1 ] == "Region" ){
+      if( columns_head[ columns_head.length - 1 ] == "Region" ){
   
-          var tmp = columns[columns.length - 1];
-          columns.unshift(tmp);
-          columns.pop();
+          var tmp = columns_head[columns_head.length - 1];
+          columns_head.unshift(tmp);
+          columns_head.pop();
       }
       	
   
@@ -281,7 +319,7 @@ function UpdateTable(data_country, data_hemisphere=null, data_continent=null, da
     var columns = tbody.selectAll("tr")
                          .selectAll("td")
                          .data(function(row){
-                            return columns.map(function(d, i){
+                            return columns_head.map(function(d, i){
                             
                                 return {i: d, value: row[d]};
                             });
@@ -290,15 +328,44 @@ function UpdateTable(data_country, data_hemisphere=null, data_continent=null, da
     
     columns.enter().append("td");
     columns.exit().remove();
-
+    
+    //variables to find the first values available
+    var count_nan = 0;
+    var idx_year = 0;
+    var previous_idx;
     //update the columns
     tbody.selectAll("td")
-        .attr("class","columns_table")
-        .html(function(d){ 
+    .attr("class", function(d,i){
+
+        if(d.i == columns_head[0]) return "region_cell";
+        
+        if(d.i == years[0] && !isNaN(d.value) && d.value != columns_head[0])
+            return "start_value_table";
+
+        if( d.i == years[idx_year] && isNaN(d.value) && d.value != columns_head[0]){
+
+            count_nan++;
+            idx_year++;
+            previous_idx = i; 
+            console.log(i)
+        }
+
+        if(d.i == years[idx_year] && !isNaN(d.value) && d.value != columns_head[0] ) 
+        if( previous_idx == (i-1)){
+                console.log("shshssh")
+                console.log(d)
+                count_nan = 0;
+                idx_year=0;
+                return "start_value_table";
+        }
+        
+     })
+     .attr("id", "cell")
+    .html(function(d){ 
                             
-            if( String(d.value) == "NaN" ) return "-";
-            else
-                return d.value;
+        if( String(d.value) == "NaN" ) return "-";
+        else
+            return d.value;
         
         })
       

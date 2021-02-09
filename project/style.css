@@ -347,3 +347,23 @@ table{
 .tbody_table .rows_table:nth-child(even):hover{
   background: #ffffcc;
 }
+
+
+
+.start_value_table{
+  
+  background: #91AAC5;
+  color: white;
+  font-weight: bold;
+
+  
+}
+
+
+.region_cell{
+
+  border: solid #2E4053 2.5px;
+  border-top: none;
+  border-bottom: none;
+  border-left: none;
+}
