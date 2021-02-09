@@ -286,15 +286,10 @@ function UpdateTable(data_country, data_hemisphere=null, data_continent=null, da
           columns.unshift(tmp);
           columns.pop();
       }
-      
-    
-   //var tbody =  d3.select(".tbody_table");
-		
+      	
   
     var tbody= d3.select(".tbody_table")
-
     var rows = tbody.selectAll("tr").data(data_table);
-
 
     rows.enter().append("tr")
                 .attr("class","rows_table")
@@ -310,7 +305,7 @@ function UpdateTable(data_country, data_hemisphere=null, data_continent=null, da
                     .style("background-color","transparent");
                     });
     
-    //remove placeholders in exit
+    //exit data and remove
     rows.exit().remove();
     
     //bind the data to columns in each row
@@ -327,8 +322,7 @@ function UpdateTable(data_country, data_hemisphere=null, data_continent=null, da
     columns.enter().append("td");
     columns.exit().remove();
 
-
-    //finally update the columns
+    //update the columns
     tbody.selectAll("td")
         .attr("class","cells_table")
         .html(function(d){ 
