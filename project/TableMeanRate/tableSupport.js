@@ -168,17 +168,8 @@ function table_data(data_country, data_hemisphere=null, data_continent=null, dat
     return data_table;
 }
 
-function getRowTable(data_2){
-
-    var row = [data_2[0].region];
-    data_2.forEach( (d) => row.push(d.annual_value.toFixed(2)  ) );
-    return row
-}
 
 function createDefaultTable(data_country, data_hemisphere=null, data_continent=null, data_global=null,  data_partial_continent = null){
-
-    
-
  
     var svg = d3.select("#table_container")
                 .attr("width", width_table + margin_table.left + margin_table.right)
@@ -194,14 +185,11 @@ function createDefaultTable(data_country, data_hemisphere=null, data_continent=n
                 tbody = table.append("tbody").attr("class","tbody_table");
     
     
-    //get data for the table and the columns for the header
-
+    //getting data for the table and the columns for the header
     var data_table = table_data( data_country, data_hemisphere, data_continent, data_global,  data_partial_continent);
-   
-    console.log("UPDATE",data_table);
 
     var columns = Object.keys(data_table[0]);
-  
+    //Move Regions as first column
     if( columns[ columns.length - 1 ] == "Regions" ){
 
         var tmp = columns[columns.length - 1];
@@ -209,7 +197,6 @@ function createDefaultTable(data_country, data_hemisphere=null, data_continent=n
         columns.pop();
     }
 
- 
 	thead.append("tr")
 		 .selectAll("th")
 		 .data(columns)
@@ -218,26 +205,17 @@ function createDefaultTable(data_country, data_hemisphere=null, data_continent=n
          .attr("class","header_table")
 		 .text((d) => d);
 		
-    
     var rows = tbody.selectAll("tr").data(data_table);
-
-
+    
     rows.enter().append("tr")
                 .attr("class","rows_table")
-                .on("mouseover", function(d){
-                                          
-                    d3.select(this)
-                    .style("background-color", "#fff2cc");
-                    })
-                                      
+                .on("mouseover", function(d){                      
+                                  
+                })
                 .on("mouseout", function(d){
                                                   
-                    d3.select(this)
-                      .style("background-color","transparent");
-                    });
-                      
-   
-    
+                });
+                       
     //draw columns
     var columns = tbody.selectAll("tr")
                         .selectAll("td")
@@ -253,7 +231,7 @@ function createDefaultTable(data_country, data_hemisphere=null, data_continent=n
     columns.enter().append("td");
 
     tbody.selectAll("td")
-         .attr("class","cells_table")
+         .attr("class","columns_table")
           .html(function(d){ 
                                               
             if( String(d.value) == "NaN" ) return "-";
@@ -290,15 +268,10 @@ function UpdateTable(data_country, data_hemisphere=null, data_continent=null, da
                 .attr("class","rows_table")
                 .on("mouseover", function(d){
                         
-                    d3.select(this)
-                    .style("background-color", "#fff2cc");
-                    })
-
+                })
                 .on("mouseout", function(d){
                                 
-                    d3.select(this)
-                    .style("background-color","transparent");
-                    });
+                });
     
     //exit data and remove
     rows.exit().remove();
@@ -319,7 +292,7 @@ function UpdateTable(data_country, data_hemisphere=null, data_continent=null, da
 
     //update the columns
     tbody.selectAll("td")
-        .attr("class","cells_table")
+        .attr("class","columns_table")
         .html(function(d){ 
                             
             if( String(d.value) == "NaN" ) return "-";
