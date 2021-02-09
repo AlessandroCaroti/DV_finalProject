@@ -5,7 +5,7 @@ TO DO:
 -pad manuale
 -aggiunta dei comandi di zoom fisici (dei bottoni)                                                 DONE
 -controllare la funzione .fitExtent() https://www.d3indepth.com/geographic/
--transizione dei colori quando cambia l'anno
+-transizione dei colori quando cambia l'anno                                                       DONE
 -contorno del mondo di colore diverso (più scuro)
 -fare in modo che la mappa si veda tutta all'inizio
 -dare dei contorni alla box di selezione dei country (quella affienco allo slider)
@@ -17,7 +17,7 @@ TO DO:
 
 TOFIX:
 -i confini del paese selezionato devono rimanere sempre sopra agli altri                           DONE
--la grid scompare quando si passa sopra ad un paese (si può corregerla mettendo la grid sempre sotto)
+-la grid scompare quando si passa sopra ad un paese (si può corregerla mettendo la grid sempre sotto) DONE
 -se un paese senza dati per quell'anno viene selezionato, il colore cambia in bianco (guarda 2020)  DONE
 -TOOLTIP MAP quando si è su uno stato e si clicca su un altro, se non si muove il mouse
  il tooltips rimane con il nome dello stato su cui era prima il cursore, anche se la mappa si muove

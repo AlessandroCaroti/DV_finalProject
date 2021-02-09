@@ -74,14 +74,16 @@ function drawGridlines() {
   maps.enter().append("path").classed("grat_2", true).attr("d", geoGenerator);
 }
 
+function modeFrontGrid(){
+  d3.selectAll(".grat_2").moveToFront();
+}
+
 function drawGlobeBackground() {
   map_container
     .select(".background_globe")
     .datum({ type: "Sphere" })
     .attr("d", geoGenerator);
 }
-
-
 
 function update_colors(temperatures) {
   // define the transition
@@ -96,8 +98,6 @@ function update_colors(temperatures) {
   countries.transition(temp_transition)
             .style("fill", unknown_temp)
             .attr("anomaly", "NaN");
-  
-  
 
   // set new anomalies
   temperatures.forEach(function (d) {
@@ -117,6 +117,9 @@ function country_events() {
   map_container.selectAll(".country").on("mouseenter", function (event, b) {
     d3.select(this).raise();
     d3.select(this).classed("highlighted_country", true);
+
+    // move to front the gridlines
+    modeFrontGrid();
   });
 
   map_container.selectAll(".country").on("mouseleave ", function (event, b) {
@@ -125,6 +128,9 @@ function country_events() {
 
     // hide tooltip
     d3.select(".tooltip-map").style("display", "none");
+
+    // move to front the gridlines
+    modeFrontGrid();
   });
 
   // MOUSE-OVER: tooltip
@@ -148,6 +154,7 @@ function country_events() {
           }
           return "unknown"
         });
+        
     })
     .on("mousemove", function (event, b) {
       // update position tooltip
