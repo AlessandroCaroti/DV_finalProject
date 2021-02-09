@@ -23,14 +23,9 @@ function getAnnualData(data){
 
     data.forEach((d) => {
         
-        if( d.Month == 5  ){
-            
-            data_annual.push(d);
-        }
+        if( d.Month == 5  ) data_annual.push(d);
     });
 
-    data[0].region;
-    
     return data_annual;
 }
 
