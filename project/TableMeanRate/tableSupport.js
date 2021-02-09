@@ -101,7 +101,7 @@ function addRowTable(dataRegion50, data_region, data_table){
     else
         regionName = fisrtLetterUpperCase(res[0])
     
-    row["Regions"] = regionName;
+    row["Region"] = regionName;
     dataRegion50.forEach((d) => row[ String(d.Year) ] = d.annual_value.toFixed(2))
     data_table.push(row)
 
@@ -190,7 +190,7 @@ function createDefaultTable(data_country, data_hemisphere=null, data_continent=n
 
     var columns = Object.keys(data_table[0]);
     //Move Regions as first column
-    if( columns[ columns.length - 1 ] == "Regions" ){
+    if( columns[ columns.length - 1 ] == "Region" ){
 
         var tmp = columns[columns.length - 1];
         columns.unshift(tmp);
@@ -253,7 +253,7 @@ function UpdateTable(data_country, data_hemisphere=null, data_continent=null, da
 
     var columns = Object.keys(data_table[0]);
     
-      if( columns[ columns.length - 1 ] == "Regions" ){
+      if( columns[ columns.length - 1 ] == "Region" ){
   
           var tmp = columns[columns.length - 1];
           columns.unshift(tmp);
