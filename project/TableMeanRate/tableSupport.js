@@ -416,7 +416,8 @@ function UpdateTable(data_country, data_hemisphere=null, data_continent=null, da
         else
             return d.mean_rate;
         
-        })
+        }).on("mouseover",tableCellEnter)
+          .on("mouseout",tableCellLeave)
       
 
    

@@ -91,8 +91,6 @@ function default_dataset(dataFile=""){
                   if(isNan(continent) && !isNan(hemisphere) && !isNan(portion_continent)) readDataContinentNull(portion_continent,hemisphere, data_country, data_global);
                   if(!isNan(continent) && isNan(hemisphere) && !isNan(portion_continent)) readDataHemisphereNull(continent,portion_continent, data_country, data_global);
                   if(!isNan(continent) &&  !isNan(hemisphere) && isNan(portion_continent)) readDataPortionContinentNull(continent,hemisphere, data_country, data_global);
-                 
-                  console.log("Continent: ", continent,"\nPortion Continent: ", portion_continent,"\nHemisphere: ", hemisphere);
   
 
             })
@@ -156,8 +154,7 @@ function changeDataTable(){
                   var hemisphere = info["hemisphere"];
                   
                   //case continet not null
-                
-                  
+                 
                   if( !isNan(continent) && !isNan(hemisphere) && !isNan(portion_continent))
                       readDataAllNonNull(continent,portion_continent,hemisphere, data_country, data_global,true)
 
@@ -170,10 +167,7 @@ function changeDataTable(){
                   
                   if(isNan(continent) && !isNan(hemisphere) && !isNan(portion_continent)) readDataContinentNull(portion_continent,hemisphere, data_country, data_global,true);
                   if(!isNan(continent) && isNan(hemisphere) && !isNan(portion_continent)) readDataHemisphereNull(continent,portion_continent, data_country, data_global,true);
-                  if(!isNan(continent) &&  !isNan(hemisphere) && isNan(portion_continent)) readDataPortionContinentNull(continent,hemisphere, data_country, data_global,true);
-                 
-                  console.log("Continent: ", continent,"\nPortion Continent: ", portion_continent,"\nHemisphere: ", hemisphere);
-                
+                  if(!isNan(continent) &&  !isNan(hemisphere) && isNan(portion_continent)) readDataPortionContinentNull(continent,hemisphere, data_country, data_global,true);                
 
             })
               .catch((error) =>{
