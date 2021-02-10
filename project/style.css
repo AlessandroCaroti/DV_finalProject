@@ -260,6 +260,18 @@ text#label-legend{
 
 }
 
+.graphics .baselines{
+
+  stroke-width: 2px;
+  stroke: black;
+  stroke-dasharray: 2px;
+  fill: none;
+}
+
+#linechart .tooltip-map{
+  text-align: left;
+}
+
 .uncertainty {
 
     fill: lightgray;

@@ -25,11 +25,11 @@ function drawTooltip(self, event, x, data, tooltipLine, id_chart, height) {
   
   
     var tipText =  String(
-      "<b> Year: " + elem.date.getFullYear()+"<br/>" +"<br/>" +
+      "<b> <p style='text-align: center; font-size: 12px;'> Year: " + elem.date.getFullYear()+"</p>" +
+      "Absolute Temp. : "+elem.baseline+" &deg;C <br/>" +
       "Annual  Avg  Temp. : "+elem.annual_value.toFixed(2) +" &deg;C " +
-      " &plusmn; " +  elem.annual_unc.toFixed(2) + " "+
-      "<br/>" +"<br/>" +
-      "Ten Years Avg Temp: "+elem.ten_years_value.toFixed(2) +" &deg;C " +
+      " &plusmn; " +  elem.annual_unc.toFixed(2) + "<br/>"+
+      "Ten Years Avg Temp: "+elem.ten_years_value.toFixed(2) +" &deg;C " + 
       " &plusmn; " +  elem.ten_years_unc.toFixed(2)+"</b>"
     )
        
@@ -73,7 +73,6 @@ function initBaselineAndInfo(dataFile){
 // parse the attribitues useful for the chart and add the baseline
 // to the annual_value and ten_years_value
 function parseDataAttributes(data, region="NaN"){
-
     data.forEach(d => {
         
       d.date = parseTime(d.Year+"-"+d.Month);
@@ -82,10 +81,13 @@ function parseDataAttributes(data, region="NaN"){
       d.annual_value = baseline + parseFloat(d["Annual Anomaly"]);
       d.ten_years_value =  baseline + parseFloat(d["Ten-year Anomaly"])
       d.ten_years_unc =  parseFloat(d["Ten-year Unc."])
+      d.baseline = baseline;
       d["region"] = region;
       
     
     })
+
+    console.log(data)
   }
   
 
