@@ -60,7 +60,7 @@ function set_colorScale(){
     var axis = d3.select('.axis-anomaly')
     // generate axis
     axis.attr("transform", "translate(" +  ((width_legend / 2) + 90) +","+ 25  +" )") //.attr("transform", "translate(" + (500 -width_legend / 2) +","+ 485  +" )")
-        .call(anomaly_axis);
+            .call(anomaly_axis);
 
     // draw bars
     var rects = axis.selectAll("rect")

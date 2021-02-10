@@ -121,11 +121,16 @@ function update_colors(temperatures) {
 function country_events() {
   //MOUSE-OVER EVENT: highlighted country when the mouse is over
   map_container.selectAll(".country").on("mouseenter", function (event, b) {
-    d3.select(this).raise();
-    d3.select(this).classed("highlighted_country", true);
 
     // move to front the gridlines
     modeFrontGrid();
+
+    //d3.select(this).raise();
+
+
+    d3.select(this).classed("highlighted_country", true);
+
+    
   });
 
   map_container.selectAll(".country").on("mouseleave ", function (event, b) {
@@ -143,6 +148,7 @@ function country_events() {
   map_container
     .selectAll(".country")
     .on("mouseover", function (event, b) {
+
       let anomaly = d3.select(this).attr("anomaly");
 
       // show tooltip
@@ -171,6 +177,10 @@ function country_events() {
 
   //CLICK EVENT:
   map_container.selectAll(".country").on("click", function (event, b) {
+
+    // move to front the gridlines
+    modeFrontGrid();
+
     //deselect the previus country
     d3.select(".selected_country").classed("selected_country", false);
 
@@ -193,16 +203,28 @@ function country_selected(country) {
 // ******************************************************** //
 //                    START ZOOM SECTION                    //
 
-const max_zoom = 8;
+var max_zoom = 8;
 var zoomIn_scale = 1.2,
   zoomOut_scale = 0.8,
   zommed = false;
+
+var borderCountryScale = d3.scaleLinear()
+                              .domain([1, max_zoom]) 
+                              .range([0.5, 0.1]);
+
+var widthGridScale = d3.scaleLinear()
+                              .domain([1, max_zoom])
+                              .range([0.3, 0.1]);
 
 var zoom = d3
   .zoom()
   .on("zoom", (event) => {
     zommed = event.transform.k != 1.0;
     map_container.attr("transform", event.transform);
+    
+    // change border width
+    map_container.selectAll("path.country").style("stroke-width", borderCountryScale(event.transform.k) + "px");
+    map_container.selectAll("path.grat_2").style("stroke-width", widthGridScale(event.transform.k) + "px");
   })
   .scaleExtent([1, max_zoom]);
 
@@ -210,7 +232,11 @@ function reset_zoom() {
   map_container
     .transition()
     .duration(1000)
-    .call(zoom.transform, d3.zoomIdentity.translate(0, 0).scale(1));
+    .call(function(selection){
+
+      zoom.transform(selection, d3.zoomIdentity.translate(0, 0).scale(1));
+      
+    });
 }
 
 function zoom_in(country) {
@@ -224,13 +250,16 @@ function zoom_in(country) {
     scale = Math.max(1, Math.min(max_zoom, 0.9 / Math.max(dx / w, dy / h))),
     translate = [w / 2 - scale * x, h / 2 - scale * y];
 
+  
   map_container
     .transition()
     .duration(1000)
-    .call(
-      zoom.transform,
-      d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale)
-    );
+    .call(function(selection){
+
+      zoom.transform(selection, d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale));
+
+    });
+    
 }
 
 //                      END ZOOM SECTION                    //
