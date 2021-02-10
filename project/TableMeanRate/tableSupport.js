@@ -146,17 +146,13 @@ function table_data(data_country, data_hemisphere=null, data_continent=null, dat
         
         //get list of temperature to calculate the mean rate of change
         var temperatures = getYearTemperatures(data_table[i]);
-        
-       
         var year_list = Object.keys(temperatures);
     
-        
         var index_year = 0;
         var year_1 = year_list[index_year]; 
         var year_2 = year_list[index_year+1];
         
      
- 
         for( var j =0; j < Object.keys(data_table[i]).length - 2; j++){
             
             // set starting temperature in the first non null cell of the row
@@ -165,7 +161,12 @@ function table_data(data_country, data_hemisphere=null, data_continent=null, dat
             //for each year is saved the mean rate of change and the correspondive temperature of that year
              data_table[i][year_2].temp= String(temperatures[year_2]);
              //comuputing mean rate of change
-             data_table[i][year_2].mean_rate=String(getMeanRateOfChange(temperatures[year_1], temperatures[year_2], year_1, year_2).toFixed(3));
+             
+             var meanRate = String(getMeanRateOfChange(temperatures[year_1], temperatures[year_2], year_1, year_2).toFixed(3));
+             //Adding + for the positive mean rate
+             data_table[i][year_2].mean_rate= meanRate > 0 ? String("+"+meanRate) : meanRate
+
+          
             
 
             //update years
@@ -175,23 +176,22 @@ function table_data(data_country, data_hemisphere=null, data_continent=null, dat
         }
               
     }
-    console.log(data_table)
     return data_table;
 }
 
 
 function tableCellEnter(event, d){
 
-
     var tooltip = d3.select("#table_container .tooltip-map");
+
     tooltip.transition();
     var tipText =  String(
-        "<b> Mean Rate: " + d.mean_rate+"<br/>" +"<br/>" +
-        "Temp. Avg.: "+d.temp.toFixed(2) +" &deg;C " +
-        " &plusmn; " +  d.annual_unc.toFixed(2) + " </b>"
+        "<b> Mean Rate: " + d.mean_rate+" &deg;C / year"+"<br/>" +"<br/>" +
+        "Temp. Avg.: "+d.temp +" &deg;C " +
+        " &plusmn; " +  d.annual_unc+ " </b>"
       )
     
-    tooltip.style('left', String( (event.pageX) + 20) + "px" )
+    tooltip.style('left', String( (event.pageX) + 25) + "px" )
            .style('top', String( (event.pageY) - 20) + "px" )
            .style("display", "block")
            .html(tipText)
@@ -255,7 +255,7 @@ function createDefaultTable(data_country, data_hemisphere=null, data_continent=n
                             return columns_head.map(function(d){
 
                                                 if(d == columns_head[0]) return{i: d, region: row[d] }
-                                                return {i: d, mean_rate: row[d].mean_rate, temp: row[d].temp};
+                                                return {i: d, mean_rate: row[d].mean_rate, temp: row[d].temp, annual_unc:row[d].annual_unc};
                                               
                                              });
                         })
@@ -306,7 +306,9 @@ function createDefaultTable(data_country, data_hemisphere=null, data_continent=n
             else
                 return d.mean_rate;
                           
-        }).on("mouse")
+        }).on("mouseover",tableCellEnter)
+          .on("mouseout",tableCellLeave)
+          
 
    
 }
@@ -349,7 +351,7 @@ function UpdateTable(data_country, data_hemisphere=null, data_continent=null, da
                             return columns_head.map(function(d){
 
                                                 if(d == columns_head[0]) return{i: d, region: row[d] }
-                                                return {i: d, mean_rate: row[d].mean_rate, temp: row[d].temp};
+                                                return {i: d, mean_rate: row[d].mean_rate, temp: row[d].temp, annual_unc:row[d].annual_unc};
                                               
                                              });
                         })
