@@ -26,7 +26,7 @@ function drawTooltip(self, event, x, data, tooltipLine, id_chart, height) {
   
     var tipText =  String(
       "<b> <p style='text-align: center; font-size: 12px;'> Year: " + elem.date.getFullYear()+"</p>" +
-      "Absolute Temp. : "+elem.baseline+" &deg;C <br/>" +
+      "Baseline Temp. : "+elem.baseline+" &deg;C <br/>" +
       "Annual  Avg  Temp. : "+elem.annual_value.toFixed(2) +" &deg;C " +
       " &plusmn; " +  elem.annual_unc.toFixed(2) + "<br/>"+
       "Ten Years Avg Temp: "+elem.ten_years_value.toFixed(2) +" &deg;C " + 

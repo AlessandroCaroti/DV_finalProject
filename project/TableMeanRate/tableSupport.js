@@ -130,15 +130,15 @@ function table_data(data_country, data_hemisphere=null, data_continent=null, dat
     //COUNTRY
     addRowTable(dataCountry50, data_country, data_table);
     
+    // PARTIAL CONTINENT IF IS AVAILABLE
+    if( data_partial_continent != null) addRowTable(dataPortionContinent50, data_partial_continent, data_table);
+
     // CONTINENT IF IS AVAILABLE
     if( data_continent != null) addRowTable(dataContinent50, data_continent, data_table);
     
     // HEMISPHERE IF IS AVAILABLE
     if( data_hemisphere != null ) addRowTable(dataHemisphere50, data_hemisphere, data_table);
     
-    // PARTIAL CONTINENT IF IS AVAILABLE
-    if( data_partial_continent != null) addRowTable(dataPortionContinent50, data_partial_continent, data_table);
-
     //GLOBAL DATA
     addRowTable(dataGlobal50, data_global, data_table);
  

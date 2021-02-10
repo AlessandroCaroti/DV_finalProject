@@ -52,7 +52,7 @@ function createLineChartLegend(svg){
           .attr("x", 37)
           .attr("y", 50)
           .attr("class", "legend")
-          .text("Absolute Temperature (°C)"); 
+          .text("Baseline Temperature"); 
   
   }
 
