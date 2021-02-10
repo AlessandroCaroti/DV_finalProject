@@ -8,6 +8,8 @@ var height = full_width*9/16 - margin.top - margin.bottom;
 
 
 
+
+
 function changeData() {
     
     // prendere dati da mappa selezionata o dropdown menu
@@ -15,7 +17,7 @@ function changeData() {
     document.getElementById("country_line").innerHTML= dataFile;
     document.getElementById("country_stripe").innerHTML= dataFile;
     
-    initBaseline(dataFile);
+    initBaselineAndInfo(dataFile);
     
     var folder;
  
@@ -61,7 +63,7 @@ function default_dataset(dataFile=""){
   else
       folder = dataFile;
   
-  initBaseline(dataFile);
+      initBaselineAndInfo(dataFile);
   //var csv = "/../../data/data_temp/"+folder+"/"+dataFile+"_anomalyTable.csv"
   var csv = "/../../remaining_data/data_new/"+folder+"/"+dataFile+"_anomalyTable.csv";
   //Di default c'è dataset 1

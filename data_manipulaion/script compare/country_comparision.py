@@ -41,17 +41,17 @@ print(country.values.tolist())
 
 
 '''
-country = (os.listdir(r"C:\\Users\\simoc\\Documents\\GitHub\\DV_finalProject\\data\\data_temp"))
+country = (os.listdir(r"C:\\Users\\simoc\\Documents\\GitHub\\DV_finalProject\\remaining_data\\data_new"))
 
 
 
 import csv
-with open('C:\\Users\\simoc\\Documents\\GitHub\\DV_finalProject\\data\\Countries.csv', 'w', newline='', encoding='utf-8') as file:
+with open('C:\\Users\\simoc\\Documents\\GitHub\\DV_finalProject\\remaining_data\\data_new\\Countries.csv', 'w', newline='', encoding='utf-8') as file:
     writer = csv.writer(file)
     writer.writerow(["Country"])
     for c in country:
         if c != "desktop.ini":
-            file = (os.listdir(r"C:\\Users\\simoc\\Documents\\GitHub\\DV_finalProject\\data\\data_temp\\"+c))
+            file = (os.listdir(r"C:\\Users\\simoc\\Documents\\GitHub\\DV_finalProject\\remaining_data\\data_new\\"+c))
             filename=""
             for f in file:
                 if f.split(".")[-1] == "csv":

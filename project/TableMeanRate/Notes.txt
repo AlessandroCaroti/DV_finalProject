@@ -1,0 +1,9 @@
+note:
+
+1) tutti e 3
+2) hemi , portion-cont
+3) continent, portion-cont
+4) continent, hemi
+5) continent
+6) hemi
+7) portion-cont
