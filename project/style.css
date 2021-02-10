@@ -130,6 +130,7 @@ input#selectCountry {
   padding: 5px;
   text-align: center;
   font-size: 11px;
+  font-family: sans-serif;
   border: 1px solid gray;
   background: white;
   border-radius: 8px;
@@ -390,4 +391,8 @@ table{
   font-weight: bold;
   color: #2E4053;
   
+}
+
+.selected_cell{
+  border: solid #2E4053 1px;
 }

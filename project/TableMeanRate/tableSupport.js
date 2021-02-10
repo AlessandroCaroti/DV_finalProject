@@ -103,7 +103,8 @@ function addRowTable(dataRegion50, data_region, data_table){
     
     row["Region"] = regionName;
 
-    dataRegion50.forEach((d) => row[ String(d.Year) ] = {temp: d.annual_value.toFixed(2), mean_rate:NaN, annual_unc:d.annual_unc.toFixed(2)})
+    dataRegion50.forEach((d) => row[ String(d.Year) ] = {temp: d.annual_value.toFixed(2), mean_rate:NaN, 
+                                                            annual_unc:d.annual_unc.toFixed(2), starting_value:false })
 
     data_table.push(row)
 
@@ -156,7 +157,13 @@ function table_data(data_country, data_hemisphere=null, data_continent=null, dat
         for( var j =0; j < Object.keys(data_table[i]).length - 2; j++){
             
             // set starting temperature in the first non null cell of the row
-            if( isNaN(data_table[i][year_1].mean_rate) ){ data_table[i][year_1].mean_rate = temperatures[year_1];}
+            if( isNaN(data_table[i][year_1].mean_rate) ){ 
+                
+                data_table[i][year_1].mean_rate = temperatures[year_1];
+                
+                if(!isNaN(temperatures[year_1])) data_table[i][year_1].starting_value=true;
+        
+            }
                      
             //for each year is saved the mean rate of change and the correspondive temperature of that year
              data_table[i][year_2].temp= String(temperatures[year_2]);
@@ -184,23 +191,33 @@ function tableCellEnter(event, d){
 
     var tooltip = d3.select("#table_container .tooltip-map");
 
-    tooltip.transition();
-    var tipText =  String(
-        "<b> Mean Rate: " + d.mean_rate+" &deg;C / year"+"<br/>" +"<br/>" +
-        "Temp. Avg.: "+d.temp +" &deg;C " +
-        " &plusmn; " +  d.annual_unc+ " </b>"
-      )
     
-    tooltip.style('left', String( (event.pageX) + 25) + "px" )
-           .style('top', String( (event.pageY) - 20) + "px" )
-           .style("display", "block")
-           .html(tipText)
+    var meanRateHtml= d.starting_value ? "<b> Starting Temp. "+ d.mean_rate+" &deg;C":
+                     "<b> Mean Rate: " + d.mean_rate+" &deg;C / year"+"<br/>" +"<br/>" +
+                     "Temp. Avg.: "+d.temp +" &deg;C " +
+                     " &plusmn; " +  d.annual_unc+ " </b>"
+
+    if( d.i != "Region"){
+
+        tooltip.transition();
+    
+        tooltip.style('left', String( (event.pageX) + 25) + "px" )
+            .style('top', String( (event.pageY) - 20) + "px" )
+            .style("display", "block")
+            .html(meanRateHtml)
+
+        d3.select(this).classed("selected_cell", true);
+
+    }
+    
+      
 
 }
 
 function tableCellLeave(){
     var tooltip = d3.select("#table_container .tooltip-map");
     if (tooltip) tooltip.style('display', 'none');
+    d3.select(this).classed("selected_cell", false);
 }
 
 
@@ -255,7 +272,8 @@ function createDefaultTable(data_country, data_hemisphere=null, data_continent=n
                             return columns_head.map(function(d){
 
                                                 if(d == columns_head[0]) return{i: d, region: row[d] }
-                                                return {i: d, mean_rate: row[d].mean_rate, temp: row[d].temp, annual_unc:row[d].annual_unc};
+                                                return {i: d, mean_rate: row[d].mean_rate, temp: row[d].temp, 
+                                                        annual_unc:row[d].annual_unc, starting_value:row[d].starting_value};
                                               
                                              });
                         })
@@ -300,7 +318,7 @@ function createDefaultTable(data_country, data_hemisphere=null, data_continent=n
         .attr("id", "cell")
          .html(function(d){ 
             
-         
+            
             if( d.i == columns_head[0] ) return d.region;
             if( String(d.mean_rate) == "NaN" ) return "-";
             else
@@ -351,7 +369,8 @@ function UpdateTable(data_country, data_hemisphere=null, data_continent=null, da
                             return columns_head.map(function(d){
 
                                                 if(d == columns_head[0]) return{i: d, region: row[d] }
-                                                return {i: d, mean_rate: row[d].mean_rate, temp: row[d].temp, annual_unc:row[d].annual_unc};
+                                                return {i: d, mean_rate: row[d].mean_rate, temp: row[d].temp, 
+                                                            annual_unc:row[d].annual_unc, starting_value:row[d].starting_value}
                                               
                                              });
                         })

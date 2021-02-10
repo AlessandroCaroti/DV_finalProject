@@ -81,6 +81,9 @@ function default_dataset(dataFile=""){
                   if( !isNan(continent) && !isNan(hemisphere) && !isNan(portion_continent))
                       readDataAllNonNull(continent,portion_continent,hemisphere, data_country, data_global)
                   
+                  if( isNan(continent) && isNan(hemisphere) && isNan(portion_continent))
+                      readDataAllNull( data_country, data_global);
+                  
                   if( !isNan(continent) && isNan(hemisphere) && isNan(portion_continent)) readDataOnlyContinent(continent, data_country, data_global);  
                   if( isNan(continent) && isNan(hemisphere) && !isNan(portion_continent)) readDataOnlyPortionContinent(portion_continent, data_country, data_global);
                   if( isNan(continent) && !isNan(hemisphere) && isNan(portion_continent)) readDataOnlyContinent(hemisphere, data_country, data_global);
@@ -157,6 +160,9 @@ function changeDataTable(){
                   
                   if( !isNan(continent) && !isNan(hemisphere) && !isNan(portion_continent))
                       readDataAllNonNull(continent,portion_continent,hemisphere, data_country, data_global,true)
+
+                  if( isNan(continent) && isNan(hemisphere) && isNan(portion_continent))
+                      readDataAllNull( data_country, data_global, true)
                   
                   if( !isNan(continent) && isNan(hemisphere) && isNan(portion_continent)) readDataOnlyContinent(continent, data_country, data_global,true);  
                   if( isNan(continent) && isNan(hemisphere) && !isNan(portion_continent)) readDataOnlyPortionContinent(portion_continent, data_country, data_global,true);
@@ -167,9 +173,6 @@ function changeDataTable(){
                   if(!isNan(continent) &&  !isNan(hemisphere) && isNan(portion_continent)) readDataPortionContinentNull(continent,hemisphere, data_country, data_global,true);
                  
                   console.log("Continent: ", continent,"\nPortion Continent: ", portion_continent,"\nHemisphere: ", hemisphere);
-
-            
-                  
                 
 
             })
