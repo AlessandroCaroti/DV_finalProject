@@ -92,6 +92,7 @@ function update_colors(temperatures) {
                             .duration(500)
                             .ease(d3.easeLinear);
 
+
   var updated_countries = new Set();
 
   // set new anomalies
@@ -101,21 +102,16 @@ function update_colors(temperatures) {
     if (typeof element != "undefined" && element != null) {
 
       updated_countries.add(d.Country);
+      console.log(d.Country);
       // update anomaly
       d3.select(element).transition(temp_transition)
                         .style("fill", colorScale(d["ANOMALY"]))
                         .attr("anomaly", d["ANOMALY"]);
+      d3.select(element).attr("anomaly", d["ANOMALY"]);
+      //console.log(d3.select(element).attr("anomaly"));
     }
     
   });
-
-   // set to unkown anomaly each country with no data
-   var countries = map_container.selectAll("path.country")
-                                .filter(function(d) {return !updated_countries.has(d.properties.name); });
-
-   countries.transition(temp_transition)
-                .style("fill", unknown_temp )
-                .attr("anomaly", "NaN");
 }
 
 function country_events() {
@@ -126,7 +122,6 @@ function country_events() {
     modeFrontGrid();
 
     //d3.select(this).raise();
-
 
     d3.select(this).classed("highlighted_country", true);
 
@@ -210,18 +205,18 @@ var zoomIn_scale = 1.2,
 
 var borderCountryScale = d3.scaleLinear()
                               .domain([1, max_zoom]) 
-                              .range([0.5, 0.1]);
+                              .range([0.5, 0.2]);
 
 var widthGridScale = d3.scaleLinear()
                               .domain([1, max_zoom])
-                              .range([0.3, 0.1]);
+                              .range([0.3, 0.2]);
 
 var zoom = d3
   .zoom()
   .on("zoom", (event) => {
     zommed = event.transform.k != 1.0;
     map_container.attr("transform", event.transform);
-    
+
     // change border width
     map_container.selectAll("path.country").style("stroke-width", borderCountryScale(event.transform.k) + "px");
     map_container.selectAll("path.grat_2").style("stroke-width", widthGridScale(event.transform.k) + "px");
@@ -437,6 +432,7 @@ function load_map() {
       topology = topojson.simplify(topology, 0.05);
 
       drawMap(topology);
+      load_tempYear(tmp_file_prefix + "2019" + tmp_file_suffix);
       init_dropdown_menu(country_list);
     })
     .catch((error) => {
@@ -455,7 +451,7 @@ function init_page() {
   // load map
   load_map();
 
-  load_tempYear(tmp_file_prefix + "2019" + tmp_file_suffix);
+  
 
   // set colorscale and  legend
   set_colorScale();
