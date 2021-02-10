@@ -57,7 +57,7 @@ function dataEvery50Years(data){
         
         if(!existYear(annual_data, year)){
             // handle missing year
-            data_2.push({ Year: year, annual_value:NaN, region: annual_data[0].region})
+            data_2.push({ Year: year, annual_value:NaN, region: annual_data[0].region, annual_unc:NaN})
         }       
         
     })
@@ -102,7 +102,8 @@ function addRowTable(dataRegion50, data_region, data_table){
         regionName = fisrtLetterUpperCase(res[0])
     
     row["Region"] = regionName;
-    dataRegion50.forEach((d) => row[ String(d.Year) ] = {"temp": d.annual_value.toFixed(2),"mean_rate":"NaN"})
+
+    dataRegion50.forEach((d) => row[ String(d.Year) ] = {temp: d.annual_value.toFixed(2), mean_rate:NaN, annual_unc:d.annual_unc.toFixed(2)})
 
     data_table.push(row)
 
@@ -159,10 +160,8 @@ function table_data(data_country, data_hemisphere=null, data_continent=null, dat
         for( var j =0; j < Object.keys(data_table[i]).length - 2; j++){
             
             // set starting temperature in the first non null cell of the row
-            if( isNaN(data_table[i][year_1].mean_rate) )  data_table[i][year_1].mean_rate = temperatures[year_1];
-            
-            
-            
+            if( isNaN(data_table[i][year_1].mean_rate) ){ data_table[i][year_1].mean_rate = temperatures[year_1];}
+                     
             //for each year is saved the mean rate of change and the correspondive temperature of that year
              data_table[i][year_2].temp= String(temperatures[year_2]);
              //comuputing mean rate of change
@@ -181,22 +180,14 @@ function table_data(data_country, data_hemisphere=null, data_continent=null, dat
 }
 
 
-
-function getStartingValueTable(d, i, columns_head, count_nan, idx_year, previous_idx) {
-    
-   
-            
-}
-
-
 function tableCellEnter(event, d){
 
 
     var tooltip = d3.select("#table_container .tooltip-map");
     tooltip.transition();
     var tipText =  String(
-        "<b> Year: " + d.date.getFullYear()+"<br/>" +"<br/>" +
-        "Annual Avg.  Anomaly: "+d.annual_anomaly.toFixed(2) +" &deg;C " +
+        "<b> Mean Rate: " + d.mean_rate+"<br/>" +"<br/>" +
+        "Temp. Avg.: "+d.temp.toFixed(2) +" &deg;C " +
         " &plusmn; " +  d.annual_unc.toFixed(2) + " </b>"
       )
     
@@ -315,9 +306,9 @@ function createDefaultTable(data_country, data_hemisphere=null, data_continent=n
             else
                 return d.mean_rate;
                           
-        })
+        }).on("mouse")
 
-        console.log(d3.select(".start_value_table"))
+   
 }
 
 
