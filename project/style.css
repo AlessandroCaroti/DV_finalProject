@@ -266,7 +266,6 @@ text#label-legend{
 }
 
 
-
 /*Tooltip Style*/
 .tooltip{
   position: absolute;
@@ -327,7 +326,6 @@ text.legend {
   width: 900px;
   height: 500px;
   border: 2px #000 dashed;
-
   margin: auto;
   margin-top: 30px;
 
@@ -336,45 +334,79 @@ text.legend {
 
 .mean_rate{
     margin: auto;
-    width: 70%;
-}
+    width: 90%;
+    height: 55%;
 
-/* Zebra striping */
-
-tr:nth-of-type(odd) { 
-  background: white; 
-}
-
-th { 
-    
-    background:lightgray; 
-    color: black; 
-    font-weight: bold; 
-    background-repeat: no-repeat;
-    background-position: 3% center;
-}
-
-td, th { 
-  padding: 6px; 
-  border: 1px solid #ccc; 
-  text-align: left; 
 }
 
 
-.cells_table{
-  
-  text-align: center;
-}
+
+
 
 .header_table{
+  padding: 15px; 
+  background: #2E4053; 
+  color: white; 
+  font-size: 16px;
+  font-weight: bold;
+  font-family: sans-serif;
   text-align: center;
+  text-transform: uppercase;
+}
+
+table{ 
+  border-collapse: collapse; 
+  background:white;
+  border-radius: 8px;
+  overflow:hidden;
 }
 
 .rows_table{
+  font-family: sans-serif;
+  transition: background 0.2s ease-in;
   text-align: center;
+  color: #2E4053;
+ 
+}
+
+
+.tbody_table .rows_table:nth-child(even){
+
+  background: #F0F3F4;
+
+}
+
+.tbody_table .rows_table:nth-child(odd){
+  background: white;
+}
+
+.tbody_table .rows_table:nth-child(odd):hover{
+
+  background: #ffffcc;
+}
+
+.tbody_table .rows_table:nth-child(even):hover{
+  background: #ffffcc;
 }
 
 
 
+.start_value_table{
+  
+  background: #91AAC5;
+  color: white;
+  font-weight: bold;
 
-/*-----------------------------------END STYLE TABLE-----------------------------------*/
+  
+}
+
+.region_cell{
+
+  border: solid #2E4053 2.5px;
+  border-top: none;
+  border-bottom: none;
+  border-left: none;
+  font-weight: bold;
+  color: #2E4053;
+  
+}

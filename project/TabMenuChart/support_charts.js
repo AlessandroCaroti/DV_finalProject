@@ -3,6 +3,7 @@ var parseTime = d3.timeParse("%Y-%m");
 var baseline;
 
 
+
 // Functions to Draw and Remove the tooltip
 // given the x position find the corresponding value 
 function drawTooltip(self, event, x, data, tooltipLine, id_chart, height) {
@@ -50,7 +51,7 @@ function removeTooltip(tooltipLine, id_chart) {
 
 
 //Load the baseline of the corresponding country from the nameCountry_info.json file
-function initBaseline(dataFile){
+function initBaselineAndInfo(dataFile){
   
 
     var folder;
@@ -60,19 +61,19 @@ function initBaseline(dataFile){
         folder = dataFile;
     
    
-    d3.json("/../../data/data_temp/"+folder+"/"+dataFile+"_info.json")
+    d3.json("/../../remaining_data/data_new/"+folder+"/"+dataFile+"_info.json")
       .then( (data =>{
     
-          baseline = +data["absolute_temp(C)"];
-     
-      }))
+          baseline = +data["absolute_temp(C)"];   
+      
+        }))
   
   }
 
 // parse the attribitues useful for the chart and add the baseline
 // to the annual_value and ten_years_value
-function parseDataAttributes(data){
-  
+function parseDataAttributes(data, region="NaN"){
+
     data.forEach(d => {
         
       d.date = parseTime(d.Year+"-"+d.Month);
@@ -81,6 +82,7 @@ function parseDataAttributes(data){
       d.annual_value = baseline + parseFloat(d["Annual Anomaly"]);
       d.ten_years_value =  baseline + parseFloat(d["Ten-year Anomaly"])
       d.ten_years_unc =  parseFloat(d["Ten-year Unc."])
+      d["region"] = region;
       
     
     })

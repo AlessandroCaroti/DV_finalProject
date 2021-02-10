@@ -1,7 +1,20 @@
 // function support for the table
 
-//Global variable
-var years = ["1750","1800","1850","1900","1950","2000","2019"];
+
+//Global variables
+var years = ["1750","1800","1850","1900","1950","2000","2020"];
+
+var full_width = 900
+var margin_table = {top: 10, right: 10, bottom: 10, left: 20};
+var width_table = full_width - margin_table.left - margin_table.right;
+var height_table = full_width*9/16 - margin_table.top - margin_table.bottom;
+
+
+function isNan(json_field){
+
+    return json_field == "NaN";
+}
+
 
 //get annual average data, saved at every june
 function getAnnualData(data){
@@ -10,12 +23,9 @@ function getAnnualData(data){
 
     data.forEach((d) => {
         
-        if( d.Month == 5  ){
-            d["region"] = document.getElementById('dataset').value;
-            data_annual.push(d);
-        }
+        if( d.Month == 5  ) data_annual.push(d);
     });
-    
+
     return data_annual;
 }
 
@@ -29,6 +39,7 @@ function existYear(data, year){
     
     return x;
 }
+
 
 //Get data every 50 years with also the 2019 at the end
 function dataEvery50Years(data){
@@ -73,28 +84,60 @@ function getYearTemperatures(row_table){
 }
 
 
+function fisrtLetterUpperCase(name){
+    return  name.charAt(0).toUpperCase()+ name.slice(1);
+}
+
+
+
+function addRowTable(dataRegion50, data_region, data_table){
+
+    var row={}
+    dataRegion50 = dataEvery50Years(data_region);
+    
+    res = dataRegion50[0].region.split("-");
+    var regionName;
+    if( res.length == 2) regionName= fisrtLetterUpperCase(res[0])+"-"+fisrtLetterUpperCase(res[1]);
+    else
+        regionName = fisrtLetterUpperCase(res[0])
+    
+    row["Region"] = regionName;
+    dataRegion50.forEach((d) => row[ String(d.Year) ] = d.annual_value.toFixed(2))
+    data_table.push(row)
+
+}
+
+
+
 // Return a table in which the keys are the Region and all the years
 // Each row contains the name of the country (or cointient, or emisphere or global) and the annual average temperature
 // Each row correspond to a csv (specific countri, emisphere, continet, global)
-function table_data(data_country, data_emisphere=null, data_continet=null, data_global=null){
+function table_data(data_country, data_hemisphere=null, data_continent=null, data_global=null,  data_partial_continent = null){
 
     
     //data for each region
-    var dataCountry50 = dataEvery50Years(data_country);
-    //TODO:SCARICARE DATI SUI CONTINENTE, EMISFERO, GLOBALI 
-    var dataEmisphere50 = [];
-    var dataContinent50 = [];
-    var dataGlobal50 = [];
-
- 
+    var dataCountry50 = null
+    var dataGlobal50 = null;
+    var dataHemisphere50 = null;
+    var dataContinent50 = null;
+    var dataPortionContinent50 = null;
+    
     var data_table = [];
-    var row={}
     
-    row["Regions"] = dataCountry50 [0].region;
+    //COUNTRY
+    addRowTable(dataCountry50, data_country, data_table);
+    
+    // CONTINENT IF IS AVAILABLE
+    if( data_continent != null) addRowTable(dataContinent50, data_continent, data_table);
+    
+    // HEMISPHERE IF IS AVAILABLE
+    if( data_hemisphere != null ) addRowTable(dataHemisphere50, data_hemisphere, data_table);
+    
+    // PARTIAL CONTINENT IF IS AVAILABLE
+    if( data_partial_continent != null) addRowTable(dataPortionContinent50, data_partial_continent, data_table);
 
-    dataCountry50.forEach((d) => row[ String(d.Year) ] = d.annual_value.toFixed(2))
-    data_table.push(row)
-    
+    //GLOBAL DATA
+    addRowTable(dataGlobal50, data_global, data_table);
     
     for(var i=0; i<data_table.length; i++){
         
@@ -125,17 +168,15 @@ function table_data(data_country, data_emisphere=null, data_continet=null, data_
     return data_table;
 }
 
-function getRowTable(data_2){
 
-    var row = [data_2[0].region];
-    data_2.forEach( (d) => row.push(d.annual_value.toFixed(2)  ) );
-    return row
+
+function getStartingValueTable(d, i, columns_head, count_nan, idx_year, previous_idx) {
+    
+   
+            
 }
 
-function createDefaultTable(data){
-
-    
-
+function createDefaultTable(data_country, data_hemisphere=null, data_continent=null, data_global=null,  data_partial_continent = null){
  
     var svg = d3.select("#table_container")
                 .attr("width", width_table + margin_table.left + margin_table.right)
@@ -151,119 +192,185 @@ function createDefaultTable(data){
                 tbody = table.append("tbody").attr("class","tbody_table");
     
     
-    //get data for the table and the columns for the header
+    //getting data for the table and the columns for the header
+    var data_table = table_data( data_country, data_hemisphere, data_continent, data_global,  data_partial_continent);
 
-    var data_table = table_data(data);
-    console.log("UPDATE",data_table);
+    var columns_head = Object.keys(data_table[0]);
+    //Move Regions as first column
+    if( columns_head[ columns_head.length - 1 ] == "Region" ){
 
-    var columns = Object.keys(data_table[0]);
-  
-    if( columns[ columns.length - 1 ] == "Regions" ){
-
-        var tmp = columns[columns.length - 1];
-        columns.unshift(tmp);
-        columns.pop();
+        var tmp = columns_head[columns_head.length - 1];
+        columns_head.unshift(tmp);
+        columns_head.pop();
     }
 
- 
-	var header = thead.append("tr")
-		              .selectAll("th")
-		              .data(columns)
-		              .enter()
-                      .append("th")
-                      .attr("class","header_table")
-			          .text((d) => d);
+	thead.append("tr")
+		 .selectAll("th")
+		 .data(columns_head)
+		 .enter()
+         .append("th")
+         .attr("class","header_table")
+		 .text((d) => d);
 		
-    var rows = tbody.selectAll("tr")
-                    .data(data_table)
-                    .enter()
-                    .append("tr")
-                    .attr("class","rows_table")
-                    .on("mouseover", function(d){
-                        
-                        
-                        d3.select(this)
-                          .style("background-color", "#fff2cc");
-                    })
-                    .on("mouseout", function(d){
-                        
-                        d3.select(this)
-                        .style("background-color","transparent");
-                    });
+    var rows = tbody.selectAll("tr").data(data_table);
+    
+    rows.enter().append("tr")
+                .attr("class","rows_table")
+                .on("mouseover", function(d){                      
+                                  
+                })
+                .on("mouseout", function(d){
+                                                  
+                });
+                       
+    //draw columns
+    var columns = tbody.selectAll("tr")
+                        .selectAll("td")
+                        .data(function(row){
+                       
+                            return columns_head.map(function(d, i){
+                                                return {i: d, value: row[d]};
+                                              
+                                             });
+                        })
+                                       
+                      
+    columns.enter().append("td");
     
 
-    var cells = rows.selectAll("td")
-                    .data(function(row){
-                        return columns.map(function(d, i){
-                           
-                            return {i: d, value: row[d]};
-                        });
-                    })
-                    .enter()
-                    .append("td")
-                    .attr("class","cells_table")
-                    .html(function(d){ 
-                        
-                        if( String(d.value) == "NaN" ) return "-";
-                        else
-                        return d.value;
-                    });
+    var count_nan = 0;
+    var idx_year = 0;
+    var previous_idx;
+    
+    tbody.selectAll("td")
+         .attr("class", function(d,i){
 
+            //find cells with regions name
+            if(d.i == columns_head[0]) return "region_cell";
+            
+            //first available values: case fisrt year non null
+            if(d.i == years[0] && !isNaN(d.value) )
+                return "start_value_table";
+            
+            // first available values: case first year null
+            //need to calculate where is the fisrt non NaN value
+            if( d.i == years[idx_year] && isNaN(d.value)){
+                
+                count_nan++;
+                idx_year++;
+                previous_idx = i; 
+                
+            }
+
+            if(d.i == years[idx_year] && !isNaN(d.value) && d.value != columns_head[0] ) 
+            if( previous_idx == (i-1)){
+            
+                    count_nan = 0;
+                    idx_year=0;
+                    return "start_value_table";
+            }
+            
+        })
+        .attr("id", "cell")
+         .html(function(d){ 
+                                              
+            if( String(d.value) == "NaN" ) return "-";
+            else
+                return d.value;
+                          
+        })
+
+        console.log(d3.select(".start_value_table"))
 }
 
 
 
-function UpdateTable(data){
+function UpdateTable(data_country, data_hemisphere=null, data_continent=null, data_global,  data_partial_continent = null){
 
 
 
     //get data for the table and the columns for the header
     
-    var data_table = table_data(data);
+    var data_table = table_data(data_country, data_hemisphere, data_continent, data_global,  data_partial_continent);
 
-    var columns = Object.keys(data_table[0]);
+    var columns_head = Object.keys(data_table[0]);
     
-      if( columns[ columns.length - 1 ] == "Regions" ){
+      if( columns_head[ columns_head.length - 1 ] == "Region" ){
   
-          var tmp = columns[columns.length - 1];
-          columns.unshift(tmp);
-          columns.pop();
+          var tmp = columns_head[columns_head.length - 1];
+          columns_head.unshift(tmp);
+          columns_head.pop();
       }
-      
-    
-    var header = d3.select(".header_table")
-		            .data(columns)
-			        .text((d) => d);
-		
-    var rows = d3.select(".rows_table")
-                .data(data_table)
+      	
+  
+    var tbody= d3.select(".tbody_table")
+    var rows = tbody.selectAll("tr").data(data_table);
+
+    rows.enter().append("tr")
+                .attr("class","rows_table")
                 .on("mouseover", function(d){
                         
-                        
-                    d3.select(this)
-                      .style("background-color", "#fff2cc");
                 })
                 .on("mouseout", function(d){
-                    
-                    d3.select(this)
-                    .style("background-color","transparent");
+                                
                 });
-
     
+    //exit data and remove
+    rows.exit().remove();
+    
+    //bind the data to columns in each row
+    var columns = tbody.selectAll("tr")
+                         .selectAll("td")
+                         .data(function(row){
+                            return columns_head.map(function(d, i){
+                            
+                                return {i: d, value: row[d]};
+                            });
+                        })
+                     
+    
+    columns.enter().append("td");
+    columns.exit().remove();
+    
+    //variables to find the first values available
+    var count_nan = 0;
+    var idx_year = 0;
+    var previous_idx;
+    //update the columns
+    tbody.selectAll("td")
+    .attr("class", function(d,i){
 
-    var cells = rows.selectAll("td")
-                    .data(function(row){
-                        return columns.map(function(d, i){
-                           
-                            return {i: d, value: row[d]};
-                        });
-                    })
-                    .html(function(d){ 
-                        
-                        if( String(d.value) == "NaN" ) return "-";
-                        else
-                            return d.value;
-                    
-                    });
+        if(d.i == columns_head[0]) return "region_cell";
 
+        if(d.i == years[0] && !isNaN(d.value) && d.value != columns_head[0])
+            return "start_value_table";
+
+        if( d.i == years[idx_year] && isNaN(d.value) && d.value != columns_head[0]){
+
+            count_nan++;
+            idx_year++;
+            previous_idx = i; 
+        }
+
+        if(d.i == years[idx_year] && !isNaN(d.value) && d.value != columns_head[0] ) 
+        if( previous_idx == (i-1)){
+               
+                count_nan = 0;
+                idx_year=0;
+                return "start_value_table";
+        }
+        
+     })
+     .attr("id", "cell")
+    .html(function(d){ 
+                            
+        if( String(d.value) == "NaN" ) return "-";
+        else
+            return d.value;
+        
+        })
+      
+
+   
 }
+
