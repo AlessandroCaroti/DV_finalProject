@@ -11,36 +11,48 @@ function createLineChartLegend(svg){
     legend = svg.append( "g" ).attr("class", "legend" );
     
     legend.append( "rect" )
-    .attr("x", 10).attr("width", 200)
-    .attr("y", 10).attr("height", 40)
-    .attr("class", "legend");
+    .attr("x", 10).attr("width", 170)
+    .attr("y", 1).attr("height", 60)
+    .attr("class", "legend")
+    .attr("id","legend-square");
   
     legend.append( "line" )
         .attr("x1", 15).attr("x2", 30)
-        .attr("y1", 20).attr("y2", 20)
+        .attr("y1", 15).attr("y2", 15)
         .attr("class", "line_chart_annual");
   
     legend.append( "text" )
         .attr("x", 37)
-        .attr("y", 20)
+        .attr("y", 15)
         .attr("class", "legend")
         .text("Annual Average Temperature");
   
     legend.append( "rect" )
           .attr("x", 15).attr("width", 15)
-          .attr("y", 29).attr("height", 16)
+          .attr("y", 24).attr("height", 16)
           .attr("class", "uncertainty");
           
     legend.append( "line" )
           .attr("x1", 15).attr("x2", 30)
-          .attr("y1", 37).attr("y2", 37)
+          .attr("y1", 32).attr("y2", 32)
           .attr("class", "line_chart_ten_years");
   
     legend.append( "text" )
           .attr("x", 37)
-          .attr("y", 37)
+          .attr("y", 32)
           .attr("class", "legend")
-          .text("10-years Average Temperature");
+          .text("10-years Average Temperature"); 
+    
+    legend.append( "line" )
+          .attr("x1", 15).attr("x2", 30)
+          .attr("y1", 50).attr("y2", 50)
+          .attr("class", "baselines");
+
+    legend.append( "text" )
+          .attr("x", 37)
+          .attr("y", 50)
+          .attr("class", "legend")
+          .text("Absolute Temperature (°C)"); 
   
   }
 

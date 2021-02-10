@@ -289,16 +289,23 @@ text#label-legend{
 /*--------------- LEGEND STYLE -------------------------------------------*/
 
 .legend {
+
+  padding: 3px;
   fill: #fff;
+  
+}
+
+#legend-square{
+  
   stroke: #000;
-  stroke-width: 0.8px;
+  stroke-width: 1px;
+
 }
 
 text.legend {
   
   fill: #000;
-  stroke: #000;
-  font-size: 12px;
+  font-size: 11px;
   alignment-baseline: central;
 
 }
@@ -309,6 +316,10 @@ text.legend {
 
 .legend .line_chart_ten_years {
   stroke-width: 3px;
+}
+
+.legend .baselines{
+  stroke-width: 2px;
 }
 
 /* END TAB MENU LINECHART */
