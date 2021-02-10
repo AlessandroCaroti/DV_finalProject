@@ -8,8 +8,8 @@ var baseline;
 // given the x position find the corresponding value 
 function drawTooltip(self, event, x, data, tooltipLine, id_chart, height) {
 
-    var tooltip = d3.select(id_chart+" .tooltip")
-                  .attr("id", "tooltip");
+    var tooltip = d3.select(id_chart+" .tooltip-map")
+
     
     const date = x.invert(d3.pointer(event, self.node())[0]);
   
@@ -26,11 +26,11 @@ function drawTooltip(self, event, x, data, tooltipLine, id_chart, height) {
   
     var tipText =  String(
       "<b> Year: " + elem.date.getFullYear()+"<br/>" +"<br/>" +
-      "Annual Average Temperature: "+elem.annual_value.toFixed(2) +" &deg;C " +
+      "Annual  Avg  Temp. : "+elem.annual_value.toFixed(2) +" &deg;C " +
       " &plusmn; " +  elem.annual_unc.toFixed(2) + " "+
       "<br/>" +"<br/>" +
-      "Ten Years Average Temperature: "+elem.ten_years_value.toFixed(2) +" &deg;C " +
-      " &plusmn; " +  elem.ten_years_unc.toFixed(2) + "</b>  "
+      "Ten Years Avg Temp: "+elem.ten_years_value.toFixed(2) +" &deg;C " +
+      " &plusmn; " +  elem.ten_years_unc.toFixed(2)+"</b>"
     )
        
     tooltip.html("")
@@ -44,7 +44,7 @@ function drawTooltip(self, event, x, data, tooltipLine, id_chart, height) {
 
 function removeTooltip(tooltipLine, id_chart) {
     
-  var tooltip = d3.select(id_chart+" .tooltip")
+  var tooltip = d3.select(id_chart+" .tooltip-map")
     if (tooltip) tooltip.style('display', 'none');
     if (tooltipLine) tooltipLine.attr('stroke', 'none');
   }

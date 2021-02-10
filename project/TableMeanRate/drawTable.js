@@ -90,19 +90,22 @@ function default_dataset(dataFile=""){
                   if(!isNan(continent) &&  !isNan(hemisphere) && isNan(portion_continent)) readDataPortionContinentNull(continent,hemisphere, data_country, data_global);
                  
                   console.log("Continent: ", continent,"\nPortion Continent: ", portion_continent,"\nHemisphere: ", hemisphere);
-
-            
-                  
-                
+  
 
             })
               .catch((error) =>{
                 console.log(error);
-                //alert("Unable To Load The Dataset!!");
                 throw(error);
               })
+          }) .catch((error) =>{
+            console.log(error);
+            throw(error);
           })
     
+        }) .catch((error) =>{
+          console.log(error);
+          //alert("Unable To Load The Dataset!!");
+          throw(error);
         })    
            
 }
@@ -172,10 +175,15 @@ function changeDataTable(){
             })
               .catch((error) =>{
                 console.log(error);
-                //alert("Unable To Load The Dataset!!");
                 throw(error);
               })
+          }) .catch((error) =>{
+            console.log(error);
+            throw(error);
           })
     
+        }) .catch((error) =>{
+          console.log(error);
+          throw(error);
         })
 }

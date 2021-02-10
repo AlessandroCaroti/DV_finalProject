@@ -35,11 +35,11 @@ function getStripesScales(data_annnual){
 function stripesEnter(event, d){
 
 
-    var tooltip = d3.select("#stripechart .tooltip");
+    var tooltip = d3.select("#stripechart .tooltip-map");
     tooltip.transition();
     var tipText =  String(
         "<b> Year: " + d.date.getFullYear()+"<br/>" +"<br/>" +
-        "Annual Average Anomaly: "+d.annual_anomaly.toFixed(2) +" &deg;C " +
+        "Annual Avg.  Anomaly: "+d.annual_anomaly.toFixed(2) +" &deg;C " +
         " &plusmn; " +  d.annual_unc.toFixed(2) + " </b>"
       )
     
@@ -51,7 +51,7 @@ function stripesEnter(event, d){
 }
 
 function stripesLeave(){
-    var tooltip = d3.select("#stripechart .tooltip");
+    var tooltip = d3.select("#stripechart .tooltip-map");
     if (tooltip) tooltip.style('display', 'none');
 }
 
