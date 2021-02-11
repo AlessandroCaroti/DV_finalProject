@@ -70,6 +70,23 @@ function initBaselineAndInfo(dataFile){
   
   }
 
+
+function init_yearSpace() {
+    var bBox = document.getElementById("sliderLabel").getBBox();
+  
+    var gap = 40,
+      w_1 = bBox.width + gap * 2,
+      w_2 = bBox.width,
+      x = bBox.x - gap;
+  
+    d3.select(".col-sm-2")
+      .select("path")
+      .attr("d", roundedFigure_1(x, -1, w_1, w_2, 37))
+      .style("fill", "rgb(202, 202, 202)")
+      .style("stroke", "black")
+      .style("stroke-width", 1.5);
+  }
+
 // parse the attribitues useful for the chart and add the baseline
 // to the annual_value and ten_years_value
 function parseDataAttributes(data, region="NaN"){

@@ -229,7 +229,7 @@ text#label-legend{
 .tabcontent {
   border: 1px solid #ccc;
   border-radius: 0px 20px 20px;
-  width: 900;
+  width: auto;
 }
 
 #stripechart{
