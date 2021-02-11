@@ -42,9 +42,9 @@ function loadData(){
 function getLineGenerators(x, y){
     
     var valueline_annual = d3.line()
-                            .x(function(d) { return x(d.date); })
-                            .y(function(d) { return y(d.monthly_value); })
-                            .defined( (d) => { return ( !isNaN(d.monthly_value) ) } );        
+                            .x(function(d) { console.log(d);return x(d.date.getMonth()) })
+                            .y(function(d) {  return y(d.monthly_value); })
+                            //.defined( (d) => { return ( !isNaN(d.monthly_value) ) } );        
  
 
     return valueline_annual;
@@ -58,7 +58,7 @@ function getLineGenerators(x, y){
 function getScales(data){
     
     var x = d3.scaleTime()
-              .domain(d3.extent(data, function(d) { return d.date.getMonth; }))
+              .domain(d3.extent(data, function(d) { return d.date }))
               .range([ 0, width ]);             
                           // Add Y axis
     var y = d3.scaleLinear()
@@ -83,7 +83,10 @@ function getMonthlyData(data){
 
     data.forEach((d)=>{
 
-        var row = {date: d.date, monthly_value: d.monthly_value}
+
+        var row = [];
+        row["date"] = d.date;
+        row["monthly_value"] = d.monthly_value;
     
         monthlyData[String(d.date.getFullYear())].push(row);
     })
@@ -98,7 +101,9 @@ function getMonthlyData(data){
 function createHottestColdestLineChart(data){
 
     var dataMonthly = getMonthlyData(data);
-    console.log(dataMonthly);
+
+
+    console.log(dataMonthly[0]);
     var svg = d3.select("#hottest_coldest_container")
                 .append("svg")
                 .attr("class","graphics")
@@ -124,16 +129,14 @@ function createHottestColdestLineChart(data){
       .call(d3.axisLeft(y))
 
     var valueline_annual = getLineGenerators(x,y);
-  
-    
-    dataMonthly.forEach((d)=>{
-        
+
+
+
            // Draw the line the line
-        svg.append("path")
-        .data([d])
+      svg.append("path")
+        .data([dataMonthly])
         .attr("class","line_chart_hottest_coldest")
         .attr("d", valueline_annual);       
 
-    })
  
 }
