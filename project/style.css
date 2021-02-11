@@ -188,27 +188,24 @@ text#label-legend{
 /* Style the buttons inside the tab */
 .tablinks {
   
-  background-color: #2E4053;
-  color: white;
-
+  background-color: white;
+  color: black;
+  position: relative;
+  border: solid lightgrey 1px;
   border-bottom: none;
-  border-radius: 15px 15px 0 0;
-
-  transform: perspective(10px) rotateX(1deg);
-  transform-origin: bottom;
-
+  border-radius: 11px 30px 0 0;
   cursor: pointer;
   padding: 14px 16px;
   transition: 0.3s;
   font-size: 17px;
   font-family: sans-serif;
   font-weight: bold;
-
   display: block;
   float: left;
+ 
 
 }
-
+.tablinks:focus {outline:0;}
 /* Change background color of buttons on hover */
 .tablinks:hover {
   background-color: #91AAC5;
@@ -219,7 +216,13 @@ text#label-legend{
 .tablinks.active {
   background-color: #91AAC5;
   color: white;
-  border: none;
+  z-index: 1;
+}
+
+#tab_stripe{
+  
+  right: 2%; 
+  
 }
 
 /* Style the tab content */
