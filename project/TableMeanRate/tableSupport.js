@@ -159,8 +159,7 @@ function table_data(data_country, data_hemisphere=null, data_continent=null, dat
             // set starting temperature in the first non null cell of the row
             if( isNaN(data_table[i][year_1].mean_rate) ){ 
                 
-                data_table[i][year_1].mean_rate = temperatures[year_1];
-                
+                data_table[i][year_1].mean_rate = temperatures[year_1]; 
                 if(!isNaN(temperatures[year_1])) data_table[i][year_1].starting_value=true;
         
             }
@@ -172,9 +171,6 @@ function table_data(data_country, data_hemisphere=null, data_continent=null, dat
              var meanRate = String(getMeanRateOfChange(temperatures[year_1], temperatures[year_2], year_1, year_2).toFixed(3));
              //Adding + for the positive mean rate
              data_table[i][year_2].mean_rate= meanRate > 0 ? String("+"+meanRate) : meanRate
-
-          
-            
 
             //update years
             index_year++;
