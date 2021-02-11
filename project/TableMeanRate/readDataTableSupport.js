@@ -39,6 +39,16 @@ function readDataAllNonNull(continent,portion_continent,hemisphere, data_country
 
 }
 
+function readDataAllNull( data_country, data_global, update=false){
+
+
+  if(update) UpdateTable(data_country, null, null, data_global, null);
+  else
+      UpdateTable(data_country, null, null, data_global, null);
+
+
+}
+
 function readDataContinentNull(portion_continent,hemisphere, data_country, data_global, update = false){
 
     console.log("2")

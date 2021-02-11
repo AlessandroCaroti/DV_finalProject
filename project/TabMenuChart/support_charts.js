@@ -8,8 +8,8 @@ var baseline;
 // given the x position find the corresponding value 
 function drawTooltip(self, event, x, data, tooltipLine, id_chart, height) {
 
-    var tooltip = d3.select(id_chart+" .tooltip")
-                  .attr("id", "tooltip");
+    var tooltip = d3.select(id_chart+" .tooltip-map")
+
     
     const date = x.invert(d3.pointer(event, self.node())[0]);
   
@@ -25,12 +25,12 @@ function drawTooltip(self, event, x, data, tooltipLine, id_chart, height) {
   
   
     var tipText =  String(
-      "<b> Year: " + elem.date.getFullYear()+"<br/>" +"<br/>" +
-      "Annual Average Temperature: "+elem.annual_value.toFixed(2) +" &deg;C " +
-      " &plusmn; " +  elem.annual_unc.toFixed(2) + " "+
-      "<br/>" +"<br/>" +
-      "Ten Years Average Temperature: "+elem.ten_years_value.toFixed(2) +" &deg;C " +
-      " &plusmn; " +  elem.ten_years_unc.toFixed(2) + "</b>  "
+      "<b> <p style='text-align: center; font-size: 12px;'> Year: " + elem.date.getFullYear()+"</p>" +
+      "Baseline Temp. : "+elem.baseline+" &deg;C <br/>" +
+      "Annual  Avg  Temp. : "+elem.annual_value.toFixed(2) +" &deg;C " +
+      " &plusmn; " +  elem.annual_unc.toFixed(2) + "<br/>"+
+      "Ten Years Avg Temp: "+elem.ten_years_value.toFixed(2) +" &deg;C " + 
+      " &plusmn; " +  elem.ten_years_unc.toFixed(2)+"</b>"
     )
        
     tooltip.html("")
@@ -44,7 +44,7 @@ function drawTooltip(self, event, x, data, tooltipLine, id_chart, height) {
 
 function removeTooltip(tooltipLine, id_chart) {
     
-  var tooltip = d3.select(id_chart+" .tooltip")
+  var tooltip = d3.select(id_chart+" .tooltip-map")
     if (tooltip) tooltip.style('display', 'none');
     if (tooltipLine) tooltipLine.attr('stroke', 'none');
   }
@@ -70,10 +70,26 @@ function initBaselineAndInfo(dataFile){
   
   }
 
+
+function init_yearSpace() {
+    var bBox = document.getElementById("sliderLabel").getBBox();
+  
+    var gap = 40,
+      w_1 = bBox.width + gap * 2,
+      w_2 = bBox.width,
+      x = bBox.x - gap;
+  
+    d3.select(".col-sm-2")
+      .select("path")
+      .attr("d", roundedFigure_1(x, -1, w_1, w_2, 37))
+      .style("fill", "rgb(202, 202, 202)")
+      .style("stroke", "black")
+      .style("stroke-width", 1.5);
+  }
+
 // parse the attribitues useful for the chart and add the baseline
 // to the annual_value and ten_years_value
 function parseDataAttributes(data, region="NaN"){
-
     data.forEach(d => {
         
       d.date = parseTime(d.Year+"-"+d.Month);
@@ -82,10 +98,13 @@ function parseDataAttributes(data, region="NaN"){
       d.annual_value = baseline + parseFloat(d["Annual Anomaly"]);
       d.ten_years_value =  baseline + parseFloat(d["Ten-year Anomaly"])
       d.ten_years_unc =  parseFloat(d["Ten-year Unc."])
+      d.baseline = baseline;
       d["region"] = region;
       
     
     })
+
+    console.log(data)
   }
   
 

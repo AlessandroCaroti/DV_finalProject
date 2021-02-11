@@ -57,7 +57,7 @@ function dataEvery50Years(data){
         
         if(!existYear(annual_data, year)){
             // handle missing year
-            data_2.push({ Year: year, annual_value:NaN, region: annual_data[0].region})
+            data_2.push({ Year: year, annual_value:NaN, region: annual_data[0].region, annual_unc:NaN})
         }       
         
     })
@@ -77,7 +77,8 @@ function getYearTemperatures(row_table){
 
     var temperatures = [];
     years.forEach((year)=>{
-        temperatures[year] = row_table[year];
+        
+        temperatures[year] = row_table[year].temp;
     })
 
     return temperatures;
@@ -94,7 +95,6 @@ function addRowTable(dataRegion50, data_region, data_table){
 
     var row={}
     dataRegion50 = dataEvery50Years(data_region);
-    
     res = dataRegion50[0].region.split("-");
     var regionName;
     if( res.length == 2) regionName= fisrtLetterUpperCase(res[0])+"-"+fisrtLetterUpperCase(res[1]);
@@ -102,7 +102,10 @@ function addRowTable(dataRegion50, data_region, data_table){
         regionName = fisrtLetterUpperCase(res[0])
     
     row["Region"] = regionName;
-    dataRegion50.forEach((d) => row[ String(d.Year) ] = d.annual_value.toFixed(2))
+
+    dataRegion50.forEach((d) => row[ String(d.Year) ] = {temp: d.annual_value.toFixed(2), mean_rate:NaN, 
+                                                            annual_unc:d.annual_unc.toFixed(2), starting_value:false })
+
     data_table.push(row)
 
 }
@@ -127,36 +130,48 @@ function table_data(data_country, data_hemisphere=null, data_continent=null, dat
     //COUNTRY
     addRowTable(dataCountry50, data_country, data_table);
     
+    // PARTIAL CONTINENT IF IS AVAILABLE
+    if( data_partial_continent != null) addRowTable(dataPortionContinent50, data_partial_continent, data_table);
+
     // CONTINENT IF IS AVAILABLE
     if( data_continent != null) addRowTable(dataContinent50, data_continent, data_table);
     
     // HEMISPHERE IF IS AVAILABLE
     if( data_hemisphere != null ) addRowTable(dataHemisphere50, data_hemisphere, data_table);
     
-    // PARTIAL CONTINENT IF IS AVAILABLE
-    if( data_partial_continent != null) addRowTable(dataPortionContinent50, data_partial_continent, data_table);
-
     //GLOBAL DATA
     addRowTable(dataGlobal50, data_global, data_table);
+ 
     
     for(var i=0; i<data_table.length; i++){
         
         //get list of temperature to calculate the mean rate of change
         var temperatures = getYearTemperatures(data_table[i]);
         var year_list = Object.keys(temperatures);
-        
+    
         var index_year = 0;
-        var year_1 = year_list[index_year];    
+        var year_1 = year_list[index_year]; 
         var year_2 = year_list[index_year+1];
- 
+        
+     
         for( var j =0; j < Object.keys(data_table[i]).length - 2; j++){
-
+            
             // set starting temperature in the first non null cell of the row
-            if( isNaN(data_table[i][year_1]) && data_table[i][year_2] )  data_table[i][year_1] = temperatures[year_1];
-            
-            //comuputing mean rate of change
-            data_table[i][year_2] = getMeanRateOfChange(temperatures[year_1], temperatures[year_2], year_1, year_2).toFixed(3)
-            
+            if( isNaN(data_table[i][year_1].mean_rate) ){ 
+                
+                data_table[i][year_1].mean_rate = temperatures[year_1]; 
+                if(!isNaN(temperatures[year_1])) data_table[i][year_1].starting_value=true;
+        
+            }
+                     
+            //for each year is saved the mean rate of change and the correspondive temperature of that year
+             data_table[i][year_2].temp= String(temperatures[year_2]);
+             //comuputing mean rate of change
+             
+             var meanRate = String(getMeanRateOfChange(temperatures[year_1], temperatures[year_2], year_1, year_2).toFixed(3));
+             //Adding + for the positive mean rate
+             data_table[i][year_2].mean_rate= meanRate > 0 ? String("+"+meanRate) : meanRate
+
             //update years
             index_year++;
             year_1 = year_list[index_year];
@@ -164,17 +179,44 @@ function table_data(data_country, data_hemisphere=null, data_continent=null, dat
         }
               
     }
-
     return data_table;
 }
 
 
+function tableCellEnter(event, d){
 
-function getStartingValueTable(d, i, columns_head, count_nan, idx_year, previous_idx) {
+    var tooltip = d3.select("#table_container .tooltip-map");
+
     
-   
-            
+    var meanRateHtml= d.starting_value ? "<b> Starting Temp. "+ d.mean_rate+" &deg;C":
+                     "<b> Mean Rate: " + d.mean_rate+" &deg;C / year"+"<br/>" +"<br/>" +
+                     "Temp. Avg.: "+d.temp +" &deg;C " +
+                     " &plusmn; " +  d.annual_unc+ " </b>"
+
+    if( d.i != "Region"){
+
+        tooltip.transition();
+    
+        tooltip.style('left', String( (event.pageX) + 25) + "px" )
+            .style('top', String( (event.pageY) - 20) + "px" )
+            .style("display", "block")
+            .html(meanRateHtml)
+
+        d3.select(this).classed("selected_cell", true);
+
+    }
+    
+      
+
 }
+
+function tableCellLeave(){
+    var tooltip = d3.select("#table_container .tooltip-map");
+    if (tooltip) tooltip.style('display', 'none');
+    d3.select(this).classed("selected_cell", false);
+}
+
+
 
 function createDefaultTable(data_country, data_hemisphere=null, data_continent=null, data_global=null,  data_partial_continent = null){
  
@@ -216,20 +258,18 @@ function createDefaultTable(data_country, data_hemisphere=null, data_continent=n
     
     rows.enter().append("tr")
                 .attr("class","rows_table")
-                .on("mouseover", function(d){                      
-                                  
-                })
-                .on("mouseout", function(d){
-                                                  
-                });
+                
                        
     //draw columns
     var columns = tbody.selectAll("tr")
                         .selectAll("td")
                         .data(function(row){
                        
-                            return columns_head.map(function(d, i){
-                                                return {i: d, value: row[d]};
+                            return columns_head.map(function(d){
+
+                                                if(d == columns_head[0]) return{i: d, region: row[d] }
+                                                return {i: d, mean_rate: row[d].mean_rate, temp: row[d].temp, 
+                                                        annual_unc:row[d].annual_unc, starting_value:row[d].starting_value};
                                               
                                              });
                         })
@@ -244,17 +284,17 @@ function createDefaultTable(data_country, data_hemisphere=null, data_continent=n
     
     tbody.selectAll("td")
          .attr("class", function(d,i){
-
+             
             //find cells with regions name
             if(d.i == columns_head[0]) return "region_cell";
             
             //first available values: case fisrt year non null
-            if(d.i == years[0] && !isNaN(d.value) )
+            if(d.i == years[0] && !isNaN(d.mean_rate) )
                 return "start_value_table";
             
             // first available values: case first year null
             //need to calculate where is the fisrt non NaN value
-            if( d.i == years[idx_year] && isNaN(d.value)){
+            if( d.i == years[idx_year] && isNaN(d.mean_rate)){
                 
                 count_nan++;
                 idx_year++;
@@ -262,7 +302,7 @@ function createDefaultTable(data_country, data_hemisphere=null, data_continent=n
                 
             }
 
-            if(d.i == years[idx_year] && !isNaN(d.value) && d.value != columns_head[0] ) 
+            if(d.i == years[idx_year] && !isNaN(d.mean_rate) && d.mean_rate != columns_head[0] ) 
             if( previous_idx == (i-1)){
             
                     count_nan = 0;
@@ -273,14 +313,18 @@ function createDefaultTable(data_country, data_hemisphere=null, data_continent=n
         })
         .attr("id", "cell")
          .html(function(d){ 
-                                              
-            if( String(d.value) == "NaN" ) return "-";
+            
+            
+            if( d.i == columns_head[0] ) return d.region;
+            if( String(d.mean_rate) == "NaN" ) return "-";
             else
-                return d.value;
+                return d.mean_rate;
                           
-        })
+        }).on("mouseover",tableCellEnter)
+          .on("mouseout",tableCellLeave)
+          
 
-        console.log(d3.select(".start_value_table"))
+   
 }
 
 
@@ -308,12 +352,7 @@ function UpdateTable(data_country, data_hemisphere=null, data_continent=null, da
 
     rows.enter().append("tr")
                 .attr("class","rows_table")
-                .on("mouseover", function(d){
-                        
-                })
-                .on("mouseout", function(d){
-                                
-                });
+               
     
     //exit data and remove
     rows.exit().remove();
@@ -322,10 +361,14 @@ function UpdateTable(data_country, data_hemisphere=null, data_continent=null, da
     var columns = tbody.selectAll("tr")
                          .selectAll("td")
                          .data(function(row){
-                            return columns_head.map(function(d, i){
-                            
-                                return {i: d, value: row[d]};
-                            });
+                       
+                            return columns_head.map(function(d){
+
+                                                if(d == columns_head[0]) return{i: d, region: row[d] }
+                                                return {i: d, mean_rate: row[d].mean_rate, temp: row[d].temp, 
+                                                            annual_unc:row[d].annual_unc, starting_value:row[d].starting_value}
+                                              
+                                             });
                         })
                      
     
@@ -342,17 +385,17 @@ function UpdateTable(data_country, data_hemisphere=null, data_continent=null, da
 
         if(d.i == columns_head[0]) return "region_cell";
 
-        if(d.i == years[0] && !isNaN(d.value) && d.value != columns_head[0])
+        if(d.i == years[0] && !isNaN(d.mean_rate) && d.mean_rate != columns_head[0])
             return "start_value_table";
 
-        if( d.i == years[idx_year] && isNaN(d.value) && d.value != columns_head[0]){
+        if( d.i == years[idx_year] && isNaN(d.mean_rate) && d.mean_rate != columns_head[0]){
 
             count_nan++;
             idx_year++;
             previous_idx = i; 
         }
 
-        if(d.i == years[idx_year] && !isNaN(d.value) && d.value != columns_head[0] ) 
+        if(d.i == years[idx_year] && !isNaN(d.mean_rate) && d.mean_rate != columns_head[0] ) 
         if( previous_idx == (i-1)){
                
                 count_nan = 0;
@@ -364,11 +407,13 @@ function UpdateTable(data_country, data_hemisphere=null, data_continent=null, da
      .attr("id", "cell")
     .html(function(d){ 
                             
-        if( String(d.value) == "NaN" ) return "-";
+        if( d.i == columns_head[0] ) return d.region;
+        if( String(d.mean_rate) == "NaN" ) return "-";
         else
-            return d.value;
+            return d.mean_rate;
         
-        })
+        }).on("mouseover",tableCellEnter)
+          .on("mouseout",tableCellLeave)
       
 
    

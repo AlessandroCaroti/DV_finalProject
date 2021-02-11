@@ -130,6 +130,7 @@ input#selectCountry {
   padding: 5px;
   text-align: center;
   font-size: 11px;
+  font-family: sans-serif;
   border: 1px solid gray;
   background: white;
   border-radius: 8px;
@@ -166,8 +167,8 @@ text#label-legend{
   float: center;
   width: 900px;
   height: 500px;
-  /* border: 1px lightgray solid; */
   margin: auto;
+  margin-top: 100px;
 
 }
 
@@ -175,39 +176,60 @@ text#label-legend{
   
   overflow: hidden;
 
+ 
 }
+
+#dropdown_tab{
+  margin-top: 50px;
+  margin-left: 45%;
+}
+
 
 /* Style the buttons inside the tab */
 .tablinks {
   
-  background-color: inherit;
-  float: left;
-  border: 1px solid lightgray;
+  background-color: white;
+  color: black;
+  position: relative;
+  border: solid lightgrey 1px;
   border-bottom: none;
-  outline: none;
+  border-radius: 11px 30px 0 0;
   cursor: pointer;
   padding: 14px 16px;
   transition: 0.3s;
   font-size: 17px;
   font-family: sans-serif;
   font-weight: bold;
+  display: block;
+  float: left;
+ 
 
 }
-
+.tablinks:focus {outline:0;}
 /* Change background color of buttons on hover */
-.tab button:hover {
-  background-color: #ddd;
+.tablinks:hover {
+  background-color: #91AAC5;
+  color: white;
 }
 
 /* Create an active/current tablink class */
-.tab button.active {
-  background-color: #ccc;
+.tablinks.active {
+  background-color: #91AAC5;
+  color: white;
+  z-index: 1;
+}
+
+#tab_stripe{
+  
+  right: 2%; 
+  
 }
 
 /* Style the tab content */
 .tabcontent {
   border: 1px solid #ccc;
-  width: 900;
+  border-radius: 0px 20px 20px;
+  width: auto;
 }
 
 #stripechart{
@@ -259,26 +281,22 @@ text#label-legend{
 
 }
 
+.graphics .baselines{
+
+  stroke-width: 1.5px;
+  stroke: black;
+  stroke-dasharray: 4px;
+  fill: none;
+}
+
+#linechart .tooltip-map{
+  text-align: left;
+}
+
 .uncertainty {
 
     fill: lightgray;
     stroke: none;
-}
-
-
-/*Tooltip Style*/
-.tooltip{
-  position: absolute;
-  width: auto;
-  height: auto;
-  padding: 10px 18px;
-  font: 10px sans-serif;
-  background-color: rgba(59, 72, 80, 0.9);
-  border-radius: 8px;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
-  display: none;
-  color: #fff;
-
 }
 
 
@@ -292,16 +310,23 @@ text#label-legend{
 /*--------------- LEGEND STYLE -------------------------------------------*/
 
 .legend {
+
+  padding: 3px;
   fill: #fff;
+  
+}
+
+#legend-square{
+  
   stroke: #000;
-  stroke-width: 0.8px;
+  stroke-width: 1px;
+
 }
 
 text.legend {
   
   fill: #000;
-  stroke: #000;
-  font-size: 12px;
+  font-size: 11px;
   alignment-baseline: central;
 
 }
@@ -312,6 +337,10 @@ text.legend {
 
 .legend .line_chart_ten_years {
   stroke-width: 3px;
+}
+
+.legend .baselines{
+  stroke-width: 2px;
 }
 
 /* END TAB MENU LINECHART */
@@ -338,9 +367,6 @@ text.legend {
     height: 55%;
 
 }
-
-
-
 
 
 .header_table{
@@ -409,4 +435,8 @@ table{
   font-weight: bold;
   color: #2E4053;
   
+}
+
+.selected_cell{
+  border: solid #2E4053 1px;
 }
