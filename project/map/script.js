@@ -9,7 +9,7 @@ var projection;
 var map_container;
 var colorsRange = ["rgb(5, 48, 97)", "white", "rgb(103, 0, 31)"];
 var colorScale;
-var unknown_temp = "#999999" // color indicating there is no data for such country in that year
+var unknown_temp = "#999999"; // color indicating there is no data for such country in that year
 var default_transition = 500;
 //var colorsRange = ["blue", "white", "red"];
 
@@ -71,10 +71,16 @@ function drawMap(world) {
 function drawGridlines() {
   var graticule = d3.geoGraticule();
 
-  var gridLines = map_container.select("#map_graticule").selectAll("path").data(graticule.lines());
-  gridLines.enter().append("path").classed("grat_2", true).attr("d", geoGenerator);
+  var gridLines = map_container
+    .select("#map_graticule")
+    .selectAll("path")
+    .data(graticule.lines());
+  gridLines
+    .enter()
+    .append("path")
+    .classed("grat_2", true)
+    .attr("d", geoGenerator);
 }
-
 
 function drawGlobeBackground() {
   map_container
@@ -84,38 +90,37 @@ function drawGlobeBackground() {
 }
 
 function update_colors(temperatures, time_trasition) {
-
   // define the transition
-  var temp_transition = d3.transition()
-                            .duration(time_trasition)
-                            .ease(d3.easeLinear);
+  var temp_transition = d3
+    .transition()
+    .duration(time_trasition)
+    .ease(d3.easeLinear);
 
   // set new anomalies
   temperatures.forEach(function (d) {
     var element = document.getElementById(d.Country);
 
-      // update anomaly color
-      d3.select(element).transition(temp_transition)
-                        .style("fill", colorScale(d["ANOMALY"]));
+    // update anomaly color
+    d3.select(element)
+      .transition(temp_transition)
+      .style("fill", colorScale(d["ANOMALY"]));
 
-      // update anomaly value
-      d3.select(element).attr("anomaly", d["ANOMALY"]);
-    });
+    // update anomaly value
+    d3.select(element).attr("anomaly", d["ANOMALY"]);
+  });
 }
 
 function country_events() {
   //MOUSE-OVER EVENT: highlighted country when the mouse is over
   map_container.selectAll(".country").on("mouseenter", function (event, b) {
-    // move to front the gridlines
-
     d3.select(this).raise();
-
     d3.select(this).classed("highlighted_country", true);
 
     // increase stroke width to make country more visible
-    let stroke = d3.select(this).style("stroke-width");
+    let stroke = parseFloat(d3.select(this).style("stroke-width"));
+    stroke = stroke * 3.0;
     console.log(stroke);
-    d3.select(this).style("stroke-width", parseFloat(stroke) * parseFloat(2.0));
+    d3.select(this).style("stroke-width", stroke);
   });
 
   map_container.selectAll(".country").on("mouseleave ", function (event, b) {
@@ -126,9 +131,11 @@ function country_events() {
     d3.select(".tooltip-map").style("display", "none");
 
     // decrease stroke width to make country less visible
-    let stroke = d3.select(this).style("stroke-width");
+    let stroke = parseFloat(d3.select(this).style("stroke-width"));
+    stroke = stroke / 3.0;
     console.log(stroke);
-    d3.select(this).style("stroke-width", parseFloat(stroke) / parseFloat(2.0));
+    d3.select(this).style("stroke-width", stroke);
+    console.log(d3.select(this));
   });
 
   // MOUSE-OVER: tooltip
@@ -154,8 +161,6 @@ function country_events() {
           }
           return "unknown";
         });
-
-        
     })
     .on("mousemove", function (event, b) {
       // update position tooltip
@@ -166,7 +171,6 @@ function country_events() {
 
   //CLICK EVENT:
   map_container.selectAll(".country").on("click", function (event, b) {
-
     //deselect the previus country
     d3.select(".selected_country").classed("selected_country", false);
 
@@ -240,8 +244,11 @@ function zoom_in(country) {
   map_container
     .transition()
     .duration(1000)
-    .call(function(selection){
-      zoom.transform(selection, d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale));
+    .call(function (selection) {
+      zoom.transform(
+        selection,
+        d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale)
+      );
     });
 }
 
@@ -297,7 +304,7 @@ function init_animationBtn() {
     .on("click", function (event, b) {
       debug_log("ANIMATION");
     });
-    
+
   play();
 }
 
@@ -326,7 +333,6 @@ d3.selection.prototype.moveToFront = function () {
 
 //                END FUNCTION MAP OVERLAY                //
 // ****************************************************** //
-
 
 // LOAD COUNTRIES MENU
 function init_dropdown_menu(list_countries) {
@@ -395,7 +401,10 @@ function load_map() {
       topology = topojson.simplify(topology, 0.05);
 
       drawMap(topology);
-      load_tempYear(tmp_file_prefix + "2019" + tmp_file_suffix, default_transition);
+      load_tempYear(
+        tmp_file_prefix + "2019" + tmp_file_suffix,
+        default_transition
+      );
       init_dropdown_menu(country_list);
     })
     .catch((error) => {
@@ -419,7 +428,7 @@ function init_page() {
 
   // trovare modo automatico per trovare min e max
   init_slider(1743, 2020, 1);
-  
+
   init_map_controls();
 
   //set_value_slider(1800);

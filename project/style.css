@@ -49,12 +49,10 @@
 .highlighted_country {
   stroke: #00ff00;
   stroke: #ffffff;
-  stroke-width: 1px;
 }
 
 .selected_country {
   stroke: red;
-  stroke-width: 1px;
 }
 
 .grat_2 {

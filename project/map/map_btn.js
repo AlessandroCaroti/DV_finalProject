@@ -106,7 +106,7 @@ async function play() {
   console.log("PLAY");
 
   await sleep(2000);
-  stop();
+  //stop();
 }
 
 async function stop() {
