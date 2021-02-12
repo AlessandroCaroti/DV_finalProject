@@ -37,6 +37,34 @@ function defaultDataHottestColdest(dataFile=""){
 
 
 function changeDataHottestColdest(){
+    
+    
+    var dataFile = document.getElementById('dataset').value;
 
-    return;
+    
+    document.getElementById("hottest_coldest_title").innerHTML= dataFile;
+
+    var folder;
+    
+    if( dataFile.charAt(dataFile.length  - 1) == '.' ) folder = dataFile.slice(0,-1);
+    else
+        folder = dataFile;
+
+
+    var csv = "/../../remaining_data/data_new/"+folder+"/"+dataFile+"_anomalyTable.csv";
+        //Di default c'è dataset 1
+    d3.csv(csv)
+        .then( function(data){ 
+            
+            parseDataAttributes(data);
+            UpdateHottestColdestLineChart(data);
+        
+        })
+            .catch((error) =>{
+            console.log(error);
+            //alert("Unable To Load The Dataset!!");
+            throw(error);
+        })
+
+
 }
