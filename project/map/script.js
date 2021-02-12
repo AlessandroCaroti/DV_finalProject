@@ -295,7 +295,7 @@ function init_zoomBtns() {
 }
 
 function init_animationBtn() {
-  d3.select("#amination")
+  d3.select("#animation")
     .select("path")
     .on("click", function (event, b) {
       debug_log("ANIMATION");

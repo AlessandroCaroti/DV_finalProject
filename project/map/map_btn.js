@@ -80,3 +80,11 @@ function local_zoom() {
 var animation = d3.select("#amination");
 animation.select("path").attr("d", roundedRect(0, 0, width, height, r));
 
+function play(){
+  
+}
+
+function stop(){
+
+}
+
