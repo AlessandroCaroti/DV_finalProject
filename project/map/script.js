@@ -192,6 +192,7 @@ function country_selected(country) {
 var max_zoom = 8;
 var zoomIn_scale = 1.2,
   zoomOut_scale = 0.8,
+  curr_zoomScale = 1,
   zommed = false;
 
 var borderCountryScale = d3
@@ -204,16 +205,18 @@ var widthGridScale = d3.scaleLinear().domain([1, max_zoom]).range([0.3, 0.2]);
 var zoom = d3
   .zoom()
   .on("zoom", (event) => {
-    zommed = event.transform.k != 1.0;
+    curr_zoomScale = event.transform.k;
+
+    zommed = curr_zoomScale != 1.0;
     map_container.attr("transform", event.transform);
 
     // change border width
     map_container
       .selectAll("path.country")
-      .style("stroke-width", borderCountryScale(event.transform.k));
+      .style("stroke-width", borderCountryScale(curr_zoomScale));
     map_container
       .selectAll("path.grat_2")
-      .style("stroke-width", widthGridScale(event.transform.k));
+      .style("stroke-width", widthGridScale(curr_zoomScale));
   })
   .scaleExtent([1, max_zoom]);
 
