@@ -71,13 +71,10 @@ function drawMap(world) {
 function drawGridlines() {
   var graticule = d3.geoGraticule();
 
-  var maps = map_container.selectAll("path.grat_2").data(graticule.lines());
-  maps.enter().append("path").classed("grat_2", true).attr("d", geoGenerator);
+  var gridLines = map_container.select("#map_graticule").selectAll("path").data(graticule.lines());
+  gridLines.enter().append("path").classed("grat_2", true).attr("d", geoGenerator);
 }
 
-function modeFrontGrid() {
-  d3.selectAll(".grat_2").moveToFront();
-}
 
 function drawGlobeBackground() {
   map_container
@@ -103,19 +100,22 @@ function update_colors(temperatures, time_trasition) {
 
       // update anomaly value
       d3.select(element).attr("anomaly", d["ANOMALY"]);
-    }
-  });
+    });
 }
 
 function country_events() {
   //MOUSE-OVER EVENT: highlighted country when the mouse is over
   map_container.selectAll(".country").on("mouseenter", function (event, b) {
     // move to front the gridlines
-    modeFrontGrid();
 
-    //d3.select(this).raise();
+    d3.select(this).raise();
 
     d3.select(this).classed("highlighted_country", true);
+
+    // increase stroke width to make country more visible
+    let stroke = d3.select(this).style("stroke-width");
+    console.log(stroke);
+    d3.select(this).style("stroke-width", parseFloat(stroke) * parseFloat(2.0));
   });
 
   map_container.selectAll(".country").on("mouseleave ", function (event, b) {
@@ -125,8 +125,10 @@ function country_events() {
     // hide tooltip
     d3.select(".tooltip-map").style("display", "none");
 
-    // move to front the gridlines
-    modeFrontGrid();
+    // decrease stroke width to make country less visible
+    let stroke = d3.select(this).style("stroke-width");
+    console.log(stroke);
+    d3.select(this).style("stroke-width", parseFloat(stroke) / parseFloat(2.0));
   });
 
   // MOUSE-OVER: tooltip
@@ -152,6 +154,8 @@ function country_events() {
           }
           return "unknown";
         });
+
+        
     })
     .on("mousemove", function (event, b) {
       // update position tooltip
@@ -162,8 +166,6 @@ function country_events() {
 
   //CLICK EVENT:
   map_container.selectAll(".country").on("click", function (event, b) {
-    // move to front the gridlines
-    modeFrontGrid();
 
     //deselect the previus country
     d3.select(".selected_country").classed("selected_country", false);
@@ -208,10 +210,10 @@ var zoom = d3
     // change border width
     map_container
       .selectAll("path.country")
-      .style("stroke-width", borderCountryScale(event.transform.k) + "px");
+      .style("stroke-width", borderCountryScale(event.transform.k));
     map_container
       .selectAll("path.grat_2")
-      .style("stroke-width", widthGridScale(event.transform.k) + "px");
+      .style("stroke-width", widthGridScale(event.transform.k));
   })
   .scaleExtent([1, max_zoom]);
 

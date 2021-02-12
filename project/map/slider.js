@@ -54,13 +54,18 @@ function init_slider(min, max, step) {
 
 function increment_step_slider(value, transition_time){
 
-  // come si triggera l'evento ... ora lo faccio in maniera becera...
 
   // set new value
   
   sliderAlternativeHandle.value(value);
 
   load_tempYear(tmp_file_prefix + value + tmp_file_suffix, transition_time);
+}
+
+async function control_animation(action){
+
+  if(action == "START"){}
+
 }
 
 async function animation_years(){
@@ -88,3 +93,4 @@ function Wait(milliseconds){
   } while (currentDate - date < milliseconds);
   
 }
+ //  id="start" onclick="animation_years()"
