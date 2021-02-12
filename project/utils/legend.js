@@ -44,7 +44,7 @@ function translation(bBox, d, pad) {
 function change_status(label_group) {
   if (label_group.attr("enable") == "y") {
     //change to not enable
-    label_group.selectAll("*").transition().duration(300).style("opacity", 0.3);
+    label_group.selectAll("*").transition().duration(300).style("opacity", 0.2);
     label_group.attr("enable", "n");
   } else {
     //otherwise set as enable
@@ -55,7 +55,7 @@ function change_status(label_group) {
 
 function update_status(label_group) {
   if (label_group.attr("enable") != "y") {
-    label_group.selectAll("*").transition().duration(300).style("opacity", 0.3);
+    label_group.selectAll("*").transition().duration(300).style("opacity", 0.2);
   }
 }
 
