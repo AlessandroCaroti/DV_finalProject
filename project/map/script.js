@@ -40,9 +40,6 @@ function drawMap(world) {
   map_container = svg.select("#map");
 
   projection = d3
-    //.geoEquirectangular()
-    //.geoMercator()
-    //.geoEqualEarth()
     .geoNaturalEarth1()
     .scale(120)
     .translate([w / 2, h / 2]);
