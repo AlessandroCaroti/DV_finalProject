@@ -36,8 +36,6 @@ function defaultDataHottestColdest(dataFile=""){
 
 
 
-
-
 function changeDataHottestColdest(){
 
     return;
