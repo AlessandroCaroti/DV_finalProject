@@ -239,16 +239,14 @@ function createHottestColdestLineChart(data){
 
       // Draw the line the line
       var line = svg.append("g")
-                    .selectAll("path")
+                    .append("path")
                     .data([d])
-                    .enter()
-                      .append("path")
                       .attr("d", valueline_annual)
                       .attr("id", String("path-"+d[0].Year))
                       .attr("class","line_chart_hottest_coldest")
       
       
-      line.exit().remove();
+      //line.exit().remove();
 
     })
 
@@ -296,8 +294,7 @@ function UpdateHottestColdestLineChart(data){
 
   //var years= Object.keys(dataMonthly);
 
-  var svg = d3.select("#hottest_coldest_container .graphics")
-             
+  var svg = d3.select(".graphics");
               
   var scales = getScales(data);
   var x = scales[0] 
@@ -316,11 +313,11 @@ function UpdateHottestColdestLineChart(data){
     //console.log(d[0].Year, "\n -----------------------------------\n");
 
     // Draw the line the line
-  var line = svg.select(".line_chart_hottest_coldest").selectAll("path").data([d]);
+  d3.select(".line_chart_hottest_coldest").remove();
   
-  line.exit().remove();
-              
-  line.enter().append("path")
+  
+  var line = svg.select(".line_chart_hottest_coldest")
+                .append("path")
                   .attr("d", valueline_annual)
                   .attr("id", String("path-"+d[0].Year))
               
