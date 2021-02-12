@@ -75,6 +75,7 @@ function getScales(data){
 }
 
 
+
 // data grouped by year
 function getMonthlyData(data){
     
@@ -88,13 +89,32 @@ function getMonthlyData(data){
     data.forEach((d)=>{
 
         var row = {};
-        row["month"] = d.date.getMonth()+1;
+        row["month"] = d.Month;
         row["monthly_value"] = d.monthly_value;
         row["Year"] = d.Year;
     
         monthlyData[String(d.Year)].push(row);
     })
 
+    console.log(monthlyData)
+    
+    var years = Object.keys(monthlyData);
+    var years_every10=[];
+    var data_every10=[];
+    for( var i=0; i < years.length; i+=10) years_every10.push(years[i])
+    
+    
+    console.log(years_every10)
+
+    years_every10.forEach( (y)=>{
+
+      data_every10.push( monthlyData[y])
+
+    })
+
+    console.log(data_every10)
+
+   // return data_every10;
     return monthlyData;
 }
 
@@ -160,18 +180,6 @@ function isInList(el, list){
 }
 
 
-function colorLines(data, d, temp){
-    
-  var colorScale = d3.scaleLinear()
-                     .domain(d3.extent(data, (x) => x.monthly_value))
-                     .range([1,0])
-
-  //if( isNaN() ) return "rgb(153,153,153)";
-
-  if(isInList(d[0].Year, temp))
-      d3.interpolateRdBu( colorScale(monthly_value));
-}
-
 
 
 function createHottestColdestLineChart(data){
@@ -223,20 +231,35 @@ function createHottestColdestLineChart(data){
       var line = svg.append("g")
                     .data([d])
                     .append("path")
-                    .attr("d", valueline_annual)
                     .attr("id", String("path-"+d[0].Year))
+                    .attr("d", valueline_annual)
+                    
                     .attr("class","line_chart_hottest_coldest")
-                    .style("stroke", colorLines(data,d, hottest_temp ));
+                  
 
 
     })
 
 
+    var colorScale = d3.scaleLinear()
+                      .domain(d3.extent(data, (x) => x.annual_value))
+                      .range([1,0])
+
     for( var i=0; i<hottest_temp.length; i++){
 
+        console.log("#path"+hottest_temp[i].Year)
+        d3.select("#path-"+hottest_temp[i].Year)
+          .style("stroke", d3.interpolateReds(colorScale(coldest_temp[i].annual_value)))
+          .style("stroke-opacity", "100%")
+          .style("stroke-width", "2")
 
-        d3.select("#path"+hottest_temp[i].Year)
-          .style("stroke", "blue");
+        
+        d3.select("#path-"+coldest_temp[i].Year)
+          .style("stroke",  d3.interpolateBlues(colorScale(coldest_temp[i].annual_value)))
+          .style("stroke-opacity", "100%")
+          .style("stroke-width", "2")
+      
+          
 
     }
     
