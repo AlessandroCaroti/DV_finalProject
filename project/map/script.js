@@ -300,6 +300,8 @@ function init_animationBtn() {
     .on("click", function (event, b) {
       debug_log("ANIMATION");
     });
+    
+  play();
 }
 
 function init_yearSpace() {
