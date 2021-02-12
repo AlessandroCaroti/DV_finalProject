@@ -73,3 +73,10 @@ function local_zoom() {
   inner_circle.attr("r", 1);
   outer_circle.style("stroke-width", 3);
 }
+
+/* -------------------------------------------------------------------------------------- */
+/*                       ANIMATION                                                        */
+
+var animation = d3.select("#amination");
+animation.select("path").attr("d", roundedRect(0, 0, width, height, r));
+

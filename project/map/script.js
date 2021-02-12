@@ -75,7 +75,7 @@ function drawGridlines() {
   maps.enter().append("path").classed("grat_2", true).attr("d", geoGenerator);
 }
 
-function modeFrontGrid(){
+function modeFrontGrid() {
   d3.selectAll(".grat_2").moveToFront();
 }
 
@@ -96,8 +96,6 @@ function update_colors(temperatures, time_trasition) {
   // set new anomalies
   temperatures.forEach(function (d) {
     var element = document.getElementById(d.Country);
-    
-    if (typeof element != "undefined" && element != null) {
 
       // update anomaly color
       d3.select(element).transition(temp_transition)
@@ -106,14 +104,12 @@ function update_colors(temperatures, time_trasition) {
       // update anomaly value
       d3.select(element).attr("anomaly", d["ANOMALY"]);
     }
-    
   });
 }
 
 function country_events() {
   //MOUSE-OVER EVENT: highlighted country when the mouse is over
   map_container.selectAll(".country").on("mouseenter", function (event, b) {
-
     // move to front the gridlines
     modeFrontGrid();
 
@@ -137,7 +133,6 @@ function country_events() {
   map_container
     .selectAll(".country")
     .on("mouseover", function (event, b) {
-
       let anomaly = d3.select(this).attr("anomaly");
 
       // show tooltip
@@ -148,14 +143,15 @@ function country_events() {
         .select(".tooltip-name")
         .html(b.properties.name);
 
-      d3.select(".tooltip-map").select(".tooltip-anomaly").datum(anomaly)
-        .html(d =>{
-          if (typeof d != "undefined" && d != null && d != "NaN"){
-              return parseFloat(d).toFixed(2) + " °C";
+      d3.select(".tooltip-map")
+        .select(".tooltip-anomaly")
+        .datum(anomaly)
+        .html((d) => {
+          if (typeof d != "undefined" && d != null && d != "NaN") {
+            return parseFloat(d).toFixed(2) + " °C";
           }
-          return "unknown"
+          return "unknown";
         });
-        
     })
     .on("mousemove", function (event, b) {
       // update position tooltip
@@ -166,7 +162,6 @@ function country_events() {
 
   //CLICK EVENT:
   map_container.selectAll(".country").on("click", function (event, b) {
-
     // move to front the gridlines
     modeFrontGrid();
 
@@ -197,13 +192,12 @@ var zoomIn_scale = 1.2,
   zoomOut_scale = 0.8,
   zommed = false;
 
-var borderCountryScale = d3.scaleLinear()
-                              .domain([1, max_zoom]) 
-                              .range([0.5, 0.2]);
+var borderCountryScale = d3
+  .scaleLinear()
+  .domain([1, max_zoom])
+  .range([0.5, 0.2]);
 
-var widthGridScale = d3.scaleLinear()
-                              .domain([1, max_zoom])
-                              .range([0.3, 0.2]);
+var widthGridScale = d3.scaleLinear().domain([1, max_zoom]).range([0.3, 0.2]);
 
 var zoom = d3
   .zoom()
@@ -212,8 +206,12 @@ var zoom = d3
     map_container.attr("transform", event.transform);
 
     // change border width
-    map_container.selectAll("path.country").style("stroke-width", borderCountryScale(event.transform.k) + "px");
-    map_container.selectAll("path.grat_2").style("stroke-width", widthGridScale(event.transform.k) + "px");
+    map_container
+      .selectAll("path.country")
+      .style("stroke-width", borderCountryScale(event.transform.k) + "px");
+    map_container
+      .selectAll("path.grat_2")
+      .style("stroke-width", widthGridScale(event.transform.k) + "px");
   })
   .scaleExtent([1, max_zoom]);
 
@@ -221,7 +219,7 @@ function reset_zoom() {
   map_container
     .transition()
     .duration(1000)
-    .call(function(selection){
+    .call(function (selection) {
       zoom.transform(selection, d3.zoomIdentity.translate(0, 0).scale(1));
     });
 }
@@ -237,14 +235,12 @@ function zoom_in(country) {
     scale = Math.max(1, Math.min(max_zoom, 0.9 / Math.max(dx / w, dy / h))),
     translate = [w / 2 - scale * x, h / 2 - scale * y];
 
-  
   map_container
     .transition()
     .duration(1000)
     .call(function(selection){
       zoom.transform(selection, d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale));
     });
-    
 }
 
 //                      END ZOOM SECTION                    //
@@ -254,6 +250,7 @@ function zoom_in(country) {
 
 function init_map_controls() {
   init_zoomBtns();
+  init_animationBtn();
   init_yearSpace();
 }
 
@@ -289,6 +286,14 @@ function init_zoomBtns() {
     .on("click", function (event, b) {
       debug_log("ZOOM_OUT");
       map_container.transition().call(zoom.scaleBy, zoomOut_scale);
+    });
+}
+
+function init_animationBtn() {
+  d3.select("#amination")
+    .select("path")
+    .on("click", function (event, b) {
+      debug_log("ANIMATION");
     });
 }
 
@@ -376,8 +381,6 @@ function load_tempYear(temp_file, time_transition) {
     });
 }
 
-
-
 function load_map() {
   d3.json(map_file)
     .then((world) => {
@@ -403,7 +406,6 @@ function load_map() {
 //                   DOVE INIZIA TUTTO                    //
 
 function init_page() {
-
   // load map
   load_map();
 
