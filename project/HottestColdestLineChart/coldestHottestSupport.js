@@ -113,21 +113,63 @@ function getAverageTemperature(data){
 }
 
 
-function getHottestYear(data){
+function getHottestYears(data){
 
-  var temperatures = getAverageTemperature(data);
-  var temp_sorted = temperatures.sort( (a, b)=> b.annual_value - a.annual_value);
-  console.log(temp_sorted)
+  var temperatures = getAverageTemperature(data).sort( (x, y) => x.annual_value - y.annual_value);
+  console.log(temperatures)
   var hottest_year = [];
   
-  for(var i=0; i < 5; i++){
+  for(var i= temperatures.length-1 ; i > temperatures.length-6; i--){
 
-    hottest_year.push(temp_sorted[i]);
+    hottest_year.push(temperatures[i]);
     
   }
 
-  console.log(hottest_year);
+  console.log("Hottest: ", hottest_year);
 
+  return hottest_year;
+
+}
+
+
+function getColdestYears(data){
+
+  var temperatures = getAverageTemperature(data).sort( (x, y) => x.annual_value - y.annual_value)
+ 
+
+  var coldest_year = [];
+  
+  for(var i=0; i < 5; i++){
+
+    coldest_year.push(temperatures[i]);
+  }
+
+  console.log("Coldest: ", coldest_year)
+  return coldest_year;
+
+}
+
+
+function isInList(el, list){
+
+  for(var i=0; i< list.length; i++){
+    if( el == list[i]) return true;
+  }
+
+  return false;
+}
+
+
+function colorLines(data, d, temp){
+    
+  var colorScale = d3.scaleLinear()
+                     .domain(d3.extent(data, (x) => x.monthly_value))
+                     .range([1,0])
+
+  //if( isNaN() ) return "rgb(153,153,153)";
+
+  if(isInList(d[0].Year, temp))
+      d3.interpolateRdBu( colorScale(monthly_value));
 }
 
 
@@ -135,7 +177,10 @@ function getHottestYear(data){
 function createHottestColdestLineChart(data){
 
     var dataMonthly = getMonthlyData(data);
-    var temperatures =  getHottestYear(data);
+    
+    
+    var hottest_temp =  getHottestYears(data);
+    var coldest_temp =  getColdestYears(data);
 
   
     //var years= Object.keys(dataMonthly);
@@ -179,11 +224,21 @@ function createHottestColdestLineChart(data){
                     .data([d])
                     .append("path")
                     .attr("d", valueline_annual)
-                    .attr("id", d[0].Year)
-                    .attr("class","line_chart_hottest_coldest");
+                    .attr("id", String("path-"+d[0].Year))
+                    .attr("class","line_chart_hottest_coldest")
+                    .style("stroke", colorLines(data,d, hottest_temp ));
 
 
     })
+
+
+    for( var i=0; i<hottest_temp.length; i++){
+
+
+        d3.select("#path"+hottest_temp[i].Year)
+          .style("stroke", "blue");
+
+    }
     
 
   
