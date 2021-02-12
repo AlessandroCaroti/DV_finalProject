@@ -77,11 +77,11 @@ function local_zoom() {
 /* -------------------------------------------------------------------------------------- */
 /*                       ANIMATION                                                        */
 
-var animation = d3.select("#amination");
+var animation = d3.select("#animation");
 animation.select("path").attr("d", roundedRect(0, 0, width, height, r));
 
 function play(){
-  
+
 }
 
 function stop(){
