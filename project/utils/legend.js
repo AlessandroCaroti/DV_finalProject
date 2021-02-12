@@ -125,7 +125,7 @@ create_legend(legend_section_1, [
   { name: "Label_1", enable: "y", color: "red", type: "rect", size: 5 },
   { name: "L_2", enable: "y", color: "green", type: "rect" },
   { name: "Label_3", enable: "n", color: "blue", type: "circle", size: 10 },
-  { name: "Label_4", enable: "y", type: "line", size: 1, class:"gold_line" },
+  { name: "Label_4", enable: "y", type: "line", class:"gold_line" },
 ]);
 
 create_legend(
