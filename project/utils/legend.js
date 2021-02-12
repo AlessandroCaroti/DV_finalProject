@@ -96,8 +96,6 @@ function create_label(group, label_info) {
       .classed(label_info.class, true);
   }
 
-  console.log(label_info.class)
-
   group
     .append("text")
     .attr("x", 35)
