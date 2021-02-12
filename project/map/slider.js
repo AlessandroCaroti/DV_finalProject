@@ -52,21 +52,30 @@ function init_slider(min, max, step) {
 }
 
 
+function control_animation(action){
+
+  if(action == "START"){
+    
+    // disable possibility to use the slider
+    disable_slider();
+  }
+
+  if(action == "STOP"){
+
+    // enable possibility to use the slider
+    enable_slider();
+  }
+
+}
+
+
 function increment_step_slider(value, transition_time){
-
-
   // set new value
-  
   sliderAlternativeHandle.value(value);
-
+  // load temperatures
   load_tempYear(tmp_file_prefix + value + tmp_file_suffix, transition_time);
 }
 
-async function control_animation(action){
-
-  if(action == "START"){}
-
-}
 
 async function animation_years(){
 
@@ -75,22 +84,22 @@ async function animation_years(){
 
     increment_step_slider(i, time_wait);
     // wait to update colors
-    //Wait(time_wait);
-    let promise = new Promise((resolve, reject) => {
-      setTimeout(() => resolve("done!"), time_wait)
-    });
-    let result = await promise; // wait until the promise resolves
+    sleep(time_wait);
   }
 
 }
-
-function Wait(milliseconds){
   
-  const date = Date.now();
-  let currentDate = null;
-  do {
-    currentDate = Date.now();
-  } while (currentDate - date < milliseconds);
-  
+function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
  //  id="start" onclick="animation_years()"
+
+function disable_slider(){
+   
+  d3.select("#" + id_slider).attr("pointer-events", "none");
+}
+
+function enable_slider(){
+  d3.select("#" + id_slider).attr("pointer-events", "auto");
+}

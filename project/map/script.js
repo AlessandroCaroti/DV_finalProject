@@ -119,7 +119,6 @@ function country_events() {
     // increase stroke width to make country more visible
     let stroke = parseFloat(d3.select(this).style("stroke-width"));
     stroke = stroke * 3.0;
-    console.log(stroke);
     d3.select(this).style("stroke-width", stroke);
   });
 
@@ -133,9 +132,7 @@ function country_events() {
     // decrease stroke width to make country less visible
     let stroke = parseFloat(d3.select(this).style("stroke-width"));
     stroke = stroke / 3.0;
-    console.log(stroke);
     d3.select(this).style("stroke-width", stroke);
-    console.log(d3.select(this));
   });
 
   // MOUSE-OVER: tooltip
@@ -176,6 +173,8 @@ function country_events() {
 
     d3.select(this).classed("selected_country", true);
     d3.select(this).moveToFront();
+
+    // make name of the country visible in the dropdown menu
     d3.select("#selectCountry").attr("value", this.id);
 
     debug_log("CLICK ON " + this.id);
@@ -303,6 +302,7 @@ function init_animationBtn() {
     .select("path")
     .on("click", function (event, b) {
       debug_log("ANIMATION");
+      
     });
 
   play();
@@ -432,5 +432,4 @@ function init_page() {
   init_map_controls();
 
   //set_value_slider(1800);
-  //animation_years();
 }
