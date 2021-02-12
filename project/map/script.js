@@ -10,6 +10,7 @@ var map_container;
 var colorsRange = ["rgb(5, 48, 97)", "white", "rgb(103, 0, 31)"];
 var colorScale;
 var unknown_temp = "#999999" // color indicating there is no data for such country in that year
+var default_transition = 500;
 //var colorsRange = ["blue", "white", "red"];
 
 var geoGenerator;
@@ -85,15 +86,12 @@ function drawGlobeBackground() {
     .attr("d", geoGenerator);
 }
 
-function update_colors(temperatures) {
+function update_colors(temperatures, time_trasition) {
 
   // define the transition
   var temp_transition = d3.transition()
-                            .duration(500)
+                            .duration(time_trasition)
                             .ease(d3.easeLinear);
-
-
-  var updated_countries = new Set();
 
   // set new anomalies
   temperatures.forEach(function (d) {
@@ -101,14 +99,12 @@ function update_colors(temperatures) {
     
     if (typeof element != "undefined" && element != null) {
 
-      updated_countries.add(d.Country);
-      console.log(d.Country);
-      // update anomaly
+      // update anomaly color
       d3.select(element).transition(temp_transition)
-                        .style("fill", colorScale(d["ANOMALY"]))
-                        .attr("anomaly", d["ANOMALY"]);
+                        .style("fill", colorScale(d["ANOMALY"]));
+
+      // update anomaly value
       d3.select(element).attr("anomaly", d["ANOMALY"]);
-      //console.log(d3.select(element).attr("anomaly"));
     }
     
   });
@@ -124,8 +120,6 @@ function country_events() {
     //d3.select(this).raise();
 
     d3.select(this).classed("highlighted_country", true);
-
-    
   });
 
   map_container.selectAll(".country").on("mouseleave ", function (event, b) {
@@ -228,9 +222,7 @@ function reset_zoom() {
     .transition()
     .duration(1000)
     .call(function(selection){
-
       zoom.transform(selection, d3.zoomIdentity.translate(0, 0).scale(1));
-      
     });
 }
 
@@ -250,9 +242,7 @@ function zoom_in(country) {
     .transition()
     .duration(1000)
     .call(function(selection){
-
       zoom.transform(selection, d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale));
-
     });
     
 }
@@ -328,40 +318,6 @@ d3.selection.prototype.moveToFront = function () {
 //                END FUNCTION MAP OVERLAY                //
 // ****************************************************** //
 
-// LOAD SLIDER YEAR
-function init_slider(min, max) {
-  var sliderAlternativeHandle = d3
-    .sliderBottom()
-    .min(min)
-    .max(max)
-    .step(1)
-    .width(500)
-    .tickFormat(d3.format("0"))
-    .ticks(7)
-    .default(2019)
-    .handle(d3.symbol().type(d3.symbolCircle).size(200)())
-    .on("end", (val) => {
-      d3.select("#sliderLabel").text("Year: " + d3.format("0")(val));
-      load_tempYear(tmp_file_prefix + val + tmp_file_suffix);
-    });
-
-  var g2 = d3
-    .select("div#sliderYear")
-    .append("svg")
-    .attr("width", 600)
-    .attr("height", 100)
-    .append("g")
-    .attr("transform", "translate(40,40)");
-
-  g2.call(sliderAlternativeHandle);
-
-  d3.select("#sliderLabel").text("Year: " + sliderAlternativeHandle.value());
-
-  d3.select("div#sliderYear")
-    .select("g .parameter-value")
-    .select("text")
-    .attr("y", -35);
-}
 
 // LOAD COUNTRIES MENU
 function init_dropdown_menu(list_countries) {
@@ -402,7 +358,7 @@ function changeCountry() {
 // ******************************************************** //
 //                   START FILES LOADING                    //
 
-function load_tempYear(temp_file) {
+function load_tempYear(temp_file, time_transition) {
   d3.csv(temp_file)
     .then(function (data) {
       console.log("LOAD TEMP: " + temp_file);
@@ -412,7 +368,7 @@ function load_tempYear(temp_file) {
       });
 
       //Associate to each county a color proportionate to it's anomaly
-      update_colors(data);
+      update_colors(data, time_transition);
     })
     .catch(function (error) {
       console.log(error);
@@ -432,7 +388,7 @@ function load_map() {
       topology = topojson.simplify(topology, 0.05);
 
       drawMap(topology);
-      load_tempYear(tmp_file_prefix + "2019" + tmp_file_suffix);
+      load_tempYear(tmp_file_prefix + "2019" + tmp_file_suffix, default_transition);
       init_dropdown_menu(country_list);
     })
     .catch((error) => {
@@ -451,14 +407,15 @@ function init_page() {
   // load map
   load_map();
 
-  
-
   // set colorscale and  legend
   set_colorScale();
   draw_legend();
 
   // trovare modo automatico per trovare min e max
-  init_slider(1743, 2020);
+  init_slider(1743, 2020, 1);
   
   init_map_controls();
+
+  //set_value_slider(1800);
+  //animation_years();
 }
