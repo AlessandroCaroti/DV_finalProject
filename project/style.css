@@ -449,6 +449,7 @@ table{
   stroke: lightgray;
   fill: none;
   stroke-width: 1px;
+  stroke-opacity: 50%;
 
 }
 

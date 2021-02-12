@@ -75,7 +75,7 @@ function getScales(data){
 }
 
 
-//TODO: DATA GROUPED BY YEAR
+// data grouped by year
 function getMonthlyData(data){
     
     var monthlyData =[];
@@ -99,12 +99,43 @@ function getMonthlyData(data){
 }
 
 
+function getAverageTemperature(data){
+
+  var data_annual = [];
+
+    data.forEach((d) => {
+        
+        if( d.Month == 5  ) data_annual.push({ Year:d.Year, annual_value: d.annual_value});
+    });
+
+  return data_annual;
+
+}
+
+
+function getHottestYear(data){
+
+  var temperatures = getAverageTemperature(data);
+  var temp_sorted = temperatures.sort( (a, b)=> b.annual_value - a.annual_value);
+  console.log(temp_sorted)
+  var hottest_year = [];
+  
+  for(var i=0; i < 5; i++){
+
+    hottest_year.push(temp_sorted[i]);
+    
+  }
+
+  console.log(hottest_year);
+
+}
+
 
 
 function createHottestColdestLineChart(data){
 
     var dataMonthly = getMonthlyData(data);
-
+    var temperatures =  getHottestYear(data);
 
   
     //var years= Object.keys(dataMonthly);
@@ -145,10 +176,10 @@ function createHottestColdestLineChart(data){
 
       // Draw the line the line
       var line = svg.append("g")
-                    .attr("id", d[0].Year)
                     .data([d])
                     .append("path")
                     .attr("d", valueline_annual)
+                    .attr("id", d[0].Year)
                     .attr("class","line_chart_hottest_coldest");
 
 
