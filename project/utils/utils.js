@@ -5,6 +5,11 @@ function debug_log(message) {
   if (debug) console.log(message + separator);
 }
 
+function changeStroke(obj, multiplyer){
+  let el = d3.select(obj)
+  el.style("stroke-width", parseFloat(el.style("stroke-width")) * multiplyer);
+}
+
 function roundedFigure_1(x, y, width_top, width_bottom, height, dy1=-0.1, dy2=0.1, p_dx1=0.5, p_dx2=0.5) {
   var l = (width_top - width_bottom) / 2;
 

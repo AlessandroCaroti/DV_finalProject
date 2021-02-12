@@ -18,7 +18,10 @@ var geoGenerator;
 var tmp_data;
 var country_list = new Array(); //List of the name of the countries present in the map
 
+var over_stroke = 3.0;
+
 var selected_country = null;
+var selected_stroke = 4.0;
 
 // FILES & DIRECTORY PATH VARIABLE
 map_file = "../../data/countries-50m.json";
@@ -117,10 +120,7 @@ function country_events() {
     d3.select(this).classed("highlighted_country", true);
 
     // increase stroke width to make country more visible
-    let stroke = parseFloat(d3.select(this).style("stroke-width"));
-    stroke = stroke * 3.0;
-    console.log(stroke);
-    d3.select(this).style("stroke-width", stroke);
+    changeStroke(this, over_stroke);
   });
 
   map_container.selectAll(".country").on("mouseleave ", function (event, b) {
@@ -131,11 +131,7 @@ function country_events() {
     d3.select(".tooltip-map").style("display", "none");
 
     // decrease stroke width to make country less visible
-    let stroke = parseFloat(d3.select(this).style("stroke-width"));
-    stroke = stroke / 3.0;
-    console.log(stroke);
-    d3.select(this).style("stroke-width", stroke);
-    console.log(d3.select(this));
+    changeStroke(this, 1 / over_stroke);
   });
 
   // MOUSE-OVER: tooltip
