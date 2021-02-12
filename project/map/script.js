@@ -37,9 +37,6 @@ function drawMap(world) {
   map_container = svg.select("#map");
 
   projection = d3
-    //.geoEquirectangular()
-    //.geoMercator()
-    //.geoEqualEarth()
     .geoNaturalEarth1()
     .scale(120)
     .translate([w / 2, h / 2]);
@@ -113,13 +110,10 @@ function update_colors(temperatures, time_trasition) {
 function country_events() {
   //MOUSE-OVER EVENT: highlighted country when the mouse is over
   map_container.selectAll(".country").on("mouseenter", function (event, b) {
-    d3.select(this).raise();
-    d3.select(this).classed("highlighted_country", true);
-
-    // increase stroke width to make country more visible
-    let stroke = parseFloat(d3.select(this).style("stroke-width"));
-    stroke = stroke * 3.0;
-    d3.select(this).style("stroke-width", stroke);
+    d3.select(this)
+      .raise()
+      .classed("highlighted_country", true)
+      .style("stroke-width", borderCountryScale(curr_zoomScale) * over_stroke); // increase stroke width to make country more visible
   });
 
   map_container.selectAll(".country").on("mouseleave ", function (event, b) {
@@ -129,10 +123,12 @@ function country_events() {
     // hide tooltip
     d3.select(".tooltip-map").style("display", "none");
 
-    // decrease stroke width to make country less visible
-    let stroke = parseFloat(d3.select(this).style("stroke-width"));
-    stroke = stroke / 3.0;
-    d3.select(this).style("stroke-width", stroke);
+    // reset the stroke width to the original one
+    var orginal_stroke = borderCountryScale(curr_zoomScale);
+    if (b === selected_country) {
+      orginal_stroke = orginal_stroke * selected_stroke;
+    }
+    d3.select(this).style("stroke-width", orginal_stroke);
   });
 
   // MOUSE-OVER: tooltip
@@ -169,12 +165,18 @@ function country_events() {
   //CLICK EVENT:
   map_container.selectAll(".country").on("click", function (event, b) {
     //deselect the previus country
+    d3.select(".selected_country").style(
+      "stroke-width",
+      borderCountryScale(curr_zoomScale)
+    );
     d3.select(".selected_country").classed("selected_country", false);
 
     d3.select(this).classed("selected_country", true);
     d3.select(this).moveToFront();
-
-    // make name of the country visible in the dropdown menu
+    d3.select(this).style(
+      "stroke-width",
+      borderCountryScale(curr_zoomScale) * selected_stroke
+    );
     d3.select("#selectCountry").attr("value", this.id);
 
     debug_log("CLICK ON " + this.id);
@@ -195,28 +197,19 @@ function country_selected(country) {
 var max_zoom = 8;
 var zoomIn_scale = 1.2,
   zoomOut_scale = 0.8,
+  curr_zoomScale = 1,
   zommed = false;
-
-var borderCountryScale = d3
-  .scaleLinear()
-  .domain([1, max_zoom])
-  .range([0.5, 0.2]);
-
-var widthGridScale = d3.scaleLinear().domain([1, max_zoom]).range([0.3, 0.2]);
 
 var zoom = d3
   .zoom()
   .on("zoom", (event) => {
-    zommed = event.transform.k != 1.0;
+    curr_zoomScale = event.transform.k;
+
+    zommed = curr_zoomScale != 1.0;
     map_container.attr("transform", event.transform);
 
     // change border width
-    map_container
-      .selectAll("path.country")
-      .style("stroke-width", borderCountryScale(event.transform.k));
-    map_container
-      .selectAll("path.grat_2")
-      .style("stroke-width", widthGridScale(event.transform.k));
+    update_strokes(curr_zoomScale);
   })
   .scaleExtent([1, max_zoom]);
 
@@ -252,6 +245,41 @@ function zoom_in(country) {
 }
 
 //                      END ZOOM SECTION                    //
+// ******************************************************** //
+// ******************************************************** //
+//                    STRAT STROKE WIDTH                    //
+var over_stroke = 3.0;
+var selected_stroke = 4.0;
+
+var borderCountryScale = d3
+  .scaleLinear()
+  .domain([1, max_zoom])
+  .range([0.5, 0.2]);
+
+var widthGridScale = d3.scaleLinear().domain([1, max_zoom]).range([0.3, 0.2]);
+
+function update_strokes(new_val) {
+  var new_strokeWidth = borderCountryScale(curr_zoomScale);
+  //update country
+  map_container
+    .selectAll("path.country")
+    .style("stroke-width", new_strokeWidth);
+
+  //update gridline
+  map_container.selectAll("path.grat_2").style("stroke-width", new_strokeWidth);
+
+  //update over
+  map_container
+    .select(".highlighted_country")
+    .style("stroke-width", new_strokeWidth * over_stroke);
+
+  //update selected
+  map_container
+    .select(".selected_country")
+    .style("stroke-width", new_strokeWidth * selected_stroke);
+}
+
+//                     END STROKE WIDTH                     //
 // ******************************************************** //
 // ******************************************************** //
 //                START FUNCTION MAP OVERLAY                //
