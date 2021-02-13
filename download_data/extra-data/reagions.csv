@@ -1,8 +1,10 @@
-,Region,Link
-0,,
-1,Asia,http://berkeleyearth.lbl.gov/regions/asia
-2,Oceania,http://berkeleyearth.lbl.gov/regions/oceania
-3,Europe,http://berkeleyearth.lbl.gov/regions/europe
-4,Africa,http://berkeleyearth.lbl.gov/regions/africa
-5,South America,http://berkeleyearth.lbl.gov/regions/south-america
-6,North America,http://berkeleyearth.lbl.gov/regions/north-america
+Region,Link
+Oceania,http://berkeleyearth.lbl.gov/regions/oceania
+Africa,http://berkeleyearth.lbl.gov/regions/africa
+Europe,http://berkeleyearth.lbl.gov/regions/europe
+South America,http://berkeleyearth.lbl.gov/regions/south-america
+North America,http://berkeleyearth.lbl.gov/regions/north-america
+Asia,http://berkeleyearth.lbl.gov/regions/asia
+Global,http://berkeleyearth.lbl.gov/auto/Global/Complete_TAVG_complete.txt
+Southern Hemisphere,http://berkeleyearth.lbl.gov/auto/Regional/TAVG/Text/southern-hemisphere-TAVG-Trend.txt
+Northern Hemisphere,http://berkeleyearth.lbl.gov/auto/Regional/TAVG/Text/northern-hemisphere-TAVG-Trend.txt

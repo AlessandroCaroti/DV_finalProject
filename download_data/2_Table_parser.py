@@ -32,16 +32,20 @@ def table_parser(html_file: str):
 
         table_not_parsed = table_not_parsed[end_curr_row+len(END_ROW):]
 
-    # remove duplicates
+    # remove duplicates and empty string
     regions = set(tuple(row) for row in regions)
+    regions = list({x for x in regions if x[0] != ""})
 
     # Save countries data
     df = pd.DataFrame(countries, columns=["Country", "Link", "Region"])
     df.to_csv("./download_data/extra-data/countries.csv")
+    print("Countries links saved.")
     
     # Save regions data
     df = pd.DataFrame(regions, columns=["Region", "Link"])
-    df.to_csv("./download_data/extra-data/reagions.csv")
+    df.to_csv("./download_data/extra-data/reagions.csv", index=False)
+    print("Regions links saved.")
+
 
 def parse(row):
     row_parsed = []
