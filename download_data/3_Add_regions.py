@@ -19,19 +19,23 @@ def extract_countryGeneralization(table):
             "<td><a href=\"") + len("<td><a href=\"")
         end_generalization = table.find("</a>", start_generalization)
 
-        link, region = table[start_generalization: end_generalization].split("\">")
+        link, region = table[start_generalization: end_generalization].split(
+            "\">")
         table = table[end_generalization:]
 
         if (region not in country_list) and (region not in regions_not_needed):
             regions.append([region, link])
             generalizations.append(region)
 
-    return generalizations, regions
+    if len(generalizations) == 0:
+        generalizations.append("Global Land")
+    
+    return ", ".join(generalizations), regions
 
 
 if __name__ == "__main__":
     df = pd.read_csv("./download_data/extra-data/countries.csv", index_col=0)
-    countries = df.values.tolist()
+    countries = df[["Country", "Link"]].values.tolist()
 
     global country_list
     country_list = df["Country"].tolist()
@@ -39,8 +43,8 @@ if __name__ == "__main__":
     error = []
     regions = []
 
-    print("This will take some times...")
-    print("{} counties to process".format(len(countries)))
+    print("This will take some times,", end=" ")
+    print("{} counties to process...".format(len(countries)))
 
     for i, country in enumerate(countries):
         print(i, end=", ", flush=True)
@@ -54,14 +58,19 @@ if __name__ == "__main__":
             end_table = webContent.find("</table> ", start_table)
         else:
             error.append(country[0])
+            print(" (error)",end=", ")
             continue
 
         country_generalization, regions_extracted = extract_countryGeneralization(
             webContent[start_table:end_table])
 
         regions += regions_extracted
-        country += [country_generalization]
+        country.append(country_generalization)
     print()
+
+    if error:
+        print("ERRORS:")
+        print(error)
 
     # remove duplicates
     regions = set(tuple(row) for row in regions)
