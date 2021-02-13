@@ -444,17 +444,8 @@ table{
 
 /*---------------------------Hottest-Coldest Year style--------------------------------*/
 
-.line_chart_hottest_coldest{
 
-  stroke: lightgray;
-  fill: none;
-  stroke-width: 1px;
-  stroke-opacity: 70%;
-
-}
-
-
-#hottest_coldest_container{
+#line_chart_hottest_coldest{
 
   border: solid lightgray 1px;
   width: 900px;

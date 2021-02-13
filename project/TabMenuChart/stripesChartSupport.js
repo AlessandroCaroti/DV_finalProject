@@ -60,7 +60,6 @@ function createDefaultStripesChart(data){
 
     var data_annnual = getAnnualData(data);
 
-
     //Scales
     var scales = getStripesScales(data_annnual);
     var x = scales[0];

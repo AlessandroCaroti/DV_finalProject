@@ -56,7 +56,7 @@ function changeDataHottestColdest(){
     d3.csv(csv)
         .then( function(data){ 
             
-            parseDataAttributes(data);
+            parseDataAttributes(data, dataFile);
             UpdateHottestColdestLineChart(data);
         
         })

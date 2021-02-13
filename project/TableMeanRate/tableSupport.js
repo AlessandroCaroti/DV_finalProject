@@ -349,13 +349,16 @@ function UpdateTable(data_country, data_hemisphere=null, data_continent=null, da
   
     var tbody= d3.select(".tbody_table")
     var rows = tbody.selectAll("tr").data(data_table);
+    
 
+    //exit data and remove
+    rows.exit().remove();
+    
     rows.enter().append("tr")
                 .attr("class","rows_table")
                
     
-    //exit data and remove
-    rows.exit().remove();
+    
     
     //bind the data to columns in each row
     var columns = tbody.selectAll("tr")
@@ -371,9 +374,9 @@ function UpdateTable(data_country, data_hemisphere=null, data_continent=null, da
                                              });
                         })
                      
-    
-    columns.enter().append("td");
     columns.exit().remove();
+    columns.enter().append("td");
+   
     
     //variables to find the first values available
     var count_nan = 0;
