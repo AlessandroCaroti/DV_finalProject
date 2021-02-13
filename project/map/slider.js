@@ -5,6 +5,11 @@ var min_slider;
 var max_slider;
 var id_slider = "draggable";
 
+// variable useful for the animation
+var animation_func;
+var cur_year;
+var animation_duration = 2.4 // in minutes
+
 // LOAD SLIDER YEAR
 function init_slider(min, max, step) {
 
@@ -48,58 +53,84 @@ function init_slider(min, max, step) {
   // setting an id to the slider
   d3.select("g.parameter-value").select("path")
                                 .attr("id", id_slider);
+
+}
+
+function control_animation(){
+
+
+  // function is running and can be STOPPED
+  if(typeof animation_func != "undefined" ){
+    stop_animation();
+    // make visible play buttom 
+    play();
+  }
+  else{
+    // no function is instanciated so START
+    start_animation();
+    // make visible stop button
+    stop();
+  }
   
 }
 
+function start_animation(){
+  var total_milliseconds = animation_duration * 60000; // 60000 milliseconds in one minute
+  var time_wait = total_milliseconds / ((max_slider - min_slider) / step_slider); //  total time / (N° years) 
+  cur_year = min_slider;
 
-function control_animation(action){
+  // disable possibility to use the slider
+  disable_slider();
 
-  if(action == "START"){
-    
-    // disable possibility to use the slider
-    disable_slider();
-  }
+  // start animation
+  animation_func = setInterval(animation_years, time_wait, time_wait);
+}
 
-  if(action == "STOP"){
+function stop_animation(){
 
-    // enable possibility to use the slider
-    enable_slider();
-  }
+  // stop animation
+  clearInterval(animation_func);
+  animation_func = undefined;
 
+  // enable possibility to use the slider
+  enable_slider();
+
+  // reset position slider
+  load_tempYear(tmp_file_prefix + sliderAlternativeHandle.value() + tmp_file_suffix, default_transition);
+  d3.select("#sliderLabel").text("Year: " + sliderAlternativeHandle.value());
 }
 
 
-function increment_step_slider(value, transition_time){
+function increment_step_slider(transition_time){
+
   // set new value
-  sliderAlternativeHandle.value(value);
+  d3.select("#sliderLabel").text("Year: " + cur_year);
   // load temperatures
-  load_tempYear(tmp_file_prefix + value + tmp_file_suffix, transition_time);
+  load_tempYear(tmp_file_prefix + cur_year + tmp_file_suffix, transition_time);
+
+  cur_year = cur_year + step_slider;
+  return cur_year;
 }
 
 
-async function animation_years(){
-
-  var time_wait = 1000;  
-  for( var i = min_slider; i <= max_slider; i += step_slider ){
-
-    increment_step_slider(i, time_wait);
-    // wait to update colors
-    sleep(time_wait);
-  }
-
-}
+async function animation_years(trasition_time){
   
-function sleep(ms) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-}
+  let year = await increment_step_slider(trasition_time);
 
- //  id="start" onclick="animation_years()"
+  // at the end of the animation
+  if (year == max_slider + step_slider)
+    stop_animation();
+  
+}
 
 function disable_slider(){
    
-  d3.select("#" + id_slider).attr("pointer-events", "none");
+  d3.select("#svg-slider").style("pointer-events", "none");
+  // change opacity 
+  d3.select("#svg-slider").style("opacity", "0.5");
 }
 
 function enable_slider(){
-  d3.select("#" + id_slider).attr("pointer-events", "auto");
+  d3.select("#" + id_slider).style("pointer-events", "auto");
+  d3.select("#svg-slider").style("opacity", "1.0");
 }

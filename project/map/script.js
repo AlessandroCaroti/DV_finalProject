@@ -173,11 +173,10 @@ function country_events() {
 
     d3.select(this).classed("selected_country", true);
     d3.select(this).moveToFront();
-    d3.select(this).style(
-      "stroke-width",
-      borderCountryScale(curr_zoomScale) * selected_stroke
-    );
-    d3.select("#selectCountry").attr("value", this.id);
+    d3.select(this).style("stroke-width", borderCountryScale(curr_zoomScale) * selected_stroke);
+
+    // set the name visible in the drop-down menu
+    d3.select("#selectCountryMenu").attr("value", this.id);
 
     debug_log("CLICK ON " + this.id);
     country_selected(this.__data__);
@@ -330,7 +329,7 @@ function init_animationBtn() {
     .select("path")
     .on("click", function (event, b) {
       debug_log("ANIMATION");
-      
+      control_animation();
     });
 
   play();
@@ -379,7 +378,7 @@ function init_dropdown_menu(list_countries) {
 
 // UPDATE COUNTRY
 function changeCountry() {
-  var listInput = document.getElementById("selectCountry");
+  var listInput = document.getElementById("selectCountryMenu");
 
   // get country name
   var name = listInput.value;
