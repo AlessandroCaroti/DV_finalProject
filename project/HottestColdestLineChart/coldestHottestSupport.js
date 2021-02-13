@@ -302,8 +302,6 @@ function UpdateHottestColdestLineChart(data){
   console.log(dataMonthly)
 
   //var years= Object.keys(dataMonthly);
-
-  //var svg = d3.select(".graphics");
               
   var scales = getScales(data);
   var x = scales[0] 
@@ -319,15 +317,14 @@ function UpdateHottestColdestLineChart(data){
     .domain(d3.extent(data, (x) => x.annual_value))
     .range([1,0])
 
-  
-  
-    var valueline_annual = getLineGenerators(x,y);
 
-    var line = d3.select(".line_chart_hottest_coldest").selectAll("path").data(dataMonthly);
+  var valueline_annual = getLineGenerators(x,y);
 
-    line.exit().remove();
+  var line = d3.select(".line_chart_hottest_coldest").selectAll("path").data(dataMonthly);
+
+  line.exit().remove();
         
-    line.enter()
+  line.enter()
           .append("g")
           .append("path")
           .merge(line)

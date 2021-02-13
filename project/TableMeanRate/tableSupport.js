@@ -355,11 +355,10 @@ function UpdateTable(data_country, data_hemisphere=null, data_continent=null, da
     rows.exit().remove();
     
     rows.enter().append("tr")
-                .attr("class","rows_table")
-               
-    
-    
-    
+                .merge(rows)
+                .attr("class","rows_table");
+
+            
     //bind the data to columns in each row
     var columns = tbody.selectAll("tr")
                          .selectAll("td")
@@ -375,7 +374,7 @@ function UpdateTable(data_country, data_hemisphere=null, data_continent=null, da
                         })
                      
     columns.exit().remove();
-    columns.enter().append("td");
+    columns.enter().append("td").merge(columns);
    
     
     //variables to find the first values available
