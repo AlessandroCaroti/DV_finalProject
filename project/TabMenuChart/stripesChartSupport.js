@@ -123,19 +123,19 @@ function updateStripesChart(data){
     
     var svg = d3.select("#stripechart");
 
-                svg.selectAll('.stripes')
-                     .data(data_annnual)
-                     .attr("x", (d) => {return  x(d.date.getFullYear())})
-                     .attr("width",  stripe_width)
-                     .attr("y",  y(0))
-                     .attr("height", y(0.8))
-                     .attr("fill", (d) => colorStripes(data_annnual, d) )
-                     .on("mouseover", stripesEnter)
-                     .on("mouseout", stripesLeave)
-                    
-
-    //Events Tooltip
     
+    var stripes= svg.selectAll('.stripes')
+                     .data(data_annnual)
 
-  
+    stripes.exit().remove();
+    
+    stripes.attr("x", (d) => {return  x(d.date.getFullYear())})
+            .attr("width",  stripe_width)
+            .attr("y",  y(0))
+            .attr("height", y(0.8))
+            .attr("fill", (d) => colorStripes(data_annnual, d) )
+            .merge(stripes)
+            .on("mouseover", stripesEnter)
+            .on("mouseout", stripesLeave)
+                    
 }
