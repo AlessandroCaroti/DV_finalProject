@@ -77,7 +77,7 @@ if __name__ == "__main__":
 
     # Save regions data
     df = pd.DataFrame(regions, columns=["Region", "Link"])
-    df.to_csv("./download_data/extra-data/reagions.csv", index=False)
+    df.to_csv("./download_data/extra-data/regions.csv")
     print("Regions links saved.")
 
     # Update countyes data

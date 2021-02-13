@@ -128,9 +128,8 @@ def pars_file(web_content, regName, data_folder):
     f.write(json_f)
     f.close()
 
-
-if __name__ == "__main__":
-    df = pd.read_csv("./download_data/extra-data/countries.csv")
+def downloader(df_path, save_directory):
+    df = pd.read_csv(df_path)
     error = []
 
     for index, row in df.iterrows():
@@ -155,6 +154,15 @@ if __name__ == "__main__":
             continue
         webContent = response.content.decode("ISO-8859-1", "backslashreplace")
 
-        pars_file(webContent, country_name, "./download_data/data/counties")
+        pars_file(webContent, country_name, save_directory)
 
     print("ERROR({}):".format(len(error)), error)
+
+if __name__ == "__main__":
+
+    #DOWNLOAD COUNTRIES
+    #downloader("./download_data/extra-data/countries.csv", "./download_data/data/counties")
+    print("______________________________________________________________________\n\n\n\n")
+
+    #DOWNLOAD REGIONS
+    downloader("./download_data/extra-data/regions.csv", "./download_data/data/regions")
