@@ -5,19 +5,31 @@ function debug_log(message) {
   if (debug) console.log(message + separator);
 }
 
-function roundedFigure_1(x, y, width_1, width_2, height, dy1=-0.1, dy2=0.1, p_dx1=0.5, p_dx2=0.5) {
-  var l = (width_1 - width_2) / 2;
+function changeStroke(obj, multiplyer){
+  let el = d3.select(obj)
+  el.style("stroke-width", parseFloat(el.style("stroke-width")) * multiplyer);
+}
+
+function roundedFigure_1(x, y, width_top, width_bottom, height, dy1=-0.1, dy2=0.1, p_dx1=0.5, p_dx2=0.5) {
+  var l = (width_top - width_bottom) / 2;
 
   return "M" + x + "," + y
-          + "h" + (width_1)
+          + "h" + (width_top)
           + "c" + (-(l*p_dx1)) +" "+ (-dy1) + ","
                 + ((l*p_dx2)-l) +" "+ (+(height+dy2)) + ","
                 + -l + " " + (+height)
-          + "h" + (-width_2)
+          + "h" + (-width_bottom)
           + "c" + (-(l*p_dx2)) +" "+ (+dy1) + ","
                 + ((l*p_dx1)-l) +" "+ (-(height+dy2)) + ","
                 + -l + " " + (-height)
           + "Z";
+}
+
+function roundedTriangle(x, y, b, h){
+  return "M" + x + "," + y
+          + "l" + h + " " + b/2
+          + "l" + -h + " " + b/2
+          + "Z"
 }
 
 /*

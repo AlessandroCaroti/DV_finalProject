@@ -19,10 +19,7 @@ TOFIX:
 -i confini del paese selezionato devono rimanere sempre sopra agli altri                           DONE
 -la grid scompare quando si passa sopra ad un paese (si può corregerla mettendo la grid sempre sotto) DONE
 -se un paese senza dati per quell'anno viene selezionato, il colore cambia in bianco (guarda 2020)  DONE
--TOOLTIP MAP quando si è su uno stato e si clicca su un altro, se non si muove il mouse
- il tooltips rimane con il nome dello stato su cui era prima il cursore, anche se la mappa si muove
- e quindi il cursore non è più sullo stato che segna il tooltip
 -rendere non interagibile le cose inutili, come il testo degli anni sotto lo slider
 
 IDEE:
--aggiungere la possibilità di cambiare anno nello slider con la rotella del mouse (o lo zoom?)
+-aggiungere la possibilità di cambiare anno nello slider con la rotella del mouse

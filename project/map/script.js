@@ -9,7 +9,8 @@ var projection;
 var map_container;
 var colorsRange = ["rgb(5, 48, 97)", "white", "rgb(103, 0, 31)"];
 var colorScale;
-var unknown_temp = "#999999" // color indicating there is no data for such country in that year
+var unknown_temp = "#999999"; // color indicating there is no data for such country in that year
+var default_transition = 500;
 //var colorsRange = ["blue", "white", "red"];
 
 var geoGenerator;
@@ -36,9 +37,6 @@ function drawMap(world) {
   map_container = svg.select("#map");
 
   projection = d3
-    //.geoEquirectangular()
-    //.geoMercator()
-    //.geoEqualEarth()
     .geoNaturalEarth1()
     .scale(120)
     .translate([w / 2, h / 2]);
@@ -70,12 +68,15 @@ function drawMap(world) {
 function drawGridlines() {
   var graticule = d3.geoGraticule();
 
-  var maps = map_container.selectAll("path.grat_2").data(graticule.lines());
-  maps.enter().append("path").classed("grat_2", true).attr("d", geoGenerator);
-}
-
-function modeFrontGrid(){
-  d3.selectAll(".grat_2").moveToFront();
+  var gridLines = map_container
+    .select("#map_graticule")
+    .selectAll("path")
+    .data(graticule.lines());
+  gridLines
+    .enter()
+    .append("path")
+    .classed("grat_2", true)
+    .attr("d", geoGenerator);
 }
 
 function drawGlobeBackground() {
@@ -85,47 +86,34 @@ function drawGlobeBackground() {
     .attr("d", geoGenerator);
 }
 
-function update_colors(temperatures) {
-
+function update_colors(temperatures, time_trasition) {
   // define the transition
-  var temp_transition = d3.transition()
-                            .duration(500)
-                            .ease(d3.easeLinear);
-
-
-  var updated_countries = new Set();
+  var temp_transition = d3
+    .transition()
+    .duration(time_trasition)
+    .ease(d3.easeLinear);
 
   // set new anomalies
   temperatures.forEach(function (d) {
     var element = document.getElementById(d.Country);
-    
-    if (typeof element != "undefined" && element != null) {
 
-      updated_countries.add(d.Country);
-      console.log(d.Country);
-      // update anomaly
-      d3.select(element).transition(temp_transition)
-                        .style("fill", colorScale(d["ANOMALY"]))
-                        .attr("anomaly", d["ANOMALY"]);
-      d3.select(element).attr("anomaly", d["ANOMALY"]);
-      //console.log(d3.select(element).attr("anomaly"));
-    }
-    
+    // update anomaly color
+    d3.select(element)
+      .transition(temp_transition)
+      .style("fill", colorScale(d["ANOMALY"]));
+
+    // update anomaly value
+    d3.select(element).attr("anomaly", d["ANOMALY"]);
   });
 }
 
 function country_events() {
   //MOUSE-OVER EVENT: highlighted country when the mouse is over
   map_container.selectAll(".country").on("mouseenter", function (event, b) {
-
-    // move to front the gridlines
-    modeFrontGrid();
-
-    //d3.select(this).raise();
-
-    d3.select(this).classed("highlighted_country", true);
-
-    
+    d3.select(this)
+      .raise()
+      .classed("highlighted_country", true)
+      .style("stroke-width", borderCountryScale(curr_zoomScale) * over_stroke); // increase stroke width to make country more visible
   });
 
   map_container.selectAll(".country").on("mouseleave ", function (event, b) {
@@ -135,15 +123,18 @@ function country_events() {
     // hide tooltip
     d3.select(".tooltip-map").style("display", "none");
 
-    // move to front the gridlines
-    modeFrontGrid();
+    // reset the stroke width to the original one
+    var orginal_stroke = borderCountryScale(curr_zoomScale);
+    if (b === selected_country) {
+      orginal_stroke = orginal_stroke * selected_stroke;
+    }
+    d3.select(this).style("stroke-width", orginal_stroke);
   });
 
   // MOUSE-OVER: tooltip
   map_container
     .selectAll(".country")
     .on("mouseover", function (event, b) {
-
       let anomaly = d3.select(this).attr("anomaly");
 
       // show tooltip
@@ -154,14 +145,15 @@ function country_events() {
         .select(".tooltip-name")
         .html(b.properties.name);
 
-      d3.select(".tooltip-map").select(".tooltip-anomaly").datum(anomaly)
-        .html(d =>{
-          if (typeof d != "undefined" && d != null && d != "NaN"){
-              return parseFloat(d).toFixed(2) + " °C";
+      d3.select(".tooltip-map")
+        .select(".tooltip-anomaly")
+        .datum(anomaly)
+        .html((d) => {
+          if (typeof d != "undefined" && d != null && d != "NaN") {
+            return parseFloat(d).toFixed(2) + " °C";
           }
-          return "unknown"
+          return "unknown";
         });
-        
     })
     .on("mousemove", function (event, b) {
       // update position tooltip
@@ -172,16 +164,19 @@ function country_events() {
 
   //CLICK EVENT:
   map_container.selectAll(".country").on("click", function (event, b) {
-
-    // move to front the gridlines
-    modeFrontGrid();
-
     //deselect the previus country
+    d3.select(".selected_country").style(
+      "stroke-width",
+      borderCountryScale(curr_zoomScale)
+    );
     d3.select(".selected_country").classed("selected_country", false);
 
     d3.select(this).classed("selected_country", true);
     d3.select(this).moveToFront();
-    d3.select("#selectCountry").attr("value", this.id);
+    d3.select(this).style("stroke-width", borderCountryScale(curr_zoomScale) * selected_stroke);
+
+    // set the name visible in the drop-down menu
+    d3.select("#selectCountryMenu").attr("value", this.id);
 
     debug_log("CLICK ON " + this.id);
     country_selected(this.__data__);
@@ -201,25 +196,19 @@ function country_selected(country) {
 var max_zoom = 8;
 var zoomIn_scale = 1.2,
   zoomOut_scale = 0.8,
+  curr_zoomScale = 1,
   zommed = false;
-
-var borderCountryScale = d3.scaleLinear()
-                              .domain([1, max_zoom]) 
-                              .range([0.5, 0.2]);
-
-var widthGridScale = d3.scaleLinear()
-                              .domain([1, max_zoom])
-                              .range([0.3, 0.2]);
 
 var zoom = d3
   .zoom()
   .on("zoom", (event) => {
-    zommed = event.transform.k != 1.0;
+    curr_zoomScale = event.transform.k;
+
+    zommed = curr_zoomScale != 1.0;
     map_container.attr("transform", event.transform);
 
     // change border width
-    map_container.selectAll("path.country").style("stroke-width", borderCountryScale(event.transform.k) + "px");
-    map_container.selectAll("path.grat_2").style("stroke-width", widthGridScale(event.transform.k) + "px");
+    update_strokes(curr_zoomScale);
   })
   .scaleExtent([1, max_zoom]);
 
@@ -227,10 +216,8 @@ function reset_zoom() {
   map_container
     .transition()
     .duration(1000)
-    .call(function(selection){
-
+    .call(function (selection) {
       zoom.transform(selection, d3.zoomIdentity.translate(0, 0).scale(1));
-      
     });
 }
 
@@ -245,25 +232,60 @@ function zoom_in(country) {
     scale = Math.max(1, Math.min(max_zoom, 0.9 / Math.max(dx / w, dy / h))),
     translate = [w / 2 - scale * x, h / 2 - scale * y];
 
-  
   map_container
     .transition()
     .duration(1000)
-    .call(function(selection){
-
-      zoom.transform(selection, d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale));
-
+    .call(function (selection) {
+      zoom.transform(
+        selection,
+        d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale)
+      );
     });
-    
 }
 
 //                      END ZOOM SECTION                    //
+// ******************************************************** //
+// ******************************************************** //
+//                    STRAT STROKE WIDTH                    //
+var over_stroke = 3.0;
+var selected_stroke = 4.0;
+
+var borderCountryScale = d3
+  .scaleLinear()
+  .domain([1, max_zoom])
+  .range([0.5, 0.2]);
+
+var widthGridScale = d3.scaleLinear().domain([1, max_zoom]).range([0.3, 0.2]);
+
+function update_strokes(new_val) {
+  var new_strokeWidth = borderCountryScale(curr_zoomScale);
+  //update country
+  map_container
+    .selectAll("path.country")
+    .style("stroke-width", new_strokeWidth);
+
+  //update gridline
+  map_container.selectAll("path.grat_2").style("stroke-width", new_strokeWidth);
+
+  //update over
+  map_container
+    .select(".highlighted_country")
+    .style("stroke-width", new_strokeWidth * over_stroke);
+
+  //update selected
+  map_container
+    .select(".selected_country")
+    .style("stroke-width", new_strokeWidth * selected_stroke);
+}
+
+//                     END STROKE WIDTH                     //
 // ******************************************************** //
 // ******************************************************** //
 //                START FUNCTION MAP OVERLAY                //
 
 function init_map_controls() {
   init_zoomBtns();
+  init_animationBtn();
   init_yearSpace();
 }
 
@@ -302,6 +324,17 @@ function init_zoomBtns() {
     });
 }
 
+function init_animationBtn() {
+  d3.select("#animation")
+    .select("path")
+    .on("click", function (event, b) {
+      debug_log("ANIMATION");
+      control_animation();
+    });
+
+  play();
+}
+
 function init_yearSpace() {
   var bBox = document.getElementById("sliderLabel").getBBox();
 
@@ -328,41 +361,6 @@ d3.selection.prototype.moveToFront = function () {
 //                END FUNCTION MAP OVERLAY                //
 // ****************************************************** //
 
-// LOAD SLIDER YEAR
-function init_slider(min, max) {
-  var sliderAlternativeHandle = d3
-    .sliderBottom()
-    .min(min)
-    .max(max)
-    .step(1)
-    .width(500)
-    .tickFormat(d3.format("0"))
-    .ticks(7)
-    .default(2019)
-    .handle(d3.symbol().type(d3.symbolCircle).size(200)())
-    .on("end", (val) => {
-      d3.select("#sliderLabel").text("Year: " + d3.format("0")(val));
-      load_tempYear(tmp_file_prefix + val + tmp_file_suffix);
-    });
-
-  var g2 = d3
-    .select("div#sliderYear")
-    .append("svg")
-    .attr("width", 600)
-    .attr("height", 100)
-    .append("g")
-    .attr("transform", "translate(40,40)");
-
-  g2.call(sliderAlternativeHandle);
-
-  d3.select("#sliderLabel").text("Year: " + sliderAlternativeHandle.value());
-
-  d3.select("div#sliderYear")
-    .select("g .parameter-value")
-    .select("text")
-    .attr("y", -35);
-}
-
 // LOAD COUNTRIES MENU
 function init_dropdown_menu(list_countries) {
   var countries = d3
@@ -380,7 +378,7 @@ function init_dropdown_menu(list_countries) {
 
 // UPDATE COUNTRY
 function changeCountry() {
-  var listInput = document.getElementById("selectCountry");
+  var listInput = document.getElementById("selectCountryMenu");
 
   // get country name
   var name = listInput.value;
@@ -402,7 +400,7 @@ function changeCountry() {
 // ******************************************************** //
 //                   START FILES LOADING                    //
 
-function load_tempYear(temp_file) {
+function load_tempYear(temp_file, time_transition) {
   d3.csv(temp_file)
     .then(function (data) {
       console.log("LOAD TEMP: " + temp_file);
@@ -412,15 +410,13 @@ function load_tempYear(temp_file) {
       });
 
       //Associate to each county a color proportionate to it's anomaly
-      update_colors(data);
+      update_colors(data, time_transition);
     })
     .catch(function (error) {
       console.log(error);
       throw error;
     });
 }
-
-
 
 function load_map() {
   d3.json(map_file)
@@ -432,7 +428,10 @@ function load_map() {
       topology = topojson.simplify(topology, 0.05);
 
       drawMap(topology);
-      load_tempYear(tmp_file_prefix + "2019" + tmp_file_suffix);
+      load_tempYear(
+        tmp_file_prefix + "2019" + tmp_file_suffix,
+        default_transition
+      );
       init_dropdown_menu(country_list);
     })
     .catch((error) => {
@@ -447,18 +446,17 @@ function load_map() {
 //                   DOVE INIZIA TUTTO                    //
 
 function init_page() {
-
   // load map
   load_map();
-
-  
 
   // set colorscale and  legend
   set_colorScale();
   draw_legend();
 
   // trovare modo automatico per trovare min e max
-  init_slider(1743, 2020);
-  
+  init_slider(1743, 2020, 1);
+
   init_map_controls();
+
+  //set_value_slider(1800);
 }

@@ -1,4 +1,3 @@
-
 var width = 31;
 var height = 31;
 var r = 5;
@@ -72,4 +71,49 @@ function no_zoom() {
 function local_zoom() {
   inner_circle.attr("r", 1);
   outer_circle.style("stroke-width", 3);
+}
+
+/* -------------------------------------------------------------------------------------- */
+/*                       ANIMATION                                                        */
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+var animation = d3.select("#animation");
+var l = 8;
+animation
+  .select("path")
+  .attr("d", roundedRect(0, 0, width, width, width / 2))
+  .style("stroke-width", 2);
+
+var play_ico = animation
+  .append("path")
+  .attr("d", roundedTriangle(width / 2 - l + 2, width / 2 - l, l * 2, l * 2))
+  .attr("fill", "balck")
+  .attr("visibility", "hidden")
+  .attr("pointer-events", "none");
+
+var stop_ico = animation
+  .append("path")
+  .attr("d", roundedRect(width / 2 - l, width / 2 - l, l * 2, l * 2, 1))
+  .attr("fill", "black")
+  .attr("visibility", "hidden")
+  .attr("pointer-events", "none");
+
+async function play() {
+  stop_ico.attr("visibility", "hidden");
+  play_ico.attr("visibility", "visible");
+  console.log("PLAY");
+
+  await sleep(2000);
+  //stop();
+}
+
+async function stop() {
+  play_ico.attr("visibility", "hidden");
+  stop_ico.attr("visibility", "visible");
+  console.log("STOP");
+
+  await sleep(2000);
+  //play();
 }
