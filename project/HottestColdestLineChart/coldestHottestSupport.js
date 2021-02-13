@@ -298,8 +298,8 @@ function createHottestColdestLineChart(data){
                     .append("path")
                       .attr("d", valueline_annual)
                       .attr("id", (d)=>String("path-"+d[0].Year))
-                      .attr("style", (d) => getHotColdStyle(hot_cold_list,d, colorScale));
-
+                      .attr("style", (d) => getHotColdStyle(hot_cold_list,d, colorScale))
+                  
  
 }
 
