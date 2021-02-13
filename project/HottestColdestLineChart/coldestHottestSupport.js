@@ -147,13 +147,16 @@ function getHottestYears(data){
   var temperatures = getAverageTemperature(data).sort( (x, y) => x.annual_value - y.annual_value);
   var hottest_year = [];
   var color=0.2
+  var color_list = ["#ff0000", "#FF7100", "#FFAF00", "#FFE700","#F3FF00"];
+  var j =0;
   for(var i= temperatures.length-1 ; i > temperatures.length-6; i--){
 
-    temperatures[i]["color_value"] = color;
+   temperatures[i]["color_value"] = color_list[j];
     
     hottest_year.push(temperatures[i]);
 
     color+= 0.2;
+    j++;
     
   }
 
@@ -170,14 +173,16 @@ function getColdestYears(data){
  
   var color=0.2
   var coldest_year = [];
-  
+  var color_list = ["#8000ff", "#0000ff", "#00bfff", "#00ffbf","#00ff00"];
+  var j =0;
   for(var i=0; i < 5; i++){
 
-    temperatures[i]["color_value"] = color;
+    temperatures[i]["color_value"] = color_list[j];
     
     coldest_year.push(temperatures[i]);
 
     color+= 0.2;
+    j++;
   }
 
   console.log("Coldest: ", coldest_year)
@@ -207,6 +212,7 @@ function getIdxList(el, list){
 }
 
 
+
 function getHotColdStyle(hot_cold_list, d, colorScale){
 
     if( isInList(d[0].Year, hot_cold_list)  ){
@@ -214,9 +220,9 @@ function getHotColdStyle(hot_cold_list, d, colorScale){
                             
       var idx = getIdxList(d[0].Year, hot_cold_list);
       
-      var colors = idx < parseInt((hot_cold_list.length - 1) / 2) ? d3.interpolateBlues(hot_cold_list[idx].color_value):d3.interpolateReds(hot_cold_list[idx].color_value)
+      //var colors = idx < parseInt((hot_cold_list.length - 1) / 2) ? d3.interpolateBlues(hot_cold_list[idx].color_value):d3.interpolateReds(hot_cold_list[idx].color_value)
 
-        var style= "stroke:" + colors+";"+//colorScale(hot_cold_list[idx].annual_value))+";"+
+      var style= "stroke:" + hot_cold_list[idx].color_value+";"+//colorScale(hot_cold_list[idx].annual_value))+";"+
                   "fill: none;"+
                   "stroke-width: 2px;"+
                   "stroke-opacity:100%;"
