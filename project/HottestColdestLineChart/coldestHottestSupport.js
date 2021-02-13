@@ -146,14 +146,18 @@ function getHottestYears(data){
 
   var temperatures = getAverageTemperature(data).sort( (x, y) => x.annual_value - y.annual_value);
   var hottest_year = [];
-  
+  var color=0.2
   for(var i= temperatures.length-1 ; i > temperatures.length-6; i--){
 
+    temperatures[i]["color_value"] = color;
+    
     hottest_year.push(temperatures[i]);
+
+    color+= 0.2;
     
   }
 
-  console.log("Hottest: ", hottest_year);
+  console.log(hottest_year)
 
   return hottest_year;
 
@@ -164,12 +168,16 @@ function getColdestYears(data){
 
   var temperatures = getAverageTemperature(data).sort( (x, y) => x.annual_value - y.annual_value)
  
-
+  var color=0.2
   var coldest_year = [];
   
   for(var i=0; i < 5; i++){
 
+    temperatures[i]["color_value"] = color;
+    
     coldest_year.push(temperatures[i]);
+
+    color+= 0.2;
   }
 
   console.log("Coldest: ", coldest_year)
@@ -205,15 +213,15 @@ function getHotColdStyle(hot_cold_list, d, colorScale){
                           
                             
       var idx = getIdxList(d[0].Year, hot_cold_list);
-  
+      
+      var colors = idx < parseInt((hot_cold_list.length - 1) / 2) ? d3.interpolateBlues(hot_cold_list[idx].color_value):d3.interpolateReds(hot_cold_list[idx].color_value)
 
-      var style= "stroke:" + d3.interpolateRdBu( colorScale(hot_cold_list[idx].annual_value))+";"+
-                "fill: none;"+
-                "stroke-width: 2px;"+
-                "stroke-opacity:100%;"
+        var style= "stroke:" + colors+";"+//colorScale(hot_cold_list[idx].annual_value))+";"+
+                  "fill: none;"+
+                  "stroke-width: 2px;"+
+                  "stroke-opacity:100%;"
       return style;
     }
-
     else{
 
      var style_base = "stroke: lightgray;"+

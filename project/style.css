@@ -456,9 +456,13 @@ table{
 
 }
 
+#hottest_coldest_title{
 
-.container-h-c{
-
-  margin-left: 50%;
+  text-align: center;
+}
+#container-h-c{
+  border: solid lightgray 1px;
+  margin-left: 20%;
+  width: 1000px;
 }
 /*---------------------------END Coldest Year style--------------------------------*/
