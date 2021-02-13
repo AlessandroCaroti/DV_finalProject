@@ -13,10 +13,8 @@ END_TABLE = "</table>"
 H_REF = "href="
 
 
-def table_parser(html_file: str):
+def table_parser(table_not_parsed: str):
     countries = []
-    regions = []
-    table_not_parsed = html_file
 
     while table_not_parsed:
         start_curr_row = table_not_parsed.find(START_ROW)
@@ -25,26 +23,16 @@ def table_parser(html_file: str):
         end_curr_row = table_not_parsed.find(END_ROW)
 
         curr_row = table_not_parsed[start_curr_row+len(START_ROW):end_curr_row]
-        country, region = parse(curr_row)
+        country = parse(curr_row)
 
         countries.append(country)
-        regions.append(region)
 
         table_not_parsed = table_not_parsed[end_curr_row+len(END_ROW):]
 
-    # remove duplicates and empty string
-    regions = set(tuple(row) for row in regions)
-    regions = list({x for x in regions if x[0] != ""})
-
     # Save countries data
-    df = pd.DataFrame(countries, columns=["Country", "Link", "Region"])
+    df = pd.DataFrame(countries, columns=["Country", "Link"])
     df.to_csv("./download_data/extra-data/countries.csv")
     print("Countries links saved.")
-    
-    # Save regions data
-    df = pd.DataFrame(regions, columns=["Region", "Link"])
-    df.to_csv("./download_data/extra-data/reagions.csv", index=False)
-    print("Regions links saved.")
 
 
 def parse(row):
@@ -68,12 +56,8 @@ def parse(row):
         link = col[href_start+len(H_REF)+1:href_end-1]
         
         row_parsed.append([name, link])
-    
-    # If resent add the ragion associated to the country
-    row_parsed.append(["",""])
-    row_parsed[0].append(row_parsed[1][0])
-    
-    return row_parsed[0], row_parsed[1] 
+        
+    return row_parsed[0]
         
 
 
