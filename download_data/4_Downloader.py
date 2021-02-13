@@ -130,7 +130,7 @@ def pars_file(web_content, regName, data_folder):
 
 
 if __name__ == "__main__":
-    df = pd.read_csv("../download_data/extra-data/countries.csv")
+    df = pd.read_csv("./download_data/extra-data/countries.csv")
     error = []
 
     for index, row in df.iterrows():
