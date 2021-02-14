@@ -139,7 +139,7 @@ function getAverageTemperature(data){
 
     data.forEach((d) => {
         
-        if( d.Month == 5  ) data_annual.push({ Year:d.Year, annual_value: d.annual_value});
+        if( d.Month == 5  ) data_annual.push({ Year:d.Year, annual_value: d.annual_value, annual_unc: d.annual_unc});
     });
 
   return data_annual;
@@ -148,8 +148,8 @@ function getAverageTemperature(data){
 
 
 function getHottestYears(data){
-
   var temperatures = getAverageTemperature(data).sort( (x, y) => x.annual_value - y.annual_value);
+ 
   var hottest_year = [];
   var color_list = ["#ff0000", "#FF7100", "#FFAF00", "#FFE700","#F3FF00"];
   var j =0;
@@ -291,8 +291,9 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp){
           .attr("x", curX)
           .attr("y", curY)
           .attr("class", "title-legend-h-c")
-          .text("Top 5 Hottest Temperature");
+          .text("Top 5 Hottest Temperatures");
 
+    var id_idx = 0;
     hottest_temp.forEach( (el)=>{
 
         curY += 35
@@ -304,21 +305,28 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp){
         legend.append( "text" )
               .attr("x", curX + 50)
               .attr("y", curY + 15)
-              .text("2020")
-              .attr("class","text-legend");
+              .html(el.Year)
+              .attr("class","text-legend")
+              .attr("id", "hot-text-"+id_idx) 
         
+        legend.append( "text" )
+              .attr("x", curX + 90)
+              .attr("y", curY + 15)
+              .html(" - "+el.annual_value.toFixed(2) + " &deg;C")
+              .attr("class","text-legend")
+              .attr("id", "hot-temp-"+id_idx) 
+      id_idx ++;
         
-
     }) 
     
-    curY += 55
+    curY += 60
     legend.append("text")
           .attr("x", curX)
           .attr("y", curY)
           .attr("class", "title-legend-h-c")
-          .text("Top 5 Coldest Temperature");
-
-
+          .text("Top 5 Coldest Temperatures");
+    
+    id_idx = 0;
     coldest_temp.forEach( (el)=>{
 
             curY += 35
@@ -330,20 +338,56 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp){
             legend.append( "text" )
                   .attr("x", curX + 50)
                   .attr("y", curY + 15)
-                  .text("2020")
-                  .attr("class","text-legend");
-                
-            
-      
+                  .html(el.Year)
+                  .attr("class","text-legend")
+                  .attr("id", "cold-text-"+id_idx) ;
+
+            legend.append( "text" )
+                  .attr("x", curX + 90)
+                  .attr("y", curY + 15)
+                  .html(" - "+el.annual_value.toFixed(2) + " &deg;C")
+                  .attr("class","text-legend")
+                  .attr("id", "cold-temp-"+id_idx) 
+          
+          id_idx ++;
+                    
         }) 
  
   
 }
 
 
+function updateHotColdLegend(hottest_temp, coldest_temp){
+
+  var id_idx=0;
+  hottest_temp.forEach( (el)=>{
+
+    d3.select("#hot-text-"+id_idx).html(el.Year);
+    d3.select("#hot-temp-"+id_idx).html(" - "+el.annual_value.toFixed(2) + " &deg;C");
+    id_idx ++;
+      
+
+  })
+  
+  id_idx = 0;
+  coldest_temp.forEach( (el)=>{
+
+    d3.select("#cold-text-"+id_idx).html(el.Year);
+    d3.select("#cold-temp-"+id_idx).html(" - "+el.annual_value.toFixed(2) + " &deg;C");
+    id_idx ++;
+
+  })
+
+
+}
+
+
+
+
+
+
 
 function createHottestColdestLineChart(data){
-
     
     var hottest_temp =  getHottestYears(data);
     var coldest_temp =  getColdestYears(data);
@@ -439,7 +483,7 @@ function UpdateHottestColdestLineChart(data){
           .on("mouseout", function(event, d){ hotColdMouseLeave(this, event, d, hot_cold_list)})
 
   
-
+  updateHotColdLegend(hottest_temp, coldest_temp);
  
 
 

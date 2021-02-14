@@ -473,6 +473,19 @@ table{
 
   border: solid lightgray 1px;
   border-radius: 10px;
+  box-shadow: 0 0 10px #333333;
+}
+
+.text-legend{
+
+  font-family: sans-serif;
+
+}
+.title-legend-h-c{
+
+  font-weight: bold;
+  font-family: sans-serif;
+  text-align: center;
 }
 
 
