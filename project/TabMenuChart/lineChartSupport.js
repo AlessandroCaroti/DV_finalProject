@@ -105,10 +105,39 @@ function drawUncertainty(data, svg, x, y){
                    
                
                }
+
+
+function getTimeScale(){
+
+    var monthList = ["1","2","3","4","5","6","7","8","9","10","11","12"];
+    var timeScale = [];
+    for(var Y = 1750; Y<=2020; Y++){
+
+        monthList.forEach((m)=>{
+
+            timeScale.push(Y+"-"+m);
+        })
+    }
+
+    return timeScale
+} 
+
+function baseLine(data){
+
+    var timeScale = getTimeScale();
+    data_baselines=[];
+    timeScale.forEach((d)=>{
+            
+        data_baselines.push({baseline: data[0].baseline});
+    })
+return data_baselines;
+}
                
 //get x and Y scales of the Linechart
 function getScales(data){
-
+    
+    var timeScale = getTimeScale();
+    //console.log(timeScale);
     var x = d3.scaleTime()
               .domain(d3.extent(data, function(d) { return d.date; }))
               .range([ 0, width ]);
@@ -200,7 +229,8 @@ function createDefaultLineChart(data){
         .append("path")
         .attr("d", valueline_ten_years);
          
-   
+   data_baselines = baseLine(data);
+   console.log(data_baselines)
     svg  
         .append("g")
         .attr("class","baselines")
