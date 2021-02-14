@@ -172,7 +172,8 @@ text#label-legend{
   width: 900px;
   height: 500px;
   margin: auto;
-  margin-top: 100px;
+  margin-top: 50px;
+ 
 
 }
 
@@ -184,7 +185,7 @@ text#label-legend{
 }
 
 #dropdown_tab{
-  margin-top: 50px;
+  margin-top: 20px;
   margin-left: 45%;
 }
 
@@ -444,3 +445,54 @@ table{
 .selected_cell{
   border: solid #2E4053 1px;
 }
+
+/*---------------------------Hottest-Coldest Year style--------------------------------*/
+
+
+#line_chart_hottest_coldest{
+
+  border: solid lightgray 1px;
+  width: 900px;
+
+}
+
+#hottest_coldest_title{
+
+  text-align: center;
+}
+#container-h-c{
+  border: solid lightgray 1px;
+  width: 1200px;
+  margin: auto;
+
+}
+
+text{
+  font-family: sans-serif;
+}
+
+#legend_hot_cold{
+
+  border: solid lightgray 1px;
+  border-radius: 10px;
+  box-shadow: 0 0 7px #333333;
+}
+
+
+.title-legend-h-c{
+
+  font-weight: bold;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.zero-line{
+
+  fill:none;
+  stroke: #000;
+  stroke-dasharray: 3px;
+  stroke-opacity: 60%;
+}
+
+
+/*---------------------------END Coldest Year style--------------------------------*/

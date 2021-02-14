@@ -183,7 +183,7 @@ function table_data(data_country, data_hemisphere=null, data_continent=null, dat
 }
 
 
-function tableCellEnter(event, d){
+function tableCellEnter(self, event, d){
 
     var tooltip = d3.select("#table_container .tooltip-map");
 
@@ -202,7 +202,7 @@ function tableCellEnter(event, d){
             .style("display", "block")
             .html(meanRateHtml)
 
-        d3.select(this).classed("selected_cell", true);
+        d3.select(self).classed("selected_cell", true);
 
     }
     
@@ -210,10 +210,10 @@ function tableCellEnter(event, d){
 
 }
 
-function tableCellLeave(){
+function tableCellLeave(self){
     var tooltip = d3.select("#table_container .tooltip-map");
     if (tooltip) tooltip.style('display', 'none');
-    d3.select(this).classed("selected_cell", false);
+    d3.select(self).classed("selected_cell", false);
 }
 
 
@@ -320,8 +320,8 @@ function createDefaultTable(data_country, data_hemisphere=null, data_continent=n
             else
                 return d.mean_rate;
                           
-        }).on("mouseover",tableCellEnter)
-          .on("mouseout",tableCellLeave)
+        }).on("mouseover",function(event, d){tableCellEnter(this, event, d)})
+          .on("mouseout",function(){tableCellLeave(this)})
           
 
    
@@ -349,14 +349,16 @@ function UpdateTable(data_country, data_hemisphere=null, data_continent=null, da
   
     var tbody= d3.select(".tbody_table")
     var rows = tbody.selectAll("tr").data(data_table);
-
-    rows.enter().append("tr")
-                .attr("class","rows_table")
-               
     
+
     //exit data and remove
     rows.exit().remove();
     
+    rows.enter().append("tr")
+                .merge(rows)
+                .attr("class","rows_table");
+
+            
     //bind the data to columns in each row
     var columns = tbody.selectAll("tr")
                          .selectAll("td")
@@ -371,9 +373,9 @@ function UpdateTable(data_country, data_hemisphere=null, data_continent=null, da
                                              });
                         })
                      
-    
-    columns.enter().append("td");
     columns.exit().remove();
+    columns.enter().append("td").merge(columns);
+   
     
     //variables to find the first values available
     var count_nan = 0;
@@ -412,8 +414,8 @@ function UpdateTable(data_country, data_hemisphere=null, data_continent=null, da
         else
             return d.mean_rate;
         
-        }).on("mouseover",tableCellEnter)
-          .on("mouseout",tableCellLeave)
+        }).on("mouseover",function(event, d){tableCellEnter(this, event, d)})
+          .on("mouseout",function(){tableCellLeave(this)})
       
 
    

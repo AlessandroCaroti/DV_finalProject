@@ -5,11 +5,6 @@ var width = full_width - margin.left - margin.right;
 var height = full_width*9/16 - margin.top - margin.bottom;
 
 
-
-
-
-
-
 function changeData() {
     
     // prendere dati da mappa selezionata o dropdown menu

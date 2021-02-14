@@ -66,13 +66,15 @@ function drawUncertainty(data, svg, x, y){
                              .y0(function(d) { return y(d.ten_years_value + d.ten_years_unc ) })
                              .y1(function(d) { return y(d.ten_years_value - d.ten_years_unc ) })
                              .defined( (d) => { return ( !isNaN(d.ten_years_unc ) ) } );
-  
-  
-    svg.append("path")
-      .datum(data)
-      .attr("class", "uncertainty")
-      .attr("d", areaUncGenerator)
-      
+
+    svg.append("g")
+                .attr("class","uncertainty")
+                .selectAll("path")
+                .data([data])
+                .enter()
+                .append("path")
+                .attr("d", areaUncGenerator);
+            
       
   
   }
@@ -89,13 +91,21 @@ function drawUncertainty(data, svg, x, y){
                              .defined( (d) => { return ( !isNaN(d.ten_years_unc ) ) } );
   
   
-    d3.select(".uncertainty")
-      .datum(data)
-      .attr("d", areaUncGenerator)
-      
-    
-  }
-  
+    var unc= d3.select(".uncertainty")
+                .selectAll("path")
+                .data([data]);
+                 
+    unc.exit().remove();
+             
+    unc.enter()
+        .append("path")
+        .merge(unc)
+        .attr("d", areaUncGenerator);
+                    
+                   
+               
+               }
+               
 //get x and Y scales of the Linechart
 function getScales(data){
 
@@ -116,7 +126,7 @@ function getScales(data){
 function getLineGenerators(x, y){
     
     var valueline_annual = d3.line()
-                            .x(function(d) { return x(d.date); })
+                            .x(function(d) {  return x(d.date); })
                             .y(function(d) { return y(d.annual_value); })
                             .defined( (d) => { return ( !isNaN(d.annual_value) ) } );        
     
@@ -167,31 +177,43 @@ function createDefaultLineChart(data){
     var valueline_ten_years = lineGenerators[1];
     var valueline_baseline = lineGenerators[2];
 
-
+    
     drawUncertainty(data, svg, x, y);
     
-    // Draw the line the line
-    svg.append("path")
-              .data([data])
-              .attr("class","line_chart_annual")
-              .attr("d", valueline_annual);       
-      
-    svg.append("path")
-              .data([data])
-              .attr("class","line_chart_ten_years")
-              .attr("d", valueline_ten_years);     
-    
-    svg.append("path")
-              .data([data])
-              .attr("class","baselines")
-              .attr("d", valueline_baseline);     
-              
-    
-    
+
+
+   svg  
+        .append("g")
+        .attr("class","line_chart_annual")
+        .selectAll("path")
+        .data([data])
+        .enter()
+        .append("path")
+        .attr("d", valueline_annual);
+         
+   svg  
+        .append("g")
+        .attr("class","line_chart_ten_years")
+        .selectAll("path")
+        .data([data])
+        .enter()
+        .append("path")
+        .attr("d", valueline_ten_years);
+         
+   
+    svg  
+        .append("g")
+        .attr("class","baselines")
+        .selectAll("path")
+        .data([data])
+        .enter()
+        .append("path")
+        .attr("d", valueline_baseline);
+        
+
     createLineChartLegend(svg);
 
     
-   
     var tooltipLine = svg.append('line').attr("class","line_tip");
     
     var tipBox = svg.append('rect')
@@ -244,22 +266,34 @@ function updateLineChart(data, grafic_class){
     //Update the area that represents the uncertainty                      
     UpdateUncertainty(data, x, y);
     
-     // Draw the line the line
-    svg.select(".line_chart_annual")
-        .data([data])
-        .attr("d", valueline_annual)
-        .transition().duration(2000);      
-                           
-    svg.select(".line_chart_ten_years")
-        .data([data])
-        .attr("d", valueline_ten_years)
-        .transition().duration(2000);  
+
+    var annual_line= svg.select(".line_chart_annual").selectAll("path").data([data]);
+    annual_line.exit().remove();
+    annual_line
+       .enter()
+       .append("path")
+       .merge(annual_line)
+       .attr("d", valueline_annual)
     
-    svg.select(".baselines")
-        .data([data])
-        .attr("d", valueline_baseline)
-        .transition().duration(2000);  
     
+    var ten_line= svg.select(".line_chart_ten_years").selectAll("path").data([data]);
+    ten_line.exit().remove();
+    ten_line
+       .enter()
+       .append("path")
+       .merge(ten_line)
+       .attr("d", valueline_ten_years);
+    
+    
+    var base_line= svg.select(".baselines").selectAll("path").data([data]);
+    base_line.exit().remove();
+    base_line
+       .enter()
+       .append("path")
+       .merge(base_line)
+       .attr("d", valueline_baseline);
+ 
+
     //Update The tooltip
     var tooltipLine = d3.select(".line_tip");
     var tipBox = d3.select(".tipbox")
