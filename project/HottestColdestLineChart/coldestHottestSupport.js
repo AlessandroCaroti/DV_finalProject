@@ -286,39 +286,53 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp){
                       .attr("transform", "translate("+(width-300)+","+-(height-200)+")")
                       .append("g")
     var curX = 25;
-    var curY = 40;
+    var curY = 25;
     legend.append("text")
           .attr("x", curX)
           .attr("y", curY)
-          .attr("class", "text-legend")
+          .attr("class", "title-legend-h-c")
           .text("Top 5 Hottest Temperature");
 
     hottest_temp.forEach( (el)=>{
 
-        curY += 30
+        curY += 35
         legend.append( "rect" )
               .attr("x", curX ).attr("width", 20)
               .attr("y", curY).attr("height", 20)
               .attr("fill", el.color_value)
         
+        legend.append( "text" )
+              .attr("x", curX + 50)
+              .attr("y", curY + 15)
+              .text("2020")
+              .attr("class","text-legend");
+        
+        
 
     }) 
     
-    curY += 50
+    curY += 55
     legend.append("text")
           .attr("x", curX)
           .attr("y", curY)
-          .attr("class", "text-legend")
-          .text("Top 5 Cottest Temperature");
+          .attr("class", "title-legend-h-c")
+          .text("Top 5 Coldest Temperature");
 
 
     coldest_temp.forEach( (el)=>{
 
-            curY += 30
+            curY += 35
             legend.append( "rect" )
                   .attr("x", curX ).attr("width", 20)
                   .attr("y", curY).attr("height", 20)
                   .attr("fill", el.color_value)
+                  
+            legend.append( "text" )
+                  .attr("x", curX + 50)
+                  .attr("y", curY + 15)
+                  .text("2020")
+                  .attr("class","text-legend");
+                
             
       
         }) 
