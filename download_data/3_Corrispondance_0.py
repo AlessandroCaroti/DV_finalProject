@@ -1,6 +1,6 @@
 import pandas as pd
 import json
-import os
+import io
 
 mapFile_path = "./data/countries-10m.json"
 countriesCsv_path = "./download_data/extra-data/countries.csv"
@@ -30,11 +30,11 @@ def save_difference(not_in_map, not_in_temp):
     print("\nSave the difference in a cvs[y/n]?", end=" ")
     choice = input()
     if choice == "y" or choice == "Y":
-        d = {"In Temp, not in Map": not_in_map,
-             "In Map, not in Temp": not_in_temp}
+        d = {"In Temp, not in Map ({})".format(len(not_in_map)): not_in_map,
+             "In Map, not in Temp ({})".format(len(not_in_temp)): not_in_temp}
         df = pd.DataFrame.from_dict(d, orient='index')
         df = df.transpose()
-        df.to_csv("./download_data/extra-data/difference.csv")
+        df.to_csv("./download_data/extra-data/difference_0.csv")
         print("Difference saved.\n")
 
 
@@ -69,7 +69,7 @@ if __name__ == "__main__":
     countryTemp_list = df["Country"].tolist()
 
     # Create a list with the country present in the map
-    with open(mapFile_path) as json_file:
+    with io.open(mapFile_path, mode="r", encoding="UTF-8") as json_file:
         map_data = json.load(json_file)
         countryMap_list = extraxtCountry_from_map(map_data)
 
