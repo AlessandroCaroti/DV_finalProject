@@ -462,7 +462,14 @@ table{
 }
 #container-h-c{
   border: solid lightgray 1px;
-  margin-left: 20%;
-  width: 1000px;
+  width: 900px;
+  margin: auto;
+
+}
+
+
+.selected-path{
+
+  stroke-width: 5px;
 }
 /*---------------------------END Coldest Year style--------------------------------*/

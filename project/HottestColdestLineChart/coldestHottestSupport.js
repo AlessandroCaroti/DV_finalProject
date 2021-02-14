@@ -146,16 +146,12 @@ function getHottestYears(data){
 
   var temperatures = getAverageTemperature(data).sort( (x, y) => x.annual_value - y.annual_value);
   var hottest_year = [];
-  var color=0.2
   var color_list = ["#ff0000", "#FF7100", "#FFAF00", "#FFE700","#F3FF00"];
   var j =0;
   for(var i= temperatures.length-1 ; i > temperatures.length-6; i--){
 
-   temperatures[i]["color_value"] = color_list[j];
-    
+    temperatures[i]["color_value"] = color_list[j]; 
     hottest_year.push(temperatures[i]);
-
-    color+= 0.2;
     j++;
     
   }
@@ -171,17 +167,13 @@ function getColdestYears(data){
 
   var temperatures = getAverageTemperature(data).sort( (x, y) => x.annual_value - y.annual_value)
  
-  var color=0.2
   var coldest_year = [];
   var color_list = ["#8000ff", "#0000ff", "#00bfff", "#00ffbf","#00ff00"];
   var j =0;
   for(var i=0; i < 5; i++){
 
     temperatures[i]["color_value"] = color_list[j];
-    
     coldest_year.push(temperatures[i]);
-
-    color+= 0.2;
     j++;
   }
 
@@ -213,16 +205,14 @@ function getIdxList(el, list){
 
 
 
-function getHotColdStyle(hot_cold_list, d, colorScale){
+function getHotColdStyle(hot_cold_list, d){
 
     if( isInList(d[0].Year, hot_cold_list)  ){
                           
                             
       var idx = getIdxList(d[0].Year, hot_cold_list);
       
-      //var colors = idx < parseInt((hot_cold_list.length - 1) / 2) ? d3.interpolateBlues(hot_cold_list[idx].color_value):d3.interpolateReds(hot_cold_list[idx].color_value)
-
-      var style= "stroke:" + hot_cold_list[idx].color_value+";"+//colorScale(hot_cold_list[idx].annual_value))+";"+
+       var style= "stroke:" + hot_cold_list[idx].color_value+";"+
                   "fill: none;"+
                   "stroke-width: 2px;"+
                   "stroke-opacity:100%;"
@@ -233,7 +223,7 @@ function getHotColdStyle(hot_cold_list, d, colorScale){
      var style_base = "stroke: lightgray;"+
                   "fill: none;"+
                   "stroke-width: 1px;"+
-                  "stroke-opacity: 70%;"
+                  "stroke-opacity: 50%;"
 
       return style_base;
     }
@@ -243,10 +233,31 @@ function getHotColdStyle(hot_cold_list, d, colorScale){
 }
 
 
+
+function hotColdMouseEnter(self, d){
+
+ 
+    d3.select(self).style("stroke-width","5px")
+
+}
+
+function hotColdMouseLeave(self, d, hot_cold_list){
+
+    year = self.id.split("-")[1];                
+    if( isInList(year, hot_cold_list)  )
+      d3.select(self).style("stroke-width","2px");
+    else
+      d3.select(self).style("stroke-width","1px");
+
+}
+
+
+
+
+
+
 function createHottestColdestLineChart(data){
 
-   
-    
     
     var hottest_temp =  getHottestYears(data);
     var coldest_temp =  getColdestYears(data);
@@ -267,12 +278,6 @@ function createHottestColdestLineChart(data){
     var x = scales[0] 
     var y =  scales[1]
 
-
-    var colorScale = d3.scaleLinear()
-    .domain(d3.extent(data, (x) => x.annual_value))
-    .range([1,0])
-
-    
     svg.append("g")
       .attr("transform", "translate(0," + height + ")")
       .attr("class", "x_axis_hc")
@@ -290,7 +295,7 @@ function createHottestColdestLineChart(data){
 
 
     // Draw the line the line
-    var line = svg.append("g")
+    svg.append("g")
                   .attr("class","line_chart_hottest_coldest")
                     .selectAll("path")
                     .data(dataMonthly)
@@ -298,7 +303,9 @@ function createHottestColdestLineChart(data){
                     .append("path")
                       .attr("d", valueline_annual)
                       .attr("id", (d)=>String("path-"+d[0].Year))
-                      .attr("style", (d) => getHotColdStyle(hot_cold_list,d, colorScale))
+                      .attr("style", (d) => getHotColdStyle(hot_cold_list,d))
+                      .on("mouseover", function(d){ hotColdMouseEnter(this, d)})
+                      .on("mouseout", function(d){ hotColdMouseLeave(this, d, hot_cold_list)})
                   
  
 }
@@ -327,10 +334,6 @@ function UpdateHottestColdestLineChart(data){
     .transition().duration(500)
     .call(d3.axisLeft(y));  
 
-  var colorScale = d3.scaleLinear()
-    .domain(d3.extent(data, (x) => x.annual_value))
-    .range([1,0])
-
 
   var valueline_annual = getLineGenerators(x,y);
 
@@ -344,7 +347,9 @@ function UpdateHottestColdestLineChart(data){
           .merge(line)
           .attr("d", valueline_annual)
           .attr("id", (d)=>String("path-"+d[0].Year))
-          .attr("style", (d) => getHotColdStyle(hot_cold_list,d, colorScale));
+          .attr("style", (d) => getHotColdStyle(hot_cold_list,d))
+          .on("mouseover", function(d){ hotColdMouseEnter(this, d)})
+          .on("mouseout", function(d){ hotColdMouseLeave(this, d, hot_cold_list)});
 
   
 
