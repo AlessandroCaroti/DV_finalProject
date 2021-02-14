@@ -281,7 +281,7 @@ function hotColdMouseEnter(self, event, d, hottest_temp, coldest_temp){
 
 }
 
-function hotColdMouseLeave(self, event, d, hot_cold_list){    
+function hotColdMouseLeave(self, event, d, hot_cold_list, hottest_temp, coldest_temp){    
     
     year = self.className.baseVal.split("-")[1]; 
     if( isInList(year, hot_cold_list)  )
@@ -291,8 +291,16 @@ function hotColdMouseLeave(self, event, d, hot_cold_list){
       d3.select(self).style("stroke-opacity","50%");
     }
 
-    d3.select("#legend_hot_cold").selectAll("text").style("font-weight", "normal")
-
+    if( isInList(year, coldest_temp)  ){
+      var idx = getIdxList(year, coldest_temp);
+      d3.select("#cold-text-"+idx).style("font-weight", "normal")
+      d3.select("#cold-temp-"+idx).style("font-weight", "normal")
+    }
+    if( isInList(year, hottest_temp)  ){
+      var idx = getIdxList(year, hottest_temp);
+      d3.select("#hot-text-"+idx).style("font-weight", "normal")
+      d3.select("#hot-temp-"+idx).style("font-weight", "normal")
+    }
 }
 
 
@@ -316,7 +324,7 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp){
           .attr("x", curX-20)
           .attr("y", curY)
           .attr("class", "title-legend-h-c")
-          .text("Top 5 Hottest Temperatures");
+          .text("Top 5 Hottest Anomalies");
 
     var id_idx = 0;
     hottest_temp.forEach( (el)=>{
@@ -328,17 +336,17 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp){
               .attr("fill", el.color_value)
         
         legend.append( "text" )
+              .attr("class","text-legend")
               .attr("x", curX + 50)
               .attr("y", curY + 15)
               .html(el.Year)
-              .attr("class","text-legend")
               .attr("id", "hot-text-"+id_idx) 
         
         legend.append( "text" )
+              .attr("class","text-legend")
               .attr("x", curX + 105)
               .attr("y", curY + 15)
               .html((el.annual_anomaly> 0? "+"+el.annual_anomaly.toFixed(2): el.annual_anomaly.toFixed(2)) + " &deg;C")
-              .attr("class","text-legend")
               .attr("id", "hot-temp-"+id_idx) 
       id_idx ++;
         
@@ -349,7 +357,7 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp){
           .attr("x", curX-20)
           .attr("y", curY)
           .attr("class", "title-legend-h-c")
-          .text("Top 5 Coldest Temperatures");
+          .text("Top 5 Coldest Anomalies");
     
     id_idx = 0;
     var coldest_tmp = coldest_temp;
@@ -362,17 +370,17 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp){
                   .attr("fill", el.color_value)
                   
             legend.append( "text" )
+                  .attr("class","text-legend")
                   .attr("x", curX + 50)
                   .attr("y", curY + 15)
                   .html(el.Year)
-                  .attr("class","text-legend")
                   .attr("id", "cold-text-"+id_idx) ;
 
             legend.append( "text" )
+                  .attr("class","text-legend")
                   .attr("x", curX + 105)
                   .attr("y", curY + 15)
                   .html((el.annual_anomaly> 0? "+"+el.annual_anomaly.toFixed(2): el.annual_anomaly.toFixed(2)) + " &deg;C")
-                  .attr("class","text-legend")
                   .attr("id", "cold-temp-"+id_idx) 
           
           id_idx ++;
@@ -465,7 +473,7 @@ function createHottestColdestLineChart(data){
                       .attr("class", (d)=>String("path-"+d[0].Year))
                       .attr("style", (d) => getHotColdStyle(hot_cold_list,d))
                       .on("mouseover", function(event, d){ hotColdMouseEnter(this, event, d, hottest_temp, coldest_temp)})
-                      .on("mouseout", function(event, d){ hotColdMouseLeave(this, event, d, hot_cold_list)})
+                      .on("mouseout", function(event, d){ hotColdMouseLeave(this, event, d, hot_cold_list, hottest_temp, coldest_temp)})
   
     
     svg.append("g")
@@ -520,7 +528,7 @@ function UpdateHottestColdestLineChart(data){
           .attr("class", (d)=>String("path-"+d[0].Year))
           .attr("style", (d) => getHotColdStyle(hot_cold_list,d))
           .on("mouseover", function(event, d){ hotColdMouseEnter(this, event, d,hottest_temp, coldest_temp)})
-          .on("mouseout", function(event, d){ hotColdMouseLeave(this, event, d, hot_cold_list)})
+          .on("mouseout", function(event, d){ hotColdMouseLeave(this, event, d, hot_cold_list, hottest_temp, coldest_temp)})
 
   var zeroLine = d3.select(".zero-line").selectAll("path").data(dataMonthly);
 
