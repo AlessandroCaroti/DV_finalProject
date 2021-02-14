@@ -462,14 +462,18 @@ table{
 }
 #container-h-c{
   border: solid lightgray 1px;
-  width: 900px;
+  width: 1200px;
   margin: auto;
 
 }
 
+#legend_hot_cold{
 
-.selected-path{
+  /*transform: translate(900px, -500px)*/
 
-  stroke-width: 5px;
+  border: solid lightgray 1px;
+  border-radius: 10px;
 }
+
+
 /*---------------------------END Coldest Year style--------------------------------*/

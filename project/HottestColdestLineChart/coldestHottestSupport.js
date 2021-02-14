@@ -9,7 +9,9 @@ var monthList = ["1","2","3","4","5","6","7","8","9","10","11","12"];
 
 
 function loadData(){ 
-    const countries = '../../remaining_data/data_new/Countries.csv';
+    
+  
+  const countries = '../../remaining_data/data_new/Countries.csv';
     var dataset = "";
     d3.csv(countries)
       .then((data)=>{
@@ -23,6 +25,8 @@ function loadData(){
             option.setAttribute("value", d.Country);
             option.innerHTML = d.Country;
             dropdown.append(option)
+
+            //test(option.value)
             if( option.value == "Italy"){
               dropdown.selectedIndex = i;
               dropdown.options[i].selected = true;
@@ -33,6 +37,7 @@ function loadData(){
             i++;
           });
 
+          
           defaultDataHottestColdest(dataset);
           
     })
@@ -148,15 +153,21 @@ function getHottestYears(data){
   var hottest_year = [];
   var color_list = ["#ff0000", "#FF7100", "#FFAF00", "#FFE700","#F3FF00"];
   var j =0;
-  for(var i= temperatures.length-1 ; i > temperatures.length-6; i--){
+  var counter_temp = 0;
+  for(var i=(temperatures.length-1); i >= 0 ; i--){
 
-    temperatures[i]["color_value"] = color_list[j]; 
-    hottest_year.push(temperatures[i]);
-    j++;
-    
+    if( counter_temp == 5) break;
+
+    if( isNaN(temperatures[i].annual_value) ) continue;
+    else{
+      temperatures[i]["color_value"] = color_list[j];
+      hottest_year.push(temperatures[i]);
+      j++;
+      counter_temp++;
+
+    }
   }
 
-  console.log(hottest_year)
 
   return hottest_year;
 
@@ -170,14 +181,23 @@ function getColdestYears(data){
   var coldest_year = [];
   var color_list = ["#8000ff", "#0000ff", "#00bfff", "#00ffbf","#00ff00"];
   var j =0;
-  for(var i=0; i < 5; i++){
+  var counter_temp = 0;
+  for(var i=0; i < temperatures.length; i++){
 
-    temperatures[i]["color_value"] = color_list[j];
-    coldest_year.push(temperatures[i]);
-    j++;
+    if( counter_temp == 5) break;
+
+    if( isNaN(temperatures[i].annual_value) ) continue;
+    else{
+      temperatures[i]["color_value"] = color_list[j];
+      coldest_year.push(temperatures[i]);
+      j++;
+      counter_temp++;
+
+    }
+   
   }
 
-  console.log("Coldest: ", coldest_year)
+
   return coldest_year;
 
 }
@@ -234,16 +254,15 @@ function getHotColdStyle(hot_cold_list, d){
 
 
 
-function hotColdMouseEnter(self, d){
+function hotColdMouseEnter(self, event, d){
 
- 
     d3.select(self).style("stroke-width","5px")
 
 }
 
-function hotColdMouseLeave(self, d, hot_cold_list){
-
-    year = self.id.split("-")[1];                
+function hotColdMouseLeave(self, event, d, hot_cold_list){    
+    
+    year = self.className.baseVal.split("-")[1]; 
     if( isInList(year, hot_cold_list)  )
       d3.select(self).style("stroke-width","2px");
     else
@@ -253,6 +272,59 @@ function hotColdMouseLeave(self, d, hot_cold_list){
 
 
 
+function createHotColdLegend(id_container, hottest_temp, coldest_temp){
+
+    container = d3.select("#"+id_container);
+    
+    var width = document.getElementById(id_container).offsetWidth
+    var height = document.getElementById(id_container).offsetHeight
+ 
+    legend = container.append("svg")
+                      .attr("id","legend_hot_cold")
+                      .attr("width", 270)
+                      .attr("height", 500)
+                      .attr("transform", "translate("+(width-300)+","+-(height-200)+")")
+                      .append("g")
+    var curX = 25;
+    var curY = 40;
+    legend.append("text")
+          .attr("x", curX)
+          .attr("y", curY)
+          .attr("class", "text-legend")
+          .text("Top 5 Hottest Temperature");
+
+    hottest_temp.forEach( (el)=>{
+
+        curY += 30
+        legend.append( "rect" )
+              .attr("x", curX ).attr("width", 20)
+              .attr("y", curY).attr("height", 20)
+              .attr("fill", el.color_value)
+        
+
+    }) 
+    
+    curY += 50
+    legend.append("text")
+          .attr("x", curX)
+          .attr("y", curY)
+          .attr("class", "text-legend")
+          .text("Top 5 Cottest Temperature");
+
+
+    coldest_temp.forEach( (el)=>{
+
+            curY += 30
+            legend.append( "rect" )
+                  .attr("x", curX ).attr("width", 20)
+                  .attr("y", curY).attr("height", 20)
+                  .attr("fill", el.color_value)
+            
+      
+        }) 
+ 
+  
+}
 
 
 
@@ -261,6 +333,8 @@ function createHottestColdestLineChart(data){
     
     var hottest_temp =  getHottestYears(data);
     var coldest_temp =  getColdestYears(data);
+
+    console.log("EQUAL: ", hottest_temp.length == coldest_temp.length)
     var hot_cold_list = hottest_temp.concat(coldest_temp);
 
     var dataMonthly = getMonthlyData(data, hottest_temp, coldest_temp);
@@ -292,7 +366,7 @@ function createHottestColdestLineChart(data){
 
     var valueline_annual = getLineGenerators(x,y);
 
-
+    
 
     // Draw the line the line
     svg.append("g")
@@ -302,13 +376,13 @@ function createHottestColdestLineChart(data){
                     .enter()
                     .append("path")
                       .attr("d", valueline_annual)
-                      .attr("id", (d)=>String("path-"+d[0].Year))
+                      .attr("class", (d)=>String("path-"+d[0].Year))
                       .attr("style", (d) => getHotColdStyle(hot_cold_list,d))
-                      .on("mouseover", function(d){ hotColdMouseEnter(this, d)})
-                      .on("mouseout", function(d){ hotColdMouseLeave(this, d, hot_cold_list)})
+                      .on("mouseover", function(event, d){ hotColdMouseEnter(this, event, d)})
+                      .on("mouseout", function(event, d){ hotColdMouseLeave(this, event, d, hot_cold_list)})
                   
- 
-}
+  createHotColdLegend("container-h-c", hottest_temp, coldest_temp);
+} 
 
 
 function UpdateHottestColdestLineChart(data){
@@ -317,12 +391,11 @@ function UpdateHottestColdestLineChart(data){
   var hottest_temp =  getHottestYears(data);
   var coldest_temp =  getColdestYears(data);
   var hot_cold_list = hottest_temp.concat(coldest_temp);
+  console.log("EQUAL: ", hottest_temp.length == coldest_temp.length)
 
   var dataMonthly = getMonthlyData(data, hottest_temp, coldest_temp);
 
-  console.log(dataMonthly)
 
-  //var years= Object.keys(dataMonthly);
               
   var scales = getScales(data);
   var x = scales[0] 
@@ -346,10 +419,10 @@ function UpdateHottestColdestLineChart(data){
           .append("path")
           .merge(line)
           .attr("d", valueline_annual)
-          .attr("id", (d)=>String("path-"+d[0].Year))
+          .attr("class", (d)=>String("path-"+d[0].Year))
           .attr("style", (d) => getHotColdStyle(hot_cold_list,d))
-          .on("mouseover", function(d){ hotColdMouseEnter(this, d)})
-          .on("mouseout", function(d){ hotColdMouseLeave(this, d, hot_cold_list)});
+          .on("mouseover", function(event, d){ hotColdMouseEnter(this, event, d)})
+          .on("mouseout", function(event, d){ hotColdMouseLeave(this, event, d, hot_cold_list)})
 
   
 

@@ -66,13 +66,7 @@ function drawUncertainty(data, svg, x, y){
                              .y0(function(d) { return y(d.ten_years_value + d.ten_years_unc ) })
                              .y1(function(d) { return y(d.ten_years_value - d.ten_years_unc ) })
                              .defined( (d) => { return ( !isNaN(d.ten_years_unc ) ) } );
-  /*
-  
-    svg.append("path")
-      .datum(data)
-      .attr("class", "uncertainty")
-      .attr("d", areaUncGenerator)
-    */
+
     svg.append("g")
                 .attr("class","uncertainty")
                 .selectAll("path")
