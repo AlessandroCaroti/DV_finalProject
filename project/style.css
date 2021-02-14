@@ -467,6 +467,10 @@ table{
 
 }
 
+text{
+  font-family: sans-serif;
+}
+
 #legend_hot_cold{
 
   border: solid lightgray 1px;
