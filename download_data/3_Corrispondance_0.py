@@ -1,9 +1,10 @@
+#!/usr/bin/python
 import pandas as pd
 import json
 import io
 
 mapFile_path = "./download_data/data/map/countries-10m_V0.json"
-countriesCsv_path = "./download_data/extra-data/countries.csv"
+countriesCsv_path = "./download_data/extra-data/2_countries.csv"
 
 
 def compute_corrisponcance(countries_Temp, countries_Map):
@@ -21,9 +22,7 @@ def compute_corrisponcance(countries_Temp, countries_Map):
     print("-{} countries in MAP but not in TEMP.".format(len(not_in_temp)))
 
     save_difference(not_in_map, not_in_temp)
-    print("_____________________________________________________")
     #print_differnce(not_in_map, not_in_temp)
-    #print("_____________________________________________________")
 
 
 def save_difference(not_in_map, not_in_temp):
@@ -34,8 +33,10 @@ def save_difference(not_in_map, not_in_temp):
              "In Map, not in Temp ({})".format(len(not_in_temp)): not_in_temp}
         df = pd.DataFrame.from_dict(d, orient='index')
         df = df.transpose()
-        df.to_csv("./download_data/extra-data/difference_0.csv")
-        print("Difference saved.\n")
+        df.to_csv("./download_data/extra-data/3_difference.csv")
+        print("Difference saved.")
+    print("_____________________________________________________")
+
 
 
 def print_differnce(not_in_map, not_in_temp):
@@ -51,6 +52,7 @@ def print_differnce(not_in_map, not_in_temp):
         print("List of countries in MAP but not in TEMP:")
         for c in not_in_temp:
             print("-{}".format(c))
+    print("_____________________________________________________")
 
 
 def extraxtCountry_from_map(map_file):

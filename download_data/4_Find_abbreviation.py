@@ -2,8 +2,8 @@ import pandas as pd
 import json
 import io
 
-mapFile_path = "./data/countries-10m.json"
-countriesCsv_path = "./download_data/extra-data/countries.csv"
+mapFile_path = "./download_data/data/map/countries-10m_V0.json"
+countriesCsv_path = "./download_data/extra-data/2_countries.csv"
 
 
 def search_for_abbreviation(countries_Temp, countries_Map):
@@ -19,9 +19,12 @@ def search_for_abbreviation(countries_Temp, countries_Map):
                 if c[:-1] == c2[:len(c)-1]:
                     abbreviation.append([c, c2])
     
+    print("Found {} abbreviations".format(len(abbreviation)))
+    
     # Save countries data
     df = pd.DataFrame(abbreviation, columns=["Map Country", "Temp Country"])
-    df.to_csv("./download_data/extra-data/abbreviation.csv")
+    df.to_csv("./download_data/extra-data/4_abbreviation.csv")
+    print("Abbreviations found saved.")
 
 
 def extraxtCountry_from_map(map_file):

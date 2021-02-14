@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import pandas as pd
 import io
 
@@ -31,7 +32,7 @@ def table_parser(table_not_parsed: str):
 
     # Save countries data
     df = pd.DataFrame(countries, columns=["Country", "Link"])
-    df.to_csv("./download_data/extra-data/countries.csv")
+    df.to_csv("./download_data/extra-data/2_countries.csv")
     print("Countries links saved.")
 
 
@@ -63,7 +64,7 @@ def parse(row):
 
 
 if __name__ == "__main__":
-    f = io.open("./download_data/extra-data/table.html",
+    f = io.open("./download_data/extra-data/1_table.html",
                 mode="r", encoding="ISO-8859-1")
     f_str = f.read()
 
