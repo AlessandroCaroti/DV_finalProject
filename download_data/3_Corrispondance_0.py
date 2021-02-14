@@ -3,6 +3,7 @@ import json
 import io
 
 mapFile_path = "./data/countries-10m.json"
+mapFile_path = "./data_manipulaion/maps_modification/countries-10m_V31.json"
 countriesCsv_path = "./download_data/extra-data/countries.csv"
 
 
@@ -69,7 +70,7 @@ if __name__ == "__main__":
     countryTemp_list = df["Country"].tolist()
 
     # Create a list with the country present in the map
-    with io.open(mapFile_path, mode="r", encoding="UTF-8") as json_file:
+    with io.open(mapFile_path, mode="r", encoding="ISO-8859-1") as json_file:
         map_data = json.load(json_file)
         countryMap_list = extraxtCountry_from_map(map_data)
 
