@@ -243,7 +243,7 @@ function getHotColdStyle(hot_cold_list, d){
      var style_base = "stroke: lightgray;"+
                   "fill: none;"+
                   "stroke-width: 1px;"+
-                  "stroke-opacity: 50%;"
+                  "stroke-opacity: 70%;"
 
       return style_base;
     }
@@ -256,7 +256,9 @@ function getHotColdStyle(hot_cold_list, d){
 
 function hotColdMouseEnter(self, event, d){
 
-    d3.select(self).style("stroke-width","5px")
+    d3.select(self).style("stroke-width","6px");
+    d3.select(self).style("stroke-opacity","100%");
+  
 
 }
 
@@ -265,8 +267,10 @@ function hotColdMouseLeave(self, event, d, hot_cold_list){
     year = self.className.baseVal.split("-")[1]; 
     if( isInList(year, hot_cold_list)  )
       d3.select(self).style("stroke-width","2px");
-    else
+    else{
       d3.select(self).style("stroke-width","1px");
+      d3.select(self).style("stroke-opacity","70%");
+    }
 
 }
 
