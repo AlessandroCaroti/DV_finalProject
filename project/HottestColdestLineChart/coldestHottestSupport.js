@@ -50,10 +50,16 @@ function getLineGenerators(x, y){
     
     var valueline_annual = d3.line()
                               .x(function(d) { console.log();return x(parseMonth(d.month))})
-                              .y(function(d) {  return y(d.monthly_value); })
-                              .defined( (d) => { return ( !isNaN(d.monthly_value) ) } );        
+                              .y(function(d) {  return y(d.monthly_value ); })
+                              .defined( (d) => { return ( !isNaN(d.monthly_value) ) } );  
+                              
+                              
+                         
+    var zeroline=       d3.line()
+                                .x(function(d) { return x(parseMonth(d.month))})
+                                .y(function(d) {  return y(d.zero_val ); })
  
-    return valueline_annual;
+    return [valueline_annual, zeroline];
 
 }
 
@@ -97,6 +103,8 @@ function getMonthlyData(data, hottestYears, coldestYears){
         row["month"] = d.Month;
         row["monthly_value"] = d.monthly_value;
         row["Year"] = d.Year;
+        row["annual_anomaly"] = d.annual_anomaly;
+        row["zero_val"] = 0;
     
         monthlyData[String(d.Year)].push(row);
     })
@@ -127,7 +135,6 @@ function getMonthlyData(data, hottestYears, coldestYears){
     })
 
 
-
    return data_every10;
 
 }
@@ -139,8 +146,11 @@ function getAverageTemperature(data){
 
     data.forEach((d) => {
         
-        if( d.Month == 5  ) data_annual.push({ Year:d.Year, annual_value: d.annual_value, annual_unc: d.annual_unc});
+        if( d.Month == 5  ) data_annual.push({ Year:d.Year, annual_value: d.annual_value, 
+                                              annual_unc: d.annual_unc, annual_anomaly: d.annual_anomaly});
     });
+
+    console.log(data_annual[0])
 
   return data_annual;
 
@@ -149,9 +159,8 @@ function getAverageTemperature(data){
 
 function getHottestYears(data){
   var temperatures = getAverageTemperature(data).sort( (x, y) => x.annual_value - y.annual_value);
- 
   var hottest_year = [];
-  var color_list = ["#ff0000", "#FF7100", "#FFAF00", "#FFE700","#F3FF00"];
+  var color_list = ["#FF0020", "#FF4600", "#FF7800", "#FFaa00","#FFe600"];
   var j =0;
   var counter_temp = 0;
   for(var i=(temperatures.length-1); i >= 0 ; i--){
@@ -167,7 +176,7 @@ function getHottestYears(data){
 
     }
   }
-
+  console.log("aaaaa", hottest_year)
 
   return hottest_year;
 
@@ -179,7 +188,7 @@ function getColdestYears(data){
   var temperatures = getAverageTemperature(data).sort( (x, y) => x.annual_value - y.annual_value)
  
   var coldest_year = [];
-  var color_list = ["#8000ff", "#0000ff", "#00bfff", "#00ffbf","#00ff00"];
+  var color_list = ["#17ff00", "#00ffa8", "#00fff4", "#0094ff","#0054ff"].reverse();
   var j =0;
   var counter_temp = 0;
   for(var i=0; i < temperatures.length; i++){
@@ -235,7 +244,7 @@ function getHotColdStyle(hot_cold_list, d){
        var style= "stroke:" + hot_cold_list[idx].color_value+";"+
                   "fill: none;"+
                   "stroke-width: 2px;"+
-                  "stroke-opacity:100%;"
+                  "stroke-opacity:80%;"
       return style;
     }
     else{
@@ -243,22 +252,32 @@ function getHotColdStyle(hot_cold_list, d){
      var style_base = "stroke: lightgray;"+
                   "fill: none;"+
                   "stroke-width: 1px;"+
-                  "stroke-opacity: 70%;"
+                  "stroke-opacity: 50%;"
 
       return style_base;
     }
-
-    
-
 }
 
 
 
-function hotColdMouseEnter(self, event, d){
+function hotColdMouseEnter(self, event, d, hottest_temp, coldest_temp){
 
     d3.select(self).style("stroke-width","6px");
-    d3.select(self).style("stroke-opacity","100%");
-  
+    d3.select(self).style("stroke-opacity","80%");
+
+    year = self.className.baseVal.split("-")[1];
+    
+    if( isInList(year, hottest_temp)  ){
+      var idx = getIdxList(year, hottest_temp);
+      d3.select("#hot-text-"+idx).style("font-weight", "bold")
+      d3.select("#hot-temp-"+idx).style("font-weight", "bold")
+    }
+    
+    if( isInList(year, coldest_temp)  ){
+      var idx = getIdxList(year, coldest_temp);
+      d3.select("#cold-text-"+idx).style("font-weight", "bold")
+      d3.select("#cold-temp-"+idx).style("font-weight", "bold")
+    }
 
 }
 
@@ -266,11 +285,13 @@ function hotColdMouseLeave(self, event, d, hot_cold_list){
     
     year = self.className.baseVal.split("-")[1]; 
     if( isInList(year, hot_cold_list)  )
-      d3.select(self).style("stroke-width","2px");
+      d3.select(self).style("stroke-width","1.5px");
     else{
       d3.select(self).style("stroke-width","1px");
-      d3.select(self).style("stroke-opacity","70%");
+      d3.select(self).style("stroke-opacity","50%");
     }
+
+    d3.select("#legend_hot_cold").selectAll("text").style("font-weight", "normal")
 
 }
 
@@ -289,10 +310,10 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp){
                       .attr("height", 500)
                       .attr("transform", "translate("+(width-300)+","+-(height-200)+")")
                       .append("g")
-    var curX = 25;
+    var curX = 50;
     var curY = 25;
     legend.append("text")
-          .attr("x", curX)
+          .attr("x", curX-20)
           .attr("y", curY)
           .attr("class", "title-legend-h-c")
           .text("Top 5 Hottest Temperatures");
@@ -314,9 +335,9 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp){
               .attr("id", "hot-text-"+id_idx) 
         
         legend.append( "text" )
-              .attr("x", curX + 90)
+              .attr("x", curX + 105)
               .attr("y", curY + 15)
-              .html(" - "+el.annual_value.toFixed(2) + " &deg;C")
+              .html((el.annual_anomaly> 0? "+"+el.annual_anomaly.toFixed(2): el.annual_anomaly.toFixed(2)) + " &deg;C")
               .attr("class","text-legend")
               .attr("id", "hot-temp-"+id_idx) 
       id_idx ++;
@@ -325,13 +346,14 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp){
     
     curY += 60
     legend.append("text")
-          .attr("x", curX)
+          .attr("x", curX-20)
           .attr("y", curY)
           .attr("class", "title-legend-h-c")
           .text("Top 5 Coldest Temperatures");
     
     id_idx = 0;
-    coldest_temp.forEach( (el)=>{
+    var coldest_tmp = coldest_temp;
+    coldest_tmp.reverse().forEach( (el)=>{
 
             curY += 35
             legend.append( "rect" )
@@ -347,9 +369,9 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp){
                   .attr("id", "cold-text-"+id_idx) ;
 
             legend.append( "text" )
-                  .attr("x", curX + 90)
+                  .attr("x", curX + 105)
                   .attr("y", curY + 15)
-                  .html(" - "+el.annual_value.toFixed(2) + " &deg;C")
+                  .html((el.annual_anomaly> 0? "+"+el.annual_anomaly.toFixed(2): el.annual_anomaly.toFixed(2)) + " &deg;C")
                   .attr("class","text-legend")
                   .attr("id", "cold-temp-"+id_idx) 
           
@@ -367,17 +389,16 @@ function updateHotColdLegend(hottest_temp, coldest_temp){
   hottest_temp.forEach( (el)=>{
 
     d3.select("#hot-text-"+id_idx).html(el.Year);
-    d3.select("#hot-temp-"+id_idx).html(" - "+el.annual_value.toFixed(2) + " &deg;C");
+    d3.select("#hot-temp-"+id_idx).html((el.annual_anomaly> 0? "+"+el.annual_anomaly.toFixed(2): el.annual_anomaly.toFixed(2)) + " &deg;C");
     id_idx ++;
       
-
   })
   
   id_idx = 0;
   coldest_temp.forEach( (el)=>{
 
     d3.select("#cold-text-"+id_idx).html(el.Year);
-    d3.select("#cold-temp-"+id_idx).html(" - "+el.annual_value.toFixed(2) + " &deg;C");
+    d3.select("#cold-temp-"+id_idx).html((el.annual_anomaly> 0? "+"+el.annual_anomaly.toFixed(2): el.annual_anomaly.toFixed(2)) + " &deg;C");
     id_idx ++;
 
   })
@@ -425,8 +446,11 @@ function createHottestColdestLineChart(data){
     svg.append("g")
       .attr("class", "y_axis_hc")
       .call(d3.axisLeft(y));
-
-    var valueline_annual = getLineGenerators(x,y);
+    
+    linegenerator= getLineGenerators(x,y);
+    
+    var valueline_annual = linegenerator[0];
+    var zero_line = linegenerator[1];
 
     
 
@@ -440,10 +464,21 @@ function createHottestColdestLineChart(data){
                       .attr("d", valueline_annual)
                       .attr("class", (d)=>String("path-"+d[0].Year))
                       .attr("style", (d) => getHotColdStyle(hot_cold_list,d))
-                      .on("mouseover", function(event, d){ hotColdMouseEnter(this, event, d)})
+                      .on("mouseover", function(event, d){ hotColdMouseEnter(this, event, d, hottest_temp, coldest_temp)})
                       .on("mouseout", function(event, d){ hotColdMouseLeave(this, event, d, hot_cold_list)})
-                  
-  createHotColdLegend("container-h-c", hottest_temp, coldest_temp);
+  
+    
+    svg.append("g")
+        .attr("class","zero-line")
+       .selectAll("path")
+       .data(dataMonthly)
+        .enter()
+        .append("path")
+        .attr("d", zero_line)
+        
+ 
+      
+    createHotColdLegend("container-h-c", hottest_temp, coldest_temp);
 } 
 
 
@@ -470,7 +505,8 @@ function UpdateHottestColdestLineChart(data){
     .call(d3.axisLeft(y));  
 
 
-  var valueline_annual = getLineGenerators(x,y);
+  var valueline_annual = getLineGenerators(x,y)[0];
+  var zero_line = getLineGenerators(x,y)[1];
 
   var line = d3.select(".line_chart_hottest_coldest").selectAll("path").data(dataMonthly);
 
@@ -483,10 +519,18 @@ function UpdateHottestColdestLineChart(data){
           .attr("d", valueline_annual)
           .attr("class", (d)=>String("path-"+d[0].Year))
           .attr("style", (d) => getHotColdStyle(hot_cold_list,d))
-          .on("mouseover", function(event, d){ hotColdMouseEnter(this, event, d)})
+          .on("mouseover", function(event, d){ hotColdMouseEnter(this, event, d,hottest_temp, coldest_temp)})
           .on("mouseout", function(event, d){ hotColdMouseLeave(this, event, d, hot_cold_list)})
 
+  var zeroLine = d3.select(".zero-line").selectAll("path").data(dataMonthly);
+
+  zeroLine.exit().remove();
   
+  zeroLine.append("g")
+          .enter()
+          .append("path")
+          .merge(zeroLine)
+          .attr("d", zero_line)
   updateHotColdLegend(hottest_temp, coldest_temp);
  
 

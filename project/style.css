@@ -469,11 +469,9 @@ table{
 
 #legend_hot_cold{
 
-  /*transform: translate(900px, -500px)*/
-
   border: solid lightgray 1px;
   border-radius: 10px;
-  box-shadow: 0 0 10px #333333;
+  box-shadow: 0 0 7px #333333;
 }
 
 .text-legend{
@@ -486,6 +484,14 @@ table{
   font-weight: bold;
   font-family: sans-serif;
   text-align: center;
+}
+
+.zero-line{
+
+  fill:none;
+  stroke: #000;
+  stroke-dasharray: 3px;
+  stroke-opacity: 60%;
 }
 
 
