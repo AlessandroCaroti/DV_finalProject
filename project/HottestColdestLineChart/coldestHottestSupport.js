@@ -8,40 +8,7 @@ var parseMonth = d3.timeParse("%m");
 var monthList = ["1","2","3","4","5","6","7","8","9","10","11","12"];
 
 
-function loadData(){ 
-    
-  
-  const countries = '../../remaining_data/data_new/Countries.csv';
-    var dataset = "";
-    d3.csv(countries)
-      .then((data)=>{
 
-          var i = 0;
-          data.forEach( d => {
-
-            var dropdown = document.getElementById("dataset");
-            
-            var option =  document.createElement("option");
-            option.setAttribute("value", d.Country);
-            option.innerHTML = d.Country;
-            dropdown.append(option)
-
-            //test(option.value)
-            if( option.value == "Italy"){
-              dropdown.selectedIndex = i;
-              dropdown.options[i].selected = true;
-              // set Italy default dataset
-              dataset = option.value;
-              
-            }
-            i++;
-          });
-
-          
-          defaultDataHottestColdest(dataset);
-          
-    })
-}
 
 
 

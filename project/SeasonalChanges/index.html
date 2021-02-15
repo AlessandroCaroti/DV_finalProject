@@ -8,33 +8,34 @@
     <script type="text/javascript" src="../../d3/topojson.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.5.0/d3.min.js"></script>
     <script type="application/javascript" src="../TabMenuChart/support_charts.js"></script>
-    <script type="application/javascript" src="plotHottestColdest.js"></script>
-    <script type="application/javascript" src="coldestHottestSupport.js"></script>
+    <script type="application/javascript" src="plotSeasonalChanges.js"></script>
+    <script type="application/javascript" src="seasonalChangesSupport.js"></script>
+
+ 
 
 </head>
 <body>
 
     
-    <title>Hottest Coldest Years</title>
+    <title>Seasonal Changes</title>
 </head>
 <body>
 
     
-<div id=container-h-c>
-    <h1 style="text-align:center;"> Hottest Coldest Years</h1>
+<div id=container-seasonal-changes>
+    <h1 style="text-align:center;"> Seasonal Changes</h1>
     <span>
         <label>Dataset:</label>
-        <select name="Dataset" id="dataset" onchange="changeDataHottestColdest()"> </select>
+        <select name="Dataset" id="dataset" onchange=""> </select>
       </span>
       
-      <div id="hottest_coldest_container"> <h2 class="country_t" id="hottest_coldest_title"></h2> <div class="tooltip-map" id="tooltip-hot-cold"> </div>
+      <div id="seasonal_changes_graphic"> <h2 class="country_t" id="hottest_coldest_title"></h2> <div class="tooltip-map" id="tooltip-seasonal-changes"> </div>
 </div>
 
 
 
 <script>
-    window.onload=loadDataHotCold();
-    //window.onload=test();
+    window.onload=loadDataSeasonal();
 </script>
 
 </body>
