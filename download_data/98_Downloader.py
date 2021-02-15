@@ -161,8 +161,8 @@ def downloader(df_path, save_directory):
 if __name__ == "__main__":
 
     #DOWNLOAD COUNTRIES
-    #downloader("./download_data/extra-data/countries.csv", "./download_data/data/counties")
+    downloader(countries_df, "./download_data/data/counties")
     print("______________________________________________________________________\n\n\n\n")
 
     #DOWNLOAD REGIONS
-    downloader("./download_data/extra-data/regions.csv", "./download_data/data/regions")
+    downloader(regions_df, "./download_data/data/regions")
