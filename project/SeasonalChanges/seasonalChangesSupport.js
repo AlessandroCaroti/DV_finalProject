@@ -53,7 +53,7 @@ function getMonthNumber(month){
 }
 
 
-function getScales(data, dataSeasonalBaseline){
+function getScales(data, seasonalBaseline){
   
 //TODO:TO CHANGE
   var m =[];
@@ -67,8 +67,9 @@ function getScales(data, dataSeasonalBaseline){
     
            // Add Y axis
     var y = d3.scaleLinear()
-              .domain(d3.extent(data, function(d) {  return ( dataSeasonalBaseline.seasonalBaseline[ getMonthName(d.Month)]  ) }))
-              .range([height, 0 ]);
+              .domain([d3.min(seasonalBaseline, function(d) { return parseFloat(d.seasonalBaseline) }), 
+                       d3.max(seasonalBaseline, function(d) { return parseFloat(d.seasonalBaseline) })])
+              .range([ height, 0 ]);
   
     return [x, y];
 
@@ -111,7 +112,7 @@ function getSeasonalBaselineData(dataSeasonalBaseline){
                   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
                   
                   
-      var scales = getScales(data, dataSeasonalBaseline);
+      var scales = getScales(data, baselineSeasonal);
       var x = scales[0] 
       var y =  scales[1]
   
