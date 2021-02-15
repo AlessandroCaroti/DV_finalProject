@@ -11,8 +11,6 @@ var parseMonth = d3.timeParse("%m");
 var monthList = ["1","2","3","4","5","6","7","8","9","10","11","12"];
 
 
-
-
 function getLineGeneratorsSeasonal(x, y){
 
     console.log("fuori")
@@ -22,8 +20,8 @@ function getLineGeneratorsSeasonal(x, y){
     
     var valuelineUnc = d3.area()
                          .x(function(d){ return x(parseMonth(d.month))})
-                         .y0(function(d){ console.log(d.seasonalUnc); return y(d.seasonalBaseline + d.seasonalUnc)} )
-                         .y1(function(d){ return y(d.seasonalBaseline - d.seasonalUnc)} );
+                         .y0(function(d){ return y(d.mean + d.unc)} )
+                         .y1(function(d){ return y(d.mean - d.unc)} );
                                                         
     return [valuelineSeasonalBaseline, valuelineUnc];
 }
@@ -86,26 +84,59 @@ function getSeasonalBaselineData(dataSeasonalBaseline){
                         'Sep', 'Oct', 'Nov', 'Dec']
 
     var data = [];
-    var baselineVal = []
-    var baselineUnc = []
-    for(var i=0; i < monthList.length; i++){
-        
-
-        data.push({month: monthList[i], seasonalBaseline:  +dataSeasonalBaseline.seasonalBaseline[monthName[i]],
+ 
+    for(var i=0; i < monthList.length; i++)
+         data.push({month: monthList[i], seasonalBaseline:  +dataSeasonalBaseline.seasonalBaseline[monthName[i]],
                         seasonalUnc: +dataSeasonalBaseline.seasonalUnc[monthName[i]]})
-    }
-    
-
-    
+  
     return data;
+}
+
+function getDataSeasonal(data, dataSeasonalBaseline){
+  var standard = [];
+  var maxs = [];
+  var mins = [];
+  
+  
+  
+  var min_yr = d3.min( data, function(d) { return d.date.getFullYear(); } );
+  var max_yr = d3.max( data, function(d) { return d.date.getFullYear(); } );
+  
+  for( var i = 1; i <12; i++ ) {
+    var item = {};
+    item.month = i;
+    data2 = data.filter( e => e.date.getMonth() == i && e.date.getFullYear() >= 1951 && 
+                         e.date.getFullYear() <= 1980 ); 
+
+    item.mean = dataSeasonalBaseline.seasonalBaseline[getMonthName(i)]; 
+    item.unc = +(1.96*d3.deviation( data2, e => e.monthly_value )); 
+
+    data2 = data.filter( e => e.date.getMonth() == i && e.monthly_unc < 1 &&
+            e.date.getFullYear() < max_yr ); 
+    item.max = d3.max( data2, e => e.monthly_value );
+    item.min = d3.min( data2, e => e.monthly_value );
+    standard.push( item );
+  }
+
+  item = {};
+  item.month = 12;
+  item.mean = standard[0].mean;
+  item.unc = standard[0].unc;
+  item.max = standard[0].max;
+  item.min = standard[0].min;
+
+  standard.push( item );
+
+  return standard;
 }
 
 
   function createHottestColdestLineChart(data, dataSeasonalBaseline){
 
-      baselineSeasonal = getSeasonalBaselineData(dataSeasonalBaseline);
+      var baselineSeasonal = getSeasonalBaselineData(dataSeasonalBaseline);
 
-      console.log(baselineSeasonal);
+      var data2 = getDataSeasonal(data, dataSeasonalBaseline);
+      console.log(data2);
    
       var svg = d3.select("#seasonal_changes_graphic")
                   .append("svg")
@@ -138,7 +169,7 @@ function getSeasonalBaselineData(dataSeasonalBaseline){
       svg.append("g")
                   .attr("class","uncertainty")
                     .selectAll("path")
-                    .data( [baselineSeasonal])
+                    .data( [data2])
                     .enter()
                     .append("path")
                     .attr("d", valuelineSeasonalBaseline[1]);
