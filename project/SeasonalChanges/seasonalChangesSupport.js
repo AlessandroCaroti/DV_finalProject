@@ -14,15 +14,12 @@ var monthList = ["1","2","3","4","5","6","7","8","9","10","11","12"];
 
 
 function getLineGeneratorsSeasonal(x, y){
-    
+
     //TODO:TO CHANGE
-    var valueline_annual = d3.line()
-                              .x(function(d) { console.log();return x(parseMonth(d.month))})
-                              .y(function(d) {  return y(d.monthly_value ); })
-                              .defined( (d) => { return ( !isNaN(d.monthly_value) ) } );  
+    //var valuelineSeasonalBaseline = 
                               
                 
-    return valueline_annual;
+    //return valuelineSeasonalBaseline;
 
 }
 
@@ -43,6 +40,17 @@ function getMonthName(month){
     return monthName[month - 1]
 
 }
+function getMonthNumber(month){
+
+    var monthName = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 
+                        'Sep', 'Oct', 'Nov', 'Dec'];
+    
+    for(var i=0; i< monthName.length; i++){
+        if( month == monthName[i]) return (i+1);
+    }
+    return -1;
+
+}
 
 
 function getScales(data, dataSeasonalBaseline){
@@ -59,7 +67,7 @@ function getScales(data, dataSeasonalBaseline){
     
            // Add Y axis
     var y = d3.scaleLinear()
-              .domain(d3.extent(data, function(d) {  return ( dataSeasonalBaseline.seasonalBaseline[ getMonthName(d.Month)] +10 ) }))
+              .domain(d3.extent(data, function(d) {  return ( dataSeasonalBaseline.seasonalBaseline[ getMonthName(d.Month)]  ) }))
               .range([height, 0 ]);
   
     return [x, y];
@@ -67,15 +75,33 @@ function getScales(data, dataSeasonalBaseline){
 }
 
 
-function getSeasonalData(){
+function getSeasonalBaselineData(dataSeasonalBaseline){
 
-    return false
+    var monthName = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 
+                        'Sep', 'Oct', 'Nov', 'Dec']
+
+    var data = [];
+    var baselineVal = []
+    var baselineUnc = []
+    for(var i=0; i < monthList.length; i++){
+        
+
+        data.push({month: monthList[i], seasonalBaseline:  dataSeasonalBaseline.seasonalBaseline[monthName[i]],
+                        seasonalUnc: dataSeasonalBaseline.seasonalUnc[monthName[i]]})
+    }
+    
+
+    
+    return data;
 }
 
 
   function createHottestColdestLineChart(data, dataSeasonalBaseline){
 
-      //TODO:TO CHANGE
+      baselineSeasonal = getSeasonalBaselineData(dataSeasonalBaseline);
+
+      console.log(baselineSeasonal);
+   
       var svg = d3.select("#seasonal_changes_graphic")
                   .append("svg")
                   .attr("class","graphics")
@@ -101,10 +127,23 @@ function getSeasonalData(){
         .attr("class", "y_axis_seasonal")
         .call(d3.axisLeft(y));
       
-      linegenerator= getLineGeneratorsSeasonal(x,y);
       
-      var valueline_annual = linegenerator[0];
-      
+      var valuelineSeasonalBaseline = getLineGeneratorsSeasonal(x,y);
+    
+      svg.append("g")
+                  .attr("class","line-seasonal-baseline")
+                    .selectAll("path")
+                    .data( baselineSeasonal)
+                    .enter()
+                    .append("path")
+                    .attr("d", (d)=>{
+                                d3.line()
+                                .x(d.month) 
+                                .y( (d.seasonalBaseline ))
+                                
+                    });
+
+                    
   
       
     
