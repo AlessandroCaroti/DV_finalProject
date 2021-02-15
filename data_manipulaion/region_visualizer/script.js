@@ -1,4 +1,4 @@
-// Global var for FIFA world cup data
+// Global vars
 var projection;
 var region_table;
 var cur_region = -1;
@@ -157,7 +157,7 @@ zoomManager();
 
 var region_list = [];
 
-d3.json("../../data/countries-50m.json", function (error, world) {
+d3.json("../../download_data/data/map/countries-10m_V0.json", function (error, world) {
   if (error) {
     console.log(error);
     throw error;
@@ -212,7 +212,7 @@ d3.csv("../../data/table.csv", function (error, csv) {
   region_table = csv;
 });
 
-d3.csv("./country_corrected.csv", function (error, csv) {
+d3.csv("../../data_manipulaion/script compare/compare data/country_corrected.csv", function (error, csv) {
   if (error) {
     console.log(error);
     throw error;

@@ -4,13 +4,13 @@ import json
 import os
 import numpy as np
 
-dataTmp_folder = "./data/data_temp"
-dataYear_folder = "./data/TEST_data_year"  #"./data/data_year"
+dataTmp_folder = ["./download_data/data/counties", "./download_data/data/regions"]
+dataYear_folder = "./download_data/data/years"
 
 global_dict = {}
 
-max = -9999
-min = 99999
+maxTmp = -9999
+minTmp = 99999
 
 
 def group_year(year_list):
@@ -72,13 +72,13 @@ for year in global_dict.keys():
                 os.makedirs(dataYear_folder+"/"+str(year))
     curr_max = np.max(global_dict[year]["Anomaly"])
     curr_min = np.min(global_dict[year]["Anomaly"])
-    if(curr_max > max):
-        max = curr_max
-    if(curr_min < min):
-        min = curr_min
+
+    maxTmp = max(maxTmp, curr_max)
+    minTmp = min(minTmp, curr_min)
+    
     global_dict[year].to_csv(dataYear_folder+"/"+str(year)+"/Annual_mean.csv")
 
-print(min, max)
+print(minTmp, maxTmp)
 
 
 
