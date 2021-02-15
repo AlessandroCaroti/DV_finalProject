@@ -1,4 +1,3 @@
-#!/usr/bin/python
 import requests
 
 url = "http://berkeleyearth.lbl.gov/country-list/"
