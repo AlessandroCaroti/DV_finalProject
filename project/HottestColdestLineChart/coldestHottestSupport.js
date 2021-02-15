@@ -55,9 +55,9 @@ function getLineGenerators(x, y){
                               
                               
                          
-    var zeroline=       d3.line()
-                                .x(function(d) { return x(parseMonth(d.month))})
-                                .y(function(d) {  return y(d.zero_val ); })
+    var zeroline = d3.line()
+                      .x(function(d) { return x(parseMonth(d.month))})
+                      .y(function(d) {  return y(d.zero_val ); })
  
     return [valueline_annual, zeroline];
 
@@ -77,9 +77,8 @@ function getScales(data){
 
            // Add Y axis
     var y = d3.scaleLinear()
-             .domain([d3.min(data, function(d) { return d.monthly_value }), 
-                          d3.max(data, function(d) { return d.monthly_value })])
-             .range([ height, 0 ]);
+               .domain(d3.extent(data, function(d) { return d.monthly_value }))
+               .range([height, 0 ]);
   
     return [x, y];
 
@@ -149,8 +148,6 @@ function getAverageTemperature(data){
         if( d.Month == 5  ) data_annual.push({ Year:d.Year, annual_value: d.annual_value, 
                                               annual_unc: d.annual_unc, annual_anomaly: d.annual_anomaly});
     });
-
-    console.log(data_annual[0])
 
   return data_annual;
 
@@ -296,6 +293,7 @@ function hotColdMouseLeave(self, event, d, hot_cold_list, hottest_temp, coldest_
       d3.select("#cold-text-"+idx).style("font-weight", "normal")
       d3.select("#cold-temp-"+idx).style("font-weight", "normal")
     }
+
     if( isInList(year, hottest_temp)  ){
       var idx = getIdxList(year, hottest_temp);
       d3.select("#hot-text-"+idx).style("font-weight", "normal")
@@ -360,8 +358,8 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp){
           .text("Top 5 Coldest Anomalies");
     
     id_idx = 0;
-    var coldest_tmp = coldest_temp;
-    coldest_tmp.reverse().forEach( (el)=>{
+
+    coldest_temp.forEach( (el)=>{
 
             curY += 35
             legend.append( "rect" )
@@ -413,13 +411,6 @@ function updateHotColdLegend(hottest_temp, coldest_temp){
 
 
 }
-
-
-
-
-
-
-
 function createHottestColdestLineChart(data){
     
     var hottest_temp =  getHottestYears(data);
