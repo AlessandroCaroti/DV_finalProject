@@ -28,7 +28,7 @@ function loadDataSeasonal(){
             }
             i++;
           });
-          
+          defaultSeasonalChanges(dataset)
     })
 }
 
@@ -46,26 +46,35 @@ function defaultSeasonalChanges(dataFile=""){
 
     var folder;
     
-    
     if( dataFile.charAt(dataFile.length  - 1) == '.' ) folder = dataFile.slice(0,-1);
     else
         folder = dataFile;
     
+    
         initBaselineAndInfo(dataFile);
-    //var csv = "/../../data/data_temp/"+folder+"/"+dataFile+"_anomalyTable.csv"
+
     var csv = "/../../remaining_data/data_new/"+folder+"/"+dataFile+"_anomalyTable.csv";
+    var csvBaseline = "/../../remaining_data/data_new/"+folder+"/"+dataFile+"_monthlyAbsoluteTemperature.csv";
     //Di default c'è dataset 1
     d3.csv(csv)
-    .then( function(data){ 
+    .then( (data)=>{ 
         
-        parseDataAttributes(data);
-      
-    
-    })
-        .catch((error) =>{
+        d3.csv(csvBaseline)
+          .then((dataBaseline)=>{
+
+            parseDataAttributes(data);
+            parseSeasonalBaseline(dataBaseline, dataFile);
+            createHottestColdestLineChart(data, dataBaseline)
+          
+          }).catch((error) =>{
+            console.log(error);
+            throw(error);
+        })
+     
+    }).catch((error) =>{
         console.log(error);
         throw(error);
-    })
+        })
 
 }
 
