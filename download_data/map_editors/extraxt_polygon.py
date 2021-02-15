@@ -160,20 +160,22 @@ def move_oldMap(map_path):
     pass
 
 #MAIN
-mapFile_path = map_path()
-with io.open(mapFile_path, mode="r", encoding="UTF-8") as json_file:
-    data = json.load(json_file)
+if __name__ == "__main__":
+    mapFile_path = map_path()
+    with io.open(mapFile_path, mode="r", encoding="UTF-8") as json_file:
+        data = json.load(json_file)
 
-    country = find_country(data["objects"]["countries"]
-                           ["geometries"], country_name)
+        country = find_country(data["objects"]["countries"]
+                            ["geometries"], country_name)
 
-    #country = data["objects"]["countries"]["geometries"][country_pos]
-    if "id" not in country:
-        country["id"] = None
-    show_info(country, "ORIGINAL")
+        #country = data["objects"]["countries"]["geometries"][country_pos]
+        if "id" not in country:
+            country["id"] = None
+        show_info(country, "ORIGINAL")
 
-    new_country = extract_polygon(country)
-    data["objects"]["countries"]["geometries"].append(new_country)
-    save_newMap(data)
-move_oldMap(mapFile_path)
+        new_country = extract_polygon(country)
+        data["objects"]["countries"]["geometries"].append(new_country)
+        save_newMap(data)
+
+    move_oldMap(mapFile_path)
 
