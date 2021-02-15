@@ -3,9 +3,9 @@ import json
 import io
 from difflib import SequenceMatcher
 
-mapFile_path = "./data/countries-10m.json"
-countriesCsv_path = "./download_data/extra-data/countries.csv"
-abbreviationFile_path = "./download_data/extra-data/abbreviation.csv"
+mapFile_path = "./download_data/data/map/countries-10m_V31.json"
+countriesCsv_path = "./download_data/extra-data/2_countries.csv"
+abbreviationFile_path = "./download_data/extra-data/4_abbreviation.csv"
 
 
 def similar(a, b):
@@ -30,13 +30,14 @@ def search_for_similarity(countries_Temp, countries_Map):
                 print("Are the same?", end="")
                 if input() == "y":
                     similarity_list.append([c, c2, similar(c, c2)])
+                print()
     
     print("----------------------------------------------------")
     print("\nFound {} similatities".format(len(similarity_list)))
 
     # Save countries data
     df = pd.DataFrame(similarity_list, columns=["Temp Country", "Map Country", "Similarity"])
-    df.to_csv("./download_data/extra-data/similarity.csv")
+    df.to_csv("./download_data/extra-data/5_similarity.csv")
     print("Similarity list saved.")
 
 
@@ -50,6 +51,11 @@ def extraxtCountry_from_map(map_file):
 
 
 if __name__ == "__main__":
+
+    print("Suggerimenti:")
+    print("-Faeroe Is. == Faroe Islands")
+    print("U.S. Virgin Is. == Virgin Islands")
+    print("------------------------------------------------\n")
 
     # Crete a list with the country of which we have the temperatures
     df = pd.read_csv(countriesCsv_path)

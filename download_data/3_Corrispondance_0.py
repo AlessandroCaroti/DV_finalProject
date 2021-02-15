@@ -3,7 +3,7 @@ import pandas as pd
 import json
 import io
 
-mapFile_path = "./download_data/data/map/countries-10m_V5.json"
+mapFile_path = "./download_data/data/map/countries-10m_V31.json"
 countriesCsv_path = "./download_data/extra-data/2_countries.csv"
 
 
@@ -26,15 +26,14 @@ def compute_corrisponcance(countries_Temp, countries_Map):
 
 
 def save_difference(not_in_map, not_in_temp):
-    print("\nSave the difference in a cvs[y/n]?", end=" ")
-    choice = input()
-    if choice == "y" or choice == "Y":
-        d = {"In Temp, not in Map ({})".format(len(not_in_map)): not_in_map,
-             "In Map, not in Temp ({})".format(len(not_in_temp)): not_in_temp}
-        df = pd.DataFrame.from_dict(d, orient='index')
-        df = df.transpose()
-        df.to_csv("./download_data/extra-data/3_difference.csv")
-        print("Difference saved.")
+    d = {"In Temp, not in Map ({})".format(len(not_in_map)): not_in_map,
+            "In Map, not in Temp ({})".format(len(not_in_temp)): not_in_temp}
+
+    df = pd.DataFrame.from_dict(d, orient='index')
+    df = df.transpose()
+    df.to_csv("./download_data/extra-data/3_difference.csv")
+    
+    print("Difference saved.")
     print("_____________________________________________________")
 
 

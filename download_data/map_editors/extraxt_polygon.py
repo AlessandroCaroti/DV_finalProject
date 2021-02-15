@@ -175,6 +175,5 @@ with io.open(mapFile_path, mode="r", encoding="UTF-8") as json_file:
     new_country = extract_polygon(country)
     data["objects"]["countries"]["geometries"].append(new_country)
     save_newMap(data)
-
 move_oldMap(mapFile_path)
 
