@@ -27,3 +27,13 @@ if __name__ == "__main__":
     exec(open("./download_data/5_Find_similarity.py").read())
     step += 1
     print("#################################################################################\n")
+
+    print("\t\tSTEP {}:\n".format(step))
+    exec(open("./download_data/6_Apply_abbreviation-similarity.py").read())
+    step += 1
+    print("#################################################################################\n")
+
+    print("\t\tSTEP {}:\n".format(step))
+    exec(open("./download_data/7_Corrispondance_1.py").read())
+    step += 1
+    print("#################################################################################\n")
