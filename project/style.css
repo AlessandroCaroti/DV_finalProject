@@ -489,9 +489,9 @@ text{
 .zero-line{
 
   fill:none;
-  stroke: #000;
+  stroke: gray;
   stroke-dasharray: 3px;
-  stroke-opacity: 60%;
+  stroke-opacity: 40%;
 }
 
 
