@@ -16,12 +16,11 @@ function getLineGenerators(x, y){
     
     
     var valueline_annual = d3.line()
-                              .x(function(d) { console.log();return x(parseMonth(d.month))})
+                              .x(function(d) { return x(parseMonth(d.month))})
                               .y(function(d) {  return y(d.monthly_value ); })
                               .defined( (d) => { return ( !isNaN(d.monthly_value) ) } );  
                               
                               
-                         
     var zeroline = d3.line()
                       .x(function(d) { return x(parseMonth(d.month))})
                       .y(function(d) {  return y(d.zero_val ); })

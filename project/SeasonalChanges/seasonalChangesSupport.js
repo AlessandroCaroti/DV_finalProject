@@ -15,12 +15,17 @@ var monthList = ["1","2","3","4","5","6","7","8","9","10","11","12"];
 
 function getLineGeneratorsSeasonal(x, y){
 
-    //TODO:TO CHANGE
-    //var valuelineSeasonalBaseline = 
-                              
-                
-    //return valuelineSeasonalBaseline;
-
+    console.log("fuori")
+    var valuelineSeasonalBaseline = d3.line()
+                                      .x(function(d){ return x(parseMonth(d.month))})
+                                      .y(function(d){ return y(d.seasonalBaseline)} );
+    
+    var valuelineUnc = d3.area()
+                         .x(function(d){ return x(parseMonth(d.month))})
+                         .y0(function(d){ console.log(d.seasonalUnc); return y(d.seasonalBaseline + d.seasonalUnc)} )
+                         .y1(function(d){ return y(d.seasonalBaseline - d.seasonalUnc)} );
+                                                        
+    return [valuelineSeasonalBaseline, valuelineUnc];
 }
 
 
@@ -53,9 +58,8 @@ function getMonthNumber(month){
 }
 
 
-function getScales(data, seasonalBaseline){
-  
-//TODO:TO CHANGE
+function getScales(data, dataSeasonal){
+
   var m =[];
     monthList.forEach((d)=>{
         m.push( parseMonth(d));
@@ -67,8 +71,8 @@ function getScales(data, seasonalBaseline){
     
            // Add Y axis
     var y = d3.scaleLinear()
-              .domain([d3.min(seasonalBaseline, function(d) { return parseFloat(d.seasonalBaseline) }), 
-                       d3.max(seasonalBaseline, function(d) { return parseFloat(d.seasonalBaseline) })])
+              .domain([d3.min(data, function(d) { return +dataSeasonal.seasonalBaseline[getMonthName(d.Month)]+d.monthly_value }), 
+                       d3.max(data, function(d) { return +dataSeasonal.seasonalBaseline[getMonthName(d.Month)]+d.monthly_value})])
               .range([ height, 0 ]);
   
     return [x, y];
@@ -87,8 +91,8 @@ function getSeasonalBaselineData(dataSeasonalBaseline){
     for(var i=0; i < monthList.length; i++){
         
 
-        data.push({month: monthList[i], seasonalBaseline:  dataSeasonalBaseline.seasonalBaseline[monthName[i]],
-                        seasonalUnc: dataSeasonalBaseline.seasonalUnc[monthName[i]]})
+        data.push({month: monthList[i], seasonalBaseline:  +dataSeasonalBaseline.seasonalBaseline[monthName[i]],
+                        seasonalUnc: +dataSeasonalBaseline.seasonalUnc[monthName[i]]})
     }
     
 
@@ -112,7 +116,7 @@ function getSeasonalBaselineData(dataSeasonalBaseline){
                   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
                   
                   
-      var scales = getScales(data, baselineSeasonal);
+      var scales = getScales(data, dataSeasonalBaseline);
       var x = scales[0] 
       var y =  scales[1]
   
@@ -130,19 +134,25 @@ function getSeasonalBaselineData(dataSeasonalBaseline){
       
       
       var valuelineSeasonalBaseline = getLineGeneratorsSeasonal(x,y);
-    
+
+      svg.append("g")
+                  .attr("class","uncertainty")
+                    .selectAll("path")
+                    .data( [baselineSeasonal])
+                    .enter()
+                    .append("path")
+                    .attr("d", valuelineSeasonalBaseline[1]);
+
+
       svg.append("g")
                   .attr("class","line-seasonal-baseline")
                     .selectAll("path")
-                    .data( baselineSeasonal)
+                    .data( [baselineSeasonal])
                     .enter()
                     .append("path")
-                    .attr("d", (d)=>{
-                                d3.line()
-                                .x(d.month) 
-                                .y( (d.seasonalBaseline ))
-                                
-                    });
+                    .attr("d", valuelineSeasonalBaseline[0]);
+
+                  
 
                     
   
