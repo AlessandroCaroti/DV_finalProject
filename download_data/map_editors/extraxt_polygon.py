@@ -1,11 +1,12 @@
 import datetime
 import json
 import os
+import io
 import copy
 
 separator = "_____________________________________________________________\n"
 
-log_file = "../../download_data/map_editors/log.txt"
+log_file = "./download_data/map_editors/log.txt"
 map_directory = "./download_data/data/map"
 map_fileName = "countries-10m"
 map_version = -1              # -1-> last vesrion, 0-> original file
@@ -89,13 +90,13 @@ def extract_polygon(country):
     global new_countryName, pol_to_extract, new_id
     # seleziona la posizione del country da estrarre
     pol_to_extract = int(
-        input("Insert position of the polygon to extract: "))
+        input("Insert POSITION of the polygon to extract: "))
     if pol_to_extract < 0 or pol_to_extract > len(country["arcs"]):
         print("\tERROR: Value out of range!")
         exit(-1)
 
     new_countryName = input(
-        "Insert new name for the new extracted polygon: ")
+        "Insert new NAME for the new extracted polygon: ")
     print(separator)    
 
     new_id = 9999
@@ -153,11 +154,14 @@ def save_newMap(data):
     f.close()
     log_changes()
 
-def move_oldMap():
+def move_oldMap(map_path):
+    nameMap = map_fileName + "_V" + str(map_version)+".json"
+    os.rename(map_path, os.path.join(map_directory,"old_version",nameMap))
     pass
 
 #MAIN
-with open(map_path()) as json_file:
+mapFile_path = map_path()
+with io.open(mapFile_path, mode="r", encoding="UTF-8") as json_file:
     data = json.load(json_file)
 
     country = find_country(data["objects"]["countries"]
@@ -171,4 +175,6 @@ with open(map_path()) as json_file:
     new_country = extract_polygon(country)
     data["objects"]["countries"]["geometries"].append(new_country)
     save_newMap(data)
+
+move_oldMap(mapFile_path)
 

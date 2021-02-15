@@ -9,7 +9,7 @@ var h = 500;
 var c = [0, 0];
 var max_zoom = 20;
 
-var highlights_Country = "Faeroe Is.";
+var highlights_Country = "France";
 
 var zoom = d3.zoom().scaleExtent([1, max_zoom]).on("zoom", zoomed);
 
@@ -17,7 +17,7 @@ var scale = d3.scaleLinear().domain([0, max_zoom]).range([3, 0.1]);
 
 var selcted_country;
 
-d3.json("./countries-10m.json", function (error, world) {
+d3.json("../../download_data/data/map/countries-10m_V8.json", function (error, world) {
   if (error) {
     console.log("ERRORE", error);
     throw error;
@@ -26,7 +26,7 @@ d3.json("./countries-10m.json", function (error, world) {
   console.log(world.objects.countries.geometries[22]);
   draw_all(world);
 
-  id_nation = 234;
+  id_nation = 578;
   test(world, id_nation);
 });
 
