@@ -1,0 +1,372 @@
+MAP VERSION 1
+
+Orginal mapVersion: 0
+Log time: 2021-02-16 15:31:33.584724
+
+Orginal Name: Norway
+New Name: Svalbard and Jan Mayen
+Id: 9999
+Poligon pos. extracted: 74
+Polygon removed from the orignal country: YES
+########################################################################
+
+MAP VERSION 2
+
+Orginal mapVersion: 1
+Log time: 2021-02-16 15:32:35.559076
+
+Orginal Name: France
+New Name: French Guiana
+Id: 9999
+Poligon pos. extracted: 0
+Polygon removed from the orignal country: YES
+########################################################################
+
+MAP VERSION 3
+
+Orginal mapVersion: 2
+Log time: 2021-02-16 15:32:58.857892
+
+Orginal Name: France
+New Name: Reunion
+Id: 9999
+Poligon pos. extracted: 6
+Polygon removed from the orignal country: YES
+########################################################################
+
+MAP VERSION 4
+
+Orginal mapVersion: 3
+Log time: 2021-02-16 15:33:37.152356
+
+Orginal Name: France
+New Name: Martinique
+Id: 9999
+Poligon pos. extracted: 1
+Polygon removed from the orignal country: YES
+########################################################################
+
+MAP VERSION 5
+
+Orginal mapVersion: 4
+Log time: 2021-02-16 15:34:33.612874
+
+Orginal Name: France
+New Name: Guadeloupe
+Id: 9999
+Poligon pos. extracted: 1
+Polygon removed from the orignal country: YES
+########################################################################
+
+MAP VERSION 6
+
+Orginal mapVersion: 5
+Log time: 2021-02-16 15:34:56.669908
+
+Orginal Name: France
+New Name: Guadeloupe
+Id: 9999
+Poligon pos. extracted: 1
+Polygon removed from the orignal country: YES
+########################################################################
+
+MAP VERSION 7
+
+Orginal mapVersion: 6
+Log time: 2021-02-16 15:35:35.290116
+
+Orginal Name: France
+New Name: Guadeloupe
+Id: 9999
+Poligon pos. extracted: 1
+Polygon removed from the orignal country: YES
+########################################################################
+
+MAP VERSION 8
+
+Orginal mapVersion: 7
+Log time: 2021-02-16 15:35:50.515735
+
+Orginal Name: France
+New Name: Guadeloupe
+Id: 9999
+Poligon pos. extracted: 1
+Polygon removed from the orignal country: YES
+########################################################################
+
+MAP VERSION 9
+
+Orginal mapVersion: 8
+Log time: 2021-02-16 15:36:25.117053
+
+Orginal Name: France
+New Name: Mayotte
+Id: 9999
+Poligon pos. extracted: 1
+Polygon removed from the orignal country: YES
+########################################################################
+
+MAP VERSION 10
+
+Orginal mapVersion: 9
+Log time: 2021-02-16 15:37:52.193230
+
+Orginal Name: Norway
+New Name: Svalbard and Jan Mayen
+Id: 9999
+Poligon pos. extracted: 74
+Polygon removed from the orignal country: YES
+########################################################################
+
+MAP VERSION 11
+
+Orginal mapVersion: 10
+Log time: 2021-02-16 15:38:36.618187
+
+Orginal Name: Norway
+New Name: Svalbard and Jan Mayen
+Id: 9999
+Poligon pos. extracted: 74
+Polygon removed from the orignal country: YES
+########################################################################
+
+MAP VERSION 12
+
+Orginal mapVersion: 11
+Log time: 2021-02-16 15:38:44.515676
+
+Orginal Name: Norway
+New Name: Svalbard and Jan Mayen
+Id: 9999
+Poligon pos. extracted: 74
+Polygon removed from the orignal country: YES
+########################################################################
+
+MAP VERSION 13
+
+Orginal mapVersion: 12
+Log time: 2021-02-16 15:38:54.129745
+
+Orginal Name: Norway
+New Name: Svalbard and Jan Mayen
+Id: 9999
+Poligon pos. extracted: 74
+Polygon removed from the orignal country: YES
+########################################################################
+
+MAP VERSION 14
+
+Orginal mapVersion: 13
+Log time: 2021-02-16 15:39:04.944764
+
+Orginal Name: Norway
+New Name: Svalbard and Jan Mayen
+Id: 9999
+Poligon pos. extracted: 74
+Polygon removed from the orignal country: YES
+########################################################################
+
+MAP VERSION 15
+
+Orginal mapVersion: 14
+Log time: 2021-02-16 15:39:14.289990
+
+Orginal Name: Norway
+New Name: Svalbard and Jan Mayen
+Id: 9999
+Poligon pos. extracted: 74
+Polygon removed from the orignal country: YES
+########################################################################
+
+MAP VERSION 16
+
+Orginal mapVersion: 15
+Log time: 2021-02-16 15:39:28.008813
+
+Orginal Name: Norway
+New Name: Svalbard and Jan Mayen
+Id: 9999
+Poligon pos. extracted: 74
+Polygon removed from the orignal country: YES
+########################################################################
+
+MAP VERSION 17
+
+Orginal mapVersion: 16
+Log time: 2021-02-16 15:39:37.712094
+
+Orginal Name: Norway
+New Name: Svalbard and Jan Mayen
+Id: 9999
+Poligon pos. extracted: 74
+Polygon removed from the orignal country: YES
+########################################################################
+
+MAP VERSION 18
+
+Orginal mapVersion: 17
+Log time: 2021-02-16 15:39:51.742441
+
+Orginal Name: Norway
+New Name: Svalbard and Jan Mayen
+Id: 9999
+Poligon pos. extracted: 74
+Polygon removed from the orignal country: YES
+########################################################################
+
+MAP VERSION 19
+
+Orginal mapVersion: 18
+Log time: 2021-02-16 15:40:00.293402
+
+Orginal Name: Norway
+New Name: Svalbard and Jan Mayen
+Id: 9999
+Poligon pos. extracted: 74
+Polygon removed from the orignal country: YES
+########################################################################
+
+MAP VERSION 20
+
+Orginal mapVersion: 19
+Log time: 2021-02-16 15:40:06.174733
+
+Orginal Name: Norway
+New Name: Svalbard and Jan Mayen
+Id: 9999
+Poligon pos. extracted: 74
+Polygon removed from the orignal country: YES
+########################################################################
+
+MAP VERSION 21
+
+Orginal mapVersion: 20
+Log time: 2021-02-16 15:40:15.365127
+
+Orginal Name: Norway
+New Name: Svalbard and Jan Mayen
+Id: 9999
+Poligon pos. extracted: 74
+Polygon removed from the orignal country: YES
+########################################################################
+
+MAP VERSION 22
+
+Orginal mapVersion: 21
+Log time: 2021-02-16 15:40:27.221600
+
+Orginal Name: Norway
+New Name: Svalbard and Jan Mayen
+Id: 9999
+Poligon pos. extracted: 74
+Polygon removed from the orignal country: YES
+########################################################################
+
+MAP VERSION 23
+
+Orginal mapVersion: 22
+Log time: 2021-02-16 15:40:32.953324
+
+Orginal Name: Norway
+New Name: Svalbard and Jan Mayen
+Id: 9999
+Poligon pos. extracted: 74
+Polygon removed from the orignal country: YES
+########################################################################
+
+MAP VERSION 24
+
+Orginal mapVersion: 23
+Log time: 2021-02-16 15:40:38.196379
+
+Orginal Name: Norway
+New Name: Svalbard and Jan Mayen
+Id: 9999
+Poligon pos. extracted: 74
+Polygon removed from the orignal country: YES
+########################################################################
+
+MAP VERSION 25
+
+Orginal mapVersion: 24
+Log time: 2021-02-16 15:40:43.575726
+
+Orginal Name: Norway
+New Name: Svalbard and Jan Mayen
+Id: 9999
+Poligon pos. extracted: 74
+Polygon removed from the orignal country: YES
+########################################################################
+
+MAP VERSION 26
+
+Orginal mapVersion: 25
+Log time: 2021-02-16 15:40:51.456620
+
+Orginal Name: Norway
+New Name: Svalbard and Jan Mayen
+Id: 9999
+Poligon pos. extracted: 74
+Polygon removed from the orignal country: YES
+########################################################################
+
+MAP VERSION 27
+
+Orginal mapVersion: 26
+Log time: 2021-02-16 15:40:57.571992
+
+Orginal Name: Norway
+New Name: Svalbard and Jan Mayen
+Id: 9999
+Poligon pos. extracted: 74
+Polygon removed from the orignal country: YES
+########################################################################
+
+MAP VERSION 28
+
+Orginal mapVersion: 27
+Log time: 2021-02-16 15:41:07.391128
+
+Orginal Name: Norway
+New Name: Svalbard and Jan Mayen
+Id: 9999
+Poligon pos. extracted: 74
+Polygon removed from the orignal country: YES
+########################################################################
+
+MAP VERSION 29
+
+Orginal mapVersion: 28
+Log time: 2021-02-16 15:41:25.618067
+
+Orginal Name: Norway
+New Name: Svalbard and Jan Mayen
+Id: 9999
+Poligon pos. extracted: 74
+Polygon removed from the orignal country: YES
+########################################################################
+
+MAP VERSION 30
+
+Orginal mapVersion: 29
+Log time: 2021-02-16 15:41:44.379024
+
+Orginal Name: Norway
+New Name: Svalbard and Jan Mayen
+Id: 9999
+Poligon pos. extracted: 74
+Polygon removed from the orignal country: YES
+########################################################################
+
+MAP VERSION 31
+
+Orginal mapVersion: 30
+Log time: 2021-02-16 15:42:19.773137
+
+Orginal Name: Norway
+New Name: Svalbard and Jan Mayen
+Id: 9999
+Poligon pos. extracted: 74
+Polygon removed from the orignal country: YES
+########################################################################
+
