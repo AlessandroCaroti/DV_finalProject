@@ -55,7 +55,7 @@ function defaultSeasonalChanges(dataFile=""){
 
     var csv = "/../../remaining_data/data_new/"+folder+"/"+dataFile+"_anomalyTable.csv";
     var csvBaseline = "/../../remaining_data/data_new/"+folder+"/"+dataFile+"_monthlyAbsoluteTemperature.csv";
-    //Di default c'è dataset 1
+
     d3.csv(csv)
     .then( (data)=>{ 
         
@@ -97,17 +97,26 @@ function changeDataSeasonal(){
 
 
     var csv = "/../../remaining_data/data_new/"+folder+"/"+dataFile+"_anomalyTable.csv";
-        //Di default c'è dataset 1
+    var csvBaseline = "/../../remaining_data/data_new/"+folder+"/"+dataFile+"_monthlyAbsoluteTemperature.csv";
+
     d3.csv(csv)
-        .then( function(data){ 
-            
-            parseDataAttributes(data, dataFile);
+    .then( (data)=>{ 
         
-        })
-            .catch((error) =>{
+        d3.csv(csvBaseline)
+          .then((dataBaseline)=>{
+
+            parseDataAttributes(data);
+            parseSeasonalBaseline(dataBaseline, dataFile);
+            UpdateHottestColdestLineChart(data, dataBaseline);
+          
+          }).catch((error) =>{
             console.log(error);
             throw(error);
         })
-
+     
+    }).catch((error) =>{
+        console.log(error);
+        throw(error);
+        })
 
 }

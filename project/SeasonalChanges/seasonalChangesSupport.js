@@ -187,6 +187,7 @@ function styleLastYearsLines(d, dataLastYears){
 
       svg.append("g")
                   .attr("class","uncertainty")
+                  .attr("id", "baseline-unc")
                     .selectAll("path")
                     .data( [seasonalData])
                     .enter()
@@ -204,6 +205,7 @@ function styleLastYearsLines(d, dataLastYears){
       
       svg.append("g")
                   .attr("class","seasonal-range-line")
+                  .attr("id","seasonal-range-max")
                     .selectAll("path")
                     .data( [seasonalData])
                     .enter()
@@ -212,6 +214,7 @@ function styleLastYearsLines(d, dataLastYears){
       
       svg.append("g")
                   .attr("class","seasonal-range-line")
+                  .attr("id","seasonal-range-min")
                     .selectAll("path")
                     .data( [seasonalData])
                     .enter()
@@ -250,8 +253,64 @@ function styleLastYearsLines(d, dataLastYears){
   
   
 
-  function UpdateHottestColdestLineChart(data){
+  function UpdateHottestColdestLineChart(data, dataSeasonalBaseline){
   
-   //TODO: TO BE IMPLEMENTED YET
-  
+    var seasonalData = getDataSeasonal(data, dataSeasonalBaseline);
+    var lastYearsData = lastYearSeasonalData(data,dataSeasonalBaseline);
+
+                
+    var scales = getScales(data, dataSeasonalBaseline);
+    var x = scales[0] 
+    var y =  scales[1]
+
+    
+    var valuelineSeasonalBaseline = getLineGeneratorsSeasonal(x,y);
+
+    var baseline_unc = d3.select("#baseline-unc").selectAll("path").data([seasonalData]);
+    
+    baseline_unc.exit().remove();
+    
+    baseline_unc.enter()
+                  .append("path")
+                  .merge(baseline_unc)
+                  .attr("d", valuelineSeasonalBaseline[0]);
+    
+    var baseline = d3.select(".line-seasonal-baseline").selectAll("path").data([seasonalData]);
+    baseline.exit().remove();
+    baseline.enter()
+                  .append("path")
+                  .merge(baseline)
+                  .attr("d", valuelineSeasonalBaseline[1]);
+    
+    var range_max = d3.select("#seasonal-range-max").selectAll("path").data([seasonalData]); 
+    range_max.exit().remove();   
+    range_max.enter()
+                  .append("path")
+                  .merge(range_max)
+                  .attr("d", valuelineSeasonalBaseline[2]);
+    
+    var range_min = d3.select("#seasonal-range-min").selectAll("path").data([seasonalData]); 
+    range_min.exit().remove();   
+    range_min.enter()
+                  .append("path")
+                  .merge(range_min)
+                  .attr("d", valuelineSeasonalBaseline[3]);
+
+                
+    var lastYearLine = d3.select(".last-years-lines").selectAll("path").data(lastYearsData); 
+    lastYearLine.exit().remove();   
+    lastYearLine.enter()
+                  .append("path")
+                  .attr("id",(d)=>d[0].year )
+                  .attr("stroke", (d)=> styleLastYearsLines(d, lastYearsData))
+                  .merge(lastYearLine)
+                  .attr("d", valuelineSeasonalBaseline[4]);
+
+    
+                  
+        // update  y Axis
+    d3.select(".y_axis_seasonal")
+        .transition().duration(500)
+        .call(d3.axisLeft(y));    
+    
   }
