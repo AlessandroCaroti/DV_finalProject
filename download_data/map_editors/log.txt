@@ -370,3 +370,51 @@ Poligon pos. extracted: 74
 Polygon removed from the orignal country: YES
 ########################################################################
 
+MAP VERSION 317
+
+Orginal mapVersion: 316
+Log time: 2021-02-16 11:01:42.186756
+
+Orginal Name: France
+New Name: Italy
+Id: 9999
+Poligon pos. extracted: 0
+Polygon removed from the orignal country: YES
+########################################################################
+
+MAP VERSION 317
+
+Orginal mapVersion: 316
+Log time: 2021-02-16 11:22:11.588347
+
+Orginal Name: France
+New Name: Italy
+Id: 9999
+Poligon pos. extracted: 0
+Polygon removed from the orignal country: YES
+########################################################################
+
+MAP VERSION 317
+
+Orginal mapVersion: 316
+Log time: 2021-02-16 11:26:23.805703
+
+Orginal Name: France
+New Name: Italy
+Id: 9999
+Poligon pos. extracted: 0
+Polygon removed from the orignal country: YES
+########################################################################
+
+MAP VERSION 317
+
+Orginal mapVersion: 316
+Log time: 2021-02-16 11:32:59.334854
+
+Orginal Name: France
+New Name: Italy
+Id: 9999
+Poligon pos. extracted: 0
+Polygon removed from the orignal country: YES
+########################################################################
+
