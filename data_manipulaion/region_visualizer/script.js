@@ -154,7 +154,7 @@ zoomManager();
 
 var region_list = [];
 
-d3.json("../../download_data/data/map/countries-10m_V31_6.json", function (error, world) {
+d3.json("../../download_data/data/map/countries-10m.json", function (error, world) {
   if (error) {
     console.log(error);
     throw error;

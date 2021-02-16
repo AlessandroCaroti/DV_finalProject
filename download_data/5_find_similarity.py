@@ -40,7 +40,7 @@ def search_for_similarity(countries_Temp, countries_Map):
 
     # Save countries data
     df = pd.DataFrame(similarity_list, columns=[
-                      "Temp Country", "Map Country", "Similarity"])
+                      "Map Country", "Temp Country", "Similarity"])
     df.to_csv(outputFile_path)
     print("Similarity list saved.")
 
@@ -61,6 +61,9 @@ if __name__ == "__main__":
         print("The similarity file already exist.")
         print("Do you want to skip this part?[yes/no]", end=" ")
         scelta = input()
+        if scelta == "no":
+            print("Are you sure? Do you want to skip this part?[yes/no]", end=" ")
+            scelta = input()
 
     if scelta == "no":
         print("Suggerimenti:")

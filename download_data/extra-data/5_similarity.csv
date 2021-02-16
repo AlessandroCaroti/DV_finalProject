@@ -1,4 +1,4 @@
-,Temp Country,Map Country,Similarity
+,Map Country,Temp Country,Similarity
 0,Cabo Verde,Cape Verde,0.8
 1,Eq. Guinea,Equatorial Guinea,0.6666666666666666
 2,Faeroe Is.,Faroe Islands,0.6956521739130435
@@ -16,3 +16,4 @@
 14,Turks and Caicos Is.,Turks and Caicas Islands,0.8181818181818182
 15,U.S. Virgin Is.,Virgin Islands,0.6206896551724138
 16,W. Sahara,Western Sahara,0.6956521739130435
+17,S. Geo. and the Is.,South Georgia and the South Sandwich Isla,0.666
