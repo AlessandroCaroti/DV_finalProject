@@ -9,7 +9,7 @@ var country_list = [];
 var w = 800;
 var h = 500;
 
-var zoom = d3.zoom().scaleExtent([1, 10]).on("zoom", zoomed);
+var zoom = d3.zoom().scaleExtent([1, 20]).on("zoom", zoomed);
 
 function next() {
   if (cur_region < country_list.length) {
@@ -48,7 +48,10 @@ function drawMap(world) {
       country_list.push(d.properties.name);
       return d.properties.name;
     })
-    .attr("d", geoGenerator);
+    .attr("d", geoGenerator)
+    .on("click", function () {
+      console.log(d3.select(this).attr("id"));
+    });
 
   c = projection([0, 0]);
 }
@@ -64,13 +67,17 @@ function clearMap() {
 function updateMap() {
   //Clear any previous selections;
   clearMap();
+  var bBox = document.getElementById(country_list[cur_region]).getBBox();
 
-  console.log(country_list[cur_region]);
+  console.log("Curr_region: " + String(cur_region));
+  console.log("Country name: " + country_list[cur_region]);
+  console.log(bBox);
+  console.log("---------------------------------------");
 
-  p1 = projection([info.LongitudeRange[0], info.LatitudeRange[0]]); //sx alto
-  p2 = projection([info.LongitudeRange[1], info.LatitudeRange[0]]); //dx alto
-  p3 = projection([info.LongitudeRange[1], info.LatitudeRange[1]]); //dx basso
-  p4 = projection([info.LongitudeRange[0], info.LatitudeRange[1]]); //sx basso
+  p1 = [bBox.x, bBox.y]; //sx alto
+  p2 = [bBox.x + bBox.width, bBox.y]; //dx alto
+  p3 = [bBox.x + bBox.width, bBox.y + bBox.height]; //dx basso
+  p4 = [bBox.x, bBox.y + bBox.height]; //sx basso
 
   //console.log(p1, p2, p3, p4);
   console.log("_________________________________");
@@ -83,16 +90,15 @@ function updateMap() {
     .attr("fill", "rgba(255,0,0,0.5)");
 
   // centro
-  c = projection([
-    (info.LongitudeRange[0] + info.LongitudeRange[1]) / 2,
-    (info.LatitudeRange[0] + info.LatitudeRange[1]) / 2,
-  ]);
+  c = [bBox.x + bBox.width / 2, bBox.y + bBox.height / 2];
   map_container
     .append("circle")
     .attr("cx", c[0])
     .attr("cy", c[1])
-    .attr("r", 0.5)
+    .attr("r", 0.0)
     .attr("fill", "rgba(255,0,0,0.8)");
+
+  d3.select("#" + country_list[cur_region]).style("fill", "red");
 
   map_container.transition().call(zoom.translateTo, c[0], c[1]);
 }
@@ -105,11 +111,11 @@ function zoomed() {
 
 function zoomManager() {
   d3.select("#zoom-in").on("click", function () {
-    map_container.transition().call(zoom.scaleBy, 1.2);
+    map_container.transition().call(zoom.scaleBy, 1.5);
   });
 
   d3.select("#zoom-out").on("click", function () {
-    map_container.transition().call(zoom.scaleBy, 0.8);
+    map_container.transition().call(zoom.scaleBy, 0.5);
   });
   d3.select("#zoom-reset").on("click", function () {
     origin = projection([0, 0]);
@@ -127,7 +133,7 @@ zoomManager();
 
 var region_list = [];
 
-d3.json("../../data/map/countries-10m_V31_6.json", function (error, world) {
+d3.json("../../data/map/countries-10m_V34.json", function (error, world) {
   if (error) {
     console.log(error);
     throw error;
@@ -138,6 +144,6 @@ d3.json("../../data/map/countries-10m_V31_6.json", function (error, world) {
   topology = topojson.presimplify(topology);
 
   drawMap(topology);
-  country_list = country_list.sort();
+  country_list = country_list;
   console.log(country_list);
 });

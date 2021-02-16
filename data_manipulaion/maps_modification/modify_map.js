@@ -17,7 +17,7 @@ var scale = d3.scaleLinear().domain([0, max_zoom]).range([3, 0.1]);
 
 var selcted_country;
 
-d3.json("../../download_data/data/map/countries-10m.json", function (error, world) {
+d3.json("../../download_data/data/map/countries-10m_V34.json", function (error, world) {
   if (error) {
     console.log("ERRORE", error);
     throw error;
@@ -26,7 +26,7 @@ d3.json("../../download_data/data/map/countries-10m.json", function (error, worl
   console.log(world.objects.countries.geometries[22]);
   draw_all(world);
 
-  id_nation = 203;
+  id_nation = 250;
   test(world, id_nation);
 });
 
