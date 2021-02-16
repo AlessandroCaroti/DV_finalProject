@@ -529,5 +529,15 @@ text{
   stroke: red;
 }
 
+#tooltip-seasonal-changes{
 
+  text-align: left;
+  font-family: sans-serif;
+  font-size: 12px;
+}
+
+#text-tip-seasonal{
+  text-align: center;
+  font-weight: bold ;
+}
 /*---------------------------END SEASONAL STYLE--------------------------------*/
