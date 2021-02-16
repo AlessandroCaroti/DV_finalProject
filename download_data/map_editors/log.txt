@@ -1,7 +1,7 @@
 MAP VERSION 1
 
 Orginal mapVersion: 0
-Log time: 2021-02-16 15:31:33.584724
+Log time: 2021-02-16 16:23:17.648324
 
 Orginal Name: Norway
 New Name: Svalbard and Jan Mayen
@@ -13,7 +13,7 @@ Polygon removed from the orignal country: YES
 MAP VERSION 2
 
 Orginal mapVersion: 1
-Log time: 2021-02-16 15:32:35.559076
+Log time: 2021-02-16 16:23:58.571792
 
 Orginal Name: France
 New Name: French Guiana
@@ -25,7 +25,7 @@ Polygon removed from the orignal country: YES
 MAP VERSION 3
 
 Orginal mapVersion: 2
-Log time: 2021-02-16 15:32:58.857892
+Log time: 2021-02-16 16:24:47.161829
 
 Orginal Name: France
 New Name: Reunion
@@ -37,7 +37,7 @@ Polygon removed from the orignal country: YES
 MAP VERSION 4
 
 Orginal mapVersion: 3
-Log time: 2021-02-16 15:33:37.152356
+Log time: 2021-02-16 16:25:00.689101
 
 Orginal Name: France
 New Name: Martinique
@@ -49,7 +49,7 @@ Polygon removed from the orignal country: YES
 MAP VERSION 5
 
 Orginal mapVersion: 4
-Log time: 2021-02-16 15:34:33.612874
+Log time: 2021-02-16 16:25:13.211479
 
 Orginal Name: France
 New Name: Guadeloupe
@@ -61,7 +61,7 @@ Polygon removed from the orignal country: YES
 MAP VERSION 6
 
 Orginal mapVersion: 5
-Log time: 2021-02-16 15:34:56.669908
+Log time: 2021-02-16 16:25:28.964999
 
 Orginal Name: France
 New Name: Guadeloupe
@@ -73,7 +73,7 @@ Polygon removed from the orignal country: YES
 MAP VERSION 7
 
 Orginal mapVersion: 6
-Log time: 2021-02-16 15:35:35.290116
+Log time: 2021-02-16 16:25:43.689803
 
 Orginal Name: France
 New Name: Guadeloupe
@@ -85,7 +85,7 @@ Polygon removed from the orignal country: YES
 MAP VERSION 8
 
 Orginal mapVersion: 7
-Log time: 2021-02-16 15:35:50.515735
+Log time: 2021-02-16 16:25:56.827835
 
 Orginal Name: France
 New Name: Guadeloupe
@@ -97,7 +97,7 @@ Polygon removed from the orignal country: YES
 MAP VERSION 9
 
 Orginal mapVersion: 8
-Log time: 2021-02-16 15:36:25.117053
+Log time: 2021-02-16 16:26:13.628358
 
 Orginal Name: France
 New Name: Mayotte
@@ -109,7 +109,7 @@ Polygon removed from the orignal country: YES
 MAP VERSION 10
 
 Orginal mapVersion: 9
-Log time: 2021-02-16 15:37:52.193230
+Log time: 2021-02-16 16:26:44.216031
 
 Orginal Name: Norway
 New Name: Svalbard and Jan Mayen
@@ -121,7 +121,7 @@ Polygon removed from the orignal country: YES
 MAP VERSION 11
 
 Orginal mapVersion: 10
-Log time: 2021-02-16 15:38:36.618187
+Log time: 2021-02-16 16:27:25.915779
 
 Orginal Name: Norway
 New Name: Svalbard and Jan Mayen
@@ -133,7 +133,7 @@ Polygon removed from the orignal country: YES
 MAP VERSION 12
 
 Orginal mapVersion: 11
-Log time: 2021-02-16 15:38:44.515676
+Log time: 2021-02-16 16:27:31.468380
 
 Orginal Name: Norway
 New Name: Svalbard and Jan Mayen
@@ -145,7 +145,7 @@ Polygon removed from the orignal country: YES
 MAP VERSION 13
 
 Orginal mapVersion: 12
-Log time: 2021-02-16 15:38:54.129745
+Log time: 2021-02-16 16:27:38.297227
 
 Orginal Name: Norway
 New Name: Svalbard and Jan Mayen
@@ -157,7 +157,7 @@ Polygon removed from the orignal country: YES
 MAP VERSION 14
 
 Orginal mapVersion: 13
-Log time: 2021-02-16 15:39:04.944764
+Log time: 2021-02-16 16:27:47.086183
 
 Orginal Name: Norway
 New Name: Svalbard and Jan Mayen
@@ -169,7 +169,7 @@ Polygon removed from the orignal country: YES
 MAP VERSION 15
 
 Orginal mapVersion: 14
-Log time: 2021-02-16 15:39:14.289990
+Log time: 2021-02-16 16:27:56.916052
 
 Orginal Name: Norway
 New Name: Svalbard and Jan Mayen
@@ -181,7 +181,7 @@ Polygon removed from the orignal country: YES
 MAP VERSION 16
 
 Orginal mapVersion: 15
-Log time: 2021-02-16 15:39:28.008813
+Log time: 2021-02-16 16:28:02.783804
 
 Orginal Name: Norway
 New Name: Svalbard and Jan Mayen
@@ -193,7 +193,7 @@ Polygon removed from the orignal country: YES
 MAP VERSION 17
 
 Orginal mapVersion: 16
-Log time: 2021-02-16 15:39:37.712094
+Log time: 2021-02-16 16:28:10.064837
 
 Orginal Name: Norway
 New Name: Svalbard and Jan Mayen
@@ -205,7 +205,7 @@ Polygon removed from the orignal country: YES
 MAP VERSION 18
 
 Orginal mapVersion: 17
-Log time: 2021-02-16 15:39:51.742441
+Log time: 2021-02-16 16:28:20.344474
 
 Orginal Name: Norway
 New Name: Svalbard and Jan Mayen
@@ -217,7 +217,7 @@ Polygon removed from the orignal country: YES
 MAP VERSION 19
 
 Orginal mapVersion: 18
-Log time: 2021-02-16 15:40:00.293402
+Log time: 2021-02-16 16:28:31.918180
 
 Orginal Name: Norway
 New Name: Svalbard and Jan Mayen
@@ -229,7 +229,7 @@ Polygon removed from the orignal country: YES
 MAP VERSION 20
 
 Orginal mapVersion: 19
-Log time: 2021-02-16 15:40:06.174733
+Log time: 2021-02-16 16:28:40.924010
 
 Orginal Name: Norway
 New Name: Svalbard and Jan Mayen
@@ -241,7 +241,7 @@ Polygon removed from the orignal country: YES
 MAP VERSION 21
 
 Orginal mapVersion: 20
-Log time: 2021-02-16 15:40:15.365127
+Log time: 2021-02-16 16:28:46.746077
 
 Orginal Name: Norway
 New Name: Svalbard and Jan Mayen
@@ -253,7 +253,7 @@ Polygon removed from the orignal country: YES
 MAP VERSION 22
 
 Orginal mapVersion: 21
-Log time: 2021-02-16 15:40:27.221600
+Log time: 2021-02-16 16:28:53.386556
 
 Orginal Name: Norway
 New Name: Svalbard and Jan Mayen
@@ -265,7 +265,7 @@ Polygon removed from the orignal country: YES
 MAP VERSION 23
 
 Orginal mapVersion: 22
-Log time: 2021-02-16 15:40:32.953324
+Log time: 2021-02-16 16:28:59.661608
 
 Orginal Name: Norway
 New Name: Svalbard and Jan Mayen
@@ -277,7 +277,7 @@ Polygon removed from the orignal country: YES
 MAP VERSION 24
 
 Orginal mapVersion: 23
-Log time: 2021-02-16 15:40:38.196379
+Log time: 2021-02-16 16:29:06.247628
 
 Orginal Name: Norway
 New Name: Svalbard and Jan Mayen
@@ -289,7 +289,7 @@ Polygon removed from the orignal country: YES
 MAP VERSION 25
 
 Orginal mapVersion: 24
-Log time: 2021-02-16 15:40:43.575726
+Log time: 2021-02-16 16:29:13.640914
 
 Orginal Name: Norway
 New Name: Svalbard and Jan Mayen
@@ -301,7 +301,7 @@ Polygon removed from the orignal country: YES
 MAP VERSION 26
 
 Orginal mapVersion: 25
-Log time: 2021-02-16 15:40:51.456620
+Log time: 2021-02-16 16:29:25.823623
 
 Orginal Name: Norway
 New Name: Svalbard and Jan Mayen
@@ -313,7 +313,7 @@ Polygon removed from the orignal country: YES
 MAP VERSION 27
 
 Orginal mapVersion: 26
-Log time: 2021-02-16 15:40:57.571992
+Log time: 2021-02-16 16:29:32.308701
 
 Orginal Name: Norway
 New Name: Svalbard and Jan Mayen
@@ -325,7 +325,7 @@ Polygon removed from the orignal country: YES
 MAP VERSION 28
 
 Orginal mapVersion: 27
-Log time: 2021-02-16 15:41:07.391128
+Log time: 2021-02-16 16:29:59.298224
 
 Orginal Name: Norway
 New Name: Svalbard and Jan Mayen
@@ -337,7 +337,7 @@ Polygon removed from the orignal country: YES
 MAP VERSION 29
 
 Orginal mapVersion: 28
-Log time: 2021-02-16 15:41:25.618067
+Log time: 2021-02-16 16:30:10.042546
 
 Orginal Name: Norway
 New Name: Svalbard and Jan Mayen
@@ -349,7 +349,7 @@ Polygon removed from the orignal country: YES
 MAP VERSION 30
 
 Orginal mapVersion: 29
-Log time: 2021-02-16 15:41:44.379024
+Log time: 2021-02-16 16:30:18.528914
 
 Orginal Name: Norway
 New Name: Svalbard and Jan Mayen
@@ -361,7 +361,7 @@ Polygon removed from the orignal country: YES
 MAP VERSION 31
 
 Orginal mapVersion: 30
-Log time: 2021-02-16 15:42:19.773137
+Log time: 2021-02-16 16:30:27.576596
 
 Orginal Name: Norway
 New Name: Svalbard and Jan Mayen
