@@ -12,6 +12,45 @@ var monthList = ["1","2","3","4","5","6","7","8","9","10","11","12"];
 var colorsYears=["red", "blue","green"];
 
 
+
+function drawTooltipSeasonal(tipBox, event, x, data, tooltipLine) {
+
+  var tooltip = d3.select("#seasonal_changes_graphic .tooltip-map");
+
+  const date = x.invert(d3.pointer(event, tipBox.node())[0]);
+
+  
+  //find the element of the corresponding month
+  var elem = data.find( (d) =>{ Math.abs( d.month - date ) < 0.5});
+  console.log(elem)
+
+  tooltipLine.attr('stroke', 'black')
+      .attr('x1', x(parseMonth(month)))
+      .attr('x2', x(parseMonth(month)))
+      .attr('y1', 0)
+      .attr('y2', height);
+  
+  
+  var tipText =  String(
+    "<b>Month: "+ getFullMonthName(elem.month)+"</p>"
+  )
+     
+  tooltip.html("")
+      .style('display', 'block')
+      .style('left', String( (event.pageX) + 20) + "px" )
+      .style('top', String( (event.pageY) - 20) + "px" )
+      .append('div')
+      .html( tipText );
+}
+
+
+function removeTooltipSeasonal(tooltipLine) {
+  
+var tooltip = d3.select("#seasonal_changes_graphic .tooltip-map")
+  if (tooltip) tooltip.style('display', 'none');
+  if (tooltipLine) tooltipLine.attr('stroke', 'none');
+}
+
 function getLineGeneratorsSeasonal(x, y){
 
 
@@ -56,6 +95,15 @@ function getMonthName(month){
                         'Sep', 'Oct', 'Nov', 'Dec']
 
     return monthName[month - 1]
+
+}
+
+function getFullMonthName(month){
+
+  var monthName = [ "January", "February", "March", "April", "May", "June", 
+                           "July", "August", "September", "October", "November", "December" ];
+
+  return monthName[month - 1]
 
 }
 
@@ -120,20 +168,17 @@ function getDataSeasonal(data, dataSeasonalBaseline){
 }
 
 function lastYearSeasonalData(data, dataSeasonalBaseline){
-  
+
   max_year = d3.max( data, function(d) { return d.date.getFullYear(); } );
   var dataLastYears = [];
-  var i=0;
+
   for( var yr = max_year - 2; yr <= max_year; yr = yr + 1 ) {
       //take 
-      var dataYear = data.filter( e => e.date.getFullYear() == yr ) ;
+      var dataYear = data.filter( (e) => e.Year == yr); //|| (e.Year == yr + 1 && e.Month == 1) ) ;
 
       dataYear2 = dataYear.map( function(e){ return {year: e.Year, month: e.Month, 
                                                      monthlyTemp: (e.monthly_value + (+dataSeasonalBaseline.seasonalBaseline[getMonthName(e.Month)]) )} })
-      //test                                             
-      console.log("year-"+i+": "+yr);
-      i++;
-
+  
       dataLastYears.push( dataYear2);
       
     }
@@ -158,7 +203,7 @@ function styleLastYearsLines(d, dataLastYears){
 
 //Create the legend of the Seasonal Linechart
 function createSeasonalLineChartLegend(svg, dataLastYears){
-  console.log(dataLastYears)
+  
   legend = svg.append( "g" ).attr("class", "legend" );
   
   var curY = 15;
@@ -200,13 +245,13 @@ function createSeasonalLineChartLegend(svg, dataLastYears){
 
   
   curY +=12;
+  var id_idx=0;
   for(var i=0; i<dataLastYears.length; i++){
 
     curY+=15;
     legend.append( "line" )
             .attr("x1", 15).attr("x2", 30)
             .attr("y1", (curY) ).attr("y2", (curY))
-            .attr("id", "legend-"+dataLastYears[i][0].year)
             .attr("stroke", colorsYears[i]);
 
 
@@ -214,10 +259,24 @@ function createSeasonalLineChartLegend(svg, dataLastYears){
           .attr("x", 40)
           .attr("y", curY)
           .attr("class", "legend")
-          .html("Monthly Temperatures of "+dataLastYears[i][0].year); 
+          .html("Monthly Temperatures of "+dataLastYears[i][0].year)
+          .attr("id", "legend-text-"+id_idx);
+    id_idx++;
 
   }
 
+}
+
+function updateSeasonalLegend(dataLastYears){
+
+  var id_idx=0;
+  for(var i=0; i<dataLastYears.length; i++){
+    
+    d3.select("#legend-text-"+id_idx)
+      .html("Monthly Temperatures of "+dataLastYears[i][0].year); 
+      id_idx++;
+
+  }
 }
 
   function createHottestColdestLineChart(data, dataSeasonalBaseline){
@@ -288,7 +347,7 @@ function createSeasonalLineChartLegend(svg, dataLastYears){
 
                           
       //Add X, Y axes          
-      svg.append("g")
+    svg.append("g")
          .attr("transform", "translate(0," + height + ")")
           .attr("class", "x_axis_seasonal")
           .call(d3.axisBottom(x)
@@ -296,12 +355,22 @@ function createSeasonalLineChartLegend(svg, dataLastYears){
                 );
               
               
-      svg.append("g")
+    svg.append("g")
           .attr("class", "y_axis_seasonal")
           .call(d3.axisLeft(y));
                           
   
-          createSeasonalLineChartLegend(svg, lastYearsData)
+    createSeasonalLineChartLegend(svg, lastYearsData);
+
+    var tooltipLine = svg.append('line').attr("class","line_tip");
+    
+    var tipBox = svg.append('rect')
+                    .attr('width', width)
+                    .attr('height', height)
+                    .attr('opacity', 0)
+                    .attr('class','tipbox')
+                    .on('mousemove', (event) => drawTooltipSeasonal(tipBox, event, x, seasonalData, tooltipLine))
+                    .on('mouseout', () => removeTooltipSeasonal(tooltipLine));
     
   }
   
@@ -310,8 +379,7 @@ function createSeasonalLineChartLegend(svg, dataLastYears){
   
     var seasonalData = getDataSeasonal(data, dataSeasonalBaseline);
     var lastYearsData = lastYearSeasonalData(data,dataSeasonalBaseline);
-
-                
+    
     var scales = getScales(data, dataSeasonalBaseline);
     var x = scales[0] 
     var y =  scales[1]
@@ -361,5 +429,7 @@ function createSeasonalLineChartLegend(svg, dataLastYears){
     d3.select(".y_axis_seasonal")
         .transition().duration(500)
         .call(d3.axisLeft(y));    
+
+    updateSeasonalLegend(lastYearsData);
     
   }

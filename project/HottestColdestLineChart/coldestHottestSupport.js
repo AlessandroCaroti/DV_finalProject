@@ -440,10 +440,9 @@ function createHottestColdestLineChart(data){
         .enter()
         .append("path")
         .attr("d", zero_line)
-        
- 
-      
+             
     createHotColdLegend("container-h-c", hottest_temp, coldest_temp);
+
 } 
 
 
