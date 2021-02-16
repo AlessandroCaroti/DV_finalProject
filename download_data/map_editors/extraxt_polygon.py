@@ -71,7 +71,7 @@ def show_info(c, s):
     print("\t\t"+s+" COUNTRY INFO")
     print("Name:", c["properties"]["name"])
     print("Id:", c['id'])
-    print("Type:",c['type'])
+    print("Type:", c['type'])
     print("Number of polygon:", len(c["arcs"]))
     print(separator)
 
@@ -81,9 +81,8 @@ def find_country(country_list, name):
         if el["properties"]["name"] == name:
             return el
 
-    # se nessuna corrspondenza viene trovata esci
-    print("COUNTRY NOT FOUND!")
-    exit()
+    # se nessuna corrspondenza ritorna un oggetto nullo
+    return None
 
 
 def extract_polygon(country):
@@ -97,30 +96,39 @@ def extract_polygon(country):
 
     new_countryName = input(
         "Insert new NAME for the new extracted polygon: ")
-    print(separator)    
+    print(separator)
 
     new_id = 9999
-    new_country = crete_new_country(new_countryName, 9999, pol_to_extract, country)
+    polygon_to_extract = copy.deepcopy(country["arcs"][pol_to_extract])
     remove_polygon(country, pol_to_extract)
 
     extract = input("Continue? ")
     if extract != "yes":
         print("\tChiusura del programma senza apportare alcuna modifica!")
         exit(0)
-    
-    return new_country
-    
+
+    return polygon_to_extract
 
 
-def crete_new_country(new_name, new_id, pol_num, parent_country):
+def crete_new_country(new_name, new_id, polygon, parent_country):
+    
     new_country = copy.deepcopy(parent_country)
     new_country["id"] = str(new_id)
     new_country["properties"]["name"] = new_name
-    new_country["arcs"] = parent_country["arcs"][pol_num]
+    new_country["arcs"] = polygon
     new_country["type"] = "Polygon"
 
     show_info(new_country, "NEW")
     return new_country
+
+def append_polygon(country, polygon):
+    new_country["arcs"].append(polygon)
+    if len(country["arcs"]) > 1:
+        new_country["type"] = "MultiPolygon"
+    
+    return new_country
+
+
 
 def remove_polygon(original_country, pol_pos):
     if remove_from_originalCountry:
@@ -129,21 +137,24 @@ def remove_polygon(original_country, pol_pos):
             original_country["type"] = "Polygon"
     show_info(original_country, "UPDATED ORIGINAL")
 
+
 def log_changes():
     f = open(log_file, "a")
     f.write("MAP VERSION "+str(map_version+1)+"\n\n")
-    
-    f.write("Orginal mapVersion: "+ str(map_version)+"\n")
+
+    f.write("Orginal mapVersion: " + str(map_version)+"\n")
     f.write("Log time: "+str(datetime.datetime.now())+"\n\n")
     f.write("Orginal Name: "+country_name+"\n")
     f.write("New Name: "+new_countryName+"\n")
     f.write("Id: "+str(new_id)+"\n")
     f.write("Poligon pos. extracted: "+str(pol_to_extract)+"\n")
-    f.write("Polygon removed from the orignal country: " + ("YES" if remove_from_originalCountry else "NO")+"\n")
-    
+    f.write("Polygon removed from the orignal country: " +
+            ("YES" if remove_from_originalCountry else "NO")+"\n")
+
     f.write("########################################################################")
     f.write("\n\n")
     f.close()
+
 
 def save_newMap(data):
     new_name = map_fileName + "_V" + str(map_version+1)+".json"
@@ -154,28 +165,38 @@ def save_newMap(data):
     f.close()
     log_changes()
 
+
 def move_oldMap(map_path):
     nameMap = map_fileName + "_V" + str(map_version)+".json"
-    os.rename(map_path, os.path.join(map_directory,"old_version",nameMap))
+    os.rename(map_path, os.path.join(map_directory, "old_version", nameMap))
     pass
 
-#MAIN
+
+# MAIN
 if __name__ == "__main__":
     mapFile_path = map_path()
     with io.open(mapFile_path, mode="r", encoding="UTF-8") as json_file:
         data = json.load(json_file)
+        countries_list = data["objects"]["countries"]["geometries"]
 
-        country = find_country(data["objects"]["countries"]
-                            ["geometries"], country_name)
+        country = find_country(countries_list, country_name)
+        if country is None:
+            print("COUNTRY NOT FOUND!")
+            exit()
 
-        #country = data["objects"]["countries"]["geometries"][country_pos]
         if "id" not in country:
             country["id"] = None
         show_info(country, "ORIGINAL")
 
-        new_country = extract_polygon(country)
+        polygon_extracted = extract_polygon(country)
+        new_country = find_country(countries_list, new_countryName)
+        if new_country is None:
+            new_country = crete_new_country(new_countryName, 9999, polygon_extracted, country)
+        else:
+            new_country = append_polygon(new_country, polygon_extracted)
+
+
         data["objects"]["countries"]["geometries"].append(new_country)
         save_newMap(data)
 
     move_oldMap(mapFile_path)
-
