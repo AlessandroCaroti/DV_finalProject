@@ -308,6 +308,13 @@ function updateSeasonalLegend(dataLastYears){
   
       var valuelineSeasonalBaseline = getLineGeneratorsSeasonal(x,y);
 
+      svg.append('clipPath')
+          .attr('id', 'panel-clip')
+          .append('rect')
+            .attr('width', width)
+            .attr('height', height);
+
+
       svg.append("g")
                   .attr("class","uncertainty")
                   .attr("id", "baseline-unc")
@@ -315,6 +322,7 @@ function updateSeasonalLegend(dataLastYears){
                     .data( [seasonalData])
                     .enter()
                     .append("path")
+                    .attr("clip-path", "url(#panel-clip)" )
                     .attr("d", valuelineSeasonalBaseline[0]);
 
 
@@ -324,6 +332,7 @@ function updateSeasonalLegend(dataLastYears){
                     .data( [seasonalData])
                     .enter()
                     .append("path")
+                    .attr("clip-path", "url(#panel-clip)" )
                     .attr("d", valuelineSeasonalBaseline[1]);
       
       svg.append("g")
@@ -333,6 +342,7 @@ function updateSeasonalLegend(dataLastYears){
                     .data( [seasonalData])
                     .enter()
                     .append("path")
+                    .attr("clip-path", "url(#panel-clip)" )
                     .attr("d", valuelineSeasonalBaseline[2]);
       
       svg.append("g")
@@ -342,6 +352,7 @@ function updateSeasonalLegend(dataLastYears){
                     .data( [seasonalData])
                     .enter()
                     .append("path")
+                    .attr("clip-path", "url(#panel-clip)" )
                     .attr("d", valuelineSeasonalBaseline[3]);
       
       svg.append("g")
