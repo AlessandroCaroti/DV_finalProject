@@ -46,7 +46,7 @@ function parseSeasonalBaseline(data, region="NaN"){
     data.seasonalBaseline = data[0];
     data.seasonalUnc = data[1];
     data.region = region;
-    console.log(data)
+
 }
 
 function getMonthName(month){
@@ -132,17 +132,21 @@ function lastYearSeasonalData(data, dataSeasonalBaseline){
   
   max_year = d3.max( data, function(d) { return d.date.getFullYear(); } );
   var dataLastYears = [];
+  var i=0;
   for( var yr = max_year - 2; yr <= max_year; yr = yr + 1 ) {
       //take 
       var dataYear = data.filter( e => e.date.getFullYear() == yr ) ;
 
       dataYear2 = dataYear.map( function(e){ return {year: e.Year, month: e.Month, 
                                                      monthlyTemp: (e.monthly_value + (+dataSeasonalBaseline.seasonalBaseline[getMonthName(e.Month)]) )} })
-      
+      //test                                             
+      console.log("year-"+i+": "+yr);
+      i++;
+
       dataLastYears.push( dataYear2);
-     
+      
     }
-    console.log(dataLastYears);
+
     return dataLastYears;
 }
 
@@ -252,7 +256,6 @@ function styleLastYearsLines(d, dataLastYears){
   }
   
   
-
   function UpdateHottestColdestLineChart(data, dataSeasonalBaseline){
   
     var seasonalData = getDataSeasonal(data, dataSeasonalBaseline);
@@ -268,8 +271,7 @@ function styleLastYearsLines(d, dataLastYears){
 
     var baseline_unc = d3.select("#baseline-unc").selectAll("path").data([seasonalData]);
     
-    baseline_unc.exit().remove();
-    
+    baseline_unc.exit().remove();  
     baseline_unc.enter()
                   .append("path")
                   .merge(baseline_unc)
@@ -300,13 +302,10 @@ function styleLastYearsLines(d, dataLastYears){
     var lastYearLine = d3.select(".last-years-lines").selectAll("path").data(lastYearsData); 
     lastYearLine.exit().remove();   
     lastYearLine.enter()
+                  .append("g")
                   .append("path")
-                  .attr("id",(d)=>d[0].year )
-                  .attr("stroke", (d)=> styleLastYearsLines(d, lastYearsData))
                   .merge(lastYearLine)
                   .attr("d", valuelineSeasonalBaseline[4]);
-
-    
                   
         // update  y Axis
     d3.select(".y_axis_seasonal")
