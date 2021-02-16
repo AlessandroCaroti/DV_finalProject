@@ -4,7 +4,7 @@ import io
 import os
 from difflib import SequenceMatcher
 
-mapFile_path = "./download_data/data/map/countries-10m_V31.json"
+mapFile_path = "./download_data/data/map/countries-10m_V34.json"
 countriesCsv_path = "./download_data/extra-data/2_countries.csv"
 abbreviationFile_path = "./download_data/extra-data/4_abbreviation.csv"
 
