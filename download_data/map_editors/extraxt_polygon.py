@@ -165,26 +165,25 @@ def save_newMap(data):
 def move_oldMap(map_path):
     nameMap = map_fileName + "_V" + str(map_version)+".json"
     os.rename(map_path, os.path.join(map_directory, "old_version", nameMap))
-    pass
 
-def create_or_update_newCountry(countries_list, polygon_extracted):
+
+def update_map(dataMap, country):
+    polygon_extracted = extract_polygon(country)
+
     new_country = find_country(countries_list, new_countryName)
     if new_country is None:
         print("Creating new country...")
         new_country = crete_new_country(new_countryName, 9999, polygon_extracted, country)
+        dataMap["objects"]["countries"]["geometries"].append(new_country)
     else:
         print("The country already exist, appending the polingon to {}...".format(new_countryName))
         new_country = append_polygon(new_country, polygon_extracted)
-    
-    return new_country
 
-def update_map(dataMap, new_country):
     extract = input("Continue? ")
     if extract != "yes":
         print("\tChiusura del programma senza apportare alcuna modifica!")
         exit(0)
-
-    dataMap["objects"]["countries"]["geometries"].append(new_country)
+        
     save_newMap(dataMap)
     
 
@@ -205,9 +204,6 @@ if __name__ == "__main__":
             country["id"] = None
         show_info(country, "ORIGINAL")
 
-        polygon_extracted = extract_polygon(country)
-        new_country = create_or_update_newCountry(countries_list, polygon_extracted)
-
-        update_map(data_map, new_country)
+        update_map(data_map, country)
     
-    # move_oldMap(mapFile_path)
+    move_oldMap(mapFile_path)
