@@ -490,13 +490,14 @@ text{
 
   fill:none;
   stroke: gray;
-  stroke-dasharray: 3px;
+  stroke-dasharray: 6px;
   stroke-opacity: 40%;
 }
 
 
 /*---------------------------END Coldest Year style--------------------------------*/
 
+/*---------------------------START SEASONAL STYLE--------------------------------*/
 
 
 
@@ -514,3 +515,19 @@ text{
   stroke: black;
 
 }
+
+
+.seasonal-range-line{
+
+  fill: none;
+  stroke: black;
+  stroke-dasharray: 6px;
+}
+
+.last-years-lines{
+  fill: none;
+  stroke: red;
+}
+
+
+/*---------------------------END SEASONAL STYLE--------------------------------*/

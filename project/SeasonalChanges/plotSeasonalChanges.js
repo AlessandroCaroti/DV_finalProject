@@ -102,7 +102,6 @@ function changeDataSeasonal(){
         .then( function(data){ 
             
             parseDataAttributes(data, dataFile);
-
         
         })
             .catch((error) =>{

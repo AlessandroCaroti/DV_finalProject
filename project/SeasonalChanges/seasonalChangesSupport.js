@@ -13,17 +13,31 @@ var monthList = ["1","2","3","4","5","6","7","8","9","10","11","12"];
 
 function getLineGeneratorsSeasonal(x, y){
 
-    console.log("fuori")
+
+    var valuelineUnc = d3.area()
+                         .x(function(d){ return x(parseMonth(d.month))})
+                         .y0(function(d){ return y(d.seasonalBaseline+ d.unc)} )
+                         .y1(function(d){ return y(d.seasonalBaseline- d.unc)} );
+    
     var valuelineSeasonalBaseline = d3.line()
                                       .x(function(d){ return x(parseMonth(d.month))})
                                       .y(function(d){ return y(d.seasonalBaseline)} );
     
-    var valuelineUnc = d3.area()
-                         .x(function(d){ return x(parseMonth(d.month))})
-                         .y0(function(d){ return y(d.mean + d.unc)} )
-                         .y1(function(d){ return y(d.mean - d.unc)} );
-                                                        
-    return [valuelineSeasonalBaseline, valuelineUnc];
+    var valuelineMaxRange = d3.line()
+                              .x(function(d){ return x(parseMonth(d.month))})
+                              .y(function(d){ return y(d.max + d.seasonalBaseline)} );
+    
+    var valuelineMinRange = d3.line()
+                              .x(function(d){ return x(parseMonth(d.month))})
+                              .y(function(d){ return y(d.min + d.seasonalBaseline)} );
+    
+    var valuelineLastYears = d3.line()
+                              .x(function(d){ return x(parseMonth(d.month))})
+                              .y(function(d){ return y(d.monthlyTemp)} )
+                              .defined( (d) => { return ( !isNaN( d.monthlyTemp ) ) } );
+        
+
+    return [ valuelineUnc, valuelineSeasonalBaseline, valuelineMaxRange, valuelineMinRange, valuelineLastYears];
 }
 
 
@@ -69,8 +83,7 @@ function getScales(data, dataSeasonal){
     
            // Add Y axis
     var y = d3.scaleLinear()
-              .domain([d3.min(data, function(d) { return +dataSeasonal.seasonalBaseline[getMonthName(d.Month)]+d.monthly_value }), 
-                       d3.max(data, function(d) { return +dataSeasonal.seasonalBaseline[getMonthName(d.Month)]+d.monthly_value})])
+              .domain(d3.extent(data, function(d) { return +dataSeasonal.seasonalBaseline[getMonthName(d.Month)]+d.monthly_value} ))
               .range([ height, 0 ]);
   
     return [x, y];
@@ -82,9 +95,7 @@ function getSeasonalBaselineData(dataSeasonalBaseline){
 
     var monthName = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 
                         'Sep', 'Oct', 'Nov', 'Dec']
-
     var data = [];
- 
     for(var i=0; i < monthList.length; i++)
          data.push({month: monthList[i], seasonalBaseline:  +dataSeasonalBaseline.seasonalBaseline[monthName[i]],
                         seasonalUnc: +dataSeasonalBaseline.seasonalUnc[monthName[i]]})
@@ -93,50 +104,69 @@ function getSeasonalBaselineData(dataSeasonalBaseline){
 }
 
 function getDataSeasonal(data, dataSeasonalBaseline){
-  var standard = [];
-  var maxs = [];
-  var mins = [];
   
-  
-  
-  var min_yr = d3.min( data, function(d) { return d.date.getFullYear(); } );
-  var max_yr = d3.max( data, function(d) { return d.date.getFullYear(); } );
-  
-  for( var i = 1; i <12; i++ ) {
+  var dataChart = [];
+
+  for( var i = 1; i <=12; i++ ) {
     var item = {};
     item.month = i;
-    data2 = data.filter( e => e.date.getMonth() == i && e.date.getFullYear() >= 1951 && 
+    //take all data for the i-th month, from 1951 to 1980
+    data2 = data.filter( e => e.Month == i && e.date.getFullYear() >= 1951 && 
                          e.date.getFullYear() <= 1980 ); 
-
-    item.mean = dataSeasonalBaseline.seasonalBaseline[getMonthName(i)]; 
+    
+    item.seasonalBaseline= +dataSeasonalBaseline.seasonalBaseline[getMonthName(i)]; 
     item.unc = +(1.96*d3.deviation( data2, e => e.monthly_value )); 
 
-    data2 = data.filter( e => e.date.getMonth() == i && e.monthly_unc < 1 &&
-            e.date.getFullYear() < max_yr ); 
+    data2 = data.filter( e => e.Month == i && e.monthly_unc < 1 ); 
+
     item.max = d3.max( data2, e => e.monthly_value );
     item.min = d3.min( data2, e => e.monthly_value );
-    standard.push( item );
+    
+    dataChart.push( item );
   }
 
-  item = {};
-  item.month = 12;
-  item.mean = standard[0].mean;
-  item.unc = standard[0].unc;
-  item.max = standard[0].max;
-  item.min = standard[0].min;
+  return dataChart;
+}
 
-  standard.push( item );
+function lastYearSeasonalData(data, dataSeasonalBaseline){
+  
+  max_year = d3.max( data, function(d) { return d.date.getFullYear(); } );
+  var dataLastYears = [];
+  for( var yr = max_year - 2; yr <= max_year; yr = yr + 1 ) {
+      //take 
+      var dataYear = data.filter( e => e.date.getFullYear() == yr ) ;
 
-  return standard;
+      dataYear2 = dataYear.map( function(e){ return {year: e.Year, month: e.Month, 
+                                                     monthlyTemp: (e.monthly_value + (+dataSeasonalBaseline.seasonalBaseline[getMonthName(e.Month)]) )} })
+      
+      dataLastYears.push( dataYear2);
+     
+    }
+    console.log(dataLastYears);
+    return dataLastYears;
 }
 
 
+function styleLastYearsLines(d, dataLastYears){
+
+  var years = []
+
+  for(var i=0; i< dataLastYears.length; i++ ) years.push( dataLastYears[i][0].year);
+  var colors=["red", "blue","green"];
+
+  for(i=0; i < colors.length; i++)
+    if( dataLastYears[i][0].year == d[0].year )
+        return colors[i];
+
+    
+}
+
   function createHottestColdestLineChart(data, dataSeasonalBaseline){
 
-      var baselineSeasonal = getSeasonalBaselineData(dataSeasonalBaseline);
+      var seasonalData = getDataSeasonal(data, dataSeasonalBaseline);
+      var lastYearsData = lastYearSeasonalData(data,dataSeasonalBaseline);
 
-      var data2 = getDataSeasonal(data, dataSeasonalBaseline);
-      console.log(data2);
+      console.log(lastYearsData);
    
       var svg = d3.select("#seasonal_changes_graphic")
                   .append("svg")
@@ -151,41 +181,68 @@ function getDataSeasonal(data, dataSeasonalBaseline){
       var x = scales[0] 
       var y =  scales[1]
   
-      svg.append("g")
-        .attr("transform", "translate(0," + height + ")")
-        .attr("class", "x_axis_seasonal")
-        .call(d3.axisBottom(x)
-                .tickFormat(d3.timeFormat("%b"))
-              );
-  
-  
-      svg.append("g")
-        .attr("class", "y_axis_seasonal")
-        .call(d3.axisLeft(y));
-      
+    
       
       var valuelineSeasonalBaseline = getLineGeneratorsSeasonal(x,y);
 
       svg.append("g")
                   .attr("class","uncertainty")
                     .selectAll("path")
-                    .data( [data2])
+                    .data( [seasonalData])
                     .enter()
                     .append("path")
-                    .attr("d", valuelineSeasonalBaseline[1]);
+                    .attr("d", valuelineSeasonalBaseline[0]);
 
 
       svg.append("g")
                   .attr("class","line-seasonal-baseline")
                     .selectAll("path")
-                    .data( [baselineSeasonal])
+                    .data( [seasonalData])
                     .enter()
                     .append("path")
-                    .attr("d", valuelineSeasonalBaseline[0]);
+                    .attr("d", valuelineSeasonalBaseline[1]);
+      
+      svg.append("g")
+                  .attr("class","seasonal-range-line")
+                    .selectAll("path")
+                    .data( [seasonalData])
+                    .enter()
+                    .append("path")
+                    .attr("d", valuelineSeasonalBaseline[2]);
+      
+      svg.append("g")
+                  .attr("class","seasonal-range-line")
+                    .selectAll("path")
+                    .data( [seasonalData])
+                    .enter()
+                    .append("path")
+                    .attr("d", valuelineSeasonalBaseline[3]);
+      
+      svg.append("g")
+                  .attr("class","last-years-lines")
+                    .selectAll("path")
+                    .data( lastYearsData)
+                    .enter()
+                    .append("path")
+                    .attr("id",(d)=>d[0].year )
+                    .attr("stroke", (d)=> styleLastYearsLines(d, lastYearsData))
+                    .attr("d", valuelineSeasonalBaseline[4]);
 
-                  
-
+                
                     
+      //Add X, Y axes          
+      svg.append("g")
+         .attr("transform", "translate(0," + height + ")")
+          .attr("class", "x_axis_seasonal")
+          .call(d3.axisBottom(x)
+                  .tickFormat(d3.timeFormat("%b"))
+                );
+              
+              
+      svg.append("g")
+          .attr("class", "y_axis_seasonal")
+          .call(d3.axisLeft(y));
+                          
   
       
     
