@@ -66,3 +66,39 @@ function changeDataHottestColdest(){
 
 
 }
+
+
+function loadDataHotCold(){ 
+    
+  
+    const countries = '../../remaining_data/data_new/Countries.csv';
+      var dataset = "";
+      d3.csv(countries)
+        .then((data)=>{
+  
+            var i = 0;
+            data.forEach( d => {
+  
+              var dropdown = document.getElementById("dataset");
+              
+              var option =  document.createElement("option");
+              option.setAttribute("value", d.Country);
+              option.innerHTML = d.Country;
+              dropdown.append(option)
+  
+              //test(option.value)
+              if( option.value == "Italy"){
+                dropdown.selectedIndex = i;
+                dropdown.options[i].selected = true;
+                // set Italy default dataset
+                dataset = option.value;
+                
+              }
+              i++;
+            });
+  
+            
+            defaultDataHottestColdest(dataset);
+            
+      })
+  }

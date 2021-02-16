@@ -244,13 +244,14 @@ function createDefaultLineChart(data){
     createLineChartLegend(svg);
 
     
-    var tooltipLine = svg.append('line').attr("class","line_tip");
+    var tooltipLine = svg.append('line').attr("class","line_tip").attr("id","linechart-tip");
     
     var tipBox = svg.append('rect')
                     .attr('width', width)
                     .attr('height', height)
                     .attr('opacity', 0)
                     .attr('class','tipbox')
+                    .attr('id', 'tipbox-linechart')
                     .on('mousemove', (event) => drawTooltip(tipBox, event, x, data, tooltipLine,"#linechart", height))
                     .on('mouseout', () => removeTooltip(tooltipLine,"#linechart"));
 
@@ -325,8 +326,8 @@ function updateLineChart(data, grafic_class){
  
 
     //Update The tooltip
-    var tooltipLine = d3.select(".line_tip");
-    var tipBox = d3.select(".tipbox")
+    var tooltipLine = d3.select("#linechart-tip");
+    var tipBox = d3.select("#tipbox-linechart")
                          .on('mousemove', (event) => drawTooltip(tipBox, event, x, data, tooltipLine, "#linechart", height))
                          .on('mouseout', () => removeTooltip(tooltipLine,"#linechart")); 
 

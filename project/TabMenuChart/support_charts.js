@@ -84,6 +84,8 @@ function parseDataAttributes(data, region="NaN"){
       d.ten_years_unc =  parseFloat(d["Ten-year Unc."])
 
       d.monthly_value =  parseFloat(d["Monthly Anomaly"]);
+      d.monthly_temp =  baseline + parseFloat(d["Monthly Anomaly"]);
+      d.monthly_unc = parseFloat(d["Monthly Unc."]);
 
       
       d.baseline = baseline;

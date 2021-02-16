@@ -8,40 +8,7 @@ var parseMonth = d3.timeParse("%m");
 var monthList = ["1","2","3","4","5","6","7","8","9","10","11","12"];
 
 
-function loadData(){ 
-    
-  
-  const countries = '../../remaining_data/data_new/Countries.csv';
-    var dataset = "";
-    d3.csv(countries)
-      .then((data)=>{
 
-          var i = 0;
-          data.forEach( d => {
-
-            var dropdown = document.getElementById("dataset");
-            
-            var option =  document.createElement("option");
-            option.setAttribute("value", d.Country);
-            option.innerHTML = d.Country;
-            dropdown.append(option)
-
-            //test(option.value)
-            if( option.value == "Italy"){
-              dropdown.selectedIndex = i;
-              dropdown.options[i].selected = true;
-              // set Italy default dataset
-              dataset = option.value;
-              
-            }
-            i++;
-          });
-
-          
-          defaultDataHottestColdest(dataset);
-          
-    })
-}
 
 
 
@@ -49,12 +16,11 @@ function getLineGenerators(x, y){
     
     
     var valueline_annual = d3.line()
-                              .x(function(d) { console.log();return x(parseMonth(d.month))})
+                              .x(function(d) { return x(parseMonth(d.month))})
                               .y(function(d) {  return y(d.monthly_value ); })
                               .defined( (d) => { return ( !isNaN(d.monthly_value) ) } );  
                               
                               
-                         
     var zeroline = d3.line()
                       .x(function(d) { return x(parseMonth(d.month))})
                       .y(function(d) {  return y(d.zero_val ); })
@@ -474,10 +440,9 @@ function createHottestColdestLineChart(data){
         .enter()
         .append("path")
         .attr("d", zero_line)
-        
- 
-      
+             
     createHotColdLegend("container-h-c", hottest_temp, coldest_temp);
+
 } 
 
 
