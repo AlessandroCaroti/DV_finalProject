@@ -1,5 +1,5 @@
 //Support functions for the LineChart
-
+var isAnnual=false;
 
 
 
@@ -12,7 +12,7 @@ function createLineChartLegend(svg){
     legend = svg.append( "g" ).attr("class", "legend" );
     
     legend.append( "rect" )
-    .attr("x", 10).attr("width", 190)
+    .attr("x", 10).attr("width", 290)
     .attr("y", 1).attr("height", 60)
     .attr("class", "legend")
     .attr("id","legend-square");
@@ -20,18 +20,21 @@ function createLineChartLegend(svg){
     legend.append( "line" )
         .attr("x1", 15).attr("x2", 30)
         .attr("y1", 15).attr("y2", 15)
-        .attr("class", "line_chart_annual");
+        .attr("class", "line_chart_annual")
+        .attr("id", "legend-annual-line");
   
     legend.append( "text" )
         .attr("x", 37)
         .attr("y", 15)
         .attr("class", "legend")
-        .text("Annual Average Temperature");
+        .text("Annual Average Temperature")
+        .attr("id", "legend-annual-text");
   
     legend.append( "rect" )
           .attr("x", 15).attr("width", 15)
           .attr("y", 24).attr("height", 16)
-          .attr("class", "uncertainty");
+          .attr("class", "uncertainty")
+          .attr("id","range-name-unc");
 
     var range_name =  document.getElementById('rage-year');
     range_name = range_name.options[range_name.selectedIndex].text;
@@ -41,19 +44,21 @@ function createLineChartLegend(svg){
     legend.append( "line" )
           .attr("x1", 15).attr("x2", 30)
           .attr("y1", 32).attr("y2", 32)
-          .attr("class", "line_chart_range_years");
+          .attr("class", "line_chart_range_years")
+          .attr("id","range-name-line");
   
     legend.append( "text" )
           .attr("x", 37)
           .attr("y", 32)
           .attr("class", "legend")
           .attr("id","range-name-legend")
-          .html(range_name+" Average Temperature"); 
+          .html(range_name+" Average Temperature with uncertainty"); 
     
     legend.append( "line" )
           .attr("x1", 15).attr("x2", 30)
-          .attr("y1", 50).attr("y2", 50)
-          .attr("class", "baselines");
+          .attr("y1", 48).attr("y2", 48)
+          .attr("class", "baselines")
+         
 
     legend.append( "text" )
           .attr("x", 37)
@@ -67,10 +72,57 @@ function createLineChartLegend(svg){
   function updateRangeNameLegend(){
     
     var range_name =  document.getElementById('rage-year');
+
+    if(range_name.value == "annual" && !isAnnual){
+
+        d3.select("#legend-annual-line").remove();
+        d3.select("#legend-annual-text").remove();
+
+        d3.select("#range-name-unc").attr("y",15);
+                
+        
+        d3.select("#range-name-line")
+                        .attr("y1", 23).attr("y2", 23)
+                        .style("stroke","steelblue")
+                       
+        
+        d3.select("#range-name-legend").attr("y", 23)
+        isAnnual = true;
+    }
+
+    if( isAnnual && range_name.value != "annual"){
+        
+        var legend = d3.select(".legend")
+        legend
+            .append( "line" )
+            .attr("x1", 15).attr("x2", 30)
+            .attr("y1", 15).attr("y2", 15)
+            .attr("class", "line_chart_annual")
+            .attr("id", "legend-annual-line");
+            
+        legend.append( "text" )
+            .attr("x", 37)
+            .attr("y", 15)
+            .attr("class", "legend")
+            .text("Annual Average Temperature")
+            .attr("id", "legend-annual-text");
+
+        d3.select("#range-name-unc").attr("y",24)
+                .attr("class", "uncertainty")
+                .attr("id","range-name-unc");
+
+        d3.select("#range-name-line")
+                .attr("y1", 32).attr("y2", 32)
+                .style("stroke","red")
+        d3.select("#range-name-legend").attr("y", 32)
+        
+                isAnnual = false;
+    }
+    
     range_name = range_name.options[range_name.selectedIndex].text;
-  
+    
     d3.select("#range-name-legend")
-        .html(range_name+" Average Temperature"); 
+        .html(range_name+" Average Temperature with uncertainty"); 
   }
 
 
@@ -251,7 +303,7 @@ function createDefaultLineChart(data){
         .attr("d", valueline_ten_years);
          
    data_baselines = baseLine(data);
-   console.log(data_baselines)
+
     svg  
         .append("g")
         .attr("class","baselines")
@@ -334,7 +386,22 @@ function updateLineChart(data, grafic_class){
        .enter()
        .append("path")
        .merge(ten_line)
-       .attr("d", valueline_ten_years);
+       .attr("d", valueline_ten_years)
+       .style("stroke", function(d){
+                
+                var range_year =  document.getElementById('rage-year').value;
+                if( range_year == "annual") return "steelblue";
+                else
+                    return "red";
+       })
+       .style("stroke-width", function(d){
+                
+                var range_year =  document.getElementById('rage-year').value;
+                if( range_year == "annual") return "1px";
+                else
+                    return "2px";
+       })
+       
     
     
     var base_line= svg.select(".baselines").selectAll("path").data([data]);

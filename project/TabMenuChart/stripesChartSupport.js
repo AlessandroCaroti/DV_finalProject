@@ -12,7 +12,6 @@ function getAnnualData(data){
         if( d.Month == 6  ) data_annnual.push(d)
     });
     
-    console.log(data_annnual)
     return data_annnual;
 }
 
@@ -97,7 +96,6 @@ function createDefaultStripesChart(data){
 function colorStripes(data_annnual, d){
 
     var range_year =  document.getElementById('rage-year').value; 
-    console.log(range_year+"_anomaly")
     var colorScale = d3.scaleLinear()
                        .domain(d3.extent(data_annnual, (d) => d[range_year+"_anomaly"]))
                        .range([1,0])
