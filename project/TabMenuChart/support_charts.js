@@ -20,15 +20,16 @@ function drawTooltip(self, event, x, data, tooltipLine, id_chart, height) {
         .attr('y1', 0)
         .attr('y2', height);
     
-  
+    var range_selected =  document.getElementById('rage-year');
+    range_name = range_selected.options[range_selected.selectedIndex].text;
   
     var tipText =  String(
       "<b> <p style='text-align: center; font-size: 12px;'> Year: " + elem.date.getFullYear()+"</p>" +
       "Baseline Temp. : "+elem.baseline+" &deg;C <br/>" +
-      "Annual  Avg  Temp. : "+elem.annual_value.toFixed(2) +" &deg;C " +
+      "Annual  Avg.  Temp. : "+elem.annual_value.toFixed(2) +" &deg;C " +
       " &plusmn; " +  elem.annual_unc.toFixed(2) + "<br/>"+
-      "Ten Years Avg Temp: "+elem.ten_years_value.toFixed(2) +" &deg;C " + 
-      " &plusmn; " +  elem.ten_years_unc.toFixed(2)+"</b>"
+      (range_selected.value != "annual"? String(range_name+"  Avg. Temp: "+elem[range_selected.value+"_value"].toFixed(2) +" &deg;C " + 
+      " &plusmn; " +  elem[range_selected.value+"_unc"].toFixed(2)+"</b>"):"")
     )
        
     tooltip.html("")

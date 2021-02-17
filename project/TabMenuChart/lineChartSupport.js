@@ -206,15 +206,16 @@ function baseLine(data){
 //get x and Y scales of the Linechart
 function getScales(data){
 
-    //console.log(timeScale);
+
     var x = d3.scaleTime()
               .domain(d3.extent(data, function(d) { return d.date; }))
               .range([ 0, width ]);
                         
-                          // Add Y axis
+    var range_year =  document.getElementById('rage-year').value; 
+              // Add Y axis
     var y = d3.scaleLinear()
-             .domain([d3.min(data, function(d) { return d.annual_value - d.ten_years_unc - 0.5; }), 
-                          d3.max(data, function(d) { return d.annual_value + d.ten_years_unc + 0.5; })])
+             .domain([d3.min(data, function(d) { return d.annual_value - d[range_year+"_unc"] - 0.5; }), 
+                          d3.max(data, function(d) { return d.annual_value + d[range_year+"_unc"] + 0.5; })])
              .range([ height, 0 ]);
     
     return [x, y];
