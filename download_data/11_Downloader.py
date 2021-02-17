@@ -6,8 +6,8 @@ import json
 from os import path
 import os
 
-countries_df = "./download_data/extra-data/countries.csv"
-regions_df = "./download_data/extra-data/regions.csv"
+countries_df = "./download_data/extra-data/10_countries.csv"
+regions_df = "./download_data/extra-data/10_regions.csv"
 
 URL_ROOT = "http://berkeleyearth.lbl.gov"
 DATA_FOLDER = "/auto/Regional/TAVG/Text/"
@@ -15,11 +15,11 @@ DATA_FOLDER = "/auto/Regional/TAVG/Text/"
 DATE_FORMAT = "%d-%b-%Y %H:%M:%S"
 
 
-def pars_file(web_content, regName, data_folder):
+def pars_file(web_content, regName, data_folder, generalization):
     country_info = {"LastUpdate": None, "Name": None, "LatitudeRange": None,
                     "LongitudeRange": None, "Area(Km^2)": None, "global_landArea(%)": None,
                     "Num_stations": None, "Num_observations": None,
-                    "absolute_temp(C)": None, "absTemp_unc(C)": None}
+                    "absolute_temp(C)": None, "absTemp_unc(C)": None, "Generalization": generalization}
     monthly_temp = None
     anomaly_table = None
 
@@ -111,9 +111,7 @@ def pars_file(web_content, regName, data_folder):
             break
         web_content = web_content[end_line+1:]
 
-    if country_info["Name"] is None:
-        print("\tWarning: Ragion Name Not Found!!!")
-        country_info["Name"] = regName
+    country_info["Name"] = regName
 
     # SAVE ALL DATA
     data_folder = data_folder+"/"+country_info["Name"]
@@ -154,9 +152,12 @@ def downloader(df_path, save_directory):
             continue
         webContent = response.content.decode("ISO-8859-1", "backslashreplace")
 
-        pars_file(webContent, country_name, save_directory)
+        generalization_list = ""
+        if "Generalization" in df.columns:
+            generalization_list = row["Generalization"].split(", ")
+        pars_file(webContent, country_name, save_directory, generalization_list)
 
-    print("ERROR({}):".format(len(error)), error)
+    print("\nERROR({}):".format(len(error)), error)
 
 if __name__ == "__main__":
 

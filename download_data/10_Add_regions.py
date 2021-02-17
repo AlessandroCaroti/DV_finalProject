@@ -2,7 +2,7 @@ import pandas as pd
 import requests
 
 regions_not_needed = ["Newfoundland and Labrador", "Guangdong", "CuraÃ§ao"]
-
+country_list = pd.read_csv("./download_data/extra-data/2_countries.csv", index_col=0)["Country"].tolist()
 
 def extract_countryGeneralization(table):
     generalizations = []
@@ -34,11 +34,8 @@ def extract_countryGeneralization(table):
 
 
 if __name__ == "__main__":
-    df = pd.read_csv("./download_data/extra-data/countries.csv", index_col=0)
+    df = pd.read_csv("./download_data/extra-data/8_countries.csv", index_col=0)
     countries = df[["Country", "Link"]].values.tolist()
-
-    global country_list
-    country_list = df["Country"].tolist()
 
     error = []
     regions = []
@@ -77,10 +74,10 @@ if __name__ == "__main__":
 
     # Save regions data
     df = pd.DataFrame(regions, columns=["Region", "Link"])
-    df.to_csv("./download_data/extra-data/regions.csv")
+    df.to_csv("./download_data/extra-data/10_regions.csv")
     print("Regions links saved.")
 
     # Update countyes data
     df = pd.DataFrame(countries, columns=["Country", "Link", "Generalization"])
-    df.to_csv("./download_data/extra-data/countries.csv")
-    print("Countries links updated.")
+    df.to_csv("./download_data/extra-data/10_countries.csv")
+    print("Countries links updated with the generalization.")

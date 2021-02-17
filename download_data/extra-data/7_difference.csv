@@ -1,4 +1,4 @@
-,"In Temp, not in Map (17)","In Map, not in Temp (41)"
+,"In Temp, not in Map (16)","In Map, not in Temp (40)"
 0,Baker Island,Akrotiri
 1,"Bonaire, Saint Eustatius and Saba",Ashmore and Cartier Is.
 2,Burma,Baikonur
@@ -12,10 +12,10 @@
 10,Kingman Reef,Cyprus U.N. Buffer Zone
 11,Netherlands (Europe),Czechia
 12,Palmyra Atoll,Dem. Rep. Congo
-13,Saint Vincent and the Grenadines,Dhekelia
-14,Swaziland,Gibraltar
-15,United Kingdom (Europe),Indian Ocean Ter.
-16,United States,Kosovo
+13,Swaziland,Dhekelia
+14,United Kingdom (Europe),Gibraltar
+15,United States,Indian Ocean Ter.
+16,,Kosovo
 17,,Maldives
 18,,Marshall Is.
 19,,Micronesia
@@ -31,12 +31,11 @@
 29,,Siachen Glacier
 30,,Somaliland
 31,,Spratly Is.
-32,,St. Vin. and Gren.
-33,,Tuvalu
-34,,U.S. Minor Outlying Is.
-35,,USNB Guantanamo Bay
-36,,United States of America
-37,,Vanuatu
-38,,Vatican
-39,,Wallis and Futuna Is.
-40,,eSwatini
+32,,Tuvalu
+33,,U.S. Minor Outlying Is.
+34,,USNB Guantanamo Bay
+35,,United States of America
+36,,Vanuatu
+37,,Vatican
+38,,Wallis and Futuna Is.
+39,,eSwatini

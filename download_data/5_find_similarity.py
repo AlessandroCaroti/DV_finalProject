@@ -59,10 +59,10 @@ if __name__ == "__main__":
 
     if os.path.isfile(outputFile_path):
         print("The similarity file already exist.")
-        print("Do you want to skip this part?[yes/no]", end=" ")
+        print("Do you want to SKIP this part?[yes/no]", end=" ")
         scelta = input()
         if scelta == "no":
-            print("Are you sure? Do you want to skip this part?[yes/no]", end=" ")
+            print("Are you sure? Do you want to SKIP this part?[yes/no]", end=" ")
             scelta = input()
 
     if scelta == "no":

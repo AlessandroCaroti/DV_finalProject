@@ -37,3 +37,23 @@ if __name__ == "__main__":
     exec(open("./download_data/7_Corrispondance_1.py").read())
     step += 1
     print("#################################################################################\n")
+
+    print("\t\tSTEP {}:\n".format(step))
+    exec(open("./download_data/8_Remove_countriesFromTable.py").read())
+    step += 1
+    print("#################################################################################\n")
+
+    print("\t\tSTEP {}:\n".format(step))
+    exec(open("./download_data/9_Corrispondance_2.py").read())
+    step += 1
+    print("#################################################################################\n")
+
+    print("\t\tSTEP {}:\n".format(step))
+    exec(open("./download_data/10_Add_regions.py").read())
+    step += 1
+    print("#################################################################################\n")
+    
+    print("\t\tSTEP {}:\n".format(step))
+    exec(open("./download_data/11_downloader.py").read())
+    step += 1
+    print("#################################################################################\n")
