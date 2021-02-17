@@ -9,7 +9,7 @@ function getAnnualData(data){
 
     data.forEach((d) => {
         
-        if( d.Month == 5  ) data_annnual.push(d)
+        if( d.Month == 6  ) data_annnual.push(d)
     });
     
     return data_annnual;
@@ -21,7 +21,7 @@ function getStripesScales(data_annnual){
     var x = d3.scaleTime()
               .domain(d3.extent(data_annnual, function(d) { return d.date.getFullYear(); }))
               .range([ 0, width ]);
-                        
+              
     // Add Y axis
     var y = d3.scaleLinear()
              .domain([0,1])
@@ -86,7 +86,6 @@ function createDefaultStripesChart(data){
                      .attr("height", y(0.8))
                      .attr("fill", (d)  => colorStripes(data_annnual, d) ) 
 
-    
     //Events Tooltip
     stripes.on("mouseover", stripesEnter)
            .on("mouseout", stripesLeave)
@@ -95,14 +94,15 @@ function createDefaultStripesChart(data){
 
 
 function colorStripes(data_annnual, d){
-    
+
+    var range_year =  document.getElementById('rage-year').value; 
     var colorScale = d3.scaleLinear()
-                       .domain(d3.extent(data_annnual, (d) => d.annual_anomaly))
+                       .domain(d3.extent(data_annnual, (d) => d[range_year+"_anomaly"]))
                        .range([1,0])
 
-    if( isNaN(d.annual_anomaly) ) return "rgb(153,153,153)";
+    if( isNaN(d[range_year+"_anomaly"] ) ) return "rgb(153,153,153)";
     else
-        return d3.interpolateRdBu( colorScale(d.annual_anomaly))
+        return d3.interpolateRdBu( colorScale(d[range_year+"_anomaly"]))
 }
 
 

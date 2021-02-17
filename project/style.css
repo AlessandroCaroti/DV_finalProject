@@ -172,7 +172,7 @@ text#label-legend{
   width: 900px;
   height: 500px;
   margin: auto;
-  margin-top: 50px;
+  margin-top: 60px;
  
 
 }
@@ -180,14 +180,11 @@ text#label-legend{
 .tab {
   
   overflow: hidden;
+  margin-top: 30px;
 
  
 }
 
-#dropdown_tab{
-  margin-top: 20px;
-  margin-left: 45%;
-}
 
 
 /* Style the buttons inside the tab */
@@ -244,7 +241,7 @@ text#label-legend{
 /*--------------------------------- END TAB MENU STYLE -------------------------------------*/
 
 
-/*------------------- CHART STYLE -------------------------------*/
+/*------------------- LINECHART STYLE -------------------------------*/
 
 .graphics{
 
@@ -278,7 +275,7 @@ text#label-legend{
 
 }
 
-.graphics .line_chart_ten_years{
+.graphics .line_chart_range_years{
 
   stroke-width: 2px;
   stroke: red;
@@ -304,13 +301,20 @@ text#label-legend{
     stroke: none;
 }
 
+#dropdown_tab{
+
+  margin: auto;
+  
+}
+
+#tab-menu{
+  margin-top: 100px;
+}
 
 /* -----------------------------END CHART STYLE--------------------------------------*/
 
 /*Dropdown menu -> to remove at the end, only for testing*/
-#dropdown{
-  margin: auto;
-}
+
 
 /*--------------- LEGEND STYLE -------------------------------------------*/
 
@@ -318,6 +322,7 @@ text#label-legend{
 
   padding: 3px;
   fill: #fff;
+
   
 }
 
@@ -325,6 +330,7 @@ text#label-legend{
   
   stroke: #000;
   stroke-width: 1px;
+  
 
 }
 
@@ -332,7 +338,8 @@ text.legend {
   
   fill: #000;
   font-size: 11px;
-  alignment-baseline: central;
+
+  font-family: sans-serif;
 
 }
 
@@ -349,7 +356,6 @@ text.legend {
 }
 
 /* END TAB MENU LINECHART */
-
 
 
 
@@ -467,8 +473,9 @@ table{
 
 }
 
-text{
+.text-legend {
   font-family: sans-serif;
+  color: #000;
 }
 
 #legend_hot_cold{
@@ -539,5 +546,15 @@ text{
 #text-tip-seasonal{
   text-align: center;
   font-weight: bold ;
+}
+
+
+.grid line {
+  stroke: lightgrey;
+  stroke-opacity: 0.6;
+  shape-rendering: crispEdges
+}
+.grid path {
+  stroke-width: 0;
 }
 /*---------------------------END SEASONAL STYLE--------------------------------*/
