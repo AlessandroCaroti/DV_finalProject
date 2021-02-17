@@ -60,12 +60,12 @@ function createLineChartLegend(svg){
 //Draw the area that represents the uncertainty of the temperature measurement
 function drawUncertainty(data, svg, x, y){
     
-
+    var range_year =  document.getElementById('rage-year').value; 
     var areaUncGenerator = d3.area()
                              .x(function(d) { return x(d.date) })
-                             .y0(function(d) { return y(d.ten_years_value + d.ten_years_unc ) })
-                             .y1(function(d) { return y(d.ten_years_value - d.ten_years_unc ) })
-                             .defined( (d) => { return ( !isNaN(d.ten_years_unc ) ) } );
+                             .y0(function(d) { return y(d[range_year+"_value"] + d[range_year+"_unc"]) })
+                             .y1(function(d) { return  y(d[range_year+"_value"] - d[range_year+"_unc"]) })
+                             .defined( (d) => { return ( !isNaN(d[range_year+"_unc"] ) ) } );
 
     svg.append("g")
                 .attr("class","uncertainty")
@@ -83,12 +83,12 @@ function drawUncertainty(data, svg, x, y){
   //Update the area that represents the uncertainty of the temperature measurement
   function UpdateUncertainty(data, x, y){
       
-    
+    var range_year =  document.getElementById('rage-year').value; 
     var areaUncGenerator = d3.area()
                              .x(function(d) { return x(d.date) })
-                             .y0(function(d) { return y(d.ten_years_value + d.ten_years_unc ) })
-                             .y1(function(d) { return y(d.ten_years_value - d.ten_years_unc ) })
-                             .defined( (d) => { return ( !isNaN(d.ten_years_unc ) ) } );
+                             .y0(function(d) { return y(d[range_year+"_value"] + d[range_year+"_unc"]) })
+                             .y1(function(d) { return  y(d[range_year+"_value"] - d[range_year+"_unc"]) })
+                             .defined( (d) => { return ( !isNaN(d[range_year+"_unc"] ) ) } );
   
   
     var unc= d3.select(".uncertainty")
@@ -159,10 +159,13 @@ function getLineGenerators(x, y){
                             .y(function(d) { return y(d.annual_value); })
                             .defined( (d) => { return ( !isNaN(d.annual_value) ) } );        
     
+
+    var range_year =  document.getElementById('rage-year').value;   
+  
     var valueline_ten_years = d3.line()
                                 .x(function(d) { return x(d.date); })
-                                .y(function(d) { return y(d.ten_years_value ); })
-                                .defined( (d) => { return ( !isNaN(d.ten_years_value ) ) } );
+                                .y(function(d) { return y(d[range_year+"_value"] ); })
+                                .defined( (d) => { return ( !isNaN(d[range_year+"_value"] ) ) } );
     
     var valueline_baseline = d3.line()
                                 .x(function(d) { return x(d.date); })
