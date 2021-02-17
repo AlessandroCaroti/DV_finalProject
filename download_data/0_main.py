@@ -57,3 +57,18 @@ if __name__ == "__main__":
     exec(open("./download_data/11_downloader.py").read())
     step += 1
     print("#################################################################################\n")
+    
+    print("\t\tSTEP {}:\n".format(step))
+    exec(open("./download_data/12_Modify_countriesName.py").read())
+    step += 1
+    print("#################################################################################\n")
+    
+    print("\t\tSTEP {}:\n".format(step))
+    exec(open("./download_data/Corrispondance_3.py").read())
+    step += 1
+    print("#################################################################################\n")
+    
+    print("\t\tSTEP {}:\n".format(step))
+    exec(open("./download_data/14_Split_by_year.py").read())
+    step += 1
+    print("#################################################################################\n")
