@@ -125,13 +125,16 @@ function parseDataAttributes(data, region="NaN"){
       d.annual_value = baseline + parseFloat(d["Annual Anomaly"]);
       
       d.five_years_value =  baseline + parseFloat(d["Five-year Anomaly"]);
+      d.five_years_anomaly =   parseFloat(d["Five-year Anomaly"]);
       d.five_years_unc =  parseFloat(d["Five-year Unc."]);
       
       d.ten_years_value =  baseline + parseFloat(d["Ten-year Anomaly"]);
+      d.ten_years_anomaly =  parseFloat(d["Ten-year Anomaly"]);
       d.ten_years_unc =  parseFloat(d["Ten-year Unc."]);
       
       
       d.twenty_years_value =  baseline + parseFloat(d["Twenty-year Anomaly"]);
+      d.twenty_years_anomaly =  parseFloat(d["Twenty-year Anomaly"]);
       d.twenty_years_unc =  parseFloat(d["Twenty-year Unc."]);
 
       

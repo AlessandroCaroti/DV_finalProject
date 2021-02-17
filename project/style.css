@@ -275,7 +275,7 @@ text#label-legend{
 
 }
 
-.graphics .line_chart_ten_years{
+.graphics .line_chart_range_years{
 
   stroke-width: 2px;
   stroke: red;
@@ -322,6 +322,7 @@ text#label-legend{
 
   padding: 3px;
   fill: #fff;
+
   
 }
 
@@ -337,7 +338,8 @@ text.legend {
   
   fill: #000;
   font-size: 11px;
-  alignment-baseline: central;
+
+  font-family: sans-serif;
 
 }
 

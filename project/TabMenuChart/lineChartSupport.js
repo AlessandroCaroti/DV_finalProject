@@ -4,6 +4,7 @@
 
 
 
+
 //Create the legend of the Linechart
 function createLineChartLegend(svg){
 
@@ -31,17 +32,23 @@ function createLineChartLegend(svg){
           .attr("x", 15).attr("width", 15)
           .attr("y", 24).attr("height", 16)
           .attr("class", "uncertainty");
-          
+
+    var range_name =  document.getElementById('rage-year');
+    range_name = range_name.options[range_name.selectedIndex].text;
+  
+
+
     legend.append( "line" )
           .attr("x1", 15).attr("x2", 30)
           .attr("y1", 32).attr("y2", 32)
-          .attr("class", "line_chart_ten_years");
+          .attr("class", "line_chart_range_years");
   
     legend.append( "text" )
           .attr("x", 37)
           .attr("y", 32)
           .attr("class", "legend")
-          .text("10-years Average Temperature"); 
+          .attr("id","range-name-legend")
+          .html(range_name+" Average Temperature"); 
     
     legend.append( "line" )
           .attr("x1", 15).attr("x2", 30)
@@ -57,10 +64,22 @@ function createLineChartLegend(svg){
   }
 
 
+  function updateRangeNameLegend(){
+    
+    var range_name =  document.getElementById('rage-year');
+    range_name = range_name.options[range_name.selectedIndex].text;
+  
+    d3.select("#range-name-legend")
+        .html(range_name+" Average Temperature"); 
+  }
+
+
 //Draw the area that represents the uncertainty of the temperature measurement
 function drawUncertainty(data, svg, x, y){
     
     var range_year =  document.getElementById('rage-year').value; 
+
+   
     var areaUncGenerator = d3.area()
                              .x(function(d) { return x(d.date) })
                              .y0(function(d) { return y(d[range_year+"_value"] + d[range_year+"_unc"]) })
@@ -74,8 +93,7 @@ function drawUncertainty(data, svg, x, y){
                 .enter()
                 .append("path")
                 .attr("d", areaUncGenerator);
-            
-      
+              
   
   }
   
@@ -103,8 +121,7 @@ function drawUncertainty(data, svg, x, y){
         .attr("d", areaUncGenerator);
                     
                    
-               
-               }
+}
 
 
 function getTimeScale(){
@@ -126,17 +143,17 @@ function baseLine(data){
 
     var timeScale = getTimeScale();
     data_baselines=[];
-    timeScale.forEach((d)=>{
+    timeScale.forEach(()=>{
             
         data_baselines.push({baseline: data[0].baseline});
     })
-return data_baselines;
+    
+    return data_baselines;
 }
                
 //get x and Y scales of the Linechart
 function getScales(data){
-    
-    var timeScale = getTimeScale();
+
     //console.log(timeScale);
     var x = d3.scaleTime()
               .domain(d3.extent(data, function(d) { return d.date; }))
@@ -226,7 +243,7 @@ function createDefaultLineChart(data){
          
    svg  
         .append("g")
-        .attr("class","line_chart_ten_years")
+        .attr("class","line_chart_range_years")
         .selectAll("path")
         .data([data])
         .enter()
@@ -311,7 +328,7 @@ function updateLineChart(data, grafic_class){
        .attr("d", valueline_annual)
     
     
-    var ten_line= svg.select(".line_chart_ten_years").selectAll("path").data([data]);
+    var ten_line= svg.select(".line_chart_range_years").selectAll("path").data([data]);
     ten_line.exit().remove();
     ten_line
        .enter()
@@ -336,6 +353,7 @@ function updateLineChart(data, grafic_class){
                          .on('mouseout', () => removeTooltip(tooltipLine,"#linechart")); 
     
     updateGrid("#linechart", x, y,svg, 12, 10);
+    updateRangeNameLegend();
 
 }
 

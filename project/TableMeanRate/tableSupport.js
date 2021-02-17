@@ -23,7 +23,7 @@ function getAnnualData(data){
 
     data.forEach((d) => {
         
-        if( d.Month == 5  ) data_annual.push(d);
+        if( d.Month == 6  ) data_annual.push(d);
     });
 
     return data_annual;

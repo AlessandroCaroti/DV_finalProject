@@ -106,7 +106,7 @@ function getAverageTemperature(data){
 
     data.forEach((d) => {
         
-        if( d.Month == 5  ) data_annual.push({ Year:d.Year, annual_value: d.annual_value, 
+        if( d.Month == 6  ) data_annual.push({ Year:d.Year, annual_value: d.annual_value, 
                                               annual_unc: d.annual_unc, annual_anomaly: d.annual_anomaly});
     });
 
