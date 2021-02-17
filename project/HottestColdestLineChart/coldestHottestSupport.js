@@ -47,7 +47,6 @@ function getScales(data){
 }
 
 
-
 // data grouped by year
 function getMonthlyData(data, hottestYears, coldestYears){
     
@@ -228,13 +227,18 @@ function hotColdMouseEnter(self, event, d, hottest_temp, coldest_temp){
     
     if( isInList(year, hottest_temp)  ){
       var idx = getIdxList(year, hottest_temp);
-      d3.select("#hot-text-"+idx).style("font-weight", "bold").style("text-decoration", "underline");
+      d3.select("#hot-text-"+idx).style("font-weight", "bold")
+                                .style("text-decoration", "underline")
+                                .style("text-decoration-color", "black");
+                                
 
     }
     
     if( isInList(year, coldest_temp)  ){
       var idx = getIdxList(year, coldest_temp);
-      d3.select("#cold-text-"+idx).style("font-weight", "bold").style("text-decoration", "underline");
+      d3.select("#cold-text-"+idx).style("font-weight", "bold")
+                                  .style("text-decoration", "underline")
+                                  .style("text-decoration-color", "black");
     
     }
 
@@ -333,8 +337,6 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp){
                   .html(el.Year + "&nbsp &nbsp"+
                       (el.annual_anomaly> 0? "+"+el.annual_anomaly.toFixed(2): el.annual_anomaly.toFixed(2)) + " &deg;C")
         
-
-         
           id_idx ++;
                     
         }) 

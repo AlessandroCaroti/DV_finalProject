@@ -201,6 +201,7 @@ function createDefaultLineChart(data){
       .attr("class", "y_axis")
       .call(d3.axisLeft(y))
 
+    createGridLine(x,y, svg, "linechart", 10, 10);
     var lineGenerators = getLineGenerators(x,y);
     var valueline_annual = lineGenerators[0];
     var valueline_ten_years = lineGenerators[1];
@@ -284,7 +285,7 @@ function updateLineChart(data, grafic_class){
     updateAxis(".x_axis", ".y_axis", x, y);  
     
     //.graphics
-    var svg = d3.select(grafic_class);
+    var svg = d3.select(grafic_class+" g");
     
     //re-define the lines generator
     // .defined(...) => are not considered the NaN values
@@ -330,7 +331,8 @@ function updateLineChart(data, grafic_class){
     var tipBox = d3.select("#tipbox-linechart")
                          .on('mousemove', (event) => drawTooltip(tipBox, event, x, data, tooltipLine, "#linechart", height))
                          .on('mouseout', () => removeTooltip(tooltipLine,"#linechart")); 
-
+    
+    updateGrid("#linechart", x, y,svg, 12, 10);
 
 }
 

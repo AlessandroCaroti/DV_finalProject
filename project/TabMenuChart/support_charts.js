@@ -2,8 +2,6 @@
 var parseTime = d3.timeParse("%Y-%m");
 var baseline;
 
-
-
 // Functions to Draw and Remove the tooltip
 // given the x position find the corresponding value 
 function drawTooltip(self, event, x, data, tooltipLine, id_chart, height) {
@@ -71,6 +69,51 @@ function initBaselineAndInfo(dataFile){
   }
 
 
+
+  
+function make_x_gridlines(x, n_tick=8) {
+
+  return d3.axisBottom(x)
+    .ticks(n_tick)
+}
+
+function make_y_gridlines(y, n_tick=8) {
+  return d3.axisLeft(y)
+    .ticks(n_tick)
+}
+
+
+function createGridLine(x, y, svg, nameChart, n_tickX=8, n_tickY=8){
+
+    svg.append("g")
+        .attr("class","grid")
+        .attr("id", "x-grid-"+nameChart)
+        .attr("transform","translate(0," + height + ")")
+        .style("stroke-dasharray",("3,3"))
+        .call(make_x_gridlines(x, n_tickX)
+              .tickSize(-height)
+              .tickFormat("")
+          )
+    
+    svg.append("g")
+        .attr("class","grid")
+        .attr("id", "y-grid-"+nameChart)
+        .style("stroke-dasharray",("3,3"))
+        .call(make_y_gridlines(y, n_tickY)
+              .tickSize(-width)
+              .tickFormat("")
+          )
+  
+  }
+  
+  
+  function updateGrid(idChart,x,y, svg, n_tickX=8, n_tickY=8){
+  
+    d3.selectAll( idChart+" .grid").remove()
+    createGridLine(x, y, svg, "seasonal", n_tickX=8, n_tickY=8);
+  
+  }
+
 // parse the attribitues useful for the chart and add the baseline
 // to the annual_value and ten_years_value
 function parseDataAttributes(data, region="NaN"){
@@ -80,12 +123,24 @@ function parseDataAttributes(data, region="NaN"){
       d.annual_anomaly = parseFloat(d["Annual Anomaly"])
       d.annual_unc = parseFloat(d["Annual Unc."]);
       d.annual_value = baseline + parseFloat(d["Annual Anomaly"]);
-      d.ten_years_value =  baseline + parseFloat(d["Ten-year Anomaly"])
-      d.ten_years_unc =  parseFloat(d["Ten-year Unc."])
+      
+      d.five_years_value =  baseline + parseFloat(d["Five-year Anomaly"]);
+      d.five_years_unc =  parseFloat(d["Five-year Unc."]);
+      
+      d.ten_years_value =  baseline + parseFloat(d["Ten-year Anomaly"]);
+      d.ten_years_unc =  parseFloat(d["Ten-year Unc."]);
+      
+      
+      d.twenty_years_value =  baseline + parseFloat(d["Twenty-year Anomaly"]);
+      d.twenty_years_unc =  parseFloat(d["Twenty-year Unc."]);
+
+      
 
       d.monthly_value =  parseFloat(d["Monthly Anomaly"]);
       d.monthly_temp =  baseline + parseFloat(d["Monthly Anomaly"]);
       d.monthly_unc = parseFloat(d["Monthly Unc."]);
+
+   
 
       
       d.baseline = baseline;
@@ -93,6 +148,7 @@ function parseDataAttributes(data, region="NaN"){
       
     
     })
+
 
 
   }

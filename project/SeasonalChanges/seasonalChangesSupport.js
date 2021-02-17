@@ -287,55 +287,13 @@ function updateSeasonalLegend(dataLastYears){
 
 
 
-function make_x_gridlines(x) {
-  return d3.axisBottom(x)
-    .ticks(8)
-}
-
-function make_y_gridlines(y) {
-  return d3.axisLeft(y)
-    .ticks(8)
-}
-
-
-function createGridLine(x, y, svg, nameChart){
-
-
-  svg.append("g")
-      .attr("class","grid")
-      .attr("id", "x-grid-"+nameChart)
-      .attr("transform","translate(0," + height + ")")
-      .style("stroke-dasharray",("3,3"))
-      .call(make_x_gridlines(x)
-            .tickSize(-height)
-            .tickFormat("")
-        )
-  
-  svg.append("g")
-      .attr("class","grid")
-      .attr("id", "y-grid-"+nameChart)
-      .style("stroke-dasharray",("3,3"))
-      .call(make_y_gridlines(y)
-            .tickSize(-width)
-            .tickFormat("")
-        )
-
-}
-
-
-function updateYgrid(nameChart,y){
-
-  d3.select("#y-grid-"+nameChart).call(make_y_gridlines(y))
-
-}
-
 
   function createHottestColdestLineChart(data, dataSeasonalBaseline){
 
       var seasonalData = getDataSeasonal(data, dataSeasonalBaseline);
       
       var lastYearsData = lastYearSeasonalData(data,dataSeasonalBaseline);
-      console.log(lastYearsData)
+ 
       var svg = d3.select("#seasonal_changes_graphic")
                   .append("svg")
                   .attr("class","graphics")
@@ -439,7 +397,7 @@ function updateYgrid(nameChart,y){
     var x = scales[0] 
     var y =  scales[1]
 
-    
+    var svg = d3.select("#seasonal_changes_graphic svg g")
     var valuelineSeasonalBaseline = getLineGeneratorsSeasonal(x,y);
 
     var baseline_unc = d3.select("#baseline-unc").selectAll("path").data([seasonalData]);
@@ -494,6 +452,6 @@ function updateYgrid(nameChart,y){
                     .on('mouseout', () => removeTooltipSeasonal(tooltipLine));
     
     updateSeasonalLegend(lastYearsData);
-    updateYgrid("seasonal",y);
+    updateGrid("#seasonal_changes_graphic", x, y,svg);
     
   }

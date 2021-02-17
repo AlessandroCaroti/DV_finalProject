@@ -172,7 +172,7 @@ text#label-legend{
   width: 900px;
   height: 500px;
   margin: auto;
-  margin-top: 50px;
+  margin-top: 60px;
  
 
 }
@@ -180,14 +180,11 @@ text#label-legend{
 .tab {
   
   overflow: hidden;
+  margin-top: 30px;
 
  
 }
 
-#dropdown_tab{
-  margin-top: 20px;
-  margin-left: 45%;
-}
 
 
 /* Style the buttons inside the tab */
@@ -244,7 +241,7 @@ text#label-legend{
 /*--------------------------------- END TAB MENU STYLE -------------------------------------*/
 
 
-/*------------------- CHART STYLE -------------------------------*/
+/*------------------- LINECHART STYLE -------------------------------*/
 
 .graphics{
 
@@ -304,13 +301,20 @@ text#label-legend{
     stroke: none;
 }
 
+#dropdown_tab{
+
+  margin: auto;
+  
+}
+
+#tab-menu{
+  margin-top: 100px;
+}
 
 /* -----------------------------END CHART STYLE--------------------------------------*/
 
 /*Dropdown menu -> to remove at the end, only for testing*/
-#dropdown{
-  margin: auto;
-}
+
 
 /*--------------- LEGEND STYLE -------------------------------------------*/
 
@@ -350,7 +354,6 @@ text.legend {
 }
 
 /* END TAB MENU LINECHART */
-
 
 
 
@@ -468,8 +471,9 @@ table{
 
 }
 
-text{
+.text-legend {
   font-family: sans-serif;
+  color: #000;
 }
 
 #legend_hot_cold{
