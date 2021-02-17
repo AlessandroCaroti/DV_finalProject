@@ -59,7 +59,6 @@ function initBaselineAndInfo(dataFile){
     else
         folder = dataFile;
     
-   
     d3.json("/../../remaining_data/data_new/"+folder+"/"+dataFile+"_info.json")
       .then( (data =>{
     
