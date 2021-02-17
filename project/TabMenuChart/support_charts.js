@@ -52,7 +52,6 @@ function removeTooltip(tooltipLine, id_chart) {
 //Load the baseline of the corresponding country from the nameCountry_info.json file
 function initBaselineAndInfo(dataFile){
   
-
     var folder;
    
     if( dataFile.charAt(dataFile.length  - 1) == '.' ) folder = dataFile.slice(0,-1);
