@@ -1,7 +1,9 @@
-
+import time
 
 if __name__ == "__main__":
+
     step = 1
+    start = time.time()
 
     print("\t\tSTEP {}:\n".format(step))
     exec(open("./download_data/1_Download_table.py").read())
@@ -72,3 +74,7 @@ if __name__ == "__main__":
     exec(open("./download_data/14_Split_by_year.py").read())
     step += 1
     print("########################################################################################################################\n")
+
+    end = time.time()
+    minutes, seconds = divmod(end-start, 60)
+    print("Execution time: {:0>2}:{:05.2f}".formatint(minutes,seconds))
