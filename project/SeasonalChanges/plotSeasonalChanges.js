@@ -1,5 +1,15 @@
 
 
+function parseSeasonalBaseline(data, region="NaN"){
+    
+  data.seasonalBaseline = data[0];
+  data.seasonalUnc = data[1];
+  data.region = region;
+
+}
+
+
+
 function loadDataSeasonal(){ 
     
   

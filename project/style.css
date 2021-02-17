@@ -325,6 +325,7 @@ text#label-legend{
   
   stroke: #000;
   stroke-width: 1px;
+  
 
 }
 
@@ -539,5 +540,15 @@ text{
 #text-tip-seasonal{
   text-align: center;
   font-weight: bold ;
+}
+
+
+.grid line {
+  stroke: lightgrey;
+  stroke-opacity: 0.6;
+  shape-rendering: crispEdges
+}
+.grid path {
+  stroke-width: 0;
 }
 /*---------------------------END SEASONAL STYLE--------------------------------*/

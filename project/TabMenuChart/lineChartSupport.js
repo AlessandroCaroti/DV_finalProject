@@ -11,7 +11,7 @@ function createLineChartLegend(svg){
     legend = svg.append( "g" ).attr("class", "legend" );
     
     legend.append( "rect" )
-    .attr("x", 10).attr("width", 170)
+    .attr("x", 10).attr("width", 190)
     .attr("y", 1).attr("height", 60)
     .attr("class", "legend")
     .attr("id","legend-square");

@@ -39,7 +39,10 @@ function drawTooltipSeasonal(tipBox, event, x, data, tooltipLine, lastYearsData)
   for( var i=0; i< lastYearsData.length; i++){
 
     var row = lastYearsData[i].filter((d)=> d.month == elem.month)[0];
-    tipText+= "<br/>"+row.year+": "+row.monthlyTemp.toFixed(2)+ " &deg;C";
+    
+    if( row != undefined) tipText+= "<br/>"+row.year+": "+row.monthlyTemp.toFixed(2)+ " &deg;C";
+    else
+        tipText+= "<br/>"+lastYearsData[i][0].year+": NaN";
   }
      
   tooltip.html("")
@@ -88,13 +91,7 @@ function getLineGeneratorsSeasonal(x, y){
 }
 
 
-function parseSeasonalBaseline(data, region="NaN"){
-    
-    data.seasonalBaseline = data[0];
-    data.seasonalUnc = data[1];
-    data.region = region;
 
-}
 
 function getMonthName(month){
 
@@ -171,7 +168,6 @@ function getDataSeasonal(data, dataSeasonalBaseline){
     dataChart.push( item );
   }
    
-
   return dataChart;
 }
 
@@ -287,6 +283,53 @@ function updateSeasonalLegend(dataLastYears){
   }
 }
 
+
+
+
+
+function make_x_gridlines(x) {
+  return d3.axisBottom(x)
+    .ticks(8)
+}
+
+function make_y_gridlines(y) {
+  return d3.axisLeft(y)
+    .ticks(8)
+}
+
+
+function createGridLine(x, y, svg, nameChart){
+
+
+  svg.append("g")
+      .attr("class","grid")
+      .attr("id", "x-grid-"+nameChart)
+      .attr("transform","translate(0," + height + ")")
+      .style("stroke-dasharray",("3,3"))
+      .call(make_x_gridlines(x)
+            .tickSize(-height)
+            .tickFormat("")
+        )
+  
+  svg.append("g")
+      .attr("class","grid")
+      .attr("id", "y-grid-"+nameChart)
+      .style("stroke-dasharray",("3,3"))
+      .call(make_y_gridlines(y)
+            .tickSize(-width)
+            .tickFormat("")
+        )
+
+}
+
+
+function updateYgrid(nameChart,y){
+
+  d3.select("#y-grid-"+nameChart).call(make_y_gridlines(y))
+
+}
+
+
   function createHottestColdestLineChart(data, dataSeasonalBaseline){
 
       var seasonalData = getDataSeasonal(data, dataSeasonalBaseline);
@@ -308,13 +351,7 @@ function updateSeasonalLegend(dataLastYears){
   
       var valuelineSeasonalBaseline = getLineGeneratorsSeasonal(x,y);
 
-      svg.append('clipPath')
-          .attr('id', 'panel-clip')
-          .append('rect')
-            .attr('width', width)
-            .attr('height', height);
-
-
+      createGridLine(x,y, svg, "seasonal");
       svg.append("g")
                   .attr("class","uncertainty")
                   .attr("id", "baseline-unc")
@@ -322,7 +359,6 @@ function updateSeasonalLegend(dataLastYears){
                     .data( [seasonalData])
                     .enter()
                     .append("path")
-                    .attr("clip-path", "url(#panel-clip)" )
                     .attr("d", valuelineSeasonalBaseline[0]);
 
 
@@ -332,7 +368,6 @@ function updateSeasonalLegend(dataLastYears){
                     .data( [seasonalData])
                     .enter()
                     .append("path")
-                    .attr("clip-path", "url(#panel-clip)" )
                     .attr("d", valuelineSeasonalBaseline[1]);
       
       svg.append("g")
@@ -342,7 +377,6 @@ function updateSeasonalLegend(dataLastYears){
                     .data( [seasonalData])
                     .enter()
                     .append("path")
-                    .attr("clip-path", "url(#panel-clip)" )
                     .attr("d", valuelineSeasonalBaseline[2]);
       
       svg.append("g")
@@ -352,7 +386,6 @@ function updateSeasonalLegend(dataLastYears){
                     .data( [seasonalData])
                     .enter()
                     .append("path")
-                    .attr("clip-path", "url(#panel-clip)" )
                     .attr("d", valuelineSeasonalBaseline[3]);
       
       svg.append("g")
@@ -379,7 +412,7 @@ function updateSeasonalLegend(dataLastYears){
           .attr("class", "y_axis_seasonal")
           .call(d3.axisLeft(y));
                           
-
+    
 
     var tooltipLine = svg.append('line').attr("class","line_tip").attr("id","seasonal-line-tip");
     
@@ -401,6 +434,7 @@ function updateSeasonalLegend(dataLastYears){
     var seasonalData = getDataSeasonal(data, dataSeasonalBaseline);
     var lastYearsData = lastYearSeasonalData(data,dataSeasonalBaseline);
     
+    console.log(lastYearsData)
     var scales = getScales(data, dataSeasonalBaseline);
     var x = scales[0] 
     var y =  scales[1]
@@ -460,5 +494,6 @@ function updateSeasonalLegend(dataLastYears){
                     .on('mouseout', () => removeTooltipSeasonal(tooltipLine));
     
     updateSeasonalLegend(lastYearsData);
+    updateYgrid("seasonal",y);
     
   }

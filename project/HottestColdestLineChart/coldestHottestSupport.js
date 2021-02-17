@@ -8,10 +8,6 @@ var parseMonth = d3.timeParse("%m");
 var monthList = ["1","2","3","4","5","6","7","8","9","10","11","12"];
 
 
-
-
-
-
 function getLineGenerators(x, y){
     
     
@@ -43,7 +39,7 @@ function getScales(data){
 
            // Add Y axis
     var y = d3.scaleLinear()
-               .domain(d3.extent(data, function(d) { return d.monthly_value }))
+               .domain(d3.extent(data, function(d) { return d.monthly_value}))
                .range([height, 0 ]);
   
     return [x, y];
@@ -232,14 +228,14 @@ function hotColdMouseEnter(self, event, d, hottest_temp, coldest_temp){
     
     if( isInList(year, hottest_temp)  ){
       var idx = getIdxList(year, hottest_temp);
-      d3.select("#hot-text-"+idx).style("font-weight", "bold")
-      d3.select("#hot-temp-"+idx).style("font-weight", "bold")
+      d3.select("#hot-text-"+idx).style("font-weight", "bold").style("text-decoration", "underline");
+
     }
     
     if( isInList(year, coldest_temp)  ){
       var idx = getIdxList(year, coldest_temp);
-      d3.select("#cold-text-"+idx).style("font-weight", "bold")
-      d3.select("#cold-temp-"+idx).style("font-weight", "bold")
+      d3.select("#cold-text-"+idx).style("font-weight", "bold").style("text-decoration", "underline");
+    
     }
 
 }
@@ -256,14 +252,14 @@ function hotColdMouseLeave(self, event, d, hot_cold_list, hottest_temp, coldest_
 
     if( isInList(year, coldest_temp)  ){
       var idx = getIdxList(year, coldest_temp);
-      d3.select("#cold-text-"+idx).style("font-weight", "normal")
-      d3.select("#cold-temp-"+idx).style("font-weight", "normal")
+      d3.select("#cold-text-"+idx).style("font-weight", "normal").style("text-decoration", "none");
+
     }
 
     if( isInList(year, hottest_temp)  ){
       var idx = getIdxList(year, hottest_temp);
-      d3.select("#hot-text-"+idx).style("font-weight", "normal")
-      d3.select("#hot-temp-"+idx).style("font-weight", "normal")
+      d3.select("#hot-text-"+idx).style("font-weight", "normal").style("text-decoration", "none");
+ 
     }
 }
 
@@ -301,17 +297,13 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp){
         
         legend.append( "text" )
               .attr("class","text-legend")
-              .attr("x", curX + 50)
+              .attr("x", curX + 35)
               .attr("y", curY + 15)
-              .html(el.Year)
-              .attr("id", "hot-text-"+id_idx) 
+              .attr("id", "hot-text-"+id_idx )
+              .html(el.Year + "&nbsp &nbsp"+
+                (el.annual_anomaly> 0? "+"+el.annual_anomaly.toFixed(2): el.annual_anomaly.toFixed(2)) + " &deg;C")
         
-        legend.append( "text" )
-              .attr("class","text-legend")
-              .attr("x", curX + 105)
-              .attr("y", curY + 15)
-              .html((el.annual_anomaly> 0? "+"+el.annual_anomaly.toFixed(2): el.annual_anomaly.toFixed(2)) + " &deg;C")
-              .attr("id", "hot-temp-"+id_idx) 
+
       id_idx ++;
         
     }) 
@@ -335,18 +327,14 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp){
                   
             legend.append( "text" )
                   .attr("class","text-legend")
-                  .attr("x", curX + 50)
+                  .attr("x", curX + 35)
                   .attr("y", curY + 15)
-                  .html(el.Year)
-                  .attr("id", "cold-text-"+id_idx) ;
+                  .attr("id", "cold-text-"+id_idx )
+                  .html(el.Year + "&nbsp &nbsp"+
+                      (el.annual_anomaly> 0? "+"+el.annual_anomaly.toFixed(2): el.annual_anomaly.toFixed(2)) + " &deg;C")
+        
 
-            legend.append( "text" )
-                  .attr("class","text-legend")
-                  .attr("x", curX + 105)
-                  .attr("y", curY + 15)
-                  .html((el.annual_anomaly> 0? "+"+el.annual_anomaly.toFixed(2): el.annual_anomaly.toFixed(2)) + " &deg;C")
-                  .attr("id", "cold-temp-"+id_idx) 
-          
+         
           id_idx ++;
                     
         }) 
@@ -400,17 +388,7 @@ function createHottestColdestLineChart(data){
     var x = scales[0] 
     var y =  scales[1]
 
-    svg.append("g")
-      .attr("transform", "translate(0," + height + ")")
-      .attr("class", "x_axis_hc")
-      .call(d3.axisBottom(x)
-              .tickFormat(d3.timeFormat("%b"))
-            );
-
-
-    svg.append("g")
-      .attr("class", "y_axis_hc")
-      .call(d3.axisLeft(y));
+   
     
     linegenerator= getLineGenerators(x,y);
     
@@ -442,6 +420,18 @@ function createHottestColdestLineChart(data){
         .attr("d", zero_line)
              
     createHotColdLegend("container-h-c", hottest_temp, coldest_temp);
+
+    svg.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .attr("class", "x_axis_hc")
+    .call(d3.axisBottom(x)
+            .tickFormat(d3.timeFormat("%b"))
+          );
+
+
+  svg.append("g")
+    .attr("class", "y_axis_hc")
+    .call(d3.axisLeft(y));
 
 } 
 
