@@ -172,7 +172,7 @@ function wheelDistance(e) {
   if (d) { 
       return -d / 3; // Firefox; 
   } 
-  console.log(w);
+  //console.log(w);
 
   /*if(w > 0){
     w = w * 50

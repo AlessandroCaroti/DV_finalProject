@@ -33,8 +33,8 @@ tmp_file_suffix = "/Annual_mean.csv";
 function drawMap(world) {
   debug_log("DRAW-MAP");
 
-  svg = d3.select("#svg-map").attr("width", "100%").attr("height", h).call(zoom);
-  map_container = svg.select("#map");
+  svg = d3.select("#svg-map").attr("width", "100%").attr("height", h);
+  map_container = svg.select("#map").call(zoom);
 
   projection = d3
     .geoNaturalEarth1()
@@ -321,6 +321,7 @@ function changeView() {
     local_zoom();
     zoom_in(selected_country);
   }
+
 }
 
 function init_zoomBtns() {
