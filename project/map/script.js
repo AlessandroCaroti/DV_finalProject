@@ -53,7 +53,7 @@ function drawMap(world) {
     .append("path")
     .attr("class", "country")
     .attr("id", (d) => {
-      country_list.push(d.properties.name);
+      //country_list.push(d.properties.name);
       return d.properties.name;
     })
     .attr("d", geoGenerator);
@@ -176,8 +176,6 @@ function country_events() {
       d3.select(".tooltip-map")
         .style("top", event.pageY + 13 + "px")
         .style("left", event.pageX + 13 + "px");
-
-        
     });
 
 
@@ -433,6 +431,7 @@ function load_tempYear(temp_file, time_transition) {
 
       //Associate to each county a color proportionate to it's anomaly
       update_colors(data, time_transition);
+
     })
     .catch(function (error) {
       console.log(error);
@@ -450,10 +449,8 @@ function load_map() {
       topology = topojson.simplify(topology, 0.05);
 
       drawMap(topology);
-      load_tempYear(
-        tmp_file_prefix + "2020" + tmp_file_suffix,
-        default_transition
-      );
+      load_tempYear( tmp_file_prefix + "2020" + tmp_file_suffix, default_transition );
+
       init_dropdown_menu(country_list);
     })
     .catch((error) => {
