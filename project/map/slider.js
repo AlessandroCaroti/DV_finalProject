@@ -25,7 +25,7 @@ function init_slider(min, max, step) {
     .width(500)
     .tickFormat(d3.format("0"))
     .ticks(7)
-    .default(2019)
+    .default(2020)
     .handle(d3.symbol().type(d3.symbolCircle).size(200)())
     .on("end", (val) => {
       d3.select("#sliderLabel").text("Year: " + d3.format("0")(val));

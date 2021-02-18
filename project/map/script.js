@@ -21,8 +21,8 @@ var country_list = new Array(); //List of the name of the countries present in t
 var selected_country = null;
 
 // FILES & DIRECTORY PATH VARIABLE
-map_file = "../../data/countries-50m.json";
-tmp_file_prefix = "../../data/data_year/";
+map_file = "../../data/map/countries-10m_V34_6.json";
+tmp_file_prefix = "../../data/years/";
 tmp_file_suffix = "/Annual_mean.csv";
 
 //                    END GLOBAL VARIABLE                   //
@@ -450,7 +450,7 @@ function load_map() {
 
       drawMap(topology);
       load_tempYear(
-        tmp_file_prefix + "2019" + tmp_file_suffix,
+        tmp_file_prefix + "2020" + tmp_file_suffix,
         default_transition
       );
       init_dropdown_menu(country_list);
