@@ -508,6 +508,12 @@ table{
 
 }
 
+.underline-legend-hot-cold{
+
+  fill: none;
+  stroke: #000;
+  stroke-width: 1px;
+}
 
 /*---------------------------END Coldest Year style--------------------------------*/
 

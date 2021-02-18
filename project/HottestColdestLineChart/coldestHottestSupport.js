@@ -164,7 +164,6 @@ function getColdestYears(data){
    
   }
 
-
   return coldest_year;
 
 }
@@ -220,26 +219,22 @@ function getHotColdStyle(hot_cold_list, d){
 
 function hotColdMouseEnter(self, event, d, hottest_temp, coldest_temp){
 
-    d3.select(self)
-                    .style("stroke-width","6px")
+    d3.select(self).style("stroke-width","6px")
                     .style("stroke-opacity","80%");
 
-    year = self.className.baseVal.split("-")[1];
+    year = self.id.split("-")[1];
     
     if( isInList(year, hottest_temp)  ){
       var idx = getIdxList(year, hottest_temp);
-      d3.select("#hot-text-"+idx).style("font-weight", "bold")
-                                .style("text-decoration", "underline")
-                                .style("text-decoration-color", "black");
-                                
-
+      d3.select("#hot-text-"+idx).style("font-weight", "bold").style("text-decoration","underline");
+     
     }
     
     if( isInList(year, coldest_temp)  ){
       var idx = getIdxList(year, coldest_temp);
-      d3.select("#cold-text-"+idx).style("font-weight", "bold")
-                                  .style("text-decoration", "underline")
-                                  .style("text-decoration-color", "black");
+      d3.select("#cold-text-"+idx).style("font-weight", "bold").style("text-decoration","underline");
+      
+                                
     
     }
 
@@ -247,23 +242,23 @@ function hotColdMouseEnter(self, event, d, hottest_temp, coldest_temp){
 
 function hotColdMouseLeave(self, event, d, hot_cold_list, hottest_temp, coldest_temp){    
     
-    year = self.className.baseVal.split("-")[1]; 
+    year = self.id.split("-")[1]; 
     if( isInList(year, hot_cold_list)  )
       d3.select(self).style("stroke-width","1.5px");
     else{
-      d3.select(self).style("stroke-width","1px");
-      d3.select(self).style("stroke-opacity","50%");
+      d3.select(self).style("stroke-width","1px")
+                     .style("stroke-opacity","50%");
     }
+
 
     if( isInList(year, coldest_temp)  ){
       var idx = getIdxList(year, coldest_temp);
-      d3.select("#cold-text-"+idx).style("font-weight", "normal").style("text-decoration", "none");
-
+      d3.select("#cold-text-"+idx).style("font-weight", "normal").style("text-decoration","none");
     }
 
     if( isInList(year, hottest_temp)  ){
       var idx = getIdxList(year, hottest_temp);
-      d3.select("#hot-text-"+idx).style("font-weight", "normal").style("text-decoration", "none");
+      d3.select("#hot-text-"+idx).style("font-weight", "normal").style("text-decoration","none");
  
     }
 }
@@ -408,7 +403,7 @@ function createHottestColdestLineChart(data){
                     .enter()
                     .append("path")
                       .attr("d", valueline_annual)
-                      .attr("class", (d)=>String("path-"+d[0].Year))
+                      .attr("id", (d)=>String("path-"+d[0].Year))
                       .attr("style", (d) => getHotColdStyle(hot_cold_list,d))
                       .on("mouseover", function(event, d){ hotColdMouseEnter(this, event, d, hottest_temp, coldest_temp)})
                       .on("mouseout", function(event, d){ hotColdMouseLeave(this, event, d, hot_cold_list, hottest_temp, coldest_temp)})
@@ -474,7 +469,7 @@ function UpdateHottestColdestLineChart(data){
           .append("path")
           .merge(line)
           .attr("d", valueline_annual)
-          .attr("class", (d)=>String("path-"+d[0].Year))
+          .attr("id", (d)=>String("path-"+d[0].Year))
           .attr("style", (d) => getHotColdStyle(hot_cold_list,d))
           .on("mouseover", function(event, d){ hotColdMouseEnter(this, event, d,hottest_temp, coldest_temp)})
           .on("mouseout", function(event, d){ hotColdMouseLeave(this, event, d, hot_cold_list, hottest_temp, coldest_temp)})
