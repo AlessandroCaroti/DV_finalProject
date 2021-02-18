@@ -1,5 +1,4 @@
 
-
 function parseSeasonalBaseline(data, region="NaN"){
     
   data.seasonalBaseline = data[0];
@@ -12,8 +11,6 @@ function parseSeasonalBaseline(data, region="NaN"){
 
 function loadDataSeasonal(){ 
     
-  
-  const countries = '../../remaining_data/data_new/Countries.csv';
     var dataset = "";
     d3.csv(countries)
       .then((data)=>{

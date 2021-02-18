@@ -53,7 +53,7 @@ function readDataContinentNull(portion_continent,hemisphere, data_country, data_
 
     console.log("2")
     var csv_portion_continent = "/../../remaining_data/general_data/"+ portion_continent+"/"+portion_continent+"_anomalyTable.csv";
-    var csv_hemisphere = "/../..remaining_data/general_data/"+ hemisphere+"/"+hemispheret+"_anomalyTable.csv";
+    var csv_hemisphere = "/../../remaining_data/general_data/"+ hemisphere+"/"+hemispheret+"_anomalyTable.csv";
   
         d3.csv(csv_portion_continent)
         .then((data_portion_continent)=>{
@@ -146,7 +146,7 @@ function readDataPortionContinentNull(continent,hemisphere, data_country, data_g
 function readDataOnlyContinent(continent, data_country, data_global,update=false){
 
     console.log("5")
-    var csv_continent = "/../..remaining_data/general_data/"+ continent+"/"+continent+"_anomalyTable.csv";
+    var csv_continent = "/../../remaining_data/general_data/"+ continent+"/"+continent+"_anomalyTable.csv";
     
      d3.csv(csv_continent)
         .then((data_continent)=>{
@@ -166,7 +166,7 @@ function readDataOnlyContinent(continent, data_country, data_global,update=false
 }
 function readDataOnlyPortionContinent(portion_continent, data_country, data_global, update=false){
 
-
+    console.log("6")
     var csv_portion_continent = "/../../remaining_data/general_data/"+ portion_continent+"/"+portion_continent+"_anomalyTable.csv";
     
      d3.csv(csv_portion_continent)

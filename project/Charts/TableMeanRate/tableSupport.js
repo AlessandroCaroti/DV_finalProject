@@ -3,6 +3,7 @@
 
 //Global variables
 var years_table = ["1750","1800","1850","1900","1950","2000","2020"];
+
 var full_width = 900
 var margin_table = {top: 10, right: 10, bottom: 10, left: 20};
 var width_table = full_width - margin_table.left - margin_table.right;
@@ -13,9 +14,6 @@ function isInfoNaN(json_field){
 
     return json_field == "NaN";
 }
-
-//utils
-//get annual average data, saved at every june
 
 
 function existYear(data, year){
@@ -38,7 +36,7 @@ function dataEvery50Years(data){
     years_table.forEach( (year) =>{
 
         annual_data.forEach( (d)=>{
-            
+
             if( d.Year == year ) data_2.push(d); 
             
         })
@@ -54,17 +52,13 @@ function dataEvery50Years(data){
 }
 
 
-//utils
 //compute mean rate of changes
 function getMeanRateOfChange(temp1,temp2, year_temp1, year_temp2){
   
     return (temp2 - temp1) / (year_temp2 - year_temp1);
 }
 
-
-
 //save temperature to compute mean rate of changes
-//create list year-temp
 function getYearTemperatures(row_table){
 
     var temperatures = [];
@@ -77,7 +71,6 @@ function getYearTemperatures(row_table){
 }
 
 
-//utils 
 function fisrtLetterUpperCase(name){
     return  name.charAt(0).toUpperCase()+ name.slice(1);
 }
@@ -150,10 +143,10 @@ function table_data(data_country, data_hemisphere=null, data_continent=null, dat
         for( var j =0; j < Object.keys(data_table[i]).length - 2; j++){
             
             // set starting temperature in the first non null cell of the row
-            if( isInfoNaN(data_table[i][year_1].mean_rate) ){ 
+            if( isNaN(data_table[i][year_1].mean_rate) ){ 
                 
                 data_table[i][year_1].mean_rate = temperatures[year_1]; 
-                if(!isInfoNaN(temperatures[year_1])) data_table[i][year_1].starting_value=true;
+                if(!isNaN(temperatures[year_1])) data_table[i][year_1].starting_value=true;
         
             }
                      
@@ -175,37 +168,6 @@ function table_data(data_country, data_hemisphere=null, data_continent=null, dat
     return data_table;
 }
 
-
-function tableCellEnter(self, event, d){
-
-    var tooltip = d3.select("#table_container .tooltip-map");
-
-    
-    var meanRateHtml= d.starting_value ? "<b> Starting Temp. "+ d.mean_rate+" &deg;C":
-                     "<b> Mean Rate: " + d.mean_rate+" &deg;C / year"+"<br/>" +"<br/>" +
-                     "Temp. Avg.: "+d.temp +" &deg;C " +
-                     " &plusmn; " +  d.annual_unc+ " </b>"
-
-    if( d.i != "Region"){
-
-        tooltip.transition();
-    
-        tooltip.style('left', String( (event.pageX) + 25) + "px" )
-            .style('top', String( (event.pageY) - 20) + "px" )
-            .style("display", "block")
-            .html(meanRateHtml)
-
-        d3.select(self).classed("selected_cell", true);
-
-    }
-    
-}
-
-function tableCellLeave(self){
-    var tooltip = d3.select("#table_container .tooltip-map");
-    if (tooltip) tooltip.style('display', 'none');
-    d3.select(self).classed("selected_cell", false);
-}
 
 
 
@@ -280,12 +242,12 @@ function createDefaultTable(data_country, data_hemisphere=null, data_continent=n
             if(d.i == columns_head[0]) return "region_cell";
             
             //first available values: case fisrt year non null
-            if(d.i == years_table[0] && !isInfoNaN(d.mean_rate) )
+            if(d.i == years_table[0] && !isNaN(d.mean_rate) )
                 return "start_value_table";
             
             // first available values: case first year null
             //need to calculate where is the fisrt non NaN value
-            if( d.i == years_table[idx_year] && isInfoNaN(d.mean_rate)){
+            if( d.i == years_table[idx_year] && isNaN(d.mean_rate)){
                 
                 count_nan++;
                 idx_year++;
@@ -293,7 +255,7 @@ function createDefaultTable(data_country, data_hemisphere=null, data_continent=n
                 
             }
 
-            if(d.i == years_table[idx_year] && !isInfoNaN(d.mean_rate) && d.mean_rate != columns_head[0] ) 
+            if(d.i == years_table[idx_year] && !isNaN(d.mean_rate) && d.mean_rate != columns_head[0] ) 
             if( previous_idx == (i-1)){
             
                     count_nan = 0;
@@ -322,8 +284,6 @@ function createDefaultTable(data_country, data_hemisphere=null, data_continent=n
 
 function UpdateTable(data_country, data_hemisphere=null, data_continent=null, data_global,  data_partial_continent = null){
 
-
-
     //get data for the table and the columns for the header
     
     var data_table = table_data(data_country, data_hemisphere, data_continent, data_global,  data_partial_continent);
@@ -344,7 +304,6 @@ function UpdateTable(data_country, data_hemisphere=null, data_continent=null, da
 
     //exit data and remove
     rows.exit().remove();
-    
     rows.enter().append("tr")
                 .merge(rows)
                 .attr("class","rows_table");
@@ -359,8 +318,7 @@ function UpdateTable(data_country, data_hemisphere=null, data_continent=null, da
 
                                                 if(d == columns_head[0]) return{i: d, region: row[d] }
                                                 return {i: d, mean_rate: row[d].mean_rate, temp: row[d].temp, 
-                                                            annual_unc:row[d].annual_unc, starting_value:row[d].starting_value}
-                                              
+                                                            annual_unc:row[d].annual_unc, starting_value:row[d].starting_value}     
                                              });
                         })
                      
@@ -378,17 +336,17 @@ function UpdateTable(data_country, data_hemisphere=null, data_continent=null, da
 
         if(d.i == columns_head[0]) return "region_cell";
 
-        if(d.i == years_table[0] && !isInfoNaN(d.mean_rate) && d.mean_rate != columns_head[0])
+        if(d.i == years_table[0] && !isNaN(d.mean_rate) && d.mean_rate != columns_head[0])
             return "start_value_table";
 
-        if( d.i == years_table[idx_year] && isInfoNaN(d.mean_rate) && d.mean_rate != columns_head[0]){
+        if( d.i == years_table[idx_year] && isNaN(d.mean_rate) && d.mean_rate != columns_head[0]){
 
             count_nan++;
             idx_year++;
             previous_idx = i; 
         }
 
-        if(d.i == years_table[idx_year] && !isInfoNaN(d.mean_rate) && d.mean_rate != columns_head[0] ) 
+        if(d.i == years_table[idx_year] && !isNaN(d.mean_rate) && d.mean_rate != columns_head[0] ) 
         if( previous_idx == (i-1)){
                
                 count_nan = 0;

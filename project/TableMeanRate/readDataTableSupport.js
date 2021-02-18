@@ -21,6 +21,7 @@ function readDataAllNonNull(continent,portion_continent,hemisphere, data_country
                 if(update) UpdateTable(data_country, data_hemisphere, data_continent, data_global, data_portion_continent);
                 else
                     createDefaultTable(data_country, data_hemisphere, data_continent, data_global, data_portion_continent);
+
             }).catch((error) =>{
                 console.log(error);
                 throw(error);
@@ -35,7 +36,6 @@ function readDataAllNonNull(continent,portion_continent,hemisphere, data_country
         console.log(error);
         throw(error);
       })
-
 
 }
 

@@ -1,53 +1,6 @@
 //Global Variables
 var colorsYears=["red", "blue","green"];
 
-function drawTooltipSeasonal(tipBox, event, x, data, tooltipLine, lastYearsData) {
-
-  var tooltip = d3.select("#tooltip-seasonal-changes");
-
-  const date = x.invert(d3.pointer(event, tipBox.node())[0]);
-
-  //find the element of the corresponding month
-  var elem = data.find( (d) => (d.month-1) == date.getMonth() );
-
-  tooltipLine.attr('stroke', 'black')
-      .attr('x1', x(parseMonth(elem.month)))
-      .attr('x2', x(parseMonth(elem.month)))
-      .attr('y1', 0)
-      .attr('y2', height);
-  
-  
-  var tipText =  
-    "<p id='text-tip-seasonal'>"+ getFullMonthName(elem.month)+"</p>"+
-    "Average (1951-1980): " + String( (elem.seasonalBaseline).toFixed(1) ) + " &deg;C"+
-    "<br/>95% Range (1951-1980): " +"[ "+ String( (elem.seasonalBaseline - elem.unc).toFixed(2) ) + " &deg;C  -  " + 
-    String( (elem.seasonalBaseline + elem.unc).toFixed(2) ) + " &deg;C  ]";
-
-
-  for( var i=0; i< lastYearsData.length; i++){
-
-    var row = lastYearsData[i].filter((d)=> d.month == elem.month)[0];
-    
-    if( row != undefined) tipText+= "<br/>"+row.year+": "+row.monthlyTemp.toFixed(2)+ " &deg;C";
-    else
-        tipText+= "<br/>"+lastYearsData[i][0].year+": NaN";
-  }
-     
-  tooltip.html("")
-      .style('display', 'block')
-      .style('left', String( (event.pageX) + 20) + "px" )
-      .style('top', String( (event.pageY) - 20) + "px" )
-      .append('div')
-      .html( tipText )
-}
-
-
-function removeTooltipSeasonal(tooltipLine) {
-  
-var tooltip = d3.select("#tooltip-seasonal-changes")
-  if (tooltip) tooltip.style('display', 'none');
-  if (tooltipLine) tooltipLine.attr('stroke', 'none');
-}
 
 function getLineGeneratorsSeasonal(x, y){
 
@@ -100,7 +53,7 @@ function getFullMonthName(month){
 }
 
 
-function getScales(data, dataSeasonal){
+function getScalesSeasonal(data, dataSeasonal){
 
   var m =[];
     monthList.forEach((d)=>{
@@ -272,10 +225,6 @@ function updateSeasonalLegend(dataLastYears){
 }
 
 
-
-
-
-
   function createHottestColdestLineChart(data, dataSeasonalBaseline){
 
       var seasonalData = getDataSeasonal(data, dataSeasonalBaseline);
@@ -291,7 +240,7 @@ function updateSeasonalLegend(dataLastYears){
                   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
                   
                   
-      var scales = getScales(data, dataSeasonalBaseline);
+      var scales = getScalesSeasonal(data, dataSeasonalBaseline);
       var x = scales[0] 
       var y =  scales[1]
   
@@ -380,8 +329,8 @@ function updateSeasonalLegend(dataLastYears){
     var seasonalData = getDataSeasonal(data, dataSeasonalBaseline);
     var lastYearsData = lastYearSeasonalData(data,dataSeasonalBaseline);
     
-    console.log(lastYearsData)
-    var scales = getScales(data, dataSeasonalBaseline);
+
+    var scales = getScalesSeasonal(data, dataSeasonalBaseline);
     var x = scales[0] 
     var y =  scales[1]
 

@@ -94,9 +94,89 @@ function stripesLeave(){
   if (tooltip) tooltip.style('display', 'none');
 }
 
+//-------------------------------------------------------TABLE EVENTS-------------------------------------------------
+function tableCellEnter(self, event, d){
+
+  var tooltip = d3.select("#table_container .tooltip-map");
+
+  
+  var meanRateHtml= d.starting_value ? "<b> Starting Temp. "+ d.mean_rate+" &deg;C":
+                   "<b> Mean Rate: " + d.mean_rate+" &deg;C / year"+"<br/>" +"<br/>" +
+                   "Temp. Avg.: "+d.temp +" &deg;C " +
+                   " &plusmn; " +  d.annual_unc+ " </b>"
+
+  if( d.i != "Region"){
+
+      tooltip.transition();
+  
+      tooltip.style('left', String( (event.pageX) + 25) + "px" )
+          .style('top', String( (event.pageY) - 20) + "px" )
+          .style("display", "block")
+          .html(meanRateHtml)
+
+      d3.select(self).classed("selected_cell", true);
+
+  }
+  
+    
+
+}
+
+function tableCellLeave(self){
+  var tooltip = d3.select("#table_container .tooltip-map");
+  if (tooltip) tooltip.style('display', 'none');
+  d3.select(self).classed("selected_cell", false);
+}
 
 
 
+//--------------------------------- TOOLTIP SEASONAL LINECHART -------------------------------------------- 
 
 
+function drawTooltipSeasonal(tipBox, event, x, data, tooltipLine, lastYearsData) {
 
+  var tooltip = d3.select("#tooltip-seasonal-changes");
+
+  const date = x.invert(d3.pointer(event, tipBox.node())[0]);
+
+  //find the element of the corresponding month
+  var elem = data.find( (d) => (d.month-1) == date.getMonth() );
+
+  tooltipLine.attr('stroke', 'black')
+      .attr('x1', x(parseMonth(elem.month)))
+      .attr('x2', x(parseMonth(elem.month)))
+      .attr('y1', 0)
+      .attr('y2', height);
+  
+  
+  var tipText =  
+    "<p id='text-tip-seasonal'>"+ getFullMonthName(elem.month)+"</p>"+
+    "Average (1951-1980): " + String( (elem.seasonalBaseline).toFixed(1) ) + " &deg;C"+
+    "<br/>95% Range (1951-1980): " +"[ "+ String( (elem.seasonalBaseline - elem.unc).toFixed(2) ) + " &deg;C  -  " + 
+    String( (elem.seasonalBaseline + elem.unc).toFixed(2) ) + " &deg;C  ]";
+
+
+  for( var i=0; i< lastYearsData.length; i++){
+
+    var row = lastYearsData[i].filter((d)=> d.month == elem.month)[0];
+    
+    if( row != undefined) tipText+= "<br/>"+row.year+": "+row.monthlyTemp.toFixed(2)+ " &deg;C";
+    else
+        tipText+= "<br/>"+lastYearsData[i][0].year+": NaN";
+  }
+     
+  tooltip.html("")
+      .style('display', 'block')
+      .style('left', String( (event.pageX) + 20) + "px" )
+      .style('top', String( (event.pageY) - 20) + "px" )
+      .append('div')
+      .html( tipText )
+}
+
+
+function removeTooltipSeasonal(tooltipLine) {
+  
+var tooltip = d3.select("#tooltip-seasonal-changes")
+  if (tooltip) tooltip.style('display', 'none');
+  if (tooltipLine) tooltipLine.attr('stroke', 'none');
+}

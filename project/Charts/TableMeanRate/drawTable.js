@@ -1,5 +1,40 @@
 
 var continent, portion_continent, hemisphere;
+
+
+
+function loadData_table(){ 
+    
+    var dataset = "";
+    d3.csv(countries)
+      .then((data)=>{
+
+          var i = 0;
+          data.forEach( d => {
+
+            var dropdown = document.getElementById("dataset");   
+            var option =  document.createElement("option");
+            option.setAttribute("value", d.Country);
+            option.innerHTML = d.Country;
+            dropdown.append(option)
+            if( option.value == "Italy"){
+              dropdown.selectedIndex = i;
+              dropdown.options[i].selected = true;
+              // set Italy default dataset
+              dataset = option.value;
+              
+            }
+            i++;
+          });
+       
+        default_dataset(dataset);
+    })
+
+}
+
+
+
+
 function default_dataset(dataFile=""){
 
     if( dataFile == "") dataFile = "Afghanistan";
@@ -22,7 +57,9 @@ function default_dataset(dataFile=""){
     d3.csv(csv_country)
       .then( (data_country) =>{
 
+      
         parseDataAttributes(data_country,dataFile);
+    
     
         var csv_global = "/../../remaining_data/general_data/global-land/global-land_anomalyTable.csv";
         d3.csv(csv_global)
@@ -99,7 +136,7 @@ function changeDataTable(){
         parseDataAttributes(data_country,dataFile);
     
     
-        var csv_global = "/../../../remaining_data/general_data/global-land/global-land_anomalyTable.csv";
+        var csv_global = "/../../remaining_data/general_data/global-land/global-land_anomalyTable.csv";
         d3.csv(csv_global)
           .then( (data_global) =>{
 
@@ -107,7 +144,7 @@ function changeDataTable(){
               parseDataAttributes(data_global,"global-land");
            
               
-                d3.json("/../../../remaining_data/data_new/"+folder+"/"+dataFile+"_info.json")
+                d3.json("/../../remaining_data/data_new/"+folder+"/"+dataFile+"_info.json")
                 .then( (info) =>{
 
                    
@@ -145,37 +182,4 @@ function changeDataTable(){
           console.log(error);
           throw(error);
         })
-}
-
-
-
-
-//TODO: QUANDO SI UNISCE METTERE UN UNICO LOAD DATA E RICHIAMARE TUTTI I DEFAULT DATA
-function loadData_table(){ 
-    
-  var dataset = "";
-  d3.csv(countries)
-    .then((data)=>{
-
-        var i = 0;
-        data.forEach( d => {
-
-          var dropdown = document.getElementById("dataset");   
-          var option =  document.createElement("option");
-          option.setAttribute("value", d.Country);
-          option.innerHTML = d.Country;
-          dropdown.append(option)
-          if( option.value == "Italy"){
-            dropdown.selectedIndex = i;
-            dropdown.options[i].selected = true;
-            // set Italy default dataset
-            dataset = option.value;
-            
-          }
-          i++;
-        });
-     
-      default_dataset(dataset);
-  })
-
 }
