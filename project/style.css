@@ -1,8 +1,16 @@
-
+svg text {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+svg text::selection {
+  background: none;
+}
 /* MAP */
 
 #svg-map {
-  border: 0.0px solid black;
+  border: 0px solid black;
   padding: 0px;
 }
 
@@ -82,12 +90,12 @@ span {
   padding: 1em;
 }
 
-.handle:focus{
+.handle:focus {
   stroke: #777;
-  fill: #ececec
+  fill: #ececec;
 }
 
-.parameter-value text{
+.parameter-value text {
   font-size: 30px;
 }
 
@@ -99,35 +107,34 @@ span {
   font-size: 25px;
 }
 
-.tick text{
+.tick text {
   opacity: 1;
   font-size: 15px;
 }
-#dropDownMenu{
-
+#dropDownMenu {
   border-bottom: 1px solid lightgray;
   padding: 0px;
 }
 
 input#selectCountryMenu {
-     /*position:absolute;*/
-     
-     top:0px;
-     left:0px;
-     width:200px;
-     padding:1px;
-     font-size:12px;
-     border: none;
-     font-size: 100%;
-     padding: 5px;
- }
+  /*position:absolute;*/
 
- input#selectCountryMenu:focus {
-  outline:none;
+  top: 0px;
+  left: 0px;
+  width: 200px;
+  padding: 1px;
+  font-size: 12px;
+  border: none;
+  font-size: 100%;
+  padding: 5px;
+}
+
+input#selectCountryMenu:focus {
+  outline: none;
   font-size: 100%;
 }
 
-.tooltip-map{
+.tooltip-map {
   position: absolute;
   width: auto;
   height: auto;
@@ -143,17 +150,17 @@ input#selectCountryMenu {
   opacity: 0.95;
 }
 
-.tooltip-name{
+.tooltip-name {
   font-size: 20px;
   font-weight: bold;
 }
 
-.tooltip-anomaly{
+.tooltip-anomaly {
   font-size: 16px;
   text-align: center;
 }
 
-text#label-legend{
+text#label-legend {
   font-size: 13px;
   text-align: center;
   font-weight: bold;
@@ -161,35 +168,23 @@ text#label-legend{
 
 /* TAB MENU LINECHART */
 
-
-
 /*--------------------------------- TAB MENU STYLE -------------------------------------*/
 
-
-#tab_menu{
-
+#tab_menu {
   float: center;
   width: 900px;
   height: 500px;
   margin: auto;
   margin-top: 60px;
- 
-
 }
 
 .tab {
-  
   overflow: hidden;
   margin-top: 30px;
-
- 
 }
-
-
 
 /* Style the buttons inside the tab */
 .tablinks {
-  
   background-color: white;
   color: black;
   position: relative;
@@ -204,27 +199,25 @@ text#label-legend{
   font-weight: bold;
   display: block;
   float: left;
- 
-
 }
-.tablinks:focus {outline:0;}
+.tablinks:focus {
+  outline: 0;
+}
 /* Change background color of buttons on hover */
 .tablinks:hover {
-  background-color: #91AAC5;
+  background-color: #91aac5;
   color: white;
 }
 
 /* Create an active/current tablink class */
 .tablinks.active {
-  background-color: #91AAC5;
+  background-color: #91aac5;
   color: white;
   z-index: 1;
 }
 
-#tab_stripe{
-  
-  right: 2%; 
-  
+#tab_stripe {
+  right: 2%;
 }
 
 /* Style the tab content */
@@ -234,80 +227,68 @@ text#label-legend{
   width: auto;
 }
 
-#stripechart{
+#stripechart {
   display: none;
 }
 
 /*--------------------------------- END TAB MENU STYLE -------------------------------------*/
 
-
 /*------------------- LINECHART STYLE -------------------------------*/
 
-.graphics{
-
+.graphics {
   width: 900px;
   height: 500px;
   margin: 12px;
-  
 }
 
-.country_t{
-  
+.country_t {
   text-align: center;
-  color: #111; font-family: 'Open Sans Condensed', sans-serif;
-  font-size: 50px; font-weight: 700;
-  line-height: 64px; 
-  margin: 0 0 0; 
+  color: #111;
+  font-family: "Open Sans Condensed", sans-serif;
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 64px;
+  margin: 0 0 0;
   padding: 20px 30px;
   color: black;
   -webkit-text-fill-color: white; /* Will override color (regardless of order) */
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
- 
 }
 
-
-.graphics .line_chart_annual{
-
+.graphics .line_chart_annual {
   stroke-width: 1px;
   stroke: steelblue;
   fill: none;
-
 }
 
-.graphics .line_chart_range_years{
-
+.graphics .line_chart_range_years {
   stroke-width: 2px;
   stroke: red;
   fill: none;
-
 }
 
-.graphics .baselines{
-
+.graphics .baselines {
   stroke-width: 1.5px;
   stroke: black;
   stroke-dasharray: 4px;
   fill: none;
 }
 
-#linechart .tooltip-map{
+#linechart .tooltip-map {
   text-align: left;
 }
 
 .uncertainty {
-
-    fill: lightgray;
-    stroke: none;
+  fill: lightgray;
+  stroke: none;
 }
 
-#dropdown_tab{
-
+#dropdown_tab {
   margin: auto;
-  
 }
 
-#tab-menu{
+#tab-menu {
   margin-top: 100px;
 }
 
@@ -315,32 +296,23 @@ text#label-legend{
 
 /*Dropdown menu -> to remove at the end, only for testing*/
 
-
 /*--------------- LEGEND STYLE -------------------------------------------*/
 
 .legend {
-
   padding: 3px;
   fill: #fff;
-
-  
 }
 
-#legend-square{
-  
+#legend-square {
   stroke: #000;
   stroke-width: 1px;
-  
-
 }
 
 text.legend {
-  
   fill: #000;
   font-size: 11px;
 
   font-family: sans-serif;
-
 }
 
 .legend .line_chart_annual {
@@ -351,39 +323,32 @@ text.legend {
   stroke-width: 3px;
 }
 
-.legend .baselines{
+.legend .baselines {
   stroke-width: 2px;
 }
 
 /* END TAB MENU LINECHART */
 
-
-
 /*-----------------------------------START STYLE TABLE-----------------------------------*/
 
-#table_container{
-
+#table_container {
   width: 900px;
   height: 500px;
   border: 2px #000 dashed;
   margin: auto;
   margin-top: 30px;
-
 }
 
-
-.mean_rate{
-    margin: auto;
-    width: 90%;
-    height: 55%;
-
+.mean_rate {
+  margin: auto;
+  width: 90%;
+  height: 55%;
 }
 
-
-.header_table{
-  padding: 15px; 
-  background: #2E4053; 
-  color: white; 
+.header_table {
+  padding: 15px;
+  background: #2e4053;
+  color: white;
   font-size: 16px;
   font-weight: bold;
   font-family: sans-serif;
@@ -391,86 +356,69 @@ text.legend {
   text-transform: uppercase;
 }
 
-table{ 
-  border-collapse: collapse; 
-  background:white;
+table {
+  border-collapse: collapse;
+  background: white;
   border-radius: 8px;
-  overflow:hidden;
+  overflow: hidden;
 }
 
-.rows_table{
+.rows_table {
   font-family: sans-serif;
   transition: background 0.2s ease-in;
   text-align: center;
-  color: #2E4053;
- 
+  color: #2e4053;
 }
 
-
-.tbody_table .rows_table:nth-child(even){
-
-  background: #F0F3F4;
-
+.tbody_table .rows_table:nth-child(even) {
+  background: #f0f3f4;
 }
 
-.tbody_table .rows_table:nth-child(odd){
+.tbody_table .rows_table:nth-child(odd) {
   background: white;
 }
 
-.tbody_table .rows_table:nth-child(odd):hover{
-
+.tbody_table .rows_table:nth-child(odd):hover {
   background: #ffffcc;
 }
 
-.tbody_table .rows_table:nth-child(even):hover{
+.tbody_table .rows_table:nth-child(even):hover {
   background: #ffffcc;
 }
 
-
-
-.start_value_table{
-  
-  background: #91AAC5;
+.start_value_table {
+  background: #91aac5;
   color: white;
   font-weight: bold;
-
-  
 }
 
-.region_cell{
-
-  border: solid #2E4053 2.5px;
+.region_cell {
+  border: solid #2e4053 2.5px;
   border-top: none;
   border-bottom: none;
   border-left: none;
   font-weight: bold;
-  color: #2E4053;
-  
+  color: #2e4053;
 }
 
-.selected_cell{
-  border: solid #2E4053 1px;
+.selected_cell {
+  border: solid #2e4053 1px;
 }
 
 /*---------------------------Hottest-Coldest Year style--------------------------------*/
 
-
-#line_chart_hottest_coldest{
-
+#line_chart_hottest_coldest {
   border: solid lightgray 1px;
   width: 900px;
-
 }
 
-#hottest_coldest_title{
-
+#hottest_coldest_title {
   text-align: center;
 }
-#container-h-c{
+#container-h-c {
   border: solid lightgray 1px;
   width: 1200px;
   margin: auto;
-
 }
 
 .text-legend {
@@ -478,81 +426,67 @@ table{
   color: #000;
 }
 
-#legend_hot_cold{
-
+#legend_hot_cold {
   border: solid lightgray 1px;
   border-radius: 10px;
   box-shadow: 0 0 7px #333333;
 }
 
-
-.title-legend-h-c{
-
+.title-legend-h-c {
   font-weight: bold;
   font-family: sans-serif;
   text-align: center;
 }
 
-.zero-line{
-
-  fill:none;
+.zero-line {
+  fill: none;
   stroke: gray;
   stroke-dasharray: 6px;
   stroke-opacity: 40%;
 }
 
-
 /*---------------------------END Coldest Year style--------------------------------*/
 
 /*---------------------------START SEASONAL STYLE--------------------------------*/
 
-
-
-#container-seasonal-changes{
-
+#container-seasonal-changes {
   border: solid lightgray 1px;
-  width: 900px ;
+  width: 900px;
 
   margin: auto;
 }
 
-.line-seasonal-baseline{
-
+.line-seasonal-baseline {
   fill: none;
   stroke: black;
-
 }
 
-
-.seasonal-range-line{
-
+.seasonal-range-line {
   fill: none;
   stroke: black;
   stroke-dasharray: 6px;
 }
 
-.last-years-lines{
+.last-years-lines {
   fill: none;
   stroke: red;
 }
 
-#tooltip-seasonal-changes{
-
+#tooltip-seasonal-changes {
   text-align: left;
   font-family: sans-serif;
   font-size: 12px;
 }
 
-#text-tip-seasonal{
+#text-tip-seasonal {
   text-align: center;
-  font-weight: bold ;
+  font-weight: bold;
 }
-
 
 .grid line {
   stroke: lightgrey;
   stroke-opacity: 0.6;
-  shape-rendering: crispEdges
+  shape-rendering: crispEdges;
 }
 .grid path {
   stroke-width: 0;
