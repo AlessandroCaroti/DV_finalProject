@@ -5,6 +5,14 @@ import io, os
 mapFile_path = "./download_data/data/map/countries-10m_V34_6.json"
 countries_directory = "./download_data/data/counties"
 
+def extraxtCountry_from_map(map_file):
+    countryName_list = []
+
+    for country in map_file["objects"]["countries"]["geometries"]:
+        countryName_list.append(country["properties"]["name"])
+
+    return countryName_list
+
 if __name__ == "__main__":
 
     # Crete a list with the country of which we have the temperatures
