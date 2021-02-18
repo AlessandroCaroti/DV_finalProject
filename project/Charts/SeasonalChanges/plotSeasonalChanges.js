@@ -7,8 +7,6 @@ function parseSeasonalBaseline(data, region="NaN"){
 
 }
 
-
-
 function loadDataSeasonal(){ 
     
     var dataset = "";

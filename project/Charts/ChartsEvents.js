@@ -180,3 +180,57 @@ var tooltip = d3.select("#tooltip-seasonal-changes")
   if (tooltip) tooltip.style('display', 'none');
   if (tooltipLine) tooltipLine.attr('stroke', 'none');
 }
+
+
+
+//------------------------------------------HOTTTEST-COLDEST LINECHART -------------------------------------------------------------------
+
+function hotColdMouseEnter(self, event, d, hottest_temp, coldest_temp){
+
+  d3.select(self).style("stroke-width","6px");
+  d3.select(self).style("stroke-opacity","80%");
+
+  year = self.className.baseVal.split("-")[1];
+  
+  if( isInList(year, hottest_temp)  ){
+    var idx = getIdxList(year, hottest_temp);
+    d3.select("#hot-text-"+idx).style("font-weight", "bold")
+                              .style("text-decoration", "underline")
+                              .style("text-decoration-color", "black");
+                              
+
+  }
+  
+  if( isInList(year, coldest_temp)  ){
+    var idx = getIdxList(year, coldest_temp);
+    d3.select("#cold-text-"+idx).style("font-weight", "bold")
+                                .style("text-decoration", "underline")
+                                .style("text-decoration-color", "black");
+  
+  }
+
+}
+
+function hotColdMouseLeave(self, event, d, hot_cold_list, hottest_temp, coldest_temp){    
+  
+  year = self.className.baseVal.split("-")[1]; 
+  if( isInList(year, hot_cold_list)  )
+    d3.select(self).style("stroke-width","1.5px");
+  else{
+    d3.select(self).style("stroke-width","1px");
+    d3.select(self).style("stroke-opacity","50%");
+  }
+
+  if( isInList(year, coldest_temp)  ){
+    var idx = getIdxList(year, coldest_temp);
+    d3.select("#cold-text-"+idx).style("font-weight", "normal").style("text-decoration", "none");
+
+  }
+
+  if( isInList(year, hottest_temp)  ){
+    var idx = getIdxList(year, hottest_temp);
+    d3.select("#hot-text-"+idx).style("font-weight", "normal").style("text-decoration", "none");
+
+  }
+}
+

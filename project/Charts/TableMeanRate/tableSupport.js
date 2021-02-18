@@ -10,21 +10,7 @@ var width_table = full_width - margin_table.left - margin_table.right;
 var height_table = full_width*9/16 - margin_table.top - margin_table.bottom;
 
 
-function isInfoNaN(json_field){
 
-    return json_field == "NaN";
-}
-
-
-function existYear(data, year){
-    
-    var x = false;
-    data.forEach( (d) =>{
-        if( d.Year == year)  x = true;
-    });
-    
-    return x;
-}
 
 
 //Get data every 50 years_table with also the 2019 at the end
@@ -52,28 +38,6 @@ function dataEvery50Years(data){
 }
 
 
-//compute mean rate of changes
-function getMeanRateOfChange(temp1,temp2, year_temp1, year_temp2){
-  
-    return (temp2 - temp1) / (year_temp2 - year_temp1);
-}
-
-//save temperature to compute mean rate of changes
-function getYearTemperatures(row_table){
-
-    var temperatures = [];
-    years_table.forEach((year)=>{
-        
-        temperatures[year] = row_table[year].temp;
-    })
-
-    return temperatures;
-}
-
-
-function fisrtLetterUpperCase(name){
-    return  name.charAt(0).toUpperCase()+ name.slice(1);
-}
 
 
 
@@ -276,8 +240,6 @@ function createDefaultTable(data_country, data_hemisphere=null, data_continent=n
         }).on("mouseover",function(event, d){tableCellEnter(this, event, d)})
           .on("mouseout",function(){tableCellLeave(this)})
           
-
-   
 }
 
 
@@ -366,7 +328,6 @@ function UpdateTable(data_country, data_hemisphere=null, data_continent=null, da
         }).on("mouseover",function(event, d){tableCellEnter(this, event, d)})
           .on("mouseout",function(){tableCellLeave(this)})
       
-
    
 }
 
