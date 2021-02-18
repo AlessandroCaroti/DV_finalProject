@@ -21,9 +21,10 @@ var country_list = new Array(); //List of the name of the countries present in t
 var selected_country = null;
 
 // FILES & DIRECTORY PATH VARIABLE
-map_file = "../../data/map/countries-10m_V34_6.json";
+map_file = "../../data/map/countries-10m_v34_6.json";
 tmp_file_prefix = "../../data/years/";
 tmp_file_suffix = "/Annual_mean.csv";
+countries_file = "../../data/15_countries_list.csv"
 
 //                    END GLOBAL VARIABLE                   //
 // ******************************************************** //
@@ -33,8 +34,8 @@ tmp_file_suffix = "/Annual_mean.csv";
 function drawMap(world) {
   debug_log("DRAW-MAP");
 
-  svg = d3.select("#svg-map").attr("width", "100%").attr("height", h).call(zoom);
-  map_container = svg.select("#map");
+  svg = d3.select("#svg-map").attr("width", "100%").attr("height", h);
+  map_container = svg.select("#map").call(zoom);
 
   projection = d3
     .geoNaturalEarth1()
@@ -53,7 +54,7 @@ function drawMap(world) {
     .append("path")
     .attr("class", "country")
     .attr("id", (d) => {
-      country_list.push(d.properties.name);
+
       return d.properties.name;
     })
     .attr("d", geoGenerator);
@@ -176,8 +177,6 @@ function country_events() {
       d3.select(".tooltip-map")
         .style("top", event.pageY + 13 + "px")
         .style("left", event.pageX + 13 + "px");
-
-        
     });
 
 
@@ -321,6 +320,7 @@ function changeView() {
     local_zoom();
     zoom_in(selected_country);
   }
+
 }
 
 function init_zoomBtns() {
@@ -383,18 +383,32 @@ d3.selection.prototype.moveToFront = function () {
 // ****************************************************** //
 
 // LOAD COUNTRIES MENU
-function init_dropdown_menu(list_countries) {
-  var countries = d3
-    .select("datalist#countryList")
-    .selectAll("option")
-    .data(list_countries);
-  countries.exit().remove();
+function init_dropdown_menu() {
 
-  countries
-    .enter()
-    .merge(countries)
-    .append("option")
-    .attr("value", (d) => d);
+
+  d3.csv(countries_file)
+  .then(function (data) {
+    
+      var countries = d3
+                      .select("datalist#countryList")
+                      .selectAll("option")
+                      .data(data);
+      countries.exit().remove();
+
+      countries
+          .enter()
+          .merge(countries)
+          .append("option")
+          .attr("value", (d) => d.Temp);
+
+  })
+  .catch(function (error) {
+    console.log(error);
+    throw error;
+  });
+
+
+  
 }
 
 // UPDATE COUNTRY
@@ -432,6 +446,7 @@ function load_tempYear(temp_file, time_transition) {
 
       //Associate to each county a color proportionate to it's anomaly
       update_colors(data, time_transition);
+
     })
     .catch(function (error) {
       console.log(error);
@@ -449,11 +464,9 @@ function load_map() {
       topology = topojson.simplify(topology, 0.05);
 
       drawMap(topology);
-      load_tempYear(
-        tmp_file_prefix + "2020" + tmp_file_suffix,
-        default_transition
-      );
-      init_dropdown_menu(country_list);
+      load_tempYear( tmp_file_prefix + "2020" + tmp_file_suffix, default_transition );
+
+      init_dropdown_menu();
     })
     .catch((error) => {
       console.log(error);
