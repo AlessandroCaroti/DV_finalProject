@@ -1,75 +1,40 @@
-//Support Functions for  the two kid of charts
+//Support Functions for  All charts
+
+//Global Variables
+var full_width = 900
+var margin = {top: 40, right: 70, bottom: 30, left: 50};
+var width = full_width - margin.left - margin.right;
+var height = full_width*9/16 - margin.top - margin.bottom;
+
+var parseMonth = d3.timeParse("%m");
+var monthList = ["1","2","3","4","5","6","7","8","9","10","11","12"];
+
 var parseTime = d3.timeParse("%Y-%m");
 var baseline;
 
-// Functions to Draw and Remove the tooltip
-// given the x position find the corresponding value 
-function drawTooltip(self, event, x, data, tooltipLine, id_chart, height) {
 
-    var tooltip = d3.select(id_chart+" .tooltip-map")
-
-    
-    const date = x.invert(d3.pointer(event, self.node())[0]);
-  
-    //find date correspondece comparing difference in milliseconds
-    var elem = data.find( (d) =>  Math.abs( d.date - date ) < 1000*60*60*24*16 );
-  
-    tooltipLine.attr('stroke', 'black')
-        .attr('x1', x(date))
-        .attr('x2', x(date))
-        .attr('y1', 0)
-        .attr('y2', height);
-    
-    var range_selected =  document.getElementById('rage-year');
-    range_name = range_selected.options[range_selected.selectedIndex].text;
-  
-    var tipText =  String(
-      "<b> <p style='text-align: center; font-size: 12px;'> Year: " + elem.date.getFullYear()+"</p>" +
-      "Baseline Temp. : "+elem.baseline+" &deg;C <br/>" +
-      "Annual  Avg.  Temp. : "+elem.annual_value.toFixed(2) +" &deg;C " +
-      " &plusmn; " +  elem.annual_unc.toFixed(2) + "<br/>"+
-      (range_selected.value != "annual"? String(range_name+"  Avg. Temp: "+elem[range_selected.value+"_value"].toFixed(2) +" &deg;C " + 
-      " &plusmn; " +  elem[range_selected.value+"_unc"].toFixed(2)+"</b>"):"")
-    )
-       
-    tooltip.html("")
-        .style('display', 'block')
-        .style('left', String( (event.pageX) + 20) + "px" )
-        .style('top', String( (event.pageY) - 20) + "px" )
-        .append('div')
-        .html( tipText );
-  }
-  
-
-function removeTooltip(tooltipLine, id_chart) {
-    
-  var tooltip = d3.select(id_chart+" .tooltip-map")
-    if (tooltip) tooltip.style('display', 'none');
-    if (tooltipLine) tooltipLine.attr('stroke', 'none');
-  }
 
 
 //Load the baseline of the corresponding country from the nameCountry_info.json file
 function initBaselineAndInfo(dataFile){
   
-
     var folder;
-   
     if( dataFile.charAt(dataFile.length  - 1) == '.' ) folder = dataFile.slice(0,-1);
     else
         folder = dataFile;
     
     d3.json("/../../remaining_data/data_new/"+folder+"/"+dataFile+"_info.json")
-      .then( (data =>{
-    
-          baseline = +data["absolute_temp(C)"];   
-      
-        }))
+      .then( (data =>{   baseline = +data["absolute_temp(C)"]; }))
   
-  }
+}
+
+//the annual average from January to December 1950 is reported at June 1950. 
+function getAnnualData(data){   
+  return data.filter((d) => d.Month==6);
+}
 
 
-
+//-------------------------- GRIDLINES CHARTS --------------------------------------
   
 function make_x_gridlines(x, n_tick=8) {
 
@@ -143,9 +108,7 @@ function parseDataAttributes(data, region="NaN"){
       d.monthly_temp =  baseline + parseFloat(d["Monthly Anomaly"]);
       d.monthly_unc = parseFloat(d["Monthly Unc."]);
 
-   
-
-      
+  
       d.baseline = baseline;
       d["region"] = region;
       

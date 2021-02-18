@@ -1,8 +1,3 @@
-//Global Variables
-var full_width = 900
-var margin = {top: 40, right: 70, bottom: 30, left: 50};
-var width = full_width - margin.left - margin.right;
-var height = full_width*9/16 - margin.top - margin.bottom;
 
 
 function changeData() {
@@ -19,11 +14,8 @@ function changeData() {
     if( dataFile.charAt(dataFile.length  - 1) == '.' ) folder = dataFile.slice(0,-1);
     else
         folder = dataFile;
-    
-   
-    //var csv = "/../../data/data_temp/"+folder+"/"+dataFile+"_anomalyTable.csv"
 
-    var csv = "/../../remaining_data/data_new/"+folder+"/"+dataFile+"_anomalyTable.csv";
+    var csv = "/../../../remaining_data/data_new/"+folder+"/"+dataFile+"_anomalyTable.csv";
  
     d3.csv(csv)
       .then( (data) =>{ 
@@ -59,8 +51,8 @@ function default_dataset(dataFile=""){
       folder = dataFile;
   
       initBaselineAndInfo(dataFile);
-  //var csv = "/../../data/data_temp/"+folder+"/"+dataFile+"_anomalyTable.csv"
-  var csv = "/../../remaining_data/data_new/"+folder+"/"+dataFile+"_anomalyTable.csv";
+  
+  var csv = "/../../../remaining_data/data_new/"+folder+"/"+dataFile+"_anomalyTable.csv";
   //Di default c'è dataset 1
   d3.csv(csv)
   .then( function(data){ 
@@ -78,5 +70,34 @@ function default_dataset(dataFile=""){
 
 
 
+}
+
+
+function loadData(){ 
+    
+  var dataset = "";
+  d3.csv(countries)
+    .then((data)=>{
+
+        var i = 0;
+        data.forEach( d => {
+
+          var dropdown = document.getElementById("dataset");
+          
+          var option =  document.createElement("option");
+          option.setAttribute("value", d.Country);
+          option.innerHTML = d.Country;
+          dropdown.append(option)
+          if( option.value == "Italy"){
+            dropdown.selectedIndex = i;
+            dropdown.options[i].selected = true;
+            // set Italy default dataset
+            dataset = option.value;
+            
+          }
+          i++;
+        });
+        default_dataset(dataset);
+  })
 }
 

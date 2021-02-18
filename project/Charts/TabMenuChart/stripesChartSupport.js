@@ -2,18 +2,7 @@ var margin_stripes = {'top': 30, 'right': 70, 'bottom': 40, 'left': 70};
 var width_stripe = full_width - margin_stripes.left - margin_stripes.right;
 var height_stripe = full_width*9/31 - margin_stripes.top - margin_stripes.bottom;
 
-//the annual average from January to December 1950 is reported at June 1950. 
-function getAnnualData(data){
 
-    var data_annnual = [];
-
-    data.forEach((d) => {
-        
-        if( d.Month == 6  ) data_annnual.push(d)
-    });
-    
-    return data_annnual;
-}
 
 //get x and Y scales of the Linechart
 function getStripesScales(data_annnual){
@@ -30,31 +19,6 @@ function getStripesScales(data_annnual){
     return [x, y];
 
 }
-
-
-function stripesEnter(event, d){
-
-
-    var tooltip = d3.select("#stripechart .tooltip-map");
-    tooltip.transition();
-    var tipText =  String(
-        "<b> Year: " + d.date.getFullYear()+"<br/>" +"<br/>" +
-        "Annual Avg.  Anomaly: "+d.annual_anomaly.toFixed(2) +" &deg;C " +
-        " &plusmn; " +  d.annual_unc.toFixed(2) + " </b>"
-      )
-    
-    tooltip.style('left', String( (event.pageX) + 20) + "px" )
-           .style('top', String( (event.pageY) - 20) + "px" )
-           .style("display", "block")
-           .html(tipText)
-
-}
-
-function stripesLeave(){
-    var tooltip = d3.select("#stripechart .tooltip-map");
-    if (tooltip) tooltip.style('display', 'none');
-}
-
 
 function createDefaultStripesChart(data){
 

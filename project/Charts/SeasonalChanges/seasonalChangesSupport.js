@@ -1,65 +1,6 @@
 //Global Variables
-
-//TODO: Quando si unisce tutto, si può lascare un unica dichiarazione di queste varibili 
-//TODO: per tutti i grafici tranne che per lo stripechart
-var full_width = 900
-var margin = {top: 40, right: 70, bottom: 30, left: 50};
-var width = full_width - margin.left - margin.right;
-var height = full_width*9/16 - margin.top - margin.bottom;
-
-var parseMonth = d3.timeParse("%m");
-var monthList = ["1","2","3","4","5","6","7","8","9","10","11","12"];
 var colorsYears=["red", "blue","green"];
 
-
-
-function drawTooltipSeasonal(tipBox, event, x, data, tooltipLine, lastYearsData) {
-
-  var tooltip = d3.select("#tooltip-seasonal-changes");
-
-  const date = x.invert(d3.pointer(event, tipBox.node())[0]);
-
-  //find the element of the corresponding month
-  var elem = data.find( (d) => (d.month-1) == date.getMonth() );
-
-  tooltipLine.attr('stroke', 'black')
-      .attr('x1', x(parseMonth(elem.month)))
-      .attr('x2', x(parseMonth(elem.month)))
-      .attr('y1', 0)
-      .attr('y2', height);
-  
-  
-  var tipText =  
-    "<p id='text-tip-seasonal'>"+ getFullMonthName(elem.month)+"</p>"+
-    "Average (1951-1980): " + String( (elem.seasonalBaseline).toFixed(1) ) + " &deg;C"+
-    "<br/>95% Range (1951-1980): " +"[ "+ String( (elem.seasonalBaseline - elem.unc).toFixed(2) ) + " &deg;C  -  " + 
-    String( (elem.seasonalBaseline + elem.unc).toFixed(2) ) + " &deg;C  ]";
-
-
-  for( var i=0; i< lastYearsData.length; i++){
-
-    var row = lastYearsData[i].filter((d)=> d.month == elem.month)[0];
-    
-    if( row != undefined) tipText+= "<br/>"+row.year+": "+row.monthlyTemp.toFixed(2)+ " &deg;C";
-    else
-        tipText+= "<br/>"+lastYearsData[i][0].year+": NaN";
-  }
-     
-  tooltip.html("")
-      .style('display', 'block')
-      .style('left', String( (event.pageX) + 20) + "px" )
-      .style('top', String( (event.pageY) - 20) + "px" )
-      .append('div')
-      .html( tipText )
-}
-
-
-function removeTooltipSeasonal(tooltipLine) {
-  
-var tooltip = d3.select("#tooltip-seasonal-changes")
-  if (tooltip) tooltip.style('display', 'none');
-  if (tooltipLine) tooltipLine.attr('stroke', 'none');
-}
 
 function getLineGeneratorsSeasonal(x, y){
 
@@ -93,26 +34,9 @@ function getLineGeneratorsSeasonal(x, y){
 
 
 
-function getMonthName(month){
-
-    var monthName = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 
-                        'Sep', 'Oct', 'Nov', 'Dec']
-
-    return monthName[month - 1]
-
-}
-
-function getFullMonthName(month){
-
-  var monthName = [ "January", "February", "March", "April", "May", "June", 
-                           "July", "August", "September", "October", "November", "December" ];
-
-  return monthName[month - 1]
-
-}
 
 
-function getScales(data, dataSeasonal){
+function getScalesSeasonal(data, dataSeasonal){
 
   var m =[];
     monthList.forEach((d)=>{
@@ -205,87 +129,6 @@ function styleLastYearsLines(d, dataLastYears){
     
 }
 
-//Create the legend of the Seasonal Linechart
-function createSeasonalLineChartLegend(svg, dataLastYears){
-  
-  legend = svg.append( "g" ).attr("class", "legend" );
-  
-  var curY = 15;
-  
-  legend.append( "rect" )
-        .attr("x", 10).attr("width", 210)
-        .attr("y", 1).attr("height", 100)
-        .attr("class", "legend")
-        .attr("id","legend-square");
-
-  legend.append( "line" )
-      .attr("x1", 15).attr("x2", 39)
-      .attr("y1", curY).attr("y2", 15)
-      .attr("class", "seasonal-range-line");
-  
-  legend.append( "text" )
-      .attr("x", 40)
-      .attr("y", curY)
-      .attr("class", "legend")
-      .attr("id", "text-range")
-      .html("Min-Max Range Temp. Untill "+ dataLastYears[dataLastYears.length-1][0].year);
-  
-  curY+=15;
-  legend.append( "rect" )
-        .attr("x", 15).attr("width", 15)
-        .attr("y", curY ).attr("height", 16)
-        .attr("class", "uncertainty");
-  
-  legend.append( "line" )
-        .attr("x1", 15).attr("x2", 30)
-        .attr("y1", (curY + 8) ).attr("y2", (curY+8))
-        .attr("class", "line-seasonal-baseline");
-        
-  legend.append( "text" )
-        .attr("x", 40)
-        .attr("y", curY+8)
-        .attr("class", "legend")
-        .html("1951-1980 average with 95% range"); 
-
-  
-  curY +=12;
-  var id_idx=0;
-  for(var i=0; i<dataLastYears.length; i++){
-
-    curY+=15;
-    legend.append( "line" )
-            .attr("x1", 15).attr("x2", 30)
-            .attr("y1", (curY) ).attr("y2", (curY))
-            .attr("stroke", colorsYears[i]);
-
-
-    legend.append( "text" )
-          .attr("x", 40)
-          .attr("y", curY)
-          .attr("class", "legend")
-          .html("Monthly Temperatures of "+dataLastYears[i][0].year)
-          .attr("id", "legend-text-"+id_idx);
-    id_idx++;
-
-  }
-
-}
-
-function updateSeasonalLegend(dataLastYears){
-
-  var id_idx=0;
-  for(var i=0; i<dataLastYears.length; i++){
-    
-    d3.select("#legend-text-"+id_idx)
-      .html("Monthly Temperatures of "+dataLastYears[i][0].year); 
-      id_idx++;
-
-  }
-}
-
-
-
-
 
 
   function createHottestColdestLineChart(data, dataSeasonalBaseline){
@@ -303,7 +146,7 @@ function updateSeasonalLegend(dataLastYears){
                   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
                   
                   
-      var scales = getScales(data, dataSeasonalBaseline);
+      var scales = getScalesSeasonal(data, dataSeasonalBaseline);
       var x = scales[0] 
       var y =  scales[1]
   
@@ -392,8 +235,8 @@ function updateSeasonalLegend(dataLastYears){
     var seasonalData = getDataSeasonal(data, dataSeasonalBaseline);
     var lastYearsData = lastYearSeasonalData(data,dataSeasonalBaseline);
     
-    console.log(lastYearsData)
-    var scales = getScales(data, dataSeasonalBaseline);
+
+    var scales = getScalesSeasonal(data, dataSeasonalBaseline);
     var x = scales[0] 
     var y =  scales[1]
 
