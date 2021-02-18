@@ -33,7 +33,7 @@ tmp_file_suffix = "/Annual_mean.csv";
 function drawMap(world) {
   debug_log("DRAW-MAP");
 
-  svg = d3.select("#svg-map").attr("width", "100%").attr("height", h); //.call(zoom);
+  svg = d3.select("#svg-map").attr("width", "100%").attr("height", h).call(zoom);
   map_container = svg.select("#map");
 
   projection = d3
@@ -104,6 +104,22 @@ function update_colors(temperatures, time_trasition) {
 
     // update anomaly value
     d3.select(element).attr("anomaly", d["ANOMALY"]);
+
+    // update tooltip
+    let tooltip = d3.select(".tooltip-map");
+    if(tooltip.select(".tooltip-name").html() === d.Country){
+
+      tooltip.select(".tooltip-anomaly")
+        .datum(d["ANOMALY"])
+        .html((d) => {
+          if (typeof d != "undefined" && d != null && d != "NaN" && !Number.isNaN(d)) {
+            return parseFloat(d).toFixed(2) + " °C";
+          }
+          return "unknown";
+        });
+
+    }
+
   });
 }
 
@@ -149,7 +165,7 @@ function country_events() {
         .select(".tooltip-anomaly")
         .datum(anomaly)
         .html((d) => {
-          if (typeof d != "undefined" && d != null && d != "NaN") {
+          if (typeof d != "undefined" && d != null && d != "NaN" && !Number.isNaN(d)) {
             return parseFloat(d).toFixed(2) + " °C";
           }
           return "unknown";
@@ -160,8 +176,12 @@ function country_events() {
       d3.select(".tooltip-map")
         .style("top", event.pageY + 13 + "px")
         .style("left", event.pageX + 13 + "px");
+
+        
     });
 
+
+    
   //CLICK EVENT:
   map_container.selectAll(".country").on("click", function (event, b) {
     //deselect the previus country
@@ -216,7 +236,7 @@ function reset_zoom() {
   map_container
     .transition()
     .duration(1000)
-    .call(function (selection) {
+    .call( function (selection) {
       zoom.transform(selection, d3.zoomIdentity.translate(0, 0).scale(1));
     });
 }
@@ -235,13 +255,14 @@ function zoom_in(country) {
   map_container
     .transition()
     .duration(1000)
-    .call(function (selection) {
+    .call( function (selection) {
       zoom.transform(
         selection,
         d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale)
       );
     });
 }
+
 
 //                      END ZOOM SECTION                    //
 // ******************************************************** //
@@ -458,5 +479,4 @@ function init_page() {
 
   init_map_controls();
 
-  //set_value_slider(1800);
 }
