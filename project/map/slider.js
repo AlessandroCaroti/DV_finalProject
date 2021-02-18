@@ -53,7 +53,33 @@ function init_slider(min, max, step) {
   // setting an id to the slider
   d3.select("g.parameter-value").select("path")
                                 .attr("id", id_slider);
+  
+  // scroll wheel event
+  d3.select("#sliderYear")
+    .on("mousewheel", function(event){
 
+      // da gestire in modo diverso, col mouse si muove di due in due
+      let val = sliderAlternativeHandle.value();
+      let move_step = wheelDistance(event);
+      let next_val = parseInt(val + move_step);
+
+      if(next_val == val)
+        return;
+      
+
+      if(next_val > max_slider)
+        next_val = max_slider;
+
+      if (next_val < min_slider)
+        next_val = min_slider;
+
+      // change position slider
+      sliderAlternativeHandle.value(next_val);
+      load_tempYear(tmp_file_prefix + next_val + tmp_file_suffix, default_transition);
+      d3.select("#sliderLabel").text("Year: " + next_val);
+
+    });
+    
 }
 
 function control_animation(){
@@ -134,3 +160,24 @@ function enable_slider(){
   d3.select("#" + id_slider).style("pointer-events", "auto");
   d3.select("#svg-slider").style("opacity", "1.0");
 }
+
+
+function wheelDistance(e) { 
+  //console.log(e); 
+  if (!e) { 
+      e = window.event; 
+  } 
+  var w = e.wheelDeltaY, 
+      d = e.detail; 
+  if (d) { 
+      return -d / 3; // Firefox; 
+  } 
+  console.log(w);
+
+  /*if(w > 0){
+    w = w * 50
+  }*/
+
+  // IE, Safari, Chrome & other browsers 
+  return w / 120; 
+} 
