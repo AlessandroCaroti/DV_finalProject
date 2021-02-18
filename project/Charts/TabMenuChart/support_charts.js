@@ -19,20 +19,22 @@ var baseline;
 function initBaselineAndInfo(dataFile){
   
     var folder;
-   
     if( dataFile.charAt(dataFile.length  - 1) == '.' ) folder = dataFile.slice(0,-1);
     else
         folder = dataFile;
     
     d3.json("/../../remaining_data/data_new/"+folder+"/"+dataFile+"_info.json")
-      .then( (data =>{
-    
-          baseline = +data["absolute_temp(C)"];   
-      
-        }))
+      .then( (data =>{   baseline = +data["absolute_temp(C)"]; }))
   
-  }
+}
 
+//the annual average from January to December 1950 is reported at June 1950. 
+function getAnnualData(data){   
+  return data.filter((d) => d.Month==6);
+}
+
+
+//-------------------------- GRIDLINES CHARTS --------------------------------------
   
 function make_x_gridlines(x, n_tick=8) {
 

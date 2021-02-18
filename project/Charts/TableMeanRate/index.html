@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="../../../d3/topojson.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.5.0/d3.min.js"></script>
+    
+    <script type="application/javascript" src="drawTable.js"></script>
+    <script type="application/javascript" src="tableSupport.js"></script>
+    <script type="application/javascript" src="../TabMenuChart/support_charts.js"></script>
+    <script type="application/javascript" src="readDataTable.js"></script>
+    <script type="application/javascript" src="../ChartsEvents.js"></script>
+  
+
+    
+    <title>Table Mean Rate of Change</title>
+</head>
+<body>
+
+    
+<div>
+    <h1 style="text-align:center;"> TABLE MEAN RATE OF CHANGES</h1>
+    <span>
+        <label>Dataset:</label>
+        <select name="Dataset" id="dataset" onchange="changeDataTable()"> </select>
+      </span>
+      
+      <div id="table_container"> <h2 class="country_t" id="table_country"></h2> <div class="tooltip-map" id="tooltip_table"> </div>
+</div>
+
+<script>
+    window.onload=loadData_table();
+</script>
+
+</body>
+</html>

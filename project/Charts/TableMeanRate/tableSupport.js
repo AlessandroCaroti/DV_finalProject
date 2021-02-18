@@ -16,9 +16,6 @@ function isInfoNaN(json_field){
 
 //utils
 //get annual average data, saved at every june
-function getAnnualData(data){   
-    return data.filter((d) => d.Month==6);
-}
 
 
 function existYear(data, year){
