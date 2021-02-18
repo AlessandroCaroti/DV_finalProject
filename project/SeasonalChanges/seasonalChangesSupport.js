@@ -23,10 +23,8 @@ function drawTooltipSeasonal(tipBox, event, x, data, tooltipLine, lastYearsData)
   var elem = data.find( (d) => (d.month-1) == date.getMonth() );
 
   tooltipLine.attr('stroke', 'black')
-      .attr('x1', x(parseMonth(elem.month)))
-      .attr('x2', x(parseMonth(elem.month)))
-      .attr('y1', 0)
-      .attr('y2', height);
+      .attr('x1', x(parseMonth(elem.month))) .attr('x2', x(parseMonth(elem.month)))
+      .attr('y1', 0).attr('y2', height);
   
   
   var tipText =  
