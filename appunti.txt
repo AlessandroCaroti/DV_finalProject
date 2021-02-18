@@ -9,9 +9,11 @@ TO DO:
 -cambiare il cursore sullo slider
 -fare i tooltips di simo più compatti
 -fare in modo che la mappa occupi tutta la larghezza della schermo
+-salvarsi i csv quando caricati in modo da non doverli ricaricare se selezionati più volte
 
 TOFIX:
 -rendere non interagibile le cose inutili, come il testo degli anni sotto lo slider
 
 IDEE:
 -aggiungere la possibilità di cambiare anno nello slider con la rotella del mouse DONE
+-aggiungere schermata caricamento
