@@ -172,21 +172,19 @@ text#label-legend{
   width: 900px;
   height: 500px;
   margin: auto;
-  margin-top: 100px;
+  margin-top: 60px;
+ 
 
 }
 
 .tab {
   
   overflow: hidden;
+  margin-top: 30px;
 
  
 }
 
-#dropdown_tab{
-  margin-top: 50px;
-  margin-left: 45%;
-}
 
 
 /* Style the buttons inside the tab */
@@ -243,7 +241,7 @@ text#label-legend{
 /*--------------------------------- END TAB MENU STYLE -------------------------------------*/
 
 
-/*------------------- CHART STYLE -------------------------------*/
+/*------------------- LINECHART STYLE -------------------------------*/
 
 .graphics{
 
@@ -277,7 +275,7 @@ text#label-legend{
 
 }
 
-.graphics .line_chart_ten_years{
+.graphics .line_chart_range_years{
 
   stroke-width: 2px;
   stroke: red;
@@ -303,13 +301,20 @@ text#label-legend{
     stroke: none;
 }
 
+#dropdown_tab{
+
+  margin: auto;
+  
+}
+
+#tab-menu{
+  margin-top: 100px;
+}
 
 /* -----------------------------END CHART STYLE--------------------------------------*/
 
 /*Dropdown menu -> to remove at the end, only for testing*/
-#dropdown{
-  margin: auto;
-}
+
 
 /*--------------- LEGEND STYLE -------------------------------------------*/
 
@@ -317,6 +322,7 @@ text#label-legend{
 
   padding: 3px;
   fill: #fff;
+
   
 }
 
@@ -324,6 +330,7 @@ text#label-legend{
   
   stroke: #000;
   stroke-width: 1px;
+  
 
 }
 
@@ -331,7 +338,8 @@ text.legend {
   
   fill: #000;
   font-size: 11px;
-  alignment-baseline: central;
+
+  font-family: sans-serif;
 
 }
 
@@ -348,7 +356,6 @@ text.legend {
 }
 
 /* END TAB MENU LINECHART */
-
 
 
 
@@ -444,3 +451,110 @@ table{
 .selected_cell{
   border: solid #2E4053 1px;
 }
+
+/*---------------------------Hottest-Coldest Year style--------------------------------*/
+
+
+#line_chart_hottest_coldest{
+
+  border: solid lightgray 1px;
+  width: 900px;
+
+}
+
+#hottest_coldest_title{
+
+  text-align: center;
+}
+#container-h-c{
+  border: solid lightgray 1px;
+  width: 1200px;
+  margin: auto;
+
+}
+
+.text-legend {
+  font-family: sans-serif;
+  color: #000;
+}
+
+#legend_hot_cold{
+
+  border: solid lightgray 1px;
+  border-radius: 10px;
+  box-shadow: 0 0 7px #333333;
+}
+
+
+.title-legend-h-c{
+
+  font-weight: bold;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.zero-line{
+
+  fill:none;
+  stroke: gray;
+  stroke-dasharray: 6px;
+  stroke-opacity: 40%;
+}
+
+
+/*---------------------------END Coldest Year style--------------------------------*/
+
+/*---------------------------START SEASONAL STYLE--------------------------------*/
+
+
+
+#container-seasonal-changes{
+
+  border: solid lightgray 1px;
+  width: 900px ;
+
+  margin: auto;
+}
+
+.line-seasonal-baseline{
+
+  fill: none;
+  stroke: black;
+
+}
+
+
+.seasonal-range-line{
+
+  fill: none;
+  stroke: black;
+  stroke-dasharray: 6px;
+}
+
+.last-years-lines{
+  fill: none;
+  stroke: red;
+}
+
+#tooltip-seasonal-changes{
+
+  text-align: left;
+  font-family: sans-serif;
+  font-size: 12px;
+}
+
+#text-tip-seasonal{
+  text-align: center;
+  font-weight: bold ;
+}
+
+
+.grid line {
+  stroke: lightgrey;
+  stroke-opacity: 0.6;
+  shape-rendering: crispEdges
+}
+.grid path {
+  stroke-width: 0;
+}
+/*---------------------------END SEASONAL STYLE--------------------------------*/

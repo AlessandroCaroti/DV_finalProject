@@ -2,8 +2,6 @@
 var parseTime = d3.timeParse("%Y-%m");
 var baseline;
 
-
-
 // Functions to Draw and Remove the tooltip
 // given the x position find the corresponding value 
 function drawTooltip(self, event, x, data, tooltipLine, id_chart, height) {
@@ -22,15 +20,16 @@ function drawTooltip(self, event, x, data, tooltipLine, id_chart, height) {
         .attr('y1', 0)
         .attr('y2', height);
     
-  
+    var range_selected =  document.getElementById('rage-year');
+    range_name = range_selected.options[range_selected.selectedIndex].text;
   
     var tipText =  String(
       "<b> <p style='text-align: center; font-size: 12px;'> Year: " + elem.date.getFullYear()+"</p>" +
       "Baseline Temp. : "+elem.baseline+" &deg;C <br/>" +
-      "Annual  Avg  Temp. : "+elem.annual_value.toFixed(2) +" &deg;C " +
+      "Annual  Avg.  Temp. : "+elem.annual_value.toFixed(2) +" &deg;C " +
       " &plusmn; " +  elem.annual_unc.toFixed(2) + "<br/>"+
-      "Ten Years Avg Temp: "+elem.ten_years_value.toFixed(2) +" &deg;C " + 
-      " &plusmn; " +  elem.ten_years_unc.toFixed(2)+"</b>"
+      (range_selected.value != "annual"? String(range_name+"  Avg. Temp: "+elem[range_selected.value+"_value"].toFixed(2) +" &deg;C " + 
+      " &plusmn; " +  elem[range_selected.value+"_unc"].toFixed(2)+"</b>"):"")
     )
        
     tooltip.html("")
@@ -60,7 +59,6 @@ function initBaselineAndInfo(dataFile){
     else
         folder = dataFile;
     
-   
     d3.json("/../../remaining_data/data_new/"+folder+"/"+dataFile+"_info.json")
       .then( (data =>{
     
@@ -71,20 +69,49 @@ function initBaselineAndInfo(dataFile){
   }
 
 
-function init_yearSpace() {
-    var bBox = document.getElementById("sliderLabel").getBBox();
+
   
-    var gap = 40,
-      w_1 = bBox.width + gap * 2,
-      w_2 = bBox.width,
-      x = bBox.x - gap;
+function make_x_gridlines(x, n_tick=8) {
+
+  return d3.axisBottom(x)
+    .ticks(n_tick)
+}
+
+function make_y_gridlines(y, n_tick=8) {
+  return d3.axisLeft(y)
+    .ticks(n_tick)
+}
+
+
+function createGridLine(x, y, svg, nameChart, n_tickX=8, n_tickY=8){
+
+    svg.append("g")
+        .attr("class","grid")
+        .attr("id", "x-grid-"+nameChart)
+        .attr("transform","translate(0," + height + ")")
+        .style("stroke-dasharray",("3,3"))
+        .call(make_x_gridlines(x, n_tickX)
+              .tickSize(-height)
+              .tickFormat("")
+          )
+    
+    svg.append("g")
+        .attr("class","grid")
+        .attr("id", "y-grid-"+nameChart)
+        .style("stroke-dasharray",("3,3"))
+        .call(make_y_gridlines(y, n_tickY)
+              .tickSize(-width)
+              .tickFormat("")
+          )
   
-    d3.select(".col-sm-2")
-      .select("path")
-      .attr("d", roundedFigure_1(x, -1, w_1, w_2, 37))
-      .style("fill", "rgb(202, 202, 202)")
-      .style("stroke", "black")
-      .style("stroke-width", 1.5);
+  }
+  
+  
+  function updateGrid(idChart,x,y, svg, n_tickX=8, n_tickY=8){
+  
+    d3.selectAll( idChart+" .grid").remove()
+    createGridLine(x, y, svg, "seasonal", n_tickX=8, n_tickY=8);
+  
   }
 
 // parse the attribitues useful for the chart and add the baseline
@@ -96,15 +123,37 @@ function parseDataAttributes(data, region="NaN"){
       d.annual_anomaly = parseFloat(d["Annual Anomaly"])
       d.annual_unc = parseFloat(d["Annual Unc."]);
       d.annual_value = baseline + parseFloat(d["Annual Anomaly"]);
-      d.ten_years_value =  baseline + parseFloat(d["Ten-year Anomaly"])
-      d.ten_years_unc =  parseFloat(d["Ten-year Unc."])
+      
+      d.five_years_value =  baseline + parseFloat(d["Five-year Anomaly"]);
+      d.five_years_anomaly =   parseFloat(d["Five-year Anomaly"]);
+      d.five_years_unc =  parseFloat(d["Five-year Unc."]);
+      
+      d.ten_years_value =  baseline + parseFloat(d["Ten-year Anomaly"]);
+      d.ten_years_anomaly =  parseFloat(d["Ten-year Anomaly"]);
+      d.ten_years_unc =  parseFloat(d["Ten-year Unc."]);
+      
+      
+      d.twenty_years_value =  baseline + parseFloat(d["Twenty-year Anomaly"]);
+      d.twenty_years_anomaly =  parseFloat(d["Twenty-year Anomaly"]);
+      d.twenty_years_unc =  parseFloat(d["Twenty-year Unc."]);
+
+      
+
+      d.monthly_value =  parseFloat(d["Monthly Anomaly"]);
+      d.monthly_temp =  baseline + parseFloat(d["Monthly Anomaly"]);
+      d.monthly_unc = parseFloat(d["Monthly Unc."]);
+
+   
+
+      
       d.baseline = baseline;
       d["region"] = region;
       
     
     })
 
-    console.log(data)
+
+
   }
   
 
