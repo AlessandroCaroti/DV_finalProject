@@ -8,7 +8,6 @@ function drawTooltip(self, event, x, data, tooltipLine, id_chart, height) {
 
     var tooltip = d3.select(id_chart+" .tooltip-map")
 
-    
     const date = x.invert(d3.pointer(event, self.node())[0]);
   
     //find date correspondece comparing difference in milliseconds
@@ -20,7 +19,7 @@ function drawTooltip(self, event, x, data, tooltipLine, id_chart, height) {
         .attr('y1', 0)
         .attr('y2', height);
     
-    var range_selected =  document.getElementById('rage-year');
+    var range_selected =  document.getElementById('range-year');
     range_name = range_selected.options[range_selected.selectedIndex].text;
   
     var tipText =  String(

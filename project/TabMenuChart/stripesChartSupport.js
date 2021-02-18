@@ -95,7 +95,7 @@ function createDefaultStripesChart(data){
 
 function colorStripes(data_annnual, d){
 
-    var range_year =  document.getElementById('rage-year').value; 
+    var range_year =  document.getElementById('range-year').value; 
     var colorScale = d3.scaleLinear()
                        .domain(d3.extent(data_annnual, (d) => d[range_year+"_anomaly"]))
                        .range([1,0])

@@ -501,6 +501,13 @@ table{
   stroke-opacity: 40%;
 }
 
+.selected-hot-cold-line{
+  
+  stroke-width: 6px;
+  stroke-opacity: 80%;
+
+}
+
 
 /*---------------------------END Coldest Year style--------------------------------*/
 

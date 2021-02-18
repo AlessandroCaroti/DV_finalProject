@@ -220,8 +220,9 @@ function getHotColdStyle(hot_cold_list, d){
 
 function hotColdMouseEnter(self, event, d, hottest_temp, coldest_temp){
 
-    d3.select(self).style("stroke-width","6px");
-    d3.select(self).style("stroke-opacity","80%");
+    d3.select(self)
+                    .style("stroke-width","6px")
+                    .style("stroke-opacity","80%");
 
     year = self.className.baseVal.split("-")[1];
     
