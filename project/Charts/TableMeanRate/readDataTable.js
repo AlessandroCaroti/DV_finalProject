@@ -5,7 +5,7 @@ function readData(generalization,  update = false) {
     d3.csv(csv_path)
       .then((data) => {
         parseDataAttributes(data, gen_name);
-        if(update) updateRowsTable(data)
+        if(update){ console.log("dddddd"); updateRowsTable(data);}
         else addRowTable(data);
         
       })

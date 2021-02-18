@@ -217,7 +217,7 @@ function addRowTable(data) {
 function updateRowsTable(data){
 
     
-   console.log("aaaaaaaaaaaaaaaa",data) 
+   console.log("aaaaaaaaaaaaaaaa") 
    addRowTable(data);
 
    

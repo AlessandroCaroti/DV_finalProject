@@ -83,8 +83,8 @@ function changeDataTable() {
 
   initBaselineAndInfo(dataFile);
 
-  d3.select(".table_mean_rate").selectAll("tr").remove();
-  d3.select(".table_mean_rate").selectAll("td").remove();
+  //d3.select(".table_mean_rate").selectAll("tr").remove();
+  //d3.select(".table_mean_rate").selectAll("td").remove();
 
   var csv_country =
     "/../data/counties/" + folder + "/" + dataFile + "_anomalyTable.csv";
@@ -92,14 +92,14 @@ function changeDataTable() {
   d3.csv(csv_country)
     .then((data_country) => {
    
-      createEmptyTable(data_country)
+      //createEmptyTable(data_country)
       parseDataAttributes(data_country, dataFile);
-
+      console.log("sjsjsjsj")
       d3.json("/../data/counties/" + folder + "/" + dataFile + "_info.json")
         .then((info) => {
+          
           var generalization_list = info["Generalization"];
-          console.log(generalization_list);
-
+          
           readData(generalization_list, true);
 
         })
