@@ -1,130 +1,4 @@
-//Support functions for the LineChart
-var isAnnual=false;
-
-
-
-
-
-//Create the legend of the Linechart
-function createLineChartLegend(svg){
-
- 
-    legend = svg.append( "g" ).attr("class", "legend" );
-    
-    legend.append( "rect" )
-    .attr("x", 10).attr("width", 290)
-    .attr("y", 1).attr("height", 60)
-    .attr("class", "legend")
-    .attr("id","legend-square");
-  
-    legend.append( "line" )
-        .attr("x1", 15).attr("x2", 30)
-        .attr("y1", 15).attr("y2", 15)
-        .attr("class", "line_chart_annual")
-        .attr("id", "legend-annual-line");
-  
-    legend.append( "text" )
-        .attr("x", 37)
-        .attr("y", 15)
-        .attr("class", "legend")
-        .text("Annual Average Temperature")
-        .attr("id", "legend-annual-text");
-  
-    legend.append( "rect" )
-          .attr("x", 15).attr("width", 15)
-          .attr("y", 24).attr("height", 16)
-          .attr("class", "uncertainty")
-          .attr("id","range-name-unc");
-
-    var range_name =  document.getElementById('rage-year');
-    range_name = range_name.options[range_name.selectedIndex].text;
-  
-
-
-    legend.append( "line" )
-          .attr("x1", 15).attr("x2", 30)
-          .attr("y1", 32).attr("y2", 32)
-          .attr("class", "line_chart_range_years")
-          .attr("id","range-name-line");
-  
-    legend.append( "text" )
-          .attr("x", 37)
-          .attr("y", 32)
-          .attr("class", "legend")
-          .attr("id","range-name-legend")
-          .html(range_name+" Average Temperature with uncertainty"); 
-    
-    legend.append( "line" )
-          .attr("x1", 15).attr("x2", 30)
-          .attr("y1", 48).attr("y2", 48)
-          .attr("class", "baselines")
-         
-
-    legend.append( "text" )
-          .attr("x", 37)
-          .attr("y", 50)
-          .attr("class", "legend")
-          .text("Baseline Temperature"); 
-  
-  }
-
-
-  function updateRangeNameLegend(){
-    
-    var range_name =  document.getElementById('rage-year');
-
-    if(range_name.value == "annual" && !isAnnual){
-
-        d3.select("#legend-annual-line").remove();
-        d3.select("#legend-annual-text").remove();
-
-        d3.select("#range-name-unc").attr("y",15);
-                
-        
-        d3.select("#range-name-line")
-                        .attr("y1", 23).attr("y2", 23)
-                        .style("stroke","steelblue")
-                       
-        
-        d3.select("#range-name-legend").attr("y", 23)
-        isAnnual = true;
-    }
-
-    if( isAnnual && range_name.value != "annual"){
-        
-        var legend = d3.select(".legend")
-        legend
-            .append( "line" )
-            .attr("x1", 15).attr("x2", 30)
-            .attr("y1", 15).attr("y2", 15)
-            .attr("class", "line_chart_annual")
-            .attr("id", "legend-annual-line");
-            
-        legend.append( "text" )
-            .attr("x", 37)
-            .attr("y", 15)
-            .attr("class", "legend")
-            .text("Annual Average Temperature")
-            .attr("id", "legend-annual-text");
-
-        d3.select("#range-name-unc").attr("y",24)
-                .attr("class", "uncertainty")
-                .attr("id","range-name-unc");
-
-        d3.select("#range-name-line")
-                .attr("y1", 32).attr("y2", 32)
-                .style("stroke","red")
-        d3.select("#range-name-legend").attr("y", 32)
-        
-                isAnnual = false;
-    }
-    
-    range_name = range_name.options[range_name.selectedIndex].text;
-    
-    d3.select("#range-name-legend")
-        .html(range_name+" Average Temperature with uncertainty"); 
-  }
-
+// Utils function for the charts: legends, and others
 
 //Draw the area that represents the uncertainty of the temperature measurement
 function drawUncertainty(data, svg, x, y){
@@ -246,8 +120,6 @@ function getLineGenerators(x, y){
 }
 
 
-
-
 function createDefaultLineChart(data){
 
     var svg = d3.select("#linechart")
@@ -326,8 +198,8 @@ function createDefaultLineChart(data){
                     .attr('opacity', 0)
                     .attr('class','tipbox')
                     .attr('id', 'tipbox-linechart')
-                    .on('mousemove', (event) => drawTooltip(tipBox, event, x, data, tooltipLine,"#linechart", height))
-                    .on('mouseout', () => removeTooltip(tooltipLine,"#linechart"));
+                    .on('mousemove', (event) => drawTooltipLineChart(tipBox, event, x, data, tooltipLine,"#linechart", height))
+                    .on('mouseout', () => removeTooltipLineChart(tooltipLine,"#linechart"));
 
   }
 
@@ -417,8 +289,8 @@ function updateLineChart(data, grafic_class){
     //Update The tooltip
     var tooltipLine = d3.select("#linechart-tip");
     var tipBox = d3.select("#tipbox-linechart")
-                         .on('mousemove', (event) => drawTooltip(tipBox, event, x, data, tooltipLine, "#linechart", height))
-                         .on('mouseout', () => removeTooltip(tooltipLine,"#linechart")); 
+                         .on('mousemove', (event) => drawTooltipLineChart(tipBox, event, x, data, tooltipLine, "#linechart", height))
+                         .on('mouseout', () => removeTooltipLineChart(tooltipLine,"#linechart")); 
     
     updateGrid("#linechart", x, y,svg, 12, 10);
     updateRangeNameLegend();

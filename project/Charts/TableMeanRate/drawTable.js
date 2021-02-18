@@ -1,5 +1,4 @@
 
-const countries = '../../remaining_data/data_new/Countries.csv'
 var continent, portion_continent, hemisphere;
 
 
@@ -78,19 +77,19 @@ function default_dataset(dataFile=""){
                   
                   //case continet not null
                 
-                  if( !isNan(continent) && !isNan(hemisphere) && !isNan(portion_continent))
+                  if( !isInfoNaN(continent) && !isInfoNaN(hemisphere) && !isInfoNaN(portion_continent))
                       readDataAllNonNull(continent,portion_continent,hemisphere, data_country, data_global)
                   
-                  if( isNan(continent) && isNan(hemisphere) && isNan(portion_continent))
+                  if( isInfoNaN(continent) && isInfoNaN(hemisphere) && isInfoNaN(portion_continent))
                       readDataAllNull( data_country, data_global);
                   
-                  if( !isNan(continent) && isNan(hemisphere) && isNan(portion_continent)) readDataOnlyContinent(continent, data_country, data_global);  
-                  if( isNan(continent) && isNan(hemisphere) && !isNan(portion_continent)) readDataOnlyPortionContinent(portion_continent, data_country, data_global);
-                  if( isNan(continent) && !isNan(hemisphere) && isNan(portion_continent)) readDataOnlyContinent(hemisphere, data_country, data_global);
+                  if( !isInfoNaN(continent) && isInfoNaN(hemisphere) && isInfoNaN(portion_continent)) readDataOnlyContinent(continent, data_country, data_global);  
+                  if( isInfoNaN(continent) && isInfoNaN(hemisphere) && !isInfoNaN(portion_continent)) readDataOnlyPortionContinent(portion_continent, data_country, data_global);
+                  if( isInfoNaN(continent) && !isInfoNaN(hemisphere) && isInfoNaN(portion_continent)) readDataOnlyContinent(hemisphere, data_country, data_global);
                   
-                  if(isNan(continent) && !isNan(hemisphere) && !isNan(portion_continent)) readDataContinentNull(portion_continent,hemisphere, data_country, data_global);
-                  if(!isNan(continent) && isNan(hemisphere) && !isNan(portion_continent)) readDataHemisphereNull(continent,portion_continent, data_country, data_global);
-                  if(!isNan(continent) &&  !isNan(hemisphere) && isNan(portion_continent)) readDataPortionContinentNull(continent,hemisphere, data_country, data_global);
+                  if(isInfoNaN(continent) && !isInfoNaN(hemisphere) && !isInfoNaN(portion_continent)) readDataContinentNull(portion_continent,hemisphere, data_country, data_global);
+                  if(!isInfoNaN(continent) && isInfoNaN(hemisphere) && !isInfoNaN(portion_continent)) readDataHemisphereNull(continent,portion_continent, data_country, data_global);
+                  if(!isInfoNaN(continent) &&  !isInfoNaN(hemisphere) && isInfoNaN(portion_continent)) readDataPortionContinentNull(continent,hemisphere, data_country, data_global);
   
 
             })
@@ -155,19 +154,19 @@ function changeDataTable(){
                   
                   //case continet not null
                  
-                  if( !isNan(continent) && !isNan(hemisphere) && !isNan(portion_continent))
+                  if( !isInfoNaN(continent) && !isInfoNaN(hemisphere) && !isInfoNaN(portion_continent))
                       readDataAllNonNull(continent,portion_continent,hemisphere, data_country, data_global,true)
 
-                  if( isNan(continent) && isNan(hemisphere) && isNan(portion_continent))
+                  if( isInfoNaN(continent) && isInfoNaN(hemisphere) && isInfoNaN(portion_continent))
                       readDataAllNull( data_country, data_global, true)
                   
-                  if( !isNan(continent) && isNan(hemisphere) && isNan(portion_continent)) readDataOnlyContinent(continent, data_country, data_global,true);  
-                  if( isNan(continent) && isNan(hemisphere) && !isNan(portion_continent)) readDataOnlyPortionContinent(portion_continent, data_country, data_global,true);
-                  if( isNan(continent) && !isNan(hemisphere) && isNan(portion_continent)) readDataOnlyContinent(hemisphere, data_country, data_global,true);
+                  if( !isInfoNaN(continent) && isInfoNaN(hemisphere) && isInfoNaN(portion_continent)) readDataOnlyContinent(continent, data_country, data_global,true);  
+                  if( isInfoNaN(continent) && isInfoNaN(hemisphere) && !isInfoNaN(portion_continent)) readDataOnlyPortionContinent(portion_continent, data_country, data_global,true);
+                  if( isInfoNaN(continent) && !isInfoNaN(hemisphere) && isInfoNaN(portion_continent)) readDataOnlyContinent(hemisphere, data_country, data_global,true);
                   
-                  if(isNan(continent) && !isNan(hemisphere) && !isNan(portion_continent)) readDataContinentNull(portion_continent,hemisphere, data_country, data_global,true);
-                  if(!isNan(continent) && isNan(hemisphere) && !isNan(portion_continent)) readDataHemisphereNull(continent,portion_continent, data_country, data_global,true);
-                  if(!isNan(continent) &&  !isNan(hemisphere) && isNan(portion_continent)) readDataPortionContinentNull(continent,hemisphere, data_country, data_global,true);                
+                  if(isInfoNaN(continent) && !isInfoNaN(hemisphere) && !isInfoNaN(portion_continent)) readDataContinentNull(portion_continent,hemisphere, data_country, data_global,true);
+                  if(!isInfoNaN(continent) && isInfoNaN(hemisphere) && !isInfoNaN(portion_continent)) readDataHemisphereNull(continent,portion_continent, data_country, data_global,true);
+                  if(!isInfoNaN(continent) &&  !isInfoNaN(hemisphere) && isInfoNaN(portion_continent)) readDataPortionContinentNull(continent,hemisphere, data_country, data_global,true);                
 
             })
               .catch((error) =>{
