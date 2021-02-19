@@ -22,7 +22,7 @@ function loadData_table() {
       i++;
     });
 
-    default_dataset(dataset);
+    defaultDatasetTable(dataset);
   });
 }
 
@@ -52,18 +52,11 @@ function readData(generalization, data_country,  update = false) {
 }
 
 
-function default_dataset(dataFile = "") {
-  if (dataFile == "") dataFile = "Afghanistan";
+function defaultDatasetTable(dataFile) {
+  
 
   var dataFile = document.getElementById("dataset").value;
-  document.getElementById("table_country").innerHTML = dataFile;
   
-  /*
-  var folder;
-  if (dataFile.charAt(dataFile.length - 1) == ".")
-    folder = dataFile.slice(0, -1);
-  else folder = dataFile;
-  */
   initBaselineAndInfo(dataFile);
 
   var csv_country =
@@ -99,13 +92,7 @@ function changeDataTable() {
   if (dataFile == "") dataFile = "Afghanistan";
 
   var dataFile = document.getElementById("dataset").value;
-  document.getElementById("table_country").innerHTML = dataFile;
-  /*
-  var folder;
-  if (dataFile.charAt(dataFile.length - 1) == ".")
-    folder = dataFile.slice(0, -1);
-  else folder = dataFile;
-  */
+ 
   initBaselineAndInfo(dataFile);
 
   var csv_country =

@@ -1,6 +1,6 @@
 
 
-function changeData() {
+function changeDataTabMenu() {
     
     // prendere dati da mappa selezionata o dropdown menu
     var dataFile = document.getElementById('dataset').value;

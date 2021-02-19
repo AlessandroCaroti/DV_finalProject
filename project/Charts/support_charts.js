@@ -43,11 +43,20 @@ function loadAllData(){
           i++;
         });
         defaultLineChartDataset(dataset);
+        defaultDatasetTable(dataset);
   })
 
 }
 
 
+
+function changeAllData(){
+
+  changeDataTabMenu();
+  changeDataTable();
+
+
+}
 
 
 //Load the baseline of the corresponding country from the nameCountry_info.json file
