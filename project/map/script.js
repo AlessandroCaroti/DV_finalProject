@@ -488,7 +488,7 @@ function init_DropDownMenu_slect2() {
       for (var i = 0; i < countries.length; i++) {
         data.push({ id: i, text: countries[i].Map });
       }
-      console.log(data);
+      
       $("#selectCountryMenu").select2({
         placeholder: "Select an option",
         width: "resolve",
@@ -514,6 +514,8 @@ function init_DropDownMenu_slect2() {
 //                   DOVE INIZIA TUTTO                    //
 
 function init_page() {
+  init_DropDownMenu_slect2();
+
   // load map
   load_map();
 
@@ -525,5 +527,4 @@ function init_page() {
   init_slider(1743, 2020, 1);
 
   init_map_controls();
-  init_DropDownMenu_slect2();
 }
