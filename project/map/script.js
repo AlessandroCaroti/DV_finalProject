@@ -400,24 +400,42 @@ d3.selection.prototype.moveToFront = function () {
   });
 };
 
-//                END FUNCTION MAP OVERLAY                //
-// ****************************************************** //
+//                 END FUNCTION MAP OVERLAY                 //
+// ******************************************************** //
+// ******************************************************** //
+//                   START DROP_DOWN MENU                   //
 
-// LOAD COUNTRIES MENU
-function init_dropdown_menu() {
+function init_DropDownMenu_slect2() {
   d3.csv(countries_file)
-    .then(function (data) {
-      var countries = d3
-        .select("datalist#countryList")
-        .selectAll("option")
-        .data(data);
-      countries.exit().remove();
+    .then(function (countries) {
+      console.log(countries)
+      data = [];
 
-      countries
-        .enter()
-        .merge(countries)
-        .append("option")
-        .attr("value", (d) => d.Temp);
+      countries.forEach((d) => {
+        data.push(d.Map);
+      });
+
+      $("#selectCountryMenu")
+        .select2({
+          placeholder: "Select an option",
+          data: data,
+          theme: "classic",
+          allowClear: true,
+        })
+        .on("select2:unselecting", function () {
+          $(this).data("unselecting", true);
+        })
+        .on("select2:opening", function (e) {
+          if ($(this).data("unselecting")) {
+            $(this).removeData("unselecting");
+            e.preventDefault();
+          }
+        })
+        .on("select2:select", function (e) {
+          var data = e.params.data;
+          console.log(data.text);
+          changeCountry(data.text);
+        });
     })
     .catch(function (error) {
       console.log(error);
@@ -429,9 +447,6 @@ function init_dropdown_menu() {
 function changeCountry(name) {
   console.log("SELECTED COUNTRY: " + name);
 
-  //check is a country is selected
-  if (name.length == 0) return;
-
   // find path
   country = document.getElementById(name);
 
@@ -441,6 +456,8 @@ function changeCountry(name) {
   country.dispatchEvent(evObj);
 }
 
+//                    END DROP_DOWN MENU                    //
+// ******************************************************** //
 // ******************************************************** //
 //                   START FILES LOADING                    //
 
@@ -487,49 +504,6 @@ function load_map() {
 }
 
 //                   END FILES LOADING                    //
-// ****************************************************** //
-// ****************************************************** //
-//                  START DROP_DOWN MENU                  //
-
-function init_DropDownMenu_slect2() {
-  d3.csv(countries_file)
-    .then(function (countries) {
-      console.log(countries)
-      data = [];
-
-      countries.forEach((d) => {
-        data.push(d.Map);
-      });
-
-      $("#selectCountryMenu")
-        .select2({
-          placeholder: "Select an option",
-          data: data,
-          theme: "classic",
-          allowClear: true,
-        })
-        .on("select2:unselecting", function () {
-          $(this).data("unselecting", true);
-        })
-        .on("select2:opening", function (e) {
-          if ($(this).data("unselecting")) {
-            $(this).removeData("unselecting");
-            e.preventDefault();
-          }
-        })
-        .on("select2:select", function (e) {
-          var data = e.params.data;
-          console.log(data.text);
-          changeCountry(data.text);
-        });
-    })
-    .catch(function (error) {
-      console.log(error);
-      throw error;
-    });
-}
-
-//                   END DROP_DOWN MENU                   //
 // ****************************************************** //
 // ****************************************************** //
 //                   DOVE INIZIA TUTTO                    //
