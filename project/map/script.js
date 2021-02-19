@@ -418,8 +418,6 @@ function init_dropdown_menu() {
     console.log(error);
     throw error;
   });
-
-
   
 }
 
