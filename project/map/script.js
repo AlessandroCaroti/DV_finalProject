@@ -16,7 +16,7 @@ var default_transition = 500;
 var geoGenerator;
 
 var tmp_data;
-var country_list = new Array(); //List of the name of the countries present in the map
+var country_list = []; //List of the name of the countries present in the map
 
 var selected_country = null;
 
@@ -38,7 +38,6 @@ function drawMap(world) {
   map_container = svg.select("#map").call(zoom);
 
   var bBox = document.getElementById("svg-map").getBBox();
-  console.log(bBox);
 
   projection = d3
     .geoNaturalEarth1()
@@ -57,6 +56,7 @@ function drawMap(world) {
     .append("path")
     .attr("class", "country")
     .attr("id", (d) => {
+      country_list.push(d.properties.name);
       return d.properties.name;
     })
     .attr("d", geoGenerator);
@@ -189,7 +189,7 @@ function country_events() {
         .style("left", event.pageX + 13 + "px");
     });
 
-  //CLICK EVENT:
+  //CLICK EVENT: on country
   map_container.selectAll(".country").on("click", function (event, b) {
     //deselect the previus country
     d3.select(".selected_country").style(
@@ -205,8 +205,9 @@ function country_events() {
       borderCountryScale(curr_zoomScale) * selected_stroke
     );
 
-    // set the name visible in the drop-down menu
-    d3.select("#selectCountryMenu").attr("value", this.id);
+    // set the name visible in the drop-down menu TODO
+    $("#selectCountryMenu").val(String(this.id));
+    $("#selectCountryMenu").trigger("change");
 
     debug_log("CLICK ON " + this.id);
     country_selected(this.__data__);
@@ -245,13 +246,12 @@ var zoom = d3
     // change border width
     update_strokes(curr_zoomScale);
   })
-  .on("end", function(event){
+  .on("end", function (event) {
     // show tooltip if hovering a country
     let cur_country = map_container.select(".highlighted_country");
 
-    if(!cur_country.empty())
+    if (!cur_country.empty())
       d3.select(".tooltip-map").style("display", "block");
-
   });
 
 function reset_zoom() {
@@ -414,26 +414,19 @@ function init_dropdown_menu() {
       countries.exit().remove();
 
       countries
-          .enter()
-          .merge(countries)
-          .append("option")
-          .attr("value", (d) => d.Temp);
-
-  })
-  .catch(function (error) {
-    console.log(error);
-    throw error;
-  });
-  
+        .enter()
+        .merge(countries)
+        .append("option")
+        .attr("value", (d) => d.Temp);
+    })
+    .catch(function (error) {
+      console.log(error);
+      throw error;
+    });
 }
 
 // UPDATE COUNTRY
-function changeCountry() {
-  var listInput = document.getElementById("selectCountryMenu");
-
-  // get country name
-  var name = listInput.value;
-
+function changeCountry(name) {
   console.log("SELECTED COUNTRY: " + name);
 
   //check is a country is selected
@@ -476,7 +469,7 @@ function load_map() {
 
       let topology = world;
       topology = topojson.presimplify(topology);
-      topology = topojson.simplify(topology, 0.5);
+      topology = topojson.simplify(topology, 0.05);
 
       drawMap(topology);
       load_tempYear(
@@ -501,23 +494,34 @@ function load_map() {
 function init_DropDownMenu_slect2() {
   d3.csv(countries_file)
     .then(function (countries) {
+      console.log(countries)
       data = [];
-      for (var i = 0; i < countries.length; i++) {
-        data.push({ id: i, text: countries[i].Map });
-      }
 
-      $("#selectCountryMenu").select2({
-        placeholder: "Select an option",
-        width: "resolve",
-        data: data,
-        theme: "classic",
-        allowClear: true,
+      countries.forEach((d) => {
+        data.push(d.Map);
       });
 
-      $("#selectCountryMenu").on("select2:select", function (e) {
-        var data = e.params.data;
-        console.log(data.text);
-      });
+      $("#selectCountryMenu")
+        .select2({
+          placeholder: "Select an option",
+          data: data,
+          theme: "classic",
+          allowClear: true,
+        })
+        .on("select2:unselecting", function () {
+          $(this).data("unselecting", true);
+        })
+        .on("select2:opening", function (e) {
+          if ($(this).data("unselecting")) {
+            $(this).removeData("unselecting");
+            e.preventDefault();
+          }
+        })
+        .on("select2:select", function (e) {
+          var data = e.params.data;
+          console.log(data.text);
+          changeCountry(data.text);
+        });
     })
     .catch(function (error) {
       console.log(error);
@@ -531,7 +535,6 @@ function init_DropDownMenu_slect2() {
 //                   DOVE INIZIA TUTTO                    //
 
 function init_page() {
-
   // load map
   load_map();
 
@@ -542,7 +545,6 @@ function init_page() {
   // trovare modo automatico per trovare min e max
   init_slider(1743, 2020, 1);
   init_DropDownMenu_slect2();
-
 
   init_map_controls();
 }
