@@ -5,6 +5,8 @@ body {
 
 .select2-container {
   width: 100% !important;
+  min-width: 200px;
+  max-width: 300px;
   display: inline-block;
 }
 .select2-search--dropdown .select2-search__field {
@@ -124,6 +126,7 @@ span {
 
 .label {
   font-size: 22px;
+  padding-top: 10px;
 }
 
 .tick text {
