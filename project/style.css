@@ -406,13 +406,11 @@ table {
   width: 900px;
 }
 
-#hottest_coldest_title {
-  text-align: center;
-}
 #container-h-c {
   border: solid lightgray 1px;
   width: 1200px;
   margin: auto;
+  margin-top: 10%;
 }
 
 .text-legend {

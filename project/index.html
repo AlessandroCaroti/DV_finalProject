@@ -28,11 +28,13 @@
     <script type="application/javascript" src="/project/Charts/TableMeanRate/drawTable.js"></script>
     <script type="application/javascript" src="/project/Charts/TableMeanRate/tableSupport.js"></script>
 
-    <!-----------------------------SEASONAL LINECHART SCRIPTS------------------------------------------>
+    <!----------------------------SEASONAL LINECHART SCRIPTS------------------------------------------>
+    
 
 
     <!-----------------------------HOTTEST COLDEST LINECHART SCRIPTS------------------------------------------>
-
+    <script type="application/javascript" src="/project/Charts/HottestColdestLineChart/coldestHottestSupport.js"></script>
+    <script type="application/javascript" src="/project/Charts/HottestColdestLineChart/plotHottestColdest.js"></script>
     <!-----------------------------MAP SCRIPTS------------------------------------------>
 </head>
 
@@ -125,8 +127,14 @@
     <!------------------------------START HOTTEST-COLDEST LINECHART------------------------------------------->
 
     <div id="hottest-coldest-container" class="container">
-
-        <h1> -----------------------HOTTEST COLDEST LINECHART----------------------------------</h1>
+    
+        <div id="hottest_coldest_container"> 
+            
+            <div id="container-h-c"></div>
+            <div class="tooltip-map" id="tooltip-hot-cold"> </div> 
+        
+        </div>
+    
     </div>
 
     <!------------------------------START HOTTEST-COLDEST LINECHART------------------------------------------->

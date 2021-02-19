@@ -1,11 +1,7 @@
 
 
-function defaultDataHottestColdest(dataFile=""){
-
-    if( dataFile == "") dataFile = "Afghanistan";
-
+function defaultDataHottestColdest(dataFile){
     
-    document.getElementById("hottest_coldest_title").innerHTML= dataFile;
 
     initBaselineAndInfo(dataFile);
 
@@ -30,8 +26,6 @@ function changeDataHottestColdest(){
     
     
     var dataFile = document.getElementById('dataset').value;
-
-    document.getElementById("hottest_coldest_title").innerHTML= dataFile;
 
     var csv = "/../data/counties/" + dataFile + "/" + dataFile + "_anomalyTable.csv";
     initBaselineAndInfo(dataFile);

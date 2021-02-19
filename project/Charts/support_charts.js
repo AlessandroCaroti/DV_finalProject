@@ -44,6 +44,7 @@ function loadAllData(){
         });
         defaultLineChartDataset(dataset);
         defaultDatasetTable(dataset);
+        defaultDataHottestColdest(dataset);
   })
 
 }
@@ -51,10 +52,9 @@ function loadAllData(){
 
 
 function changeAllData(){
-
+  changeDataHottestColdest();
   changeDataTabMenu();
   changeDataTable();
-
 
 }
 
