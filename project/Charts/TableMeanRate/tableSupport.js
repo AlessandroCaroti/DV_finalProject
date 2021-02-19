@@ -103,6 +103,7 @@ function table_data(data) {
     year_1 = year_list[index_year];
     year_2 = year_list[index_year + 1];
   }
+  //ad data to global variable: for the update
   DATA_TABLE.push(dataTable);
   dataTable = [dataTable];
   return dataTable;
@@ -124,7 +125,6 @@ function createEmptyTable(dataCountry) {
     thead = table.append("thead").attr("class", "thead_table"),
     tbody = table.append("tbody").attr("class", "tbody_table");
 
-  
 
   thead
     .append("tr")

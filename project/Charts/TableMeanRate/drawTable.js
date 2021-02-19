@@ -24,9 +24,11 @@ function loadData_table() {
 }
 
 
-function readData(generalization,  update = false) {
+function readData(generalization, data_country,  update = false) {
   //reset data_table
   DATA_TABLE=[]
+  
+  table_data(data_country)
   generalization.forEach((gen_name) => {
     var csv_path =
       "/../data/regions/" + gen_name + "/" + gen_name + "_anomalyTable.csv";
@@ -41,7 +43,7 @@ function readData(generalization,  update = false) {
         console.log(error);
         throw error;
       });
-
+  
   });
 
 }
@@ -59,7 +61,6 @@ function default_dataset(dataFile = "") {
 
   initBaselineAndInfo(dataFile);
 
- 
   var csv_country =
     "/../data/counties/" + folder + "/" + dataFile + "_anomalyTable.csv";
 
@@ -73,7 +74,7 @@ function default_dataset(dataFile = "") {
           var generalization_list = info["Generalization"];
           console.log(generalization_list);
 
-          readData(generalization_list, update = false);
+          readData(generalization_list, data_country, update = false);
 
         })
         .catch((error) => {
@@ -101,23 +102,18 @@ function changeDataTable() {
 
   initBaselineAndInfo(dataFile);
 
-  //d3.select(".table_mean_rate").selectAll("tr").remove();
-  //d3.select(".table_mean_rate").selectAll("td").remove();
-
   var csv_country =
     "/../data/counties/" + folder + "/" + dataFile + "_anomalyTable.csv";
 
   d3.csv(csv_country)
     .then((data_country) => {
-   
-      //createEmptyTable(data_country)
+ 
       parseDataAttributes(data_country, dataFile);
       d3.json("/../data/counties/" + folder + "/" + dataFile + "_info.json")
         .then((info) => {
           
           var generalization_list = info["Generalization"];
-          
-          readData(generalization_list, true);
+          readData(generalization_list, data_country, true);
 
         })
         .catch((error) => {
@@ -127,7 +123,7 @@ function changeDataTable() {
     })
     .catch((error) => {
       console.log(error);
-      //alert("Unable To Load The Dataset!!");
+
       throw error;
     });
 }
