@@ -5,7 +5,6 @@ function changeData() {
     // prendere dati da mappa selezionata o dropdown menu
     var dataFile = document.getElementById('dataset').value;
 
-    document.getElementById("country_stripe").innerHTML= dataFile;
     
     initBaselineAndInfo(dataFile);
     
@@ -40,10 +39,6 @@ function changeData() {
 function defaultLineChartDataset(dataFile){
 
   
-  
- 
-  document.getElementById("country_stripe").innerHTML= dataFile;
-
   initBaselineAndInfo(dataFile);
 
   
