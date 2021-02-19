@@ -24,9 +24,27 @@ function loadData_table() {
 }
 
 
+function readData(generalization,  update = false) {
+  //reset data_table
+  DATA_TABLE=[]
+  generalization.forEach((gen_name) => {
+    var csv_path =
+      "/../data/regions/" + gen_name + "/" + gen_name + "_anomalyTable.csv";
+    d3.csv(csv_path)
+      .then((data) => {
+        parseDataAttributes(data, gen_name);
+        if(update){ updateRowsTable(data);}
+        else addRowTable(data);
+        
+      })
+      .catch((error) => {
+        console.log(error);
+        throw error;
+      });
 
+  });
 
-
+}
 
 
 function default_dataset(dataFile = "") {
@@ -94,7 +112,6 @@ function changeDataTable() {
    
       //createEmptyTable(data_country)
       parseDataAttributes(data_country, dataFile);
-      console.log("sjsjsjsj")
       d3.json("/../data/counties/" + folder + "/" + dataFile + "_info.json")
         .then((info) => {
           
