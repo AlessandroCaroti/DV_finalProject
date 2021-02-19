@@ -4,8 +4,7 @@ function changeData() {
     
     // prendere dati da mappa selezionata o dropdown menu
     var dataFile = document.getElementById('dataset').value;
-    document.getElementById("country_line").innerHTML= dataFile;
-    document.getElementById("country_stripe").innerHTML= dataFile;
+
     
     initBaselineAndInfo(dataFile);
     
@@ -15,9 +14,10 @@ function changeData() {
     else
         folder = dataFile;
 
-    var csv = "/../../../remaining_data/data_new/"+folder+"/"+dataFile+"_anomalyTable.csv";
+    var csv = "/../data/counties/" + dataFile + "/" + dataFile + "_anomalyTable.csv";
  
     d3.csv(csv)
+
       .then( (data) =>{ 
         
         parseDataAttributes(data);
@@ -36,27 +36,17 @@ function changeData() {
 }
 
 
-function default_dataset(dataFile=""){
-
-  if( dataFile == "") dataFile = "Afghanistan";
+function defaultLineChartDataset(dataFile){
 
   
-  document.getElementById("country_line").innerHTML= dataFile;
-  document.getElementById("country_stripe").innerHTML= dataFile;
-  var folder;
+  initBaselineAndInfo(dataFile);
+
   
-  
-  if( dataFile.charAt(dataFile.length  - 1) == '.' ) folder = dataFile.slice(0,-1);
-  else
-      folder = dataFile;
-  
-      initBaselineAndInfo(dataFile);
-  
-  var csv = "/../../../remaining_data/data_new/"+folder+"/"+dataFile+"_anomalyTable.csv";
-  //Di default c'è dataset 1
+  var csv = "/../data/counties/" + dataFile + "/" + dataFile + "_anomalyTable.csv";
+
   d3.csv(csv)
   .then( function(data){ 
-    
+  
     parseDataAttributes(data);
     createDefaultLineChart(data);
     createDefaultStripesChart(data);
@@ -67,7 +57,6 @@ function default_dataset(dataFile=""){
       //alert("Unable To Load The Dataset!!");
       throw(error);
   })
-
 
 
 }
@@ -85,9 +74,12 @@ function loadData(){
           var dropdown = document.getElementById("dataset");
           
           var option =  document.createElement("option");
-          option.setAttribute("value", d.Country);
-          option.innerHTML = d.Country;
-          dropdown.append(option)
+          if(d.Temp != ""){
+            option.setAttribute("value", d.Temp);
+            option.innerHTML = d.Temp;
+            dropdown.append(option)  
+          }
+         
           if( option.value == "Italy"){
             dropdown.selectedIndex = i;
             dropdown.options[i].selected = true;
@@ -97,7 +89,7 @@ function loadData(){
           }
           i++;
         });
-        default_dataset(dataset);
+        defaultLineChartDataset(dataset);
   })
 }
 

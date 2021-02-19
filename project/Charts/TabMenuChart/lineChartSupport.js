@@ -5,7 +5,6 @@ function drawUncertainty(data, svg, x, y){
     
     var range_year =  document.getElementById('rage-year').value; 
 
-   
     var areaUncGenerator = d3.area()
                              .x(function(d) { return x(d.date) })
                              .y0(function(d) { return y(d[range_year+"_value"] + d[range_year+"_unc"]) })
@@ -124,10 +123,10 @@ function createDefaultLineChart(data){
 
     var svg = d3.select("#linechart")
                 .append("svg")
-                .attr("class","graphics")
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
                 .append("g")
+                .attr("class","graphics")
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
                 
                 
@@ -153,7 +152,7 @@ function createDefaultLineChart(data){
     var valueline_baseline = lineGenerators[2];
 
     
-    drawUncertainty(data, svg, x, y);
+   drawUncertainty(data, svg, x, y);
     
 
 
