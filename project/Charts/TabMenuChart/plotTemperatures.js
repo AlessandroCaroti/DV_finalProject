@@ -4,7 +4,7 @@ function changeData() {
     
     // prendere dati da mappa selezionata o dropdown menu
     var dataFile = document.getElementById('dataset').value;
-    document.getElementById("country_line").innerHTML= dataFile;
+
     document.getElementById("country_stripe").innerHTML= dataFile;
     
     initBaselineAndInfo(dataFile);
@@ -37,11 +37,11 @@ function changeData() {
 }
 
 
-function default_dataset(dataFile){
+function defaultLineChartDataset(dataFile){
 
   
   
-  document.getElementById("country_line").innerHTML= dataFile;
+ 
   document.getElementById("country_stripe").innerHTML= dataFile;
 
   initBaselineAndInfo(dataFile);
@@ -94,7 +94,7 @@ function loadData(){
           }
           i++;
         });
-        default_dataset(dataset);
+        defaultLineChartDataset(dataset);
   })
 }
 

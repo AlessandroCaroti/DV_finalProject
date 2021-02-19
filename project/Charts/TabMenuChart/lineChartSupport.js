@@ -123,10 +123,10 @@ function createDefaultLineChart(data){
 
     var svg = d3.select("#linechart")
                 .append("svg")
-                .attr("class","graphics")
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
                 .append("g")
+                .attr("class","graphics")
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
                 
                 

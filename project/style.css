@@ -174,13 +174,15 @@ text#label-legend {
   float: center;
   width: 900px;
   height: 500px;
-  margin: auto;
-  margin-top: 60px;
+
 }
 
 .tab {
   overflow: hidden;
-  margin-top: 30px;
+
+  margin-top:10%;
+  margin-left: 10%;
+
 }
 
 /* Style the buttons inside the tab */
@@ -224,7 +226,10 @@ text#label-legend {
 .tabcontent {
   border: 1px solid #ccc;
   border-radius: 0px 20px 20px;
-  width: auto;
+  width: 900px;
+  height: 500px;
+  margin-left: 10%;
+ 
 }
 
 #stripechart {
@@ -241,20 +246,6 @@ text#label-legend {
   margin: 12px;
 }
 
-.country_t {
-  text-align: center;
-  color: #111;
-  font-family: "Open Sans Condensed", sans-serif;
-  font-size: 50px;
-  font-weight: 700;
-  line-height: 64px;
-  margin: 0 0 0;
-  padding: 20px 30px;
-  color: black;
-  -webkit-text-fill-color: white; /* Will override color (regardless of order) */
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: black;
-}
 
 .graphics .line_chart_annual {
   stroke-width: 1px;
@@ -492,3 +483,26 @@ table {
   stroke-width: 0;
 }
 /*---------------------------END SEASONAL STYLE--------------------------------*/
+
+
+
+/*STYLE FINAL HTML*/
+
+.container{
+
+  width: 1500px;
+  height: 900px;
+
+  border: solid black 1px;
+  margin: auto;
+  margin-top: 50px;
+}
+
+*.container h1{
+  margin-top: 25%;
+  margin-left: 20%;
+}
+
+*{
+  font-family: sans-serif;
+}
