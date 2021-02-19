@@ -11,13 +11,29 @@
 
 
     <!------------------------------CHARTS FILES------------------------------------->
+    
+    <!------------------------------ALL CHARTS--------------------------------------->
+     
     <script type="application/javascript" src="/project/Charts/support_charts.js"></script>
     <script type="application/javascript" src="/project/Charts/ChartsEvents.js"></script>
+    <script type="application/javascript" src="/project/Charts/UtilsCharts.js"></script>
+
+    <!-----------------------------TAB MENU------------------------------------------>
     <script type="application/javascript" src="/project/Charts/TabMenuChart/lineChartSupport.js"></script>
     <script type="application/javascript" src="/project/Charts/TabMenuChart/plotTemperatures.js"></script>
     <script type="application/javascript" src="/project/Charts/TabMenuChart/stripesChartSupport.js"></script>
-    <script type="application/javascript" src="/project/Charts/UtilsCharts.js"></script>
+    <!-------------------------------TABLE-------------------------------------------->
+    <script type="application/javascript" src="/project/Charts/TableMeanRate/drawTable.js"></script>
+    <script type="application/javascript" src="/project/Charts/TableMeanRate/tableSupport.js"></script>
 
+    <!-----------------------------SEASONAL LINECHART------------------------------------------>
+
+
+
+
+    <!-----------------------------HOTTEST COLDEST LINECHART------------------------------------------>
+    
+    
 </head>
 <body>
     <span id="dropdown_tab">
@@ -74,11 +90,14 @@
     
     
     <div id="table-container" class="container">
-        <h1> ----------------------------------TABLE----------------------------------</h1>
+        
         <!------------------------------ TABLE ------------------------------------------->
+        <div id="table_container">  <div class="tooltip-map" id="tooltip_table"> </div> </div>
+
     </div>
     
     <div id="seasonal-container" class="container">
+        
         <h1> -----------------------SEASONAL LINECHART----------------------------------</h1>
 
         <!------------------------------FISRT LINECHART------------------------------------------->
