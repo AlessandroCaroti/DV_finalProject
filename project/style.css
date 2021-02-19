@@ -5,11 +5,14 @@ body {
 
 .select2-container {
   width: 100% !important;
-  max-width: 200px;
-  min-width: 200px;
+  display: inline-block;
 }
 .select2-search--dropdown .select2-search__field {
   width: 98%;
+}
+
+div#menu_selectCountry {
+  width: 100%;
 }
 
 /* DIABLE ALL SVG TEXT */
@@ -61,6 +64,7 @@ svg text::selection {
   align-content: center;
   left: 50%;
   right: 50%;
+  background: white;
 }
 
 .country {
@@ -91,6 +95,7 @@ svg text::selection {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+  width: 100%;
 }
 
 .row_wrapper {

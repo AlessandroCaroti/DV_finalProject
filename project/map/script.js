@@ -34,13 +34,16 @@ countries_file = "../../data/15_countries_list.csv";
 function drawMap(world) {
   debug_log("DRAW-MAP");
 
-  svg = d3.select("#svg-map").attr("width", "100%").attr("height", h);
+  svg = d3.select("#svg-map").attr("height", h);
   map_container = svg.select("#map").call(zoom);
+
+  var bBox = document.getElementById("svg-map").getBBox();
+  console.log(bBox);
 
   projection = d3
     .geoNaturalEarth1()
-    .scale(120)
-    .translate([w / 2, h / 2]);
+    .scale(140)
+    .translate([bBox.width / 2, h / 2]);
 
   geoGenerator = d3.geoPath().projection(projection);
 
@@ -459,7 +462,7 @@ function load_map() {
 
       let topology = world;
       topology = topojson.presimplify(topology);
-      topology = topojson.simplify(topology, 0.05);
+      topology = topojson.simplify(topology, 0.5);
 
       drawMap(topology);
       load_tempYear(
@@ -488,13 +491,13 @@ function init_DropDownMenu_slect2() {
       for (var i = 0; i < countries.length; i++) {
         data.push({ id: i, text: countries[i].Map });
       }
-      
+
       $("#selectCountryMenu").select2({
         placeholder: "Select an option",
         width: "resolve",
         data: data,
         theme: "classic",
-        allowClear: true
+        allowClear: true,
       });
 
       $("#selectCountryMenu").on("select2:select", function (e) {
@@ -514,7 +517,6 @@ function init_DropDownMenu_slect2() {
 //                   DOVE INIZIA TUTTO                    //
 
 function init_page() {
-  init_DropDownMenu_slect2();
 
   // load map
   load_map();
@@ -525,6 +527,8 @@ function init_page() {
 
   // trovare modo automatico per trovare min e max
   init_slider(1743, 2020, 1);
+  init_DropDownMenu_slect2();
+
 
   init_map_controls();
 }
