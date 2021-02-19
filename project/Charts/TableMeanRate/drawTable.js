@@ -8,9 +8,11 @@ function loadData_table() {
     data.forEach((d) => {
       var dropdown = document.getElementById("dataset");
       var option = document.createElement("option");
-      option.setAttribute("value", d.Temp);
-      option.innerHTML = d.Temp;
-      dropdown.append(option);
+      if(d.Temp != ""){
+        option.setAttribute("value", d.Temp);
+        option.innerHTML = d.Temp;
+        dropdown.append(option)  
+      }
       if (option.value == "Italy") {
         dropdown.selectedIndex = i;
         dropdown.options[i].selected = true;
