@@ -36,19 +36,21 @@
     <div id="tab-menu-container" class="container">
         
         <!------------------------------FISRT LINECHART------------------------------------------->
-        <span id="dropdown_tab_years">
-            <label>Range-Years:</label>
-            <select name="Dataset" id="rage-year" onchange="changeData()"> 
-            
-                <option value="five_years"> Five-Years</option>
-                <option value="ten_years" selected="selected"> Ten-Years</option>
-                <option value="twenty_years"> Twenty-Years</option>
-                <option value="annual"> Annual</option>
-                
-            </select>
-          </span>
+        
 
         <div class="tab">
+
+            <span id="dropdown_tab_years">
+                <label>Range-Years:</label>
+                <select name="Dataset" id="rage-year" onchange="changeData()"> 
+                
+                    <option value="five_years"> Five-Years</option>
+                    <option value="ten_years" selected="selected"> Ten-Years</option>
+                    <option value="twenty_years"> Twenty-Years</option>
+                    <option value="annual"> Annual</option>
+                    
+                </select>
+              </span>
         
             <button class="tablinks active" id="tab_line" onclick="click_tab(event, 'linechart')">Line Chart</button>
             <button class="tablinks" id="tab_stripe" onclick="click_tab(event, 'stripechart')">Climate Stripes</button>
@@ -65,9 +67,9 @@
             
             <div id="stripechart" class="tabcontent"> 
                   
-                
                 <div class="tooltip-map" id="tooltip_stripes"> </div> 
           </div>    
+    
     </div>
     
     

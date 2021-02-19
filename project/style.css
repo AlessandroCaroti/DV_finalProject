@@ -179,8 +179,7 @@ text#label-legend {
 
 .tab {
   overflow: hidden;
-
-  margin-top:10%;
+  margin-top: 10%;
   margin-left: 20%;
 
 }
@@ -498,9 +497,16 @@ table {
   margin-top: 50px;
 }
 
-*.container h1{
+.container h1{
   margin-top: 25%;
   margin-left: 20%;
+}
+
+#dropdown_tab_years{
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 20%;
+ 
 }
 
 *{
