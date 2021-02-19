@@ -85,7 +85,6 @@ function table_data(data) {
     //for each year is saved the mean rate of change and the correspondive temperature of that year
     dataTable[year_2].temp = String(temperatures[year_2]);
     //comuputing mean rate of change
-
     var meanRate = String(
       getMeanRateOfChange(
         temperatures[year_1],
@@ -215,8 +214,6 @@ function addRowTable(data) {
 }
 
 
-
-
 function updateRowsTable(data){
 
   table_data(data);
@@ -262,7 +259,6 @@ function updateRowsTable(data){
        //first available values: case fisrt year non null
        if (d.i == years_table[0] && !isNaN(d.mean_rate))
          return "start_value_table";
- 
        // first available values: case first year null
        //need to calculate where is the fisrt non NaN value
        if (d.i == years_table[idx_year] && isNaN(d.mean_rate)) {

@@ -14,16 +14,11 @@ var baseline;
 
 
 
-
 //Load the baseline of the corresponding country from the nameCountry_info.json file
 function initBaselineAndInfo(dataFile){
   
-    var folder;
-    if( dataFile.charAt(dataFile.length  - 1) == '.' ) folder = dataFile.slice(0,-1);
-    else
-        folder = dataFile;
     
-    d3.json("/../../remaining_data/data_new/"+folder+"/"+dataFile+"_info.json")
+    d3.json("/../data/counties/" + dataFile + "/" + dataFile + "_info.json")
       .then( (data =>{   baseline = +data["absolute_temp(C)"]; }))
   
 }

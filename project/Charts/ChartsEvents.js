@@ -1,4 +1,4 @@
-const countries = "../../../remaining_data/data_new/Countries.csv";
+const countries = "../../../data/15_countries_list.csv";
 
 //----------------------- TAB EVENT ----------------------------------------------------
 
