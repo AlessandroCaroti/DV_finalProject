@@ -24,7 +24,7 @@ var selected_country = null;
 map_file = "../../data/map/countries-10m_v34_6.json";
 tmp_file_prefix = "../../data/years/";
 tmp_file_suffix = "/Annual_mean.csv";
-countries_file = "../../data/15_countries_list.csv"
+countries_file = "../../data/15_countries_list.csv";
 
 //                    END GLOBAL VARIABLE                   //
 // ******************************************************** //
@@ -54,7 +54,6 @@ function drawMap(world) {
     .append("path")
     .attr("class", "country")
     .attr("id", (d) => {
-
       return d.properties.name;
     })
     .attr("d", geoGenerator);
@@ -108,19 +107,22 @@ function update_colors(temperatures, time_trasition) {
 
     // update tooltip
     let tooltip = d3.select(".tooltip-map");
-    if(tooltip.select(".tooltip-name").html() === d.Country){
-
-      tooltip.select(".tooltip-anomaly")
+    if (tooltip.select(".tooltip-name").html() === d.Country) {
+      tooltip
+        .select(".tooltip-anomaly")
         .datum(d["ANOMALY"])
         .html((d) => {
-          if (typeof d != "undefined" && d != null && d != "NaN" && !Number.isNaN(d)) {
+          if (
+            typeof d != "undefined" &&
+            d != null &&
+            d != "NaN" &&
+            !Number.isNaN(d)
+          ) {
             return parseFloat(d).toFixed(2) + " °C";
           }
           return "unknown";
         });
-
     }
-
   });
 }
 
@@ -166,7 +168,12 @@ function country_events() {
         .select(".tooltip-anomaly")
         .datum(anomaly)
         .html((d) => {
-          if (typeof d != "undefined" && d != null && d != "NaN" && !Number.isNaN(d)) {
+          if (
+            typeof d != "undefined" &&
+            d != null &&
+            d != "NaN" &&
+            !Number.isNaN(d)
+          ) {
             return parseFloat(d).toFixed(2) + " °C";
           }
           return "unknown";
@@ -179,8 +186,6 @@ function country_events() {
         .style("left", event.pageX + 13 + "px");
     });
 
-
-    
   //CLICK EVENT:
   map_container.selectAll(".country").on("click", function (event, b) {
     //deselect the previus country
@@ -192,7 +197,10 @@ function country_events() {
 
     d3.select(this).classed("selected_country", true);
     d3.select(this).moveToFront();
-    d3.select(this).style("stroke-width", borderCountryScale(curr_zoomScale) * selected_stroke);
+    d3.select(this).style(
+      "stroke-width",
+      borderCountryScale(curr_zoomScale) * selected_stroke
+    );
 
     // set the name visible in the drop-down menu
     d3.select("#selectCountryMenu").attr("value", this.id);
@@ -235,7 +243,7 @@ function reset_zoom() {
   map_container
     .transition()
     .duration(1000)
-    .call( function (selection) {
+    .call(function (selection) {
       zoom.transform(selection, d3.zoomIdentity.translate(0, 0).scale(1));
     });
 }
@@ -254,14 +262,13 @@ function zoom_in(country) {
   map_container
     .transition()
     .duration(1000)
-    .call( function (selection) {
+    .call(function (selection) {
       zoom.transform(
         selection,
         d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale)
       );
     });
 }
-
 
 //                      END ZOOM SECTION                    //
 // ******************************************************** //
@@ -320,7 +327,6 @@ function changeView() {
     local_zoom();
     zoom_in(selected_country);
   }
-
 }
 
 function init_zoomBtns() {
@@ -384,31 +390,24 @@ d3.selection.prototype.moveToFront = function () {
 
 // LOAD COUNTRIES MENU
 function init_dropdown_menu() {
-
-
   d3.csv(countries_file)
-  .then(function (data) {
-    
+    .then(function (data) {
       var countries = d3
-                      .select("datalist#countryList")
-                      .selectAll("option")
-                      .data(data);
+        .select("datalist#countryList")
+        .selectAll("option")
+        .data(data);
       countries.exit().remove();
 
       countries
-          .enter()
-          .merge(countries)
-          .append("option")
-          .attr("value", (d) => d.Temp);
-
-  })
-  .catch(function (error) {
-    console.log(error);
-    throw error;
-  });
-
-
-  
+        .enter()
+        .merge(countries)
+        .append("option")
+        .attr("value", (d) => d.Temp);
+    })
+    .catch(function (error) {
+      console.log(error);
+      throw error;
+    });
 }
 
 // UPDATE COUNTRY
@@ -446,7 +445,6 @@ function load_tempYear(temp_file, time_transition) {
 
       //Associate to each county a color proportionate to it's anomaly
       update_colors(data, time_transition);
-
     })
     .catch(function (error) {
       console.log(error);
@@ -464,9 +462,13 @@ function load_map() {
       topology = topojson.simplify(topology, 0.05);
 
       drawMap(topology);
-      load_tempYear( tmp_file_prefix + "2020" + tmp_file_suffix, default_transition );
+      load_tempYear(
+        tmp_file_prefix + "2020" + tmp_file_suffix,
+        default_transition
+      );
 
-      init_dropdown_menu();
+      //init_dropdown_menu();
+      //init_DropDownMenu_slect2();
     })
     .catch((error) => {
       console.log(error);
@@ -475,6 +477,38 @@ function load_map() {
 }
 
 //                   END FILES LOADING                    //
+// ****************************************************** //
+// ****************************************************** //
+//                  START DROP_DOWN MENU                  //
+
+function init_DropDownMenu_slect2() {
+  d3.csv(countries_file)
+    .then(function (countries) {
+      data = [];
+      for (var i = 0; i < countries.length; i++) {
+        data.push({ id: i, text: countries[i].Map });
+      }
+      console.log(data);
+      $("#selectCountryMenu").select2({
+        placeholder: "Select an option",
+        width: "resolve",
+        data: data,
+        theme: "classic",
+        allowClear: true,
+      });
+
+      $("#selectCountryMenu").on("select2:select", function (e) {
+        var data = e.params.data;
+        console.log(data.text);
+      });
+    })
+    .catch(function (error) {
+      console.log(error);
+      throw error;
+    });
+}
+
+//                   END DROP_DOWN MENU                   //
 // ****************************************************** //
 // ****************************************************** //
 //                   DOVE INIZIA TUTTO                    //
@@ -491,5 +525,5 @@ function init_page() {
   init_slider(1743, 2020, 1);
 
   init_map_controls();
-
+  init_DropDownMenu_slect2();
 }
