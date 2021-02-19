@@ -7,15 +7,9 @@ function defaultDataHottestColdest(dataFile=""){
     
     document.getElementById("hottest_coldest_title").innerHTML= dataFile;
 
-    var folder;
-    
-    if( dataFile.charAt(dataFile.length  - 1) == '.' ) folder = dataFile.slice(0,-1);
-    else
-        folder = dataFile;
-    
-        initBaselineAndInfo(dataFile);
+    initBaselineAndInfo(dataFile);
 
-    var csv = "/../../remaining_data/data_new/"+folder+"/"+dataFile+"_anomalyTable.csv";
+    var csv = "/../data/counties/" + dataFile + "/" + dataFile + "_anomalyTable.csv";
     //Di default c'è dataset 1
     d3.csv(csv)
     .then( function(data){ 
@@ -32,8 +26,6 @@ function defaultDataHottestColdest(dataFile=""){
 }
 
 
-
-
 function changeDataHottestColdest(){
     
     
@@ -41,14 +33,9 @@ function changeDataHottestColdest(){
 
     document.getElementById("hottest_coldest_title").innerHTML= dataFile;
 
-    var folder;
-    
-    if( dataFile.charAt(dataFile.length  - 1) == '.' ) folder = dataFile.slice(0,-1);
-    else
-        folder = dataFile;
+    var csv = "/../data/counties/" + dataFile + "/" + dataFile + "_anomalyTable.csv";
+    initBaselineAndInfo(dataFile);
 
-    var csv = "/../../remaining_data/data_new/"+folder+"/"+dataFile+"_anomalyTable.csv";
-   
     d3.csv(csv)
         .then( function(data){ 
             
@@ -76,10 +63,11 @@ function loadDataHotCold(){
               var dropdown = document.getElementById("dataset");
               
               var option =  document.createElement("option");
-              option.setAttribute("value", d.Country);
-              option.innerHTML = d.Country;
-              dropdown.append(option)
-  
+              if(d.Temp != ""){
+                option.setAttribute("value", d.Temp);
+                option.innerHTML = d.Temp;
+                dropdown.append(option)  
+              }
               //test(option.value)
               if( option.value == "Italy"){
                 dropdown.selectedIndex = i;

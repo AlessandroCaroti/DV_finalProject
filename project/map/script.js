@@ -51,7 +51,7 @@ function drawMap(world) {
 
   // Draw the background (country outlines)
   map_container
-    .selectAll("path")
+    .selectAll("path.country")
     .data(topojson.feature(world, world.objects.countries).features)
     .enter()
     .append("path")
@@ -231,16 +231,28 @@ var zoomIn_scale = 1.2,
 
 var zoom = d3
   .zoom()
+  .scaleExtent([1, max_zoom])
   .on("zoom", (event) => {
     curr_zoomScale = event.transform.k;
 
     zommed = curr_zoomScale != 1.0;
-    map_container.attr("transform", event.transform);
+    //map_container.attr("transform", event.transform);
+    map_container.selectAll("path").attr("transform", event.transform);
+
+    // hide tooltip
+    d3.select(".tooltip-map").style("display", "none");
 
     // change border width
     update_strokes(curr_zoomScale);
   })
-  .scaleExtent([1, max_zoom]);
+  .on("end", function(event){
+    // show tooltip if hovering a country
+    let cur_country = map_container.select(".highlighted_country");
+
+    if(!cur_country.empty())
+      d3.select(".tooltip-map").style("display", "block");
+
+  });
 
 function reset_zoom() {
   map_container
@@ -402,15 +414,17 @@ function init_dropdown_menu() {
       countries.exit().remove();
 
       countries
-        .enter()
-        .merge(countries)
-        .append("option")
-        .attr("value", (d) => d.Temp);
-    })
-    .catch(function (error) {
-      console.log(error);
-      throw error;
-    });
+          .enter()
+          .merge(countries)
+          .append("option")
+          .attr("value", (d) => d.Temp);
+
+  })
+  .catch(function (error) {
+    console.log(error);
+    throw error;
+  });
+  
 }
 
 // UPDATE COUNTRY

@@ -35,6 +35,7 @@ function createDefaultStripesChart(data){
                 .attr("width", width_stripe + margin_stripes.left + margin_stripes.right)
                 .attr("height", height_stripe + margin_stripes.top + margin_stripes.bottom)
                 .append("g")
+                //.append("class", "graphics")
                 .attr("transform", "translate(" + margin_stripes.left + "," + margin_stripes.top + ")")
     
     var stripe_width = (width_stripe / data_annnual.length)+2;
@@ -44,7 +45,7 @@ function createDefaultStripesChart(data){
                      .data(data_annnual)
                      .enter().append("rect")
                      .attr("class", "stripes")
-                     .attr("x", (d) => {return  x(d.date.getFullYear())})
+                     .attr("x", (d) => { return  x(d.date.getFullYear())})
                      .attr("width",  stripe_width)
                      .attr("y",  y(0))
                      .attr("height", y(0.8))
@@ -85,10 +86,10 @@ function updateStripesChart(data){
     
     
     
-    var svg = d3.select("#stripechart");
+    var svg = d3.select("#stripechart g");
 
     
-    var stripes= svg.selectAll('.stripes')
+    var stripes= svg.selectAll('rect')
                      .data(data_annnual)
 
     stripes.exit().remove();

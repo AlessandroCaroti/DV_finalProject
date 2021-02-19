@@ -3,13 +3,16 @@ var continent, portion_continent, hemisphere;
 function loadData_table() {
   //ciaovar dataset = "";
   d3.csv(countries).then((data) => {
+
     var i = 0;
     data.forEach((d) => {
       var dropdown = document.getElementById("dataset");
       var option = document.createElement("option");
-      option.setAttribute("value", d.Country);
-      option.innerHTML = d.Country;
-      dropdown.append(option);
+      if(d.Temp != ""){
+        option.setAttribute("value", d.Temp);
+        option.innerHTML = d.Temp;
+        dropdown.append(option)  
+      }
       if (option.value == "Italy") {
         dropdown.selectedIndex = i;
         dropdown.options[i].selected = true;
@@ -24,9 +27,29 @@ function loadData_table() {
 }
 
 
+function readData(generalization, data_country,  update = false) {
+  //reset data_table
+  DATA_TABLE=[]
+  
+  table_data(data_country)
+  generalization.forEach((gen_name) => {
+    var csv_path =
+      "/../data/regions/" + gen_name + "/" + gen_name + "_anomalyTable.csv";
+    d3.csv(csv_path)
+      .then((data) => {
+        parseDataAttributes(data, gen_name);
+        if(update){ updateRowsTable(data);}
+        else addRowTable(data);
+        
+      })
+      .catch((error) => {
+        console.log(error);
+        throw error;
+      });
+  
+  });
 
-
-
+}
 
 
 function default_dataset(dataFile = "") {
@@ -34,28 +57,29 @@ function default_dataset(dataFile = "") {
 
   var dataFile = document.getElementById("dataset").value;
   document.getElementById("table_country").innerHTML = dataFile;
+  
+  /*
   var folder;
   if (dataFile.charAt(dataFile.length - 1) == ".")
     folder = dataFile.slice(0, -1);
   else folder = dataFile;
-
+  */
   initBaselineAndInfo(dataFile);
 
- 
   var csv_country =
-    "/../data/counties/" + folder + "/" + dataFile + "_anomalyTable.csv";
+    "/../data/counties/" + dataFile+ "/" + dataFile + "_anomalyTable.csv";
 
   d3.csv(csv_country)
     .then((data_country) => {
       parseDataAttributes(data_country, dataFile);
       createEmptyTable(data_country)
 
-      d3.json("/../data/counties/" + folder + "/" + dataFile + "_info.json")
+      d3.json("/../data/counties/" + dataFile + "/" + dataFile + "_info.json")
         .then((info) => {
           var generalization_list = info["Generalization"];
           console.log(generalization_list);
 
-          readData(generalization_list, update = false);
+          readData(generalization_list, data_country, update = false);
 
         })
         .catch((error) => {
@@ -76,31 +100,26 @@ function changeDataTable() {
 
   var dataFile = document.getElementById("dataset").value;
   document.getElementById("table_country").innerHTML = dataFile;
+  /*
   var folder;
   if (dataFile.charAt(dataFile.length - 1) == ".")
     folder = dataFile.slice(0, -1);
   else folder = dataFile;
-
+  */
   initBaselineAndInfo(dataFile);
 
-  //d3.select(".table_mean_rate").selectAll("tr").remove();
-  //d3.select(".table_mean_rate").selectAll("td").remove();
-
   var csv_country =
-    "/../data/counties/" + folder + "/" + dataFile + "_anomalyTable.csv";
+    "/../data/counties/" + dataFile + "/" + dataFile + "_anomalyTable.csv";
 
   d3.csv(csv_country)
     .then((data_country) => {
-   
-      //createEmptyTable(data_country)
+ 
       parseDataAttributes(data_country, dataFile);
-      console.log("sjsjsjsj")
-      d3.json("/../data/counties/" + folder + "/" + dataFile + "_info.json")
+      d3.json("/../data/counties/" + dataFile + "/" + dataFile + "_info.json")
         .then((info) => {
           
           var generalization_list = info["Generalization"];
-          
-          readData(generalization_list, true);
+          readData(generalization_list, data_country, true);
 
         })
         .catch((error) => {
@@ -110,7 +129,7 @@ function changeDataTable() {
     })
     .catch((error) => {
       console.log(error);
-      //alert("Unable To Load The Dataset!!");
+
       throw error;
     });
 }
