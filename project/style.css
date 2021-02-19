@@ -1,3 +1,16 @@
+html,
+body {
+  height: 100px;
+}
+
+.select2-container {
+  width: 100% !important;
+}
+.select2-search--dropdown .select2-search__field {
+  width: 98%;
+}
+
+/* DIABLE ALL SVG TEXT */
 svg text {
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -87,7 +100,6 @@ svg text::selection {
 }
 
 span {
-  padding: 1em;
 }
 
 .handle:focus {
