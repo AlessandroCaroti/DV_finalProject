@@ -235,6 +235,11 @@ text#label-legend {
   display: none;
 }
 
+#stripechart svg{
+
+  margin-top: 10%
+}
+
 /*--------------------------------- END TAB MENU STYLE -------------------------------------*/
 
 /*------------------- LINECHART STYLE -------------------------------*/
