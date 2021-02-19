@@ -235,8 +235,12 @@ var zoom = d3
     update_strokes(curr_zoomScale);
   })
   .on("end", function(event){
-    // show tooltip
-    d3.select(".tooltip-map").style("display", "block");
+    // show tooltip if hovering a country
+    let cur_country = map_container.select(".highlighted_country");
+
+    console.log(cur_country);
+    if(!cur_country.empty())
+      d3.select(".tooltip-map").style("display", "block");
 
   });
 
