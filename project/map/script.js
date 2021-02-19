@@ -228,9 +228,16 @@ var zoom = d3
     //map_container.attr("transform", event.transform);
     map_container.selectAll("path").attr("transform", event.transform);
 
+    // hide tooltip
+    d3.select(".tooltip-map").style("display", "none");
 
     // change border width
     update_strokes(curr_zoomScale);
+  })
+  .on("end", function(event){
+    // show tooltip
+    d3.select(".tooltip-map").style("display", "block");
+
   });
 
 function reset_zoom() {
