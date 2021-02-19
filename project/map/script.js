@@ -35,7 +35,7 @@ function drawMap(world) {
   debug_log("DRAW-MAP");
 
   svg = d3.select("#svg-map").attr("width", "100%").attr("height", h);
-  map_container = svg.select("#map").call(zoom);
+  map_container = d3.select("#map").call(zoom);
 
   projection = d3
     .geoNaturalEarth1()
@@ -220,16 +220,18 @@ var zoomIn_scale = 1.2,
 
 var zoom = d3
   .zoom()
+  .scaleExtent([1, max_zoom])
   .on("zoom", (event) => {
     curr_zoomScale = event.transform.k;
 
     zommed = curr_zoomScale != 1.0;
-    map_container.attr("transform", event.transform);
+    //map_container.attr("transform", event.transform);
+    map_container.selectAll("path").attr("transform", event.transform);
+
 
     // change border width
     update_strokes(curr_zoomScale);
-  })
-  .scaleExtent([1, max_zoom]);
+  });
 
 function reset_zoom() {
   map_container
