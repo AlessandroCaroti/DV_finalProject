@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,9 +12,9 @@
 
 
     <!------------------------------CHARTS FILES------------------------------------->
-    
+
     <!------------------------------ALL CHARTS SCRIPTS--------------------------------------->
-     
+
     <script type="application/javascript" src="/project/Charts/support_charts.js"></script>
     <script type="application/javascript" src="/project/Charts/ChartsEvents.js"></script>
     <script type="application/javascript" src="/project/Charts/UtilsCharts.js"></script>
@@ -22,7 +23,7 @@
     <script type="application/javascript" src="/project/Charts/TabMenuChart/lineChartSupport.js"></script>
     <script type="application/javascript" src="/project/Charts/TabMenuChart/plotTemperatures.js"></script>
     <script type="application/javascript" src="/project/Charts/TabMenuChart/stripesChartSupport.js"></script>
-    
+
     <!------------------------------- TABLE SCRIPTS-------------------------------------------->
     <script type="application/javascript" src="/project/Charts/TableMeanRate/drawTable.js"></script>
     <script type="application/javascript" src="/project/Charts/TableMeanRate/tableSupport.js"></script>
@@ -31,17 +32,26 @@
 
 
     <!-----------------------------HOTTEST COLDEST LINECHART SCRIPTS------------------------------------------>
-    
+
     <!-----------------------------MAP SCRIPTS------------------------------------------>
-    
-
-
 </head>
+
+
+
 <body>
+
+
+    <!--TODO:TO REMOVE AT THE END, ONLY FOR TEST-->
     <span id="dropdown_tab">
         <label>Dataset:</label>
         <select name="Dataset" id="dataset" onchange="changeAllData()"> </select>
     </span>
+    <!--TODO:------------------------------------->
+
+
+
+
+    <!------------------------------START MAP------------------------------------------->
 
     <div id="map-containter" class="container">
 
@@ -49,101 +59,95 @@
 
     </div>
 
-
-<!------------------------------START MAP------------------------------------------->
-
-<!------------------------------END MAP------------------------------------------->
+    <!------------------------------END MAP------------------------------------------->
 
 
 
 
 
 
-<!------------------------------START TAB-MENU LINECHART------------------------------------------->
+    <!------------------------------START TAB-MENU LINECHART------------------------------------------->
 
     <div id="tab-menu-container" class="container">
-        
+
 
         <div class="tab">
 
             <span id="dropdown_tab_years">
                 <label>Range-Years:</label>
-                <select name="Dataset" id="rage-year" onchange="changeDataTabMenu()"> 
-                
+                <select name="Dataset" id="rage-year" onchange="changeDataTabMenu()">
+
                     <option value="five_years"> Five-Years</option>
                     <option value="ten_years" selected="selected"> Ten-Years</option>
                     <option value="twenty_years"> Twenty-Years</option>
                     <option value="annual"> Annual</option>
-                    
+
                 </select>
-              </span>
-        
+            </span>
+
             <button class="tablinks active" id="tab_line" onclick="click_tab(event, 'linechart')">Line Chart</button>
             <button class="tablinks" id="tab_stripe" onclick="click_tab(event, 'stripechart')">Climate Stripes</button>
-          
-          </div>
-    
-            <div id="linechart" class="tabcontent"> 
-                
-             
-                
-              <div class="tooltip-map" id="tooltip_line"> </div> 
-              
-            </div>
-            
-            <div id="stripechart" class="tabcontent"> 
-                  
-                <div class="tooltip-map" id="tooltip_stripes"> </div> 
-          </div>    
-    
+
+        </div>
+
+        <div id="linechart" class="tabcontent">
+            <div class="tooltip-map" id="tooltip_line"> </div>
+        </div>
+
+        <div id="stripechart" class="tabcontent">
+            <div class="tooltip-map" id="tooltip_stripes"> </div>
+        </div>
+
     </div>
-<!------------------------------END TAB-MENU LINECHART------------------------------------------->
+    <!------------------------------END TAB-MENU LINECHART------------------------------------------->
 
 
 
 
-    
-<!------------------------------ START TABLE ------------------------------------------->
-    
+
+    <!------------------------------ START TABLE ------------------------------------------->
+
     <div id="table-container" class="container">
-        
-        
-        <div id="table-mean-rate">  <div class="tooltip-map" id="tooltip_table"> </div> </div>
+
+
+        <div id="table-mean-rate">
+            <div class="tooltip-map" id="tooltip_table"> </div>
+        </div>
 
     </div>
 
-<!------------------------------ END TABLE ------------------------------------------->
+    <!------------------------------ END TABLE ------------------------------------------->
 
 
 
 
 
-<!------------------------------START HOTTEST-COLDEST LINECHART------------------------------------------->
+    <!------------------------------START HOTTEST-COLDEST LINECHART------------------------------------------->
 
     <div id="hottest-coldest-container" class="container">
-        
+
         <h1> -----------------------HOTTEST COLDEST LINECHART----------------------------------</h1>
     </div>
 
-<!------------------------------START HOTTEST-COLDEST LINECHART------------------------------------------->
+    <!------------------------------START HOTTEST-COLDEST LINECHART------------------------------------------->
 
 
 
 
-    
-<!------------------------------START SEASONAL LINECHART------------------------------------------->
+
+    <!------------------------------START SEASONAL LINECHART------------------------------------------->
 
     <div id="seasonal-container" class="container">
-        
+
         <h1> -----------------------SEASONAL LINECHART----------------------------------</h1>
     </div>
 
-<!------------------------------END SEASONAL LINECHART------------------------------------------->
+    <!------------------------------END SEASONAL LINECHART------------------------------------------->
 
 
     <script>
-
         window.onload = loadAllData();
     </script>
 </body>
+
 </html>
