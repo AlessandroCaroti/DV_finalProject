@@ -494,7 +494,7 @@ function init_DropDownMenu_slect2() {
         width: "resolve",
         data: data,
         theme: "classic",
-        allowClear: true,
+        allowClear: true
       });
 
       $("#selectCountryMenu").on("select2:select", function (e) {
