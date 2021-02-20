@@ -8,11 +8,6 @@ function changeDataTabMenu() {
     
     initBaselineAndInfo(dataFile);
     
-    var folder;
- 
-    if( dataFile.charAt(dataFile.length  - 1) == '.' ) folder = dataFile.slice(0,-1);
-    else
-        folder = dataFile;
 
     var csv = "/../data/counties/" + dataFile + "/" + dataFile + "_anomalyTable.csv";
  
@@ -39,14 +34,14 @@ function changeDataTabMenu() {
 function defaultLineChartDataset(dataFile){
 
   
-  initBaselineAndInfo(dataFile);
+ 
 
   
   var csv = "/../data/counties/" + dataFile + "/" + dataFile + "_anomalyTable.csv";
 
   d3.csv(csv)
   .then( function(data){ 
-  
+
     parseDataAttributes(data);
     createDefaultLineChart(data);
     createDefaultStripesChart(data);
@@ -72,7 +67,6 @@ function loadData(){
         data.forEach( d => {
 
           var dropdown = document.getElementById("dataset");
-          
           var option =  document.createElement("option");
           if(d.Temp != ""){
             option.setAttribute("value", d.Temp);

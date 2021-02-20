@@ -56,8 +56,6 @@ function defaultDatasetTable(dataFile) {
   
 
   var dataFile = document.getElementById("dataset").value;
-  
-  initBaselineAndInfo(dataFile);
 
   var csv_country =
     "/../data/counties/" + dataFile+ "/" + dataFile + "_anomalyTable.csv";
@@ -89,11 +87,9 @@ function defaultDatasetTable(dataFile) {
 
 function changeDataTable() {
   // prendere dati da mappa selezionata o dropdown menu
-  if (dataFile == "") dataFile = "Afghanistan";
 
   var dataFile = document.getElementById("dataset").value;
- 
-  initBaselineAndInfo(dataFile);
+
 
   var csv_country =
     "/../data/counties/" + dataFile + "/" + dataFile + "_anomalyTable.csv";

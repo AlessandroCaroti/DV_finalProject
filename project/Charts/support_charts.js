@@ -25,7 +25,6 @@ function loadAllData(){
         data.forEach( d => {
 
           var dropdown = document.getElementById("dataset");
-          
           var option =  document.createElement("option");
           if(d.Temp != ""){
             option.setAttribute("value", d.Temp);
@@ -42,6 +41,8 @@ function loadAllData(){
           }
           i++;
         });
+        initBaselineAndInfo(dataset);
+        
         defaultLineChartDataset(dataset);
         defaultDatasetTable(dataset);
         defaultDataHottestColdest(dataset);
@@ -52,6 +53,9 @@ function loadAllData(){
 
 
 function changeAllData(){
+  var dataFile = document.getElementById("dataset").value;
+  initBaselineAndInfo(dataFile);
+  
   changeDataHottestColdest();
   changeDataTabMenu();
   changeDataTable();
