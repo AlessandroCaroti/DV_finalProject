@@ -2,8 +2,8 @@
 //                    START GLOBAL VARIABLE                    //
 
 // MAP DIMANSION
-var w = 1000;
-const h = 500;
+var w_map = 1000;
+const h_map = 500;
 
 var projection;
 var map_container;
@@ -15,8 +15,7 @@ var default_transition = 500;
 
 var geoGenerator;
 
-var tmp_data;
-var country_list = []; //List of the name of the countries present in the map
+var country_list_map = []; //List of the name of the countries present in the map
 
 var selected_country = null;
 
@@ -34,7 +33,7 @@ countries_file = "../../data/15_countries_list.csv";
 function drawMap(world) {
   debug_log("DRAW-MAP");
 
-  svg = d3.select("#svg-map").attr("height", h);
+  svg = d3.select("#svg-map").attr("height", h_map);
   map_container = svg.select("#map").call(zoom);
 
   var bBox = document.getElementById("svg-map").getBBox();
@@ -42,7 +41,7 @@ function drawMap(world) {
   projection = d3
     .geoNaturalEarth1()
     .scale(140)
-    .translate([bBox.width / 2, h / 2]);
+    .translate([bBox.width / 2, h_map / 2]);
 
   geoGenerator = d3.geoPath().projection(projection);
 
@@ -56,7 +55,7 @@ function drawMap(world) {
     .append("path")
     .attr("class", "country")
     .attr("id", (d) => {
-      country_list.push(d.properties.name);
+      country_list_map.push(d.properties.name);
       return d.properties.name;
     })
     .attr("d", geoGenerator);
@@ -271,8 +270,8 @@ function zoom_in(country) {
     dy = bounds[1][1] - bounds[0][1],
     x = (bounds[0][0] + bounds[1][0]) / 2,
     y = (bounds[0][1] + bounds[1][1]) / 2,
-    scale = Math.max(1, Math.min(max_zoom, 0.9 / Math.max(dx / w, dy / h))),
-    translate = [w / 2 - scale * x, h / 2 - scale * y];
+    scale = Math.max(1, Math.min(max_zoom, 0.9 / Math.max(dx / w_map, dy / h_map))),
+    translate = [w_map / 2 - scale * x, h_map / 2 - scale * y];
 
   map_container
     .transition()
@@ -509,6 +508,7 @@ function load_map() {
 //                   DOVE INIZIA TUTTO                    //
 
 function init_page() {
+  console.log("ASDFGHJKL;MNBVCDERTYJMNBVCDRTY")
   // load map
   load_map();
 
