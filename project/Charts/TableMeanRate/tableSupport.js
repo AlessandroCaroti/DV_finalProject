@@ -15,6 +15,8 @@ var height_table =
 //Get data every 50 years_table with also the 2019 at the end
 function dataEvery50Years(data) {
   var annual_data = getAnnualData(data);
+
+
   var data_2 = [];
 
   years_table.forEach((year) => {
@@ -32,7 +34,6 @@ function dataEvery50Years(data) {
       });
     }
   });
-
   return data_2;
 }
 
@@ -40,17 +41,19 @@ function addRowData(data50, dataTable) {
   var row = {};
 
   regionName = data50[0].region;
+  
 
   row["Region"] = regionName;
 
   data50.forEach(
-    (d) =>
-      (row[String(d.Year)] = {
+    (d) =>{ 
+      row[String(d.Year)] = {
         temp: d.annual_value.toFixed(2),
         mean_rate: NaN,
         annual_unc: d.annual_unc.toFixed(2),
         starting_value: false,
-      })
+      }
+    }
   );
 
   dataTable.push(row);
@@ -62,9 +65,11 @@ function addRowData(data50, dataTable) {
 function table_data(data) {
   var data50 = dataEvery50Years(data);
 
+
   var dataTable = [];
   //GLOBAL DATA
   addRowData(data50, dataTable);
+
 
   dataTable = dataTable[0];
 
@@ -106,6 +111,7 @@ function table_data(data) {
   }
   //ad data to global variable: for the update
   DATA_TABLE.push(dataTable);
+
   dataTable = [dataTable];
   return dataTable;
 }
@@ -219,7 +225,7 @@ function addRowTable(data) {
 function updateRowsTable(data){
 
   table_data(data);
-  
+
   var tbody = d3.select(".tbody_table");
   var rows = tbody.selectAll("tr").data(DATA_TABLE);
 

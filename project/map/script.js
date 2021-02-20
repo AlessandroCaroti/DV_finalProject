@@ -407,7 +407,6 @@ d3.selection.prototype.moveToFront = function () {
 function init_DropDownMenu_slect2() {
   d3.csv(countries_file)
     .then(function (countries) {
-      console.log(countries)
       data = [];
 
       countries.forEach((d) => {
@@ -434,6 +433,8 @@ function init_DropDownMenu_slect2() {
           var data = e.params.data;
           console.log(data.text);
           changeCountry(data.text);
+          changeAllData(data.text, false);
+
         });
     })
     .catch(function (error) {
@@ -507,8 +508,9 @@ function load_map() {
 // ****************************************************** //
 //                   DOVE INIZIA TUTTO                    //
 
+
+/*
 function init_page() {
-  console.log("ASDFGHJKL;MNBVCDERTYJMNBVCDRTY")
   // load map
   load_map();
 
@@ -522,3 +524,4 @@ function init_page() {
 
   init_map_controls();
 }
+*/
