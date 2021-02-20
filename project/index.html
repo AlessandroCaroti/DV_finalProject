@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Berkley Earth Project</title>
     <link rel="stylesheet" href="style.css" />
     <!----------------------------------- D3 ------------------------------------------>
@@ -23,114 +22,181 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <!------------------------------- UTILITY SCRIPTS -------------------------------------->
-    <script src="../utils/RoundedRect.js"></script>
-    <script src="../utils/utils.js"></script>
+    <script src="/project/utils/RoundedRect.js"></script>
+    <script src="/project/utils/utils.js"></script>
 
     <!----------------------------------CHARTS FILES----------------------------------------->
 
     <!------------------------------ALL CHARTS SCRIPTS--------------------------------------->
 
-    <script type="application/javascript" src="/project/Charts/support_charts.js"></script>
-    <script type="application/javascript" src="/project/Charts/ChartsEvents.js"></script>
-    <script type="application/javascript" src="/project/Charts/UtilsCharts.js"></script>
+    <script
+      type="application/javascript"
+      src="/project/Charts/support_charts.js"
+    ></script>
+    <script
+      type="application/javascript"
+      src="/project/Charts/ChartsEvents.js"
+    ></script>
+    <script
+      type="application/javascript"
+      src="/project/Charts/UtilsCharts.js"
+    ></script>
 
     <!-----------------------------TAB MENU SCRIPTS-------------------------------------------->
-    <script type="application/javascript" src="/project/Charts/TabMenuChart/lineChartSupport.js"></script>
-    <script type="application/javascript" src="/project/Charts/TabMenuChart/plotTemperatures.js"></script>
-    <script type="application/javascript" src="/project/Charts/TabMenuChart/stripesChartSupport.js"></script>
+    <script
+      type="application/javascript"
+      src="/project/Charts/TabMenuChart/lineChartSupport.js"
+    ></script>
+    <script
+      type="application/javascript"
+      src="/project/Charts/TabMenuChart/plotTemperatures.js"
+    ></script>
+    <script
+      type="application/javascript"
+      src="/project/Charts/TabMenuChart/stripesChartSupport.js"
+    ></script>
 
     <!------------------------------- TABLE SCRIPTS-------------------------------------------->
-    <script type="application/javascript" src="/project/Charts/TableMeanRate/drawTable.js"></script>
-    <script type="application/javascript" src="/project/Charts/TableMeanRate/tableSupport.js"></script>
+    <script
+      type="application/javascript"
+      src="/project/Charts/TableMeanRate/drawTable.js"
+    ></script>
+    <script
+      type="application/javascript"
+      src="/project/Charts/TableMeanRate/tableSupport.js"
+    ></script>
 
     <!----------------------------SEASONAL LINECHART SCRIPTS------------------------------------------>
-    
-
 
     <!-----------------------------HOTTEST COLDEST LINECHART SCRIPTS------------------------------------------>
-    
+
     <!-- TODO: FA CONFLITTO DA CONTROLLARE-->
     <!--
     <script type="application/javascript" src="/project/Charts/HottestColdestLineChart/coldestHottestSupport.js"></script>
-    <script type="application/javascript" src="/project/Charts/HottestColdestLineChart/plotHottestColdest.js"></script>--> 
+    <script type="application/javascript" src="/project/Charts/HottestColdestLineChart/plotHottestColdest.js"></script>-->
     <!-----------------------------MAP SCRIPTS------------------------------------------>
-</head>
+  </head>
 
-
-
-<body>
-
-
+  <body>
     <!--TODO:TO REMOVE AT THE END, ONLY FOR TEST-->
     <span id="dropdown_tab">
-        <label>Dataset:</label>
-        <select name="Dataset" id="dataset" onchange="changeAllData()"> </select>
+      <label>Dataset:</label>
+      <select name="Dataset" id="dataset" onchange="changeAllData()"></select>
     </span>
     <!--TODO:------------------------------------->
 
-
-
-
     <!------------------------------START MAP------------------------------------------->
 
-    <div id="map-containter" class="container">
+    <div id="map-containter" class="content">
+      <div id="all_map" class="col_wrapper">
+        <div class="row_wrapper">
+          <div class="all-slider" id="svg-slider" class="row_wrapper">
+            <div class="col-sm"><div id="sliderYear"></div></div>
+          </div>
 
-        <h1> ----------------------------------MAP----------------------------------</h1>
+          <div id="menu_selectCountry">
+            <p class="label">
+              <label for="selectCountryMenu">
+                Country:
+                <select id="selectCountryMenu">
+                  <option></option>
+                </select>
+              </label>
+            </p>
+          </div>
+        </div>
 
+        <svg class="view-map" id="svg-map" width="100%">
+          <rect class="background" width="100%" height="100%"></rect>
+
+          <g id="map">
+            <path class="background_globe" d=""></path>
+            <g id="map_graticule"></g>
+          </g>
+
+          <g class="zoom-controls" transform="translate(10, 10)">
+            <g id="zoom-in" transform="translate(0, 0)">
+              <path class="btn" d=""></path>
+            </g>
+            <g id="zoom-reset" transform="translate(0, 31)">
+              <rect class="btn" width="5" height="5"></rect>
+            </g>
+            <g id="zoom-out" transform="translate(0, 62)">
+              <path class="btn" d=""></path>
+            </g>
+            <g id="animation" transform="translate(0,110)">
+              <path class="btn" d=""></path>
+            </g>
+          </g>
+
+          <g class="col-sm-2">
+            <path d=""></path>
+            <text id="sliderLabel" x="45%" y="27" pointer-events="none"></text>
+          </g>
+        </svg>
+
+        <svg width="100%" height="100%">
+          <g class="legend-anomaly" id="legend-anomaly">
+            <text id="label-legend">Anomaly Temperature (°C)</text>
+            <path d=""></path>
+            <g class="axis-anomaly"></g>
+          </g>
+        </svg>
+        <div class="tooltip-map">
+          <div class="tooltip-name"></div>
+          <div class="tooltip-anomaly"></div>
+        </div>
+      </div>
     </div>
 
     <!------------------------------END MAP------------------------------------------->
 
-
-
-
-
-
-<!------------------------------START TAB-MENU LINECHART------------------------------------------->
+    <!------------------------------START TAB-MENU LINECHART------------------------------------------->
 
     <div id="tab-menu-container" class="container">
+      <div class="tab">
+        <span id="dropdown_tab_years">
+          <label>Range-Years:</label>
+          <select name="Dataset" id="rage-year" onchange="changeDataTabMenu()">
+            <option value="five_years">Five-Years</option>
+            <option value="ten_years" selected="selected">Ten-Years</option>
+            <option value="twenty_years">Twenty-Years</option>
+            <option value="annual">Annual</option>
+          </select>
+        </span>
 
+        <button
+          class="tablinks active"
+          id="tab_line"
+          onclick="click_tab(event, 'linechart')"
+        >
+          Line Chart
+        </button>
+        <button
+          class="tablinks"
+          id="tab_stripe"
+          onclick="click_tab(event, 'stripechart')"
+        >
+          Climate Stripes
+        </button>
+      </div>
 
-        <div class="tab">
+      <div id="linechart" class="tabcontent">
+        <div class="tooltip-map" id="tooltip_line"></div>
+      </div>
 
-            <span id="dropdown_tab_years">
-                <label>Range-Years:</label>
-                <select name="Dataset" id="rage-year" onchange="changeDataTabMenu()">
-
-                    <option value="five_years"> Five-Years</option>
-                    <option value="ten_years" selected="selected"> Ten-Years</option>
-                    <option value="twenty_years"> Twenty-Years</option>
-                    <option value="annual"> Annual</option>
-
-                </select>
-            </span>
-
-            <button class="tablinks active" id="tab_line" onclick="click_tab(event, 'linechart')">Line Chart</button>
-            <button class="tablinks" id="tab_stripe" onclick="click_tab(event, 'stripechart')">Climate Stripes</button>
-
-        </div>
-
-        <div id="linechart" class="tabcontent">
-            <div class="tooltip-map" id="tooltip_line"> </div>
-        </div>
-
-        <div id="stripechart" class="tabcontent">
-            <div class="tooltip-map" id="tooltip_stripes"> </div>
-        </div>
-
+      <div id="stripechart" class="tabcontent">
+        <div class="tooltip-map" id="tooltip_stripes"></div>
+      </div>
     </div>
     <!------------------------------END TAB-MENU LINECHART------------------------------------------->
 
-
-
-
-
     <!------------------------------ START TABLE ------------------------------------------->
 
-    <div id="table-container" class="container">
+    <div id="table-container-mean-rate" class="container">
 
 
-        <div id="table-mean-rate">
+        <div id="table_container">
             <div class="tooltip-map" id="tooltip_table"> </div>
         </div>
 
@@ -138,42 +204,35 @@
 
     <!------------------------------ END TABLE ------------------------------------------->
 
-
-
-
-
     <!------------------------------START HOTTEST-COLDEST LINECHART------------------------------------------->
 
     <div id="hottest-coldest-container" class="container">
-    
-        <div id="hottest_coldest_container"> 
-            
-            <div id="container-h-c"></div>
-            <div class="tooltip-map" id="tooltip-hot-cold"> </div> 
-        
-        </div>
-    
+      <div id="hottest_coldest_container">
+        <div id="container-h-c"></div>
+        <div class="tooltip-map" id="tooltip-hot-cold"></div>
+      </div>
     </div>
 
     <!------------------------------START HOTTEST-COLDEST LINECHART------------------------------------------->
-
-
-
-
 
     <!------------------------------START SEASONAL LINECHART------------------------------------------->
 
     <div id="seasonal-container" class="container">
-
-        <h1> -----------------------SEASONAL LINECHART----------------------------------</h1>
+      <h1>
+        -----------------------SEASONAL
+        LINECHART----------------------------------
+      </h1>
     </div>
 
     <!------------------------------END SEASONAL LINECHART------------------------------------------->
 
-
+    
+    <script src="/project/map/slider.js?version=1"></script>
+    <script src="/project/map/map_btn.js?version=1"></script>
+    <script src="/project/map/script.js?version=1"></script>
+    <script src="/project/map/color_scale.js?version=1"></script>
     <script>
-        window.onload = loadAllData();
+      window.onload = loadAllData();
     </script>
-</body>
-
+  </body>
 </html>

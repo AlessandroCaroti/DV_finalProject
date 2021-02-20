@@ -56,6 +56,7 @@ function allDeafaultDataset(dataFile){
     parseDataAttributes(data);
     createDefaultLineChart(data);
     createDefaultStripesChart(data);
+    readDataTableFinal(data, dataFile, false)
     
   })
     .catch((error) =>{
