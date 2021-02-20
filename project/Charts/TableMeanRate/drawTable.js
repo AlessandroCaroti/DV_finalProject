@@ -23,7 +23,7 @@ function loadData_table() {
       i++;
     });
 
-    default_dataset(dataset);
+    defaultDatasetTable(dataset);
   });
 }
 
@@ -54,24 +54,41 @@ function readDataTable(generalization, data_country,  update = false) {
 
 
 
-function readDataTableFinal(data){
+function readDataTableFinal(data_country, dataFile, update=false){
 
-  
+      DATA_TABLE=[];
+     createEmptyTable(data_country);
 
+      d3.json("/../data/counties/" + dataFile + "/" + dataFile + "_info.json")
+        .then((info) => {
+          var generalization= info["Generalization"];
+          generalization.forEach((gen_name) => {
+            var csv_path =
+              "/../data/regions/" + gen_name + "/" + gen_name + "_anomalyTable.csv";
+            d3.csv(csv_path)
+              .then((data) => {
+                
+                parseDataAttributes(data, gen_name);
+                if(update){ updateRowsTable(data);}
+                else addRowTable(data);
+                
+              })
+              .catch((error) => {
+                console.log(error);
+                throw error;
+              });
 
-
+        })
+  })
 }
 
 
-function default_dataset(dataFile = "") {
-  if (dataFile == "") dataFile = "Afghanistan";
 
+function defaultDatasetTable(dataFile = "") {
+ 
   var dataFile = document.getElementById("dataset").value;
-  document.getElementById("table_country").innerHTML = dataFile;
-  var folder;
-  if (dataFile.charAt(dataFile.length - 1) == ".")
-    folder = dataFile.slice(0, -1);
-  else folder = dataFile;
+
+
 
   initBaselineAndInfo(dataFile);
 

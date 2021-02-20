@@ -11,6 +11,7 @@ var width_table = full_width - margin_table.left - margin_table.right;
 var height_table =
   (full_width * 9) / 16 - margin_table.top - margin_table.bottom;
 
+  
 //Get data every 50 years_table with also the 2019 at the end
 function dataEvery50Years(data) {
   var annual_data = getAnnualData(data);

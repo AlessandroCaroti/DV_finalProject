@@ -8,8 +8,6 @@ function changeDataTabMenu() {
     
     initBaselineAndInfo(dataFile);
     
- 
-
     var csv = "/../../data/counties/"+dataFile+"/"+dataFile+"_anomalyTable.csv";
  
     d3.csv(csv)
