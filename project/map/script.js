@@ -434,7 +434,7 @@ function init_DropDownMenu_slect2() {
           var data = e.params.data;
           console.log(data.text);
           changeCountry(data.text);
-          changeAllData(data.text);
+          changeAllData(data.text, false);
 
         });
     })

@@ -1,23 +1,24 @@
 
 
-function changeDataTabMenu(global=false) {
+function changeDataTabMenu() {
+
+  var dataFile = document.getElementById("selectCountryMenu").value;
+  var folder;
+  
+  if(dataFile == ""){
     
-    // prendere dati da mappa selezionata o dropdown menu
-    
-    var csv;
-    if(global){
-      csv ="/../../data/regions/Global Land/Global Land_anomalyTable.csv";
-      initBaselineAndInfo("Global Land");
-    }
-    else{
-      var dataFile = document.getElementById("selectCountryMenu");
-      csv = "/../../data/counties/"+dataFile+"/"+dataFile+"_anomalyTable.csv";
-      initBaselineAndInfo("Global Land");
-    }
+    dataFile="Global Land";
+    folder = "regions";
+  
+  }else folder = "counties";
+  
+
+  var csv = "/../data/"+folder+ "/" +"/"+dataFile+"/"+ dataFile + "_anomalyTable.csv";
+
     d3.csv(csv)
       .then( (data) =>{ 
-        
-        parseDataAttributes(data);
+
+        parseDataAttributes(data, dataFile);
          
         //Update the LineChart
         updateLineChart(data, ".graphics");
