@@ -16,10 +16,15 @@ var baseline;
 
 
 //Load the baseline of the corresponding country from the nameCountry_info.json file
-function initBaselineAndInfo(dataFile){
+function initBaselineAndInfo(dataFile, global=false){
   
+    var folder;
+
+    if( global ) folder="regions";
+    else
+        folder="counties";
    
-    d3.json("/../data/counties/"+dataFile+"/"+dataFile+"_info.json")
+    d3.json("/../data/"+folder+"/"+dataFile+"/"+dataFile+"_info.json")
       .then( (data =>{   baseline = +data["absolute_temp(C)"]; }))
   
 }
@@ -46,9 +51,10 @@ function make_y_gridlines(y, n_tick=8) {
 
 function allDeafaultDataset(dataFile){
   
-  initBaselineAndInfo(dataFile);
+  initBaselineAndInfo(dataFile, true);
   
-  var csv = "/../../data/counties/"+dataFile+"/"+dataFile+"_anomalyTable.csv";
+  //var csv = "/../../data/counties/"+dataFile+"/"+dataFile+"_anomalyTable.csv";
+  var csv = "/../../data/regions/"+dataFile+"/"+dataFile+"_anomalyTable.csv";
 
   d3.csv(csv)
   .then( function(data){ 
@@ -56,7 +62,7 @@ function allDeafaultDataset(dataFile){
     parseDataAttributes(data, dataFile);
     createDefaultLineChart(data);
     createDefaultStripesChart(data);
-    readDataTableFinal(data, dataFile, false);
+    readDataTableFinal(data, dataFile, false, true);
     createHottestColdestLineChart(data);
     
   })

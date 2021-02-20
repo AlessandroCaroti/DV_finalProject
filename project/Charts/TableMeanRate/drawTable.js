@@ -51,32 +51,35 @@ function readDataTable(generalization, data_country, update = false) {
 
 
 
-function readDataTableFinal(data_country, dataFile, update = false) {
+function readDataTableFinal(data_country, dataFile, update = false, global=false) {
   DATA_TABLE = [];
   
   if(!update)   createEmptyTable(data_country);
 
+  if(!global){
+    d3.json("/../data/counties/" + dataFile + "/" + dataFile + "_info.json").then(
+      (info) => {
+        var generalization = info["Generalization"];
+        generalization.forEach((gen_name) => {
+          var csv_path =
+            "/../data/regions/" + gen_name + "/" + gen_name + "_anomalyTable.csv";
+          d3.csv(csv_path)
+            .then((data) => {
+              parseDataAttributes(data, gen_name);
+              if (update) {
+                updateRowsTable(data);
+              } else addRowTable(data);
+            })
+            .catch((error) => {
+              console.log(error);
+              throw error;
+            });
+        });
+      }
+    );
 
-  d3.json("/../data/counties/" + dataFile + "/" + dataFile + "_info.json").then(
-    (info) => {
-      var generalization = info["Generalization"];
-      generalization.forEach((gen_name) => {
-        var csv_path =
-          "/../data/regions/" + gen_name + "/" + gen_name + "_anomalyTable.csv";
-        d3.csv(csv_path)
-          .then((data) => {
-            parseDataAttributes(data, gen_name);
-            if (update) {
-              updateRowsTable(data);
-            } else addRowTable(data);
-          })
-          .catch((error) => {
-            console.log(error);
-            throw error;
-          });
-      });
-    }
-  );
+  }
+ 
 }
 
 

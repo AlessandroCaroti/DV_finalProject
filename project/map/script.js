@@ -434,6 +434,7 @@ function init_DropDownMenu_slect2() {
           var data = e.params.data;
           console.log(data.text);
           changeCountry(data.text);
+
         });
     })
     .catch(function (error) {
@@ -507,8 +508,9 @@ function load_map() {
 // ****************************************************** //
 //                   DOVE INIZIA TUTTO                    //
 
+
+/*
 function init_page() {
-  console.log("ASDFGHJKL;MNBVCDERTYJMNBVCDRTY")
   // load map
   load_map();
 
@@ -522,3 +524,4 @@ function init_page() {
 
   init_map_controls();
 }
+*/
