@@ -23,7 +23,7 @@ function initBaselineAndInfo(dataFile, global=false){
     if( global ) folder="regions";
     else
         folder="counties";
-   
+    console.log(dataFile)
     d3.json("/../data/"+folder+"/"+dataFile+"/"+dataFile+"_info.json")
       .then( (data =>{   baseline = +data["absolute_temp(C)"]; }))
   
@@ -79,7 +79,7 @@ function changeAllData(dataFile=""){
   
   //dataFile = document.getElementById('dataset').value;
  
-  //initBaselineAndInfo(dataFile);
+  initBaselineAndInfo(dataFile);
 
   var csv = "/../../data/counties/"+dataFile+"/"+dataFile+"_anomalyTable.csv";
 
