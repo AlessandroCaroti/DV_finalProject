@@ -8,13 +8,9 @@ function changeDataTabMenu() {
     
     initBaselineAndInfo(dataFile);
     
-    var folder;
  
-    if( dataFile.charAt(dataFile.length  - 1) == '.' ) folder = dataFile.slice(0,-1);
-    else
-        folder = dataFile;
 
-    var csv = "/../../../remaining_data/data_new/"+folder+"/"+dataFile+"_anomalyTable.csv";
+    var csv = "/../../data/counties/"+dataFile+"/"+dataFile+"_anomalyTable.csv";
  
     d3.csv(csv)
       .then( (data) =>{ 

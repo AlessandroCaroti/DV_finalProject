@@ -7,9 +7,13 @@ function loadData_table() {
     data.forEach((d) => {
       var dropdown = document.getElementById("dataset");
       var option = document.createElement("option");
-      option.setAttribute("value", d.Country);
-      option.innerHTML = d.Country;
-      dropdown.append(option);
+      
+      if( d.Temp != ""){
+        option.setAttribute("value", d.Temp);
+        option.innerHTML = d.Temp;
+        dropdown.append(option);
+      }
+      
       if (option.value == "Italy") {
         dropdown.selectedIndex = i;
         dropdown.options[i].selected = true;
@@ -24,7 +28,7 @@ function loadData_table() {
 }
 
 
-function readData(generalization, data_country,  update = false) {
+function readDataTable(generalization, data_country,  update = false) {
   //reset data_table
   DATA_TABLE=[]
   
@@ -49,6 +53,16 @@ function readData(generalization, data_country,  update = false) {
 }
 
 
+
+function readDataTableFinal(data){
+
+  
+
+
+
+}
+
+
 function default_dataset(dataFile = "") {
   if (dataFile == "") dataFile = "Afghanistan";
 
@@ -69,12 +83,12 @@ function default_dataset(dataFile = "") {
       parseDataAttributes(data_country, dataFile);
       createEmptyTable(data_country)
 
-      d3.json("/../data/counties/" + folder + "/" + dataFile + "_info.json")
+      d3.json("/../data/counties/" + dataFile + "/" + dataFile + "_info.json")
         .then((info) => {
           var generalization_list = info["Generalization"];
           console.log(generalization_list);
 
-          readData(generalization_list, data_country, update = false);
+          readDataTable(generalization_list, data_country, update = false);
 
         })
         .catch((error) => {
@@ -113,7 +127,7 @@ function changeDataTable() {
         .then((info) => {
           
           var generalization_list = info["Generalization"];
-          readData(generalization_list, data_country, true);
+          readDataTable(generalization_list, data_country, true);
 
         })
         .catch((error) => {

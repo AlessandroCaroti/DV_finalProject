@@ -18,12 +18,8 @@ var baseline;
 //Load the baseline of the corresponding country from the nameCountry_info.json file
 function initBaselineAndInfo(dataFile){
   
-    var folder;
-    if( dataFile.charAt(dataFile.length  - 1) == '.' ) folder = dataFile.slice(0,-1);
-    else
-        folder = dataFile;
-    
-    d3.json("/../../remaining_data/data_new/"+folder+"/"+dataFile+"_info.json")
+   
+    d3.json("/../data/counties/"+dataFile+"/"+dataFile+"_info.json")
       .then( (data =>{   baseline = +data["absolute_temp(C)"]; }))
   
 }
@@ -80,7 +76,7 @@ function changeAllData(){
   d3.csv(csv)
   .then( function(data){ 
     
-      parseDataAttributes(data);
+    parseDataAttributes(data);
      //Update the LineChart
      updateLineChart(data, ".graphics");
      //Update StripesChart
@@ -166,7 +162,8 @@ function createGridLine(x, y, svg, nameChart, n_tickX=8, n_tickY=8){
 // parse the attribitues useful for the chart and add the baseline
 // to the annual_value and ten_years_value
 function parseDataAttributes(data, region="NaN"){
-    data.forEach(d => {
+    
+  data.forEach(d => {
         
       d.date = parseTime(d.Year+"-"+d.Month);
       d.annual_anomaly = parseFloat(d["Annual Anomaly"])
