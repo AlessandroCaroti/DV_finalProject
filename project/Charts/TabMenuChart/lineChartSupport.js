@@ -124,10 +124,10 @@ function createDefaultLineChart(data){
 
     var svg = d3.select("#linechart")
                 .append("svg")
-                .attr("class","graphics")
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
                 .append("g")
+                .attr("class","graphics")
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
                 
                 
@@ -230,7 +230,7 @@ function updateLineChart(data, grafic_class){
     updateAxis(".x_axis", ".y_axis", x, y);  
     
     //.graphics
-    var svg = d3.select(grafic_class+" g");
+    var svg = d3.select(grafic_class);
     
     //re-define the lines generator
     // .defined(...) => are not considered the NaN values

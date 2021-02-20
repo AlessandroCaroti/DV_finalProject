@@ -100,7 +100,7 @@ function createHottestColdestLineChart(data){
 
     var dataMonthly = getMonthlyData(data, hottest_temp, coldest_temp);
 
-    var svg = d3.select("#container-h-c")
+    var svg = d3.select("#hottest_coldest_container")
                 .append("svg")
                 .attr("class","graphics")
                 .attr("width", width + margin.left + margin.right)
@@ -172,7 +172,7 @@ function UpdateHottestColdestLineChart(data){
   var dataMonthly = getMonthlyData(data, hottest_temp, coldest_temp);
 
 
-  
+              
   var scales = getScalesHottestColdest(data);
   var x = scales[0] 
   var y =  scales[1]

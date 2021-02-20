@@ -7,8 +7,8 @@ function loadData_table() {
     data.forEach((d) => {
       var dropdown = document.getElementById("dataset");
       var option = document.createElement("option");
-      option.setAttribute("value", d.Temp);
-      option.innerHTML = d.Temp;
+      option.setAttribute("value", d.Country);
+      option.innerHTML = d.Country;
       dropdown.append(option);
       if (option.value == "Italy") {
         dropdown.selectedIndex = i;
@@ -19,7 +19,7 @@ function loadData_table() {
       i++;
     });
 
-    defaultDatasetTable(dataset);
+    default_dataset(dataset);
   });
 }
 
@@ -49,7 +49,7 @@ function readData(generalization, data_country,  update = false) {
 }
 
 
-function defaultDatasetTable(dataFile = "") {
+function default_dataset(dataFile = "") {
   if (dataFile == "") dataFile = "Afghanistan";
 
   var dataFile = document.getElementById("dataset").value;
