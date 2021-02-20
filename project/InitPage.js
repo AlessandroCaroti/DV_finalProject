@@ -12,7 +12,7 @@ function init_page() {
     init_DropDownMenu_slect2();
     init_map_controls();
 
-    allDeafaultDataset("Global Land")
+    allDeafaultDataset("Global Land");
   
 
 

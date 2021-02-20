@@ -5,11 +5,10 @@ function drawUncertainty(data, svg, x, y){
     
     var range_year =  document.getElementById('rage-year').value; 
 
-   
     var areaUncGenerator = d3.area()
                              .x(function(d) { return x(d.date) })
                              .y0(function(d) { return y(d[range_year+"_value"] + d[range_year+"_unc"]) })
-                             .y1(function(d) { return  y(d[range_year+"_value"] - d[range_year+"_unc"]) })
+                             .y1(function(d) {  return  y(d[range_year+"_value"] - d[range_year+"_unc"]) })
                              .defined( (d) => { return ( !isNaN(d[range_year+"_unc"] ) ) } );
 
     svg.append("g")
@@ -52,7 +51,6 @@ function drawUncertainty(data, svg, x, y){
 
 function getTimeScale(){
 
-    var monthList = ["1","2","3","4","5","6","7","8","9","10","11","12"];
     var timeScale = [];
     for(var Y = 1750; Y<=2020; Y++){
 
@@ -122,6 +120,7 @@ function getLineGenerators(x, y){
 
 function createDefaultLineChart(data){
 
+    
     var svg = d3.select("#linechart")
                 .append("svg")
                 .attr("width", width + margin.left + margin.right)

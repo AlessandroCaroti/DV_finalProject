@@ -407,7 +407,6 @@ d3.selection.prototype.moveToFront = function () {
 function init_DropDownMenu_slect2() {
   d3.csv(countries_file)
     .then(function (countries) {
-      console.log(countries)
       data = [];
 
       countries.forEach((d) => {

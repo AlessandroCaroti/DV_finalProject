@@ -51,21 +51,27 @@ function readDataTable(generalization, data_country, update = false) {
 
 
 
-function readDataTableFinal(data_country, dataFile, update = false, global=false) {
+function readDataTableFinal(data_country, dataFile, baseline, update = false, global=false) {
+ 
   DATA_TABLE = [];
-  
-  if(!update)   createEmptyTable(data_country);
 
+  
+  if(!update){createEmptyTable(data_country); table_data(data_country); }
+  
   if(!global){
+    
     d3.json("/../data/counties/" + dataFile + "/" + dataFile + "_info.json").then(
       (info) => {
         var generalization = info["Generalization"];
+
         generalization.forEach((gen_name) => {
           var csv_path =
             "/../data/regions/" + gen_name + "/" + gen_name + "_anomalyTable.csv";
-          d3.csv(csv_path)
+          
+            d3.csv(csv_path)
             .then((data) => {
-              parseDataAttributes(data, gen_name);
+              parseDataAttributes(data, baseline, gen_name);
+      
               if (update) {
                 updateRowsTable(data);
               } else addRowTable(data);
@@ -100,7 +106,6 @@ function defaultDatasetTable(dataFile = "") {
       d3.json("/../data/counties/" + dataFile + "/" + dataFile + "_info.json")
         .then((info) => {
           var generalization_list = info["Generalization"];
-          console.log(generalization_list);
 
           readDataTable(generalization_list, data_country, (update = false));
         })
