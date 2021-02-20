@@ -44,22 +44,12 @@ function loadDataSeasonal(){
 
 function defaultSeasonalChanges(dataFile=""){
 
-    if( dataFile == "") dataFile = "Afghanistan";
+    
 
-    
-    document.getElementById("hottest_coldest_title").innerHTML= dataFile;
+    initBaselineAndInfo(dataFile);
 
-    var folder;
-    
-    if( dataFile.charAt(dataFile.length  - 1) == '.' ) folder = dataFile.slice(0,-1);
-    else
-        folder = dataFile;
-    
-    
-        initBaselineAndInfo(dataFile);
-
-    var csv = "/../../remaining_data/data_new/"+folder+"/"+dataFile+"_anomalyTable.csv";
-    var csvBaseline = "/../../remaining_data/data_new/"+folder+"/"+dataFile+"_monthlyAbsoluteTemperature.csv";
+    var csv = "/../../data/counties/" + dataFile + "/" + dataFile + "_anomalyTable.csv";
+    var csvBaseline = "/../../data/counties/" + dataFile + "/" + dataFile+"_monthlyAbsoluteTemperature.csv";
 
     d3.csv(csv)
     .then( (data)=>{ 
@@ -69,7 +59,7 @@ function defaultSeasonalChanges(dataFile=""){
 
             parseDataAttributes(data);
             parseSeasonalBaseline(dataBaseline, dataFile);
-            createHottestColdestLineChart(data, dataBaseline)
+            createDeafaultSeasonalLinechart(data, dataBaseline)
           
           }).catch((error) =>{
             console.log(error);
@@ -112,7 +102,7 @@ function changeDataSeasonal(){
 
             parseDataAttributes(data);
             parseSeasonalBaseline(dataBaseline, dataFile);
-            UpdateHottestColdestLineChart(data, dataBaseline);
+            updateSeasonalLineChart(data, dataBaseline);
           
           }).catch((error) =>{
             console.log(error);

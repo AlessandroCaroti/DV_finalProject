@@ -461,12 +461,13 @@ table {
 
 /*---------------------------START SEASONAL STYLE--------------------------------*/
 
-#container-seasonal-changes {
-  border: solid lightgray 1px;
-  width: 900px;
+#seasonal_changes_graphic{
 
-  margin: auto;
+  margin-left: 20%;
+  margin-top: 10%;
 }
+
+
 
 .line-seasonal-baseline {
   fill: none;

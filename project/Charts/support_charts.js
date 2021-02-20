@@ -53,18 +53,41 @@ function allDeafaultDataset() {
     "/../../data/" + folder + "/" + dataFile + "/" + dataFile +"_anomalyTable.csv";
   var json =
     "/../../data/" + folder + "/" + dataFile + "/" + dataFile + "_info.json";
+  var csvBaseline = "/../../data/"+folder+"/" + dataFile + "/" + dataFile+"_monthlyAbsoluteTemperature.csv";
 
   d3.csv(csv)
     .then(function (data) {
       d3.json(json)
         .then((info) => {
-          var baseline = +info["absolute_temp(C)"];
+          
+          d3.csv(csvBaseline)
+            .then((dataBaseline)=>{
 
-          parseDataAttributes(data, baseline, dataFile);
-          createDefaultLineChart(data);
-          createDefaultStripesChart(data);
-          readDataTableFinal(data, dataFile, baseline, false, true);
-          createHottestColdestLineChart(data);
+
+              var baseline = +info["absolute_temp(C)"];
+
+              parseDataAttributes(data, baseline, dataFile);
+              createDefaultLineChart(data);
+              createDefaultStripesChart(data);
+              readDataTableFinal(data, dataFile, baseline, false, true);
+              createHottestColdestLineChart(data);
+
+              parseSeasonalBaseline(dataBaseline, dataFile);
+              createDeafaultSeasonalLinechart(data, dataBaseline);
+            
+
+
+            }) .catch((error) => {
+              console.log(error);
+              //alert("Unable To Load The Dataset!!");
+              throw error;
+            });
+          
+          
+          
+        
+        
+        
         })
         .catch((error) => {
           console.log(error);
@@ -80,27 +103,49 @@ function allDeafaultDataset() {
 
 function changeAllData(dataFile) {
 
-  var csv =
-    "/../../data/counties/" + dataFile + "/" + dataFile + "_anomalyTable.csv";
-  var json =
-    "/../../data/counties/" + "/" + dataFile + "/" + dataFile + "_info.json";
+  var csv = "/../../data/counties/" + dataFile + "/" + dataFile + "_anomalyTable.csv";
+  var json = "/../../data/counties/" + "/" + dataFile + "/" + dataFile + "_info.json";
+  var csvBaseline = "/../../data/counties/" + dataFile + "/" + dataFile+"_monthlyAbsoluteTemperature.csv";
 
   d3.csv(csv)
     .then((data) => {
       
       d3.json(json)
         .then((info) => {
-          var baseline = +info["absolute_temp(C)"];
           
-          parseDataAttributes(data, baseline, dataFile);
-          //Update the LineChart
-          updateLineChart(data, ".graphics");
-          //Update StripesChart
-          updateStripesChart(data);
-          //Update Table
-          readDataTableFinal(data, dataFile, baseline, true, false);
-          //Update Hottest Coldest Linechart
-          UpdateHottestColdestLineChart(data);
+          d3.csv(csvBaseline)
+            .then((dataBaseline)=>{
+
+              var baseline = +info["absolute_temp(C)"];
+          
+              parseDataAttributes(data, baseline, dataFile);
+              //Update the LineChart
+              updateLineChart(data, ".graphics");
+              //Update StripesChart
+              updateStripesChart(data);
+              //Update Table
+              readDataTableFinal(data, dataFile, baseline, true, false);
+              //Update Hottest Coldest Linechart
+              UpdateHottestColdestLineChart(data);
+              parseSeasonalBaseline(dataBaseline, dataFile);
+              updateSeasonalLineChart(data, dataBaseline);
+
+
+
+            }) .catch((error) => {
+              console.log(error);
+              //alert("Unable To Load The Dataset!!");
+              throw error;
+            });
+          
+          
+          
+          
+        
+        
+        
+        
+        
         })
         .catch((error) => {
           console.log(error);
