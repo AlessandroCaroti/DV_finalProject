@@ -13,7 +13,7 @@ function defaultDataHottestColdest(dataFile){
     initBaselineAndInfo(dataFile);
 
     var csv =  "/../../data/counties/"+dataFile+"/"+dataFile+"_anomalyTable.csv";
-    //Di default c'è dataset 1
+    
     d3.csv(csv)
     .then( function(data){ 
         
