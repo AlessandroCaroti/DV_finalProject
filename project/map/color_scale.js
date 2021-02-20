@@ -5,7 +5,7 @@
  var n_ticks = 11;
  var step_list = [];
  var step_color_list = [];
- var ranges = new Set();
+ var ranges_scale = new Set();
 
 // define the anomaly color space
 function set_colorScale(){
@@ -32,8 +32,8 @@ function set_colorScale(){
     
     step_color_list.forEach(element => {
 
-        ranges.add(colorScale.invertExtent(element)[0]);
-        ranges.add(colorScale.invertExtent(element)[1]);
+        ranges_scale.add(colorScale.invertExtent(element)[0]);
+        ranges_scale.add(colorScale.invertExtent(element)[1]);
     });
     
              
@@ -44,7 +44,7 @@ function set_colorScale(){
   function draw_legend(){
     
     // axis quantization
-    let ticks = Array.from(ranges);
+    let ticks = Array.from(ranges_scale);
 
     let step_bar_list = d3.range(0, width_legend +  width_legend/parseFloat(step_color_list.length), width_legend/parseFloat(step_color_list.length)).map(d => parseFloat(d.toFixed(2)) );
     
