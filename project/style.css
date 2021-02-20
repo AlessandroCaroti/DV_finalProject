@@ -1,3 +1,23 @@
+html,
+body {
+  height: 100%;
+}
+
+.select2-container {
+  width: 100% !important;
+  min-width: 200px;
+  max-width: 300px;
+  display: inline-block;
+}
+.select2-search--dropdown .select2-search__field {
+  width: 98%;
+}
+
+div#menu_selectCountry {
+  width: 100%;
+}
+
+/* DIABLE ALL SVG TEXT */
 svg text {
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -46,6 +66,7 @@ svg text::selection {
   align-content: center;
   left: 50%;
   right: 50%;
+  background: white;
 }
 
 .country {
@@ -76,6 +97,7 @@ svg text::selection {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+  width: 100%;
 }
 
 .row_wrapper {
@@ -87,7 +109,6 @@ svg text::selection {
 }
 
 span {
-  padding: 1em;
 }
 
 .handle:focus {
@@ -104,7 +125,8 @@ span {
 }
 
 .label {
-  font-size: 25px;
+  font-size: 22px;
+  padding-top: 10px;
 }
 
 .tick text {
@@ -116,14 +138,14 @@ span {
   padding: 0px;
 }
 
-input#selectCountryMenu {
-  /*position:absolute;*/
+/*
+
+select#selectCountryMenu {
+  
 
   top: 0px;
   left: 0px;
-  width: 200px;
   padding: 1px;
-  font-size: 12px;
   border: none;
   font-size: 100%;
   padding: 5px;
@@ -133,6 +155,8 @@ input#selectCountryMenu:focus {
   outline: none;
   font-size: 100%;
 }
+
+*/
 
 .tooltip-map {
   position: absolute;

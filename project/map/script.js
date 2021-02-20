@@ -16,7 +16,7 @@ var default_transition = 500;
 var geoGenerator;
 
 var tmp_data;
-var country_list = new Array(); //List of the name of the countries present in the map
+var country_list = []; //List of the name of the countries present in the map
 
 var selected_country = null;
 
@@ -24,7 +24,7 @@ var selected_country = null;
 map_file = "../../data/map/countries-10m_v34_6.json";
 tmp_file_prefix = "../../data/years/";
 tmp_file_suffix = "/Annual_mean.csv";
-countries_file = "../../data/15_countries_list.csv"
+countries_file = "../../data/15_countries_list.csv";
 
 //                    END GLOBAL VARIABLE                   //
 // ******************************************************** //
@@ -34,13 +34,15 @@ countries_file = "../../data/15_countries_list.csv"
 function drawMap(world) {
   debug_log("DRAW-MAP");
 
-  svg = d3.select("#svg-map").attr("width", "100%").attr("height", h);
-  map_container = d3.select("#map").call(zoom);
+  svg = d3.select("#svg-map").attr("height", h);
+  map_container = svg.select("#map").call(zoom);
+
+  var bBox = document.getElementById("svg-map").getBBox();
 
   projection = d3
     .geoNaturalEarth1()
-    .scale(120)
-    .translate([w / 2, h / 2]);
+    .scale(140)
+    .translate([bBox.width / 2, h / 2]);
 
   geoGenerator = d3.geoPath().projection(projection);
 
@@ -54,7 +56,7 @@ function drawMap(world) {
     .append("path")
     .attr("class", "country")
     .attr("id", (d) => {
-
+      country_list.push(d.properties.name);
       return d.properties.name;
     })
     .attr("d", geoGenerator);
@@ -108,19 +110,22 @@ function update_colors(temperatures, time_trasition) {
 
     // update tooltip
     let tooltip = d3.select(".tooltip-map");
-    if(tooltip.select(".tooltip-name").html() === d.Country){
-
-      tooltip.select(".tooltip-anomaly")
+    if (tooltip.select(".tooltip-name").html() === d.Country) {
+      tooltip
+        .select(".tooltip-anomaly")
         .datum(d["ANOMALY"])
         .html((d) => {
-          if (typeof d != "undefined" && d != null && d != "NaN" && !Number.isNaN(d)) {
+          if (
+            typeof d != "undefined" &&
+            d != null &&
+            d != "NaN" &&
+            !Number.isNaN(d)
+          ) {
             return parseFloat(d).toFixed(2) + " °C";
           }
           return "unknown";
         });
-
     }
-
   });
 }
 
@@ -166,7 +171,12 @@ function country_events() {
         .select(".tooltip-anomaly")
         .datum(anomaly)
         .html((d) => {
-          if (typeof d != "undefined" && d != null && d != "NaN" && !Number.isNaN(d)) {
+          if (
+            typeof d != "undefined" &&
+            d != null &&
+            d != "NaN" &&
+            !Number.isNaN(d)
+          ) {
             return parseFloat(d).toFixed(2) + " °C";
           }
           return "unknown";
@@ -179,9 +189,7 @@ function country_events() {
         .style("left", event.pageX + 13 + "px");
     });
 
-
-    
-  //CLICK EVENT:
+  //CLICK EVENT: on country
   map_container.selectAll(".country").on("click", function (event, b) {
     //deselect the previus country
     d3.select(".selected_country").style(
@@ -192,10 +200,14 @@ function country_events() {
 
     d3.select(this).classed("selected_country", true);
     d3.select(this).moveToFront();
-    d3.select(this).style("stroke-width", borderCountryScale(curr_zoomScale) * selected_stroke);
+    d3.select(this).style(
+      "stroke-width",
+      borderCountryScale(curr_zoomScale) * selected_stroke
+    );
 
-    // set the name visible in the drop-down menu
-    d3.select("#selectCountryMenu").attr("value", this.id);
+    // set the name visible in the drop-down menu TODO
+    $("#selectCountryMenu").val(String(this.id));
+    $("#selectCountryMenu").trigger("change");
 
     debug_log("CLICK ON " + this.id);
     country_selected(this.__data__);
@@ -234,20 +246,19 @@ var zoom = d3
     // change border width
     update_strokes(curr_zoomScale);
   })
-  .on("end", function(event){
+  .on("end", function (event) {
     // show tooltip if hovering a country
     let cur_country = map_container.select(".highlighted_country");
 
-    if(!cur_country.empty())
+    if (!cur_country.empty())
       d3.select(".tooltip-map").style("display", "block");
-
   });
 
 function reset_zoom() {
   map_container
     .transition()
     .duration(1000)
-    .call( function (selection) {
+    .call(function (selection) {
       zoom.transform(selection, d3.zoomIdentity.translate(0, 0).scale(1));
     });
 }
@@ -266,14 +277,13 @@ function zoom_in(country) {
   map_container
     .transition()
     .duration(1000)
-    .call( function (selection) {
+    .call(function (selection) {
       zoom.transform(
         selection,
         d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale)
       );
     });
 }
-
 
 //                      END ZOOM SECTION                    //
 // ******************************************************** //
@@ -332,7 +342,6 @@ function changeView() {
     local_zoom();
     zoom_in(selected_country);
   }
-
 }
 
 function init_zoomBtns() {
@@ -391,47 +400,52 @@ d3.selection.prototype.moveToFront = function () {
   });
 };
 
-//                END FUNCTION MAP OVERLAY                //
-// ****************************************************** //
+//                 END FUNCTION MAP OVERLAY                 //
+// ******************************************************** //
+// ******************************************************** //
+//                   START DROP_DOWN MENU                   //
 
-// LOAD COUNTRIES MENU
-function init_dropdown_menu() {
-
-
+function init_DropDownMenu_slect2() {
   d3.csv(countries_file)
-  .then(function (data) {
-    
-      var countries = d3
-                      .select("datalist#countryList")
-                      .selectAll("option")
-                      .data(data);
-      countries.exit().remove();
+    .then(function (countries) {
+      console.log(countries)
+      data = [];
 
-      countries
-          .enter()
-          .merge(countries)
-          .append("option")
-          .attr("value", (d) => d.Temp);
+      countries.forEach((d) => {
+        data.push(d.Map);
+      });
 
-  })
-  .catch(function (error) {
-    console.log(error);
-    throw error;
-  });
-  
+      $("#selectCountryMenu")
+        .select2({
+          placeholder: "Select an option",
+          data: data,
+          theme: "classic",
+          allowClear: true,
+        })
+        .on("select2:unselecting", function () {
+          $(this).data("unselecting", true);
+        })
+        .on("select2:opening", function (e) {
+          if ($(this).data("unselecting")) {
+            $(this).removeData("unselecting");
+            e.preventDefault();
+          }
+        })
+        .on("select2:select", function (e) {
+          var data = e.params.data;
+          console.log(data.text);
+          changeCountry(data.text);
+        });
+    })
+    .catch(function (error) {
+      console.log(error);
+      throw error;
+    });
 }
 
 // UPDATE COUNTRY
-function changeCountry() {
-  var listInput = document.getElementById("selectCountryMenu");
-
-  // get country name
-  var name = listInput.value;
-
+function changeCountry(name) {
   console.log("SELECTED COUNTRY: " + name);
-
-  //check is a country is selected
-  if (name.length == 0) return;
 
   // find path
   country = document.getElementById(name);
@@ -442,6 +456,8 @@ function changeCountry() {
   country.dispatchEvent(evObj);
 }
 
+//                    END DROP_DOWN MENU                    //
+// ******************************************************** //
 // ******************************************************** //
 //                   START FILES LOADING                    //
 
@@ -456,7 +472,6 @@ function load_tempYear(temp_file, time_transition) {
 
       //Associate to each county a color proportionate to it's anomaly
       update_colors(data, time_transition);
-
     })
     .catch(function (error) {
       console.log(error);
@@ -474,9 +489,13 @@ function load_map() {
       topology = topojson.simplify(topology, 0.05);
 
       drawMap(topology);
-      load_tempYear( tmp_file_prefix + "2020" + tmp_file_suffix, default_transition );
+      load_tempYear(
+        tmp_file_prefix + "2020" + tmp_file_suffix,
+        default_transition
+      );
 
-      init_dropdown_menu();
+      //init_dropdown_menu();
+      //init_DropDownMenu_slect2();
     })
     .catch((error) => {
       console.log(error);
@@ -499,7 +518,7 @@ function init_page() {
 
   // trovare modo automatico per trovare min e max
   init_slider(1743, 2020, 1);
+  init_DropDownMenu_slect2();
 
   init_map_controls();
-
 }
