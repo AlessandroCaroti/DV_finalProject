@@ -1,11 +1,11 @@
 var width_btn = 31;
 var height_btn = 31;
-var r_btn = 5;
+var r = 5;
 
 /* -------------------------------------------------------------------------------------- */
 /*                       ZOOM IN                                                          */
 var zoom_in = d3.select("#zoom-in");
-zoom_in.select("path").attr("d", topRoundedRect(0, 0, width_btn, height_btn, r_btn));
+zoom_in.select("path").attr("d", topRoundedRect(0, 0, width_btn, height_btn, r));
 zoom_in
   .append("line")
   .attr("x1", width_btn / 2 - 7)
@@ -29,7 +29,7 @@ zoom_in
 /* -------------------------------------------------------------------------------------- */
 /*                       ZOOM OUT                                                         */
 var zoom_out = d3.select("#zoom-out");
-zoom_out.select("path").attr("d", bottomRoundedRect(0, 0, width_btn, height_btn, r_btn));
+zoom_out.select("path").attr("d", bottomRoundedRect(0, 0, width_btn, height_btn, r));
 zoom_out
   .append("line")
   .attr("x1", width_btn / 2 - 7)
