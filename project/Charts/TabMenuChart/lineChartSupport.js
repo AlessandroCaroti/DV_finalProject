@@ -5,6 +5,7 @@ function drawUncertainty(data, svg, x, y){
     
     var range_year =  document.getElementById('rage-year').value; 
 
+   
     var areaUncGenerator = d3.area()
                              .x(function(d) { return x(d.date) })
                              .y0(function(d) { return y(d[range_year+"_value"] + d[range_year+"_unc"]) })
@@ -87,7 +88,7 @@ function getScales(data){
     var range_year =  document.getElementById('rage-year').value; 
               // Add Y axis
     var y = d3.scaleLinear()
-             .domain([d3.min(data, function(d) {return d.annual_value - d[range_year+"_unc"] - 0.5; }), 
+             .domain([d3.min(data, function(d) { return d.annual_value - d[range_year+"_unc"] - 0.5; }), 
                           d3.max(data, function(d) { return d.annual_value + d[range_year+"_unc"] + 0.5; })])
              .range([ height, 0 ]);
     
@@ -99,7 +100,7 @@ function getLineGenerators(x, y){
     
     var valueline_annual = d3.line()
                             .x(function(d) {  return x(d.date); })
-                            .y(function(d) {console.log(d ); return y(d.annual_value); })
+                            .y(function(d) { return y(d.annual_value); })
                             .defined( (d) => { return ( !isNaN(d.annual_value) ) } );        
     
 
@@ -107,7 +108,7 @@ function getLineGenerators(x, y){
   
     var valueline_ten_years = d3.line()
                                 .x(function(d) { return x(d.date); })
-                                .y(function(d) { console.log(d ); return y(d[range_year+"_value"] ); })
+                                .y(function(d) { return y(d[range_year+"_value"] ); })
                                 .defined( (d) => { return ( !isNaN(d[range_year+"_value"] ) ) } );
     
     var valueline_baseline = d3.line()
@@ -123,10 +124,10 @@ function createDefaultLineChart(data){
 
     var svg = d3.select("#linechart")
                 .append("svg")
+                .attr("class","graphics")
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
                 .append("g")
-                .attr("class","graphics")
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
                 
                 
@@ -150,6 +151,8 @@ function createDefaultLineChart(data){
     var valueline_annual = lineGenerators[0];
     var valueline_ten_years = lineGenerators[1];
     var valueline_baseline = lineGenerators[2];
+
+    
     drawUncertainty(data, svg, x, y);
     
 

@@ -15,12 +15,32 @@ var baseline;
 
 
 
+
+function allDeafaultCharts(dataFile){
+
+  var csv =  "/../data/counties/" + dataFile+ "/" + dataFile + "_anomalyTable.csv";
+  initBaselineAndInfo(dataFile);
+  
+  d3.csv(csv)
+    .then( function(data){
+
+      parseDataAttributes(data);
+      createDefaultLineChart(data);
+      createDefaultStripesChart(data);
+
+    
+    })
+
+
+}
+
+
+
 function loadAllData(){
 
   var dataset = "";
   d3.csv(countries)
     .then((data)=>{
-
         var i = 0;
         data.forEach( d => {
 
@@ -41,11 +61,11 @@ function loadAllData(){
           }
           i++;
         });
+
         initBaselineAndInfo(dataset);
-        
-        defaultLineChartDataset(dataset);
-        defaultDatasetTable(dataset);
-        defaultDataHottestColdest(dataset);
+        //defaultLineChartDataset(dataset);
+        allDeafaultCharts(dataset)
+       
   })
 
 }
@@ -54,8 +74,33 @@ function loadAllData(){
 
 function changeAllData(){
   var dataFile = document.getElementById("dataset").value;
-  initBaselineAndInfo(dataFile);
   
+
+  var csv_country =
+    "/../data/counties/" + dataFile + "/" + dataFile + "_anomalyTable.csv";
+
+  d3.csv(csv_country)
+    .then((data_country) => {
+ 
+      parseDataAttributes(data_country, dataFile);
+      d3.json("/../data/counties/" + dataFile + "/" + dataFile + "_info.json")
+        .then((info) => {
+          
+          var generalization_list = info["Generalization"];
+          readData(generalization_list, data_country, true);
+
+        })
+        .catch((error) => {
+          console.log(error);
+          throw error;
+        });
+    })
+    .catch((error) => {
+      console.log(error);
+
+      throw error;
+    });
+
   changeDataHottestColdest();
   changeDataTabMenu();
   changeDataTable();
@@ -65,9 +110,10 @@ function changeAllData(){
 
 //Load the baseline of the corresponding country from the nameCountry_info.json file
 function initBaselineAndInfo(dataFile){
-  
-    
-    d3.json("/../data/counties/" + dataFile + "/" + dataFile + "_info.json")
+
+    var json = "/../data/counties/" + dataFile + "/" + dataFile + "_info.json";
+    console.log(json);
+    d3.json(json)
       .then( (data =>{   baseline = +data["absolute_temp(C)"]; }))
   
 }

@@ -3,16 +3,13 @@ var continent, portion_continent, hemisphere;
 function loadData_table() {
   //ciaovar dataset = "";
   d3.csv(countries).then((data) => {
-
     var i = 0;
     data.forEach((d) => {
       var dropdown = document.getElementById("dataset");
       var option = document.createElement("option");
-      if(d.Temp != ""){
-        option.setAttribute("value", d.Temp);
-        option.innerHTML = d.Temp;
-        dropdown.append(option)  
-      }
+      option.setAttribute("value", d.Temp);
+      option.innerHTML = d.Temp;
+      dropdown.append(option);
       if (option.value == "Italy") {
         dropdown.selectedIndex = i;
         dropdown.options[i].selected = true;
@@ -52,20 +49,27 @@ function readData(generalization, data_country,  update = false) {
 }
 
 
-function defaultDatasetTable(dataFile) {
-  
+function defaultDatasetTable(dataFile = "") {
+  if (dataFile == "") dataFile = "Afghanistan";
 
   var dataFile = document.getElementById("dataset").value;
+  document.getElementById("table_country").innerHTML = dataFile;
+  var folder;
+  if (dataFile.charAt(dataFile.length - 1) == ".")
+    folder = dataFile.slice(0, -1);
+  else folder = dataFile;
+
+  initBaselineAndInfo(dataFile);
 
   var csv_country =
-    "/../data/counties/" + dataFile+ "/" + dataFile + "_anomalyTable.csv";
+    "/../data/counties/" + dataFile + "/" + dataFile + "_anomalyTable.csv";
 
   d3.csv(csv_country)
     .then((data_country) => {
       parseDataAttributes(data_country, dataFile);
       createEmptyTable(data_country)
 
-      d3.json("/../data/counties/" + dataFile + "/" + dataFile + "_info.json")
+      d3.json("/../data/counties/" + folder + "/" + dataFile + "_info.json")
         .then((info) => {
           var generalization_list = info["Generalization"];
           console.log(generalization_list);
@@ -87,18 +91,25 @@ function defaultDatasetTable(dataFile) {
 
 function changeDataTable() {
   // prendere dati da mappa selezionata o dropdown menu
+  if (dataFile == "") dataFile = "Afghanistan";
 
   var dataFile = document.getElementById("dataset").value;
+  document.getElementById("table_country").innerHTML = dataFile;
+  var folder;
+  if (dataFile.charAt(dataFile.length - 1) == ".")
+    folder = dataFile.slice(0, -1);
+  else folder = dataFile;
 
+  initBaselineAndInfo(dataFile);
 
   var csv_country =
-    "/../data/counties/" + dataFile + "/" + dataFile + "_anomalyTable.csv";
+    "/../data/counties/" + folder + "/" + dataFile + "_anomalyTable.csv";
 
   d3.csv(csv_country)
     .then((data_country) => {
  
       parseDataAttributes(data_country, dataFile);
-      d3.json("/../data/counties/" + dataFile + "/" + dataFile + "_info.json")
+      d3.json("/../data/counties/" + folder + "/" + dataFile + "_info.json")
         .then((info) => {
           
           var generalization_list = info["Generalization"];
