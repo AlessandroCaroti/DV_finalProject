@@ -14,3 +14,6 @@ TOFIX:
 
 IDEE:
 -aggiungere schermata caricamento
+
+DA DISCUTERE:
+-avvicinare gli anni dello slider per renderlo più compatta
