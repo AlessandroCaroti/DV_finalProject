@@ -131,7 +131,7 @@ function styleLastYearsLines(d, dataLastYears){
 
 
 
-  function createHottestColdestLineChart(data, dataSeasonalBaseline){
+  function createDeafaultSeasonalLinechart(data, dataSeasonalBaseline){
 
       var seasonalData = getDataSeasonal(data, dataSeasonalBaseline);
       
@@ -230,7 +230,7 @@ function styleLastYearsLines(d, dataLastYears){
   }
   
   
-  function UpdateHottestColdestLineChart(data, dataSeasonalBaseline){
+  function updateSeasonalLineChart(data, dataSeasonalBaseline){
   
     var seasonalData = getDataSeasonal(data, dataSeasonalBaseline);
     var lastYearsData = lastYearSeasonalData(data,dataSeasonalBaseline);

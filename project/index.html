@@ -69,6 +69,9 @@
 
     <!----------------------------SEASONAL LINECHART SCRIPTS------------------------------------------>
 
+    <script type="application/javascript" src="/project/Charts/SeasonalChanges/plotSeasonalChanges.js"></script>
+    <script type="application/javascript" src="/project/Charts/SeasonalChanges/seasonalChangesSupport.js"></script>
+
     <!-----------------------------HOTTEST COLDEST LINECHART SCRIPTS------------------------------------------>
 
     <script type="application/javascript" src="/project/Charts/HottestColdestLineChart/coldestHottestSupport.js"></script>
@@ -76,13 +79,6 @@
     <!-----------------------------MAP SCRIPTS------------------------------------------>
   </head>
 
-  <body>
-    <!--TODO:TO REMOVE AT THE END, ONLY FOR TEST-->
-    <span id="dropdown_tab">
-      <label>Dataset:</label>
-      <select name="Dataset" id="dataset" onchange="changeAllData()"></select>
-    </span>
-    <!--TODO:------------------------------------->
 
     <!------------------------------START MAP------------------------------------------->
 
@@ -217,10 +213,9 @@
     <!------------------------------START SEASONAL LINECHART------------------------------------------->
 
     <div id="seasonal-container" class="container">
-      <h1>
-        -----------------------SEASONAL
-        LINECHART----------------------------------
-      </h1>
+
+        <div id="seasonal_changes_graphic"> <div class="tooltip-map" id="tooltip-seasonal-changes"> </div> </div>
+      
     </div>
 
     <!------------------------------END SEASONAL LINECHART------------------------------------------->
