@@ -7,13 +7,13 @@ function loadData_table() {
     data.forEach((d) => {
       var dropdown = document.getElementById("dataset");
       var option = document.createElement("option");
-      
-      if( d.Temp != ""){
+
+      if (d.Temp != "") {
         option.setAttribute("value", d.Temp);
         option.innerHTML = d.Temp;
         dropdown.append(option);
       }
-      
+
       if (option.value == "Italy") {
         dropdown.selectedIndex = i;
         dropdown.options[i].selected = true;
@@ -27,68 +27,62 @@ function loadData_table() {
   });
 }
 
-
-function readDataTable(generalization, data_country,  update = false) {
+function readDataTable(generalization, data_country, update = false) {
   //reset data_table
-  DATA_TABLE=[]
-  
-  table_data(data_country)
+  DATA_TABLE = [];
+
+  table_data(data_country);
   generalization.forEach((gen_name) => {
     var csv_path =
       "/../data/regions/" + gen_name + "/" + gen_name + "_anomalyTable.csv";
     d3.csv(csv_path)
       .then((data) => {
         parseDataAttributes(data, gen_name);
-        if(update){ updateRowsTable(data);}
-        else addRowTable(data);
-        
+        if (update) {
+          updateRowsTable(data);
+        } else addRowTable(data);
       })
       .catch((error) => {
         console.log(error);
         throw error;
       });
-  
   });
-
 }
 
 
 
-function readDataTableFinal(data_country, dataFile, update=false){
+function readDataTableFinal(data_country, dataFile, update = false) {
+  DATA_TABLE = [];
+  
+  if(!update)   createEmptyTable(data_country);
 
-      DATA_TABLE=[];
-     createEmptyTable(data_country);
 
-      d3.json("/../data/counties/" + dataFile + "/" + dataFile + "_info.json")
-        .then((info) => {
-          var generalization= info["Generalization"];
-          generalization.forEach((gen_name) => {
-            var csv_path =
-              "/../data/regions/" + gen_name + "/" + gen_name + "_anomalyTable.csv";
-            d3.csv(csv_path)
-              .then((data) => {
-                
-                parseDataAttributes(data, gen_name);
-                if(update){ updateRowsTable(data);}
-                else addRowTable(data);
-                
-              })
-              .catch((error) => {
-                console.log(error);
-                throw error;
-              });
-
-        })
-  })
+  d3.json("/../data/counties/" + dataFile + "/" + dataFile + "_info.json").then(
+    (info) => {
+      var generalization = info["Generalization"];
+      generalization.forEach((gen_name) => {
+        var csv_path =
+          "/../data/regions/" + gen_name + "/" + gen_name + "_anomalyTable.csv";
+        d3.csv(csv_path)
+          .then((data) => {
+            parseDataAttributes(data, gen_name);
+            if (update) {
+              updateRowsTable(data);
+            } else addRowTable(data);
+          })
+          .catch((error) => {
+            console.log(error);
+            throw error;
+          });
+      });
+    }
+  );
 }
 
 
 
 function defaultDatasetTable(dataFile = "") {
- 
   var dataFile = document.getElementById("dataset").value;
-
-
 
   initBaselineAndInfo(dataFile);
 
@@ -98,15 +92,14 @@ function defaultDatasetTable(dataFile = "") {
   d3.csv(csv_country)
     .then((data_country) => {
       parseDataAttributes(data_country, dataFile);
-      createEmptyTable(data_country)
+      createEmptyTable(data_country);
 
       d3.json("/../data/counties/" + dataFile + "/" + dataFile + "_info.json")
         .then((info) => {
           var generalization_list = info["Generalization"];
           console.log(generalization_list);
 
-          readDataTable(generalization_list, data_country, update = false);
-
+          readDataTable(generalization_list, data_country, (update = false));
         })
         .catch((error) => {
           console.log(error);
@@ -138,14 +131,11 @@ function changeDataTable() {
 
   d3.csv(csv_country)
     .then((data_country) => {
- 
       parseDataAttributes(data_country, dataFile);
       d3.json("/../data/counties/" + folder + "/" + dataFile + "_info.json")
         .then((info) => {
-          
           var generalization_list = info["Generalization"];
           readDataTable(generalization_list, data_country, true);
-
         })
         .catch((error) => {
           console.log(error);

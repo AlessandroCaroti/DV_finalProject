@@ -53,10 +53,10 @@ function allDeafaultDataset(dataFile){
   d3.csv(csv)
   .then( function(data){ 
     
-    parseDataAttributes(data);
+    parseDataAttributes(data, dataFile);
     createDefaultLineChart(data);
     createDefaultStripesChart(data);
-    readDataTableFinal(data, dataFile, false)
+    readDataTableFinal(data, dataFile, false);
     
   })
     .catch((error) =>{
@@ -77,11 +77,12 @@ function changeAllData(){
   d3.csv(csv)
   .then( function(data){ 
     
-    parseDataAttributes(data);
+    parseDataAttributes(data, dataFile);
      //Update the LineChart
      updateLineChart(data, ".graphics");
      //Update StripesChart
-     updateStripesChart(data)
+     updateStripesChart(data);
+     readDataTableFinal(data, dataFile, true);
     
   })
     .catch((error) =>{
