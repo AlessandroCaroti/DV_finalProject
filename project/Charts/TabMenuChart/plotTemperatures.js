@@ -14,8 +14,6 @@ function changeDataRangeYears() {
   
 
   var csv = "/../data/"+folder+ "/" +"/"+dataFile+"/"+ dataFile + "_anomalyTable.csv";
-
-
   var json = "/../../data/"+folder+"/"  + dataFile + "/" + dataFile + "_info.json";
 
   d3.csv(csv)
