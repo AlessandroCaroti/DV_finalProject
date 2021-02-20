@@ -9,6 +9,15 @@
     <script src="https://unpkg.com/topojson@3"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.5.0/d3.min.js"></script>
     <script src="https://unpkg.com/d3-simple-slider"></script>
+    <!-- Select-2 script -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <!-- our script -->
     <script src="../utils/RoundedRect.js"></script>
     <script src="../utils/utils.js"></script>
@@ -17,28 +26,24 @@
   <body>
     <div class="content">
       <div id="all_map" class="col_wrapper">
-        <div class="row_wrapper" width="1200" height="100">
-          <span>
-            <div class="all-slider" id="svg-slider" class="row_wrapper">
-              <div class="col-sm"><div id="sliderYear"></div></div>
-            </div>
-          </span>
+        <div class="row_wrapper">
+          <div class="all-slider" id="svg-slider" class="row_wrapper">
+            <div class="col-sm"><div id="sliderYear"></div></div>
+          </div>
 
-          <span>
-            <div class="row_wrapper" id="dropDownMenu">
-              <p class="label" font-size="50px">Country:</p>
-              <input
-                list="countryList"
-                id="selectCountryMenu"
-                onchange="changeCountry()"
-                placeholder="select a country"
-              />
-              <datalist id="countryList"></datalist>
-            </div>
-          </span>
+          <div id="menu_selectCountry">
+            <p class="label">
+              <label for="selectCountryMenu">
+                Country:
+                <select id="selectCountryMenu">
+                  <option></option>
+                </select>
+              </label>
+            </p>
+          </div>
         </div>
 
-        <svg class="view-map" id="svg-map">
+        <svg class="view-map" id="svg-map" width="100%">
           <rect class="background" width="100%" height="100%"></rect>
 
           <g id="map">
@@ -57,7 +62,7 @@
               <path class="btn" d=""></path>
             </g>
             <g id="animation" transform="translate(0,110)">
-              <path class="btn" d="" ></path>
+              <path class="btn" d=""></path>
             </g>
           </g>
 
@@ -65,23 +70,18 @@
             <path d=""></path>
             <text id="sliderLabel" x="45%" y="27" pointer-events="none"></text>
           </g>
-          
-          
         </svg>
 
         <svg width="100%" height="100%">
-        
-        <g class="legend-anomaly" id="legend-anomaly">
-          <text id="label-legend" >Anomaly Temperature (°C)</text>
-          <path d=""></path>
-          <g class="axis-anomaly"></g>
-          
-        </g>
+          <g class="legend-anomaly" id="legend-anomaly">
+            <text id="label-legend">Anomaly Temperature (°C)</text>
+            <path d=""></path>
+            <g class="axis-anomaly"></g>
+          </g>
         </svg>
         <div class="tooltip-map">
           <div class="tooltip-name"></div>
           <div class="tooltip-anomaly"></div>
-          
         </div>
       </div>
     </div>
