@@ -75,10 +75,12 @@ function allDeafaultDataset(dataFile){
 
 
 
-function changeAllData(){
-  var dataFile = document.getElementById('dataset').value;
-  initBaselineAndInfo(dataFile);
-  console.log
+function changeAllData(dataFile=""){
+  
+  //dataFile = document.getElementById('dataset').value;
+ 
+  //initBaselineAndInfo(dataFile);
+
   var csv = "/../../data/counties/"+dataFile+"/"+dataFile+"_anomalyTable.csv";
 
   d3.csv(csv)
