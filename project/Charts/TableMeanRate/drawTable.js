@@ -56,10 +56,10 @@ function readDataTableFinal(data_country, dataFile, baseline, update = false, gl
   DATA_TABLE = [];
 
   
-  if(!update){createEmptyTable(data_country); table_data(data_country); }
+  if(!update){createEmptyTable(data_country); }
   
   if(!global){
-    
+    table_data(data_country);
     d3.json("/../data/counties/" + dataFile + "/" + dataFile + "_info.json").then(
       (info) => {
         var generalization = info["Generalization"];
