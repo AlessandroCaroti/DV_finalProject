@@ -57,6 +57,7 @@ function allDeafaultDataset(dataFile){
     createDefaultLineChart(data);
     createDefaultStripesChart(data);
     readDataTableFinal(data, dataFile, false);
+    createHottestColdestLineChart(data);
     
   })
     .catch((error) =>{
@@ -82,7 +83,10 @@ function changeAllData(){
      updateLineChart(data, ".graphics");
      //Update StripesChart
      updateStripesChart(data);
+     //Update Table
      readDataTableFinal(data, dataFile, true);
+     //Update Hottest Coldest Linechart
+     UpdateHottestColdestLineChart(data);
     
   })
     .catch((error) =>{

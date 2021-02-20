@@ -1,4 +1,4 @@
-function getLineGenerators(x, y){
+function getLineGeneratorsHottestColdest(x, y){
     
     
     var valueline_annual = d3.line()
@@ -100,7 +100,7 @@ function createHottestColdestLineChart(data){
 
     var dataMonthly = getMonthlyData(data, hottest_temp, coldest_temp);
 
-    var svg = d3.select("#hottest_coldest_container")
+    var svg = d3.select("#container-h-c")
                 .append("svg")
                 .attr("class","graphics")
                 .attr("width", width + margin.left + margin.right)
@@ -115,7 +115,7 @@ function createHottestColdestLineChart(data){
 
    
     
-    linegenerator= getLineGenerators(x,y);
+    linegenerator= getLineGeneratorsHottestColdest(x,y);
     
     var valueline_annual = linegenerator[0];
     var zero_line = linegenerator[1];
@@ -144,7 +144,7 @@ function createHottestColdestLineChart(data){
         .append("path")
         .attr("d", zero_line)
              
-    createHotColdLegend("container-h-c", hottest_temp, coldest_temp);
+    createHotColdLegend("hottest_coldest_chart", hottest_temp, coldest_temp);
 
     svg.append("g")
     .attr("transform", "translate(0," + height + ")")
@@ -184,8 +184,8 @@ function UpdateHottestColdestLineChart(data){
     .call(d3.axisLeft(y));  
 
 
-  var valueline_annual = getLineGenerators(x,y)[0];
-  var zero_line = getLineGenerators(x,y)[1];
+  var valueline_annual = getLineGeneratorsHottestColdest(x,y)[0];
+  var zero_line = getLineGeneratorsHottestColdest(x,y)[1];
 
   var line = d3.select(".line_chart_hottest_coldest").selectAll("path").data(dataMonthly);
 
