@@ -1,6 +1,6 @@
 
 
-function changeDataTabMenu() {
+function changeDataRangeYears() {
 
   var dataFile = document.getElementById("selectCountryMenu").value;
   var folder;
@@ -15,22 +15,35 @@ function changeDataTabMenu() {
 
   var csv = "/../data/"+folder+ "/" +"/"+dataFile+"/"+ dataFile + "_anomalyTable.csv";
 
-    d3.csv(csv)
-      .then( (data) =>{ 
 
-        parseDataAttributes(data, dataFile);
-         
-        //Update the LineChart
-        updateLineChart(data, ".graphics");
-        //Update StripesChart
-        updateStripesChart(data)
-           
-                     
-      })
-      .catch((error) =>{
-        console.log(error);
-        throw(error);
-    })  
+  var json = "/../../data/"+folder+"/"  + dataFile + "/" + dataFile + "_info.json";
+
+  d3.csv(csv)
+    .then((data) => {
+      
+      d3.json(json)
+        .then((info) => {
+          var baseline = +info["absolute_temp(C)"];
+          
+          parseDataAttributes(data, baseline, dataFile);
+          //Update the LineChart
+          updateLineChart(data, ".graphics");
+          //Update StripesChart
+          updateStripesChart(data);
+
+        })
+        .catch((error) => {
+          console.log(error);
+          //alert("Unable To Load The Dataset!!");
+          throw error;
+        });
+    })
+    .catch((error) => {
+      console.log(error);
+      //alert("Unable To Load The Dataset!!");
+      throw error;
+    });
+
 }
 
 
