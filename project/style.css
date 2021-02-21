@@ -119,8 +119,12 @@ span {
   fill: #ececec;
 }
 
-.parameter-value text {
+.hover {
   font-size: 30px;
+}
+
+.not-hover  {
+  font-size: 0px;
 }
 
 .col-sm-2 {
