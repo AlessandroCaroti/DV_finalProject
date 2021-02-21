@@ -92,10 +92,10 @@ var globe_img = zoom_reset_btn.append("svg:image")
                       .attr("y", s);
 
 function no_zoom() {
+  globe_img.attr("visibility", "hidden");
+
   inner_circle.attr("visibility", "visible");
   outer_circle.attr("visibility", "visible");
-
-  globe_img.attr("visibility", "hidden");
 }
 
 function set_globe_icon() {
