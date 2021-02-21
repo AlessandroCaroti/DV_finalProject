@@ -1,5 +1,5 @@
 
-
+/*
 function defaultDataHottestColdest(dataFile){
 
 
@@ -27,7 +27,6 @@ function defaultDataHottestColdest(dataFile){
     })
 
 }
-
 
 
 
@@ -90,3 +89,5 @@ function loadDataHotCold(){
             
       })
   }
+
+  */
