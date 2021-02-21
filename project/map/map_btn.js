@@ -75,9 +75,6 @@ function local_zoom() {
 
 /* -------------------------------------------------------------------------------------- */
 /*                       ANIMATION                                                        */
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
 
 var animation = d3.select("#animation");
 var l = 8;
@@ -104,16 +101,10 @@ async function play() {
   stop_ico.attr("visibility", "hidden");
   play_ico.attr("visibility", "visible");
   console.log("PLAY");
-
-  await sleep(2000);
-  //stop();
 }
 
 async function stop() {
   play_ico.attr("visibility", "hidden");
   stop_ico.attr("visibility", "visible");
   console.log("STOP");
-
-  await sleep(2000);
-  //play();
 }
