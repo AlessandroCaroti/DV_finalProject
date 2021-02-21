@@ -11,6 +11,8 @@ var colorsRange = ["rgb(5, 48, 97)", "white", "rgb(103, 0, 31)"];
 var colorScale;
 var unknown_temp = "#999999"; // color indicating there is no data for such country in that year
 var default_transition = 500;
+var map_data;
+var context;
 //var colorsRange = ["blue", "white", "red"];
 
 var geoGenerator;
@@ -30,6 +32,30 @@ countries_file = "../../data/15_countries_list.csv";
 // ******************************************************** //
 //                START FUNCTION FOR THE MAP                //
 
+var visibleArea; 
+var invisibleArea;
+var translate;
+var scale_simplify;
+
+var simplify = d3.geoTransform({
+  point: function(x, y, z) {
+    if (z < visibleArea) return
+    
+    x = x * curr_zoomScale + translate[0]
+    y = y * curr_zoomScale + translate[1]
+      
+    if (x >= -10 &&
+        x <= width + 10 &&
+        y >= -10 &&
+        y <= height + 10 ||
+        z >= invisibleArea) {
+      this.stream.point(x, y)
+    }
+    
+  }
+})
+
+
 function drawMap(world) {
   debug_log("DRAW-MAP");
 
@@ -43,7 +69,11 @@ function drawMap(world) {
     .scale(140)
     .translate([bBox.width / 2, h_map / 2]);
 
-  geoGenerator = d3.geoPath().projection(projection);
+  geoGenerator = d3.geoPath().projection({
+    stream: function(s) { return simplify.stream(projection.stream(s)); }
+  });
+
+  //geoGenerator = d3.geoPath().projection(projection);
 
   drawGlobeBackground();
 
@@ -66,6 +96,26 @@ function drawMap(world) {
   //Define the events of the countries(Es, mouseover, click...)
   country_events();
 }
+
+
+/*function updateMapDetails(world){
+  // Draw the background (country outlines)
+  let map = map_container
+    .selectAll("path.country")
+    .data(topojson.feature(world, world.objects.countries).features);
+  
+  map.exit().remove();
+    
+  map.enter()
+    .append("path")
+    .merge(map)
+    .attr("class", "country")
+    .attr("id", (d) => {
+      country_list_map.push(d.properties.name);
+      return d.properties.name;
+    })
+    .attr("d", geoGenerator);
+}*/
 
 function drawGridlines() {
   var graticule = d3.geoGraticule();
@@ -244,6 +294,13 @@ var zoom = d3
 
     // change border width
     update_strokes(curr_zoomScale);
+
+    // update variable semplification map
+    var z = event.transform
+    translate = [z.x, z.y]
+    scale = z.k
+    visibleArea = 1 / scale / scale
+    invisibleArea = 200 * visibleArea
   })
   .on("end", function (event) {
     // show tooltip if hovering a country
@@ -251,6 +308,15 @@ var zoom = d3
 
     if (!cur_country.empty())
       d3.select(".tooltip-map").style("display", "block");
+
+
+    /*// load new level of details
+    let topology = map_data;
+    topology = topojson.presimplify(topology);
+    topology = topojson.simplify(topology, 0.01);
+
+    updateMapDetails(topology);*/
+
   });
 
 function reset_zoom() {
@@ -482,6 +548,7 @@ function load_map() {
   d3.json(map_file)
     .then((world) => {
       console.log("LOAD MAP");
+      map_data = world;
 
       let topology = world;
       topology = topojson.presimplify(topology);
