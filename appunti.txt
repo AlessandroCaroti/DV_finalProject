@@ -3,6 +3,7 @@ TO DO:
 -cambiare il cursore sullo slider
 -fare i tooltips di simo più compatti
 -salvarsi i csv quando caricati in modo da non doverli ricaricare se selezionati più volte
+-transizione zoom con rotella
 
 TOFIX:
 -rendere non interagibile le cose inutili, come il testo degli anni sotto lo slider
@@ -11,6 +12,7 @@ TOFIX:
 
 IDEE:
 -aggiungere schermata caricamento
+-Su temperature Record, mettere l'evento over anche sulla scritte
 
 DA DISCUTERE:
 -avvicinare gli anni dello slider per renderlo più compatta
