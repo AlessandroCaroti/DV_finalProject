@@ -11,7 +11,47 @@ var width_table = full_width - margin_table.left - margin_table.right;
 var height_table =
   (full_width * 9) / 16 - margin_table.top - margin_table.bottom;
 
+
+
+function readDataTableFinal(data_country, dataFile, baseline, update = false, global=false) {
+ 
+    DATA_TABLE = [];
   
+    
+    if(!update){createEmptyTable(data_country); }
+    
+    if(!global){
+      table_data(data_country);
+      d3.json("/../data/counties/" + dataFile + "/" + dataFile + "_info.json").then(
+        (info) => {
+          var generalization = info["Generalization"];
+  
+          generalization.forEach((gen_name) => {
+            var csv_path =
+              "/../data/regions/" + gen_name + "/" + gen_name + "_anomalyTable.csv";
+            
+              d3.csv(csv_path)
+              .then((data) => {
+                parseDataAttributes(data, baseline, gen_name);
+        
+                if (update) {
+                  updateRowsTable(data);
+                } else addRowTable(data);
+              })
+              .catch((error) => {
+                console.log(error);
+                throw error;
+              });
+          });
+        }
+      );
+  
+    }
+   
+  }
+
+
+
 //Get data every 50 years_table with also the 2019 at the end
 function dataEvery50Years(data) {
   var annual_data = getAnnualData(data);

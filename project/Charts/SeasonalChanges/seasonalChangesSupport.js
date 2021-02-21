@@ -13,8 +13,6 @@ function parseSeasonalBaseline(data, region="NaN"){
 }
 
 
-
-
 function getLineGeneratorsSeasonal(x, y){
 
 
@@ -42,6 +40,7 @@ function getLineGeneratorsSeasonal(x, y){
         
 
     return [ valuelineUnc, valuelineSeasonalBaseline, valuelineMaxRange, valuelineMinRange, valuelineLastYears];
+
 }
 
 
