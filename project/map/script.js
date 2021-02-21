@@ -132,7 +132,7 @@ function update_colors(temperatures, time_trasition) {
 
 function country_events() {
   //MOUSE-OVER EVENT: highlighted country when the mouse is over
-  map_container.selectAll(".country").on("mouseenter", function (event, b) {
+  map_container.selectAll(".country").on("mouseenter", function () {
     d3.select(this)
       .raise()
       .classed("highlighted_country", true)
@@ -251,7 +251,7 @@ var zoom = d3
     d3.select(".tooltip-map").style("display", "none");
 
     // change border width
-    update_strokes(curr_zoomScale);
+    update_strokes();
   })
   .on("end", function (event) {
     // show tooltip if hovering a country
@@ -317,7 +317,7 @@ var borderCountryScale = d3
 
 var widthGridScale = d3.scaleLinear().domain([1, max_zoom]).range([0.3, 0.2]);
 
-function update_strokes(new_val) {
+function update_strokes() {
   var new_strokeWidth = borderCountryScale(curr_zoomScale);
   //update country
   map_container
