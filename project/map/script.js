@@ -32,7 +32,6 @@ countries_file = "../../data/15_countries_list.csv";
 // ******************************************************** //
 //                START FUNCTION FOR THE MAP                //
 
-
 function drawMap(world) {
   debug_log("DRAW-MAP");
 
@@ -229,8 +228,7 @@ function country_selected(country) {
 var max_zoom = 8;
 var zoomIn_scale = 1.2,
   zoomOut_scale = 0.8,
-  curr_zoomScale = 1,
-  zommed = false;
+  curr_zoomScale = 1;
 
 var zoom = d3
   .zoom()
@@ -238,7 +236,14 @@ var zoom = d3
   .on("zoom", (event) => {
     curr_zoomScale = event.transform.k;
 
-    zommed = curr_zoomScale != 1.0;
+    if (curr_zoomScale != 1) {
+      initial_view = false;
+    } else {
+      initial_view = event.transform.x + event.transform.y == 0;
+    }
+    console.log(initial_view);
+    update_middle_zoomBtn();
+
     //map_container.attr("transform", event.transform);
     map_container.selectAll("path").attr("transform", event.transform);
 
@@ -247,8 +252,6 @@ var zoom = d3
 
     // change border width
     update_strokes(curr_zoomScale);
-
-    
   })
   .on("end", function (event) {
     // show tooltip if hovering a country
@@ -256,7 +259,6 @@ var zoom = d3
 
     if (!cur_country.empty())
       d3.select(".tooltip-map").style("display", "block");
-
   });
 
 function reset_zoom() {
@@ -291,6 +293,14 @@ function zoom_in(country) {
         d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale)
       );
     });
+}
+
+function update_middle_zoomBtn(){
+  if (!initial_view) {
+    set_globe_icon();
+  } else if (selected_country != null) {
+    no_zoom();
+  }
 }
 
 //                      END ZOOM SECTION                    //
@@ -332,6 +342,7 @@ function update_strokes(new_val) {
 // ******************************************************** //
 // ******************************************************** //
 //                START FUNCTION MAP OVERLAY                //
+var initial_view = true;
 
 function init_map_controls() {
   init_zoomBtns();
@@ -340,14 +351,11 @@ function init_map_controls() {
 }
 
 function changeView() {
-  console.log(zommed);
-  if (zommed) {
+  if (!initial_view) {
     debug_log("RESET_ZOOM");
-    no_zoom();
     reset_zoom();
   } else if (selected_country != null) {
     debug_log("ZOOM COUNTRY");
-    local_zoom();
     zoom_in(selected_country);
   }
 }
