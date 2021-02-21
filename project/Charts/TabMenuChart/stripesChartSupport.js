@@ -43,7 +43,6 @@ function dataStripes(data_annnual){
 
             var idx = getIdxList(yr, data_annnual);
             data2.push(data_annnual[idx])
-
         }
             
         else{
@@ -115,7 +114,7 @@ function updateStripesChart(data){
 
     var data_annnual = getAnnualData(data);
     data_annnual = dataStripes(data_annnual);
-    console.log(data_annnual)
+
     //Scales
     var scales = getStripesScales(data_annnual);
     var x = scales[0];
