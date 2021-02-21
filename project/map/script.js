@@ -270,7 +270,10 @@ function zoom_in(country) {
     dy = bounds[1][1] - bounds[0][1],
     x = (bounds[0][0] + bounds[1][0]) / 2,
     y = (bounds[0][1] + bounds[1][1]) / 2,
-    scale = Math.max(1, Math.min(max_zoom, 0.9 / Math.max(dx / w_map, dy / h_map))),
+    scale = Math.max(
+      1,
+      Math.min(max_zoom, 0.9 / Math.max(dx / w_map, dy / h_map))
+    ),
     translate = [w_map / 2 - scale * x, h_map / 2 - scale * y];
 
   map_container
@@ -410,7 +413,7 @@ function init_DropDownMenu_slect2() {
       data = [];
 
       countries.forEach((d) => {
-        data.push(d.Map);
+        data.push(d.Temp);
       });
 
       $("#selectCountryMenu")
@@ -434,7 +437,6 @@ function init_DropDownMenu_slect2() {
           console.log(data.text);
           changeCountry(data.text);
           changeAllData(data.text, false);
-
         });
     })
     .catch(function (error) {
@@ -507,7 +509,6 @@ function load_map() {
 // ****************************************************** //
 // ****************************************************** //
 //                   DOVE INIZIA TUTTO                    //
-
 
 /*
 function init_page() {
