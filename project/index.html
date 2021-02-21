@@ -24,6 +24,7 @@
     <!------------------------------- UTILITY SCRIPTS -------------------------------------->
     <script src="/project/utils/RoundedRect.js"></script>
     <script src="/project/utils/utils.js"></script>
+    <script src="/project/InitPage.js"></script>
 
     <!----------------------------------CHARTS FILES----------------------------------------->
 
@@ -68,22 +69,16 @@
 
     <!----------------------------SEASONAL LINECHART SCRIPTS------------------------------------------>
 
+    <script type="application/javascript" src="/project/Charts/SeasonalChanges/plotSeasonalChanges.js"></script>
+    <script type="application/javascript" src="/project/Charts/SeasonalChanges/seasonalChangesSupport.js"></script>
+
     <!-----------------------------HOTTEST COLDEST LINECHART SCRIPTS------------------------------------------>
 
-    <!-- TODO: FA CONFLITTO DA CONTROLLARE-->
-    <!--
     <script type="application/javascript" src="/project/Charts/HottestColdestLineChart/coldestHottestSupport.js"></script>
-    <script type="application/javascript" src="/project/Charts/HottestColdestLineChart/plotHottestColdest.js"></script>-->
+    <script type="application/javascript" src="/project/Charts/HottestColdestLineChart/plotHottestColdest.js"></script>
     <!-----------------------------MAP SCRIPTS------------------------------------------>
   </head>
 
-  <body>
-    <!--TODO:TO REMOVE AT THE END, ONLY FOR TEST-->
-    <span id="dropdown_tab">
-      <label>Dataset:</label>
-      <select name="Dataset" id="dataset" onchange="changeAllData()"></select>
-    </span>
-    <!--TODO:------------------------------------->
 
     <!------------------------------START MAP------------------------------------------->
 
@@ -157,7 +152,7 @@
       <div class="tab">
         <span id="dropdown_tab_years">
           <label>Range-Years:</label>
-          <select name="Dataset" id="rage-year" onchange="changeDataTabMenu()">
+          <select name="Dataset" id="rage-year" onchange="changeDataRangeYears()">
             <option value="five_years">Five-Years</option>
             <option value="ten_years" selected="selected">Ten-Years</option>
             <option value="twenty_years">Twenty-Years</option>
@@ -207,7 +202,7 @@
     <!------------------------------START HOTTEST-COLDEST LINECHART------------------------------------------->
 
     <div id="hottest-coldest-container" class="container">
-      <div id="hottest_coldest_container">
+      <div id="hottest_coldest_chart">
         <div id="container-h-c"></div>
         <div class="tooltip-map" id="tooltip-hot-cold"></div>
       </div>
@@ -218,10 +213,9 @@
     <!------------------------------START SEASONAL LINECHART------------------------------------------->
 
     <div id="seasonal-container" class="container">
-      <h1>
-        -----------------------SEASONAL
-        LINECHART----------------------------------
-      </h1>
+
+        <div id="seasonal_changes_graphic"> <div class="tooltip-map" id="tooltip-seasonal-changes"> </div> </div>
+      
     </div>
 
     <!------------------------------END SEASONAL LINECHART------------------------------------------->
@@ -232,7 +226,7 @@
     <script src="/project/map/script.js?version=1"></script>
     <script src="/project/map/color_scale.js?version=1"></script>
     <script>
-      window.onload = loadAllData();
+      window.onload = init_page();
     </script>
   </body>
 </html>

@@ -2,6 +2,17 @@
 var colorsYears=["red", "blue","green"];
 
 
+
+
+function parseSeasonalBaseline(data, region="NaN"){
+    
+  data.seasonalBaseline = data[0];
+  data.seasonalUnc = data[1];
+  data.region = region;
+
+}
+
+
 function getLineGeneratorsSeasonal(x, y){
 
 
@@ -29,6 +40,7 @@ function getLineGeneratorsSeasonal(x, y){
         
 
     return [ valuelineUnc, valuelineSeasonalBaseline, valuelineMaxRange, valuelineMinRange, valuelineLastYears];
+
 }
 
 
@@ -131,7 +143,7 @@ function styleLastYearsLines(d, dataLastYears){
 
 
 
-  function createHottestColdestLineChart(data, dataSeasonalBaseline){
+  function createDeafaultSeasonalLinechart(data, dataSeasonalBaseline){
 
       var seasonalData = getDataSeasonal(data, dataSeasonalBaseline);
       
@@ -230,7 +242,7 @@ function styleLastYearsLines(d, dataLastYears){
   }
   
   
-  function UpdateHottestColdestLineChart(data, dataSeasonalBaseline){
+  function updateSeasonalLineChart(data, dataSeasonalBaseline){
   
     var seasonalData = getDataSeasonal(data, dataSeasonalBaseline);
     var lastYearsData = lastYearSeasonalData(data,dataSeasonalBaseline);

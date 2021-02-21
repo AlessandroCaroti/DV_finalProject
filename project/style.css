@@ -67,7 +67,6 @@ svg text::selection {
   left: 50%;
   right: 50%;
   background: white;
-  height: 800px;
 }
 
 .country {
@@ -279,6 +278,15 @@ text#label-legend {
 #linechart .tooltip-map {
   text-align: left;
 }
+#linechart{
+  padding: 50px;
+ 
+}
+#linechart svg{
+
+  margin-left: 2%;
+}
+
 
 .uncertainty {
   fill: lightgray;
@@ -332,9 +340,9 @@ text.legend {
 
 /*-----------------------------------START STYLE TABLE-----------------------------------*/
 
-#table-mean-rate {
-  width: 900px;
-  height: 500px;
+#table_container {
+  width: 950px;
+  height: auto;
   margin: auto;
   margin-top: 20%;
 }
@@ -363,6 +371,11 @@ table {
   overflow: hidden;
 }
 
+.tbody_table td{
+  
+  padding: 25px;
+
+}
 .rows_table {
   font-family: sans-serif;
   transition: background 0.2s ease-in;
@@ -447,12 +460,13 @@ table {
 
 /*---------------------------START SEASONAL STYLE--------------------------------*/
 
-#container-seasonal-changes {
-  border: solid lightgray 1px;
-  width: 900px;
+#seasonal_changes_graphic{
 
-  margin: auto;
+  margin-left: 20%;
+  margin-top: 10%;
 }
+
+
 
 .line-seasonal-baseline {
   fill: none;
@@ -520,3 +534,4 @@ table {
 *{
   font-family: sans-serif;
 }
+

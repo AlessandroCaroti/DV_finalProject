@@ -1,33 +1,8 @@
 
 
-function changeDataTabMenu() {
-    
-    // prendere dati da mappa selezionata o dropdown menu
-    var dataFile = document.getElementById('dataset').value;
 
-    
-    initBaselineAndInfo(dataFile);
-    
-    var csv = "/../../data/counties/"+dataFile+"/"+dataFile+"_anomalyTable.csv";
- 
-    d3.csv(csv)
-      .then( (data) =>{ 
-        
-        parseDataAttributes(data);
-         
-        //Update the LineChart
-        updateLineChart(data, ".graphics");
-        //Update StripesChart
-        updateStripesChart(data)
-           
-                     
-      })
-      .catch((error) =>{
-        console.log(error);
-        throw(error);
-    })  
-}
 
+/*
 
 function defaultDatasetTabMenu(dataFile){
 
@@ -85,3 +60,4 @@ function loadDataTabMenu(){
   })
 }
 
+*/
