@@ -14,9 +14,8 @@ zoom_in_btn
   .attr("y1", height_btn / 2)
   .attr("x2", width_btn / 2 + 7)
   .attr("y2", height_btn / 2)
-  .style("stroke", "black")
-  .style("stroke-width", 2)
-  .attr("pointer-events", "none");
+  .style("stroke-width", 2.5)
+  .classed("btn_element", true);
 
 zoom_in_btn
   .append("line")
@@ -24,9 +23,9 @@ zoom_in_btn
   .attr("y1", height_btn / 2 - 7)
   .attr("x2", width_btn / 2)
   .attr("y2", height_btn / 2 + 7)
-  .style("stroke", "black")
-  .style("stroke-width", 2)
-  .attr("pointer-events", "none");
+  .style("stroke-width", 2.5)
+  .classed("btn_element", true);
+
 
 /* -------------------------------------------------------------------------------------- */
 /*                       ZOOM OUT                                                         */
@@ -40,9 +39,9 @@ zoom_out_brn
   .attr("y1", height_btn / 2)
   .attr("x2", width_btn / 2 + 7)
   .attr("y2", height_btn / 2)
-  .style("stroke", "black")
-  .style("stroke-width", 2)
-  .attr("pointer-events", "none");
+  .style("stroke-width", 2.5)
+  .classed("btn_element", true);
+
 
 /* -------------------------------------------------------------------------------------- */
 /*                       ZOOM RESET                                                       */
@@ -56,7 +55,8 @@ var inner_circle = zoom_reset_btn
   .attr("cy", height_btn / 2)
   .attr("fill", "black")
   .attr("pointer-events", "none")
-  .attr("visibility", "hidden");
+  .attr("visibility", "hidden")
+  .classed("btn_element", true);
 
 var radius = 7.5
 var s = 3.4 
@@ -76,11 +76,12 @@ var ha = "M " + (width_btn / 2) + " "+ ((height_btn / 2)-radius-s)
 var outer_circle = zoom_reset_btn
   .append("path")
   .attr("d", ha)
-  .attr("fill", "none")
   .style("stroke", "black")
   .style("stroke-width", 1.3)
   .attr("pointer-events", "none")
-  .attr("visibility", "hidden");
+  .attr("visibility", "hidden")
+  .classed("btn_element", true)
+  .attr("fill", "none");
 
 
 var globe_img = zoom_reset_btn.append("svg:image")
@@ -89,7 +90,9 @@ var globe_img = zoom_reset_btn.append("svg:image")
                       .attr("width", width_btn - (s*2))
                       .attr("height", height_btn - (s*2))
                       .attr("x", s)
-                      .attr("y", s);
+                      .attr("y", s)
+  .classed("btn_element", true);
+
 
 function no_zoom() {
   globe_img.attr("visibility", "hidden");
@@ -114,7 +117,7 @@ var l = 8;
 animation_btn
   .select("path")
   .attr("d", roundedRect(0, 0, width_btn, width_btn, width_btn / 2))
-  .style("stroke-width", 2);
+  .style("stroke-width", 1.5);
 
 var play_ico = animation_btn
   .append("path")
@@ -124,14 +127,17 @@ var play_ico = animation_btn
   )
   .attr("fill", "balck")
   .attr("visibility", "hidden")
-  .attr("pointer-events", "none");
+  .attr("pointer-events", "none")
+  .classed("btn_element", true);
+
 
 var stop_ico = animation_btn
   .append("path")
   .attr("d", roundedRect(width_btn / 2 - l, width_btn / 2 - l, l * 2, l * 2, 1))
   .attr("fill", "black")
   .attr("visibility", "hidden")
-  .attr("pointer-events", "none");
+  .attr("pointer-events", "none")
+  .classed("btn_element", true);
 
 async function play() {
   stop_ico.attr("visibility", "hidden");
