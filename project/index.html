@@ -128,40 +128,49 @@
 
 
         <!------------------------------END MAP------------------------------------------->
+      
+        <!------------------------------START CLIMATE STRIPES------------------------------------------->
+        <div id="climate-stripes-linechart-container" class="container"> 
 
-        <!------------------------------START TAB-MENU LINECHART------------------------------------------->
+         
 
-        <div id="tab-menu-container" class="container">
-          <div class="tab">
-            <span id="dropdown_tab_years">
-              <label>Range-Years:</label>
-              <select name="Dataset" id="rage-year" onchange="changeDataRangeYears()">
-                <option value="five_years">Five-Years</option>
-                <option value="ten_years" selected="selected">Ten-Years</option>
-                <option value="twenty_years">Twenty-Years</option>
-                <option value="annual">Annual</option>
-              </select>
-            </span>
-
-            <button class="tablinks active" id="tab_line" onclick="click_tab(event, 'linechart')">
-              Line Chart
-            </button>
-            <button class="tablinks" id="tab_stripe" onclick="click_tab(event, 'stripechart')">
-              Climate Stripes
-            </button>
+            <div id="stripes-line-content" class="tabcontent">
+              <div id="range-years-buttons-container">
+              <span id="dropdown_tab_years">
+                <label>Range-Years:</label>
+                <select name="Dataset" id="rage-year" onchange="changeDataRangeYears()">
+                  <option value="five_years">Five-Years</option>
+                  <option value="ten_years" selected="selected">Ten-Years</option>
+                  <option value="twenty_years">Twenty-Years</option>
+                  <option value="annual">Annual</option>
+                </select>
+              </span>
+            </div>
+         
+          
+          <div id="stripechart">
+            <div class="tooltip-map" id="tooltip_stripes"></div>
           </div>
-
-          <div id="linechart" class="tabcontent">
+          
+          <div id="linechart" >
             <div class="tooltip-map" id="tooltip_line"></div>
           </div>
 
-          <div id="stripechart" class="tabcontent">
-            <div class="tooltip-map" id="tooltip_stripes"></div>
-          </div>
         </div>
+
+        <!------------------------------END CLIMATE STRIPES------------------------------------------->
+
+      
+        <!------------------------------START TAB-MENU LINECHART------------------------------------------->
+
+       
+         
+           
+
+  
         <!------------------------------END TAB-MENU LINECHART------------------------------------------->
 
-        <!------------------------------ START TABLE ------------------------------------------->
+        <!------------------------------- START TABLE ------------------------------------------->
 
         <div id="table-container-mean-rate" class="container">
 
