@@ -404,7 +404,7 @@ function init_yearSpace() {
   d3.select(".col-sm-2")
     .select("path")
     .attr("d", roundedFigure_1(x, -1, w_1, w_2, 37))
-    .style("fill", "rgb(202, 202, 202)")
+    .style("fill", "rgb(243, 243, 243)")
     .style("stroke", "black")
     .style("stroke-width", 1.5);
 }

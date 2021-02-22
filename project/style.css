@@ -8,6 +8,7 @@ body {
   min-width: 200px;
   max-width: 300px;
   display: inline-block;
+  text-align-last: left;
 }
 .select2-search--dropdown .select2-search__field {
   width: 98%;
@@ -39,13 +40,13 @@ svg text::selection {
 }
 
 .btn {
-  fill: rgb(202, 202, 202);
+  fill: rgb(243, 243, 243);
   stroke: black;
   stroke-width: 0.8;
 }
 
 .btn:hover {
-  fill: rgb(243, 243, 243);
+  fill: rgb(202, 202, 202);
 }
 
 .background {
@@ -123,7 +124,7 @@ span {
   font-size: 30px;
 }
 
-.not-hover  {
+.not-hover {
   font-size: 0px;
 }
 
@@ -134,6 +135,8 @@ span {
 .label {
   font-size: 22px;
   padding-top: 10px;
+  padding-right: 10px;
+  text-align: right;
 }
 
 .tick text {
@@ -185,7 +188,6 @@ text#label-legend {
   float: center;
   width: 900px;
   height: 500px;
-
 }
 
 .tab {
@@ -246,9 +248,8 @@ text#label-legend {
   display: none;
 }
 
-#stripechart svg{
-
-  margin-top: 10%
+#stripechart svg {
+  margin-top: 10%;
 }
 
 /*--------------------------------- END TAB MENU STYLE -------------------------------------*/
@@ -261,7 +262,6 @@ text#label-legend {
   stroke: steelblue;
   fill: none;
 }
-
 
 .graphics .line_chart_range_years {
   stroke-width: 2px;
@@ -279,15 +279,12 @@ text#label-legend {
 #linechart .tooltip-map {
   text-align: left;
 }
-#linechart{
+#linechart {
   padding: 50px;
- 
 }
-#linechart svg{
-
+#linechart svg {
   margin-left: 2%;
 }
-
 
 .uncertainty {
   fill: lightgray;
@@ -370,10 +367,8 @@ table {
   overflow: hidden;
 }
 
-.tbody_table td{
-  
+.tbody_table td {
   padding: 25px;
-
 }
 .rows_table {
   font-family: sans-serif;
@@ -404,7 +399,7 @@ table {
   font-weight: bold;
 }
 
-#table_container h2{
+#table_container h2 {
   margin-left: 5%;
 }
 
@@ -422,8 +417,6 @@ table {
 }
 
 /*---------------------------Hottest-Coldest Year style--------------------------------*/
-
-
 
 #container-h-c {
   border: solid lightgray 1px;
@@ -468,9 +461,6 @@ table {
 /*---------------------------START SEASONAL LINECHART STYLE--------------------------------*/
 
 
-
-
-
 .line-seasonal-baseline {
   fill: none;
   stroke: black;
@@ -507,8 +497,7 @@ table {
   stroke-width: 0;
 }
 
-#seasonal_changes_graphic h2{
-
+#seasonal_changes_graphic h2 {
   margin-left: 5%;
 }
 #seasonal_changes_graphic{
@@ -518,12 +507,9 @@ table {
 
 /*---------------------------END SEASONAL STYLE--------------------------------*/
 
-
-
 /*STYLE FINAL HTML*/
 
-.container{
-
+.container {
   width: 1500px;
   height: auto;
   padding: 2%;
@@ -531,14 +517,13 @@ table {
 }
 
 
-#dropdown_tab_years{
+#dropdown_tab_years {
   display: inline-block;
   vertical-align: middle;
   margin-left: 20%;
- 
 }
 
-*{
+* {
   font-family: sans-serif;
 }
 

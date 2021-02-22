@@ -114,7 +114,7 @@ var l = 8;
 animation_btn
   .select("path")
   .attr("d", roundedRect(0, 0, width_btn, width_btn, width_btn / 2))
-  .style("stroke-width", 2);
+  .style("stroke-width", 1.5);
 
 var play_ico = animation_btn
   .append("path")
