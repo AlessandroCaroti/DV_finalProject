@@ -144,7 +144,7 @@ function country_events() {
 
     // reset the stroke width to the original one
     var orginal_stroke = borderCountryScale(curr_zoomScale);
-    if (b === selected_country) {
+    if (b.properties.name === selected_country) {
       orginal_stroke = orginal_stroke * selected_stroke;
     }
     d3.select(this).style("stroke-width", orginal_stroke);
@@ -208,16 +208,15 @@ function country_events() {
 
     console.log(curr_zoomScale);
     
-    if(curr_zoomScale != max_zoom){
-      debug_log("CLICK ON " + this.id);
-      country_selected(this.__data__);
-    }
+    debug_log("CLICK ON " + this.id);
+    country_selected(this.__data__);
+    
     
   });
 }
 
 function country_selected(country) {
-  selected_country = country;
+  selected_country = country.properties.name;
   zoom_in(selected_country);
   
     
@@ -251,9 +250,7 @@ var zoom = d3
     // change border width
     update_strokes(curr_zoomScale);
     
-    //shown new level
-    let new_level = levelScale(curr_zoomScale);
-    showLevel(new_level);
+    
 
   })
   .on("end", function (event) {
@@ -264,7 +261,9 @@ var zoom = d3
       d3.select(".tooltip-map").style("display", "block");
 
     
-
+    //shown new level
+    let new_level = levelScale(curr_zoomScale);
+    showLevel(new_level);
   });
 
 function reset_zoom() {
@@ -367,14 +366,24 @@ function drawLevel(world, level) {
     })
     .attr("name", d => d.properties.name)
     .attr("d", geoGenerator);
+
+    // current level shown is 0
+    cur_level = 0;
 }
 
 
 function showLevel(level) {
 
-  console.log("PINOH");
+  //
+  if(level == cur_level)
+    return;
+
+  // current level shown
+  cur_level = level;
+
   let highlighted = map_container.select(".selected_country");
-  console.log(highlighted.empty())
+  highlighted.classed("selected_country", false);
+
 
   // update colors
   map_container.select("g#level_" + level)
@@ -443,7 +452,7 @@ function showLevel(level) {
                                     .classed("selected_country", true);
 
             */
-  highlighted.classed("selected_country", false);
+  
   
 
   // create events on new elements
