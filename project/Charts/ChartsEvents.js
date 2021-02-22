@@ -95,7 +95,7 @@ function stripesEnter(event, d) {
 
   var range_year =  document.getElementById('rage-year').value;
   var tooltip = d3.select("#stripechart .tooltip-map");
-  console.log(d)
+
   tooltip.transition();
   var tipText = String(
     "<p style='text-align: center; font-weight: bold; font-size: 13px'> " +
