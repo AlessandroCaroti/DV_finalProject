@@ -237,20 +237,28 @@ text#label-legend {
 /* Style the tab content */
 .tabcontent {
   border: 1px solid #ccc;
-  border-radius: 0px 20px 20px;
-  width: 900px;
-  height: 500px;
-  margin-left: 6%;
+  border-radius: 20px;
+  width: 950px;
+  height: auto;
+  padding: 50px 50px 50px 50px;
+  margin-left: 10%;
  
 }
 
-#stripechart {
-  display: none;
+#range-years-buttons-container{
+
+  width: 500px;
+  height: 200px;
+  border: #000 solid 1px;
+  margin-left: 21%;
 }
 
-#stripechart svg {
-  margin-top: 10%;
+#rage-year{
+
+  margin-top: 45%;
 }
+
+
 
 /*--------------------------------- END TAB MENU STYLE -------------------------------------*/
 
@@ -282,18 +290,12 @@ text#label-legend {
 #linechart {
   padding: 50px;
 }
-#linechart svg {
-  margin-left: 2%;
-}
 
 .uncertainty {
   fill: lightgray;
   stroke: none;
 }
 
-#dropdown_tab {
-  margin: auto;
-}
 
 
 
@@ -513,7 +515,9 @@ table {
   width: 1500px;
   height: auto;
   padding: 2%;
-  margin: 0 auto;  
+  margin: 0 auto; 
+  align-items: center;
+  align-content: center;
 }
 
 
