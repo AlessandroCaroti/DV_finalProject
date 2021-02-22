@@ -412,6 +412,10 @@ table {
   font-weight: bold;
 }
 
+#table_container h2{
+  margin-left: 5%;
+}
+
 .region_cell {
   border: solid #2e4053 2.5px;
   border-top: none;
@@ -439,7 +443,7 @@ table {
 }
 
 #container-h-c h2 {
-  margin-left: 50px;
+  margin-left: 5%;
 }
 
 .text-legend {
@@ -513,6 +517,12 @@ table {
 .grid path {
   stroke-width: 0;
 }
+
+#seasonal_changes_graphic h2{
+
+  margin-left: 5%;
+}
+
 /*---------------------------END SEASONAL STYLE--------------------------------*/
 
 
