@@ -45,8 +45,9 @@ function set_colorScale(){
     
     // axis quantization
     let ticks = Array.from(ranges_scale);
+    let bar_step = width_legend/parseFloat(step_color_list.length)
 
-    let step_bar_list = d3.range(0, width_legend +  width_legend/parseFloat(step_color_list.length), width_legend/parseFloat(step_color_list.length)).map(d => parseFloat(d.toFixed(2)) );
+    let step_bar_list = d3.range(0, width_legend + bar_step , bar_step).map(d => parseFloat(d.toFixed(2)) );
     
     var quantizeBarScale = d3.scaleQuantize()
                                   .domain([min_scale, max_scale])

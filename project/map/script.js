@@ -7,12 +7,11 @@ const h_map = 500;
 
 var projection;
 var map_container;
-var colorsRange = ["rgb(5, 48, 97)", "white", "rgb(103, 0, 31)"];
+//var colorsRange = ["rgb(5, 48, 97)", "white", "rgb(103, 0, 31)"];
 var colorScale;
 var unknown_temp = "#999999"; // color indicating there is no data for such country in that year
 var default_transition = 500;
-var map_data;
-var context;
+var n_levels;
 //var colorsRange = ["blue", "white", "red"];
 
 var geoGenerator;
@@ -32,28 +31,7 @@ countries_file = "../../data/15_countries_list.csv";
 // ******************************************************** //
 //                START FUNCTION FOR THE MAP                //
 
-var visibleArea; 
-var invisibleArea;
-var translate;
-var scale_simplify;
 
-var simplify = d3.geoTransform({
-  point: function(x, y, z) {
-    if (z < visibleArea) return
-    
-    x = x * curr_zoomScale + translate[0]
-    y = y * curr_zoomScale + translate[1]
-      
-    if (x >= -10 &&
-        x <= width + 10 &&
-        y >= -10 &&
-        y <= height + 10 ||
-        z >= invisibleArea) {
-      this.stream.point(x, y)
-    }
-    
-  }
-})
 
 
 function drawMap(world) {
@@ -69,26 +47,13 @@ function drawMap(world) {
     .scale(140)
     .translate([bBox.width / 2, h_map / 2]);
 
-  geoGenerator = d3.geoPath().projection({
-    stream: function(s) { return simplify.stream(projection.stream(s)); }
-  });
 
-  //geoGenerator = d3.geoPath().projection(projection);
+  geoGenerator = d3.geoPath().projection(projection);
 
   drawGlobeBackground();
 
-  // Draw the background (country outlines)
-  map_container
-    .selectAll("path.country")
-    .data(topojson.feature(world, world.objects.countries).features)
-    .enter()
-    .append("path")
-    .attr("class", "country")
-    .attr("id", (d) => {
-      country_list_map.push(d.properties.name);
-      return d.properties.name;
-    })
-    .attr("d", geoGenerator);
+  // draw first level
+  drawLevel(world, 0)
 
   // Draw gridlines
   drawGridlines();
@@ -97,25 +62,6 @@ function drawMap(world) {
   country_events();
 }
 
-
-/*function updateMapDetails(world){
-  // Draw the background (country outlines)
-  let map = map_container
-    .selectAll("path.country")
-    .data(topojson.feature(world, world.objects.countries).features);
-  
-  map.exit().remove();
-    
-  map.enter()
-    .append("path")
-    .merge(map)
-    .attr("class", "country")
-    .attr("id", (d) => {
-      country_list_map.push(d.properties.name);
-      return d.properties.name;
-    })
-    .attr("d", geoGenerator);
-}*/
 
 function drawGridlines() {
   var graticule = d3.geoGraticule();
@@ -137,6 +83,7 @@ function drawGlobeBackground() {
     .datum({ type: "Sphere" })
     .attr("d", geoGenerator);
 }
+
 
 function update_colors(temperatures, time_trasition) {
   // define the transition
@@ -279,6 +226,7 @@ var zoomIn_scale = 1.2,
   curr_zoomScale = 1,
   zommed = false;
 
+
 var zoom = d3
   .zoom()
   .scaleExtent([1, max_zoom])
@@ -295,12 +243,10 @@ var zoom = d3
     // change border width
     update_strokes(curr_zoomScale);
 
-    // update variable semplification map
-    var z = event.transform
-    translate = [z.x, z.y]
-    scale = z.k
-    visibleArea = 1 / scale / scale
-    invisibleArea = 200 * visibleArea
+    //shown new level
+    let new_level = levelScale(curr_zoomScale);
+    showLevel(new_level);
+
   })
   .on("end", function (event) {
     // show tooltip if hovering a country
@@ -308,14 +254,6 @@ var zoom = d3
 
     if (!cur_country.empty())
       d3.select(".tooltip-map").style("display", "block");
-
-
-    /*// load new level of details
-    let topology = map_data;
-    topology = topojson.presimplify(topology);
-    topology = topojson.simplify(topology, 0.01);
-
-    updateMapDetails(topology);*/
 
   });
 
@@ -389,6 +327,110 @@ function update_strokes(new_val) {
 }
 
 //                     END STROKE WIDTH                     //
+// ******************************************************** //
+// ******************************************************** //
+//                    STRAT LEVELS SECTION                //
+
+
+// scale to select the level of details
+var levelScale = d3.scaleQuantize()
+  .domain([1, max_zoom])
+  .range([0, 1]); // only two levels
+
+
+function drawLevel(world, level) {
+
+  // Draw the background (country outlines)
+  map_container.select("g#level_" + level)
+    .classed("shown_level", level == 0 ? true : false)
+    .classed("hidden_level", level == 0 ? false : true)
+    .selectAll("path.country")
+    .data(topojson.feature(world, world.objects.countries).features)
+    .enter()
+    .append("path")
+    .attr("class", "country")
+    .attr("id", (d) => {
+      country_list_map.push(d.properties.name);
+      if (level == 0)
+        return d.properties.name;
+      return "";
+    })
+    .attr("name", d => d.properties.name)
+    .attr("d", geoGenerator)
+}
+
+
+function showLevel(level) {
+
+  // update colors
+  map_container.select("g#level_" + level)
+    .selectAll("path.country")
+    .each(function () {
+      let new_elem = d3.select(this);
+
+      let cur_elem = d3.select(document.getElementById(new_elem.attr("name")));
+
+      new_elem.attr("anomaly", cur_elem.attr("anomaly"))
+        .style("fill", function () {
+
+          let cur_anomaly = cur_elem.attr("anomaly");
+          if (typeof cur_anomaly != "undefined" &&
+            cur_anomaly != null &&
+            cur_anomaly != "NaN" &&
+            !Number.isNaN(cur_anomaly))
+            return colorScale(cur_elem.attr("anomaly"));
+          return unknown_temp;
+        });
+    });
+
+
+  // define the transition
+  var temp_transition = d3
+  .transition()
+  .duration(500)
+  .ease(d3.easeLinear);
+
+  // hide the others levels
+  map_container.select("g.shown_level")
+    .classed("shown_level", false)
+    .classed("hidden_level", true)
+    .selectAll("path.country")
+    .attr("id", "")
+    .transition(temp_transition)
+    .style("opacity", 0);
+
+  // display the level
+  map_container.select("g#level_" + level)
+    .classed("shown_level", true)
+    .classed("hidden_level", false)
+    .selectAll("path.country")
+    .each(function () {
+
+      let elem = d3.select(this);
+      elem.attr("id", elem.attr("name"))
+    })
+    .transition(temp_transition)
+    .style("opacity", 1);
+  
+  // update highlighted country path
+  let highlighted = map_container.select(".selected_country");
+  
+  console.log(highlighted.attr("name"))
+  
+  d3.select(document.getElementById(highlighted.attr("name")))
+                                    .classed("selected_country", true);
+
+            
+  highlighted.classed("selected_country", false);
+  
+
+  // create events on new elements
+  country_events();
+
+}
+
+
+//                      END LEVELS FUNCTIONS                //
 // ******************************************************** //
 // ******************************************************** //
 //                START FUNCTION MAP OVERLAY                //
@@ -553,15 +595,26 @@ function load_map() {
       console.log("LOAD MAP");
       map_data = world;
 
+      // first layer
       let topology = world;
       topology = topojson.presimplify(topology);
       topology = topojson.simplify(topology, 0.05);
 
       drawMap(topology);
+
+      // second layer with more details
+      topology = world;
+      topology = topojson.presimplify(topology);
+      topology = topojson.simplify(topology, 0.01);
+
+      drawLevel(topology, 1);
+
       load_tempYear(
         tmp_file_prefix + "2020" + tmp_file_suffix,
         default_transition
       );
+
+      n_levels = 2;
 
       //init_dropdown_menu();
       //init_DropDownMenu_slect2();
@@ -577,7 +630,7 @@ function load_map() {
 // ****************************************************** //
 //                   DOVE INIZIA TUTTO                    //
 
-/*
+
 function init_page() {
   // load map
   load_map();
@@ -592,4 +645,4 @@ function init_page() {
 
   init_map_controls();
 }
-*/
+
