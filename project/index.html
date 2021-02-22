@@ -56,153 +56,153 @@
 
 <!------------------------------START MAP------------------------------------------->
 
-<div class="content">
-  
-  <div class="col_wrapper">
-    <div id="map-containter" class="container">
-      <h1 style="text-align: center;">Berkeley Earth Data</h1>
 
-        <div id="all_map" class="col_wrapper">
-          <div class="row_wrapper">
-            <div class="all-slider" id="svg-slider" class="row_wrapper">
-              <div class="col-sm">
-                <div id="sliderYear"></div>
+    <div class="content">
+
+      <div class="col_wrapper">
+        <div id="map-containter" class="container">
+          <h1 style="text-align: center;">Berkeley Earth Data</h1>
+
+          <div id="all_map" class="col_wrapper">
+            <div class="row_wrapper">
+              <div class="all-slider" id="svg-slider" class="row_wrapper">
+                <div class="col-sm">
+                  <div id="sliderYear"></div>
+                </div>
+              </div>
+
+              <div id="menu_selectCountry">
+                <p class="label">
+                  <label for="selectCountryMenu">
+                    Country:
+                    <select id="selectCountryMenu">
+                      <option></option>
+                    </select>
+                  </label>
+                </p>
               </div>
             </div>
 
-            <div id="menu_selectCountry">
-              <p class="label">
-                <label for="selectCountryMenu">
-                  Country:
-                  <select id="selectCountryMenu">
-                    <option></option>
-                  </select>
-                </label>
-              </p>
+            <svg class="view-map" id="svg-map" width="100%">
+              <rect class="background" width="100%" height="100%"></rect>
+
+              <g id="map">
+                <path class="background_globe" d=""></path>
+                <g id="map_graticule"></g>
+              </g>
+
+              <g class="zoom-controls" transform="translate(10, 10)">
+                <g id="zoom-in" transform="translate(0, 0)">
+                  <path class="btn" d=""></path>
+                </g>
+                <g id="zoom-reset" transform="translate(0, 31)">
+                  <rect class="btn" width="5" height="5"></rect>
+                </g>
+                <g id="zoom-out" transform="translate(0, 62)">
+                  <path class="btn" d=""></path>
+                </g>
+                <g id="animation" transform="translate(0,110)">
+                  <path class="btn" d=""></path>
+                </g>
+              </g>
+
+              <g class="col-sm-2">
+                <path d=""></path>
+                <text id="sliderLabel" x="45%" y="27" pointer-events="none"></text>
+              </g>
+            </svg>
+
+            <svg width="100%" height="100%">
+              <g class="legend-anomaly" id="legend-anomaly">
+                <text id="label-legend">Anomaly Temperature (°C)</text>
+                <path d=""></path>
+                <g class="axis-anomaly"></g>
+              </g>
+            </svg>
+            <div class="tooltip-map">
+              <div class="tooltip-name"></div>
+              <div class="tooltip-anomaly"></div>
             </div>
           </div>
+        </div>
 
-          <svg class="view-map" id="svg-map" width="100%">
-            <rect class="background" width="100%" height="100%"></rect>
 
-            <g id="map">
-              <path class="background_globe" d=""></path>
-              <g id="map_graticule"></g>
-            </g>
+        <!------------------------------END MAP------------------------------------------->
 
-            <g class="zoom-controls" transform="translate(10, 10)">
-              <g id="zoom-in" transform="translate(0, 0)">
-                <path class="btn" d=""></path>
-              </g>
-              <g id="zoom-reset" transform="translate(0, 31)">
-                <rect class="btn" width="5" height="5"></rect>
-              </g>
-              <g id="zoom-out" transform="translate(0, 62)">
-                <path class="btn" d=""></path>
-              </g>
-              <g id="animation" transform="translate(0,110)">
-                <path class="btn" d=""></path>
-              </g>
-            </g>
+        <!------------------------------START TAB-MENU LINECHART------------------------------------------->
 
-            <g class="col-sm-2">
-              <path d=""></path>
-              <text id="sliderLabel" x="45%" y="27" pointer-events="none"></text>
-            </g>
-          </svg>
+        <div id="tab-menu-container" class="container">
+          <div class="tab">
+            <span id="dropdown_tab_years">
+              <label>Range-Years:</label>
+              <select name="Dataset" id="rage-year" onchange="changeDataRangeYears()">
+                <option value="five_years">Five-Years</option>
+                <option value="ten_years" selected="selected">Ten-Years</option>
+                <option value="twenty_years">Twenty-Years</option>
+                <option value="annual">Annual</option>
+              </select>
+            </span>
 
-          <svg width="100%" height="100%">
-            <g class="legend-anomaly" id="legend-anomaly">
-              <text id="label-legend">Anomaly Temperature (°C)</text>
-              <path d=""></path>
-              <g class="axis-anomaly"></g>
-            </g>
-          </svg>
-          <div class="tooltip-map">
-            <div class="tooltip-name"></div>
-            <div class="tooltip-anomaly"></div>
+            <button class="tablinks active" id="tab_line" onclick="click_tab(event, 'linechart')">
+              Line Chart
+            </button>
+            <button class="tablinks" id="tab_stripe" onclick="click_tab(event, 'stripechart')">
+              Climate Stripes
+            </button>
+          </div>
+
+          <div id="linechart" class="tabcontent">
+            <div class="tooltip-map" id="tooltip_line"></div>
+          </div>
+
+          <div id="stripechart" class="tabcontent">
+            <div class="tooltip-map" id="tooltip_stripes"></div>
           </div>
         </div>
-      </div>
+        <!------------------------------END TAB-MENU LINECHART------------------------------------------->
 
+        <!------------------------------ START TABLE ------------------------------------------->
 
-      <!------------------------------END MAP------------------------------------------->
+        <div id="table-container-mean-rate" class="container">
 
-      <!------------------------------START TAB-MENU LINECHART------------------------------------------->
-
-      <div id="tab-menu-container" class="container">
-        <div class="tab">
-          <span id="dropdown_tab_years">
-            <label>Range-Years:</label>
-            <select name="Dataset" id="rage-year" onchange="changeDataRangeYears()">
-              <option value="five_years">Five-Years</option>
-              <option value="ten_years" selected="selected">Ten-Years</option>
-              <option value="twenty_years">Twenty-Years</option>
-              <option value="annual">Annual</option>
-            </select>
-          </span>
-
-          <button class="tablinks active" id="tab_line" onclick="click_tab(event, 'linechart')">
-            Line Chart
-          </button>
-          <button class="tablinks" id="tab_stripe" onclick="click_tab(event, 'stripechart')">
-            Climate Stripes
-          </button>
-        </div>
-
-        <div id="linechart" class="tabcontent">
-          <div class="tooltip-map" id="tooltip_line"></div>
-        </div>
-
-        <div id="stripechart" class="tabcontent">
-          <div class="tooltip-map" id="tooltip_stripes"></div>
-        </div>
-      </div>
-      <!------------------------------END TAB-MENU LINECHART------------------------------------------->
-
-      <!------------------------------ START TABLE ------------------------------------------->
-
-      <div id="table-container-mean-rate" class="container">
-
-        <div id="table_container">
-          <h2>Mean Rate of Change ( °C / Year )</h2>
-          <div class="tooltip-map" id="tooltip_table"> </div>
-        </div>
-
-      </div>
-
-      <!------------------------------ END TABLE ------------------------------------------->
-
-      <!------------------------------START HOTTEST-COLDEST LINECHART------------------------------------------->
-
-      <div id="hottest-coldest-container" class="container">
-        
-        <div id="hottest_coldest_chart">
-          <div id="container-h-c">
-            <h2>Temperature Record</h2>
+          <div id="table_container">
+            <h2>Mean Rate of Change ( °C / Year )</h2>
+            <div class="tooltip-map" id="tooltip_table"> </div>
           </div>
-          
-          <div class="tooltip-map" id="tooltip-hot-cold"></div>
-        </div>
-      </div>
 
-      <!------------------------------START HOTTEST-COLDEST LINECHART------------------------------------------->
-
-      <!------------------------------START SEASONAL LINECHART------------------------------------------->
-
-      <div id="seasonal-container" class="container">
-        
-        <div id="seasonal_changes_graphic">
-          <h2>Seasonal Changes</h2>
-          <div class="tooltip-map" id="tooltip-seasonal-changes"> </div>
         </div>
 
-      </div>
+        <!------------------------------ END TABLE ------------------------------------------->
 
-      <!------------------------------END SEASONAL LINECHART------------------------------------------->
+        <!------------------------------START HOTTEST-COLDEST LINECHART------------------------------------------->
+
+        <div id="hottest-coldest-container" class="container">
+
+          <div id="hottest_coldest_chart">
+            <div id="container-h-c">
+              <h2>Temperature Record</h2>
+            </div>
+
+            <div class="tooltip-map" id="tooltip-hot-cold"></div>
+          </div>
+        </div>
+
+        <!------------------------------START HOTTEST-COLDEST LINECHART------------------------------------------->
+
+        <!------------------------------START SEASONAL LINECHART------------------------------------------->
+
+        <div id="seasonal-container" class="container">
+
+          <div id="seasonal_changes_graphic">
+            <h2>Seasonal Changes</h2>
+            <div class="tooltip-map" id="tooltip-seasonal-changes"> </div>
+          </div>
+
+        </div>
+
+        <!------------------------------END SEASONAL LINECHART------------------------------------------->
+      </div>
     </div>
-  </div>
-</div>
 
 <script src="/project/map/slider.js?version=1"></script>
 <script src="/project/map/map_btn.js?version=1"></script>

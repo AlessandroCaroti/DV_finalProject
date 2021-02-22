@@ -144,7 +144,7 @@ function createHottestColdestLineChart(data){
         .append("path")
         .attr("d", zero_line)
              
-    createHotColdLegend("hottest_coldest_chart", hottest_temp, coldest_temp);
+    createHotColdLegend("container-h-c", hottest_temp, coldest_temp);
 
     svg.append("g")
     .attr("transform", "translate(0," + height + ")")
