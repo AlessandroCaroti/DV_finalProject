@@ -427,16 +427,19 @@ table {
 
 /*---------------------------Hottest-Coldest Year style--------------------------------*/
 
-#line_chart_hottest_coldest {
-  border: solid lightgray 1px;
-  width: 900px;
-}
+
 
 #container-h-c {
   border: solid lightgray 1px;
   width: 1200px;
   margin: auto;
   margin-top: 10%;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+#container-h-c h2 {
+  margin-left: 50px;
 }
 
 .text-legend {
@@ -465,7 +468,7 @@ table {
 
 /*---------------------------END Coldest Year style--------------------------------*/
 
-/*---------------------------START SEASONAL STYLE--------------------------------*/
+/*---------------------------START SEASONAL LINECHART STYLE--------------------------------*/
 
 #seasonal_changes_graphic{
 
