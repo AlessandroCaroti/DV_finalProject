@@ -95,13 +95,30 @@ function update_colors(temperatures, time_trasition) {
   temperatures.forEach(function (d) {
     var element = document.getElementById(d.Country);
 
+    if(element == null)
+      return;
+    // find corresponding path in the other layers
+    var elements = map_container.selectAll("path.country")
+              .filter(function(d,i){
+
+                      //console.log(d3.select(this).attr("name") == d3.select(element).attr("name"));
+                      return d3.select(this).attr("name") == d3.select(element).attr("name");
+              });
+
+    
+
     // update anomaly color
-    d3.select(element)
+    /*d3.select(element)
       .transition(temp_transition)
-      .style("fill", colorScale(d["ANOMALY"]));
+      .style("fill", colorScale(d["ANOMALY"]));*/
+    elements.transition(temp_transition)
+                  .style("fill", colorScale(d["ANOMALY"]));
+
 
     // update anomaly value
-    d3.select(element).attr("anomaly", d["ANOMALY"]);
+    //d3.select(element).attr("anomaly", d["ANOMALY"]);
+    elements.attr("anomaly", d["ANOMALY"]);
+
 
     // update tooltip
     let tooltip = d3.select(".tooltip-map");
@@ -142,7 +159,7 @@ function country_events() {
 
     // reset the stroke width to the original one
     var orginal_stroke = borderCountryScale(curr_zoomScale);
-    if (b.properties.name === selected_country) {
+    if (b === selected_country) {
       orginal_stroke = orginal_stroke * selected_stroke;
     }
     d3.select(this).style("stroke-width", orginal_stroke);
@@ -204,8 +221,6 @@ function country_events() {
     $("#selectCountryMenu").val(String(this.id));
     $("#selectCountryMenu").trigger("change");
 
-    console.log(curr_zoomScale);
-    
     debug_log("CLICK ON " + this.id);
     country_selected(this.__data__);
     
@@ -214,7 +229,7 @@ function country_events() {
 }
 
 function country_selected(country) {
-  selected_country = country.properties.name;
+  selected_country = country;
   zoom_in(selected_country);
   
     
@@ -253,6 +268,10 @@ var zoom = d3
 
     // change border width
     update_strokes();
+
+    //shown new level
+    let new_level = levelScale(curr_zoomScale);
+    showLevel(new_level);
   })
   .on("end", function (event) {
     // show tooltip if hovering a country
@@ -262,9 +281,7 @@ var zoom = d3
       d3.select(".tooltip-map").style("display", "block");
 
     
-    //shown new level
-    let new_level = levelScale(curr_zoomScale);
-    showLevel(new_level);
+    
   });
 
 function reset_zoom() {
@@ -368,7 +385,6 @@ function drawLevel(world, level) {
     .append("path")
     .attr("class", "country")
     .attr("id", (d) => {
-      country_list_map.push(d.properties.name);
       if (level == 0)
         return d.properties.name;
       return "";
@@ -383,18 +399,16 @@ function drawLevel(world, level) {
 
 function showLevel(level) {
 
-  //
+  // do nothing if same level
   if(level == cur_level)
     return;
 
   // current level shown
   cur_level = level;
 
-  let highlighted = map_container.select(".selected_country");
-  highlighted.classed("selected_country", false);
-
 
   // update colors
+  /*
   map_container.select("g#level_" + level)
     .selectAll("path.country")
     .each(function () {
@@ -414,7 +428,7 @@ function showLevel(level) {
           return unknown_temp;
         });
     });
-
+*/
 
   // define the transition
   var temp_transition = d3
@@ -428,7 +442,8 @@ function showLevel(level) {
     .classed("hidden_level", true)
     .selectAll("path.country")
     .attr("id", "")
-    .transition(temp_transition)
+    .transition()
+    .duration(5000)
     .style("opacity", 0);
 
   // display the level
@@ -436,37 +451,34 @@ function showLevel(level) {
     .classed("shown_level", true)
     .classed("hidden_level", false)
     .selectAll("path.country")
-    .classed("selected_country", function(){
-      let elem = d3.select(this);
-      return elem.attr("name") == selected_country;
-    })
     .each(function () {
 
       let elem = d3.select(this);
       elem.attr("id", elem.attr("name"))
     })
-    .transition(temp_transition)
+    //.raise()
+    .transition()
+    .duration(400)
     .style("opacity", 1);
-  
-  // update highlighted country path
 
-  //console.log(document.getElementById(highlighted.attr("name")))
-  
-  // fake click()
-  /*var evObj = document.createEvent("Events");
-  evObj.initEvent("click", true, false);
-  document.getElementById(highlighted.attr("name")).dispatchEvent(evObj);*/
-  
-  /*d3.select(document.getElementById(selected_country))
-                                    .classed("selected_country", true);
-
-            */
-  
-  
 
   // create events on new elements
   country_events();
 
+  // update highlighted country path
+  let highlighted = map_container.select(".selected_country");
+
+  if(highlighted.empty())
+    return;
+  
+  highlighted.classed("selected_country", false);
+
+  let new_selected = document.getElementById(highlighted.attr("name"))
+
+  d3.select(new_selected)
+          .classed("selected_country", true);
+
+  selected_country = new_selected.__data__;
 }
 
 
@@ -613,10 +625,14 @@ function changeCountry(name) {
 // ******************************************************** //
 //                   START FILES LOADING                    //
 
-function load_tempYear(temp_file, time_transition) {
+function load_tempYear(year, time_transition) {
+  temp_file = tmp_file_prefix + year + tmp_file_suffix;
   d3.csv(temp_file)
     .then(function (data) {
       console.log("LOAD TEMP: " + temp_file);
+
+      // curret year 
+      cur_year = year;
 
       data.forEach((d) => {
         d.ANOMALY = parseFloat(d.Anomaly);
@@ -651,8 +667,7 @@ function load_map() {
 
       drawLevel(topology, 1);
 
-      load_tempYear(
-        tmp_file_prefix + "2020" + tmp_file_suffix,
+      load_tempYear("2020",
         default_transition
       );
 
