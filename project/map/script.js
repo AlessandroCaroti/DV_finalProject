@@ -12,6 +12,7 @@ var colorScale;
 var unknown_temp = "#999999"; // color indicating there is no data for such country in that year
 var default_transition = 500;
 var n_levels;
+var cur_level;
 //var colorsRange = ["blue", "white", "red"];
 
 var geoGenerator;
@@ -205,14 +206,21 @@ function country_events() {
     $("#selectCountryMenu").val(String(this.id));
     $("#selectCountryMenu").trigger("change");
 
-    debug_log("CLICK ON " + this.id);
-    country_selected(this.__data__);
+    console.log(curr_zoomScale);
+    
+    if(curr_zoomScale != max_zoom){
+      debug_log("CLICK ON " + this.id);
+      country_selected(this.__data__);
+    }
+    
   });
 }
 
 function country_selected(country) {
   selected_country = country;
   zoom_in(selected_country);
+  
+    
 }
 
 //                 END FUNCTION FOR THE MAP                 //
@@ -242,7 +250,7 @@ var zoom = d3
 
     // change border width
     update_strokes(curr_zoomScale);
-
+    
     //shown new level
     let new_level = levelScale(curr_zoomScale);
     showLevel(new_level);
@@ -254,6 +262,8 @@ var zoom = d3
 
     if (!cur_country.empty())
       d3.select(".tooltip-map").style("display", "block");
+
+    
 
   });
 
@@ -356,11 +366,15 @@ function drawLevel(world, level) {
       return "";
     })
     .attr("name", d => d.properties.name)
-    .attr("d", geoGenerator)
+    .attr("d", geoGenerator);
 }
 
 
 function showLevel(level) {
+
+  console.log("PINOH");
+  let highlighted = map_container.select(".selected_country");
+  console.log(highlighted.empty())
 
   // update colors
   map_container.select("g#level_" + level)
@@ -404,6 +418,10 @@ function showLevel(level) {
     .classed("shown_level", true)
     .classed("hidden_level", false)
     .selectAll("path.country")
+    .classed("selected_country", function(){
+      let elem = d3.select(this);
+      return elem.attr("name") == selected_country;
+    })
     .each(function () {
 
       let elem = d3.select(this);
@@ -413,14 +431,18 @@ function showLevel(level) {
     .style("opacity", 1);
   
   // update highlighted country path
-  let highlighted = map_container.select(".selected_country");
+
+  //console.log(document.getElementById(highlighted.attr("name")))
   
-  console.log(highlighted.attr("name"))
+  // fake click()
+  /*var evObj = document.createEvent("Events");
+  evObj.initEvent("click", true, false);
+  document.getElementById(highlighted.attr("name")).dispatchEvent(evObj);*/
   
-  d3.select(document.getElementById(highlighted.attr("name")))
+  /*d3.select(document.getElementById(selected_country))
                                     .classed("selected_country", true);
 
-            
+            */
   highlighted.classed("selected_country", false);
   
 
@@ -614,7 +636,7 @@ function load_map() {
         default_transition
       );
 
-      n_levels = 2;
+      n_levels = 1;
 
       //init_dropdown_menu();
       //init_DropDownMenu_slect2();
