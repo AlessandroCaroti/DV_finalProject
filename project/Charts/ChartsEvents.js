@@ -95,15 +95,16 @@ function stripesEnter(event, d) {
 
   var range_year =  document.getElementById('rage-year').value;
   var tooltip = d3.select("#stripechart .tooltip-map");
+  console.log(d)
   tooltip.transition();
   var tipText = String(
     "<p style='text-align: center; font-weight: bold; font-size: 13px'> " +
-      d.date.getFullYear() +
+      d.Year +
       "</p>" +"<p style='text-align: center; font-weight: bold; font-size: 12px'> "+
       d[range_year+"_anomaly"].toFixed(2) +
       " &deg;C " +
-      " &plusmn; " +
-      d[range_year+"_unc"].toFixed(2) +
+      
+      (isNaN( d[range_year+"_anomaly"])?"": (" &plusmn; " + d[range_year+"_unc"].toFixed(2) )) +
       " </p>"
   );
 
