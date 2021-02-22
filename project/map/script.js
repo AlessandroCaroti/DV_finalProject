@@ -295,7 +295,7 @@ function zoom_in(country) {
     });
 }
 
-function update_middle_zoomBtn(){
+function update_middle_zoomBtn() {
   if (!initial_view) {
     set_globe_icon();
   } else if (selected_country != null) {
@@ -444,6 +444,10 @@ function init_DropDownMenu_slect2() {
           if ($(this).data("unselecting")) {
             $(this).removeData("unselecting");
             e.preventDefault();
+
+            reset_zoom();
+            d3.select(".selected_country").classed("selected_country", false);
+            selected_country = null;
           }
         })
         .on("select2:select", function (e) {
@@ -510,9 +514,6 @@ function load_map() {
         tmp_file_prefix + "2020" + tmp_file_suffix,
         default_transition
       );
-
-      //init_dropdown_menu();
-      //init_DropDownMenu_slect2();
     })
     .catch((error) => {
       console.log(error);
