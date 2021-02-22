@@ -92,19 +92,20 @@ function removeTooltipLineChart(tooltipLine, id_chart) {
 //--------------------------------STRIPE CHART TOOLTIP----------------------------------------
 
 function stripesEnter(event, d) {
+
+  var range_year =  document.getElementById('rage-year').value;
   var tooltip = d3.select("#stripechart .tooltip-map");
+
   tooltip.transition();
   var tipText = String(
-    "<b> Year: " +
-      d.date.getFullYear() +
-      "<br/>" +
-      "<br/>" +
-      "Annual Avg.  Anomaly: " +
-      d.annual_anomaly.toFixed(2) +
+    "<p style='text-align: center; font-weight: bold; font-size: 13px'> " +
+      d.Year +
+      "</p>" +"<p style='text-align: center; font-weight: bold; font-size: 12px'> "+
+      d[range_year+"_anomaly"].toFixed(2) +
       " &deg;C " +
-      " &plusmn; " +
-      d.annual_unc.toFixed(2) +
-      " </b>"
+      
+      (isNaN( d[range_year+"_anomaly"])?"": (" &plusmn; " + d[range_year+"_unc"].toFixed(2) )) +
+      " </p>"
   );
 
   tooltip

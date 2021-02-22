@@ -1,6 +1,6 @@
 
 var sliderAlternativeHandle;
-var step_slider; 
+var step_slider;
 var min_slider;
 var max_slider;
 var id_slider = "draggable";
@@ -47,27 +47,28 @@ function init_slider(min, max, step) {
   d3.select("div#sliderYear")
     .select("g .parameter-value")
     .select("text")
-    .attr("y", -35);
+    .attr("y", -35)
+    .classed("hover", false)
+    .classed("not-hover", true);
 
-  
   // setting an id to the slider
   d3.select("g.parameter-value").select("path")
-                                .attr("id", id_slider);
-  
+    .attr("id", id_slider);
+
   // scroll wheel event
   d3.select("#sliderYear")
-    .on("mousewheel", function(event){
+    .on("mousewheel", function (event) {
 
       // da gestire in modo diverso, col mouse si muove di due in due
       let val = sliderAlternativeHandle.value();
       let move_step = wheelDistance(event);
       let next_val = parseInt(val + move_step);
 
-      if(next_val == val)
+      if (next_val == val)
         return;
-      
 
-      if(next_val > max_slider)
+
+      if (next_val > max_slider)
         next_val = max_slider;
 
       if (next_val < min_slider)
@@ -78,29 +79,45 @@ function init_slider(min, max, step) {
       load_tempYear(tmp_file_prefix + next_val + tmp_file_suffix, default_transition);
       d3.select("#sliderLabel").text("Year: " + next_val);
 
+    })
+    .on("mouseenter", function () {
+      d3.select("div#sliderYear")
+        .select("g .parameter-value")
+        .select("text")
+        .attr("y", -35)
+        .classed("hover", true)
+        .classed("not-hover", false);
+    })
+    .on("mouseleave", function(){
+      d3.select("div#sliderYear")
+        .select("g .parameter-value")
+        .select("text")
+        .attr("y", -35)
+        .classed("hover", false)
+        .classed("not-hover", true);
     });
-    
+
 }
 
-function control_animation(){
+function control_animation() {
 
 
   // function is running and can be STOPPED
-  if(typeof animation_func != "undefined" ){
+  if (typeof animation_func != "undefined") {
     stop_animation();
     // make visible play buttom 
     play();
   }
-  else{
+  else {
     // no function is instanciated so START
     start_animation();
     // make visible stop button
     stop();
   }
-  
+
 }
 
-function start_animation(){
+function start_animation() {
   var total_milliseconds = animation_duration * 60000; // 60000 milliseconds in one minute
   var time_wait = total_milliseconds / ((max_slider - min_slider) / step_slider); //  total time / (N° years) 
   cur_year = min_slider;
@@ -112,7 +129,7 @@ function start_animation(){
   animation_func = setInterval(animation_years, time_wait, time_wait);
 }
 
-function stop_animation(){
+function stop_animation() {
 
   // stop animation
   clearInterval(animation_func);
@@ -127,7 +144,7 @@ function stop_animation(){
 }
 
 
-function increment_step_slider(transition_time){
+function increment_step_slider(transition_time) {
 
   // set new value
   d3.select("#sliderLabel").text("Year: " + cur_year);
@@ -139,39 +156,39 @@ function increment_step_slider(transition_time){
 }
 
 
-async function animation_years(trasition_time){
-  
+async function animation_years(trasition_time) {
+
   let year = await increment_step_slider(trasition_time);
 
   // at the end of the animation
   if (year == max_slider + step_slider)
     stop_animation();
-  
+
 }
 
-function disable_slider(){
-   
+function disable_slider() {
+
   d3.select("#svg-slider").style("pointer-events", "none");
   // change opacity 
   d3.select("#svg-slider").style("opacity", "0.5");
 }
 
-function enable_slider(){
+function enable_slider() {
   d3.select("#" + id_slider).style("pointer-events", "auto");
   d3.select("#svg-slider").style("opacity", "1.0");
 }
 
 
-function wheelDistance(e) { 
+function wheelDistance(e) {
   //console.log(e); 
-  if (!e) { 
-      e = window.event; 
-  } 
-  var w = e.wheelDeltaY, 
-      d = e.detail; 
-  if (d) { 
-      return -d / 3; // Firefox; 
-  } 
+  if (!e) {
+    e = window.event;
+  }
+  var w = e.wheelDeltaY,
+    d = e.detail;
+  if (d) {
+    return -d / 3; // Firefox; 
+  }
   //console.log(w);
 
   /*if(w > 0){
@@ -179,5 +196,5 @@ function wheelDistance(e) {
   }*/
 
   // IE, Safari, Chrome & other browsers 
-  return w / 120; 
+  return w / 120;
 } 

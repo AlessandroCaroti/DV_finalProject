@@ -48,7 +48,6 @@ function drawMap(world) {
     .scale(140)
     .translate([bBox.width / 2, h_map / 2]);
 
-
   geoGenerator = d3.geoPath().projection(projection);
 
   drawGlobeBackground();
@@ -62,7 +61,6 @@ function drawMap(world) {
   //Define the events of the countries(Es, mouseover, click...)
   country_events();
 }
-
 
 function drawGridlines() {
   var graticule = d3.geoGraticule();
@@ -128,7 +126,7 @@ function update_colors(temperatures, time_trasition) {
 
 function country_events() {
   //MOUSE-OVER EVENT: highlighted country when the mouse is over
-  map_container.selectAll(".country").on("mouseenter", function (event, b) {
+  map_container.selectAll(".country").on("mouseenter", function () {
     d3.select(this)
       .raise()
       .classed("highlighted_country", true)
@@ -230,8 +228,7 @@ function country_selected(country) {
 var max_zoom = 8;
 var zoomIn_scale = 1.2,
   zoomOut_scale = 0.8,
-  curr_zoomScale = 1,
-  zommed = false;
+  curr_zoomScale = 1;
 
 
 var zoom = d3
@@ -240,7 +237,14 @@ var zoom = d3
   .on("zoom", (event) => {
     curr_zoomScale = event.transform.k;
 
-    zommed = curr_zoomScale != 1.0;
+    if (curr_zoomScale != 1) {
+      initial_view = false;
+    } else {
+      initial_view = event.transform.x + event.transform.y == 0;
+    }
+    console.log(initial_view);
+    update_middle_zoomBtn();
+
     //map_container.attr("transform", event.transform);
     map_container.selectAll("path").attr("transform", event.transform);
 
@@ -248,10 +252,7 @@ var zoom = d3
     d3.select(".tooltip-map").style("display", "none");
 
     // change border width
-    update_strokes(curr_zoomScale);
-    
-    
-
+    update_strokes();
   })
   .on("end", function (event) {
     // show tooltip if hovering a country
@@ -300,6 +301,14 @@ function zoom_in(country) {
     });
 }
 
+function update_middle_zoomBtn() {
+  if (!initial_view) {
+    set_globe_icon();
+  } else if (selected_country != null) {
+    no_zoom();
+  }
+}
+
 //                      END ZOOM SECTION                    //
 // ******************************************************** //
 // ******************************************************** //
@@ -314,7 +323,7 @@ var borderCountryScale = d3
 
 var widthGridScale = d3.scaleLinear().domain([1, max_zoom]).range([0.3, 0.2]);
 
-function update_strokes(new_val) {
+function update_strokes() {
   var new_strokeWidth = borderCountryScale(curr_zoomScale);
   //update country
   map_container
@@ -465,6 +474,7 @@ function showLevel(level) {
 // ******************************************************** //
 // ******************************************************** //
 //                START FUNCTION MAP OVERLAY                //
+var initial_view = true;
 
 function init_map_controls() {
   init_zoomBtns();
@@ -473,14 +483,11 @@ function init_map_controls() {
 }
 
 function changeView() {
-  console.log(zommed);
-  if (zommed) {
+  if (!initial_view) {
     debug_log("RESET_ZOOM");
-    no_zoom();
     reset_zoom();
   } else if (selected_country != null) {
     debug_log("ZOOM COUNTRY");
-    local_zoom();
     zoom_in(selected_country);
   }
 }
@@ -529,7 +536,7 @@ function init_yearSpace() {
   d3.select(".col-sm-2")
     .select("path")
     .attr("d", roundedFigure_1(x, -1, w_1, w_2, 37))
-    .style("fill", "rgb(202, 202, 202)")
+    .style("fill", "rgb(243, 243, 243)")
     .style("stroke", "black")
     .style("stroke-width", 1.5);
 }
@@ -569,6 +576,10 @@ function init_DropDownMenu_slect2() {
           if ($(this).data("unselecting")) {
             $(this).removeData("unselecting");
             e.preventDefault();
+
+            reset_zoom();
+            d3.select(".selected_country").classed("selected_country", false);
+            selected_country = null;
           }
         })
         .on("select2:select", function (e) {
@@ -645,10 +656,8 @@ function load_map() {
         default_transition
       );
 
-      n_levels = 1;
+      n_levels = 2;
 
-      //init_dropdown_menu();
-      //init_DropDownMenu_slect2();
     })
     .catch((error) => {
       console.log(error);

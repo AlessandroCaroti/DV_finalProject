@@ -401,7 +401,6 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp){
                       .attr("id","legend_hot_cold")
                       .attr("width", 270)
                       .attr("height", 500)
-                      .attr("transform", "translate("+(width-450)+","+ (-(height)+15)+")")
                       .append("g")
     var curX = 50;
     var curY = 25;

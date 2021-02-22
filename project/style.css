@@ -8,6 +8,7 @@ body {
   min-width: 200px;
   max-width: 300px;
   display: inline-block;
+  text-align-last: left;
 }
 .select2-search--dropdown .select2-search__field {
   width: 98%;
@@ -39,13 +40,13 @@ svg text::selection {
 }
 
 .btn {
-  fill: rgb(202, 202, 202);
+  fill: rgb(243, 243, 243);
   stroke: black;
   stroke-width: 0.8;
 }
 
 .btn:hover {
-  fill: rgb(243, 243, 243);
+  fill: rgb(202, 202, 202);
 }
 
 .background {
@@ -59,14 +60,17 @@ svg text::selection {
 }
 
 .content {
-  margin: auto;
-  width: 70%;
-  padding: 10px;
+  margin: 0 auto;
+  /*width: 70%;*/
+  /*padding-right: 10px;*/
   align-items: center;
   align-content: center;
-  left: 50%;
-  right: 50%;
+  /*left: 50%;
+  right: 50%;*/
   background: white;
+  /*height: 650px;
+  /*-ms-transform: translateY(-50%);
+  transform: translateY(-50%);*/
 }
 
 .country {
@@ -116,8 +120,12 @@ span {
   fill: #ececec;
 }
 
-.parameter-value text {
+.hover {
   font-size: 30px;
+}
+
+.not-hover {
+  font-size: 0px;
 }
 
 .col-sm-2 {
@@ -127,6 +135,8 @@ span {
 .label {
   font-size: 22px;
   padding-top: 10px;
+  padding-right: 10px;
+  text-align: right;
 }
 
 .tick text {
@@ -198,13 +208,12 @@ text#label-legend {
   float: center;
   width: 900px;
   height: 500px;
-
 }
 
 .tab {
   overflow: hidden;
-  margin-top: 10%;
-  margin-left: 20%;
+
+  margin-left: 6%;
 
 }
 
@@ -248,31 +257,32 @@ text#label-legend {
 /* Style the tab content */
 .tabcontent {
   border: 1px solid #ccc;
-  border-radius: 0px 20px 20px;
-  width: 900px;
-  height: 500px;
-  margin-left: 20%;
+  border-radius: 20px;
+  width: 950px;
+  height: auto;
+  padding: 50px 50px 50px 50px;
+  margin-left: 10%;
  
 }
 
-#stripechart {
-  display: none;
+#range-years-buttons-container{
+
+  width: 500px;
+  height: 200px;
+  border: #000 solid 1px;
+  margin-left: 21%;
 }
 
-#stripechart svg{
+#rage-year{
 
-  margin-top: 10%
+  margin-top: 45%;
 }
+
+
 
 /*--------------------------------- END TAB MENU STYLE -------------------------------------*/
 
 /*------------------- LINECHART STYLE -------------------------------*/
-
-.graphics {
-  width: 900px;
-  height: 500px;
-  margin: 12px;
-}
 
 
 .graphics .line_chart_annual {
@@ -280,7 +290,6 @@ text#label-legend {
   stroke: steelblue;
   fill: none;
 }
-
 
 .graphics .line_chart_range_years {
   stroke-width: 2px;
@@ -298,28 +307,17 @@ text#label-legend {
 #linechart .tooltip-map {
   text-align: left;
 }
-#linechart{
+#linechart {
   padding: 50px;
- 
 }
-#linechart svg{
-
-  margin-left: 2%;
-}
-
 
 .uncertainty {
   fill: lightgray;
   stroke: none;
 }
 
-#dropdown_tab {
-  margin: auto;
-}
 
-#tab-menu {
-  margin-top: 100px;
-}
+
 
 /* -----------------------------END CHART STYLE--------------------------------------*/
 
@@ -364,7 +362,7 @@ text.legend {
   width: 950px;
   height: auto;
   margin: auto;
-  margin-top: 20%;
+  
 }
 
 .mean_rate {
@@ -391,10 +389,8 @@ table {
   overflow: hidden;
 }
 
-.tbody_table td{
-  
+.tbody_table td {
   padding: 25px;
-
 }
 .rows_table {
   font-family: sans-serif;
@@ -425,6 +421,10 @@ table {
   font-weight: bold;
 }
 
+#table_container h2 {
+  margin-left: 5%;
+}
+
 .region_cell {
   border: solid #2e4053 2.5px;
   border-top: none;
@@ -440,16 +440,17 @@ table {
 
 /*---------------------------Hottest-Coldest Year style--------------------------------*/
 
-#line_chart_hottest_coldest {
-  border: solid lightgray 1px;
-  width: 900px;
-}
-
 #container-h-c {
   border: solid lightgray 1px;
   width: 1200px;
   margin: auto;
   margin-top: 10%;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+#container-h-c h2 {
+  margin-left: 5%;
 }
 
 .text-legend {
@@ -461,6 +462,7 @@ table {
   border: solid lightgray 1px;
   border-radius: 10px;
   box-shadow: 0 0 7px #333333;
+  margin:auto;
 }
 
 .title-legend-h-c {
@@ -478,14 +480,7 @@ table {
 
 /*---------------------------END Coldest Year style--------------------------------*/
 
-/*---------------------------START SEASONAL STYLE--------------------------------*/
-
-#seasonal_changes_graphic{
-
-  margin-left: 20%;
-  margin-top: 10%;
-}
-
+/*---------------------------START SEASONAL LINECHART STYLE--------------------------------*/
 
 
 .line-seasonal-baseline {
@@ -523,35 +518,42 @@ table {
 .grid path {
   stroke-width: 0;
 }
+
+#seasonal_changes_graphic h2 {
+  margin-left: 5%;
+}
+#seasonal_changes_graphic{
+  
+    margin-left: 20%;
+}
+
 /*---------------------------END SEASONAL STYLE--------------------------------*/
-
-
 
 /*STYLE FINAL HTML*/
 
-.container{
-
+.container {
   width: 1500px;
-  height: 900px;
-
-  border: solid black 1px;
-  margin: auto;
-  margin-top: 50px;
+  height: auto;
+  padding: 2%;
+  margin: 0 auto; 
+  align-items: center;
+  align-content: center;
 }
 
-.container h1{
-  margin-top: 25%;
-  margin-left: 20%;
-}
 
-#dropdown_tab_years{
+#dropdown_tab_years {
   display: inline-block;
   vertical-align: middle;
   margin-left: 20%;
- 
 }
 
-*{
+* {
   font-family: sans-serif;
 }
 
+
+#content{
+  width: auto;
+  align-items: center;
+  align-content: center;
+}
