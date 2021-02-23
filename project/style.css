@@ -180,6 +180,26 @@ text#label-legend {
   font-weight: bold;
 }
 
+/* styles to manage tranision display*/
+
+.shown_level{
+
+  display: block;
+}
+
+.hidden_level{
+  display: none;
+  /*transition: opacity 1s ease;*/
+}
+
+
+
+.level-transition {
+	transition: opacity 1s ease;
+}
+
+
+
 /* TAB MENU LINECHART */
 
 /*--------------------------------- TAB MENU STYLE -------------------------------------*/
