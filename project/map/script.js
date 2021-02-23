@@ -93,15 +93,24 @@ function update_colors(temperatures, time_trasition) {
 
   // set new anomalies
   temperatures.forEach(function (d) {
+
+
+    // update global anomaly label
+    if(d.Country == "Global Land"){
+      
+      d3.select("#global-anomaly-data")
+            .html(parseFloat(d["ANOMALY"]).toFixed(2) + "°C");
+    }
+
     var element = document.getElementById(d.Country);
 
     if(element == null)
       return;
+
     // find corresponding path in the other layers
     var elements = map_container.selectAll("path.country")
               .filter(function(d,i){
-
-                      return d3.select(this).attr("name") == d3.select(element).attr("name");
+                    return d3.select(this).attr("name") == d3.select(element).attr("name");
               });
 
     

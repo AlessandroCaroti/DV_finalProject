@@ -106,9 +106,22 @@ function set_colorScale(){
             .attr("x", ((w_map / bar_step) + 32))
             .attr("y", "-15")
             .style("fill", "black")
-            .html("Anomaly Temperature (°C)")
-
+            //.html("Anomaly Temperature (°C)")
             .raise();
+    
+    d3.select("#global-anomaly")
+              .attr("x", width_legend + 2 * (width_legend / n_ticks) + 150)
+              .attr("y", "0")
+              .style("fill", "black")
+              .style("font-size", "15px")
+              .style("font-weight", "bold");
+    
+    d3.select("#global-anomaly-data")
+              .attr("x", width_legend + 2 * (width_legend / n_ticks) + 240)
+              .attr("y", "0")
+              .style("fill", "black")
+              .style("font-size", "15px")
+              .style("font-weight", "bold");
 
     //init_legendSpace();
   }
