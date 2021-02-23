@@ -454,7 +454,8 @@ function showLevel(level) {
 
   d3.select(new_selected)
           .classed("selected_country", true)
-          .style("stroke-width", borderCountryScale(curr_zoomScale) * selected_stroke);
+          .style("stroke-width", borderCountryScale(curr_zoomScale) * selected_stroke)
+          .raise();
 
   selected_country = new_selected.__data__;
 }
@@ -610,7 +611,7 @@ function load_tempYear(year, time_transition) {
       console.log("LOAD TEMP: " + temp_file);
 
       // curret year 
-      cur_year = year;
+      //cur_year = year;
 
       data.forEach((d) => {
         d.ANOMALY = parseFloat(d.Anomaly);
