@@ -267,9 +267,8 @@ text#label-legend {
 
 #range-years-buttons-container{
 
-  width: 500px;
-  height: 200px;
-  border: #000 solid 1px;
+  width: auto;
+  height: auto;
   margin-left: 21%;
 }
 
@@ -279,6 +278,29 @@ text#label-legend {
 }
 
 
+.btn-range{
+  background-color: rgb(243, 243, 243); /* Green */
+  border: solid black 0.5px;
+  margin: none;
+  padding: 15px 32px;
+  stroke: black;
+  stroke-width: 0.8;
+
+  
+}
+
+.btn-range:focus{
+  
+  outline-style: solid;
+  outline: 0.5px;
+
+}
+
+.btn-range:active{
+  outline-style: solid;
+  outline: 0.5px;
+  background-color: #777;
+}
 
 /*--------------------------------- END TAB MENU STYLE -------------------------------------*/
 

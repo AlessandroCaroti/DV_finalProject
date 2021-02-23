@@ -138,21 +138,19 @@
         <!------------------------------END MAP------------------------------------------->
       
         <!------------------------------START CLIMATE STRIPES------------------------------------------->
+  
+        
         <div id="climate-stripes-linechart-container" class="container"> 
-
-         
+ 
 
             <div id="stripes-line-content" class="tabcontent">
               <div id="range-years-buttons-container">
-              <span id="dropdown_tab_years">
-                <label>Range-Years:</label>
-                <select name="Dataset" id="rage-year" onchange="changeDataRangeYears()">
-                  <option value="five_years">Five-Years</option>
-                  <option value="ten_years" selected="selected">Ten-Years</option>
-                  <option value="twenty_years">Twenty-Years</option>
-                  <option value="annual">Annual</option>
-                </select>
-              </span>
+             
+                <button value="annual" class="btn-range" id="btn1" onclick="changeDataRangeYears(this.id)">Annual</button>
+                <button value="five_years" class="btn-range" id="btn2" onclick="changeDataRangeYears(this.id)">Five-Year</button>
+                <button value="ten_years" class="btn-range active" id="btn2" onclick="changeDataRangeYears(this.id)">Ten-Year</button>
+                <button value="twenty_years" class="btn-range" id="btn3"onclick="changeDataRangeYears(this.id)">Twenty-Years</button>
+             
             </div>
          
           

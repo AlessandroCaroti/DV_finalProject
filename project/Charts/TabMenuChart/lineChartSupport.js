@@ -1,7 +1,7 @@
 
-function changeDataRangeYears() {
+function changeDataRangeYears(BtnId) {
 
-    var dataFile = document.getElementById("selectCountryMenu").value;
+    var dataFile = document.getElementById(BtnId).value;
     var folder;
     
     if(dataFile == ""){
@@ -45,11 +45,24 @@ function changeDataRangeYears() {
   }
 
 
+function getSelectedButton(){
+  var num = null;
+  var ele = document.querySelectorAll("#range-years-buttons-container > button.btn-range");
+  console.log(ele)
+  for(var i=0; i<ele.length; i++){
+    console.log("SSSSSSS",ele[i])
+      ele[i].addEventListener("click", function(){
+          
+      });
+}
+}
+
 
 
 //Draw the area that represents the uncertainty of the temperature measurement
 function drawUncertainty(data, svg, x, y){
     
+ 
     var range_year =  document.getElementById('rage-year').value; 
 
     var areaUncGenerator = d3.area()
@@ -166,6 +179,8 @@ function getLineGenerators(x, y){
 
 
 function createDefaultLineChart(data){
+
+  getSelectedButton();
 
     var svg = d3.select("#linechart")
                 .append("svg")
