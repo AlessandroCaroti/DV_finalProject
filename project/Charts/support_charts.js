@@ -47,7 +47,7 @@ function allDeafaultDataset() {
     dataFile = "Global Land";
     folder = "regions";
   } else folder = "counties";
-
+  console.log("agahahaha")
   //initBaselineAndInfo(dataFile, true);
   var csv =
     "/../../data/" + folder + "/" + dataFile + "/" + dataFile +"_anomalyTable.csv";
