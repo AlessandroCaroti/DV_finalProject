@@ -10,13 +10,6 @@
 // define the anomaly color space
 function set_colorScale(){
     //GLOBAL MIN & MAX
-    // [-2.998, +3.7969999999999997]
-  
-    /*var colorScale = d3
-      .scaleLinear()
-      //.domain([-5, 0, +5])
-      .domain([-3.0, 0, +3.8])
-      .range(colorsRange);*/
 
     var colorBase = d3.scaleDiverging(t => d3.interpolateRdBu(1 - t))
                                                     .domain([min_scale, 0, max_scale]);
@@ -45,8 +38,9 @@ function set_colorScale(){
     
     // axis quantization
     let ticks = Array.from(ranges_scale);
+    let bar_step = width_legend/parseFloat(step_color_list.length)
 
-    let step_bar_list = d3.range(0, width_legend +  width_legend/parseFloat(step_color_list.length), width_legend/parseFloat(step_color_list.length)).map(d => parseFloat(d.toFixed(2)) );
+    let step_bar_list = d3.range(0, width_legend + bar_step , bar_step).map(d => parseFloat(d.toFixed(2)) );
     
     var quantizeBarScale = d3.scaleQuantize()
                                   .domain([min_scale, max_scale])
@@ -57,9 +51,9 @@ function set_colorScale(){
                                         .tickFormat(d3.format(".2f"))
                                         .tickSize(-10);
 
-    var axis = d3.select('.axis-anomaly')
+    var axis = d3.select('.legend-anomaly')
     // generate axis
-    axis.attr("transform", "translate(" +  ((width_legend / 2) + 90) +","+ 25  +" )") //.attr("transform", "translate(" + (500 -width_legend / 2) +","+ 485  +" )")
+    axis.attr("transform", "translate(" +  ( w_map/2 + bar_step ) +","+ 25  +" )") //.attr("transform", "translate(" + (500 -width_legend / 2) +","+ 485  +" )")
             .call(anomaly_axis);
 
     // draw bars
@@ -109,9 +103,12 @@ function set_colorScale(){
 
     // move label
     d3.select("#label-legend")
-            .attr("x", ((width_legend / 2) + 90))
-            .attr("y", "11")
-            .moveToFront();
+            .attr("x", ((w_map / bar_step) + 32))
+            .attr("y", "-15")
+            .style("fill", "black")
+            .html("Anomaly Temperature (°C)")
+
+            .raise();
 
     //init_legendSpace();
   }

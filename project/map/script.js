@@ -7,12 +7,12 @@ const h_map = 500;
 
 var projection;
 var map_container;
-var colorsRange = ["rgb(5, 48, 97)", "white", "rgb(103, 0, 31)"];
+//var colorsRange = ["rgb(5, 48, 97)", "white", "rgb(103, 0, 31)"];
 var colorScale;
 var unknown_temp = "#999999"; // color indicating there is no data for such country in that year
 var default_transition = 500;
-var map_data;
-var context;
+var n_levels;
+var cur_level;
 //var colorsRange = ["blue", "white", "red"];
 
 var geoGenerator;
@@ -32,6 +32,9 @@ countries_file = "../../data/15_countries_list.csv";
 // ******************************************************** //
 //                START FUNCTION FOR THE MAP                //
 
+
+
+
 function drawMap(world) {
   debug_log("DRAW-MAP");
 
@@ -49,18 +52,8 @@ function drawMap(world) {
 
   drawGlobeBackground();
 
-  // Draw the background (country outlines)
-  map_container
-    .selectAll("path.country")
-    .data(topojson.feature(world, world.objects.countries).features)
-    .enter()
-    .append("path")
-    .attr("class", "country")
-    .attr("id", (d) => {
-      country_list_map.push(d.properties.name);
-      return d.properties.name;
-    })
-    .attr("d", geoGenerator);
+  // draw first level
+  drawLevel(world, 0)
 
   // Draw gridlines
   drawGridlines();
@@ -90,6 +83,7 @@ function drawGlobeBackground() {
     .attr("d", geoGenerator);
 }
 
+
 function update_colors(temperatures, time_trasition) {
   // define the transition
   var temp_transition = d3
@@ -101,13 +95,22 @@ function update_colors(temperatures, time_trasition) {
   temperatures.forEach(function (d) {
     var element = document.getElementById(d.Country);
 
-    // update anomaly color
-    d3.select(element)
-      .transition(temp_transition)
-      .style("fill", colorScale(d["ANOMALY"]));
+    if(element == null)
+      return;
+    // find corresponding path in the other layers
+    var elements = map_container.selectAll("path.country")
+              .filter(function(d,i){
 
-    // update anomaly value
-    d3.select(element).attr("anomaly", d["ANOMALY"]);
+                      return d3.select(this).attr("name") == d3.select(element).attr("name");
+              });
+
+    
+    elements.transition(temp_transition)
+                  .style("fill", colorScale(d["ANOMALY"]));
+
+
+    elements.attr("anomaly", d["ANOMALY"]);
+
 
     // update tooltip
     let tooltip = d3.select(".tooltip-map");
@@ -197,7 +200,13 @@ function country_events() {
       "stroke-width",
       borderCountryScale(curr_zoomScale)
     );
-    d3.select(".selected_country").classed("selected_country", false);
+    let previous = d3.select(".selected_country").classed("selected_country", false);
+    
+    // if is the same country the path is deselected
+    if( !previous.empty() && previous.attr("id") == this.id){
+      selected_country = null;
+      return;
+    }
 
     d3.select(this).classed("selected_country", true);
     d3.select(this).moveToFront();
@@ -212,12 +221,16 @@ function country_events() {
 
     debug_log("CLICK ON " + this.id);
     country_selected(this.__data__);
+    
+    
   });
 }
 
 function country_selected(country) {
   selected_country = country;
   zoom_in(selected_country);
+  
+    
 }
 
 //                 END FUNCTION FOR THE MAP                 //
@@ -230,6 +243,7 @@ var zoomIn_scale = 1.2,
   zoomOut_scale = 0.8,
   curr_zoomScale = 1;
 
+
 var zoom = d3
   .zoom()
   .scaleExtent([1, max_zoom])
@@ -241,7 +255,7 @@ var zoom = d3
     } else {
       initial_view = event.transform.x + event.transform.y == 0;
     }
-    console.log(initial_view);
+    //console.log(initial_view);
     update_middle_zoomBtn();
 
     //map_container.attr("transform", event.transform);
@@ -252,6 +266,8 @@ var zoom = d3
 
     // change border width
     update_strokes();
+
+    
   })
   .on("end", function (event) {
     // show tooltip if hovering a country
@@ -259,6 +275,11 @@ var zoom = d3
 
     if (!cur_country.empty())
       d3.select(".tooltip-map").style("display", "block");
+
+    
+    //shown new level
+    let new_level = levelScale(curr_zoomScale);
+    showLevel(new_level);
   });
 
 function reset_zoom() {
@@ -339,6 +360,98 @@ function update_strokes() {
 }
 
 //                     END STROKE WIDTH                     //
+// ******************************************************** //
+// ******************************************************** //
+//                    STRAT LEVELS SECTION                //
+
+
+// scale to select the level of details
+var levelScale = d3.scaleQuantize()
+  .domain([1, max_zoom])
+  .range([0, 1]); // only two levels
+
+
+function drawLevel(world, level) {
+
+  // Draw the background (country outlines)
+  map_container.select("g#level_" + level)
+    .classed("shown_level", level == 0 ? true : false)
+    .classed("hidden_level", level == 0 ? false : true)
+    .selectAll("path.country")
+    .data(topojson.feature(world, world.objects.countries).features)
+    .enter()
+    .append("path")
+    .attr("class", "country")
+    .attr("id", (d) => {
+      if (level == 0)
+        return d.properties.name;
+      return "";
+    })
+    .attr("name", d => d.properties.name)
+    .attr("d", geoGenerator);
+
+    // current level shown is 0
+    cur_level = 0;
+}
+
+
+function showLevel(level) {
+
+  // do nothing if same level
+  if(level == cur_level)
+    return;
+
+  // current level shown
+  cur_level = level;
+
+  // hide the others levels
+  map_container.select("g.shown_level")
+    .classed("shown_level", false)
+    .classed("hidden_level", true)
+    .selectAll("path.country")
+    .attr("id", "")
+    .transition()
+    .duration(0)
+    .style("opacity", 0);
+
+  // display the level
+  map_container.select("g#level_" + level)
+    .classed("shown_level", true)
+    .classed("hidden_level", false)
+    .selectAll("path.country")
+    .each(function () {
+
+      let elem = d3.select(this);
+      elem.attr("id", elem.attr("name"))
+    })
+    .raise()
+    .transition()
+    .duration(0)
+    .style("opacity", 1);
+
+
+  // create events on new elements+
+  country_events();
+
+  // update highlighted country path
+  let highlighted = map_container.select(".selected_country");
+
+  if(highlighted.empty())
+    return;
+  
+  highlighted.classed("selected_country", false);
+
+  let new_selected = document.getElementById(highlighted.attr("name"))
+
+  d3.select(new_selected)
+          .classed("selected_country", true)
+          .style("stroke-width", borderCountryScale(curr_zoomScale) * selected_stroke);
+
+  selected_country = new_selected.__data__;
+}
+
+
+//                      END LEVELS FUNCTIONS                //
 // ******************************************************** //
 // ******************************************************** //
 //                START FUNCTION MAP OVERLAY                //
@@ -481,10 +594,14 @@ function changeCountry(name) {
 // ******************************************************** //
 //                   START FILES LOADING                    //
 
-function load_tempYear(temp_file, time_transition) {
+function load_tempYear(year, time_transition) {
+  temp_file = tmp_file_prefix + year + tmp_file_suffix;
   d3.csv(temp_file)
     .then(function (data) {
       console.log("LOAD TEMP: " + temp_file);
+
+      // curret year 
+      cur_year = year;
 
       data.forEach((d) => {
         d.ANOMALY = parseFloat(d.Anomaly);
@@ -505,15 +622,26 @@ function load_map() {
       console.log("LOAD MAP");
       map_data = world;
 
+      // first layer
       let topology = world;
       topology = topojson.presimplify(topology);
       topology = topojson.simplify(topology, 0.05);
 
       drawMap(topology);
-      load_tempYear(
-        tmp_file_prefix + "2020" + tmp_file_suffix,
+
+      // second layer with more details
+      topology = world;
+      topology = topojson.presimplify(topology);
+      topology = topojson.simplify(topology, 0.01);
+
+      drawLevel(topology, 1);
+
+      load_tempYear("2020",
         default_transition
       );
+
+      n_levels = 2;
+
     })
     .catch((error) => {
       console.log(error);
@@ -526,7 +654,7 @@ function load_map() {
 // ****************************************************** //
 //                   DOVE INIZIA TUTTO                    //
 
-/*
+
 function init_page() {
   // load map
   load_map();
@@ -541,4 +669,4 @@ function init_page() {
 
   init_map_controls();
 }
-*/
+

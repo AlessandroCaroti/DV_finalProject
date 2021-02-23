@@ -29,7 +29,7 @@ function init_slider(min, max, step) {
     .handle(d3.symbol().type(d3.symbolCircle).size(200)())
     .on("end", (val) => {
       d3.select("#sliderLabel").text("Year: " + d3.format("0")(val));
-      load_tempYear(tmp_file_prefix + val + tmp_file_suffix, default_transition);
+      load_tempYear(val , default_transition);
     });
 
   var g2 = d3
@@ -50,6 +50,11 @@ function init_slider(min, max, step) {
     .attr("y", -35)
     .classed("hover", false)
     .classed("not-hover", true);
+
+  // aesthetic adjustment
+  d3.select(".axis")
+    .selectAll("text")
+    .attr("y", "10");
 
   // setting an id to the slider
   d3.select("g.parameter-value").select("path")
@@ -76,7 +81,7 @@ function init_slider(min, max, step) {
 
       // change position slider
       sliderAlternativeHandle.value(next_val);
-      load_tempYear(tmp_file_prefix + next_val + tmp_file_suffix, default_transition);
+      load_tempYear(next_val , default_transition);
       d3.select("#sliderLabel").text("Year: " + next_val);
 
     })
@@ -139,7 +144,7 @@ function stop_animation() {
   enable_slider();
 
   // reset position slider
-  load_tempYear(tmp_file_prefix + sliderAlternativeHandle.value() + tmp_file_suffix, default_transition);
+  load_tempYear(sliderAlternativeHandle.value() , default_transition);
   d3.select("#sliderLabel").text("Year: " + sliderAlternativeHandle.value());
 }
 
@@ -149,7 +154,7 @@ function increment_step_slider(transition_time) {
   // set new value
   d3.select("#sliderLabel").text("Year: " + cur_year);
   // load temperatures
-  load_tempYear(tmp_file_prefix + cur_year + tmp_file_suffix, transition_time);
+  load_tempYear( cur_year , transition_time);
 
   cur_year = cur_year + step_slider;
   return cur_year;
