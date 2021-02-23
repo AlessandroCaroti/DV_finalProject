@@ -51,6 +51,11 @@ function init_slider(min, max, step) {
     .classed("hover", false)
     .classed("not-hover", true);
 
+  // aesthetic adjustment
+  d3.select(".axis")
+    .selectAll("text")
+    .attr("y", "10");
+
   // setting an id to the slider
   d3.select("g.parameter-value").select("path")
     .attr("id", id_slider);

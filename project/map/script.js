@@ -101,22 +101,14 @@ function update_colors(temperatures, time_trasition) {
     var elements = map_container.selectAll("path.country")
               .filter(function(d,i){
 
-                      //console.log(d3.select(this).attr("name") == d3.select(element).attr("name"));
                       return d3.select(this).attr("name") == d3.select(element).attr("name");
               });
 
     
-
-    // update anomaly color
-    /*d3.select(element)
-      .transition(temp_transition)
-      .style("fill", colorScale(d["ANOMALY"]));*/
     elements.transition(temp_transition)
                   .style("fill", colorScale(d["ANOMALY"]));
 
 
-    // update anomaly value
-    //d3.select(element).attr("anomaly", d["ANOMALY"]);
     elements.attr("anomaly", d["ANOMALY"]);
 
 
@@ -208,7 +200,13 @@ function country_events() {
       "stroke-width",
       borderCountryScale(curr_zoomScale)
     );
-    d3.select(".selected_country").classed("selected_country", false);
+    let previous = d3.select(".selected_country").classed("selected_country", false);
+    
+    // if is the same country the path is deselected
+    if( !previous.empty() && previous.attr("id") == this.id){
+      selected_country = null;
+      return;
+    }
 
     d3.select(this).classed("selected_country", true);
     d3.select(this).moveToFront();
@@ -257,7 +255,7 @@ var zoom = d3
     } else {
       initial_view = event.transform.x + event.transform.y == 0;
     }
-    console.log(initial_view);
+    //console.log(initial_view);
     update_middle_zoomBtn();
 
     //map_container.attr("transform", event.transform);
@@ -269,9 +267,7 @@ var zoom = d3
     // change border width
     update_strokes();
 
-    //shown new level
-    let new_level = levelScale(curr_zoomScale);
-    showLevel(new_level);
+    
   })
   .on("end", function (event) {
     // show tooltip if hovering a country
@@ -281,7 +277,9 @@ var zoom = d3
       d3.select(".tooltip-map").style("display", "block");
 
     
-    
+    //shown new level
+    let new_level = levelScale(curr_zoomScale);
+    showLevel(new_level);
   });
 
 function reset_zoom() {
@@ -406,36 +404,6 @@ function showLevel(level) {
   // current level shown
   cur_level = level;
 
-
-  // update colors
-  /*
-  map_container.select("g#level_" + level)
-    .selectAll("path.country")
-    .each(function () {
-      let new_elem = d3.select(this);
-
-      let cur_elem = d3.select(document.getElementById(new_elem.attr("name")));
-
-      new_elem.attr("anomaly", cur_elem.attr("anomaly"))
-        .style("fill", function () {
-
-          let cur_anomaly = cur_elem.attr("anomaly");
-          if (typeof cur_anomaly != "undefined" &&
-            cur_anomaly != null &&
-            cur_anomaly != "NaN" &&
-            !Number.isNaN(cur_anomaly))
-            return colorScale(cur_elem.attr("anomaly"));
-          return unknown_temp;
-        });
-    });
-*/
-
-  // define the transition
-  var temp_transition = d3
-  .transition()
-  .duration(500)
-  .ease(d3.easeLinear);
-
   // hide the others levels
   map_container.select("g.shown_level")
     .classed("shown_level", false)
@@ -443,7 +411,7 @@ function showLevel(level) {
     .selectAll("path.country")
     .attr("id", "")
     .transition()
-    .duration(5000)
+    .duration(0)
     .style("opacity", 0);
 
   // display the level
@@ -456,13 +424,13 @@ function showLevel(level) {
       let elem = d3.select(this);
       elem.attr("id", elem.attr("name"))
     })
-    //.raise()
+    .raise()
     .transition()
-    .duration(400)
+    .duration(0)
     .style("opacity", 1);
 
 
-  // create events on new elements
+  // create events on new elements+
   country_events();
 
   // update highlighted country path
@@ -476,7 +444,8 @@ function showLevel(level) {
   let new_selected = document.getElementById(highlighted.attr("name"))
 
   d3.select(new_selected)
-          .classed("selected_country", true);
+          .classed("selected_country", true)
+          .style("stroke-width", borderCountryScale(curr_zoomScale) * selected_stroke);
 
   selected_country = new_selected.__data__;
 }
