@@ -577,6 +577,17 @@ function init_DropDownMenu_slect2() {
           var data = e.params.data;
           console.log(data.text);
           changeCountry(data.text);
+          
+          var btns = document.querySelectorAll("#range-years-buttons-container > button")
+          btns.forEach((btn)=>{
+
+            btn.addEventListener("click", (d=>{
+
+              console.log("clickkkk")
+            }))
+
+          });
+          
           changeAllData(data.text, false);
         });
     })

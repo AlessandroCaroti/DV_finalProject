@@ -20,15 +20,13 @@ function click_tab(evt, graphic_name) {
 
 // Functions to Draw and Remove the tooltip
 // given the x position find the corresponding value
-function drawTooltipLineChart(
-  self,
-  event,
-  x,
-  data,
-  tooltipLine,
-  id_chart,
-  height
-) {
+function drawTooltipLineChart(self, event, x, data, tooltipLine, id_chart, height) {
+  
+  var btn = getCheckedValue("btn-range-year")
+
+  var label = document.getElementById("label-"+btn.id)
+  var range_name = label.innerHTML;
+
   var tooltip = d3.select(id_chart + " .tooltip-map");
 
   const date = x.invert(d3.pointer(event, self.node())[0]);
@@ -45,9 +43,8 @@ function drawTooltipLineChart(
     .attr("y1", 0)
     .attr("y2", height);
 
-  var range_selected = document.getElementById("rage-year");
-  range_name = range_selected.options[range_selected.selectedIndex].text;
 
+ 
   var tipText = String(
     "<b> <p style='text-align: center; font-size: 12px;'> Year: " +
       elem.date.getFullYear() +
@@ -61,14 +58,14 @@ function drawTooltipLineChart(
       " &plusmn; " +
       elem.annual_unc.toFixed(2) +
       "<br/>" +
-      (range_selected.value != "annual"
+      (btn.value != "annual"
         ? String(
             range_name +
               "  Avg. Temp: " +
-              elem[range_selected.value + "_value"].toFixed(2) +
+              elem[btn.value + "_value"].toFixed(2) +
               " &deg;C " +
               " &plusmn; " +
-              elem[range_selected.value + "_unc"].toFixed(2) +
+              elem[btn.value + "_unc"].toFixed(2) +
               "</b>"
           )
         : "")
@@ -93,7 +90,7 @@ function removeTooltipLineChart(tooltipLine, id_chart) {
 
 function stripesEnter(event, d) {
 
-  var range_year =  document.getElementById('rage-year').value;
+  var range_year = getCheckedValue("btn-range-year").value;
   var tooltip = d3.select("#stripechart .tooltip-map");
 
   tooltip.transition();

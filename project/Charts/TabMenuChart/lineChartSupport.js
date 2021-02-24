@@ -1,8 +1,12 @@
 
-function changeDataRangeYears() {
 
-    var dataFile = document.getElementById("selectCountryMenu").value;
+
+
+function changeDataRangeYears() {
+ 
+    var dataFile = document.getElementById("selectCountryMenu").value
     var folder;
+  
     
     if(dataFile == ""){
       
@@ -12,7 +16,8 @@ function changeDataRangeYears() {
     }else folder = "counties";
     
   
-    var csv = "/../data/"+folder+ "/" +"/"+dataFile+"/"+ dataFile + "_anomalyTable.csv";
+  
+    var csv = "/../data/"+folder +"/"+dataFile+"/"+ dataFile + "_anomalyTable.csv";
     var json = "/../../data/"+folder+"/"  + dataFile + "/" + dataFile + "_info.json";
   
     d3.csv(csv)
@@ -45,13 +50,11 @@ function changeDataRangeYears() {
   }
 
 
-
-
 //Draw the area that represents the uncertainty of the temperature measurement
 function drawUncertainty(data, svg, x, y){
     
-    var range_year =  document.getElementById('rage-year').value; 
-
+ 
+   var range_year = getCheckedValue("btn-range-year").value;
     var areaUncGenerator = d3.area()
                              .x(function(d) { return x(d.date) })
                              .y0(function(d) { return y(d[range_year+"_value"] + d[range_year+"_unc"]) })
@@ -73,7 +76,7 @@ function drawUncertainty(data, svg, x, y){
   //Update the area that represents the uncertainty of the temperature measurement
   function UpdateUncertainty(data, x, y){
       
-    var range_year =  document.getElementById('rage-year').value; 
+    var range_year = getCheckedValue("btn-range-year").value;
     var areaUncGenerator = d3.area()
                              .x(function(d) { return x(d.date) })
                              .y0(function(d) { return y(d[range_year+"_value"] + d[range_year+"_unc"]) })
@@ -125,12 +128,13 @@ function baseLine(data){
 //get x and Y scales of the Linechart
 function getScales(data){
 
+  var range_year = getCheckedValue("btn-range-year").value;
 
     var x = d3.scaleTime()
               .domain(d3.extent(data, function(d) { return d.date; }))
               .range([ 0, width ]);
                         
-    var range_year =  document.getElementById('rage-year').value; 
+
               // Add Y axis
     var y = d3.scaleLinear()
              .domain([d3.min(data, function(d) { return d.annual_value - d[range_year+"_unc"] - 0.5; }), 
@@ -143,13 +147,13 @@ function getScales(data){
 
 function getLineGenerators(x, y){
     
+   var range_year = getCheckedValue("btn-range-year").value;
+
     var valueline_annual = d3.line()
                             .x(function(d) {  return x(d.date); })
                             .y(function(d) { return y(d.annual_value); })
                             .defined( (d) => { return ( !isNaN(d.annual_value) ) } );        
     
-
-    var range_year =  document.getElementById('rage-year').value;   
   
     var valueline_ten_years = d3.line()
                                 .x(function(d) { return x(d.date); })
@@ -164,8 +168,20 @@ function getLineGenerators(x, y){
 
 }
 
+function getCheckedValue( groupName ) {
+  var radios = document.getElementsByName( groupName );
+  for( i = 0; i < radios.length; i++ ) {
+      if( radios[i].checked ) {
+          return radios[i];
+      }
+  }
+  return null;
+}
+
 
 function createDefaultLineChart(data){
+
+    //default button
 
     var svg = d3.select("#linechart")
                 .append("svg")
@@ -197,11 +213,8 @@ function createDefaultLineChart(data){
     var valueline_ten_years = lineGenerators[1];
     var valueline_baseline = lineGenerators[2];
 
-    
     drawUncertainty(data, svg, x, y);
     
-
-
    svg  
         .append("g")
         .attr("class","line_chart_annual")
@@ -232,9 +245,8 @@ function createDefaultLineChart(data){
         .attr("d", valueline_baseline);
         
 
-    createLineChartLegend(svg);
+    createLineChartLegend(svg, btn_ten);
 
-    
     var tooltipLine = svg.append('line').attr("class","line_tip").attr("id","linechart-tip");
     
     var tipBox = svg.append('rect')
@@ -267,8 +279,10 @@ function updateAxis(x_axis_class, y_axis_class, x, y){
 
 
 function updateLineChart(data, grafic_class){
+  
 
-    //Get scales and update axis
+  
+  //Get scales and update axis
     var scales = getScales(data);
     var x = scales[0] 
     var y =  scales[1]
@@ -307,14 +321,14 @@ function updateLineChart(data, grafic_class){
        .attr("d", valueline_ten_years)
        .style("stroke", function(d){
                 
-                var range_year =  document.getElementById('rage-year').value;
+                var range_year = getCheckedValue("btn-range-year").value;
                 if( range_year == "annual") return "steelblue";
                 else
                     return "red";
        })
        .style("stroke-width", function(d){
                 
-                var range_year =  document.getElementById('rage-year').value;
+              var range_year = getCheckedValue("btn-range-year").value;
                 if( range_year == "annual") return "1px";
                 else
                     return "2px";

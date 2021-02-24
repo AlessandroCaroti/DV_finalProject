@@ -138,22 +138,31 @@
         <!------------------------------END MAP------------------------------------------->
       
         <!------------------------------START CLIMATE STRIPES------------------------------------------->
+  
+        
         <div id="climate-stripes-linechart-container" class="container"> 
+           
+                <div class="range-years-buttons-container">
+                 
+   
+                    
+                      <input class="checkbox-range" type="radio" name="btn-range-year"  value="annual" id="btn_annual" onclick="changeDataRangeYears()"/>
+                      <label  id="label-btn_annual" for="btn_annual"> Annual </label>
+                
 
-         
 
-            <div id="stripes-line-content" class="tabcontent">
-              <div id="range-years-buttons-container">
-              <span id="dropdown_tab_years">
-                <label>Range-Years:</label>
-                <select name="Dataset" id="rage-year" onchange="changeDataRangeYears()">
-                  <option value="five_years">Five-Years</option>
-                  <option value="ten_years" selected="selected">Ten-Years</option>
-                  <option value="twenty_years">Twenty-Years</option>
-                  <option value="annual">Annual</option>
-                </select>
-              </span>
-            </div>
+                      <input class="checkbox-range" type="radio" name="btn-range-year"  value="five_years" id="btn_five" onclick="changeDataRangeYears()"/>
+                      <label id="label-btn_five" for="btn_five"> Five-Year </label>
+
+                      <input class="checkbox-range" type="radio" name="btn-range-year" checked="checked" value="ten_years" id="btn_ten" onclick="changeDataRangeYears()"/>
+                      <label  id="label-btn_ten" for="btn_ten"> Ten-Year </label>
+      
+                      <input class="checkbox-range" type="radio" name="btn-range-year"  value="twenty_years" id="btn_twenty" onclick="changeDataRangeYears()"/>
+                      <label id="label-btn_twenty" for="btn_twenty">Twenty-Years</label>
+
+                </div>
+                 
+            
          
           
           <div id="stripechart">

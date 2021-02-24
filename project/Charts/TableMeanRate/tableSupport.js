@@ -17,7 +17,6 @@ function readDataTableFinal(data_country, dataFile, baseline, update = false, gl
  
     DATA_TABLE = [];
   
-    
     if(!update){createEmptyTable(data_country); }
     
     if(!global){
@@ -157,6 +156,7 @@ function table_data(data) {
 }
 
 function createEmptyTable(dataCountry) {
+  
   var svg = d3
     .select("#table_container")
     .attr("width", width_table + margin_table.left + margin_table.right)
