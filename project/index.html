@@ -57,187 +57,184 @@
 <!------------------------------START MAP------------------------------------------->
 
 <body>
-  
 
-    <div class="content">
 
-      <div class="col_wrapper">
-        <div id="map-containter" class="container">
-          <h1 style="text-align: center;">Berkeley Earth Data</h1>
+  <div class="content">
 
-          <div id="all_map" class="col_wrapper">
-            <div class="row_wrapper">
-              <div class="all-slider" id="svg-slider" class="row_wrapper">
-                <div class="col-sm">
-                  <div id="sliderYear"></div>
-                </div>
-              </div>
+    <div class="col_wrapper">
+      <div id="map-containter" class="container">
+        <h1 style="text-align: center;">Berkeley Earth Data</h1>
 
-              <div id="menu_selectCountry">
-                <p class="label">
-                  <label for="selectCountryMenu">
-                    Country:
-                    <select id="selectCountryMenu">
-                      <option></option>
-                    </select>
-                  </label>
-                </p>
+        <div id="all_map" class="col_wrapper">
+          <div class="row_wrapper">
+            <div class="all-slider" id="svg-slider" class="row_wrapper">
+              <div class="col-sm">
+                <div id="sliderYear"></div>
               </div>
             </div>
 
-            <svg class="view-map" id="svg-map" width="100%">
-              <rect class="background" width="100%" height="100%"></rect>
-
-              <g id="map">
-                <path class="background_globe" d=""></path>
-                <g id="map_graticule"></g>
-                <g id="level_0"></g>
-                <g id="level_1"></g>
-              </g>
-
-              <g class="zoom-controls" transform="translate(10, 10)">
-                <g id="zoom-in" transform="translate(0, 0)">
-                  <path class="btn" d=""></path>
-                </g>
-                <g id="zoom-reset" transform="translate(0, 31)">
-                  <rect class="btn" width="5" height="5"></rect>
-                </g>
-                <g id="zoom-out" transform="translate(0, 62)">
-                  <path class="btn" d=""></path>
-                </g>
-                <g id="animation" transform="translate(0,110)">
-                  <path class="btn" d=""></path>
-                </g>
-              </g>
-
-              <g class="col-sm-2">
-                <path d=""></path>
-                <text id="sliderLabel" x="45%" y="27" pointer-events="none"></text>
-              </g>
-            </svg>
-
-            <svg width="100%" height="100%">
-              <g class="legend-anomaly" id="legend-anomaly">
-                <text id="label-legend">Anomaly Temperature (°C)</text>
-                
-                <text id="global-anomaly">Global anomaly: </text>
-                <text id="global-anomaly-data"></text>
-                
-                <path d=""></path>
-                <g class="axis-anomaly"></g>
-              </g>
-            </svg>
-            <div class="tooltip-map">
-              <div class="tooltip-name"></div>
-              <div class="tooltip-anomaly"></div>
+            <div id="menu_selectCountry">
+              <p class="label">
+                <label for="selectCountryMenu">
+                  Country:
+                  <select id="selectCountryMenu">
+                    <option></option>
+                  </select>
+                </label>
+              </p>
             </div>
           </div>
-        </div>
 
+          <svg class="view-map" id="svg-map" width="100%">
+            <rect class="background" width="100%" height="100%"></rect>
 
-        <!------------------------------END MAP------------------------------------------->
-      
-        <!------------------------------START CLIMATE STRIPES------------------------------------------->
-  
-        
-        <div id="climate-stripes-linechart-container" class="container"> 
-           
-                <div class="range-years-buttons-container">
-                 
-   
-                    
-                      <input class="checkbox-range" type="radio" name="btn-range-year"  value="annual" id="btn_annual" onclick="changeDataRangeYears()"/>
-                      <label  id="label-btn_annual" for="btn_annual"> Annual </label>
-                
+            <g id="map">
+              <path class="background_globe" d=""></path>
+              <g id="map_graticule"></g>
+              <g id="level_0"></g>
+              <g id="level_1"></g>
+            </g>
 
+            <g class="zoom-controls" transform="translate(10, 10)">
+              <g id="zoom-in" transform="translate(0, 0)">
+                <path class="btn" d=""></path>
+              </g>
+              <g id="zoom-reset" transform="translate(0, 31)">
+                <rect class="btn" width="5" height="5"></rect>
+              </g>
+              <g id="zoom-out" transform="translate(0, 62)">
+                <path class="btn" d=""></path>
+              </g>
+              <g id="animation" transform="translate(0,110)">
+                <path class="btn" d=""></path>
+              </g>
+            </g>
 
-                      <input class="checkbox-range" type="radio" name="btn-range-year"  value="five_years" id="btn_five" onclick="changeDataRangeYears()"/>
-                      <label id="label-btn_five" for="btn_five"> Five-Year </label>
+            <g class="col-sm-2">
+              <path d=""></path>
+              <text id="sliderLabel" x="45%" y="27" pointer-events="none"></text>
+            </g>
+          </svg>
 
-                      <input class="checkbox-range" type="radio" name="btn-range-year" checked="checked" value="ten_years" id="btn_ten" onclick="changeDataRangeYears()"/>
-                      <label  id="label-btn_ten" for="btn_ten"> Ten-Year </label>
-      
-                      <input class="checkbox-range" type="radio" name="btn-range-year"  value="twenty_years" id="btn_twenty" onclick="changeDataRangeYears()"/>
-                      <label id="label-btn_twenty" for="btn_twenty">Twenty-Years</label>
+          <svg width="100%" height="100%">
+            <g class="legend-anomaly" id="legend-anomaly">
+              <text id="label-legend">Anomaly Temperature (°C)</text>
 
-                </div>
-                 
-            
-         
-          
-          <div id="stripechart">
-            <div class="tooltip-map" id="tooltip_stripes"></div>
-          </div>
-          
-          <div id="linechart" >
-            <div class="tooltip-map" id="tooltip_line"></div>
-          </div>
+              <text id="global-anomaly">Global anomaly: </text>
+              <text id="global-anomaly-data"></text>
 
-        </div>
-
-        <!------------------------------END CLIMATE STRIPES------------------------------------------->
-
-      
-        <!------------------------------START TAB-MENU LINECHART------------------------------------------->
-
-       
-         
-           
-
-  
-        <!------------------------------END TAB-MENU LINECHART------------------------------------------->
-
-        <!------------------------------- START TABLE ------------------------------------------->
-
-        <div id="table-container-mean-rate" class="container">
-
-          <div id="table_container">
-            <h2>Mean Rate of Change ( °C / Year )</h2>
-            <div class="tooltip-map" id="tooltip_table"> </div>
-          </div>
-
-        </div>
-
-        <!------------------------------ END TABLE ------------------------------------------->
-
-        <!------------------------------START HOTTEST-COLDEST LINECHART------------------------------------------->
-
-        <div id="hottest-coldest-container" class="container">
-
-          <div id="hottest_coldest_chart">
-            <div id="container-h-c">
-              <h2>Temperature Record</h2>
-            </div>
-
-            <div class="tooltip-map" id="tooltip-hot-cold"></div>
+              <path d=""></path>
+              <g class="axis-anomaly"></g>
+            </g>
+          </svg>
+          <div class="tooltip-map">
+            <div class="tooltip-name"></div>
+            <div class="tooltip-anomaly"></div>
           </div>
         </div>
-
-        <!------------------------------START HOTTEST-COLDEST LINECHART------------------------------------------->
-
-        <!------------------------------START SEASONAL LINECHART------------------------------------------->
-
-        <div id="seasonal-container" class="container">
-
-          <div id="seasonal_changes_graphic">
-            <h2>Seasonal Changes</h2>
-            <div class="tooltip-map" id="tooltip-seasonal-changes"> </div>
-          </div>
-
-        </div>
-
-        <!------------------------------END SEASONAL LINECHART------------------------------------------->
       </div>
+
+
+      <!------------------------------END MAP------------------------------------------->
+
+      <!------------------------------START CLIMATE STRIPES------------------------------------------->
+
+
+
+
+      <fieldset class="chart-container">
+
+        <legend class="title-chart">Climate Changes</legend>
+
+        <div class="range-years-buttons-container">
+          <input class="checkbox-range" type="radio" name="btn-range-year" value="annual" id="btn_annual"
+            onclick="changeDataRangeYears()" />
+          <label id="label-btn_annual" for="btn_annual"> Annual </label>
+
+
+
+          <input class="checkbox-range" type="radio" name="btn-range-year" value="five_years" id="btn_five"
+            onclick="changeDataRangeYears()" />
+          <label id="label-btn_five" for="btn_five"> 5-Year </label>
+
+          <input class="checkbox-range" type="radio" name="btn-range-year" checked="checked" value="ten_years"
+            id="btn_ten" onclick="changeDataRangeYears()" />
+          <label id="label-btn_ten" for="btn_ten"> 10-Year </label>
+
+          <input class="checkbox-range" type="radio" name="btn-range-year" value="twenty_years" id="btn_twenty"
+            onclick="changeDataRangeYears()" />
+          <label id="label-btn_twenty" for="btn_twenty">20-Years</label>
+        </div>
+
+
+
+
+        <div id="stripechart">
+          <div class="tooltip-map" id="tooltip_stripes"></div>
+        </div>
+
+        <div id="linechart">
+          <div class="tooltip-map" id="tooltip_line"></div>
+        </div>
+
+      </fieldset>
+
+
+
+      <!------------------------------END CLIMATE STRIPES------------------------------------------->
+
+
+      <!------------------------------START TAB-MENU LINECHART------------------------------------------->
+
+
+      <!------------------------------END TAB-MENU LINECHART------------------------------------------->
+
+      <!------------------------------- START TABLE ------------------------------------------->
+
+      <div id="table-container-mean-rate" class="container">
+
+        <div id="table_container">
+          <h2>Mean Rate of Change ( °C / Year )</h2>
+          <div class="tooltip-map" id="tooltip_table"> </div>
+        </div>
+
       </div>
+
+      <!------------------------------ END TABLE ------------------------------------------->
+
+      <!------------------------------START HOTTEST-COLDEST LINECHART------------------------------------------->
+
+
+      <fieldset id="container-h-c" class="chart-container">
+        <legend class="title-chart">Hottest Coldest Linechart</legend>
+        <div class="tooltip-map" id="tooltip-hot-cold"></div>
+      </fieldset>
+
+
+      <!------------------------------START HOTTEST-COLDEST LINECHART------------------------------------------->
+
+      <!------------------------------START SEASONAL LINECHART------------------------------------------->
+
+
+
+      <fieldset id="seasonal_changes_graphic" class="chart-container">
+        <legend class="title-chart">Seasonal Changes</legend>
+        <div class="tooltip-map" id="tooltip-seasonal-changes"> </div>
+      </fieldset>
+
+
+      <!------------------------------END SEASONAL LINECHART------------------------------------------->
     </div>
+  </div>
+  </div>
 
-<script src="/project/map/slider.js?version=1"></script>
-<script src="/project/map/map_btn.js?version=1"></script>
-<script src="/project/map/script.js?version=1"></script>
-<script src="/project/map/color_scale.js?version=1"></script>
-<script>
-  window.onload = init_page();
-</script>
+  <script src="/project/map/slider.js?version=1"></script>
+  <script src="/project/map/map_btn.js?version=1"></script>
+  <script src="/project/map/script.js?version=1"></script>
+  <script src="/project/map/color_scale.js?version=1"></script>
+  <script>
+    window.onload = init_page();
+  </script>
 </body>
 
 </html>

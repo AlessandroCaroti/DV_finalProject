@@ -112,8 +112,7 @@ svg text::selection {
   flex-wrap: nowrap;
 }
 
-span {
-}
+
 
 .handle:focus {
   stroke: #777;
@@ -218,47 +217,20 @@ text#label-legend {
 }
 
 
-/* Style the tab content */
-#climate-stripes-linechart-container{
+
+.chart-container{
   border: 1px solid #ccc;
   border-radius: 20px;
   width: 950px;
   height: auto;
   padding: 50px 50px 50px 50px;
-  margin:auto
+  margin: auto;
+  margin-top: 5%;
  
 }
-
-#range-years-buttons-container{
-
-  width: auto;
-  height: auto;
-  margin-left: 21%;
-}
-
-/*
-
-
-.range-years-buttons-container li {
-  display: inline-block;
-  margin-right: 15px;
-}
-.range-years-buttons-container input {
-  visibility:hidden;
-}
-.range-years-buttons-container label {
-  cursor: pointer;
-}
-.range-years-buttons-container input:checked + label {
-  background: red;
-}
-*/
-
-
 .range-years-buttons-container{
-  margin-left: 12%;
+  margin-left: 15%;
 }
-
 
 .range-years-buttons-container input {
   visibility:hidden;
@@ -266,26 +238,15 @@ text#label-legend {
 
 .range-years-buttons-container input[type="radio"] + label{
   display: inline-block;
-  width: 100px;
+  width: 110px;
   height: auto;
+  border-radius: 10px;
   padding: 15px;
-
   border: 1px solid black;
- 
-  margin: 0px;
-
   text-align: center;
-  line-height: 25px;
+  font-weight: bold;
 }
 
-.custom-radios input[type="radio"] + label {
-  opacity: 0;
-  transition: all 0.3s ease;
-}
-
-.custom-radios input[type="radio"]:checked + label span img {
-  opacity: 1;
-}
 
 
 .range-years-buttons-container input[type="radio"]:checked + label{
@@ -300,6 +261,13 @@ text#label-legend {
   color: black;
 }
 
+
+.title-chart{
+
+  margin-left: 40%;
+  font-size: 25px;
+  font-weight: bold;
+}
 
 /*--------------------------------- END TAB MENU STYLE -------------------------------------*/
 
@@ -330,6 +298,7 @@ text#label-legend {
 }
 #linechart {
   padding: 50px;
+  width: 900px;
 }
 
 .uncertainty {
@@ -456,7 +425,8 @@ table {
 }
 
 .selected_cell {
-  border: solid #2e4053 1px;
+  background: rgb(46,64,83, 0.6);
+  color: white;
 }
 
 /*---------------------------Hottest-Coldest Year style--------------------------------*/
@@ -464,15 +434,11 @@ table {
 #container-h-c {
   border: solid lightgray 1px;
   width: 1200px;
-  margin: auto;
-  margin-top: 10%;
-  border-radius: 20px;
+
+
   padding: 20px;
 }
 
-#container-h-c h2 {
-  margin-left: 5%;
-}
 
 .text-legend {
   font-family: sans-serif;
@@ -540,13 +506,7 @@ table {
   stroke-width: 0;
 }
 
-#seasonal_changes_graphic h2 {
-  margin-left: 5%;
-}
-#seasonal_changes_graphic{
-  
-    margin-left: 20%;
-}
+
 
 /*---------------------------END SEASONAL STYLE--------------------------------*/
 
@@ -577,4 +537,13 @@ table {
   width: auto;
   align-items: center;
   align-content: center;
+}
+
+#container-h-c legend{
+
+  margin-left: 35%;
+}
+
+#seasonal_changes_graphic{
+  margin-bottom: 10%;
 }
