@@ -12,10 +12,13 @@ TO FIX:
 -ricentrare la barra delle temperature
 -mettere a posto il css principale
 -risolvere il fatto che quando si seleziona il paese lo zoom lo decentra a sinistra
+-aggiustare la tabbella che balla quando si va sulle caselle
 
 IDEE:
 -aggiungere schermata caricamento
 -Su temperature Record, mettere l'evento over anche sulla scritte
+-Quando siamo sui dati globali mostrare altre cose oltre i dati globali, solo con 
+ una riga la tabella fa un po' schifo. Per esempio mostrare i pricipali continenti
 
 DA DISCUTERE:
 -avvicinare gli anni dello slider per renderlo più compatta
