@@ -68,7 +68,7 @@ function allDeafaultDataset() {
 
               parseDataAttributes(data, baseline, dataFile);
               createDefaultLineChart(data);
-             // createDefaultStripesChart(data);
+              createDefaultStripesChart(data);
               readDataTableFinal(data, dataFile, baseline, false, true);
               createHottestColdestLineChart(data);
 

@@ -32,7 +32,7 @@ function changeDataRangeYears() {
             updateLineChart(data, ".graphics");
           
             //Update StripesChart
-            //updateStripesChart(data, BtnId);
+            updateStripesChart(data);
   
           })
           .catch((error) => {

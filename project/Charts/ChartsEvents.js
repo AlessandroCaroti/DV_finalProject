@@ -90,7 +90,7 @@ function removeTooltipLineChart(tooltipLine, id_chart) {
 
 function stripesEnter(event, d) {
 
-  var range_year =  document.getElementById('rage-year').value;
+  var range_year = getCheckedValue("btn-range-year").value;
   var tooltip = d3.select("#stripechart .tooltip-map");
 
   tooltip.transition();
