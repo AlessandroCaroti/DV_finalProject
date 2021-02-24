@@ -236,36 +236,66 @@ text#label-legend {
   margin-left: 21%;
 }
 
-#rage-year{
+/*
 
-  margin-top: 45%;
+
+.range-years-buttons-container li {
+  display: inline-block;
+  margin-right: 15px;
+}
+.range-years-buttons-container input {
+  visibility:hidden;
+}
+.range-years-buttons-container label {
+  cursor: pointer;
+}
+.range-years-buttons-container input:checked + label {
+  background: red;
+}
+*/
+
+
+.range-years-buttons-container{
+  margin-left: 12%;
 }
 
 
-.btn-range{
-  background-color: rgb(243, 243, 243); /* Green */
-  border: solid black 0.5px;
-  margin: none;
-  padding: 15px 32px;
-  stroke: black;
-  stroke-width: 0.8;
-
-  
+.range-years-buttons-container input {
+  visibility:hidden;
 }
 
-.btn-range:focus{
-  
-  outline-style: solid;
-  outline: 0.5px;
-  outline: 0.5px;
+.range-years-buttons-container input[type="radio"] + label{
+  display: inline-block;
+  width: 100px;
+  height: auto;
+  padding: 15px;
+
+  border: 1px solid lightgray;
+  margin: 0px;
+
+  text-align: center;
+  line-height: 25px;
+}
+
+.custom-radios input[type="radio"] + label {
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.custom-radios input[type="radio"]:checked + label span img {
+  opacity: 1;
+}
+
+
+.range-years-buttons-container input[type="radio"]:checked + label{
+
   background-color: #777;
+  opacity: 50%;
+  color: #ccc;
+
 
 }
 
-.btn-range:active{
-  outline-style: solid;
- 
-}
 
 /*--------------------------------- END TAB MENU STYLE -------------------------------------*/
 
