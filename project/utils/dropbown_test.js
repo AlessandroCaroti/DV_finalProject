@@ -99,7 +99,6 @@ const last_year = 2020
 const year_scale = d3.scaleLinear().domain([first_years, last_year]).range([(-w2+w1+p_l_2), (w1-p_l_2)]);
 const start_line_2 = year_scale(first_years)
 const end_line_2 = year_scale(last_year)
-console.log("start: "+start_line_2,"   end: "+end_line_2)
 var startYear_selected = 1750
 var startYear_pos = year_scale(startYear_selected)
 var endYear_selected = 2020
@@ -113,7 +112,7 @@ d3.select("#selected_range").attr("x",startYear_pos).attr("y",y_l_2+0.1).attr("w
 d3.select("#start_year").attr("x", startYear_pos-12).attr("y", y_l_2-10).text(startYear_selected)
 d3.select("#end_year").attr("x", endYear_pos-8).attr("y", y_l_2-10).text(endYear_selected)
 d3.select("#slider_ball_year_start").call(d3.drag()
-                                      .on("start", () => {d3.select("#slider_ball_year_start").raise();
+                                      .on("start", () => {d3.select("#slider_ball_year_start").attr("r", 6);
                                                           d3.select("#start_year").style("font-weight","bold");})
                                       .on("drag", (event) => {
                                         if(event.x >= start_line_2 && event.x < (endYear_pos-twenty_year_gap)){
@@ -125,11 +124,12 @@ d3.select("#slider_ball_year_start").call(d3.drag()
                                         }
                                       })
                                       .on("end", () => {console.log(startYear_selected)
+                                                        d3.select("#slider_ball_year_start").raise().attr("r", 5);
                                                         d3.select("#start_year").style("font-weight","normal");}))
 
 d3.select("#slider_ball_year_end").attr("cx",year_scale(endYear_selected)).attr("cy",y_l_2+2).raise();
 d3.select("#slider_ball_year_end").call(d3.drag()
-                                      .on("start", () => {d3.select("#slider_ball_year_end").raise();
+                                      .on("start", () => {d3.select("#slider_ball_year_end").attr("r", 6);
                                                           d3.select("#end_year").style("font-weight","bold");})
                                       .on("drag", (event) => {
                                         if(event.x > (startYear_pos+twenty_year_gap) && event.x <= end_line_2){
@@ -141,6 +141,7 @@ d3.select("#slider_ball_year_end").call(d3.drag()
                                         }
                                       })
                                       .on("end", () => {console.log(startYear_selected)
+                                                        d3.select("#slider_ball_year_end").attr("r", 5);
                                                         d3.select("#end_year").style("font-weight","normal");}))
 var curr_year_k = 1750
 while(curr_year_k<last_year){
