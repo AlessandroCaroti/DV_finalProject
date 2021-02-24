@@ -163,6 +163,7 @@ function table_data(data) {
 }
 
 function createEmptyTable(dataCountry) {
+  
   var svg = d3
     .select("#table_container")
     .attr("width", width_table + margin_table.left + margin_table.right)

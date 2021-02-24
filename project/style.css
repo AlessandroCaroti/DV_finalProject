@@ -112,8 +112,7 @@ svg text::selection {
   flex-wrap: nowrap;
 }
 
-span {
-}
+
 
 .handle:focus {
   stroke: #777;
@@ -217,68 +216,58 @@ text#label-legend {
 
 }
 
-/* Style the buttons inside the tab */
-.tablinks {
-  background-color: white;
-  color: black;
-  position: relative;
-  border: solid lightgrey 1px;
-  border-bottom: none;
-  border-radius: 11px 30px 0 0;
-  cursor: pointer;
-  padding: 14px 16px;
-  transition: 0.3s;
-  font-size: 17px;
-  font-family: sans-serif;
-  font-weight: bold;
-  display: block;
-  float: left;
-}
-.tablinks:focus {
-  outline: 0;
-}
-/* Change background color of buttons on hover */
-.tablinks:hover {
-  background-color: #91aac5;
-  color: white;
-}
 
-/* Create an active/current tablink class */
-.tablinks.active {
-  background-color: #91aac5;
-  color: white;
-  z-index: 1;
-}
 
-#tab_stripe {
-  right: 2%;
-}
-
-/* Style the tab content */
-.tabcontent {
+.chart-container{
   border: 1px solid #ccc;
   border-radius: 20px;
   width: 950px;
   height: auto;
   padding: 50px 50px 50px 50px;
-  margin-left: 10%;
+  margin: auto;
+  margin-top: 5%;
  
 }
-
-#range-years-buttons-container{
-
-  width: 500px;
-  height: 200px;
-  border: #000 solid 1px;
-  margin-left: 21%;
+.range-years-buttons-container{
+  margin-left: 15%;
 }
 
-#rage-year{
+.range-years-buttons-container input {
+  visibility:hidden;
+}
 
-  margin-top: 45%;
+.range-years-buttons-container input[type="radio"] + label{
+  display: inline-block;
+  width: 110px;
+  height: auto;
+  border-radius: 10px;
+  padding: 15px;
+  border: 1px solid black;
+  text-align: center;
+  font-weight: bold;
 }
 
 
+
+.range-years-buttons-container input[type="radio"]:checked + label{
+
+  background-color:rgba(192, 192, 192, 0.8);
+  color: black;
+}
+
+.range-years-buttons-container input[type="radio"]+label:hover{
+
+  background-color:rgba(192, 192, 192, 0.8);
+  color: black;
+}
+
+
+.title-chart{
+
+  margin-left: 40%;
+  font-size: 25px;
+  font-weight: bold;
+}
 
 /*--------------------------------- END TAB MENU STYLE -------------------------------------*/
 
@@ -309,6 +298,7 @@ text#label-legend {
 }
 #linechart {
   padding: 50px;
+  width: 900px;
 }
 
 .uncertainty {
@@ -435,7 +425,8 @@ table {
 }
 
 .selected_cell {
-  border: solid #2e4053 1px;
+  background: rgb(46,64,83, 0.6);
+  color: white;
 }
 
 /*---------------------------Hottest-Coldest Year style--------------------------------*/
@@ -443,15 +434,11 @@ table {
 #container-h-c {
   border: solid lightgray 1px;
   width: 1200px;
-  margin: auto;
-  margin-top: 10%;
-  border-radius: 20px;
+
+
   padding: 20px;
 }
 
-#container-h-c h2 {
-  margin-left: 5%;
-}
 
 .text-legend {
   font-family: sans-serif;
@@ -519,13 +506,7 @@ table {
   stroke-width: 0;
 }
 
-#seasonal_changes_graphic h2 {
-  margin-left: 5%;
-}
-#seasonal_changes_graphic{
-  
-    margin-left: 20%;
-}
+
 
 /*---------------------------END SEASONAL STYLE--------------------------------*/
 
@@ -556,4 +537,13 @@ table {
   width: auto;
   align-items: center;
   align-content: center;
+}
+
+#container-h-c legend{
+
+  margin-left: 35%;
+}
+
+#seasonal_changes_graphic{
+  margin-bottom: 10%;
 }

@@ -17,7 +17,6 @@ function getYearsStripes(){
 //get x and Y scales of the Linechart
 function getStripesScales(){
 
-
     var x = d3.scaleTime()
               .domain(d3.extent(years_stripes, function(d) { return d; }))
               .range([ 0, width ]);
@@ -34,7 +33,7 @@ function getStripesScales(){
 
 function dataStripes(data_annnual){
     
-    var range_year =  document.getElementById('rage-year').value;
+    var range_year = getCheckedValue("btn-range-year").value;
     var data2=[];
     var i = 0;
     years_stripes.forEach(yr => {
@@ -99,7 +98,7 @@ function createDefaultStripesChart(data){
 
 function colorStripes(data_annnual, d){
 
-    var range_year =  document.getElementById('rage-year').value; 
+    var range_year = getCheckedValue("btn-range-year").value;
     var colorScale = d3.scaleLinear()
                        .domain(d3.extent(data_annnual, (d) => d[range_year+"_anomaly"]))
                        .range([1,0])

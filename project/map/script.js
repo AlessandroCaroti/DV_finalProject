@@ -488,6 +488,7 @@ function init_map_controls() {
   init_zoomBtns();
   init_animationBtn();
   init_yearSpace();
+  init_menu();
 }
 
 function changeView() {
@@ -547,6 +548,12 @@ function init_yearSpace() {
     .style("fill", "rgb(243, 243, 243)")
     .style("stroke", "black")
     .style("stroke-width", 1.5);
+}
+
+function init_menu(){
+  var bBox = document.getElementById("svg-map").getBBox();
+  console.log(bBox.width)
+  d3.select("#setting_group").attr("transform", "translate("+(bBox.width-250)+", 10)")
 }
 
 // funtion to move path in front of the charts

@@ -3,20 +3,27 @@ TO DO:
 -cambiare il cursore sullo slider
 -fare i tooltips di simo più compatti
 -salvarsi i csv quando caricati in modo da non doverli ricaricare se selezionati più volte
--transizione zoom con rotella
 -segnalino sulla scala dei colori posizionata sull'anomalia globale dell'anno selezionato
+-completare il menù della mappa
+-aggiugere testo con anomalia globale
 
-TOFIX:
+TO FIX:
 -rendere non interagibile le cose inutili, come il testo degli anni sotto lo slider
--cosa fare con i paesi di cui abbiamo i dati ma non vengono non vengono visualizzati per la semplificazione della mappa?
 -ricentrare la barra delle temperature
 -mettere a posto il css principale
 -risolvere il fatto che quando si seleziona il paese lo zoom lo decentra a sinistra
+-aggiustare la tabbella che balla quando si va sulle caselle
+-in Seasonal Changes dicenbre non si riesce a selezionare
+-quando si deseleziona un paese, aggiornare nel modo corretto il pulsante entrale dello zoom
 
 IDEE:
 -aggiungere schermata caricamento
 -Su temperature Record, mettere l'evento over anche sulla scritte
+-Quando siamo su dati globali mostrare altre cose oltre i dati globali, solo con 
+ una riga la tabella fa un po' schifo. Per esempio mostrare i pricipali continenti
 
 DA DISCUTERE:
 -avvicinare gli anni dello slider per renderlo più compatta
 -fare in modo che la mappa occupi tutta la larghezza della schermo
+-nel grafico Hottest Coldest Linechart se tenere l'hover sulle linee grige
+-su Hottest Coldest Linechart la linea selezionata farla andare sopra a tutte le altre
