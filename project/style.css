@@ -217,51 +217,15 @@ text#label-legend {
 
 }
 
-/* Style the buttons inside the tab */
-.tablinks {
-  background-color: white;
-  color: black;
-  position: relative;
-  border: solid lightgrey 1px;
-  border-bottom: none;
-  border-radius: 11px 30px 0 0;
-  cursor: pointer;
-  padding: 14px 16px;
-  transition: 0.3s;
-  font-size: 17px;
-  font-family: sans-serif;
-  font-weight: bold;
-  display: block;
-  float: left;
-}
-.tablinks:focus {
-  outline: 0;
-}
-/* Change background color of buttons on hover */
-.tablinks:hover {
-  background-color: #91aac5;
-  color: white;
-}
-
-/* Create an active/current tablink class */
-.tablinks.active {
-  background-color: #91aac5;
-  color: white;
-  z-index: 1;
-}
-
-#tab_stripe {
-  right: 2%;
-}
 
 /* Style the tab content */
-.tabcontent {
+#climate-stripes-linechart-container{
   border: 1px solid #ccc;
   border-radius: 20px;
   width: 950px;
   height: auto;
   padding: 50px 50px 50px 50px;
-  margin-left: 10%;
+  margin:auto
  
 }
 
@@ -293,13 +257,14 @@ text#label-legend {
   
   outline-style: solid;
   outline: 0.5px;
+  outline: 0.5px;
+  background-color: #777;
 
 }
 
 .btn-range:active{
   outline-style: solid;
-  outline: 0.5px;
-  background-color: #777;
+ 
 }
 
 /*--------------------------------- END TAB MENU STYLE -------------------------------------*/

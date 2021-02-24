@@ -68,7 +68,7 @@ function allDeafaultDataset() {
 
               parseDataAttributes(data, baseline, dataFile);
               createDefaultLineChart(data);
-              createDefaultStripesChart(data);
+             // createDefaultStripesChart(data);
               readDataTableFinal(data, dataFile, baseline, false, true);
               createHottestColdestLineChart(data);
 
@@ -83,11 +83,6 @@ function allDeafaultDataset() {
               throw error;
             });
           
-          
-          
-        
-        
-        
         })
         .catch((error) => {
           console.log(error);
@@ -138,14 +133,6 @@ function changeAllData(dataFile) {
               throw error;
             });
           
-          
-          
-          
-        
-        
-        
-        
-        
         })
         .catch((error) => {
           console.log(error);

@@ -37,9 +37,11 @@ function createLineChartLegend(svg){
           .attr("class", "uncertainty")
           .attr("id","range-name-unc");
 
-    var range_name =  document.getElementById('rage-year');
-    range_name = range_name.options[range_name.selectedIndex].text;
-  
+    
+    var btn = getCheckedValue("btn-range-year")
+
+    var label = document.getElementById("label-"+btn.id)
+    var range_name = label.innerHTML;
 
 
     legend.append( "line" )
@@ -72,9 +74,12 @@ function createLineChartLegend(svg){
 
   function updateRangeNameLegend(){
     
-    var range_name =  document.getElementById('rage-year');
+    var btn = getCheckedValue("btn-range-year")
 
-    if(range_name.value == "annual" && !isAnnual){
+    var label = document.getElementById("label-"+btn.id)
+    var range_name = label.innerHTML;
+
+    if(btn.value == "annual" && !isAnnual){
 
         d3.select("#legend-annual-line").remove();
         d3.select("#legend-annual-text").remove();
@@ -91,7 +96,7 @@ function createLineChartLegend(svg){
         isAnnual = true;
     }
 
-    if( isAnnual && range_name.value != "annual"){
+    if( isAnnual && btn.value != "annual"){
         
         var legend = d3.select(".legend")
         legend
@@ -120,7 +125,6 @@ function createLineChartLegend(svg){
                 isAnnual = false;
     }
     
-    range_name = range_name.options[range_name.selectedIndex].text;
     
     d3.select("#range-name-legend")
         .html(range_name+" Average Temperature with uncertainty"); 
