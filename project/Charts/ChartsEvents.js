@@ -209,7 +209,7 @@ function hotColdTextLegendLeave(event, d){
   
 
   if(this.id.split("-")[0] !="path") d3.select("#path-"+idx).style("stroke-width", "2px")
-  .style("stroke-opacity", "50%");
+  .style("stroke-opacity", "70%");
   else
       d3.select("#path-"+idx).style("stroke-width", "2px");
 
