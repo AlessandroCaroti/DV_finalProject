@@ -98,8 +98,8 @@ function stripesEnter(event, d) {
     "<p style='text-align: center; font-weight: bold; font-size: 13px'> " +
       d.Year +
       "</p>" +"<p style='text-align: center; font-weight: bold; font-size: 12px'> "+
-      d[range_year+"_anomaly"].toFixed(2) +
-      " &deg;C " +
+      (isNaN( d[range_year+"_anomaly"])?"unknown" : d[range_year+"_anomaly"].toFixed(2)+
+      " &deg;C " ) +
       
       (isNaN( d[range_year+"_anomaly"])?"": (" &plusmn; " + d[range_year+"_unc"].toFixed(2) )) +
       " </p>"
