@@ -14,5 +14,5 @@ function init_page() {
   
     init_map_controls();
     allDeafaultDataset("Global Land");
-  
+    $('body').addClass('loaded');
 }
