@@ -93,15 +93,24 @@ function update_colors(temperatures, time_trasition) {
 
   // set new anomalies
   temperatures.forEach(function (d) {
+
+
+    // update global anomaly label
+    if(d.Country == "Global Land"){
+      
+      d3.select("#global-anomaly-data")
+            .html(parseFloat(d["ANOMALY"]).toFixed(2) + "°C");
+    }
+
     var element = document.getElementById(d.Country);
 
     if(element == null)
       return;
+
     // find corresponding path in the other layers
     var elements = map_container.selectAll("path.country")
               .filter(function(d,i){
-
-                      return d3.select(this).attr("name") == d3.select(element).attr("name");
+                    return d3.select(this).attr("name") == d3.select(element).attr("name");
               });
 
     
@@ -445,7 +454,8 @@ function showLevel(level) {
 
   d3.select(new_selected)
           .classed("selected_country", true)
-          .style("stroke-width", borderCountryScale(curr_zoomScale) * selected_stroke);
+          .style("stroke-width", borderCountryScale(curr_zoomScale) * selected_stroke)
+          .raise();
 
   selected_country = new_selected.__data__;
 }
@@ -601,7 +611,7 @@ function load_tempYear(year, time_transition) {
       console.log("LOAD TEMP: " + temp_file);
 
       // curret year 
-      cur_year = year;
+      //cur_year = year;
 
       data.forEach((d) => {
         d.ANOMALY = parseFloat(d.Anomaly);
@@ -653,20 +663,4 @@ function load_map() {
 // ****************************************************** //
 // ****************************************************** //
 //                   DOVE INIZIA TUTTO                    //
-
-
-function init_page() {
-  // load map
-  load_map();
-
-  // set colorscale and  legend
-  set_colorScale();
-  draw_legend();
-
-  // trovare modo automatico per trovare min e max
-  init_slider(1743, 2020, 1);
-  init_DropDownMenu_slect2();
-
-  init_map_controls();
-}
 

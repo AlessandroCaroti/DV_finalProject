@@ -25,6 +25,7 @@ function changeDataRangeYears() {
             parseDataAttributes(data, baseline, dataFile);
             //Update the LineChart
             updateLineChart(data, ".graphics");
+          
             //Update StripesChart
             updateStripesChart(data);
   
@@ -42,22 +43,6 @@ function changeDataRangeYears() {
       });
   
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -182,7 +167,6 @@ function getLineGenerators(x, y){
 
 function createDefaultLineChart(data){
 
-    
     var svg = d3.select("#linechart")
                 .append("svg")
                 .attr("width", width + margin.left + margin.right)
