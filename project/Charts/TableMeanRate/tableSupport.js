@@ -1,5 +1,5 @@
 // function support for the table
-var DATA_TABLE=[];
+var DATA_TABLE = [];
 
 //Global variables
 var years_table = ["1750", "1800", "1850", "1900", "1950", "2000", "2020"];
@@ -13,48 +13,55 @@ var height_table =
 
 
 
-function readDataTableFinal(data_country, dataFile, baseline, update = false, global=false) {
- 
-    DATA_TABLE = [];
-  
-    if(!update){createEmptyTable(data_country); }
-    
-    if(!global){
-      table_data(data_country);
-      d3.json("/../data/counties/" + dataFile + "/" + dataFile + "_info.json").then(
-        (info) => {
-          var generalization = info["Generalization"];
-  
-          generalization.forEach((gen_name) => {
-            var csv_path =
-              "/../data/regions/" + gen_name + "/" + gen_name + "_anomalyTable.csv";
-            
-              d3.csv(csv_path)
-              .then((data) => {
-                parseDataAttributes(data, baseline, gen_name);
-        
-                if (update) {
-                  updateRowsTable(data);
-                } else addRowTable(data);
-              })
-              .catch((error) => {
-                console.log(error);
-                throw error;
-              });
-          });
-        }
-      );
-  
-    }
-   
-  }
+function readDataTableFinal(data_country, dataFile, baseline, update = false, global = false) {
 
+  DATA_TABLE = [];
+
+  if (!update){
+    createEmptyTable(data_country);
+    return;
+  }
+     
+  var folder = "counties";
+
+  if (global)
+    folder = "regions";
+
+  var path = "/../data/" + folder + "/" + dataFile + "/" + dataFile + "_info.json"
+
+  if (!global)
+    table_data(data_country);
+
+  d3.json(path).then(
+    (info) => {
+      var generalization = info["Generalization"];
+
+      generalization.forEach((gen_name) => {
+        var csv_path =
+          "/../data/regions/" + gen_name + "/" + gen_name + "_anomalyTable.csv";
+
+        d3.csv(csv_path)
+          .then((data) => {
+            parseDataAttributes(data, baseline, gen_name);
+
+            if (update) {
+              updateRowsTable(data);
+            } else addRowTable(data);
+          })
+          .catch((error) => {
+            console.log(error);
+            throw error;
+          });
+      });
+    }
+  );
+
+}
 
 
 //Get data every 50 years_table with also the 2019 at the end
 function dataEvery50Years(data) {
   var annual_data = getAnnualData(data);
-
 
   var data_2 = [];
 
@@ -80,12 +87,12 @@ function addRowData(data50, dataTable) {
   var row = {};
 
   regionName = data50[0].region;
-  
+
 
   row["Region"] = regionName;
 
   data50.forEach(
-    (d) =>{ 
+    (d) => {
       row[String(d.Year)] = {
         temp: d.annual_value.toFixed(2),
         mean_rate: NaN,
@@ -186,14 +193,14 @@ function createEmptyTable(dataCountry) {
 }
 
 function addRowTable(data) {
-  
+
   var tableData = table_data(data);
   var tbody = d3.select(".tbody_table");
   var rows = tbody.data(tableData);
-  
+
   rows.enter().merge(rows).append("tr").attr("class", "rows_table");
 
- 
+
   //bind the data to columns in each row
   var columns = tbody
     .selectAll("tr")
@@ -218,7 +225,7 @@ function addRowTable(data) {
   var idx_year = 0;
   var previous_idx;
 
-    tbody
+  tbody
     .selectAll("td")
     .attr("class", function (d, i) {
       //find cells with regions name
@@ -262,7 +269,7 @@ function addRowTable(data) {
 }
 
 
-function updateRowsTable(data){
+function updateRowsTable(data) {
 
   table_data(data);
 
@@ -344,7 +351,7 @@ function updateRowsTable(data){
       tableCellLeave(this);
     });
 
-   
+
 
 }
 

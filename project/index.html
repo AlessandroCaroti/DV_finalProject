@@ -28,28 +28,28 @@
 
   <!------------------------------ALL CHARTS SCRIPTS--------------------------------------->
 
-  <script type="application/javascript" src="/project/Charts/support_charts.js"></script>
-  <script type="application/javascript" src="/project/Charts/ChartsEvents.js"></script>
-  <script type="application/javascript" src="/project/Charts/UtilsCharts.js"></script>
+  <script src="/project/Charts/support_charts.js"></script>
+  <script src="/project/Charts/ChartsEvents.js"></script>
+  <script src="/project/Charts/UtilsCharts.js"></script>
 
   <!-----------------------------TAB MENU SCRIPTS-------------------------------------------->
-  <script type="application/javascript" src="/project/Charts/TabMenuChart/lineChartSupport.js"></script>
-  <script type="application/javascript" src="/project/Charts/TabMenuChart/plotTemperatures.js"></script>
-  <script type="application/javascript" src="/project/Charts/TabMenuChart/stripesChartSupport.js"></script>
+  <script src="/project/Charts/TabMenuChart/lineChartSupport.js"></script>
+  <script src="/project/Charts/TabMenuChart/plotTemperatures.js"></script>
+  <script src="/project/Charts/TabMenuChart/stripesChartSupport.js"></script>
 
   <!------------------------------- TABLE SCRIPTS-------------------------------------------->
-  <script type="application/javascript" src="/project/Charts/TableMeanRate/drawTable.js"></script>
-  <script type="application/javascript" src="/project/Charts/TableMeanRate/tableSupport.js"></script>
+  <script src="/project/Charts/TableMeanRate/drawTable.js"></script>
+  <script src="/project/Charts/TableMeanRate/tableSupport.js"></script>
 
   <!----------------------------SEASONAL LINECHART SCRIPTS------------------------------------------>
 
-  <script type="application/javascript" src="/project/Charts/SeasonalChanges/plotSeasonalChanges.js"></script>
-  <script type="application/javascript" src="/project/Charts/SeasonalChanges/seasonalChangesSupport.js"></script>
+  <script src="/project/Charts/SeasonalChanges/plotSeasonalChanges.js"></script>
+  <script src="/project/Charts/SeasonalChanges/seasonalChangesSupport.js"></script>
 
   <!-----------------------------HOTTEST COLDEST LINECHART SCRIPTS------------------------------------------>
 
-  <script type="application/javascript" src="/project/Charts/HottestColdestLineChart/coldestHottestSupport.js"></script>
-  <script type="application/javascript" src="/project/Charts/HottestColdestLineChart/plotHottestColdest.js"></script>
+  <script src="/project/Charts/HottestColdestLineChart/coldestHottestSupport.js"></script>
+  <script src="/project/Charts/HottestColdestLineChart/plotHottestColdest.js"></script>
   <!-----------------------------MAP SCRIPTS------------------------------------------>
 </head>
 
@@ -114,6 +114,39 @@
             <g class="col-sm-2">
               <path d=""></path>
               <text id="sliderLabel" x="45%" y="27" pointer-events="none"></text>
+            </g>
+
+            <g id="setting_group">
+              <path id="menu" d="" visibility="hidden"></path>
+              <path id="setting_btn_open" class="btn" d=""></path>
+              <image id="setting_icon_open" height="0" width="0"/>
+              <g id="munu_parts" visibility="hidden">
+                <path id="setting_btn_close" class="btn" d=""></path>
+                <image id="setting_icon_close" height="0" width="0"/>
+                <text id="text_setting" style="font-size:20px">SETTING</text>
+                <g id="animation_speed_group">
+                  <text id="text_animation" style="font-size:13px">Animation speed:</text>
+                  <line id="speed_line" style="stroke:black;stroke-width:2"></line>
+                  <circle id="slider_ball" r="4" stroke="black" fill="white"></circle>
+                  <g>
+                    <circle id="decrease_back" class="btn" r="10"></circle>
+                    <path id="decrease_speed" d="" style="stroke:black;stroke-width:0.5"></path>
+                  </g>
+                  <g>
+                    <circle id="increase_back" class="btn" r="10"></circle>
+                    <path id="increase_speed" stroke-width="2" d="" style="fill:none;stroke:black;stroke-width:0.5"></path>
+                  </g>
+                </g>
+                <g id="range_slider_group">
+                  <text id="text_range" style="font-size:13px">Animation years:</text>
+                  <text id="start_year" style="font-size:12px;font-family:'Times New Roman',serif;"></text>
+                  <text id="end_year" style="font-size:12px;font-family:'Times New Roman',serif;"></text>
+                  <path id="range_line" style="stroke:black;stroke-width:1;fill:aliceblue" d=""></path>
+                  <rect id="selected_range" style="fill:lightseagreen" height="" width=""></rect>
+                  <circle id="slider_ball_year_start" r="5" stroke="black" fill="white"></circle>
+                  <circle id="slider_ball_year_end" r="5" stroke="black" fill="white"></circle>
+                </g>
+              </g>
             </g>
           </svg>
 
@@ -215,9 +248,6 @@
       </fieldset>
       <!------------------------------END SEASONAL LINECHART------------------------------------------->
 
-  
-  
-  
   </div>
 
 
@@ -225,6 +255,7 @@
   <script src="/project/map/map_btn.js?version=1"></script>
   <script src="/project/map/script.js?version=1"></script>
   <script src="/project/map/color_scale.js?version=1"></script>
+  <script src="/project/map/map_menu.js"></script>
   <script>
     window.onload = init_page();
   </script>
