@@ -75,7 +75,7 @@ d3.select("#slider_ball").attr("cx",((start_line) + step*1)).attr("cy",y_l).rais
 
 d3.select("#decrease_speed").attr("d", "M "+(start_line-24)+" "+y_l+"h "+10)
   .style("stroke-width", 2).attr("pointer-events", "none");
-d3.select("#decrease_back").attr("cx",(start_line-24)+5).attr("cy",y_l).attr("r",10)
+d3.select("#decrease_back").attr("cx",(start_line-24)+5).attr("cy",y_l)
   .on("click", function(){
     if (selected_opt_idx > 0)
       selected_opt_idx--;
@@ -84,7 +84,7 @@ d3.select("#decrease_back").attr("cx",(start_line-24)+5).attr("cy",y_l).attr("r"
 
 d3.select("#increase_speed").attr("d", "M "+(end_line+24)+" "+y_l+"h "+(-10)+"h "+5+"v "+5+"v "+(-9))
   .style("stroke-width", 2).attr("pointer-events", "none");
-d3.select("#increase_back").attr("cx",(end_line+24)-5).attr("cy",y_l).attr("r",10)
+d3.select("#increase_back").attr("cx",(end_line+24)-5).attr("cy",y_l)
   .on("click", function(){
     if (selected_opt_idx < speed_options.length-1)
       selected_opt_idx++;
