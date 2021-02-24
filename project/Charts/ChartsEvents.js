@@ -185,11 +185,13 @@ function removeTooltipSeasonal(tooltipLine) {
 
 
 function hotColdTextLegendEnter(event, d){
-
-  var curText =  d3.select("#"+this.id).style("font-weight", "bold")
-                                        .style("text-decoration", "underline");
-                                      
   var idx= this.id.split("-")[3];
+  var idx_text= "hot-cold-text-"+idx
+  d3.select("#"+idx_text).style("font-weight", "bold")
+                                .style("text-decoration", "underline");
+                              
+  
+  
   d3.select("#path-"+idx).style("stroke-width", "6px")
                   .style("stroke-opacity", "80%");
 
@@ -200,13 +202,14 @@ function hotColdTextLegendEnter(event, d){
 
 
 function hotColdTextLegendLeave(event, d){
-
-  d3.select("#"+this.id).style("font-weight", "normal")
-                        .style("text-decoration", "none");
   var idx= this.id.split("-")[3];
+  var idx_text= "hot-cold-text-"+idx
+  d3.select("#"+idx_text).style("font-weight", "normal")
+                        .style("text-decoration", "none");
+  
 
   if(this.id.split("-")[0] !="path") d3.select("#path-"+idx).style("stroke-width", "2px")
-  .style("stroke-opacity", "50%");
+  .style("stroke-opacity", "70%");
   else
       d3.select("#path-"+idx).style("stroke-width", "2px");
 

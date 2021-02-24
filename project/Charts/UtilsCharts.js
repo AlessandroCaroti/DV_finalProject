@@ -398,17 +398,20 @@ function createSeasonalLineChartLegend(svg, dataLastYears){
 function createHotColdLegend(id_container, hottest_temp, coldest_temp){
 
     container = d3.select("#"+id_container);
-    
-    var width = document.getElementById(id_container).offsetWidth
-    var height = document.getElementById(id_container).offsetHeight
- 
-    legend = container.append("svg")
+
+    var legend = container.append("svg")
                       .attr("id","legend_hot_cold")
                       .attr("width", 270)
                       .attr("height", 500)
                       .append("g")
     var curX = 50;
     var curY = 25;
+              
+    legend.append("rect")
+          .attr("x", curX-20)
+          .attr("y", curY)
+
+
     legend.append("text")
           .attr("x", curX-20)
           .attr("y", curY)
@@ -419,6 +422,7 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp){
     hottest_temp.forEach( (el)=>{
 
         curY += 35
+
         legend.append( "rect" )
               .attr("x", curX ).attr("width", 20)
               .attr("y", curY).attr("height", 20)
@@ -426,20 +430,26 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp){
               
         
         legend.append( "text" )
-              .attr("class","text-legend")
-              .attr("x", curX + 35)
-              .attr("y", curY + 15)
-              .attr("id", "hot-cold-text-"+ id_idx)
-              .html(el.Year + "&nbsp &nbsp"+
-                (el.annual_anomaly> 0? "+"+el.annual_anomaly.toFixed(2): el.annual_anomaly.toFixed(2)) + " &deg;C")
-                .on("mouseenter", hotColdTextLegendEnter)
-                .on("mouseleave", hotColdTextLegendLeave)
+                      .attr("class","text-legend")
+                      .attr("x", curX + 35)
+                      .attr("y", curY + 15)
+                      .attr("id", "hot-cold-text-"+ id_idx)
+                      .html(el.Year + "&nbsp &nbsp"+
+                            (el.annual_anomaly> 0? "+"+el.annual_anomaly.toFixed(2): el.annual_anomaly.toFixed(2)) + " &deg;C")
 
+        legend.append("rect")
+              .attr("id", "hot-cold-rect-"+id_idx)
+              .attr("x", curX-5).attr("width", 150)
+              .attr("y", curY-5).attr("height", 28)
+              .style("fill", "white")
+              .style("opacity","0%")
+              .on("mouseenter", hotColdTextLegendEnter)
+              .on("mouseleave", hotColdTextLegendLeave)
               
-
-
-
+                                  
+                            
         
+                      
 
       id_idx ++;
         
@@ -455,6 +465,7 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp){
     coldest_temp.forEach( (el)=>{
 
             curY += 35
+
             legend.append( "rect" )
                   .attr("x", curX ).attr("width", 20)
                   .attr("y", curY).attr("height", 20)
@@ -467,9 +478,15 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp){
                   .attr("id", "hot-cold-text-"+id_idx )
                   .html(el.Year + "&nbsp &nbsp"+
                       (el.annual_anomaly> 0? "+"+el.annual_anomaly.toFixed(2): el.annual_anomaly.toFixed(2)) + " &deg;C")
-                  .on("mouseenter", hotColdTextLegendEnter)
-                  .on("mouseleave", hotColdTextLegendLeave)
-      
+            
+            legend.append("rect")
+                      .attr("id", "hot-cold-rect-"+id_idx)
+                      .attr("x", curX-5).attr("width", 150)
+                      .attr("y", curY-5).attr("height", 28)
+                      .style("fill", "white")
+                      .style("opacity","0%")
+                      .on("mouseenter", hotColdTextLegendEnter)
+                      .on("mouseleave", hotColdTextLegendLeave)
         
           id_idx ++;
                     
