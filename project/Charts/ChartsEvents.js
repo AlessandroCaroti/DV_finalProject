@@ -183,56 +183,64 @@ function removeTooltipSeasonal(tooltipLine) {
 
 //------------------------------------------HOTTTEST-COLDEST LINECHART -------------------------------------------------------------------
 
-function hotColdMouseEnter(self, event, d, hottest_temp, coldest_temp) {
-  d3.select(self).style("stroke-width", "6px");
-  d3.select(self).style("stroke-opacity", "80%");
 
-  year = self.className.baseVal.split("-")[1];
+function hotColdTextLegendEnter(event, d){
 
-  if (isInList(year, hottest_temp)) {
-    var idx = getIdxList(year, hottest_temp);
-    d3.select("#hot-text-" + idx)
-      .style("font-weight", "bold")
-      .style("text-decoration", "underline")
-      .style("text-decoration-color", "black");
-  }
+  var curText =  d3.select("#"+this.id).style("font-weight", "bold")
+                                        .style("text-decoration", "underline");
+                                      
+  var idx= this.id.split("-")[3];
+  d3.select("#path-"+idx).style("stroke-width", "6px")
+                  .style("stroke-opacity", "80%");
 
-  if (isInList(year, coldest_temp)) {
-    var idx = getIdxList(year, coldest_temp);
-    d3.select("#cold-text-" + idx)
-      .style("font-weight", "bold")
-      .style("text-decoration", "underline")
-      .style("text-decoration-color", "black");
-  }
+
+
 }
 
-function hotColdMouseLeave(
-  self,
-  event,
-  d,
-  hot_cold_list,
-  hottest_temp,
-  coldest_temp
-) {
-  year = self.className.baseVal.split("-")[1];
-  if (isInList(year, hot_cold_list))
-    d3.select(self).style("stroke-width", "1.5px");
-  else {
-    d3.select(self).style("stroke-width", "1px");
-    d3.select(self).style("stroke-opacity", "50%");
-  }
 
-  if (isInList(year, coldest_temp)) {
-    var idx = getIdxList(year, coldest_temp);
-    d3.select("#cold-text-" + idx)
+
+function hotColdTextLegendLeave(event, d){
+
+  d3.select("#"+this.id).style("font-weight", "normal")
+                        .style("text-decoration", "none");
+  var idx= this.id.split("-")[3];
+
+  if(this.id.split("-")[0] !="path") d3.select("#path-"+idx).style("stroke-width", "2px")
+  .style("stroke-opacity", "50%");
+  else
+      d3.select("#path-"+idx).style("stroke-width", "2px");
+
+
+}
+
+
+function hotColdMouseEnter(self) {
+  
+  var idx = self.id.split("-")[1];
+
+  d3.select(self).style("stroke-width", "6px")
+                  .style("stroke-opacity", "80%");
+
+    d3.select("#hot-cold-text-" + idx)
+      .style("font-weight", "bold")
+      .style("text-decoration", "underline")
+      .style("text-decoration-color", "black");
+
+
+}
+
+function hotColdMouseLeave(self){
+  
+  var idx = self.id.split("-")[1];
+
+  if(self.id.split("-")[0] !="path") d3.select(self).style("stroke-width", "2px")
+                                                    .style("stroke-opacity", "50%");
+  else
+    d3.select(self).style("stroke-width", "2px");
+  
+  d3.select("#hot-cold-text-" + idx)
       .style("font-weight", "normal")
       .style("text-decoration", "none");
   }
 
-  if (isInList(year, hottest_temp)) {
-    var idx = getIdxList(year, hottest_temp);
-    d3.select("#hot-text-" + idx)
-      .style("font-weight", "normal")
-      .style("text-decoration", "none");
-  }
-}
+
