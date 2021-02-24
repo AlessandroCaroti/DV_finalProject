@@ -59,6 +59,7 @@
 <body>
 
 
+
   <div class="content">
 
     <div class="col_wrapper">
@@ -140,8 +141,6 @@
       <!------------------------------START CLIMATE STRIPES------------------------------------------->
 
 
-
-
       <fieldset class="chart-container">
 
         <legend class="title-chart">Climate Changes</legend>
@@ -150,8 +149,6 @@
           <input class="checkbox-range" type="radio" name="btn-range-year" value="annual" id="btn_annual"
             onclick="changeDataRangeYears()" />
           <label id="label-btn_annual" for="btn_annual"> Annual </label>
-
-
 
           <input class="checkbox-range" type="radio" name="btn-range-year" value="five_years" id="btn_five"
             onclick="changeDataRangeYears()" />
@@ -165,9 +162,6 @@
             onclick="changeDataRangeYears()" />
           <label id="label-btn_twenty" for="btn_twenty">20-Years</label>
         </div>
-
-
-
 
         <div id="stripechart">
           <div class="tooltip-map" id="tooltip_stripes"></div>
@@ -186,9 +180,6 @@
       <!------------------------------START TAB-MENU LINECHART------------------------------------------->
 
 
-
-      
-
       <!------------------------------END TAB-MENU LINECHART------------------------------------------->
 
       <!------------------------------- START TABLE ------------------------------------------->
@@ -206,9 +197,8 @@
 
       <!------------------------------START HOTTEST-COLDEST LINECHART------------------------------------------->
 
-
       <fieldset id="container-h-c" class="chart-container">
-        <legend class="title-chart">Hottest Coldest Linechart</legend>
+        <legend class="title-chart">Temperature Records</legend>
         <div class="tooltip-map" id="tooltip-hot-cold"></div>
       </fieldset>
 
@@ -223,12 +213,13 @@
         <legend class="title-chart">Seasonal Changes</legend>
         <div class="tooltip-map" id="tooltip-seasonal-changes"> </div>
       </fieldset>
-
-
       <!------------------------------END SEASONAL LINECHART------------------------------------------->
-    </div>
+
+  
+  
+  
   </div>
-  </div>
+
 
   <script src="/project/map/slider.js?version=1"></script>
   <script src="/project/map/map_btn.js?version=1"></script>

@@ -216,7 +216,8 @@ function createSeasonalLineChartLegend(svg, dataLastYears){
         .attr("y", curY)
         .attr("class", "legend")
         .attr("id", "text-range")
-        .html("Min-Max Range Temp. Untill "+ dataLastYears[dataLastYears.length-1][0].year);
+        .html("Min-Max Range Temp. Untill "+ dataLastYears[dataLastYears.length-1][0].year)
+       
     
     curY+=15;
     legend.append( "rect" )
@@ -422,14 +423,17 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp){
               .attr("x", curX ).attr("width", 20)
               .attr("y", curY).attr("height", 20)
               .attr("fill", el.color_value)
+              
         
         legend.append( "text" )
               .attr("class","text-legend")
               .attr("x", curX + 35)
               .attr("y", curY + 15)
-              .attr("id", "hot-text-"+id_idx )
+              .attr("id", "hot-text-"+el.Year )
               .html(el.Year + "&nbsp &nbsp"+
                 (el.annual_anomaly> 0? "+"+el.annual_anomaly.toFixed(2): el.annual_anomaly.toFixed(2)) + " &deg;C")
+                .on("mouseenter", hotColdTextLegendEnter)
+              
         
 
       id_idx ++;
@@ -457,7 +461,7 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp){
                   .attr("class","text-legend")
                   .attr("x", curX + 35)
                   .attr("y", curY + 15)
-                  .attr("id", "cold-text-"+id_idx )
+                  .attr("id", "cold-text-"+el.Year )
                   .html(el.Year + "&nbsp &nbsp"+
                       (el.annual_anomaly> 0? "+"+el.annual_anomaly.toFixed(2): el.annual_anomaly.toFixed(2)) + " &deg;C")
         
@@ -474,7 +478,7 @@ function updateHotColdLegend(hottest_temp, coldest_temp){
   var id_idx=0;
   hottest_temp.forEach( (el)=>{
 
-    d3.select("#hot-text-"+id_idx).html(el.Year + "&nbsp &nbsp"+
+    d3.select("#hot-text-"+el.Year).html(el.Year + "&nbsp &nbsp"+
                 (el.annual_anomaly> 0? "+"+el.annual_anomaly.toFixed(2): el.annual_anomaly.toFixed(2)) + " &deg;C")
    
     id_idx ++;

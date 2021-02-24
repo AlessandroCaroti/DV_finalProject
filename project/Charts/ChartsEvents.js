@@ -183,9 +183,23 @@ function removeTooltipSeasonal(tooltipLine) {
 
 //------------------------------------------HOTTTEST-COLDEST LINECHART -------------------------------------------------------------------
 
+
+function hotColdTextLegendEnter(event, d){
+  console.log(this)
+  var curText =  d3.select("#"+this.id).style("stroke-width", "6px");
+
+
+
+
+}
+
+
+
+
 function hotColdMouseEnter(self, event, d, hottest_temp, coldest_temp) {
   d3.select(self).style("stroke-width", "6px");
   d3.select(self).style("stroke-opacity", "80%");
+  console.log(self)
 
   year = self.className.baseVal.split("-")[1];
 
@@ -206,14 +220,7 @@ function hotColdMouseEnter(self, event, d, hottest_temp, coldest_temp) {
   }
 }
 
-function hotColdMouseLeave(
-  self,
-  event,
-  d,
-  hot_cold_list,
-  hottest_temp,
-  coldest_temp
-) {
+function hotColdMouseLeave( self, event, d, hot_cold_list, hottest_temp, coldest_temp){
   year = self.className.baseVal.split("-")[1];
   if (isInList(year, hot_cold_list))
     d3.select(self).style("stroke-width", "1.5px");

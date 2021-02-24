@@ -1,6 +1,5 @@
 function getLineGeneratorsHottestColdest(x, y){
     
-    
     var valueline_annual = d3.line()
                               .x(function(d) { return x(parseMonth(d.month))})
                               .y(function(d) {  return y(d.monthly_value ); })
@@ -102,7 +101,7 @@ function createHottestColdestLineChart(data){
 
     var svg = d3.select("#container-h-c")
                 .append("svg")
-                .attr("class","graphics")
+                .attr("id","graphics")
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
                 .append("g")
@@ -130,7 +129,7 @@ function createHottestColdestLineChart(data){
                     .enter()
                     .append("path")
                       .attr("d", valueline_annual)
-                      .attr("class", (d)=>String("path-"+d[0].Year))
+                      .attr("id", (d)=>String("path-"+d[0].Year))
                       .attr("style", (d) => getHotColdStyle(hot_cold_list,d))
                       .on("mouseover", function(event, d){ hotColdMouseEnter(this, event, d, hottest_temp, coldest_temp)})
                       .on("mouseout", function(event, d){ hotColdMouseLeave(this, event, d, hot_cold_list, hottest_temp, coldest_temp)})
@@ -195,8 +194,7 @@ function UpdateHottestColdestLineChart(data){
           .append("g")
           .append("path")
           .merge(line)
-          .attr("d", valueline_annual)
-          .attr("class", (d)=>String("path-"+d[0].Year))
+          .attr("d", valueline_annual(d))
           .attr("style", (d) => getHotColdStyle(hot_cold_list,d))
           .on("mouseover", function(event, d){ hotColdMouseEnter(this, event, d,hottest_temp, coldest_temp)})
           .on("mouseout", function(event, d){ hotColdMouseLeave(this, event, d, hot_cold_list, hottest_temp, coldest_temp)})
