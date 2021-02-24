@@ -17,7 +17,9 @@ var cur_level;
 
 var geoGenerator;
 
-var country_list_map = []; //List of the name of the countries present in the map
+var country_list_map = []; // List of the name of the countries present in the map
+var country_list = []; // list of countries with data
+var country_no_data; // list of countries with no associated data 
 
 var selected_country = null;
 
@@ -192,7 +194,11 @@ function country_events() {
           ) {
             return parseFloat(d).toFixed(2) + " °C";
           }
-          return "unknown";
+
+          if(country_no_data.includes(b.properties.name))
+            return "No Data Available";
+          else
+            return "unknown";
         });
     })
     .on("mousemove", function (event, b) {
@@ -204,33 +210,43 @@ function country_events() {
 
   //CLICK EVENT: on country
   map_container.selectAll(".country").on("click", function (event, b) {
+  
+    if(d3.select(this).classed("no_data"))
+      return;
+
     //deselect the previus country
     d3.select(".selected_country").style(
       "stroke-width",
       borderCountryScale(curr_zoomScale)
     );
+
     let previous = d3.select(".selected_country").classed("selected_country", false);
     
     // if is the same country the path is deselected
-    if( !previous.empty() && previous.attr("id") == this.id){
+    if( !previous.empty() && previous.attr("id") == this.id && selected_country === b){
+      $("#selectCountryMenu").val(null);
+      $("#selectCountryMenu").trigger("change").trigger("select2:unselecting");
       selected_country = null;
       return;
     }
 
+    // set new selected country
     d3.select(this).classed("selected_country", true);
     d3.select(this).moveToFront();
     d3.select(this).style(
       "stroke-width",
       borderCountryScale(curr_zoomScale) * selected_stroke
     );
-
+          
     // set the name visible in the drop-down menu TODO
-    $("#selectCountryMenu").val(String(this.id));
-    $("#selectCountryMenu").trigger("change");
+    if($("#selectCountryMenu").val() != String(this.id)){
+      $("#selectCountryMenu").val(String(this.id));
+      $("#selectCountryMenu").trigger("change").trigger("select2:select");
+      return;
+    }
 
     debug_log("CLICK ON " + this.id);
     country_selected(this.__data__);
-    
     
   });
 }
@@ -238,8 +254,7 @@ function country_events() {
 function country_selected(country) {
   selected_country = country;
   zoom_in(selected_country);
-  
-    
+
 }
 
 //                 END FUNCTION FOR THE MAP                 //
@@ -390,7 +405,8 @@ function drawLevel(world, level) {
     .data(topojson.feature(world, world.objects.countries).features)
     .enter()
     .append("path")
-    .attr("class", "country")
+    .classed("country", true)
+    .classed("no_data", d => country_no_data.includes(d.properties.name))
     .attr("id", (d) => {
       if (level == 0)
         return d.properties.name;
@@ -431,7 +447,8 @@ function showLevel(level) {
     .each(function () {
 
       let elem = d3.select(this);
-      elem.attr("id", elem.attr("name"))
+      elem.attr("id", elem.attr("name"));
+      
     })
     .raise()
     .transition()
@@ -547,21 +564,28 @@ d3.selection.prototype.moveToFront = function () {
 function init_DropDownMenu_slect2() {
   d3.csv(countries_file)
     .then(function (countries) {
-      data = [];
+      //data = [];
 
       countries.forEach((d) => {
-        data.push(d.Temp);
+        country_list.push(d.Temp);
+        country_list_map.push(d.Map);
       });
+
+      // finda path elements without data
+      country_no_data = country_list_map.filter( x => !country_list.includes(x))
+
 
       $("#selectCountryMenu")
         .select2({
           placeholder: "Select an option",
-          data: data,
+          data: country_list,
           theme: "classic",
           allowClear: true,
         })
         .on("select2:unselecting", function () {
           $(this).data("unselecting", true);
+          changeAllData("Global Land");
+
         })
         .on("select2:opening", function (e) {
           if ($(this).data("unselecting")) {
@@ -574,10 +598,13 @@ function init_DropDownMenu_slect2() {
           }
         })
         .on("select2:select", function (e) {
-          var data = e.params.data;
-          console.log(data.text);
-          changeCountry(data.text);
-          changeAllData(data.text, false);
+                  
+          var data = $(this).val(); // e.params.data.text;
+          
+          // update charts
+          console.log(data);
+          changeCountry(data);
+          changeAllData(data);
         });
     })
     .catch(function (error) {
@@ -609,9 +636,6 @@ function load_tempYear(year, time_transition) {
   d3.csv(temp_file)
     .then(function (data) {
       console.log("LOAD TEMP: " + temp_file);
-
-      // curret year 
-      //cur_year = year;
 
       data.forEach((d) => {
         d.ANOMALY = parseFloat(d.Anomaly);
@@ -650,6 +674,7 @@ function load_map() {
         default_transition
       );
 
+      // number of levels
       n_levels = 2;
 
     })

@@ -47,7 +47,6 @@ function allDeafaultDataset() {
     dataFile = "Global Land";
     folder = "regions";
   } else folder = "counties";
-  console.log("agahahaha")
   //initBaselineAndInfo(dataFile, true);
   var csv =
     "/../../data/" + folder + "/" + dataFile + "/" + dataFile +"_anomalyTable.csv";
@@ -75,18 +74,11 @@ function allDeafaultDataset() {
               parseSeasonalBaseline(dataBaseline, dataFile);
               createDeafaultSeasonalLinechart(data, dataBaseline);
             
-
-
             }) .catch((error) => {
               console.log(error);
               //alert("Unable To Load The Dataset!!");
               throw error;
             });
-          
-          
-          
-        
-        
         
         })
         .catch((error) => {
@@ -103,9 +95,14 @@ function allDeafaultDataset() {
 
 function changeAllData(dataFile) {
 
-  var csv = "/../../data/counties/" + dataFile + "/" + dataFile + "_anomalyTable.csv";
-  var json = "/../../data/counties/" + "/" + dataFile + "/" + dataFile + "_info.json";
-  var csvBaseline = "/../../data/counties/" + dataFile + "/" + dataFile+"_monthlyAbsoluteTemperature.csv";
+  var folder = "counties";
+  if(dataFile == "Global Land")
+    folder = "regions";
+  
+
+  var csv = "/../../data/" + folder + "/" + dataFile + "/" + dataFile + "_anomalyTable.csv";
+  var json = "/../../data/" + folder + "/" + "/" + dataFile + "/" + dataFile + "_info.json";
+  var csvBaseline = "/../../data/" + folder + "/" + dataFile + "/" + dataFile+"_monthlyAbsoluteTemperature.csv";
 
   d3.csv(csv)
     .then((data) => {
@@ -124,7 +121,7 @@ function changeAllData(dataFile) {
               //Update StripesChart
               updateStripesChart(data);
               //Update Table
-              readDataTableFinal(data, dataFile, baseline, true, false);
+              readDataTableFinal(data, dataFile, baseline, true, (dataFile == "Global Land") ? true : false);
               //Update Hottest Coldest Linechart
               UpdateHottestColdestLineChart(data);
               parseSeasonalBaseline(dataBaseline, dataFile);
@@ -137,14 +134,6 @@ function changeAllData(dataFile) {
               //alert("Unable To Load The Dataset!!");
               throw error;
             });
-          
-          
-          
-          
-        
-        
-        
-        
         
         })
         .catch((error) => {
@@ -158,32 +147,6 @@ function changeAllData(dataFile) {
       //alert("Unable To Load The Dataset!!");
       throw error;
     });
-}
-
-function loadAllData() {
-  var dataset = "";
-  d3.csv(countries).then((data) => {
-    var i = 0;
-    data.forEach((d) => {
-      var dropdown = document.getElementById("dataset");
-
-      var option = document.createElement("option");
-      if (d.Temp != "") {
-        option.setAttribute("value", d.Temp);
-        option.innerHTML = d.Temp;
-        dropdown.append(option);
-      }
-
-      if (option.value == "Italy") {
-        dropdown.selectedIndex = i;
-        dropdown.options[i].selected = true;
-        // set Italy default dataset
-        dataset = option.value;
-      }
-      i++;
-    });
-    allDeafaultDataset(dataset);
-  });
 }
 
 function createGridLine(x, y, svg, nameChart, n_tickX = 8, n_tickY = 8) {

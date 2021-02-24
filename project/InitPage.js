@@ -1,7 +1,9 @@
 
 function init_page() {
-    // load map
 
+    init_DropDownMenu_slect2();
+
+    // load map
     load_map();
 
     // set colorscale and  legend
@@ -10,9 +12,8 @@ function init_page() {
   
     // trovare modo automatico per trovare min e max
     init_slider(1743, 2020, 1);
-    init_DropDownMenu_slect2();
   
     init_map_controls();
-    allDeafaultDataset("Global Land");
+    allDeafaultDataset();
   
 }

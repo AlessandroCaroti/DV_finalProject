@@ -53,7 +53,7 @@ function set_colorScale(){
 
     var axis = d3.select('.legend-anomaly')
     // generate axis
-    axis.attr("transform", "translate(" +  ( w_map/2 + bar_step ) +","+ 25  +" )") //.attr("transform", "translate(" + (500 -width_legend / 2) +","+ 485  +" )")
+    axis.attr("transform", "translate(" +  ( w_map/2 + bar_step ) +","+ 25  +" )") 
             .call(anomaly_axis);
 
     // draw bars
@@ -106,7 +106,6 @@ function set_colorScale(){
             .attr("x", ((w_map / bar_step) + 32))
             .attr("y", "-15")
             .style("fill", "black")
-            //.html("Anomaly Temperature (°C)")
             .raise();
     
     d3.select("#global-anomaly")
