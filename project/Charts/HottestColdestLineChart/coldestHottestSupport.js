@@ -129,10 +129,13 @@ function createHottestColdestLineChart(data){
                     .enter()
                     .append("path")
                       .attr("d", valueline_annual)
-                      .attr("id", (d)=>String("path-"+d[0].Year))
+                      .attr("id", function(d){
+                        if(isInList(d[0].Year, hot_cold_list))
+                            return String("path-"+ getIdxList(d[0].Year, hot_cold_list));
+                          })
                       .attr("style", (d) => getHotColdStyle(hot_cold_list,d))
-                      .on("mouseover", function(event, d){ hotColdMouseEnter(this, event, d, hottest_temp, coldest_temp)})
-                      .on("mouseout", function(event, d){ hotColdMouseLeave(this, event, d, hot_cold_list, hottest_temp, coldest_temp)})
+                      .on("mouseover", function(event, d){ hotColdMouseEnter(this)})
+                      .on("mouseout", function(event, d){ hotColdMouseLeave(this)})
   
     
     svg.append("g")
@@ -169,9 +172,7 @@ function UpdateHottestColdestLineChart(data){
 
 
   var dataMonthly = getMonthlyData(data, hottest_temp, coldest_temp);
-
-
-              
+       
   var scales = getScalesHottestColdest(data);
   var x = scales[0] 
   var y =  scales[1]
@@ -194,10 +195,14 @@ function UpdateHottestColdestLineChart(data){
           .append("g")
           .append("path")
           .merge(line)
-          .attr("d", valueline_annual(d))
+          .attr("d", valueline_annual)
           .attr("style", (d) => getHotColdStyle(hot_cold_list,d))
-          .on("mouseover", function(event, d){ hotColdMouseEnter(this, event, d,hottest_temp, coldest_temp)})
-          .on("mouseout", function(event, d){ hotColdMouseLeave(this, event, d, hot_cold_list, hottest_temp, coldest_temp)})
+          .attr("id", function(d){
+            if(isInList(d[0].Year, hot_cold_list))
+                return String("path-"+ getIdxList(d[0].Year, hot_cold_list));
+              })
+          .on("mouseover", function(){ hotColdMouseEnter(this)})
+          .on("mouseout", function(){ hotColdMouseLeave(this)})
 
   var zeroLine = d3.select(".zero-line").selectAll("path").data(dataMonthly);
 
@@ -208,7 +213,7 @@ function UpdateHottestColdestLineChart(data){
           .append("path")
           .merge(zeroLine)
           .attr("d", zero_line)
-  updateHotColdLegend(hottest_temp, coldest_temp);
+  updateHotColdLegend(hot_cold_list);
  
 
 

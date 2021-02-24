@@ -429,11 +429,16 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp){
               .attr("class","text-legend")
               .attr("x", curX + 35)
               .attr("y", curY + 15)
-              .attr("id", "hot-text-"+el.Year )
+              .attr("id", "hot-cold-text-"+ id_idx)
               .html(el.Year + "&nbsp &nbsp"+
                 (el.annual_anomaly> 0? "+"+el.annual_anomaly.toFixed(2): el.annual_anomaly.toFixed(2)) + " &deg;C")
                 .on("mouseenter", hotColdTextLegendEnter)
+                .on("mouseleave", hotColdTextLegendLeave)
+
               
+
+
+
         
 
       id_idx ++;
@@ -447,8 +452,6 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp){
           .attr("class", "title-legend-h-c")
           .text("Top 5 Coldest Anomalies");
     
-    id_idx = 0;
-
     coldest_temp.forEach( (el)=>{
 
             curY += 35
@@ -461,9 +464,12 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp){
                   .attr("class","text-legend")
                   .attr("x", curX + 35)
                   .attr("y", curY + 15)
-                  .attr("id", "cold-text-"+el.Year )
+                  .attr("id", "hot-cold-text-"+id_idx )
                   .html(el.Year + "&nbsp &nbsp"+
                       (el.annual_anomaly> 0? "+"+el.annual_anomaly.toFixed(2): el.annual_anomaly.toFixed(2)) + " &deg;C")
+                  .on("mouseenter", hotColdTextLegendEnter)
+                  .on("mouseleave", hotColdTextLegendLeave)
+      
         
           id_idx ++;
                     
@@ -473,27 +479,21 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp){
 }
 
 
-function updateHotColdLegend(hottest_temp, coldest_temp){
+function updateHotColdLegend(hot_cold_list){
 
   var id_idx=0;
-  hottest_temp.forEach( (el)=>{
+  hot_cold_list.forEach( (el)=>{
 
-    d3.select("#hot-text-"+el.Year).html(el.Year + "&nbsp &nbsp"+
+    d3.select("#hot-cold-text-"+id_idx).html(el.Year + "&nbsp &nbsp"+
                 (el.annual_anomaly> 0? "+"+el.annual_anomaly.toFixed(2): el.annual_anomaly.toFixed(2)) + " &deg;C")
+                .on("mouseenter", hotColdTextLegendEnter)
+                .on("mouseleave", hotColdTextLegendLeave)
+    
    
     id_idx ++;
       
   })
   
-  id_idx = 0;
-  coldest_temp.forEach( (el)=>{
-
-    d3.select("#cold-text-"+id_idx).html(el.Year + "&nbsp &nbsp"+
-                            (el.annual_anomaly> 0? "+"+el.annual_anomaly.toFixed(2): el.annual_anomaly.toFixed(2)) + " &deg;C")
-    
-    id_idx ++;
-
-  })
 
 
 }
