@@ -225,7 +225,7 @@ text#label-legend {
   height: auto;
   padding: 50px 50px 50px 50px;
   margin: auto;
-  margin-top: 5%;
+  margin-top: 3%;
  
 }
 .range-years-buttons-container{
@@ -434,8 +434,6 @@ table {
 #container-h-c {
   border: solid lightgray 1px;
   width: 1200px;
-
-
   padding: 20px;
 }
 
@@ -513,10 +511,10 @@ table {
 /*STYLE FINAL HTML*/
 
 .container {
-  width: 1500px;
+  width: 900px;
   height: auto;
   padding: 2%;
-  margin: 0 auto; 
+  margin:  auto; 
   align-items: center;
   align-content: center;
 }
@@ -532,13 +530,6 @@ table {
   font-family: sans-serif;
 }
 
-
-#content{
-  width: auto;
-  align-items: center;
-  align-content: center;
-}
-
 #container-h-c legend{
 
   margin-left: 35%;
@@ -547,3 +538,4 @@ table {
 #seasonal_changes_graphic{
   margin-bottom: 10%;
 }
+
