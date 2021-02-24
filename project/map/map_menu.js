@@ -65,26 +65,26 @@ for(var i = 0; i<speed_options.length; i++){
 
   d3.select("#animation_speed_group")
     .append("text")
-    .attr("x", k-5)
-    .attr("y", y_l+17)
-    .attr("font-size", 10)
+    .attr("x", k-6)
+    .attr("y", y_l+21)
+    .attr("font-size", 12)
     .attr("font-family","Courier New")
     .text("x"+(speed_options[i]));
 }
 d3.select("#slider_ball").attr("cx",((start_line) + step*1)).attr("cy",y_l).raise();
 
-d3.select("#decrease_speed").attr("d", "M "+(start_line-22)+" "+y_l+"h "+9)
+d3.select("#decrease_speed").attr("d", "M "+(start_line-24)+" "+y_l+"h "+10)
   .style("stroke-width", 2).attr("pointer-events", "none");
-d3.select("#decrease_back").attr("cx",(start_line-22)+4.5).attr("cy",y_l).attr("r",8)
+d3.select("#decrease_back").attr("cx",(start_line-24)+5).attr("cy",y_l).attr("r",10)
   .on("click", function(){
     if (selected_opt_idx > 0)
       selected_opt_idx--;
       d3.select("#slider_ball").attr("cx", (start_line + step*selected_opt_idx));
   });
 
-d3.select("#increase_speed").attr("d", "M "+(end_line+22)+" "+y_l+"h "+(-9)+"h "+4.5+"v "+4.5+"v "+(-9))
+d3.select("#increase_speed").attr("d", "M "+(end_line+24)+" "+y_l+"h "+(-10)+"h "+5+"v "+5+"v "+(-9))
   .style("stroke-width", 2).attr("pointer-events", "none");
-d3.select("#increase_back").attr("cx",(end_line+22)-4.5).attr("cy",y_l).attr("r",8)
+d3.select("#increase_back").attr("cx",(end_line+24)-5).attr("cy",y_l).attr("r",10)
   .on("click", function(){
     if (selected_opt_idx < speed_options.length-1)
       selected_opt_idx++;
@@ -92,7 +92,7 @@ d3.select("#increase_back").attr("cx",(end_line+22)-4.5).attr("cy",y_l).attr("r"
   });
 
 // YEAR RANGE
-const p_l_2 = 15
+const p_l_2 = 20
 const y_l_2 = 190
 const first_years = 1743
 const last_year = 2020
@@ -158,8 +158,8 @@ while(curr_year_k<last_year){
   d3.select("#range_slider_group")
     .append("text")
     .attr("x", year_scale(curr_year_k)-9)
-    .attr("y", y_l_2+19)
-    .attr("font-size", 8)
+    .attr("y", y_l_2+22)
+    .attr("font-size", 10)
     .attr("font-family","Courier New")
     .text(curr_year_k)
     .attr("visibility", "hidden");
