@@ -270,7 +270,8 @@ text#label-legend {
   height: auto;
   padding: 15px;
 
-  border: 1px solid lightgray;
+  border: 1px solid black;
+ 
   margin: 0px;
 
   text-align: center;
@@ -289,11 +290,14 @@ text#label-legend {
 
 .range-years-buttons-container input[type="radio"]:checked + label{
 
-  background-color: #777;
-  opacity: 50%;
-  color: #ccc;
+  background-color:rgba(192, 192, 192, 0.8);
+  color: black;
+}
 
+.range-years-buttons-container input[type="radio"]+label:hover{
 
+  background-color:rgba(192, 192, 192, 0.8);
+  color: black;
 }
 
 
