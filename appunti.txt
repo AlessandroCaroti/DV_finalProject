@@ -14,6 +14,7 @@ TO FIX:
 -risolvere il fatto che quando si seleziona il paese lo zoom lo decentra a sinistra
 -aggiustare la tabbella che balla quando si va sulle caselle
 -in Seasonal Changes dicenbre non si riesce a selezionare
+-quando si deseleziona un paese, aggiornare nel modo corretto il pulsante entrale dello zoom
 
 IDEE:
 -aggiungere schermata caricamento
