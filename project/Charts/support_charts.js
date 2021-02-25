@@ -48,10 +48,8 @@ function allDeafaultDataset() {
     folder = "regions";
   } else folder = "counties";
   //initBaselineAndInfo(dataFile, true);
-  var csv =
-    "/../../data/" + folder + "/" + dataFile + "/" + dataFile +"_anomalyTable.csv";
-  var json =
-    "/../../data/" + folder + "/" + dataFile + "/" + dataFile + "_info.json";
+  var csv = "/../../data/" + folder + "/" + dataFile + "/" + dataFile +"_anomalyTable.csv";
+  var json = "/../../data/" + folder + "/" + dataFile + "/" + dataFile + "_info.json";
   var csvBaseline = "/../../data/"+folder+"/" + dataFile + "/" + dataFile+"_monthlyAbsoluteTemperature.csv";
 
   d3.csv(csv)

@@ -317,7 +317,7 @@ text#label-legend {
 
 .legend {
   padding: 3px;
-  fill: #fff;
+  fill: white;
 }
 
 #legend-square {
@@ -379,9 +379,21 @@ table {
   overflow: hidden;
 }
 
-.tbody_table td {
-  padding: 25px;
+.thead_table th{
+
+  padding-top: 25px;
+  padding-bottom: 25px;
+  font-size: large;
+
 }
+
+ .tbody_table td {
+  
+  padding-top: 25px;
+  padding-bottom: 25px;
+
+}
+
 .rows_table {
   font-family: sans-serif;
   transition: background 0.2s ease-in;
@@ -405,10 +417,16 @@ table {
   background: #ffffcc;
 }
 
+.selected_border{
+  background-color: rgba(0, 0, 0, 1);
+
+}
+
 .start_value_table {
   background: #91aac5;
   color: white;
   font-weight: bold;
+
 }
 
 #table_container h2 {
@@ -422,11 +440,6 @@ table {
   border-left: none;
   font-weight: bold;
   color: #2e4053;
-}
-
-.selected_cell {
-  background: rgb(46,64,83, 0.6);
-  color: white;
 }
 
 /*---------------------------Hottest-Coldest Year style--------------------------------*/
