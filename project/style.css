@@ -381,7 +381,13 @@ table {
 
 .tbody_table td {
   padding: 25px;
+  
 }
+
+.tbody_table td:hover {
+  background-color: rgba(192, 192, 192, 0.5);
+}
+
 .rows_table {
   font-family: sans-serif;
   transition: background 0.2s ease-in;
@@ -405,6 +411,11 @@ table {
   background: #ffffcc;
 }
 
+.selected_border{
+  background-color: rgba(0, 0, 0, 1);
+
+}
+
 .start_value_table {
   background: #91aac5;
   color: white;
@@ -424,10 +435,7 @@ table {
   color: #2e4053;
 }
 
-.selected_cell {
-  background: rgb(46,64,83, 0.6);
-  color: white;
-}
+
 
 /*---------------------------Hottest-Coldest Year style--------------------------------*/
 
