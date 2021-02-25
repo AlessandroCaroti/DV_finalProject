@@ -8,9 +8,35 @@ var columns_head = ["Region"].concat(years_table);
 var full_width = 900;
 var margin_table = { top: 10, right: 10, bottom: 10, left: 20 };
 var width_table = full_width - margin_table.left - margin_table.right;
-var height_table =
-  (full_width * 9) / 16 - margin_table.top - margin_table.bottom;
+var height_table = (full_width * 9) / 16 - margin_table.top - margin_table.bottom;
 
+
+
+function drawContinentTable(baseline, update){
+
+  var continent_list = ["Africa","Asia","Europe", "North America","South America","Oceania"];
+
+  continent_list.forEach((continent)=>{
+
+      var csv_path=  "/../data/regions/" + continent + "/" + continent + "_anomalyTable.csv";
+
+      d3.csv(csv_path)
+          .then((data) => {
+            parseDataAttributes(data, baseline, continent);
+
+            if (update) {
+              updateRowsTable(data);
+            } else addRowTable(data);
+          
+          })
+          .catch((error) => {
+            console.log(error);
+            throw error;
+          });
+
+    })
+
+}
 
 
 function readDataTableFinal(data_country, dataFile, baseline, update = false, global = false) {
@@ -18,14 +44,16 @@ function readDataTableFinal(data_country, dataFile, baseline, update = false, gl
   DATA_TABLE = [];
 
   if (!update){
-    createEmptyTable(data_country);
+    createEmptyTable(data_country, baseline)
     return;
   }
      
   var folder = "counties";
 
-  if (global)
+  if (global){
     folder = "regions";
+    drawContinentTable(baseline,update);
+  }
 
   var path = "/../data/" + folder + "/" + dataFile + "/" + dataFile + "_info.json"
 
@@ -162,7 +190,7 @@ function table_data(data) {
   return dataTable;
 }
 
-function createEmptyTable(dataCountry) {
+function createEmptyTable(dataCountry,baseline) {
   
   var svg = d3
     .select("#table_container")
@@ -188,8 +216,11 @@ function createEmptyTable(dataCountry) {
     .append("th")
     .attr("class", "header_table")
     .text((d) => d);
-
+  
+ 
   addRowTable(dataCountry);
+  drawContinentTable(baseline, false);
+ 
 }
 
 function addRowTable(data) {
@@ -260,12 +291,7 @@ function addRowTable(data) {
       if (String(d.mean_rate) == "NaN") return "-";
       else return d.mean_rate;
     })
-    .on("mouseover", function (event, d) {
-      tableCellEnter(this, event, d);
-    })
-    .on("mouseout", function () {
-      tableCellLeave(this);
-    });
+ 
 }
 
 
@@ -344,14 +370,6 @@ function updateRowsTable(data) {
       if (String(d.mean_rate) == "NaN") return "-";
       else return d.mean_rate;
     })
-    .on("mouseover", function (event, d) {
-      tableCellEnter(this, event, d);
-    })
-    .on("mouseout", function () {
-      tableCellLeave(this);
-    });
-
-
 
 }
 

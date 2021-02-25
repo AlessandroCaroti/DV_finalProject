@@ -125,12 +125,18 @@ function stripesMove(){
 }
 
 //-------------------------------------------------------TABLE EVENTS-------------------------------------------------
-function tableCellEnter(self, event, d) {
-  d3.select(self).classed("selected_cell", true);
+function tableCellEnter() {
+
+  //if(this.className != "region_cell")
+   //d3.select(this).style("border-color","black")
+                 
 }
 
-function tableCellLeave(self) {
-  d3.select(self).classed("selected_cell", false);
+function tableCellLeave() {
+ 
+ // d3.select(this).classed("selected_border", false)
+
+  
 }
 
 //--------------------------------- TOOLTIP SEASONAL LINECHART --------------------------------------------
