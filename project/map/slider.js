@@ -123,12 +123,16 @@ function control_animation() {
 }
 
 function start_animation() {
-  var total_milliseconds = animation_duration * 60000; // 60000 milliseconds in one minute
-  var time_wait = total_milliseconds / ((max_slider - min_slider) / step_slider); //  total time / (N° years) 
-  cur_year = min_slider;
+
+  // get speed
+  let speed = speed_options[selected_opt_idx];
+  
+  var total_milliseconds = (animation_duration * 60000) / speed; // 60000 milliseconds in one minute
+  var time_wait = total_milliseconds / ((endYear_selected - startYear_selected) / step_slider); //  total time / (N° years) 
+  cur_year = startYear_selected;
 
   // disable possibility to use the slider
-  disable_slider();
+  disable_menu();
 
   // start animation
   animation_func = setInterval(animation_years, time_wait, time_wait);
@@ -141,7 +145,7 @@ function stop_animation() {
   animation_func = undefined;
 
   // enable possibility to use the slider
-  enable_slider();
+  enable_menu();
 
   // reset position slider
   load_tempYear(sliderAlternativeHandle.value() , default_transition);
@@ -171,16 +175,25 @@ async function animation_years(trasition_time) {
 
 }
 
-function disable_slider() {
+function disable_menu() {
 
+  // disable slider
   d3.select("#svg-slider").style("pointer-events", "none");
   // change opacity 
   d3.select("#svg-slider").style("opacity", "0.5");
+
+  // disable animation menu
+  d3.select("#setting_btn_open").style("pointer-events", "none");
+  // change opacity 
+  d3.select("#setting_btn_open").style("opacity", "0.5");
 }
 
-function enable_slider() {
-  d3.select("#" + id_slider).style("pointer-events", "auto");
+function enable_menu() {
+  d3.select("#svg-slider").style("pointer-events", "auto");
   d3.select("#svg-slider").style("opacity", "1.0");
+
+  d3.select("#setting_btn_open").style("pointer-events", "auto");
+  d3.select("#setting_btn_open").style("opacity", "1.0");
 }
 
 
