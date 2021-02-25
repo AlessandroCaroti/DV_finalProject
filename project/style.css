@@ -225,7 +225,7 @@ text#label-legend {
   height: auto;
   padding: 50px 50px 50px 50px;
   margin: auto;
-  margin-top: 5%;
+  margin-top: 3%;
  
 }
 .range-years-buttons-container{
@@ -264,7 +264,7 @@ text#label-legend {
 
 .title-chart{
 
-  margin-left: 40%;
+  margin-left: 30%;
   font-size: 25px;
   font-weight: bold;
 }
@@ -317,7 +317,7 @@ text#label-legend {
 
 .legend {
   padding: 3px;
-  fill: #fff;
+  fill: white;
 }
 
 #legend-square {
@@ -379,9 +379,21 @@ table {
   overflow: hidden;
 }
 
-.tbody_table td {
-  padding: 25px;
+.thead_table th{
+
+  padding-top: 25px;
+  padding-bottom: 25px;
+  font-size: large;
+
 }
+
+ .tbody_table td {
+  
+  padding-top: 25px;
+  padding-bottom: 25px;
+
+}
+
 .rows_table {
   font-family: sans-serif;
   transition: background 0.2s ease-in;
@@ -405,10 +417,16 @@ table {
   background: #ffffcc;
 }
 
+.selected_border{
+  background-color: rgba(0, 0, 0, 1);
+
+}
+
 .start_value_table {
   background: #91aac5;
   color: white;
   font-weight: bold;
+
 }
 
 #table_container h2 {
@@ -424,18 +442,11 @@ table {
   color: #2e4053;
 }
 
-.selected_cell {
-  background: rgb(46,64,83, 0.6);
-  color: white;
-}
-
 /*---------------------------Hottest-Coldest Year style--------------------------------*/
 
 #container-h-c {
   border: solid lightgray 1px;
   width: 1200px;
-
-
   padding: 20px;
 }
 
@@ -513,10 +524,10 @@ table {
 /*STYLE FINAL HTML*/
 
 .container {
-  width: 1500px;
+  width: 900px;
   height: auto;
   padding: 2%;
-  margin: 0 auto; 
+  margin:  auto; 
   align-items: center;
   align-content: center;
 }
@@ -532,18 +543,12 @@ table {
   font-family: sans-serif;
 }
 
-
-#content{
-  width: auto;
-  align-items: center;
-  align-content: center;
-}
-
 #container-h-c legend{
 
-  margin-left: 35%;
+  margin-left: 28%;
 }
 
 #seasonal_changes_graphic{
   margin-bottom: 10%;
 }
+

@@ -1,5 +1,5 @@
 // function support for the table
-var DATA_TABLE=[];
+var DATA_TABLE = [];
 
 //Global variables
 var years_table = ["1750", "1800", "1850", "1900", "1950", "2000", "2020"];
@@ -8,53 +8,93 @@ var columns_head = ["Region"].concat(years_table);
 var full_width = 900;
 var margin_table = { top: 10, right: 10, bottom: 10, left: 20 };
 var width_table = full_width - margin_table.left - margin_table.right;
-var height_table =
-  (full_width * 9) / 16 - margin_table.top - margin_table.bottom;
+var height_table = (full_width * 9) / 16 - margin_table.top - margin_table.bottom;
 
 
 
-function readDataTableFinal(data_country, dataFile, baseline, update = false, global=false) {
- 
-    DATA_TABLE = [];
-  
-    if(!update){createEmptyTable(data_country); }
-    
-    if(!global){
-      table_data(data_country);
-      d3.json("/../data/counties/" + dataFile + "/" + dataFile + "_info.json").then(
-        (info) => {
-          var generalization = info["Generalization"];
-  
-          generalization.forEach((gen_name) => {
-            var csv_path =
-              "/../data/regions/" + gen_name + "/" + gen_name + "_anomalyTable.csv";
-            
-              d3.csv(csv_path)
-              .then((data) => {
-                parseDataAttributes(data, baseline, gen_name);
-        
-                if (update) {
-                  updateRowsTable(data);
-                } else addRowTable(data);
-              })
-              .catch((error) => {
-                console.log(error);
-                throw error;
-              });
+function drawContinentTable(baseline, update){
+
+  var continent_list = ["Africa","Asia","Europe", "North America","South America","Oceania"];
+
+  continent_list.forEach((continent)=>{
+
+      var csv_path=  "/../data/regions/" + continent + "/" + continent + "_anomalyTable.csv";
+
+      d3.csv(csv_path)
+          .then((data) => {
+            parseDataAttributes(data, baseline, continent);
+
+            if (update) {
+              updateRowsTable(data);
+            } else addRowTable(data);
+          
+          })
+          .catch((error) => {
+            console.log(error);
+            throw error;
           });
-        }
-      );
-  
-    }
-   
+
+    })
+
+}
+
+
+function readDataTableFinal(data_country, dataFile, baseline, update = false, global = false) {
+
+  DATA_TABLE = [];
+
+  if (!update){
+    createEmptyTable(data_country, baseline)
+    var title = document.getElementById("title-table").innerHTML;
+    document.getElementById("title-table").innerHTML = title + " - "+ data_country[0].region;
+    return;
+  }else{
+    var title = document.getElementById("title-table").innerHTML.split("-");
+    document.getElementById("title-table").innerHTML = title[0] + " - "+ data_country[0].region;
+  }
+     
+  var folder = "counties";
+
+  if (global){
+    folder = "regions";
+    drawContinentTable(baseline,update);
   }
 
+  var path = "/../data/" + folder + "/" + dataFile + "/" + dataFile + "_info.json"
+
+  if (!global)
+    table_data(data_country);
+
+  d3.json(path).then(
+    (info) => {
+      var generalization = info["Generalization"];
+
+      generalization.forEach((gen_name) => {
+        var csv_path =
+          "/../data/regions/" + gen_name + "/" + gen_name + "_anomalyTable.csv";
+
+        d3.csv(csv_path)
+          .then((data) => {
+            parseDataAttributes(data, baseline, gen_name);
+
+            if (update) {
+              updateRowsTable(data);
+            } else addRowTable(data);
+          })
+          .catch((error) => {
+            console.log(error);
+            throw error;
+          });
+      });
+    }
+  );
+
+}
 
 
 //Get data every 50 years_table with also the 2019 at the end
 function dataEvery50Years(data) {
   var annual_data = getAnnualData(data);
-
 
   var data_2 = [];
 
@@ -80,12 +120,12 @@ function addRowData(data50, dataTable) {
   var row = {};
 
   regionName = data50[0].region;
-  
+
 
   row["Region"] = regionName;
 
   data50.forEach(
-    (d) =>{ 
+    (d) => {
       row[String(d.Year)] = {
         temp: d.annual_value.toFixed(2),
         mean_rate: NaN,
@@ -103,7 +143,6 @@ function addRowData(data50, dataTable) {
 // Each row correspond to a csv (specific countri, emisphere, continet, global)
 function table_data(data) {
   var data50 = dataEvery50Years(data);
-
 
   var dataTable = [];
   //GLOBAL DATA
@@ -155,7 +194,8 @@ function table_data(data) {
   return dataTable;
 }
 
-function createEmptyTable(dataCountry) {
+function createEmptyTable(dataCountry,baseline) {
+ 
   
   var svg = d3
     .select("#table_container")
@@ -181,19 +221,22 @@ function createEmptyTable(dataCountry) {
     .append("th")
     .attr("class", "header_table")
     .text((d) => d);
-
+  
+ 
   addRowTable(dataCountry);
+  drawContinentTable(baseline, false);
+ 
 }
 
 function addRowTable(data) {
-  
+
   var tableData = table_data(data);
   var tbody = d3.select(".tbody_table");
   var rows = tbody.data(tableData);
-  
+
   rows.enter().merge(rows).append("tr").attr("class", "rows_table");
 
- 
+
   //bind the data to columns in each row
   var columns = tbody
     .selectAll("tr")
@@ -218,7 +261,7 @@ function addRowTable(data) {
   var idx_year = 0;
   var previous_idx;
 
-    tbody
+  tbody
     .selectAll("td")
     .attr("class", function (d, i) {
       //find cells with regions name
@@ -249,20 +292,21 @@ function addRowTable(data) {
     })
     .attr("id", "cell")
     .html(function (d) {
+      if(this.className == "start_value_table") return d.mean_rate + " °C";
       if (d.i == columns_head[0]) return d.region;
       if (String(d.mean_rate) == "NaN") return "-";
       else return d.mean_rate;
     })
-    .on("mouseover", function (event, d) {
-      tableCellEnter(this, event, d);
-    })
-    .on("mouseout", function () {
-      tableCellLeave(this);
-    });
+
+
+    
+ 
 }
 
 
-function updateRowsTable(data){
+function updateRowsTable(data) {
+  
+ 
 
   table_data(data);
 
@@ -333,18 +377,11 @@ function updateRowsTable(data){
     })
     .attr("id", "cell")
     .html(function (d) {
+      if(this.className == "start_value_table") return d.mean_rate + " °C";
       if (d.i == columns_head[0]) return d.region;
       if (String(d.mean_rate) == "NaN") return "-";
       else return d.mean_rate;
     })
-    .on("mouseover", function (event, d) {
-      tableCellEnter(this, event, d);
-    })
-    .on("mouseout", function () {
-      tableCellLeave(this);
-    });
-
-   
 
 }
 

@@ -144,6 +144,9 @@ function styleLastYearsLines(d, dataLastYears){
 
 
   function createDeafaultSeasonalLinechart(data, dataSeasonalBaseline){
+      
+      var title = document.getElementById("title-seasonal").innerHTML;
+      document.getElementById("title-seasonal").innerHTML = title + " - "+ data[0].region;
 
       var seasonalData = getDataSeasonal(data, dataSeasonalBaseline);
       
@@ -243,7 +246,10 @@ function styleLastYearsLines(d, dataLastYears){
   
   
   function updateSeasonalLineChart(data, dataSeasonalBaseline){
-  
+    
+    var title = document.getElementById("title-seasonal").innerHTML.split("-");
+    document.getElementById("title-seasonal").innerHTML = title[0] + " - "+ data[0].region;
+
     var seasonalData = getDataSeasonal(data, dataSeasonalBaseline);
     var lastYearsData = lastYearSeasonalData(data,dataSeasonalBaseline);
     

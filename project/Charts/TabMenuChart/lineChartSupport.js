@@ -181,6 +181,8 @@ function getCheckedValue( groupName ) {
 
 function createDefaultLineChart(data){
 
+  var title = document.getElementById("title-climate-changes").innerHTML;
+  document.getElementById("title-climate-changes").innerHTML = title + " - "+ data[0].region;
     //default button
 
     var svg = d3.select("#linechart")
@@ -245,7 +247,7 @@ function createDefaultLineChart(data){
         .attr("d", valueline_baseline);
         
 
-    createLineChartLegend(svg, btn_ten);
+    
 
     var tooltipLine = svg.append('line').attr("class","line_tip").attr("id","linechart-tip");
     
@@ -257,6 +259,8 @@ function createDefaultLineChart(data){
                     .attr('id', 'tipbox-linechart')
                     .on('mousemove', (event) => drawTooltipLineChart(tipBox, event, x, data, tooltipLine,"#linechart", height))
                     .on('mouseout', () => removeTooltipLineChart(tooltipLine,"#linechart"));
+
+    createLineChartLegend(svg, btn_ten);
 
   }
 
@@ -280,6 +284,8 @@ function updateAxis(x_axis_class, y_axis_class, x, y){
 
 function updateLineChart(data, grafic_class){
   
+  var title = document.getElementById("title-climate-changes").innerHTML.split("-");
+  document.getElementById("title-climate-changes").innerHTML = title[0] + " - "+ data[0].region;
 
   
   //Get scales and update axis
@@ -352,7 +358,7 @@ function updateLineChart(data, grafic_class){
                          .on('mouseout', () => removeTooltipLineChart(tooltipLine,"#linechart")); 
     
     updateGrid("#linechart", x, y,svg, 12, 10);
-    updateRangeNameLegend();
+    updateRangeNameLegend(svg);
 
 }
 

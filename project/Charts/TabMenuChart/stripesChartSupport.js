@@ -90,8 +90,9 @@ function createDefaultStripesChart(data){
                      .attr("fill", (d)  => colorStripes(data_annnual, d) ) 
 
     //Events Tooltip
-    stripes.on("mouseover", stripesEnter)
+    stripes.on("mouseenter", stripesEnter)
            .on("mouseout", stripesLeave)
+           .on("mousemove", stripesMove);
  
 }
 
@@ -99,13 +100,18 @@ function createDefaultStripesChart(data){
 function colorStripes(data_annnual, d){
 
     var range_year = getCheckedValue("btn-range-year").value;
-    var colorScale = d3.scaleLinear()
-                       .domain(d3.extent(data_annnual, (d) => d[range_year+"_anomaly"]))
-                       .range([1,0])
 
-    if( isNaN(d[range_year+"_anomaly"] ) ) return "rgb(153,153,153)";
+    var extent = d3.extent(data_annnual, (d) => d[range_year+"_anomaly"]);
+
+    
+    var colors = d3.scaleDiverging(t => d3.interpolateRdBu(1 - t))
+                                .domain([extent[0], 0, extent[1]]);
+
+
+    if( isNaN(d[range_year+"_anomaly"] ) ) 
+        return unknown_temp;
     else
-        return d3.interpolateRdBu( colorScale(d[range_year+"_anomaly"]))
+        return colors( d[range_year+"_anomaly"]);
 }
 
 
