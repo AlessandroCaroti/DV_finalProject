@@ -45,7 +45,12 @@ function readDataTableFinal(data_country, dataFile, baseline, update = false, gl
 
   if (!update){
     createEmptyTable(data_country, baseline)
+    var title = document.getElementById("title-table").innerHTML;
+    document.getElementById("title-table").innerHTML = title + " - "+ data_country[0].region;
     return;
+  }else{
+    var title = document.getElementById("title-table").innerHTML.split("-");
+    document.getElementById("title-table").innerHTML = title[0] + " - "+ data_country[0].region;
   }
      
   var folder = "counties";
@@ -190,6 +195,7 @@ function table_data(data) {
 }
 
 function createEmptyTable(dataCountry,baseline) {
+ 
   
   var svg = d3
     .select("#table_container")
@@ -299,6 +305,8 @@ function addRowTable(data) {
 
 
 function updateRowsTable(data) {
+  
+ 
 
   table_data(data);
 

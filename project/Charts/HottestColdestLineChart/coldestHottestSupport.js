@@ -91,6 +91,11 @@ function getMonthlyData(data, hottestYears, coldestYears){
 
 function createHottestColdestLineChart(data){
     
+  var title = document.getElementById("title-hot-cold").innerHTML;
+  document.getElementById("title-hot-cold").innerHTML = title + " - "+ data[0].region;
+
+
+
     var hottest_temp =  getHottestYears(data);
     var coldest_temp =  getColdestYears(data);
 
@@ -165,7 +170,9 @@ function createHottestColdestLineChart(data){
 
 function UpdateHottestColdestLineChart(data){
 
-   
+  var title = document.getElementById("title-hot-cold").innerHTML.split("-");
+  document.getElementById("title-hot-cold").innerHTML = title[0] + " - "+ data[0].region;
+
   var hottest_temp =  getHottestYears(data);
   var coldest_temp =  getColdestYears(data);
   var hot_cold_list = hottest_temp.concat(coldest_temp);
