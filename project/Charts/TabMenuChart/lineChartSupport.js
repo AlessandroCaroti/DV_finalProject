@@ -245,7 +245,7 @@ function createDefaultLineChart(data){
         .attr("d", valueline_baseline);
         
 
-    createLineChartLegend(svg, btn_ten);
+    
 
     var tooltipLine = svg.append('line').attr("class","line_tip").attr("id","linechart-tip");
     
@@ -257,6 +257,8 @@ function createDefaultLineChart(data){
                     .attr('id', 'tipbox-linechart')
                     .on('mousemove', (event) => drawTooltipLineChart(tipBox, event, x, data, tooltipLine,"#linechart", height))
                     .on('mouseout', () => removeTooltipLineChart(tooltipLine,"#linechart"));
+
+    createLineChartLegend(svg, btn_ten);
 
   }
 
@@ -352,7 +354,7 @@ function updateLineChart(data, grafic_class){
                          .on('mouseout', () => removeTooltipLineChart(tooltipLine,"#linechart")); 
     
     updateGrid("#linechart", x, y,svg, 12, 10);
-    updateRangeNameLegend();
+    updateRangeNameLegend(svg);
 
 }
 

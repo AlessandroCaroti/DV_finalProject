@@ -72,12 +72,15 @@ function createLineChartLegend(svg){
   }
 
 
-  function updateRangeNameLegend(){
+  function updateRangeNameLegend(svg){
     
     var btn = getCheckedValue("btn-range-year")
 
     var label = document.getElementById("label-"+btn.id)
     var range_name = label.innerHTML;
+
+    d3.select(".legend").remove();
+    createLineChartLegend(svg, btn)
 
     if(btn.value == "annual" && !isAnnual){
 
@@ -98,7 +101,7 @@ function createLineChartLegend(svg){
 
     if( isAnnual && btn.value != "annual"){
         
-        var legend = d3.select(".legend")
+        var legend = d3.select(".legend");
         legend
             .append( "line" )
             .attr("x1", 15).attr("x2", 30)
@@ -122,7 +125,7 @@ function createLineChartLegend(svg){
                 .style("stroke","red")
         d3.select("#range-name-legend").attr("y", 32)
         
-                isAnnual = false;
+        isAnnual = false;
     }
     
     
