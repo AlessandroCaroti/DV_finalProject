@@ -117,6 +117,13 @@ function stripesLeave() {
   if (tooltip) tooltip.style("display", "none");
 }
 
+function stripesMove(){
+  var tooltip = d3.select("#stripechart .tooltip-map");
+  tooltip
+    .style("left", String(event.pageX + 20) + "px")
+    .style("top", String(event.pageY - 20) + "px");
+}
+
 //-------------------------------------------------------TABLE EVENTS-------------------------------------------------
 function tableCellEnter(self, event, d) {
   d3.select(self).classed("selected_cell", true);

@@ -90,8 +90,9 @@ function createDefaultStripesChart(data){
                      .attr("fill", (d)  => colorStripes(data_annnual, d) ) 
 
     //Events Tooltip
-    stripes.on("mouseover", stripesEnter)
+    stripes.on("mouseenter", stripesEnter)
            .on("mouseout", stripesLeave)
+           .on("mousemove", stripesMove);
  
 }
 
