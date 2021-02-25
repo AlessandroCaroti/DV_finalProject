@@ -139,7 +139,6 @@ function addRowData(data50, dataTable) {
 function table_data(data) {
   var data50 = dataEvery50Years(data);
 
-
   var dataTable = [];
   //GLOBAL DATA
   addRowData(data50, dataTable);
@@ -287,10 +286,14 @@ function addRowTable(data) {
     })
     .attr("id", "cell")
     .html(function (d) {
+      if(this.className == "start_value_table") return d.mean_rate + " °C";
       if (d.i == columns_head[0]) return d.region;
       if (String(d.mean_rate) == "NaN") return "-";
       else return d.mean_rate;
     })
+
+
+    
  
 }
 

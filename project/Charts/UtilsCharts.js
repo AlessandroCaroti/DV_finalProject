@@ -80,7 +80,7 @@ function createLineChartLegend(svg){
     var range_name = label.innerHTML;
 
     d3.select(".legend").remove();
-    createLineChartLegend(svg, btn)
+    createLineChartLegend(svg, btn);
 
     if(btn.value == "annual" && !isAnnual){
 

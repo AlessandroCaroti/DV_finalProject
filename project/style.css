@@ -379,13 +379,19 @@ table {
   overflow: hidden;
 }
 
-.tbody_table td {
-  padding: 25px;
-  
+.thead_table th{
+
+  padding-top: 25px;
+  padding-bottom: 25px;
+  font-size: large;
+
 }
 
-.tbody_table td:hover {
-  background-color: rgba(192, 192, 192, 0.5);
+ .tbody_table td {
+  
+  padding-top: 25px;
+  padding-bottom: 25px;
+
 }
 
 .rows_table {
@@ -420,6 +426,7 @@ table {
   background: #91aac5;
   color: white;
   font-weight: bold;
+
 }
 
 #table_container h2 {
@@ -434,8 +441,6 @@ table {
   font-weight: bold;
   color: #2e4053;
 }
-
-
 
 /*---------------------------Hottest-Coldest Year style--------------------------------*/
 
