@@ -104,6 +104,9 @@ svg text::selection {
   /*height: 650px;
   /*-ms-transform: translateY(-50%);
   transform: translateY(-50%);*/
+
+  /*border-left: 0.5px solid lightgray;*/
+
 }
 
 .country {
@@ -235,8 +238,8 @@ text#label-legend {
 }
 
 .tab {
+  
   overflow: hidden;
-
   margin-left: 6%;
 }
 
@@ -246,6 +249,7 @@ text#label-legend {
   padding: 50px 50px 50px 50px;
   margin: auto;
   margin-top: 3%;
+  
 }
 .range-years-buttons-container {
   margin-left: 11%;
@@ -564,4 +568,47 @@ table {
 
 #seasonal_changes_graphic {
   margin-bottom: 10%;
+}
+
+
+#starting-menu{
+  width: 100%;
+  background-color:#2e4053;
+  height: 5%;
+ 
+}
+
+
+
+/*Starting Menu*/
+ul#menu {
+  font-family: Verdana, sans-serif;
+  font-size: 11px;
+  padding: 0;
+  list-style: none;
+  height: 100%;
+
+}
+
+ul#menu li {
+  background-color: #2e4053;
+  display: block;
+  float: left; 
+  height: 100%;
+}
+ul#menu li a {
+  color: #fff;
+  display: block;
+  font-weight: bold;
+  line-height: 35px;
+  height: 100%;
+  margin-top: 4%;
+  text-decoration: none;
+  width: 150px;
+
+  text-align: center;
+}
+ul#menu li.active, ul#menu li:hover {
+  background-color: #54BAE2;
+
 }
