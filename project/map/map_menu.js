@@ -30,7 +30,7 @@ d3.select("#setting_icon_close")
   .attr("y", y + p);
 
 //STYLE MENU'
-d3.select("#menu")
+d3.select("#menu_map")
   .attr("d", roundedRect(x, y, w1, h1, 3))
   .style("fill", "rgba(255,255,255,0.8)")
   .style("stroke", "black")
@@ -170,7 +170,7 @@ while(curr_year_k<last_year){
 
 // EVENTS OPEN
 d3.select("#setting_btn_open").on("click", function () {
-  d3.select("#menu")
+  d3.select("#menu_map")
     .transition()
     .attr("visibility", "visible")
     .attr("d", roundedRect(-w2 + w1, 0, w2, h2, 10))
@@ -185,7 +185,7 @@ d3.select("#setting_btn_open").on("click", function () {
 // EVENTS CLOSE
 d3.select("#setting_btn_close").on("click", function () {
   console.log("CLICK");
-  d3.select("#menu")
+  d3.select("#menu_map")
     .transition()
     .attr("visibility", "visible")
     .attr("d", roundedRect(x, y, w1, h1, 3))
