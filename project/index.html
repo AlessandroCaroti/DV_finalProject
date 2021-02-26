@@ -57,7 +57,7 @@
 
 <!------------------------------START MAP------------------------------------------->
 
-<body class="loaded"> <!-- remove class loaded to enable the loading screen -->
+<body > <!-- remove class loaded to enable the loading screen -->
 
   <div id="loader-wrapper">
     <div id="loader"></div>
@@ -71,7 +71,28 @@
 
     <div class="col_wrapper">
       <div id="map-containter" class="container">
-        <h1 style="text-align: center;">Berkeley Earth Data</h1>
+        <h1 style="text-align: center;   color: #0070a1;
+        ">Berkeley Earth Data</h1>
+
+          <div class="range-years-buttons-container">
+            <input class="checkbox-range" type="radio" name="btn-range-year" value="annual" id="btn_annual"
+              onclick="changeDataRangeYears()" />
+            <label id="label-btn_annual" for="btn_annual"> Annual </label>
+
+            <input class="checkbox-range" type="radio" name="btn-range-year" value="five_years" id="btn_five"
+              onclick="changeDataRangeYears()" />
+            <label id="label-btn_five" for="btn_five"> 5-Year </label>
+
+            <input class="checkbox-range" type="radio" name="btn-range-year" checked="checked" value="ten_years"
+              id="btn_ten" onclick="changeDataRangeYears()" />
+            <label id="label-btn_ten" for="btn_ten"> 10-Year </label>
+
+            <input class="checkbox-range" type="radio" name="btn-range-year" value="twenty_years" id="btn_twenty"
+              onclick="changeDataRangeYears()" />
+            <label id="label-btn_twenty" for="btn_twenty">20-Years</label>
+          </div>
+
+
 
         <div id="all_map" class="col_wrapper">
           <div class="row_wrapper" style="height: 70;">
@@ -120,7 +141,7 @@
 
             <g class="col-sm-2">
               <path d=""></path>
-              <text id="sliderLabel" x="45%" y="27" pointer-events="none"></text>
+              <text id="sliderLabel" x="42%" y="27" pointer-events="none"></text>
             </g>
 
             <g id="setting_group">
@@ -175,45 +196,30 @@
         </div>
       </div>
 
+      <hr/>
 
       <!------------------------------END MAP------------------------------------------->
 
       <!------------------------------START CLIMATE STRIPES------------------------------------------->
 
 
-      <fieldset class="chart-container">
+      <div class="chart-container">
 
-        <legend id="title-climate-changes" class="title-chart">Climate Changes</legend>
-
-        <div class="range-years-buttons-container">
-          <input class="checkbox-range" type="radio" name="btn-range-year" value="annual" id="btn_annual"
-            onclick="changeDataRangeYears()" />
-          <label id="label-btn_annual" for="btn_annual"> Annual </label>
-
-          <input class="checkbox-range" type="radio" name="btn-range-year" value="five_years" id="btn_five"
-            onclick="changeDataRangeYears()" />
-          <label id="label-btn_five" for="btn_five"> 5-Year </label>
-
-          <input class="checkbox-range" type="radio" name="btn-range-year" checked="checked" value="ten_years"
-            id="btn_ten" onclick="changeDataRangeYears()" />
-          <label id="label-btn_ten" for="btn_ten"> 10-Year </label>
-
-          <input class="checkbox-range" type="radio" name="btn-range-year" value="twenty_years" id="btn_twenty"
-            onclick="changeDataRangeYears()" />
-          <label id="label-btn_twenty" for="btn_twenty">20-Years</label>
-        </div>
+        <h2 id="title-climate-changes" class="title-chart">Climate Changes</h2>
 
         <div id="stripechart">
+          <h3>Climate Stripes</h3>
           <div class="tooltip-map" id="tooltip_stripes"></div>
         </div>
 
         <div id="linechart">
+          <h3>Regional Climate Change</h3>
           <div class="tooltip-map" id="tooltip_line"></div>
         </div>
 
-      </fieldset>
+      </div>
 
-
+      <hr>
 
       <!------------------------------END CLIMATE STRIPES------------------------------------------->
 
@@ -233,26 +239,29 @@
 
       </div>
 
+      <hr>
       <!------------------------------ END TABLE ------------------------------------------->
 
       <!------------------------------START HOTTEST-COLDEST LINECHART------------------------------------------->
 
-      <fieldset id="container-h-c" class="chart-container">
-        <legend id="title-hot-cold" class="title-chart">Temperature Records</legend>
+      <div id="container-h-c" class="chart-container">
+        <h2 id="title-hot-cold" class="title-chart">Temperature Records</h2>
         <div class="tooltip-map" id="tooltip-hot-cold"></div>
-      </fieldset>
+      </div>
 
-
+      <hr>
       <!------------------------------START HOTTEST-COLDEST LINECHART------------------------------------------->
 
       <!------------------------------START SEASONAL LINECHART------------------------------------------->
 
 
 
-      <fieldset id="seasonal_changes_graphic" class="chart-container">
-        <legend id="title-seasonal" class="title-chart">Seasonal Changes</legend>
+      <div id="seasonal_changes_graphic" class="chart-container">
+        <h2 id="title-seasonal" class="title-chart">Seasonal Changes</h2>
         <div class="tooltip-map" id="tooltip-seasonal-changes"> </div>
-      </fieldset>
+      </div>
+      
+      <hr>
       <!------------------------------END SEASONAL LINECHART------------------------------------------->
 
   </div>

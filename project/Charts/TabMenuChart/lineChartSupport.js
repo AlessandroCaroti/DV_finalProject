@@ -198,13 +198,12 @@ function createDefaultLineChart(data){
     var x = scales[0] 
     var y =  scales[1]
 
-
+  
     svg.append("g")
       .attr("transform", "translate(0," + height + ")")
       .attr("class", "x_axis")
       .call(d3.axisBottom(x).tickSizeOuter(0));
-
-
+    
     svg.append("g")
       .attr("class", "y_axis")
       .call(d3.axisLeft(y).tickSizeOuter(0))

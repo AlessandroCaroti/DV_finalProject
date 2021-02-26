@@ -1,4 +1,4 @@
-var margin_stripes = {'top': 30, 'right': 70, 'bottom': 40, 'left': 70};
+var margin_stripes = {'top': 10, 'right': 70, 'bottom': 10, 'left': 70};
 var width_stripe = full_width - margin_stripes.left - margin_stripes.right;
 var height_stripe = full_width*9/31 - margin_stripes.top - margin_stripes.bottom;
 var years_stripes;
