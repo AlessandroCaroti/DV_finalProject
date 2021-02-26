@@ -35,10 +35,10 @@ function init_slider(min, max, step) {
   var g2 = d3
     .select("div#sliderYear")
     .append("svg")
-    .attr("width", 600)
+    .attr("width", "100%")
     .attr("height", 100)
     .append("g")
-    .attr("transform", "translate(40,70)");
+    .attr("transform", "translate(40, 70)");
 
   g2.call(sliderAlternativeHandle);
 
@@ -57,8 +57,7 @@ function init_slider(min, max, step) {
     .attr("y", "10");
 
   d3.select("#svg-slider")
-    .style("width", "600px")
-    .style("height", "100px"),
+    .style("width", "600px");
 
   // setting an id to the slider
   d3.select("g.parameter-value").select("path")

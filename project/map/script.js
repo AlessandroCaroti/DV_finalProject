@@ -97,12 +97,7 @@ function update_colors(temperatures, time_trasition) {
   temperatures.forEach(function (d) {
 
 
-    // update global anomaly label
-    if(d.Country == "Global Land"){
-      
-      d3.select("#global-anomaly-data")
-            .html(parseFloat(d["ANOMALY"]).toFixed(2) + "°C");
-    }
+    // TODO: update global anomaly label
 
     var element = document.getElementById(d.Country);
 

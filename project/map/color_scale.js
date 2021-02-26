@@ -114,13 +114,6 @@ function set_colorScale(){
               .style("fill", "black")
               .style("font-size", "15px")
               .style("font-weight", "bold");
-    
-    d3.select("#global-anomaly-data")
-              .attr("x", width_legend + 2 * (width_legend / n_ticks) + 240)
-              .attr("y", "0")
-              .style("fill", "black")
-              .style("font-size", "15px")
-              .style("font-weight", "bold");
 
     //init_legendSpace();
   }
