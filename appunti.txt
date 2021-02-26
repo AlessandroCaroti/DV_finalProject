@@ -5,13 +5,12 @@ TO DO:
 -salvarsi i csv quando caricati in modo da non doverli ricaricare se selezionati più volte
 -segnalino sulla scala dei colori posizionata sull'anomalia globale dell'anno selezionato
 -completare il menù della mappa
--aggiungere schermata caricamento
+
 
 TO FIX:
 -rendere non interagibile le cose inutili, come il testo degli anni sotto lo slider
 -mettere a posto il css principale
--in Seasonal Changes dicenbre non si riesce a selezionare
- (proposta Ale: aggiungere dello spazio vuoto si a destra sia a sinistra di circa la larghezza di 1 mese) DONE ma da vedere se piase
+
 -quando si deseleziona un paese, aggiornare nel modo corretto il pulsante entrale dello zoom
 -toglere l'ultima tacchetta dell'asse y del grafico sotto le stripe
 
