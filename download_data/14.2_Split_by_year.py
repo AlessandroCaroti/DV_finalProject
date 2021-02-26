@@ -13,50 +13,52 @@ maxTmp = -9999
 minTmp = 99999
 
 
-def group_year(year_list):
+def group_year(df):
 
+    year_list = df.loc[:, "Year": "Month"]
     year_dict = {}
+    find_start = False
     for idx, (year, month) in enumerate(year_list.values.tolist()):
-        if year not in year_dict or month == 5:
+        if (year not in year_dict or month == 5) and (find_start or not np.isnan(df.loc[idx, "Five-year Anomaly"])):
             year_dict[year] = idx
+            find_start = True
     return year_dict
 
 
 # initialize the year dictionary
 folders_list = [(os.path.join(dataTmp_folder, country), country)
                 for country in os.listdir(dataTmp_folder)]
-folders_list.append(("./download_data/data/regions/Global Land", "Global Land"))
+folders_list.append(
+    ("./download_data/data/regions/Global Land", "Global Land"))
 
 for i, (dir_path, country) in enumerate(folders_list):
 
     df = pd.read_csv(dir_path + "/" + country + "_anomalyTable.csv")
-    year_group = group_year(df.loc[:, "Year": "Month"])
+    year_group = group_year(df)
 
     for year in year_group.keys():
         if year not in global_dict:
             global_dict[year] = pd.DataFrame(
-                columns=["Country", "Anomaly", "Unc."])
+                columns=["Country", "Anomaly"])
 
 # filling the csv files
 for i, (dir_path, country) in enumerate(folders_list):
     print("[{}/{}] {}".format(i, len(folders_list), country))
 
     df = pd.read_csv(dir_path + "/" + country+"_anomalyTable.csv")
-    year_group = group_year(df.loc[:, "Year": "Month"])
+    year_group = group_year(df)
 
     for year in global_dict.keys():
         if year in year_group.keys():
-            year_mean = df.iloc[year_group[year], 7]
-            unc_mean = df.iloc[year_group[year], 8]
+            year_mean = df.loc[year_group[year], "Five-year Anomaly"]
 
             year_df = global_dict[year]
             new_row = {"Country": country,
-                       "Anomaly": year_mean, "Unc.": unc_mean}
+                       "Anomaly": year_mean}
             global_dict[year] = year_df.append(new_row, ignore_index=True)
         else:
             year_df = global_dict[year]
-            new_row = {"Country": country, "Anomaly": np.float64(
-                "NaN"), "Unc.": np.float64("NaN")}
+            new_row = {"Country": country, "Anomaly": np.float64("NaN")}
             global_dict[year] = year_df.append(new_row, ignore_index=True)
 
 for year in global_dict.keys():
@@ -68,10 +70,18 @@ for year in global_dict.keys():
     maxTmp = max(maxTmp, curr_max)
     minTmp = min(minTmp, curr_min)
 
-    global_dict[year].to_csv(dataYear_folder+"/"+str(year)+"/FiveYear_mean.csv")
+    global_dict[year].to_csv(
+        dataYear_folder+"/"+str(year)+"/5-year_mean.csv", index=False)
 
 print()
-print("First year:", sorted(global_dict.keys())[0],
-      "- Last Year:", sorted(global_dict.keys())[-1])
-print("Min:", minTmp, "- Max:", maxTmp)
-print("Saved the files that contains the division by years.")
+new_row = {"Average": "5-year",
+           "First_year": sorted(global_dict.keys())[0],
+           "Last_year": sorted(global_dict.keys())[-1],
+           "min_temp": minTmp,
+           "max_tmp": maxTmp}
+df = pd.read_csv("./download_data/extra-data/14.1_info_yearsDivision.csv", index_col=0)
+df = df.append(new_row, ignore_index=True)
+df.to_csv("./download_data/extra-data/14.2_info_yearsDivision.csv")
+print(df)
+
+print("Saved the files that contains the division by years, PART 2.")
