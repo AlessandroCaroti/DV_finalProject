@@ -477,6 +477,8 @@ function showLevel(level) {
 // ******************************************************** //
 // ******************************************************** //
 //                START FUNCTION MAP OVERLAY                //
+
+
 var initial_view = true;
 
 function init_map_controls() {
@@ -530,6 +532,7 @@ function init_animationBtn() {
 }
 
 function init_yearSpace() {
+  var bBox_svg = document.getElementById("svg-map").getBBox();
   var bBox = document.getElementById("sliderLabel").getBBox();
 
   var gap = 40,

@@ -70,6 +70,13 @@ svg text {
 svg text::selection {
   background: none;
 }
+
+div.tooltip-map {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 /* MAP */
 
 #svg-map {
