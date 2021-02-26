@@ -135,7 +135,6 @@ svg text::selection {
   font-size: 22px;
   padding-top: 10px;
   padding-right: 10px;
-  text-align: right;
 }
 
 .tick text {
