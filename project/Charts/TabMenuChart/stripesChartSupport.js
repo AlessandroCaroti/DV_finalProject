@@ -24,7 +24,7 @@ function getStripesScales(){
     // Add Y axis
     var y = d3.scaleLinear()
              .domain([0,1])
-             .range([ 0, height ]);
+             .range([ 0, height/3 ]);
     
     return [x, y];
 
