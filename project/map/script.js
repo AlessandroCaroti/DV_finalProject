@@ -683,6 +683,8 @@ function load_map() {
       // number of levels
       n_levels = 2;
 
+      $("body").addClass("loaded");
+
     })
     .catch((error) => {
       console.log(error);

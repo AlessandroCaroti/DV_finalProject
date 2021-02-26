@@ -1,19 +1,16 @@
-
 function init_page() {
+  init_DropDownMenu_slect2();
 
-    init_DropDownMenu_slect2();
+  // load map
+  load_map();
 
-    // load map
-    load_map();
+  // set colorscale and  legend
+  set_colorScale();
+  draw_legend();
 
-    // set colorscale and  legend
-    set_colorScale();
-    draw_legend();
-  
-    // trovare modo automatico per trovare min e max
-    init_slider(1743, 2020, 1);
-  
-    init_map_controls();
-    allDeafaultDataset();
-  
+  // trovare modo automatico per trovare min e max
+  init_slider(1743, 2020, 1);
+
+  init_map_controls();
+  allDeafaultDataset();
 }

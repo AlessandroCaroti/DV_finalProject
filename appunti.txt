@@ -26,3 +26,6 @@ DA DISCUTERE:
 -ridurre l'altezza delle righe della tabella per renderla + compatta
 -fare le stripe meno alte
 -rendere interagibile il menù anche durante l'animazione, per lo meno il cambio della velocità
+
+DA CHIEDERE:
+-l'incertezza per la mappa viene usata?

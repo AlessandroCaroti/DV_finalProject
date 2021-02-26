@@ -84,7 +84,7 @@ var outer_circle = zoom_reset_btn
 
 
 var globe_img = zoom_reset_btn.append("svg:image")
-                      .attr("xlink:href", "/project/images/globe_2.svg")
+                      .attr("xlink:href", "/project/images/globe.svg")
                       .attr("pointer-events", "none")
                       .attr("width", width_btn - (s*2))
                       .attr("height", height_btn - (s*2))

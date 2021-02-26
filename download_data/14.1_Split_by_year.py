@@ -25,18 +25,15 @@ def group_year(year_list):
 # initialize the year dictionary
 folders_list = [(os.path.join(dataTmp_folder, country), country)
                 for country in os.listdir(dataTmp_folder)]
-folders_list.append(("./download_data/data/regions/Global Land", "Global Land"))
+folders_list.append(
+    ("./download_data/data/regions/Global Land", "Global Land"))
 
 for i, (dir_path, country) in enumerate(folders_list):
 
     df = pd.read_csv(dir_path + "/" + country + "_anomalyTable.csv")
-
     year_group = group_year(df.loc[:, "Year": "Month"])
 
     for year in year_group.keys():
-        year_mean = df.iloc[year_group[year], 5]
-        unc_mean = df.iloc[year_group[year], 6]
-
         if year not in global_dict:
             global_dict[year] = pd.DataFrame(
                 columns=["Country", "Anomaly", "Unc."])
@@ -46,7 +43,6 @@ for i, (dir_path, country) in enumerate(folders_list):
     print("[{}/{}] {}".format(i, len(folders_list), country))
 
     df = pd.read_csv(dir_path + "/" + country+"_anomalyTable.csv")
-
     year_group = group_year(df.loc[:, "Year": "Month"])
 
     for year in global_dict.keys():
@@ -76,5 +72,7 @@ for year in global_dict.keys():
     global_dict[year].to_csv(dataYear_folder+"/"+str(year)+"/Annual_mean.csv")
 
 print()
+print("First year:", sorted(global_dict.keys())[0],
+      "- Last Year:", sorted(global_dict.keys())[-1])
 print("Min:", minTmp, "- Max:", maxTmp)
 print("Saved the files that contains the division by years.")

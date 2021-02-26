@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Berkley Earth Project</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="loader.css" />
   <!----------------------------------- D3 ------------------------------------------>
   <script src="https://unpkg.com/topojson@3"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.5.0/d3.min.js"></script>
@@ -56,8 +57,14 @@
 
 <!------------------------------START MAP------------------------------------------->
 
-<body>
+<body class="loaded"> <!-- remove class loaded to enable the loading screen -->
 
+  <div id="loader-wrapper">
+    <div id="loader"></div>
+
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+  </div>
 
 
   <div class="content">
