@@ -202,12 +202,12 @@ function createDefaultLineChart(data){
     svg.append("g")
       .attr("transform", "translate(0," + height + ")")
       .attr("class", "x_axis")
-      .call(d3.axisBottom(x));
+      .call(d3.axisBottom(x).tickSizeOuter(0));
 
 
     svg.append("g")
       .attr("class", "y_axis")
-      .call(d3.axisLeft(y))
+      .call(d3.axisLeft(y).tickSizeOuter(0))
 
     createGridLine(x,y, svg, "linechart", 10, 10);
     
@@ -273,12 +273,12 @@ function updateAxis(x_axis_class, y_axis_class, x, y){
         // update  x Axis
     d3.select(x_axis_class)
     .transition().duration(500)
-    .call(d3.axisBottom(x));                 
+    .call(d3.axisBottom(x).tickSizeOuter(0));                 
         
         // update  y Axis
     d3.select(y_axis_class)
     .transition().duration(500)
-    .call(d3.axisLeft(y));    
+    .call(d3.axisLeft(y).tickSizeOuter(0));    
 
 }
 

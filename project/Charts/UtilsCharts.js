@@ -264,7 +264,7 @@ function createSeasonalLineChartLegend(svg, dataLastYears){
   }
   
   function updateSeasonalLegend(dataLastYears){
-  
+
     var id_idx=0;
     for(var i=0; i<dataLastYears.length; i++){
       
@@ -273,6 +273,7 @@ function createSeasonalLineChartLegend(svg, dataLastYears){
         id_idx++;
   
     }
+    
   }
 
   

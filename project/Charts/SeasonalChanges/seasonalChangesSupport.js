@@ -299,12 +299,6 @@ function styleLastYearsLines(d, dataLastYears){
                   .merge(lastYearLine)
                   .attr("d", valuelineSeasonalBaseline[4]);
                   
-        // update  y Axis
-    d3.select(".y_axis_seasonal")
-        .transition().duration(500)
-        .call(d3.axisLeft(y));    
-    
-
     //update tooltip
     var tooltipLine = d3.select("#seasonal-line-tip");
     
@@ -312,7 +306,16 @@ function styleLastYearsLines(d, dataLastYears){
                     .on('mousemove', (event) => drawTooltipSeasonal(tipBox, event, x, seasonalData, tooltipLine, lastYearsData))
                     .on('mouseout', () => removeTooltipSeasonal(tooltipLine));
     
-    updateSeasonalLegend(lastYearsData);
     updateGrid("#seasonal_changes_graphic", x, y,svg);
+    updateSeasonalLegend(lastYearsData);
+
+
+        // update  y Axis
+        d3.select(".y_axis_seasonal")
+        .raise()
+        .transition().duration(500)
+        .call(d3.axisLeft(y));  
+    
+
     
   }
