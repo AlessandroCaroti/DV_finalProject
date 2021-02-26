@@ -181,8 +181,12 @@ function getCheckedValue( groupName ) {
 
 function createDefaultLineChart(data){
 
+  // set titles
   var title = document.getElementById("title-climate-changes").innerHTML;
   document.getElementById("title-climate-changes").innerHTML = title + " - "+ data[0].region;
+
+  title = document.getElementById("title-stripes-changes").innerHTML;
+  document.getElementById("title-stripes-changes").innerHTML = title + " - "+ data[0].region;
     //default button
 
     var svg = d3.select("#linechart")
@@ -284,8 +288,12 @@ function updateAxis(x_axis_class, y_axis_class, x, y){
 
 function updateLineChart(data, grafic_class){
   
+  // update titles
   var title = document.getElementById("title-climate-changes").innerHTML.split("-");
   document.getElementById("title-climate-changes").innerHTML = title[0] + " - "+ data[0].region;
+
+  title = document.getElementById("title-stripes-changes").innerHTML.split("-");
+  document.getElementById("title-stripes-changes").innerHTML = title[0] + " - "+ data[0].region;
 
   
   //Get scales and update axis
