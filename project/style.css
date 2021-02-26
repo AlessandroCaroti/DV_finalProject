@@ -220,7 +220,8 @@ text#label-legend {
 
 .chart-container{
   border: 1px solid #ccc;
-  border-radius: 20px;
+  border-top: none;
+  border-bottom: none;
   width: 950px;
   height: auto;
   padding: 50px 50px 50px 50px;
@@ -229,7 +230,8 @@ text#label-legend {
  
 }
 .range-years-buttons-container{
-  margin-left: 15%;
+  margin-left: 11%;
+  margin-top: 8%;
 }
 
 .range-years-buttons-container input {
@@ -459,7 +461,7 @@ table {
 /*---------------------------Hottest-Coldest Year style--------------------------------*/
 
 #container-h-c {
-  border: solid lightgray 1px;
+  
   width: 1200px;
   padding: 20px;
 }

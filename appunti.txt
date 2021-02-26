@@ -1,18 +1,15 @@
 TO DO:
+
 -discutere come caricare i file
 -cambiare il cursore sullo slider
--fare i tooltips di simo più compatti
 -salvarsi i csv quando caricati in modo da non doverli ricaricare se selezionati più volte
--segnalino sulla scala dei colori posizionata sull'anomalia globale dell'anno selezionato
 -completare il menù della mappa
 
 
 TO FIX:
 -rendere non interagibile le cose inutili, come il testo degli anni sotto lo slider
 -mettere a posto il css principale
-
 -quando si deseleziona un paese, aggiornare nel modo corretto il pulsante entrale dello zoom
--toglere l'ultima tacchetta dell'asse y del grafico sotto le stripe
 
 IDEE:
 

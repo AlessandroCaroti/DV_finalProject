@@ -74,6 +74,26 @@
         <h1 style="text-align: center;   color: #0070a1;
         ">Berkeley Earth Data</h1>
 
+          <div class="range-years-buttons-container">
+            <input class="checkbox-range" type="radio" name="btn-range-year" value="annual" id="btn_annual"
+              onclick="changeDataRangeYears()" />
+            <label id="label-btn_annual" for="btn_annual"> Annual </label>
+
+            <input class="checkbox-range" type="radio" name="btn-range-year" value="five_years" id="btn_five"
+              onclick="changeDataRangeYears()" />
+            <label id="label-btn_five" for="btn_five"> 5-Year </label>
+
+            <input class="checkbox-range" type="radio" name="btn-range-year" checked="checked" value="ten_years"
+              id="btn_ten" onclick="changeDataRangeYears()" />
+            <label id="label-btn_ten" for="btn_ten"> 10-Year </label>
+
+            <input class="checkbox-range" type="radio" name="btn-range-year" value="twenty_years" id="btn_twenty"
+              onclick="changeDataRangeYears()" />
+            <label id="label-btn_twenty" for="btn_twenty">20-Years</label>
+          </div>
+
+
+
         <div id="all_map" class="col_wrapper">
           <div class="row_wrapper" style="height: 70;">
             <div class="all-slider" id="svg-slider" class="row_wrapper">
@@ -182,27 +202,9 @@
       <!------------------------------START CLIMATE STRIPES------------------------------------------->
 
 
-      <fieldset class="chart-container">
+      <div class="chart-container">
 
-        <legend id="title-climate-changes" class="title-chart">Climate Changes</legend>
-
-        <div class="range-years-buttons-container">
-          <input class="checkbox-range" type="radio" name="btn-range-year" value="annual" id="btn_annual"
-            onclick="changeDataRangeYears()" />
-          <label id="label-btn_annual" for="btn_annual"> Annual </label>
-
-          <input class="checkbox-range" type="radio" name="btn-range-year" value="five_years" id="btn_five"
-            onclick="changeDataRangeYears()" />
-          <label id="label-btn_five" for="btn_five"> 5-Year </label>
-
-          <input class="checkbox-range" type="radio" name="btn-range-year" checked="checked" value="ten_years"
-            id="btn_ten" onclick="changeDataRangeYears()" />
-          <label id="label-btn_ten" for="btn_ten"> 10-Year </label>
-
-          <input class="checkbox-range" type="radio" name="btn-range-year" value="twenty_years" id="btn_twenty"
-            onclick="changeDataRangeYears()" />
-          <label id="label-btn_twenty" for="btn_twenty">20-Years</label>
-        </div>
+        <h2 id="title-climate-changes" class="title-chart">Climate Changes</h2>
 
         <div id="stripechart">
           <div class="tooltip-map" id="tooltip_stripes"></div>
@@ -212,7 +214,7 @@
           <div class="tooltip-map" id="tooltip_line"></div>
         </div>
 
-      </fieldset>
+      </div>
 
 
 
@@ -238,10 +240,10 @@
 
       <!------------------------------START HOTTEST-COLDEST LINECHART------------------------------------------->
 
-      <fieldset id="container-h-c" class="chart-container">
-        <legend id="title-hot-cold" class="title-chart">Temperature Records</legend>
+      <div id="container-h-c" class="chart-container">
+        <h2 id="title-hot-cold" class="title-chart">Temperature Records</h2>
         <div class="tooltip-map" id="tooltip-hot-cold"></div>
-      </fieldset>
+      </div>
 
 
       <!------------------------------START HOTTEST-COLDEST LINECHART------------------------------------------->
@@ -250,10 +252,10 @@
 
 
 
-      <fieldset id="seasonal_changes_graphic" class="chart-container">
-        <legend id="title-seasonal" class="title-chart">Seasonal Changes</legend>
+      <div id="seasonal_changes_graphic" class="chart-container">
+        <h2 id="title-seasonal" class="title-chart">Seasonal Changes</h2>
         <div class="tooltip-map" id="tooltip-seasonal-changes"> </div>
-      </fieldset>
+      </div>
       <!------------------------------END SEASONAL LINECHART------------------------------------------->
 
   </div>
