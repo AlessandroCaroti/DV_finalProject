@@ -3,6 +3,18 @@ body {
   height: 100%;
 }
 
+hr{
+  /*border: 0px;*/
+  clear:both;
+  display:block;
+  width: 96%;               
+  background-color: lightgray;
+  height: 0.5px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  border-width: 0px;
+}
+
 .select2-container {
   width: 100% !important;
   min-width: 200px;
@@ -450,7 +462,8 @@ table {
 }
 
 #table_container h2 {
-  margin-left: 5%;
+  /*margin-left: 5%;*/
+  text-align: center;
 }
 
 .region_cell {
