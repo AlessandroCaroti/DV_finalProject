@@ -30,7 +30,7 @@ DA DISCUTERE:
 DA CHIEDERE:
 -l'incertezza per la mappa viene usata?
 
-
+------------------------------------------------------------------------------------
 Presentazione progetto:
 -what(all dataset), why, how
 -describe the structure of the table
