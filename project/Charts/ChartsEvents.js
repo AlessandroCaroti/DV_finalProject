@@ -46,13 +46,13 @@ function drawTooltipLineChart(self, event, x, data, tooltipLine, id_chart, heigh
 
  
   var tipText = String(
-    "<b> <p style='text-align: center; font-size: 12px;'> Year: " +
+    "<b> <p style='text-align: center; font-size: 15px;'>" +
       elem.date.getFullYear() +
       "</p>" +
-      "Baseline Temp. : " +
+      "Baseline: " +
       elem.baseline +
       " &deg;C <br/>" +
-      "Annual  Avg.  Temp. : " +
+      "Annual  Avg: " +
       elem.annual_value.toFixed(2) +
       " &deg;C " +
       " &plusmn; " +
@@ -61,7 +61,7 @@ function drawTooltipLineChart(self, event, x, data, tooltipLine, id_chart, heigh
       (btn.value != "annual"
         ? String(
             range_name +
-              "  Avg. Temp: " +
+              "  Avg: " +
               elem[btn.value + "_value"].toFixed(2) +
               " &deg;C " +
               " &plusmn; " +
@@ -144,10 +144,10 @@ function tableCellLeave() {
 function drawTooltipSeasonal(tipBox, event,x, data, tooltipLine, lastYearsData ) {
   var tooltip = d3.select("#tooltip-seasonal-changes");
 
-  const date = x.invert(d3.pointer(event, tipBox.node())[0]);
-
+  const date = x.invert(d3.pointer(event, tipBox.node())[0] );
+  console.log(date);
   //find the element of the corresponding month
-  var elem = data.find((d) => d.month - 1 == date.getMonth());
+  var elem = data.find((d) => (d.month -1 == date.getMonth() + 1 && date.getDate() >= 15) || (d.month -1 == date.getMonth() && date.getDate() < 15));
 
   tooltipLine
     .attr("stroke", "black")
@@ -199,16 +199,14 @@ function removeTooltipSeasonal(tooltipLine) {
 
 function hotColdTextLegendEnter(event, d){
   var idx= this.id.split("-")[3];
-  var idx_text= "hot-cold-text-"+idx
+  var idx_text= "hot-cold-text-"+idx;
   d3.select("#"+idx_text).style("font-weight", "bold")
                                 .style("text-decoration", "underline");
                               
-  
-  
   d3.select("#path-"+idx).style("stroke-width", "6px")
                   .style("stroke-opacity", "80%");
 
-
+  d3.select("#path-"+idx).moveToFront();
 
 }
 
@@ -235,7 +233,8 @@ function hotColdMouseEnter(self) {
   var idx = self.id.split("-")[1];
 
   d3.select(self).style("stroke-width", "6px")
-                  .style("stroke-opacity", "80%");
+                  .style("stroke-opacity", "80%")
+                  .moveToFront();
 
     d3.select("#hot-cold-text-" + idx)
       .style("font-weight", "bold")
