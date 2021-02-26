@@ -83,6 +83,9 @@ svg text::selection {
   /*height: 650px;
   /*-ms-transform: translateY(-50%);
   transform: translateY(-50%);*/
+
+  /*border-left: 0.5px solid lightgray;*/
+
 }
 
 .country {
@@ -236,7 +239,7 @@ text#label-legend {
   padding: 50px 50px 50px 50px;
   margin: auto;
   margin-top: 3%;
- 
+  
 }
 .range-years-buttons-container{
   margin-left: 11%;
