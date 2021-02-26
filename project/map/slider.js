@@ -38,7 +38,7 @@ function init_slider(min, max, step) {
     .attr("width", 600)
     .attr("height", 100)
     .append("g")
-    .attr("transform", "translate(40,40)");
+    .attr("transform", "translate(40,70)");
 
   g2.call(sliderAlternativeHandle);
 
@@ -55,6 +55,10 @@ function init_slider(min, max, step) {
   d3.select(".axis")
     .selectAll("text")
     .attr("y", "10");
+
+  d3.select("#svg-slider")
+    .style("width", "600px")
+    .style("height", "100px"),
 
   // setting an id to the slider
   d3.select("g.parameter-value").select("path")
