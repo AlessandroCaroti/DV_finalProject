@@ -264,8 +264,9 @@ text#label-legend {
 
 .title-chart{
 
-  margin-left: 30%;
+  /*margin-left: 30%;*/
   font-size: 25px;
+  text-align: center;
   font-weight: bold;
   color: #0070a1;
 
@@ -274,6 +275,11 @@ text#label-legend {
 #title-table{
   color: #0070a1;
 
+}
+
+h3{
+  color: #0070a1;
+  text-align: center;
 }
 
 
@@ -461,7 +467,7 @@ table {
 #container-h-c {
   border: solid lightgray 1px;
   width: 1200px;
-  padding: 20px;
+  /*padding: 20px;*/
 }
 
 
