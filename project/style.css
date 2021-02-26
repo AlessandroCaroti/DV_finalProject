@@ -269,7 +269,7 @@ text#label-legend {
   font-weight: bold;
 }
 
-/*--------------------------------- END TAB MENU STYLE -------------------------------------*/
+
 
 /*------------------- LINECHART STYLE -------------------------------*/
 
@@ -306,6 +306,13 @@ text#label-legend {
   stroke: none;
 }
 
+#stripechart{
+
+ margin-left: 4%;
+ margin-top: 3%;
+ height: 120px;
+
+}
 
 
 
