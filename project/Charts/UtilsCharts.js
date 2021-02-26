@@ -355,11 +355,15 @@ function createSeasonalLineChartLegend(svg, dataLastYears){
     for(var i=0; i< list.length; i++){
       if( el == list[i].Year) return true;
     }
-  
+   
     return false;
   }
   
+  function getUniqueValue(value, index, self) {
+    return self.indexOf(value) === index;
+  }
   
+
   function getIdxList(el, list){
   
     for(var i=0; i< list.length; i++){

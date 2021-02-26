@@ -124,28 +124,13 @@ function stripesMove(){
     .style("top", String(event.pageY - 20) + "px");
 }
 
-//-------------------------------------------------------TABLE EVENTS-------------------------------------------------
-function tableCellEnter() {
-
-  //if(this.className != "region_cell")
-   //d3.select(this).style("border-color","black")
-                 
-}
-
-function tableCellLeave() {
- 
- // d3.select(this).classed("selected_border", false)
-
-  
-}
-
 //--------------------------------- TOOLTIP SEASONAL LINECHART --------------------------------------------
 
 function drawTooltipSeasonal(tipBox, event,x, data, tooltipLine, lastYearsData ) {
   var tooltip = d3.select("#tooltip-seasonal-changes");
 
   const date = x.invert(d3.pointer(event, tipBox.node())[0] );
-  console.log(date);
+
   //find the element of the corresponding month
   var elem = data.find((d) => (d.month -1 == date.getMonth() + 1 && date.getDate() >= 15) || (d.month -1 == date.getMonth() && date.getDate() < 15));
 
@@ -198,13 +183,13 @@ function removeTooltipSeasonal(tooltipLine) {
 
 
 function hotColdTextLegendEnter(event, d){
+  
   var idx= this.id.split("-")[3];
   var idx_text= "hot-cold-text-"+idx;
   d3.select("#"+idx_text).style("font-weight", "bold")
                                 .style("text-decoration", "underline");
-                              
-  d3.select("#path-"+idx).style("stroke-width", "6px")
-                  .style("stroke-opacity", "80%");
+           
+  d3.select("#path-"+idx).style("stroke-width", "6px");
 
   d3.select("#path-"+idx).moveToFront();
 
@@ -214,15 +199,13 @@ function hotColdTextLegendEnter(event, d){
 
 function hotColdTextLegendLeave(event, d){
   var idx= this.id.split("-")[3];
+
   var idx_text= "hot-cold-text-"+idx
   d3.select("#"+idx_text).style("font-weight", "normal")
                         .style("text-decoration", "none");
   
-
-  if(this.id.split("-")[0] !="path") d3.select("#path-"+idx).style("stroke-width", "2px")
-  .style("stroke-opacity", "70%");
-  else
-      d3.select("#path-"+idx).style("stroke-width", "2px");
+  
+  d3.select("#path-"+idx).style("stroke-width", "2px");
 
 
 }
