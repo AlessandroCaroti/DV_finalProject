@@ -36,6 +36,8 @@ function getScalesHottestColdest(data){
 }
 
 
+
+
 // data grouped by year
 function getMonthlyData(data, hottestYears, coldestYears){
     
@@ -65,24 +67,24 @@ function getMonthlyData(data, hottestYears, coldestYears){
 
     //data every 10 years
     for( var i=0; i < years.length; i+=10) years_every10.push(years[i])
-    
+  
     // add hootest coldest years
     for(var i=0; i< hottestYears.length; i++){
 
-       if(!isInList( hottestYears[i].Year, years_every10))
-          years_every10.push(hottestYears[i].Year);
-        
-        if(!isInList( coldestYears[i].Year, years_every10)) 
-            years_every10.push(coldestYears[i].Year)
+      years_every10.push(coldestYears[i].Year);
+      years_every10.push(hottestYears[i].Year);
+    
     }
-
+    
+    years_every10 = years_every10.filter(getUniqueValue);
 
     years_every10.forEach( (y)=>{
-
+        
       data_every10.push( monthlyData[y])
 
     })
 
+ 
 
    return data_every10;
 
@@ -124,7 +126,6 @@ function createHottestColdestLineChart(data){
     var valueline_annual = linegenerator[0];
     var zero_line = linegenerator[1];
 
-    
 
     // Draw the line the line
     svg.append("g")

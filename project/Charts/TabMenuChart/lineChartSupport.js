@@ -210,6 +210,7 @@ function createDefaultLineChart(data){
       .call(d3.axisLeft(y).tickSizeOuter(0))
 
     createGridLine(x,y, svg, "linechart", 10, 10);
+    
     var lineGenerators = getLineGenerators(x,y);
     var valueline_annual = lineGenerators[0];
     var valueline_ten_years = lineGenerators[1];
