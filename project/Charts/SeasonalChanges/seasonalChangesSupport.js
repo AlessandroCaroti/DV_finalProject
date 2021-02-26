@@ -307,7 +307,7 @@ function styleLastYearsLines(d, dataLastYears){
                     .on('mouseout', () => removeTooltipSeasonal(tooltipLine));
     
     updateGrid("#seasonal_changes_graphic", x, y,svg);
-    updateSeasonalLegend(lastYearsData);
+    updateSeasonalLegend(lastYearsData, svg);
 
 
         // update  y Axis

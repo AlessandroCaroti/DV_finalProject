@@ -15,8 +15,8 @@ function createLineChartLegend(svg){
     legend.append( "rect" )
     .attr("x", 10).attr("width", 290)
     .attr("y", 1).attr("height", 60)
-    .attr("class", "legend")
-    .attr("id","legend-square");
+    .attr("class","legend-square")
+    .attr("id", "legend-square-linechart")
   
     legend.append( "line" )
         .attr("x1", 15).attr("x2", 30)
@@ -79,7 +79,7 @@ function createLineChartLegend(svg){
     var label = document.getElementById("label-"+btn.id)
     var range_name = label.innerHTML;
 
-    d3.select(".legend").remove();
+    d3.select("#legend-square-linechart").remove();
     createLineChartLegend(svg, btn);
 
     if(btn.value == "annual" && !isAnnual){
@@ -206,17 +206,17 @@ function createSeasonalLineChartLegend(svg, dataLastYears){
     legend.append( "rect" )
           .attr("x", 10).attr("width", 210)
           .attr("y", 1).attr("height", 100)
-          .attr("class", "legend")
-          .attr("id","legend-square");
+          .attr("class", "legend-square")
+          .attr("id","legend-square-seasonal");
   
     legend.append( "line" )
         .attr("x1", 15).attr("x2", 39)
-        .attr("y1", curY).attr("y2", 15)
+        .attr("y1", curY).attr("y2", curY)
         .attr("class", "seasonal-range-line");
     
     legend.append( "text" )
         .attr("x", 40)
-        .attr("y", curY)
+        .attr("y", curY+3)
         .attr("class", "legend")
         .attr("id", "text-range")
         .html("Min-Max Range Temp. Untill "+ dataLastYears[dataLastYears.length-1][0].year)
@@ -235,7 +235,7 @@ function createSeasonalLineChartLegend(svg, dataLastYears){
           
     legend.append( "text" )
           .attr("x", 40)
-          .attr("y", curY+8)
+          .attr("y", curY+ 11)
           .attr("class", "legend")
           .html("1951-1980 average with 95% range"); 
   
@@ -253,7 +253,7 @@ function createSeasonalLineChartLegend(svg, dataLastYears){
   
       legend.append( "text" )
             .attr("x", 40)
-            .attr("y", curY)
+            .attr("y", curY+3)
             .attr("class", "legend")
             .html("Monthly Temperatures of "+dataLastYears[i][0].year)
             .attr("id", "legend-text-"+id_idx);
@@ -263,17 +263,10 @@ function createSeasonalLineChartLegend(svg, dataLastYears){
   
   }
   
-  function updateSeasonalLegend(dataLastYears){
+  function updateSeasonalLegend(dataLastYears,svg){
 
-    var id_idx=0;
-    for(var i=0; i<dataLastYears.length; i++){
-      
-      d3.select("#legend-text-"+id_idx)
-        .html("Monthly Temperatures of "+dataLastYears[i][0].year); 
-        id_idx++;
-  
-    }
-    
+    d3.select("#legend-square-seasonal").remove();
+    createSeasonalLineChartLegend(svg, dataLastYears);
   }
 
   
