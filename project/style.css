@@ -583,10 +583,12 @@ table {
 /*Starting Menu*/
 ul#menu {
   font-family: Verdana, sans-serif;
-  font-size: 11px;
+  font-size: 15px;
   padding: 0;
   list-style: none;
   height: 100%;
+  overflow: hidden;
+
 
 }
 
@@ -596,6 +598,7 @@ ul#menu li {
   float: left; 
   height: 100%;
 }
+
 ul#menu li a {
   color: #fff;
   display: block;
@@ -604,7 +607,7 @@ ul#menu li a {
   height: 100%;
   margin-top: 4%;
   text-decoration: none;
-  width: 150px;
+  width: 100px;
 
   text-align: center;
 }
