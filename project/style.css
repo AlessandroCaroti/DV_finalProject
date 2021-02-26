@@ -577,7 +577,8 @@ table {
 #starting-menu{
   width: 100%;
   background-color:#2e4053;
-  height: 5%;
+  height: 6%;
+  display: inline-block;
  
 }
 
@@ -585,10 +586,10 @@ table {
 
 /*Starting Menu*/
 ul#menu-elem {
-  font-family: Verdana, sans-serif;
+  font-family:sans-serif;
   font-size: 15px;
   padding: 0;
-  
+
   height: 100%;
   overflow: hidden;
   margin: 0%;
@@ -601,21 +602,38 @@ ul#menu-elem li {
   display: block;
   float: left; 
   height: 100%;
+  padding-right: 5%;
+  
+  
 }
 
 ul#menu-elem li a {
   color: #fff;
   display: block;
   font-weight: bold;
-  line-height: 35px;
+
   height: 100%;
   margin-top: 4%;
   text-decoration: none;
-  width: 100px;
-
+  width: 150px;
   text-align: center;
 }
-ul#menu-elem li.active, ul#menu li:hover {
+
+ul#menu-elem li:hover {
   background-color: #91aac5
 
+}
+
+#title-menu{
+  color: #fff;
+  font-weight: bold;
+  font-size: 120%;
+  width: 15%;
+  margin-top: 0.4%;
+}
+
+#icon-global-warming{
+
+  height: 80%;
+  width: 40%;
 }
