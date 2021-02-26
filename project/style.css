@@ -327,7 +327,7 @@ text#label-legend {
   fill: white;
 }
 
-#legend-square {
+.legend-square {
   stroke: #000;
   stroke-width: 1px;
 }
