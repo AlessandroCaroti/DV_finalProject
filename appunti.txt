@@ -12,6 +12,10 @@ TO FIX:
 -quando si deseleziona un paese, aggiornare nel modo corretto il pulsante entrale dello zoom
 
 IDEE:
+-rioragnizzare tutto, dividendo la pagina in 2 parti. l'80% a destra viene occupato 
+ da mappa e grafici, quello che ora è al centro. A sinistra,spostare la selezione del paese, 
+ la selezione se 1, 5, 10, 20 anni, l'anomaly globale, e se vogliamo aggiungere info del paese selezionato
+-I paesi senza temperature farli grigi a righe
 
 
 DA DISCUTERE:
@@ -25,3 +29,13 @@ DA DISCUTERE:
 
 DA CHIEDERE:
 -l'incertezza per la mappa viene usata?
+
+------------------------------------------------------------------------------------
+Presentazione progetto:
+-what(all dataset), why, how
+-describe the structure of the table
+-describe the dataset of the map (items, attribute, structure)
+-3 level of abstraction
+-the application is more of discovering, present, enjoy, ...? (1° level)
+-derived data(se c'è ne sono)
+-(look up, browse, explore, locating)
