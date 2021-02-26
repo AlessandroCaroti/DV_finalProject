@@ -7,7 +7,7 @@ body {
 }
 .sidenav {
   height: 100%;
-  width: 160px;
+  width: 184px;
   position: fixed;
   z-index: 1;
   top: 1;
@@ -15,8 +15,8 @@ body {
   background-color: white;
   overflow-x: hidden;
   padding-top: 20px;
-  padding-right: 32px !important;
-  padding-left: 32px !important;
+  padding-right: 20px !important;
+  padding-left: 20px !important;
   border: 3px solid transparent;
   border-right-color: #26436f;
 }
@@ -526,7 +526,7 @@ table {
 /*STYLE FINAL HTML*/
 
 .container {
-  width: 80%;
+  width: 85%;
   height: auto;
   margin: auto;
 }
