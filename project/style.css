@@ -219,9 +219,7 @@ text#label-legend {
 
 
 .chart-container{
-  border: 1px solid #ccc;
-  border-top: none;
-  border-bottom: none;
+ 
   width: 950px;
   height: auto;
   padding: 50px 50px 50px 50px;
