@@ -570,6 +570,7 @@ table {
 .navbar{
   width: 100%;
   height: 72px;
+  overflow:hidden;
 }
 
 .navbar ul{
@@ -641,8 +642,10 @@ table {
 
   margin-left: 30px;
   width: 180px;
-  position: relative;
-  left: 73%;
+  height: 72px;
+  position: absolute ;
+  right: 2%;
+
 }
 
 #contributors{
@@ -697,7 +700,7 @@ table {
   background-color: white;
   height: 33.3333%;
   width: 100%;
- text-align: center;
+  text-align: center;
 
 }
 
@@ -715,8 +718,8 @@ table {
 #elem-logo-git{
   
   margin-top: 0.7%;
-  position: relative;
-  left: 60%;
+  position: absolute;
+  right: 230px;
   width: 45px;
   height: 45px;
   border-radius: 100%;
