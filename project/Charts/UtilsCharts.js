@@ -87,8 +87,8 @@ function updateRangeNameLegend(svg) {
   var label = document.getElementById("label-" + btn.id);
   var range_name = label.innerHTML;
 
-  //d3.select("#legend-square-linechart").remove();
-  //createLineChartLegend(svg, btn);
+  d3.select(".legend").remove();
+  createLineChartLegend(svg, btn);
 
   if (btn.value == "annual" && !isAnnual) {
 
