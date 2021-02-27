@@ -516,7 +516,16 @@ function updateHotColdLegend(hot_cold_list){
 
 }
 
-
-
-
 //-----------------------------------------------------------------------------------------
+
+
+
+
+function dropDownEvt(){
+
+  var drop = document.getElementById("contributors-div");
+  drop.classList.toggle("drop-visible");
+  console.log(drop)
+
+
+}
