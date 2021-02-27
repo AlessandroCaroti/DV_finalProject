@@ -566,9 +566,11 @@ function NavBarDropDownEvt() {
   ) {
     drop_div.style.display = "block";
     ul.style.display = "block";
-    console.log(ul.style.display);
+    document.getElementById("bracket_drop_nav").style.transform="rotate(180deg)";
+
   } else {
     drop_div.style.display = "none";
     ul.style.display = "none";
+    document.getElementById("bracket_drop_nav").style.transform="none";
   }
 }

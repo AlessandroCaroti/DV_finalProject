@@ -639,11 +639,13 @@ table {
 #contributors-drop{
 
   margin-left: 30px;
+  width: 180px;
 }
 
 #contributors{
   font-size: large;
   margin-top: 6.5%;
+  padding-right: 3px;
 }
 
 .button-nav-bar{
@@ -660,8 +662,8 @@ table {
   display: none;
   position: absolute;
   border: #000 solid 1px;
-  top: 73px;
-  right: -18px;
+  top: 74px;
+  
 }
 
 
@@ -680,17 +682,18 @@ table {
 
 #contributors-div ul li a{
   color:black;
-  text-align: center;
-  width: 125px;
-  font-size: 12px;
+ 
+  width: 138px;
+  font-size: 14px;
 
 }
 
 #contributors-div ul li {
   background-color: white;
-  height: 30.3333%;
-  width: 80%;
-  margin-left: 3%;
+  height: 33.3333%;
+  width: 100%;
+ text-align: center;
+
 }
 
 #contributors-div ul li:hover{
