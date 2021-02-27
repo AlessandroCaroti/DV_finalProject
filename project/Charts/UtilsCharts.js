@@ -84,14 +84,14 @@ function createLineChartLegend(svg) {
 
 function updateRangeNameLegend(svg) {
   var btn = getCheckedValue("btn-range-year");
-
   var label = document.getElementById("label-" + btn.id);
   var range_name = label.innerHTML;
 
-  d3.select("#legend-square-linechart").remove();
-  createLineChartLegend(svg, btn);
+  //d3.select("#legend-square-linechart").remove();
+  //createLineChartLegend(svg, btn);
 
   if (btn.value == "annual" && !isAnnual) {
+
     d3.select("#legend-annual-line").remove();
     d3.select("#legend-annual-text").remove();
 
@@ -107,7 +107,8 @@ function updateRangeNameLegend(svg) {
   }
 
   if (isAnnual && btn.value != "annual") {
-    var legend = d3.select(".legend");
+    
+    var legend = d3.select("legend-square-linechart");
     legend
       .append("line")
       .attr("x1", 15)
