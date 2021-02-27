@@ -569,7 +569,7 @@ table {
 
 .navbar{
   width: 100%;
-  height: 7%;
+  height: 72px;
 }
 
 .navbar ul{
@@ -629,7 +629,6 @@ table {
 }
 
 #contributors-drop{
-
   margin-top: 3px;
   font-size: large;
 }
@@ -642,151 +641,49 @@ table {
  
 }
 
-.dropdown-navbar div ul { 
+#contributors-div{
+  width: 180px;
+  height: 160px;
+  display: none;
+  position: absolute;
+  border: #000 solid 1px;
+  margin-top: 7%;
+}
+
+
+#contributors-div ul { 
   position: absolute;
   left: 0;
   padding-left: 0;
   display: none;
-
-}
-
-
-.drop-visible{
-  width: 200px;
-  height: 200px;
-  background-color: #26436f;
-  display: block;
-}
-
-
-
-
-.dropdown-navbar div ul li a{
-  color:white;
-  display: block !important;
-  width: 180px;
-  text-align: center;
-}
-
-
-.dropdown-navbar:hover div ul li {
-  background-color:#91aac5;
-}
-
-
-.dropdown-navbar div ul li:hover{
-  background-color: rgba(192, 192, 192, 0.8);
-  color: #000;
-
-}
-
-.dropdown-navbar div ul li a:hover{
-  color: #000;
-}
-
-
-
-
-/*
-#menu-elem {
-  
-  font-family:sans-serif;
-  display: inline;
   height: 100%;
-  margin: 0;
-  padding: 0;
-  
-}
-
-#starting-menu {
   width: 100%;
-  background-color:#2e4053;
-  height: 6%;
+  background-color: #fff;
 
 }
 
 
-ul#menu-elem li {
- display: inline-block;
- height: 100%;
-}
 
-
-ul#menu-elem .buttons-starting-menu a {
-  color: #fff;
-  display: inline-block;
-  font-weight: bold;
-  text-decoration: none;
-  font-size: 110%;
-  padding-left: 10%;
-  padding-right: 10%;
-
-}
-
-ul#menu-elem .buttons-starting-menu{
-
-  border: solid #91aac5 1px;
-  border-top: none;
-  border-bottom: none;
+#contributors-div ul li a{
+  color:black;
   text-align: center;
-  width: 8%;
-}
-
-
-ul#menu-elem .buttons-starting-menu:hover {
-  background: #91aac5
-}
-
-
-ul#menu-elem .buttons-starting-menu:hover ul {
-  display: block;
-  width: 10%;
-}
-
-#contributors:hover {
-  background-color: #666;;
-}
-
-.buttons-starting-menu ul li a{
-  
-  display: block;
-}
-
-
-ul#menu-elem li ul{
-  position: absolute;
-  display: none;
-  
-}
-
-ul#menu-elem li ul li{
-  background-color: #91aac5;
-  display: block;
-  
-}
-
-ul#menu-elem li ul li a{
-  display: block;
-}
-
-
-
-#title-menu{  
-  width: 10%;
-  padding-right: 3%;
+  width: 120px;
+  font-size: 11px;
 
 }
 
-#title-menu p{
+#contributors-div ul li {
+  background-color: white;
+  height: 30.3333%;
+  width: 80%;
+  margin-left: 3%;
 
-  font-weight: bold;
-  font-size: 160%;
-  color: #fff;
-  text-align: center;
-  line-height: 30%;
-  display:inline-block;
  
+
 }
 
-*/
+#contributors-div ul li:hover{
+  background-color: rgba(192, 192, 192, 0.8);
+
+}
 
