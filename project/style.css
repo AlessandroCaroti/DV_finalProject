@@ -663,6 +663,7 @@ table {
   position: absolute;
   border: #000 solid 1px;
   top: 74px;
+
   
 }
 
@@ -675,6 +676,7 @@ table {
   height: 100%;
   width: 100%;
   background-color: #fff;
+ 
 
 }
 
@@ -701,3 +703,21 @@ table {
 
 }
 
+#logo-git{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+#elem-logo-git{
+  
+  margin-top: 0.7%;
+  margin-left: 70%;
+  width: 45px;
+  height: 45px;
+}
+
+#elem-logo-git:hover{
+  background-color: rgba(192, 192, 192, 0.3);
+}

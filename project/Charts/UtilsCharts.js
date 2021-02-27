@@ -566,6 +566,7 @@ function NavBarDropDownEvt() {
   ) {
     drop_div.style.display = "block";
     ul.style.display = "block";
+  
     document.getElementById("bracket_drop_nav").style.transform="rotate(180deg)";
 
   } else {
