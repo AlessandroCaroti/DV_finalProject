@@ -574,12 +574,12 @@ table {
 /*Starting Menu*/
 ul#menu-elem {
   font-family:sans-serif;
-  font-size: 15px;
+ 
   padding: 0;
-
   height: 100%;
   overflow: hidden;
   margin: 0%;
+ 
 }
 
 ul#menu-elem li {
@@ -587,38 +587,52 @@ ul#menu-elem li {
   display: block;
   float: left;
   height: 100%;
-  padding-right: 5%;
-  
-  
+  position: sticky;
 }
 
-ul#menu-elem li a {
+ul#menu-elem .buttons-starting-menu a {
   color: #fff;
-  display: block;
+  display: inline-block;
   font-weight: bold;
-
   height: 100%;
-  margin-top: 4%;
+  margin-top: 17%;
   text-decoration: none;
-  width: 150px;
+  width: 100%;
+  font-size: 110%;
   text-align: center;
+ 
 }
 
-ul#menu-elem li:hover {
-  background-color: #91aac5
+ul#menu-elem .buttons-starting-menu:hover {
+  background: #91aac5
+}
+
+#title-menu{  
+  width: 10%;
+  height: 100%;
+  padding-right: 3%;
 
 }
 
-#title-menu{
-  color: #fff;
+#title-menu p{
+
   font-weight: bold;
-  font-size: 120%;
-  width: 15%;
-  margin-top: 0.4%;
+  font-size: 160%;
+  color: #fff;
+  text-align: center;
+  line-height: 30%;
+ 
+}
+
+#logo-title{
+  width: 4%;
+  padding-left: 1%;
+
 }
 
 #icon-global-warming{
-
-  height: 80%;
-  width: 40%;
+  margin-top: 4%;
+  padding-left: 5%;
+  height: 90%;
+  width: 60%;
 }
