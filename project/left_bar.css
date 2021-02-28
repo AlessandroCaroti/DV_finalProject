@@ -49,6 +49,9 @@
   border: transparent;
   font-family: inherit;
   outline: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 #input_container button {
