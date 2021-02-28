@@ -484,7 +484,7 @@ var initial_view = true;
 function init_map_controls() {
   init_zoomBtns();
   init_animationBtn();
-  init_yearSpace();ù
+  init_yearSpace();
 }
 
 function changeView() {
