@@ -38,7 +38,7 @@ function set_colorScale(){
     
     // axis quantization
     let ticks = Array.from(ranges_scale);
-    let bar_step = width_legend/parseFloat(step_color_list.length)
+    let bar_step = width_legend/parseFloat(step_color_list.length);
 
     let step_bar_list = d3.range(0, width_legend + bar_step , bar_step).map(d => parseFloat(d.toFixed(2)) );
     
@@ -48,14 +48,13 @@ function set_colorScale(){
     // draw axis
     var anomaly_axis = d3.axisBottom().scale(quantizeBarScale)
                                         .tickValues(ticks)
-                                        .tickFormat(d3.format(".2f"))
+                                        .tickFormat(d3.format(".1f"))
                                         .tickSize(13);
 
     var axis = d3.select('.legend-anomaly')
-                  .attr("x", "50%")
     // generate axis
     
-    axis.attr("transform", "translate(" +   0 +","+ 40  +" )") 
+    axis.attr("transform", "translate(" +   (w_map/2 - width_legend/2) +","+ 40  +" )") 
             .call(anomaly_axis);
 
     // draw bars
@@ -71,7 +70,7 @@ function set_colorScale(){
               return quantizeBarScale(range[0]);
             })
           .attr("y", "-10")
-          .attr("width", rect_width)
+          .attr("width", rect_width + 1.5)
           .attr("height", "15px")
           .style("fill", d => d)
     
