@@ -5,7 +5,8 @@
   display: flex !important;
 }
 
-.sidenav input {
+.input-country {
+  flex-grow: 2;
   font-size: 16px;
   padding: 5px 10px;
   line-height: 20px;
@@ -14,8 +15,6 @@
   background-color: #fafbfc;
   border-radius: 6px;
   outline: none;
-  overflow: visible;
-  box-sizing: border-box;
   font-family: inherit;
   border: 1px solid hsl(214.3, 13.2%, 89.6%);
   box-shadow: inset 0 1px 0 rgba(225, 228, 232, 0.2), 0 0 0 3px white;
@@ -46,11 +45,72 @@
   background-color: transparent;
   border: none;
   color: black;
-  transform: translateX(-30px);
   outline: none;
-} 
+}
 
 #input_container {
   display: flex;
   flex-direction: row;
+}
+
+div#country_list_conteiner {
+  margin: 0;
+  padding-left: 10px;
+  max-height: 100px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+/* width */
+#country_list_conteiner::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+#country_list_conteiner::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+#country_list_conteiner::-webkit-scrollbar-thumb {
+  background: rgb(62, 10, 122);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+#country_list_conteiner::-webkit-scrollbar-thumb:hover {
+  background: #b30000;
+}
+
+ul#country_list {
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  box-sizing: border-box;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+#country_list li {
+  display: list-item;
+  list-style-type: none;
+}
+
+.width-full {
+  width: 100% !important;
+}
+.text-bold {
+  font-weight: 600 !important;
+}
+
+form {
+  /* This bit sets up the horizontal layout */
+  display: flex;
+  flex-direction: row;
+
+  /* This bit draws the box around it */
+  border: 1px solid grey;
+
+  /* I've used padding so you can see the edges of the elements. */
+  padding: 2px;
 }
