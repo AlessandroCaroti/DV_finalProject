@@ -24,6 +24,7 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <!------------------------------- UTILITY SCRIPTS -------------------------------------->
+    <script src="//unpkg.com/string-similarity/umd/string-similarity.min.js"></script>
     <script src="/project/utils/RoundedRect.js"></script>
     <script src="/project/utils/utils.js"></script>
     <script src="/project/InitPage.js"></script>
@@ -103,7 +104,7 @@
         <h2>Country:</h2>
         <div id="input_container" class="py_1">
           <form id="form_selectCountry" action="">
-            <input id="selectCountryMenu_2" 
+            <input id="input_countrySelection" 
                 autocomplete="off" 
                 value="" 
                 placeholder="Select a country..." 
@@ -113,13 +114,6 @@
         </div>
         <div id="country_list_conteiner">
           <ul id="country_list">
-            <li><div class="width-full text-bold">COUNTRY 1</div></li>
-            <li><div class="width-full text-bold">COUNTRY 2</div></li>
-            <li><div class="width-full text-bold">COUNTRY 3</div></li>
-            <li><div class="width-full text-bold">COUNTRY 4</div></li>
-            <li><div class="width-full text-bold">COUNTRY 5</div></li>
-            <li><div class="width-full text-bold">COUNTRY 6</div></li>
-            <li><div class="width-full text-bold">COUNTRY 7</div></li>
           </ul>
         </div>
       </div>
@@ -398,6 +392,7 @@
     <script src="/project/map/script.js?version=1"></script>
     <script src="/project/map/color_scale.js?version=1"></script>
     <script src="/project/map/map_menu.js"></script>
+    <script src="/project/map/select_country.js"></script>
     <script>
       window.onload = init_page();
     </script>
