@@ -48,14 +48,13 @@ function set_colorScale(){
     // draw axis
     var anomaly_axis = d3.axisBottom().scale(quantizeBarScale)
                                         .tickValues(ticks)
-                                        .tickFormat(d3.format(".2f"))
+                                        .tickFormat(d3.format(".1f"))
                                         .tickSize(13);
 
     var axis = d3.select('.legend-anomaly')
-                  .attr("x", "50%")
     // generate axis
     
-    axis.attr("transform", "translate(" +   0 +","+ 40  +" )") 
+    axis.attr("transform", "translate(" +   (w_map/2 - width_legend/2) +","+ 40  +" )") 
             .call(anomaly_axis);
 
     // draw bars
