@@ -48,15 +48,15 @@
 
 #input_container button {
   font-family: Arial;
-  font-weight: bold;
-  font-size: 16px;
+  font-weight: 700;
+  font-size: 22px;
   z-index: 2;
   cursor: pointer;
   background-color: transparent;
   border: none;
   color: black;
   outline: none;
-  transform: translateX(-5px);
+  transform: translateX(-7px);
 }
 
 /*-----------------------------------------------------------------------------*/
