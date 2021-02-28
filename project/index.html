@@ -80,11 +80,9 @@
   
         <a href="#" id="contributors">Contributors</a>
         
-        <image id="bracket_drop_nav" src="../project/images/angular_bracket_white_down.svg"  alt="" height="13"
-          width="13"/> 
+        <image id="bracket_drop_nav" src="../project/images/angular_bracket_white_down.svg"  alt="" height="13" width="13"/> 
   
           <div id="contributors-div">
-  
               <ul id="contributors-elem">
   
                 <li> <a href="https://github.com/LazyRacc00n" target="_blank">Jacopo Dapueto</a></li>
@@ -96,76 +94,72 @@
       </li>
 
       <li id="elem-logo-git"> <img id="log-git" src="../project/images/github-icon-white-6.jpg" height="45" width="45"
-            alt="logo-git" onclick="window.open('https://github.com/AlessandroCaroti/DV_finalProject', '_blank');"/></li>
-  
+        alt="logo-git" onclick="window.open('https://github.com/AlessandroCaroti/DV_finalProject', '_blank');"/></li>
     </ul>
   </div>
 
-    <div class="sidenav">
-      <div id="selectionCountry_countainer">
-        <h2>Country:</h2>
-        <div id="input_container">
-          <input id="selectCountryMenu_2" class="input-country" autocomplete="off" value="" placeholder="Select a country..." type="text">
-        </div>
+  <div class="sidenav">
+    <div id="selectionCountry_countainer" class="border_bottom py_1">
+      <h2>Country:</h2>
+      <div id="input_container">
+        <input id="selectCountryMenu_2" class="input-country" autocomplete="off" value="" placeholder="Select a country..." type="text">
       </div>
-
-
-      <div id="menu_selectCountry">
-        <p class="label">
-          <label for="selectCountryMenu">
-            Country:
-            <select id="selectCountryMenu">
-              <option></option>
-            </select>
-          </label>
-        </p>
-      </div>
-      <div class="range-years-buttons-container">
-        <input
-          class="checkbox-range"
-          type="radio"
-          name="btn-range-year"
-          value="annual"
-          id="btn_annual"
-          onclick="changeDataRangeYears()"
-        />
-        <label id="label-btn_annual" for="btn_annual"> Annual </label>
-
-        <input
-          class="checkbox-range"
-          type="radio"
-          name="btn-range-year"
-          value="five_years"
-          id="btn_five"
-          onclick="changeDataRangeYears()"
-        />
-        <label id="label-btn_five" for="btn_five"> 5-Year </label>
-
-        <input
-          class="checkbox-range"
-          type="radio"
-          name="btn-range-year"
-          checked="checked"
-          value="ten_years"
-          id="btn_ten"
-          onclick="changeDataRangeYears()"
-        />
-        <label id="label-btn_ten" for="btn_ten"> 10-Year </label>
-
-        <input
-          class="checkbox-range"
-          type="radio"
-          name="btn-range-year"
-          value="twenty_years"
-          id="btn_twenty"
-          onclick="changeDataRangeYears()"
-        />
-        <label id="label-btn_twenty" for="btn_twenty">20-Years</label>
-      </div>
-      <!-- TODO: AGGIUNGERE ANOMALIA -->
     </div>
 
-    <!------------------------------START MAP------------------------------------------->
+
+    <div id="menu_selectCountry">
+      <p class="label">
+        <label for="selectCountryMenu">
+          Country:
+          <select id="selectCountryMenu">
+            <option></option>
+          </select>
+        </label>
+      </p>
+    </div>
+
+    <div class="range-years-buttons-container">
+      <input
+        class="checkbox-range"
+        type="radio"
+        name="btn-range-year"
+        value="annual"
+        id="btn_annual"
+        onclick="changeDataRangeYears()"/>
+      <label id="label-btn_annual" for="btn_annual"> Annual </label>
+
+      <input
+        class="checkbox-range"
+        type="radio"
+        name="btn-range-year"
+        value="five_years"
+        id="btn_five"
+        onclick="changeDataRangeYears()"/>
+      <label id="label-btn_five" for="btn_five"> 5-Year </label>
+
+      <input
+        class="checkbox-range"
+        type="radio"
+        name="btn-range-year"
+        checked="checked"
+        value="ten_years"
+        id="btn_ten"
+        onclick="changeDataRangeYears()"/>
+      <label id="label-btn_ten" for="btn_ten"> 10-Year </label>
+
+      <input
+        class="checkbox-range"
+        type="radio"
+        name="btn-range-year"
+        value="twenty_years"
+        id="btn_twenty"
+        onclick="changeDataRangeYears()"/>
+      <label id="label-btn_twenty" for="btn_twenty">20-Years</label>
+    </div>
+    <!-- TODO: AGGIUNGERE ANOMALIA -->
+  </div>
+
+  <!------------------------------START MAP------------------------------------------->
 
     <div class="main">
       <div class="col_wrapper">
