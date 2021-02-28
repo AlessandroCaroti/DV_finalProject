@@ -32,7 +32,7 @@ d3.select("#setting_icon_close")
 //STYLE MENU'
 d3.select("#menu_map")
   .attr("d", roundedRect(x, y, w1, h1, 3))
-  .style("fill", "rgba(255,255,255,0.8)")
+  .style("fill", "rgba(255,255,255,0.9)")
   .style("stroke", "black")
   .style("stroke-width", "2px");
 

@@ -530,12 +530,12 @@ function init_animationBtn() {
 
 function init_yearSpace() {
   var bBox = document.getElementById("sliderLabel").getBBox();
-
   var gap = 40,
     w_1 = bBox.width + gap * 2,
     w_2 = bBox.width,
-    x = bBox.x - gap;
-
+    x = -bBox.width/2 - gap;
+  
+  d3.select("#sliderLabel").attr("x", -bBox.width/2);
   d3.select("#year_svg")
     .select("path")
     .attr("d", roundedFigure_1(x, -1, w_1, w_2, 37))
