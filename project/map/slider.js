@@ -29,7 +29,7 @@ function init_slider(min, max, step) {
     .handle(d3.symbol().type(d3.symbolCircle).size(200)())
     .on("end", (val) => {
       d3.select("#sliderLabel").text("Year: " + d3.format("0")(val));
-      load_tempYear(val , default_transition);
+      load_tempYear(val, default_transition);
     });
 
   var g2 = d3
@@ -85,7 +85,7 @@ function init_slider(min, max, step) {
 
       // change position slider
       sliderAlternativeHandle.value(next_val);
-      load_tempYear(next_val , default_transition);
+      load_tempYear(next_val, default_transition);
       d3.select("#sliderLabel").text("Year: " + next_val);
 
     })
@@ -97,7 +97,7 @@ function init_slider(min, max, step) {
         .classed("hover", true)
         .classed("not-hover", false);
     })
-    .on("mouseleave", function(){
+    .on("mouseleave", function () {
       d3.select("div#sliderYear")
         .select("g .parameter-value")
         .select("text")
@@ -130,7 +130,7 @@ function start_animation() {
 
   // get speed
   let speed = speed_options[selected_opt_idx];
-  
+
   var total_milliseconds = (animation_duration * 60000) / speed; // 60000 milliseconds in one minute
   var time_wait = total_milliseconds / ((endYear_selected - startYear_selected) / step_slider); //  total time / (N° years) 
   cur_year = startYear_selected;
@@ -152,7 +152,7 @@ function stop_animation() {
   enable_menu();
 
   // reset position slider
-  load_tempYear(sliderAlternativeHandle.value() , default_transition);
+  load_tempYear(sliderAlternativeHandle.value(), default_transition);
   d3.select("#sliderLabel").text("Year: " + sliderAlternativeHandle.value());
 }
 
@@ -162,7 +162,7 @@ function increment_step_slider(transition_time) {
   // set new value
   d3.select("#sliderLabel").text("Year: " + cur_year);
   // load temperatures
-  load_tempYear( cur_year , transition_time);
+  load_tempYear(cur_year, transition_time);
 
   cur_year = cur_year + step_slider;
   return cur_year;
@@ -190,6 +190,9 @@ function disable_menu() {
   d3.select("#setting_btn_open").style("pointer-events", "none");
   // change opacity 
   d3.select("#setting_btn_open").style("opacity", "0.5");
+
+  // if open, close it
+  closeMenu();
 }
 
 function enable_menu() {
@@ -200,6 +203,15 @@ function enable_menu() {
   d3.select("#setting_btn_open").style("opacity", "1.0");
 }
 
+function closeMenu() {
+  // find path
+  let btn = document.getElementById("setting_btn_close");
+
+  // fake click()
+  var evObj = document.createEvent("Events");
+  evObj.initEvent("click", true, false);
+  btn.dispatchEvent(evObj);
+}
 
 function wheelDistance(e) {
   //console.log(e); 
