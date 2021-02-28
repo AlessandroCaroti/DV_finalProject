@@ -622,8 +622,18 @@ table {
 
 }
 
-.dropdown-navbar:hover{
-  background: rgba(192, 192, 192, 0.3);;
+.dropdown-navbar:hover a{
+  color: rgba(192, 192, 192, 0.3);;
+}
+
+
+#bracket_drop_nav{
+  position: absolute;
+  bottom: 38%;
+}
+.dropdown-navbar:hover #bracket_drop_nav{
+
+  filter: hue-rotate(0deg) saturate(0%) brightness(75%) opacity(30%);
 }
 
 
@@ -704,6 +714,6 @@ table {
   border-radius: 100%;
 }
 
-#elem-logo-git:hover{
-  background-color: rgba(192, 192, 192, 0.3);
+#elem-logo-git:hover {
+  filter: hue-rotate(0deg) saturate(0%) brightness(75%) opacity(30%);
 }
