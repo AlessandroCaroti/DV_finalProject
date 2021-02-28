@@ -167,7 +167,7 @@ function styleLastYearsLines(d, dataLastYears){
   
       var valuelineSeasonalBaseline = getLineGeneratorsSeasonal(x,y);
 
-      createGridLine(x,y, svg, "seasonal");
+    
       svg.append("g")
                   .attr("class","uncertainty")
                   .attr("id", "baseline-unc")
@@ -227,7 +227,22 @@ function styleLastYearsLines(d, dataLastYears){
     svg.append("g")
           .attr("class", "y_axis_seasonal")
           .call(d3.axisLeft(y));
-                          
+      
+    d3.selectAll("g.y_axis_seasonal g.tick") 
+      .append("line") 
+      .attr("class", "gridline")
+      .attr("x1", 1) 
+                  .attr("y1", 1)
+                  .attr("x2", width)
+                  .attr("y2", 1);
+    
+    d3.selectAll("g.x_axis_seasonal g.tick") 
+      .append("line") 
+      .attr("class", "gridline")
+      .attr("x1", 1) 
+      .attr("y1", -height)
+                .attr("x2", 1)
+                .attr("y2", 1)
     
 
     var tooltipLine = svg.append('line').attr("class","line_tip").attr("id","seasonal-line-tip");
@@ -306,7 +321,7 @@ function styleLastYearsLines(d, dataLastYears){
                     .on('mousemove', (event) => drawTooltipSeasonal(tipBox, event, x, seasonalData, tooltipLine, lastYearsData))
                     .on('mouseout', () => removeTooltipSeasonal(tooltipLine));
     
-    updateGrid("#seasonal_changes_graphic", x, y,svg);
+    
     updateSeasonalLegend(lastYearsData, svg);
 
 
@@ -316,6 +331,27 @@ function styleLastYearsLines(d, dataLastYears){
         .transition().duration(500)
         .call(d3.axisLeft(y));  
     
-
+        updateGridlineSeasonal()
     
+  }
+
+
+  function updateGridlineSeasonal(){
+  
+    d3.select(".gridline").remove()
+    d3.selectAll("g.y_axis_seasonal g.tick") 
+        .append("line") 
+                .attr("class", "gridline")
+                .attr("x1", 1) 
+                .attr("y1", 1)
+                .attr("x2", width)
+                .attr("y2", 1);
+  
+      d3.selectAll("g.x_axis_seasonal g.tick") 
+          .append("line") 
+              .attr("class", "gridline")
+              .attr("x1", 1) 
+              .attr("y1", -height)
+              .attr("x2", 1)
+              .attr("y2", 1)
   }

@@ -145,6 +145,10 @@ function updateRangeNameLegend(svg) {
   );
 }
 
+
+
+
+
 //-------------------------------------------------------TABLE-----------------------------------------
 
 function isInfoNaN(json_field) {
