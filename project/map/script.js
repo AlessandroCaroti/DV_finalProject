@@ -48,7 +48,7 @@ function drawMap(world) {
   projection = d3
     .geoNaturalEarth1()
     .scale(140)
-    .translate([bBox.width / 2, h_map / 2]);
+    .translate([0, h_map / 2]);
 
   geoGenerator = d3.geoPath().projection(projection);
 
