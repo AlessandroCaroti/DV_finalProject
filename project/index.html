@@ -57,72 +57,47 @@
     <!-----------------------------MAP SCRIPTS------------------------------------------>
   </head>
 
-  <body>
-    <!-- remove class loaded to enable the loading screen -->
-    <div id="loader-wrapper">
-      <div id="loader"></div>
 
-      <div class="loader-section section-left"></div>
-      <div class="loader-section section-right"></div>
-    </div>
 
-    <div class="navbar">
-      <ul id="main-nav">
-        <li id="logo-elem" class="button-nav-bar-logo">
-          <img
-            id="logo"
-            src="../project/images/Global_Warming_icon.svg"
-            alt="Global_Warming_icon"
-          />
-        </li>
-        <li class="button-nav-bar-logo">
-          <a id="title-logo">Berkley Earth</a>
-        </li>
-        <li
-          id="contributors-drop"
-          class="dropdown-navbar"
-          onclick="NavBarDropDownEvt()"
-        >
-          <a href="#" id="contributors">Contributors</a>
-          <img
-            id="bracket_drop_nav"
-            src="../project/images/angular_bracket_white_down.svg"
-            alt=""
-            height="13"
-            width="13"
-          />
 
+<body>
+
+  <!-- remove class loaded to enable the loading screen -->
+  <div id="loader-wrapper">
+    <div id="loader"></div>
+
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+  </div>
+  
+  <div class="navbar">
+
+    <ul id="main-nav">
+      <li id="logo-elem" class="button-nav-bar-logo"> <img id="logo" src="../project/images/Global_Warming_icon.svg"
+          alt="Global_Warming_icon"></li>
+      <li class="button-nav-bar-logo"> <a href="http://berkeleyearth.org/" target="_blank" id="title-logo">Berkley Earth</a> </li>
+      <li id="contributors-drop" class="dropdown-navbar" onclick="NavBarDropDownEvt()">
+  
+        <a href="#" id="contributors">Contributors</a>
+        
+        <image id="bracket_drop_nav" src="../project/images/angular_bracket_white_down.svg"  alt="" height="13"
+          width="13"/> 
+  
           <div id="contributors-div">
-            <ul id="contributors-elem">
-              <li>
-                <a href="https://github.com/LazyRacc00n" target="_blank"
-                  >Jacopo Dapueto</a
-                >
-              </li>
-              <li>
-                <a href="https://github.com/simocampi" target="_blank"
-                  >Simone Campisi</a
-                >
-              </li>
-              <li>
-                <a href="https://github.com/AlessandroCaroti" target="_blank"
-                  >Alessandro Caroti</a
-                >
-              </li>
-            </ul>
-          </div>
-        </li>
+  
+              <ul id="contributors-elem">
+  
+                <li> <a href="https://github.com/LazyRacc00n" target="_blank">Jacopo Dapueto</a></li>
+                <li> <a href="https://github.com/simocampi" target="_blank">Simone Campisi</a></li>
+                <li> <a href="https://github.com/AlessandroCaroti" target="_blank">Alessandro Caroti</a></li>
+  
+              </ul>
+        </div>
+          </li>
 
-        <li id="elem-logo-git">
-          <img
-            id="log-git"
-            src="../project/images/github-icon-white-6.jpg"
-            height="45"
-            width="45"
-            alt=""
-            onclick="window.open('https://github.com/AlessandroCaroti/DV_finalProject', '_blank');"
-          />
-        </li>
+          <li id="elem-logo-git"> <img id="log-git" src="../project/images/github-icon-white-6.jpg" height="45" width="45"
+            alt="logo-git" onclick="window.open('https://github.com/AlessandroCaroti/DV_finalProject', '_blank');"/></li>
+  
       </ul>
     </div>
 

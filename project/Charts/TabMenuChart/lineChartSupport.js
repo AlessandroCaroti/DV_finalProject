@@ -15,8 +15,7 @@ function changeDataRangeYears() {
     
     }else folder = "counties";
     
-  
-  
+
     var csv = "/../data/"+folder +"/"+dataFile+"/"+ dataFile + "_anomalyTable.csv";
     var json = "/../../data/"+folder+"/"  + dataFile + "/" + dataFile + "_info.json";
   
@@ -202,17 +201,32 @@ function createDefaultLineChart(data){
     var x = scales[0] 
     var y =  scales[1]
 
+  svg.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .attr("class", "x_axis")
+    .call(d3.axisBottom(x).tickSizeOuter(0));
   
-    svg.append("g")
-      .attr("transform", "translate(0," + height + ")")
-      .attr("class", "x_axis")
-      .call(d3.axisBottom(x).tickSizeOuter(0));
-    
-    svg.append("g")
-      .attr("class", "y_axis")
-      .call(d3.axisLeft(y).tickSizeOuter(0))
+  svg.append("g")
+    .attr("class", "y_axis")
+    .call(d3.axisLeft(y).tickSizeOuter(0))
+   
 
-    createGridLine(x,y, svg, "linechart", 10, 10);
+    d3.selectAll("g.y_axis g.tick") 
+      .append("line") 
+              .attr("class", "gridline")
+              .attr("x1", 1) 
+              .attr("y1", 1)
+              .attr("x2", width)
+              .attr("y2", 1);
+
+    d3.selectAll("g.x_axis g.tick") 
+        .append("line") 
+            .attr("class", "gridline")
+            .attr("x1", 1) 
+            .attr("y1", -height)
+            .attr("x2", 1)
+            .attr("y2", 1)
+
     
     var lineGenerators = getLineGenerators(x,y);
     var valueline_annual = lineGenerators[0];
@@ -266,6 +280,8 @@ function createDefaultLineChart(data){
 
     createLineChartLegend(svg, btn_ten);
 
+   
+   
   }
 
 
@@ -300,10 +316,12 @@ function updateLineChart(data, grafic_class){
     var scales = getScales(data);
     var x = scales[0] 
     var y =  scales[1]
-    updateAxis(".x_axis", ".y_axis", x, y);  
+    
+    
     
     //.graphics
     var svg = d3.select(grafic_class);
+    //updateGrid("#linechart", x, y,svg, 12, 10);
     
     //re-define the lines generator
     // .defined(...) => are not considered the NaN values
@@ -365,11 +383,33 @@ function updateLineChart(data, grafic_class){
                          .on('mousemove', (event) => drawTooltipLineChart(tipBox, event, x, data, tooltipLine, "#linechart", height))
                          .on('mouseout', () => removeTooltipLineChart(tooltipLine,"#linechart")); 
     
-    updateGrid("#linechart", x, y,svg, 12, 10);
+    
     updateRangeNameLegend(svg);
+    updateAxis(".x_axis", ".y_axis", x, y);  
+    updateGridline();
+ 
 
 }
 
 
+function updateGridline(){
+  
+  d3.select(".gridline").remove()
+  d3.selectAll("g.y_axis g.tick") 
+      .append("line") 
+              .attr("class", "gridline")
+              .attr("x1", 1) 
+              .attr("y1", 1)
+              .attr("x2", width)
+              .attr("y2", 1);
+
+    d3.selectAll("g.x_axis g.tick") 
+        .append("line") 
+            .attr("class", "gridline")
+            .attr("x1", 1) 
+            .attr("y1", -height)
+            .attr("x2", 1)
+            .attr("y2", 1)
+}
 
 
