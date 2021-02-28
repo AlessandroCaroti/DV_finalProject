@@ -522,10 +522,11 @@ table {
   font-weight: bold;
 }
 
-.grid line {
+.gridline {
   stroke: lightgrey;
-  stroke-opacity: 0.6;
+  stroke-opacity: 0.8;
   shape-rendering: crispEdges;
+  stroke-dasharray: 5px;
 }
 .grid path {
   stroke-width: 0;
