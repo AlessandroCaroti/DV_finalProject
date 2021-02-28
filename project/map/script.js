@@ -43,8 +43,6 @@ function drawMap(world) {
   svg = d3.select("#svg-map").attr("height", h_map);
   map_container = svg.select("#map").call(zoom);
 
-  var bBox = document.getElementById("svg-map").getBBox();
-
   projection = d3
     .geoNaturalEarth1()
     .scale(140)
