@@ -43,12 +43,10 @@ function drawMap(world) {
   svg = d3.select("#svg-map").attr("height", h_map);
   map_container = svg.select("#map").call(zoom);
 
-  var bBox = document.getElementById("svg-map").getBBox();
-
   projection = d3
     .geoNaturalEarth1()
     .scale(140)
-    .translate([bBox.width / 2, h_map / 2]);
+    .translate([0, h_map / 2]);
 
   geoGenerator = d3.geoPath().projection(projection);
 
@@ -485,7 +483,6 @@ function init_map_controls() {
   init_zoomBtns();
   init_animationBtn();
   init_yearSpace();
-  init_menu();
 }
 
 function changeView() {
@@ -545,11 +542,6 @@ function init_yearSpace() {
     .style("fill", "rgb(243, 243, 243)")
     .style("stroke", "black")
     .style("stroke-width", 1.5);
-}
-
-function init_menu(){
-  var bBox = document.getElementById("svg-map").getBBox();
-  d3.select("#setting_group").attr("transform", "translate("+(bBox.width-250)+", 10)")
 }
 
 // funtion to move path in front of the charts
