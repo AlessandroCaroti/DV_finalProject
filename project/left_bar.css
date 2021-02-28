@@ -72,13 +72,13 @@
 div#country_list_conteiner {
   margin: 0;
   padding-left: 10px;
-  max-height: 100px;
+  max-height: 150px;
   overflow-y: auto;
   overflow-x: hidden;
 }
 /* width */
 #country_list_conteiner::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 /* Track */
@@ -103,8 +103,6 @@ ul#country_list {
   margin-top: 0;
   margin-bottom: 0;
   box-sizing: border-box;
-  font-size: 14px;
-  line-height: 1.5;
 }
 
 #country_list li {
@@ -117,4 +115,16 @@ ul#country_list {
 }
 .text-bold {
   font-weight: 600 !important;
+}
+
+.country_option {
+  cursor: pointer;
+  padding: 6px;
+  -webkit-user-select: none;
+  font-family: sans-serif;
+}
+
+.country_option:hover {
+  background-color: #3875d7;
+  color: #fff;
 }

@@ -19,7 +19,6 @@ var geoGenerator;
 
 var country_list_map = []; // List of the name of the countries present in the map
 var country_list = []; // list of countries with data
-var country_list_low = []; // list of countries with data
 var country_no_data; // list of countries with no associated data 
 
 var selected_country = null;
@@ -564,7 +563,6 @@ function init_DropDownMenu_slect2() {
 
       countries.forEach((d) => {
         country_list.push(d.Temp);
-        country_list_low.push(d.Temp.toLowerCase());
         country_list_map.push(d.Map);
       });
 

@@ -114,9 +114,10 @@
           <input id="input_countrySelection" 
               autocomplete="off" 
               value="" 
-              placeholder="Select a country..." 
+              placeholder="Select a country..."
+              onfocus="showAllData()"
               type="text" for="countrys">
-          <button id="reset_countrySelection" type="reset" onclick="resetInput()">x</button>
+          <button id="reset_countrySelection" type="button" onclick="reset_and_hide()">x</button>
         </form>
       </div>
       <div id="country_list_conteiner">
