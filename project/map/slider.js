@@ -61,7 +61,8 @@ function init_slider(min, max, step) {
 
   // setting an id to the slider
   d3.select("g.parameter-value").select("path")
-    .attr("id", id_slider);
+    .attr("id", id_slider)
+    .style("outline", "none");
 
   // scroll wheel event
   d3.select("#sliderYear")
