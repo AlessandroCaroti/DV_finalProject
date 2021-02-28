@@ -532,7 +532,6 @@ function init_animationBtn() {
 }
 
 function init_yearSpace() {
-  var bBox_svg = document.getElementById("svg-map").getBBox();
   var bBox = document.getElementById("sliderLabel").getBBox();
 
   var gap = 40,
@@ -540,7 +539,7 @@ function init_yearSpace() {
     w_2 = bBox.width,
     x = bBox.x - gap;
 
-  d3.select(".col-sm-2")
+  d3.select("#year_svg")
     .select("path")
     .attr("d", roundedFigure_1(x, -1, w_1, w_2, 37))
     .style("fill", "rgb(243, 243, 243)")
@@ -550,7 +549,7 @@ function init_yearSpace() {
 
 function init_menu(){
   var bBox = document.getElementById("svg-map").getBBox();
-  d3.select("#setting_group").attr("transform", "translate("+(bBox.width-250)+", 10)")
+  //d3.select("#setting_group").attr("transform", "translate("+(bBox.width-250)+", 10)")
 }
 
 // funtion to move path in front of the charts
