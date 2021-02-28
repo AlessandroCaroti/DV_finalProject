@@ -221,6 +221,17 @@ function createDefaultLineChart(data){
 
     drawUncertainty(data, svg, x, y);
     
+
+    svg  
+      .append("g")
+      .attr("class","baselines")
+      .selectAll("path")
+      .data([data])
+      .enter()
+      .append("path")
+      .attr("d", valueline_baseline);
+      
+
    svg  
         .append("g")
         .attr("class","line_chart_annual")
@@ -239,17 +250,6 @@ function createDefaultLineChart(data){
         .append("path")
         .attr("d", valueline_ten_years);
          
-   data_baselines = baseLine(data);
-
-    svg  
-        .append("g")
-        .attr("class","baselines")
-        .selectAll("path")
-        .data([data])
-        .enter()
-        .append("path")
-        .attr("d", valueline_baseline);
-        
 
     
 
