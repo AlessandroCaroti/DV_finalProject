@@ -1,7 +1,7 @@
  // da trovare modo per trovare min e max automaticamente 
  var min_scale = -3.0;
  var max_scale = +3.8;
- var width_legend = 400; // width of the legend axis
+ var width_legend = 500; // width of the legend axis
  var n_ticks = 11;
  var step_list = [];
  var step_color_list = [];
@@ -49,11 +49,13 @@ function set_colorScale(){
     var anomaly_axis = d3.axisBottom().scale(quantizeBarScale)
                                         .tickValues(ticks)
                                         .tickFormat(d3.format(".2f"))
-                                        .tickSize(-10);
+                                        .tickSize(13);
 
     var axis = d3.select('.legend-anomaly')
+                  .attr("x", "50%")
     // generate axis
-    axis.attr("transform", "translate(" +   (w_map/2 - width_legend) +","+ 25  +" )") 
+    
+    axis.attr("transform", "translate(" +   0 +","+ 40  +" )") 
             .call(anomaly_axis);
 
     // draw bars
@@ -70,7 +72,7 @@ function set_colorScale(){
             })
           .attr("y", "-10")
           .attr("width", rect_width)
-          .attr("height", "10px")
+          .attr("height", "15px")
           .style("fill", d => d)
     
     
@@ -78,7 +80,7 @@ function set_colorScale(){
             .attr("x", quantizeBarScale(max_scale) + 2 * rect_width)
             .attr("y", "-10")
             .attr("width", rect_width)
-            .attr("height", "10px")
+            .attr("height", "15px")
             .style("fill", "#999999");
     
             
@@ -87,25 +89,27 @@ function set_colorScale(){
             .attr("transform", "translate(" + (width_legend + 2 * (width_legend / n_ticks)) + ", 0)")
             .append("text")
             .attr("fill", "currentColor")
-            .attr("y", "3")
+            .attr("y", "9")
             .attr("x", "10")
             .attr("dy", "0.71em")
             .html("unknown");
     
     // change axis style
-    axis.selectAll("text")
-          .style("font-size", "10px");
+    axis.selectAll(".tick").selectAll("text")
+          .attr("dy", "0.91em")
+          .style("font-size", "14px");
 
-    axis.selectAll(".tick")
-          .moveToFront();
+    /*axis.selectAll(".tick")
+          .moveToFront();*/
 
     axis.select(".domain").remove();
 
     // move label
     d3.select("#label-legend")
-            .attr("x", ((w_map / bar_step) + 32))
+            .attr("x", ((w_map / bar_step) + 70))
             .attr("y", "-15")
             .style("fill", "black")
+            .style("font-size", "15px")
             .raise();
     
     d3.select("#global-anomaly")
