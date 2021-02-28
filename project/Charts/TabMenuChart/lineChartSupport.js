@@ -211,22 +211,7 @@ function createDefaultLineChart(data){
     .call(d3.axisLeft(y).tickSizeOuter(0))
    
 
-    d3.selectAll("g.y_axis g.tick") 
-      .append("line") 
-              .attr("class", "gridline")
-              .attr("x1", 1) 
-              .attr("y1", 1)
-              .attr("x2", width)
-              .attr("y2", 1);
-
-    d3.selectAll("g.x_axis g.tick") 
-        .append("line") 
-            .attr("class", "gridline")
-            .attr("x1", 1) 
-            .attr("y1", -height)
-            .attr("x2", 1)
-            .attr("y2", 1)
-
+    lineChartGridline("x_axis", "y_axis");
     
     var lineGenerators = getLineGenerators(x,y);
     var valueline_annual = lineGenerators[0];
@@ -386,30 +371,11 @@ function updateLineChart(data, grafic_class){
     
     updateRangeNameLegend(svg);
     updateAxis(".x_axis", ".y_axis", x, y);  
-    updateGridline();
+    updateLineChartGridline("x_axis", "y_axis");
  
 
 }
 
 
-function updateGridline(){
-  
-  d3.select(".gridline").remove()
-  d3.selectAll("g.y_axis g.tick") 
-      .append("line") 
-              .attr("class", "gridline")
-              .attr("x1", 1) 
-              .attr("y1", 1)
-              .attr("x2", width)
-              .attr("y2", 1);
-
-    d3.selectAll("g.x_axis g.tick") 
-        .append("line") 
-            .attr("class", "gridline")
-            .attr("x1", 1) 
-            .attr("y1", -height)
-            .attr("x2", 1)
-            .attr("y2", 1)
-}
 
 

@@ -145,6 +145,37 @@ function updateRangeNameLegend(svg) {
   );
 }
 
+function lineChartGridline(x_axis_class, y_axis_class){
+
+  var y_axis_grid= String("g."+y_axis_class+" g.tick")
+  var x_axis_grid= String("g."+x_axis_class+" g.tick")
+
+  d3.selectAll(y_axis_grid) 
+    .append("line") 
+    .attr("class", "gridline")
+    .attr("x1", 1) 
+    .attr("y1", 1)
+    .attr("x2", width)
+    .attr("y2", 1);
+  
+  d3.selectAll(x_axis_grid) 
+    .append("line") 
+    .attr("class", "gridline")
+    .attr("x1", 1) 
+    .attr("y1", -height)
+    .attr("x2", 1)
+    .attr("y2", 1)
+}
+
+
+function updateLineChartGridline(x_axis_class, y_axis_class){
+
+  d3.select(".gridline").remove()
+  lineChartGridline(x_axis_class,y_axis_class);
+}
+
+
+
 //-------------------------------------------------------TABLE-----------------------------------------
 
 function isInfoNaN(json_field) {
