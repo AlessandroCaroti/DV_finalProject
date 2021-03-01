@@ -742,7 +742,6 @@ table {
   
   margin-top: 10px;
   font-size: smaller;
- 
 }
 
 .links_page:hover a{
@@ -753,3 +752,14 @@ table {
 html {
   scroll-behavior: smooth;
 }
+
+#btn-back-top{
+  position: fixed;
+  background: transparent;
+  width: 45px;
+  height: 45px;
+  margin-left: 86%;
+  margin-top: 1%;
+
+}
+
