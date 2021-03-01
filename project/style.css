@@ -114,6 +114,10 @@ div.tooltip-map {
   fill: #999999;
 }
 
+.no_data {
+  fill: url(#diagonalHatch);
+}
+
 .highlighted_country {
   stroke: #00ff00;
   stroke: #ffffff;
