@@ -2,7 +2,7 @@
 //                    START GLOBAL VARIABLE                    //
 
 // MAP DIMANSION
-var w_map = 1000;
+var w_map = NaN;
 const h_map = 500;
 
 var projection;
@@ -38,9 +38,9 @@ function drawMap(world) {
   debug_log("DRAW-MAP");
 
   svg = d3.select("#svg-map").attr("height", h_map);
-  svg_bBox = document.getElementById("sliderLabel").getBBox();
   map_container = svg.select("#map").call(zoom);
 
+  svg_bBox = document.getElementById("sliderLabel").getBBox();
   w_map = svg_bBox.width
 
   projection = d3
@@ -306,7 +306,7 @@ function zoom_in(country) {
       1,
       Math.min(max_zoom, 0.9 / Math.max(dx / w_map, dy / h_map))
     ),
-    translate = [ - scale * x, h_map / 2 - scale * y];
+    translate = [/* w_map/2 */ - scale * x, h_map / 2 - scale * y];
 
   map_container
     .transition()
