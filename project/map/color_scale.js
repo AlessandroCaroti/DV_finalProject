@@ -54,7 +54,7 @@ function set_colorScale(){
     var axis = d3.select('.legend-anomaly')
     // generate axis
     
-    axis.attr("transform", "translate(" +   (w_map/2 - (width_legend + bar_step *6)) +","+ 40  +" )") 
+    axis.attr("transform", "translate(" +   (w_map - width_legend + bar_step * 3 ) +","+ 40  +" )") 
             .call(anomaly_axis);
 
     // draw bars

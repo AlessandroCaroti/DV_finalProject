@@ -41,7 +41,7 @@ function drawMap(world) {
   map_container = svg.select("#map").call(zoom);
 
   svg_bBox = document.getElementById("sliderLabel").getBBox();
-  w_map = svg_bBox.width
+  w_map = svg_bBox.width;
 
   projection = d3
     .geoNaturalEarth1()
@@ -386,6 +386,7 @@ function drawLevel(world, level) {
       if (level == 0) return d.properties.name;
       return "";
     })
+    .attr("fill-rule", "nonzero")
     .attr("name", (d) => d.properties.name)
     .attr("d", geoGenerator);
 
@@ -612,6 +613,10 @@ function load_map() {
 
       // number of levels
       n_levels = 2;
+
+      // set colorscale and  legend
+      set_colorScale();
+      draw_legend();
 
       $("body").addClass("loaded");
     })
