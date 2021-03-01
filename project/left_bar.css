@@ -151,13 +151,19 @@ ul#country_list {
 }
 
 .btn-group button {
-  background-color: #4CAF50; /* Green background */
-  border: 2px solid green; /* Green border */
-  color: white; /* White text */
+  background-color: #0064bd; /* background */
+  border: 2px solid #3b4045; /* border */
   padding: 10px 24px; /* Some padding */
   cursor: pointer; /* Pointer/hand icon */
   float: left; /* Float the buttons side by side */
   line-height: 20px;
+
+  color: white; /* White text */
+  font-size: 15px;
+  text-align: center;
+  font-weight: 500;
+  font-family: sans-serif;
+  white-space: nowrap;
 }
 
 .btn-group.top_btn {
@@ -176,5 +182,5 @@ ul#country_list {
 
 /* Add a background color on hover */
 .btn-group button:hover {
-  background-color: #3e8e41;
+  background-color: #f300cb;
 }
