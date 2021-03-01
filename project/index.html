@@ -132,11 +132,25 @@
     <div id="selectionAverage_container" class="border_bottom py_2">
       <h2>Data averaged on:</h2>
       <div class="btn-group">
-        <button type="button" style="width:50%" class="top_btn left_btn">1-year</button>
-        <button type="button" style="width:50%" class="top_btn right_btn">5-year</button>
-        <button type="button" style="width:50%" class="bottom_btn right_btn">10-year</button>
-        <button type="button" style="width:50%" class="bottom_btn right_btn">20-year</button>
+        <button type="button" style="width:50%" 
+                class="top_btn left_btn" value="annual"
+                onclick="changeDataRangeYears()">1-year</button>
+        <button type="button" style="width:50%" 
+                class="top_btn right_btn" value="five_years"
+                onclick="changeDataRangeYears()">5-year</button>
+        <button type="button" style="width:50%" 
+                class="bottom_btn right_btn" value="ten_years"
+                onclick="changeDataRangeYears()">10-year</button>
+        <button type="button" style="width:50%" 
+                class="bottom_btn right_btn" value="twenty_years"
+                onclick="changeDataRangeYears()">20-year</button>
       </div>
+    </div>
+
+    <div class="row_wrapper border_bottom py_2">
+      <div><h1>Global anomaly: </h1></div>
+      <div><h1>-10°C</h1></div>
+
     </div>
 
     <div class="range-years-buttons-container">
@@ -157,6 +171,7 @@
       <label id="label-btn_twenty" for="btn_twenty">20-Years</label>
     </div>
     <!-- TODO: AGGIUNGERE ANOMALIA -->
+    
   </div>
 
   <!------------------------------START MAP------------------------------------------->
