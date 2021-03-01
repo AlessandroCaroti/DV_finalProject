@@ -25,9 +25,7 @@ IDEE:
 DA DISCUTERE:
 -fare in modo che la mappa occupi tutta la larghezza della schermo
 -nel grafico Hottest Coldest Linechart se tenere l'hover sulle linee grige
--su Hottest Coldest Linechart la linea selezionata farla andare sopra a tutte le altre DONE
 -aggiungere lo zoom sul grafico sotto le stripe
--ridurre l'altezza delle righe della tabella per renderla + compatta
 -rendere interagibile il menù anche durante l'animazione, per lo meno il cambio della velocità
 
 DA CHIEDERE:

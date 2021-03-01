@@ -386,7 +386,6 @@ function drawLevel(world, level) {
       if (level == 0) return d.properties.name;
       return "";
     })
-    .attr("fill-rule", "nonzero")
     .attr("name", (d) => d.properties.name)
     .attr("d", geoGenerator);
 
@@ -408,8 +407,6 @@ function showLevel(level) {
     .classed("hidden_level", true)
     .selectAll("path.country")
     .attr("id", "")
-    .transition()
-    .duration(0)
     .style("opacity", 0);
 
   // display the level
@@ -423,8 +420,6 @@ function showLevel(level) {
       elem.attr("id", elem.attr("name"));
     })
     .raise()
-    .transition()
-    .duration(0)
     .style("opacity", 1);
 
   // create events on new elements+

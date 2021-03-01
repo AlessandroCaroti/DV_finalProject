@@ -200,6 +200,14 @@
 
             <!-- GLOBE SVG LAYER -->
             <svg id="map" style="overflow: visible" x="50%">
+
+              <defs>
+                <pattern id="diagonalHatch" width="5" height="5" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+                  <rect width="5" height="5" style="fill:#999999;"></rect>
+                  <line x1="0" y1="0" x2="0" y2="10" style="stroke:black; stroke-width:2; " />
+                </pattern>
+              </defs>
+
               <path class="background_globe" d=""></path>
               <g id="map_graticule"></g>
               <g id="level_0"></g>

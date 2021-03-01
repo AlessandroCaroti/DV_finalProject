@@ -54,7 +54,7 @@ function set_colorScale(){
     var axis = d3.select('.legend-anomaly')
     // generate axis
     
-    axis.attr("transform", "translate(" +   (w_map - width_legend + bar_step * 3 ) +","+ 40  +" )") 
+    axis.attr("transform", "translate(" +   (w_map - width_legend + bar_step * 2 ) +","+ 40  +" )") 
             .call(anomaly_axis);
 
     // draw bars
@@ -105,7 +105,7 @@ function set_colorScale(){
 
     // move label
     d3.select("#label-legend")
-            .attr("x", ((w_map / bar_step) + 70))
+            .attr("x", ((w_map / bar_step) + 90))
             .attr("y", "-15")
             .style("fill", "black")
             .style("font-size", "15px")
