@@ -10,14 +10,18 @@ const inputHandler = function (e) {
 };
 
 input_source.addEventListener("input", inputHandler);
+input_source.addEventListener("blur",async function () {
+  await new Promise(r => setTimeout(r, 100));
+  selectionCountry_list.classed("hide", true);
+});
 
 function hide_options() {
-  selectionCountry_list.selectAll("li").data([]).exit().remove();
+  selectionCountry_list.classed("hide", true);
   input_source.blur();
-  console.log(input_source);
 }
 
 function showAllData() {
+  selectionCountry_list.classed("hide", false);
   update_otionsCountry(country_list);
 }
 
