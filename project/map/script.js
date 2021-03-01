@@ -469,20 +469,20 @@ function changeView() {
 function init_zoomBtns() {
   d3.select("#zoom-reset")
     .select("rect")
-    .on("click", function (event, b) {
+    .on("click", function () {
       changeView();
     });
 
   d3.select("#zoom-in")
     .select("path")
-    .on("click", function (event, b) {
+    .on("click", function () {
       debug_log("ZOOM_IN");
       map_container.transition().call(zoom.scaleBy, zoomIn_scale);
     });
 
   d3.select("#zoom-out")
     .select("path")
-    .on("click", function (event, b) {
+    .on("click", function () {
       debug_log("ZOOM_OUT");
       map_container.transition().call(zoom.scaleBy, zoomOut_scale);
     });
