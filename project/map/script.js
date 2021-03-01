@@ -222,7 +222,10 @@ function country_events() {
     );
 
     // set the name visible in the drop-down menu
-    d3.select("#input_countrySelection").attr("value", String(this.id));
+    if(d3.select("#input_countrySelection").attr("value") != String(this.id)){
+      d3.select("#input_countrySelection").attr("value", String(this.id));
+      changeAllData(String(this.id));
+    }
 
     debug_log("CLICK ON " + this.id);
     country_selected(this.__data__);
