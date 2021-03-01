@@ -217,7 +217,7 @@ function country_events() {
 
     // if is the same country the path is deselected
     if (!previous.empty() && previous.attr("id") == this.id &&  selected_country === b) {
-      d3.select("#input_countrySelection").attr("value", "");
+      d3.select("#input_countrySelection").property("value", "");
       selected_country = null;
       set_globe_icon();
       return;
@@ -232,8 +232,8 @@ function country_events() {
     );
 
     // set the name visible in the drop-down menu
-    if(d3.select("#input_countrySelection").attr("value") != String(this.id)){
-      d3.select("#input_countrySelection").attr("value", String(this.id));
+    if(d3.select("#input_countrySelection").property("value") != String(this.id)){
+      d3.select("#input_countrySelection").property("value", String(this.id));
       changeAllData(String(this.id));
     }
 

@@ -3,8 +3,7 @@ const selectionCountry_list = d3.select("#country_list");
 
 const inputHandler = function (e) {
   console.log("INPUT_CHANGE");
-  input_val = e.target.value.toLowerCase();
-  metches = stringSimilarity.findBestMatch(input_val, country_list);
+  metches = stringSimilarity.findBestMatch(e.target.value, country_list);
   best = metches.ratings.sort((a, b) => b.rating - a.rating).slice(0, 10);
 
   update_otionsCountry(best.map((x) => x.target));
@@ -12,7 +11,7 @@ const inputHandler = function (e) {
 
 input_source.addEventListener("input", inputHandler);
 input_source.addEventListener("blur", async function () {
-  await new Promise((r) => setTimeout(r, 100));
+  await new Promise((r) => setTimeout(r, 500));
   selectionCountry_list.selectAll("li").remove();
 });
 input_source.addEventListener("keyup", function (event) {
