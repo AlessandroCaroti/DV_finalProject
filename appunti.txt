@@ -19,7 +19,6 @@ IDEE:
 -rioragnizzare tutto, dividendo la pagina in 2 parti. l'80% a destra viene occupato 
  da mappa e grafici, quello che ora è al centro. A sinistra,spostare la selezione del paese, 
  la selezione se 1, 5, 10, 20 anni, l'anomaly globale, e se vogliamo aggiungere info del paese selezionato
--I paesi senza temperature farli grigi a righe
 
 
 DA DISCUTERE:
