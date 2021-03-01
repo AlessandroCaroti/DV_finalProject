@@ -12,6 +12,17 @@
 .py_1 {
   padding-top: 5px;
   padding-bottom: 10px;
+  margin-bottom: 8px;
+}
+
+.py_2 {
+  padding: 10px 0px;
+  margin: 8px 0px;
+}
+
+.py_3{
+  padding-top: 5px;
+  padding-bottom: 3px;
 }
 
 /*-----------------------------------------------------------------------------*/
@@ -89,13 +100,13 @@ div#country_list_conteiner {
 
 /* Handle */
 #country_list_conteiner::-webkit-scrollbar-thumb {
-  background: rgb(62, 10, 122);
+  background: #35477d;
   border-radius: 10px;
 }
 
 /* Handle on hover */
 #country_list_conteiner::-webkit-scrollbar-thumb:hover {
-  background: #b30000;
+  background: #c06c84;
 }
 
 ul#country_list {
@@ -128,4 +139,42 @@ ul#country_list {
 .country_option:hover {
   background-color: #3875d7;
   color: #fff;
+}
+
+/*-------------------------------------------------------------*/
+/* DATA AVERAGE SELECTION STYLE */
+#selectionAverage_container h2{
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 0px;
+  margin-bottom: 8px;
+}
+
+.btn-group button {
+  background-color: #4CAF50; /* Green background */
+  border: 2px solid green; /* Green border */
+  color: white; /* White text */
+  padding: 10px 24px; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  float: left; /* Float the buttons side by side */
+  line-height: 20px;
+}
+
+.btn-group.top_btn {
+  border-bottom: none;
+}
+.btn-group.left_btn {
+  border-right: none;
+}
+
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {
+  background-color: #3e8e41;
 }
