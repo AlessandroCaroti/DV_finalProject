@@ -25,6 +25,7 @@ DA DISCUTERE:
 -nel grafico Hottest Coldest Linechart se tenere l'hover sulle linee grige
 -aggiungere lo zoom sul grafico sotto le stripe
 -rendere interagibile il menù anche durante l'animazione, per lo meno il cambio della velocità
+-nella mappa sui paese di cui non abbiamo i dati disattivare il bordo bianco e ù spesso quando si fa l'over
 
 DA CHIEDERE:
 -l'incertezza per la mappa viene usata? nope
