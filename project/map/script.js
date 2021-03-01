@@ -300,7 +300,7 @@ function zoom_in(country) {
       1,
       Math.min(max_zoom, 0.9 / Math.max(dx / w_map, dy / h_map))
     ),
-    translate = [w_map / 2 - scale * x, h_map / 2 - scale * y];
+    translate = [ - scale * x, h_map / 2 - scale * y];
 
   map_container
     .transition()
