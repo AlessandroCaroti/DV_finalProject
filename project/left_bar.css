@@ -120,6 +120,7 @@ ul#country_list {
 .country_option {
   cursor: pointer;
   padding: 6px;
+  user-select: none;
   -webkit-user-select: none;
   font-family: sans-serif;
 }
