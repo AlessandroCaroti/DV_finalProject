@@ -719,9 +719,7 @@ table {
   
   position: relative;
   left: 5%;
-  border-right: 1px solid lightgray;
-  padding-right: 12px;
-  padding-left: 12px;
+ 
 }
 
 .links_page:last-child{
@@ -729,12 +727,21 @@ table {
   border: none;
  
 }
+.links_page:after{
+  content:"";
+    position:absolute;
+    top:20%;
+    right:0;
+    width:1px;
+    height:60%;
+    background: lightgray;
+}
 
 .links_page a{
   
-  margin-top: 8px;
-
-
+  margin-top: 10px;
+  font-size: smaller;
+ 
 }
 
 .links_page:hover a{
