@@ -120,6 +120,7 @@ ul#country_list {
 .country_option {
   cursor: pointer;
   padding: 6px;
+  user-select: none;
   -webkit-user-select: none;
   font-family: sans-serif;
 }
@@ -127,4 +128,8 @@ ul#country_list {
 .country_option:hover {
   background-color: #3875d7;
   color: #fff;
+}
+
+.hide {
+  display: none;
 }
