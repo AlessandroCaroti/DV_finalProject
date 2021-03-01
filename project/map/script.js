@@ -208,7 +208,7 @@ function country_events() {
 
     // if is the same country the path is deselected
     if (!previous.empty() && previous.attr("id") == this.id &&  selected_country === b) {
-      $("#input_countrySelection").value = "";
+      d3.select("#input_countrySelection").attr("value", "");
       selected_country = null;
       return;
     }
@@ -222,7 +222,7 @@ function country_events() {
     );
 
     // set the name visible in the drop-down menu
-    $("#input_countrySelection").value = String(this.id);
+    d3.select("#input_countrySelection").attr("value", String(this.id));
 
     debug_log("CLICK ON " + this.id);
     country_selected(this.__data__);
