@@ -527,10 +527,10 @@ d3.selection.prototype.moveToFront = function () {
 function init_DropDownMenu_slect2() {
   d3.csv(countries_file)
     .then(function (countries) {
-      //data = [];
-
       countries.forEach((d) => {
-        country_list.push(d.Temp);
+        if(d.Temp != ""){
+          country_list.push(d.Temp);
+        }
         country_list_map.push(d.Map);
       });
 
