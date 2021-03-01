@@ -538,38 +538,6 @@ function init_DropDownMenu_slect2() {
       country_no_data = country_list_map.filter(
         (x) => !country_list.includes(x)
       );
-      
-      /* TODO: rimmuovere
-      $("#selectCountryMenu")
-        .select2({
-          placeholder: "Select an option",
-          data: country_list,
-          theme: "classic",
-          allowClear: true,
-        })
-        .on("select2:unselecting", function () {
-          $(this).data("unselecting", true);
-          changeAllData("Global Land");
-        })
-        .on("select2:opening", function (e) {
-          if ($(this).data("unselecting")) {
-            $(this).removeData("unselecting");
-            e.preventDefault();
-
-            reset_zoom();
-            d3.select(".selected_country").classed("selected_country", false);
-            selected_country = null;
-          }
-        })
-        .on("select2:select", function (e) {
-          var data = $(this).val(); // e.params.data.text;
-
-          // update charts
-          console.log(data);
-          changeCountry(data);
-          changeAllData(data);
-        });
-        */
     })
     .catch(function (error) {
       console.log(error);
