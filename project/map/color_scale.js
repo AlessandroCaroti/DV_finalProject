@@ -81,6 +81,13 @@ function set_colorScale(){
             .attr("width", rect_width)
             .attr("height", "15px")
             .style("fill", "#999999");
+      
+    axis.append("rect")
+            .attr("x", quantizeBarScale(max_scale) + 4 * rect_width)
+            .attr("y", "-10")
+            .attr("width", rect_width)
+            .attr("height", "15px")
+            .style("fill", "url(#diagonalHatch)");
     
             
     axis.append("g")
@@ -89,9 +96,19 @@ function set_colorScale(){
             .append("text")
             .attr("fill", "currentColor")
             .attr("y", "9")
-            .attr("x", "10")
+            .attr("x", "14")
             .attr("dy", "0.71em")
             .html("unknown");
+
+    axis.append("g")
+            .classed("tick", true)
+            .attr("transform", "translate(" + (width_legend + 4 * (width_legend / n_ticks)) + ", 0)")
+            .append("text")
+            .attr("fill", "currentColor")
+            .attr("y", "9")
+            .attr("x", "6")
+            .attr("dy", "0.71em")
+            .html("no data");
     
     // change axis style
     axis.selectAll(".tick").selectAll("text")

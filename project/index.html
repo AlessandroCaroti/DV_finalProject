@@ -282,6 +282,14 @@
           </svg>
           <svg width="100%" height="100%">
             <svg style="overflow: visible" x="50%">
+
+              <defs>
+                <pattern id="diagonalHatch" width="5" height="5" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+                  <rect width="5" height="5" style="fill:#999999;"></rect>
+                  <line x1="0" y1="0" x2="0" y2="10" style="stroke:black; stroke-width:1; " />
+                </pattern>
+              </defs>
+
               <g class="legend-anomaly" id="legend-anomaly" >
                 <text id="label-legend">Anomaly Temperature (°C)</text>
 
