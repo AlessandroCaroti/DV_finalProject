@@ -11,6 +11,10 @@ TO FIX:
 -mettere a posto il css principale
 -quando si deseleziona un paese, aggiornare nel modo corretto il pulsante entrale dello zoom
 
+PROBLEMI NEMU' COUNTRY:
+-gestire evento invio
+-cambiare la modalità di ricerca
+
 IDEE:
 -rioragnizzare tutto, dividendo la pagina in 2 parti. l'80% a destra viene occupato 
  da mappa e grafici, quello che ora è al centro. A sinistra,spostare la selezione del paese, 
