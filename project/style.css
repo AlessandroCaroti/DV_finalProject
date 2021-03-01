@@ -619,7 +619,8 @@ table {
 }
 
 .dropdown-navbar:hover a {
-  transition: 0.01s;
+  
+  transition:  0.01s;
   color: rgba(192, 192, 192, 0.3);
 }
 
@@ -703,8 +704,9 @@ table {
 
 #elem-logo-git{
   
-  margin-top: 0.8%;
+  
   position: absolute;
+  top:1.5%;
   right: 190px;
   width: 45px;
   height: 45px;
