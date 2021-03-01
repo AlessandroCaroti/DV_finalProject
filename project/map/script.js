@@ -19,7 +19,7 @@ var geoGenerator;
 
 var country_list_map = []; // List of the name of the countries present in the map
 var country_list = []; // list of countries with data
-var country_no_data; // list of countries with no associated data 
+var country_no_data; // list of countries with no associated data
 
 var selected_country = null;
 
@@ -33,9 +33,6 @@ countries_file = "../../data/15_countries_list.csv";
 // ******************************************************** //
 // ******************************************************** //
 //                START FUNCTION FOR THE MAP                //
-
-
-
 
 function drawMap(world) {
   debug_log("DRAW-MAP");
@@ -53,7 +50,7 @@ function drawMap(world) {
   drawGlobeBackground();
 
   // draw first level
-  drawLevel(world, 0)
+  drawLevel(world, 0);
 
   // Draw gridlines
   drawGridlines();
@@ -83,7 +80,6 @@ function drawGlobeBackground() {
     .attr("d", geoGenerator);
 }
 
-
 function update_colors(temperatures, time_trasition) {
   // define the transition
   var temp_transition = d3
@@ -93,28 +89,24 @@ function update_colors(temperatures, time_trasition) {
 
   // set new anomalies
   temperatures.forEach(function (d) {
-
-
     // TODO: update global anomaly label
 
     var element = document.getElementById(d.Country);
 
-    if(element == null)
-      return;
+    if (element == null) return;
 
     // find corresponding path in the other layers
-    var elements = map_container.selectAll("path.country")
-              .filter(function(d,i){
-                    return d3.select(this).attr("name") == d3.select(element).attr("name");
-              });
+    var elements = map_container
+      .selectAll("path.country")
+      .filter(function (d, i) {
+        return d3.select(this).attr("name") == d3.select(element).attr("name");
+      });
 
-    
-    elements.transition(temp_transition)
-                  .style("fill", colorScale(d["ANOMALY"]));
-
+    elements
+      .transition(temp_transition)
+      .style("fill", colorScale(d["ANOMALY"]));
 
     elements.attr("anomaly", d["ANOMALY"]);
-
 
     // update tooltip
     let tooltip = d3.select(".tooltip-map");
@@ -188,10 +180,9 @@ function country_events() {
             return parseFloat(d).toFixed(2) + " °C";
           }
 
-          if(country_no_data.includes(b.properties.name))
+          if (country_no_data.includes(b.properties.name))
             return "No Data Available";
-          else
-            return "unknown";
+          else return "unknown";
         });
     })
     .on("mousemove", function (event, b) {
@@ -203,9 +194,7 @@ function country_events() {
 
   //CLICK EVENT: on country
   map_container.selectAll(".country").on("click", function (event, b) {
-  
-    if(d3.select(this).classed("no_data"))
-      return;
+    if (d3.select(this).classed("no_data")) return;
 
     //deselect the previus country
     d3.select(".selected_country").style(
@@ -213,12 +202,13 @@ function country_events() {
       borderCountryScale(curr_zoomScale)
     );
 
-    let previous = d3.select(".selected_country").classed("selected_country", false);
-    
+    let previous = d3
+      .select(".selected_country")
+      .classed("selected_country", false);
+
     // if is the same country the path is deselected
-    if( !previous.empty() && previous.attr("id") == this.id && selected_country === b){
-      $("#selectCountryMenu").val(null);
-      $("#selectCountryMenu").trigger("change").trigger("select2:unselecting");
+    if (!previous.empty() && previous.attr("id") == this.id &&  selected_country === b) {
+      $("#input_countrySelection").value = "";
       selected_country = null;
       return;
     }
@@ -230,24 +220,18 @@ function country_events() {
       "stroke-width",
       borderCountryScale(curr_zoomScale) * selected_stroke
     );
-          
-    // set the name visible in the drop-down menu TODO
-    if($("#selectCountryMenu").val() != String(this.id)){
-      $("#selectCountryMenu").val(String(this.id));
-      $("#selectCountryMenu").trigger("change").trigger("select2:select");
-      return;
-    }
+
+    // set the name visible in the drop-down menu
+    $("#input_countrySelection").value = String(this.id);
 
     debug_log("CLICK ON " + this.id);
     country_selected(this.__data__);
-    
   });
 }
 
 function country_selected(country) {
   selected_country = country;
   zoom_in(selected_country);
-
 }
 
 //                 END FUNCTION FOR THE MAP                 //
@@ -259,7 +243,6 @@ var max_zoom = 8;
 var zoomIn_scale = 1.2,
   zoomOut_scale = 0.8,
   curr_zoomScale = 1;
-
 
 var zoom = d3
   .zoom()
@@ -283,8 +266,6 @@ var zoom = d3
 
     // change border width
     update_strokes();
-
-    
   })
   .on("end", function (event) {
     // show tooltip if hovering a country
@@ -293,7 +274,6 @@ var zoom = d3
     if (!cur_country.empty())
       d3.select(".tooltip-map").style("display", "block");
 
-    
     //shown new level
     let new_level = levelScale(curr_zoomScale);
     showLevel(new_level);
@@ -381,17 +361,13 @@ function update_strokes() {
 // ******************************************************** //
 //                    STRAT LEVELS SECTION                //
 
-
 // scale to select the level of details
-var levelScale = d3.scaleQuantize()
-  .domain([1, max_zoom])
-  .range([0, 1]); // only two levels
-
+var levelScale = d3.scaleQuantize().domain([1, max_zoom]).range([0, 1]); // only two levels
 
 function drawLevel(world, level) {
-
   // Draw the background (country outlines)
-  map_container.select("g#level_" + level)
+  map_container
+    .select("g#level_" + level)
     .classed("shown_level", level == 0 ? true : false)
     .classed("hidden_level", level == 0 ? false : true)
     .selectAll("path.country")
@@ -399,31 +375,28 @@ function drawLevel(world, level) {
     .enter()
     .append("path")
     .classed("country", true)
-    .classed("no_data", d => country_no_data.includes(d.properties.name))
+    .classed("no_data", (d) => country_no_data.includes(d.properties.name))
     .attr("id", (d) => {
-      if (level == 0)
-        return d.properties.name;
+      if (level == 0) return d.properties.name;
       return "";
     })
-    .attr("name", d => d.properties.name)
+    .attr("name", (d) => d.properties.name)
     .attr("d", geoGenerator);
 
-    // current level shown is 0
-    cur_level = 0;
+  // current level shown is 0
+  cur_level = 0;
 }
 
-
 function showLevel(level) {
-
   // do nothing if same level
-  if(level == cur_level)
-    return;
+  if (level == cur_level) return;
 
   // current level shown
   cur_level = level;
 
   // hide the others levels
-  map_container.select("g.shown_level")
+  map_container
+    .select("g.shown_level")
     .classed("shown_level", false)
     .classed("hidden_level", true)
     .selectAll("path.country")
@@ -433,21 +406,19 @@ function showLevel(level) {
     .style("opacity", 0);
 
   // display the level
-  map_container.select("g#level_" + level)
+  map_container
+    .select("g#level_" + level)
     .classed("shown_level", true)
     .classed("hidden_level", false)
     .selectAll("path.country")
     .each(function () {
-
       let elem = d3.select(this);
       elem.attr("id", elem.attr("name"));
-      
     })
     .raise()
     .transition()
     .duration(0)
     .style("opacity", 1);
-
 
   // create events on new elements+
   country_events();
@@ -455,27 +426,24 @@ function showLevel(level) {
   // update highlighted country path
   let highlighted = map_container.select(".selected_country");
 
-  if(highlighted.empty())
-    return;
-  
+  if (highlighted.empty()) return;
+
   highlighted.classed("selected_country", false);
 
-  let new_selected = document.getElementById(highlighted.attr("name"))
+  let new_selected = document.getElementById(highlighted.attr("name"));
 
   d3.select(new_selected)
-          .classed("selected_country", true)
-          .style("stroke-width", borderCountryScale(curr_zoomScale) * selected_stroke)
-          .raise();
+    .classed("selected_country", true)
+    .style("stroke-width", borderCountryScale(curr_zoomScale) * selected_stroke)
+    .raise();
 
   selected_country = new_selected.__data__;
 }
-
 
 //                      END LEVELS FUNCTIONS                //
 // ******************************************************** //
 // ******************************************************** //
 //                START FUNCTION MAP OVERLAY                //
-
 
 var initial_view = true;
 
@@ -533,9 +501,9 @@ function init_yearSpace() {
   var gap = 40,
     w_1 = bBox.width + gap * 2,
     w_2 = bBox.width,
-    x = -bBox.width/2 - gap;
-  
-  d3.select("#sliderLabel").attr("x", -bBox.width/2);
+    x = -bBox.width / 2 - gap;
+
+  d3.select("#sliderLabel").attr("x", -bBox.width / 2);
   d3.select("#year_svg")
     .select("path")
     .attr("d", roundedFigure_1(x, -1, w_1, w_2, 37))
@@ -567,9 +535,11 @@ function init_DropDownMenu_slect2() {
       });
 
       // finda path elements without data
-      country_no_data = country_list_map.filter( x => !country_list.includes(x))
-
-
+      country_no_data = country_list_map.filter(
+        (x) => !country_list.includes(x)
+      );
+      
+      /* TODO: rimmuovere
       $("#selectCountryMenu")
         .select2({
           placeholder: "Select an option",
@@ -580,7 +550,6 @@ function init_DropDownMenu_slect2() {
         .on("select2:unselecting", function () {
           $(this).data("unselecting", true);
           changeAllData("Global Land");
-
         })
         .on("select2:opening", function (e) {
           if ($(this).data("unselecting")) {
@@ -593,14 +562,14 @@ function init_DropDownMenu_slect2() {
           }
         })
         .on("select2:select", function (e) {
-                  
           var data = $(this).val(); // e.params.data.text;
-          
+
           // update charts
           console.log(data);
           changeCountry(data);
           changeAllData(data);
         });
+        */
     })
     .catch(function (error) {
       console.log(error);
@@ -665,15 +634,12 @@ function load_map() {
 
       drawLevel(topology, 1);
 
-      load_tempYear("2020",
-        default_transition
-      );
+      load_tempYear("2020", default_transition);
 
       // number of levels
       n_levels = 2;
 
       $("body").addClass("loaded");
-
     })
     .catch((error) => {
       console.log(error);
@@ -685,4 +651,3 @@ function load_map() {
 // ****************************************************** //
 // ****************************************************** //
 //                   DOVE INIZIA TUTTO                    //
-
