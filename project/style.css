@@ -618,8 +618,10 @@ table {
 
 }
 
-.dropdown-navbar:hover a{
-  color: rgba(192, 192, 192, 0.3);;
+.dropdown-navbar:hover a {
+  
+  /*color: rgba(192, 192, 192, 0.3);*/
+  filter: hue-rotate(0deg) saturate(0%) brightness(75%) opacity(30%);
 }
 
 
