@@ -213,6 +213,7 @@ function country_events() {
     if (!previous.empty() && previous.attr("id") == this.id &&  selected_country === b) {
       d3.select("#input_countrySelection").attr("value", "");
       selected_country = null;
+      set_globe_icon();
       return;
     }
 
