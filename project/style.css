@@ -718,15 +718,11 @@ table {
 .links_page{
   
   position: relative;
-  left: 5%;
+  left: 10%;
  
 }
 
-.links_page:last-child{
-  
-  border: none;
- 
-}
+
 .links_page:after{
   content:"";
     position:absolute;
@@ -735,6 +731,11 @@ table {
     width:1px;
     height:60%;
     background: lightgray;
+}
+
+.links_page:last-child:after{
+  
+    opacity: 0%;
 }
 
 .links_page a{
