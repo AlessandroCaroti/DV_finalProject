@@ -28,11 +28,10 @@ DA DISCUTERE:
 -su Hottest Coldest Linechart la linea selezionata farla andare sopra a tutte le altre DONE
 -aggiungere lo zoom sul grafico sotto le stripe
 -ridurre l'altezza delle righe della tabella per renderla + compatta
--fare le stripe meno alte
 -rendere interagibile il menù anche durante l'animazione, per lo meno il cambio della velocità
 
 DA CHIEDERE:
--l'incertezza per la mappa viene usata?
+-l'incertezza per la mappa viene usata? nope
 
 ------------------------------------------------------------------------------------
 Presentazione progetto:
