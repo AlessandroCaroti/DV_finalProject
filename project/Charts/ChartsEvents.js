@@ -131,7 +131,6 @@ function drawTooltipSeasonal(tipBox, event,x, data, tooltipLine, lastYearsData )
 
   const date = x.invert(d3.pointer(event, tipBox.node())[0] );
 
-  console.log(date.getMonth());
   //find the element of the corresponding month
   var elem = data.find((d) => (d.month -1 == date.getMonth() + 1 && date.getDate() >= 15) || (d.month -1 == date.getMonth() && date.getDate() < 15) || ( date.getDate() >= 15  && date.getMonth() == 11 && d.month  == 1));
 
