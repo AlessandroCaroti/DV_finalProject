@@ -15,6 +15,11 @@ input_source.addEventListener("blur", async function () {
   await new Promise((r) => setTimeout(r, 100));
   selectionCountry_list.selectAll("li").remove();
 });
+input_source.addEventListener("keyup", function (event) {
+  if (event.key === "Enter") {
+    console.log("ENTER")
+  }
+});
 
 function hide_options() {
   selectionCountry_list.selectAll("li").remove();
