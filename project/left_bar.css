@@ -157,6 +157,10 @@ ul#country_list {
   color: #fff;
 }
 
+.center {
+  margin: auto;
+}
+
 /*-------------------------------------------------------------*/
 /* DATA AVERAGE SELECTION STYLE */
 .btn-group {
@@ -228,13 +232,14 @@ ul#country_list {
   color: #C15A4F;
 }
 
-#change_value {/*
-  font-size: 2.1em;
+#change_value {
+  font-size: 38px;
   font-weight: 300;
-  font-family: Helvetica, Arial, sans-serif;*/
+  letter-spacing: -2px;
+  font-family: Helvetica, Arial, sans-serif;
   display: inline-block;
   vertical-align: top;
-  margin-top: -8px;
+  margin-top: -6px;
   box-sizing: border-box;
 }
 
