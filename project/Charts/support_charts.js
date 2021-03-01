@@ -42,12 +42,12 @@ function make_y_gridlines(y, n_tick = 8) {
 
 function allDeafaultDataset() {
   var folder;
-  var dataFile = document.getElementById("selectCountryMenu").value;
+  var dataFile = document.getElementById("input_countrySelection").value;
   if (dataFile == "") {
     dataFile = "Global Land";
     folder = "regions";
   } else folder = "counties";
-  //initBaselineAndInfo(dataFile, true);
+  //initBaselineAndInfo(dataFile, true);input_countrySelection
   var csv = "/../../data/" + folder + "/" + dataFile + "/" + dataFile +"_anomalyTable.csv";
   var json = "/../../data/" + folder + "/" + dataFile + "/" + dataFile + "_info.json";
   var csvBaseline = "/../../data/"+folder+"/" + dataFile + "/" + dataFile+"_monthlyAbsoluteTemperature.csv";

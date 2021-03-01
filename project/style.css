@@ -755,14 +755,20 @@ html {
 
 #btn-back-top{
   position: fixed;
-  background: transparent;
   width: 45px;
   height: 45px;
   right: 1%;
   margin-top: -2%;
   z-index: 99;
   display: none;
- 
+  cursor:pointer;
+}
 
+#btn-back-top circle{
+  fill: rgb(202, 202, 202, 0.3);
+}
+
+#btn-back-top circle:hover{
+  fill: rgb(202, 202, 202, 0.9);
 }
 

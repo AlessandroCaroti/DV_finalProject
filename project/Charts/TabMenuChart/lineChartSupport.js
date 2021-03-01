@@ -4,7 +4,7 @@
 
 function changeDataRangeYears() {
  
-    var dataFile = document.getElementById("selectCountryMenu").value
+    var dataFile = document.getElementById("input_countrySelection").value
     var folder;
   
     
