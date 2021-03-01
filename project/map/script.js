@@ -38,7 +38,10 @@ function drawMap(world) {
   debug_log("DRAW-MAP");
 
   svg = d3.select("#svg-map").attr("height", h_map);
+  svg_bBox = document.getElementById("sliderLabel").getBBox();
   map_container = svg.select("#map").call(zoom);
+
+  w_map = svg_bBox.width
 
   projection = d3
     .geoNaturalEarth1()
