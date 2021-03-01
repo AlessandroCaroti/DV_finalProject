@@ -716,10 +716,25 @@ table {
 
 
 .links_page{
+  
+  position: relative;
+  left: 5%;
+  border-right: 1px solid lightgray;
+  padding-right: 12px;
+  padding-left: 12px;
+}
 
-  position: absolute;
-  top: 10px;
-  left: 7%;
+.links_page:last-child{
+  
+  border: none;
+ 
+}
+
+.links_page a{
+  
+  margin-top: 8px;
+
+
 }
 
 .links_page:hover a{
