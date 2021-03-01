@@ -83,7 +83,7 @@ function set_colorScale(){
             .style("fill", "#999999");
       
     axis.append("rect")
-            .attr("x", quantizeBarScale(max_scale) + 4 * rect_width)
+            .attr("x", quantizeBarScale(max_scale) + 7 * rect_width/2)
             .attr("y", "-10")
             .attr("width", rect_width)
             .attr("height", "15px")
@@ -102,11 +102,11 @@ function set_colorScale(){
 
     axis.append("g")
             .classed("tick", true)
-            .attr("transform", "translate(" + (width_legend + 4 * (width_legend / n_ticks)) + ", 0)")
+            .attr("transform", "translate(" + (width_legend + 7 * (width_legend / n_ticks)/2) + ", 0)")
             .append("text")
             .attr("fill", "currentColor")
             .attr("y", "9")
-            .attr("x", "6")
+            .attr("x", "9")
             .attr("dy", "0.71em")
             .html("no data");
     
