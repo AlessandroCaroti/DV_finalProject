@@ -618,8 +618,9 @@ table {
 
 }
 
-.dropdown-navbar:hover a{
-  color: rgba(192, 192, 192, 0.3);;
+.dropdown-navbar:hover a {
+  transition: 0.01s;
+  color: rgba(192, 192, 192, 0.3);
 }
 
 
@@ -628,7 +629,7 @@ table {
   bottom: 38%;
 }
 .dropdown-navbar:hover #bracket_drop_nav{
-
+  transition:  0.01s;
   filter: hue-rotate(0deg) saturate(0%) brightness(75%) opacity(30%);
 }
 
