@@ -135,6 +135,10 @@ function update_colors(temperatures, time_trasition) {
 function country_events() {
   //MOUSE-OVER EVENT: highlighted country when the mouse is over
   map_container.selectAll(".country").on("mouseenter", function () {
+
+    // if no data, no highlighted
+    if (d3.select(this).classed("no_data")) return;
+
     d3.select(this)
       .raise()
       .classed("highlighted_country", true)
@@ -197,6 +201,8 @@ function country_events() {
 
   //CLICK EVENT: on country
   map_container.selectAll(".country").on("click", function (event, b) {
+
+    // if no data, not selected
     if (d3.select(this).classed("no_data")) return;
 
     //deselect the previus country
