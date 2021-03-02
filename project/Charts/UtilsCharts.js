@@ -90,7 +90,7 @@ function updateRangeNameLegend(svg) {
   d3.select(".legend").remove();
   createLineChartLegend(svg, btn);
 
-  if (btn.value == "annual" && !isAnnual) {
+  if (btn.value == "annual") {
 
     d3.select("#legend-annual-line").remove();
     d3.select("#legend-annual-text").remove();
