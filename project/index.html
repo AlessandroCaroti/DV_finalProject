@@ -113,15 +113,15 @@
     <div id="selectionCountry_countainer" class="border_bottom py_1">
       <h2>Country:</h2>
       <div id="input_container" class="py_3">
-        <form id="form_selectCountry" action="">
+        <form id="form_selectCountry">
           <input id="input_countrySelection" 
               autocomplete="off" 
               value="" 
               placeholder="Select a country..."
-              onfocus="showAllData()"
+              onfocus="this.select();showAllData()"
               spellcheck="false"
               type="text">
-          <button id="reset_countrySelection" type="button" onclick="reset_and_hide()">x</button>
+          <button id="reset_countrySelection" type="button" onclick="this.blur();reset_and_hide();">x</button>
         </form>
       </div>
       <div id="country_list_conteiner">
