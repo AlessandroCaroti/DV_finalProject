@@ -2,11 +2,14 @@ const input_source = document.getElementById("input_countrySelection");
 const selectionCountry_list = d3.select("#country_list");
 
 const inputHandler = function (e) {
-  console.log("INPUT_CHANGE");
+  /*
   metches = stringSimilarity.findBestMatch(e.target.value, country_list);
   best = metches.ratings.sort((a, b) => b.rating - a.rating).slice(0, 10);
 
   update_otionsCountry(best.map((x) => x.target));
+  */
+  metches = find_matches(e.target.value, country_list);
+  update_otionsCountry(metches);
 };
 
 input_source.addEventListener("input", inputHandler);
@@ -16,7 +19,7 @@ input_source.addEventListener("blur", async function () {
 });
 input_source.addEventListener("keyup", function (event) {
   if (event.key === "Enter") {
-    console.log("ENTER")
+    console.log("ENTER");
   }
 });
 
@@ -66,4 +69,15 @@ function update_otionsCountry(options) {
       changeAllData(this.id);
     })
     .html((d) => d);
+}
+
+function find_matches(string, list_of_sting) {
+  let d = [];
+  string = string.toLowerCase();
+  list_of_sting.forEach((el) => {
+    if ((el.toLowerCase()).includes(string)) {
+      d.push(el);
+    }
+  });
+  return d;
 }
