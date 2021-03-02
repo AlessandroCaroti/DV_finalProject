@@ -11,6 +11,7 @@ TO FIX:
 
 PROBLEMI NEMU' SELEZIONE COUNTRY:
 -se c'è un paese selezionato nel menu e provo a digitare un'altro nome non mette i suggeriti
+-se si usa il tasto invio, non so per quale motivo parte pure l'evento su click
 
 IDEE:
 
