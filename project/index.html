@@ -159,6 +159,7 @@
       </div>
     </div>
 
+    
     <div class="range-years-buttons-container">
       <input class="checkbox-range" type="radio" name="btn-range-year" value="annual" id="btn_annual"
         onclick="changeDataRangeYears()" />
@@ -175,7 +176,8 @@
       <input class="checkbox-range" type="radio" name="btn-range-year" value="twenty_years" id="btn_twenty"
         onclick="changeDataRangeYears()" />
       <label id="label-btn_twenty" for="btn_twenty">20-Years</label>
-    </div>    
+    </div>   
+  
   </div>
 
   <!-- MAIN PAGE -->
@@ -364,6 +366,11 @@
 
       <div id="seasonal_changes_graphic" class="chart-container">
         <h2 id="title-seasonal" class="title-chart">Seasonal Changes</h2>
+        <svg>
+          <g class="chart">
+            <g class="y_axis_seasonal"></g>
+          </g>
+        </svg>
         <div class="tooltip-map" id="tooltip-seasonal-changes"></div>
         <hr />
       <!------------------------------END SEASONAL LINECHART------------------------------------------->
