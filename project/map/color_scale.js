@@ -16,7 +16,7 @@ function set_colorScale(){
    
     let step = (max_scale - min_scale)/parseFloat(n_ticks);
     // color quantization
-    step_color_list = d3.range(min_scale, max_scale + step, step).map(d => colorBase(parseFloat(d.toFixed(2)) ));
+    step_color_list = d3.range(min_scale, max_scale + step, step).map(d => colorBase(parseFloat(d.toFixed(1)) ));
 
     colorScale = d3.scaleQuantize()
                         .domain([min_scale, max_scale])

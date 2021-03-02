@@ -68,13 +68,26 @@ function createDefaultStripesChart(data){
     var x = scales[0];
     var y = scales[1];
 
+
     
     var svg = d3.select("#stripechart")
                 .append("svg")
                 .attr("width", width_stripe + margin_stripes.left + margin_stripes.right)
                 .attr("height", height_stripe + margin_stripes.top + margin_stripes.bottom)
                 .append("g")
-                .attr("transform", "translate(" + margin_stripes.left + "," + margin_stripes.top + ")")
+                .attr("transform", "translate(" + margin_stripes.left + "," + margin_stripes.top + ")");
+
+    // add axis
+
+    let stripe_axis = d3.axisBottom()
+                        .scale(x)
+                        .tickFormat(d3.format(".0f"));
+
+    svg.append("g")
+    .attr("transform", "translate(0," + y(0.8) + ")")
+    //.attr("class", "x_axis")
+    .call(stripe_axis)
+    .select(".domain").remove();
     
     var stripe_width = (width_stripe / data_annnual.length)+2;
     
