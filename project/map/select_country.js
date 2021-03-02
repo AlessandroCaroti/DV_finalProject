@@ -45,8 +45,6 @@ const keydownHandlwe = function (event) {
     }
   } else if (event.key === "Escape") {
     hide_options();
-  } else {
-    console.log(event.key);
   }
 }
 
