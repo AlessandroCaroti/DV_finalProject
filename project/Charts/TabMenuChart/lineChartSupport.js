@@ -303,7 +303,6 @@ function updateLineChart(data, grafic_class){
     var y =  scales[1]
     
     
-    
     //.graphics
     var svg = d3.select(grafic_class);
     //updateGrid("#linechart", x, y,svg, 12, 10);
