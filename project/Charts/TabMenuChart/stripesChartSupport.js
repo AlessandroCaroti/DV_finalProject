@@ -81,6 +81,7 @@ function createDefaultStripesChart(data){
 
     let stripe_axis = d3.axisBottom()
                         .scale(x)
+                        .ticks(6)
                         .tickFormat(d3.format(".0f"));
 
     svg.append("g")
