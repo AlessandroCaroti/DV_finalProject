@@ -3,6 +3,12 @@ const selectionCountry_list = d3.select("#country_list");
 var curr_over = null;
 var k = 0;
 
+input_source.addEventListener("input", inputHandler);
+input_source.addEventListener("blur", blurHandler);
+input_source.addEventListener("keydown", keydownHandlwe);
+
+
+// EVENT HANDLERS
 const inputHandler = function (e) {
   metches = find_matches(e.target.value, country_list);
   update_otionsCountry(metches);
@@ -14,9 +20,7 @@ const blurHandler = async function () {
   selectionCountry_list.selectAll("li").remove();
 };
 
-input_source.addEventListener("input", inputHandler);
-input_source.addEventListener("blur", blurHandler);
-input_source.addEventListener("keydown", function (event) {
+const keydownHandlwe = function (event) {
   if (event.key === "Enter") {
     update_mainPage(curr_over.id);
     hide_options();
@@ -25,6 +29,8 @@ input_source.addEventListener("keydown", function (event) {
       d3.select(curr_over).classed("country_option_over", false);
       curr_over = curr_over.nextElementSibling;
       d3.select(curr_over).classed("country_option_over", true);
+
+      //scroll if outside the view box
       if (curr_over.getBoundingClientRect().y > 285) {
         k += curr_over.getBoundingClientRect().y - 285;
         document.getElementById("country_list_conteiner").scroll(0, k);
@@ -35,6 +41,8 @@ input_source.addEventListener("keydown", function (event) {
       d3.select(curr_over).classed("country_option_over", false);
       curr_over = curr_over.previousElementSibling;
       d3.select(curr_over).classed("country_option_over", true);
+      
+      //scroll if outside the view box
       if (curr_over.getBoundingClientRect().y < 163) {
         k += curr_over.getBoundingClientRect().y - 163;
         document.getElementById("country_list_conteiner").scroll(0, k);
@@ -45,7 +53,7 @@ input_source.addEventListener("keydown", function (event) {
   } else {
     console.log(event.key);
   }
-});
+}
 
 function hide_options() {
   selectionCountry_list.selectAll("li").remove();
