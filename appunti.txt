@@ -10,6 +10,7 @@ TO FIX:
 -menù laterale a sx, fare in modo che rimanga sempre attacato incima
 
 PROBLEMI NEMU' SELEZIONE COUNTRY:
+-se c'è un paese selezionato nel menu e provo a digitare un'altro nome non mette i suggeriti
 
 IDEE:
 
