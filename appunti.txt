@@ -15,7 +15,7 @@ IDEE:
 DA DISCUTERE:
 -nel grafico Hottest Coldest Linechart se tenere l'hover sulle linee grige
 -aggiungere lo zoom sul grafico sotto le stripe
--rendere interagibile il menù anche durante l'animazione, per lo meno il cambio della velocità
+-rendere interagibile il menù_mappa durante l'animazione, per lo meno il cambio della velocità
 -discutere come caricare i file, e se vale la pena salvarseli
 
 DA CHIEDERE:
