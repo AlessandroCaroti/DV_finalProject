@@ -346,7 +346,7 @@ var borderCountryScale = d3
   .domain([1, max_zoom])
   .range([0.5, 0.2]);
 
-var widthGridScale = d3.scaleLinear().domain([1, max_zoom]).range([0.3, 0.2]);
+var widthGridScale = d3.scaleLinear().domain([1, max_zoom]).range([0.2, 0.05]);
 
 function update_strokes() {
   var new_strokeWidth = borderCountryScale(curr_zoomScale);
@@ -356,7 +356,7 @@ function update_strokes() {
     .style("stroke-width", new_strokeWidth);
 
   //update gridline
-  map_container.selectAll("path.grat_2").style("stroke-width", new_strokeWidth);
+  map_container.selectAll("path.grat_2").style("stroke-width", widthGridScale(curr_zoomScale));
 
   //update over
   map_container

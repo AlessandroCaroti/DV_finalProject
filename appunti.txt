@@ -10,7 +10,6 @@ TO FIX:
 -rendere non interagibile le cose inutili, come il testo degli anni sotto lo slider
 -mettere a posto il css principale
 -menù laterale a sx, fare in modo che rimanga sempre attacato incima
--la minchia di roba che va sopra l'asse nel Seasonal change
 
 PROBLEMI NEMU' COUNTRY:
 -gestire evento invio

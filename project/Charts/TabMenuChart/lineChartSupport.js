@@ -169,7 +169,10 @@ function getLineGenerators(x, y){
 
 function getCheckedValue( groupName ) {
   var radios = document.getElementsByName( groupName );
+
+  //console.log(radios);
   for( i = 0; i < radios.length; i++ ) {
+      
       if( radios[i].checked ) {
           return radios[i];
       }
