@@ -2,6 +2,7 @@ TO DO:
 -cambiare il cursore sullo slider
 -completare il menù della mappa
 -aggiungere al menù mappa l'oprione di cambiare lo zoom massimo
+-aggiungere per la mappa i file per 5, 10, 20 anni e gestirene il caricamento
 
 TO FIX:
 -rendere non interagibile le cose inutili, come il testo degli anni sotto lo slider
