@@ -1,25 +1,23 @@
 TO DO:
--discutere come caricare i file
 -cambiare il cursore sullo slider
--salvarsi i csv quando caricati in modo da non doverli ricaricare se selezionati più volte
 -completare il menù della mappa
-
+-aggiungere al menù mappa l'oprione di cambiare lo zoom massimo
+-aggiungere per la mappa i file per 5, 10, 20 anni e gestirene il caricamento
 
 TO FIX:
 -rendere non interagibile le cose inutili, come il testo degli anni sotto lo slider
 -mettere a posto il css principale
 -menù laterale a sx, fare in modo che rimanga sempre attacato incima
 
-PROBLEMI NEMU' COUNTRY:
+PROBLEMI NEMU' SELEZIONE COUNTRY:
 
 IDEE:
 
-
 DA DISCUTERE:
--fare in modo che la mappa occupi tutta la larghezza della schermo
 -nel grafico Hottest Coldest Linechart se tenere l'hover sulle linee grige
 -aggiungere lo zoom sul grafico sotto le stripe
--rendere interagibile il menù anche durante l'animazione, per lo meno il cambio della velocità
+-rendere interagibile il menù_mappa durante l'animazione, per lo meno il cambio della velocità
+-discutere come caricare i file, e se vale la pena salvarseli
 
 DA CHIEDERE:
 -l'incertezza per la mappa viene usata? nope
