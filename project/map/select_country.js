@@ -4,12 +4,6 @@ var curr_over = null;
 var k = 0;
 
 const inputHandler = function (e) {
-  /*
-  metches = stringSimilarity.findBestMatch(e.target.value, country_list);
-  best = metches.ratings.sort((a, b) => b.rating - a.rating).slice(0, 10);
-
-  update_otionsCountry(best.map((x) => x.target));
-  */
   metches = find_matches(e.target.value, country_list);
   update_otionsCountry(metches);
 };
@@ -101,7 +95,11 @@ function update_otionsCountry(options) {
       d3.select(curr_over).classed("country_option_over", true);
     })
     .html((d) => d);
-
+  
+  //Set the selected to the 1° one
+  if (curr_over != null){
+    d3.select(curr_over).classed("country_option_over", false);
+  }
   selectionCountry_list
     .select("#" + options[0])
     .classed("country_option_over", true);
@@ -118,6 +116,7 @@ function find_matches(string, list_of_sting) {
   });
   return d;
 }
+
 function update_mainPage(new_country) {
   // update charts
   console.log(new_country);
