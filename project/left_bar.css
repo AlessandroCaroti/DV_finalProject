@@ -151,7 +151,7 @@ ul#country_list {
   font-family: sans-serif;
 }
 
-.country_option:hover {
+.country_option_over {
   background-color: #3875d7;
   color: #fff;
 }
