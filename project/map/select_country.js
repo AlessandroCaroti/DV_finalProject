@@ -3,11 +3,6 @@ const selectionCountry_list = d3.select("#country_list");
 var curr_over = null;
 var k = 0;
 
-input_source.addEventListener("input", inputHandler);
-input_source.addEventListener("blur", blurHandler);
-input_source.addEventListener("keydown", keydownHandlwe);
-
-
 // EVENT HANDLERS
 const inputHandler = function (e) {
   metches = find_matches(e.target.value, country_list);
@@ -54,6 +49,10 @@ const keydownHandlwe = function (event) {
     console.log(event.key);
   }
 }
+
+input_source.addEventListener("input", inputHandler);
+input_source.addEventListener("blur", blurHandler);
+input_source.addEventListener("keydown", keydownHandlwe);
 
 function hide_options() {
   selectionCountry_list.selectAll("li").remove();
