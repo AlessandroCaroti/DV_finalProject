@@ -162,14 +162,28 @@ ul#country_list {
 
 /*-------------------------------------------------------------*/
 /* DATA AVERAGE SELECTION STYLE */
-.btn-group {
-  padding: 0px 4px;
+
+.range-years-buttons-container {
+  padding: 0 25px;
+
+  width: 250px;
 }
 
-.btn-group button {
+.range-years-buttons-container:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.range-years-buttons-container input {
+  visibility: hidden;
+}
+
+.range-years-buttons-container input[type="radio"] + label {
   background-color: #fafbfc; /* background */
   border: 1px solid #1b1f2326; /* border */
-  padding: 5px 16px; /* Some padding */
+  padding: 8px 13px; /* Some padding */
+
   cursor: pointer; /* Pointer/hand icon */
   float: left; /* Float the buttons side by side */
   line-height: 20px;
@@ -178,6 +192,69 @@ ul#country_list {
     sans-serif, Apple Color Emoji, Segoe UI Emoji !important;
 
   color: #070663; /*rgb(3, 102, 214); /* White text */
+  font-size: 18px;
+  text-align: center;
+  text-size-adjust: 100%;
+  text-decoration-line: none;
+  text-decoration-style: solid;
+  font-weight: 600;
+  white-space: nowrap;
+  width: 63px;
+  height: 25px;
+  
+}
+
+input[type="radio"] {
+  margin-top: 0;
+
+}
+input[type="radio"] {
+  margin-bottom: 0;
+}
+
+
+
+.range-years-buttons-container input[type="radio"]:checked + label {
+  background-color: rgba(192, 192, 192, 0.8);
+  color: black;
+}
+
+.range-years-buttons-container input[type="radio"] + label:hover {
+  background-color: rgba(192, 192, 192, 0.8);
+  color: black;
+}
+
+#label-btn_annual{
+  border-bottom-color: rgba(0, 0, 0, 0);
+  border-right-color: rgba(0, 0, 0, 0);
+ 
+}
+#label-btn_twenty{
+
+  border-top-color: rgba(0, 0, 0, 0);
+}
+#label-btn_ten{
+  border-right-color: rgba(0, 0, 0, 0);
+}
+
+
+/*
+.btn-group {
+  padding: 0px 4px;
+}
+
+.btn-group button {
+  background-color: #fafbfc; /* background 
+  border: 1px solid #1b1f2326; /* border 
+  padding: 5px 16px; /* Some padding 
+  cursor: pointer; /* Pointer/hand icon 
+  float: left; /* Float the buttons side by side 
+  line-height: 20px;
+  
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
+    sans-serif, Apple Color Emoji, Segoe UI Emoji !important;
+
+  color: #070663; /*rgb(3, 102, 214); /* White text 
   font-size: 18px;
   text-align: center;
   text-size-adjust: 100%;
@@ -194,17 +271,19 @@ ul#country_list {
   border-right: none;
 }
 
-/* Clear floats (clearfix hack) */
+/* Clear floats (clearfix hack) 
 .btn-group:after {
   content: "";
   clear: both;
   display: table;
 }
 
-/* Add a background color on hover */
+/* Add a background color on hover 
 .btn-group button:hover {
   background-color: #f300cb;
 }
+
+*/
 
 /*--------------------------------------------------------------*/
 

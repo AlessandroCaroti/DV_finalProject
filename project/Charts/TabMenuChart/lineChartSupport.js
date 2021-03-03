@@ -147,6 +147,7 @@ function getScales(data){
 function getLineGenerators(x, y){
     
    var range_year = getCheckedValue("btn-range-year").value;
+   
 
     var valueline_annual = d3.line()
                             .x(function(d) {  return x(d.date); })
@@ -169,8 +170,7 @@ function getLineGenerators(x, y){
 
 function getCheckedValue( groupName ) {
   var radios = document.getElementsByName( groupName );
-
-  //console.log(radios);
+  
   for( i = 0; i < radios.length; i++ ) {
       
       if( radios[i].checked ) {

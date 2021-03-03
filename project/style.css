@@ -248,34 +248,9 @@ text#label-legend {
   margin: auto;
   margin-top: 3%;
 }
-.range-years-buttons-container {
-  margin-top: 8%;
-}
 
-.range-years-buttons-container input {
-  visibility: hidden;
-}
 
-.range-years-buttons-container input[type="radio"] + label {
-  display: inline-block;
-  width: 110px;
-  height: auto;
-  border-radius: 10px;
-  padding: 15px;
-  border: 1px solid black;
-  text-align: center;
-  font-weight: bold;
-}
 
-.range-years-buttons-container input[type="radio"]:checked + label {
-  background-color: rgba(192, 192, 192, 0.8);
-  color: black;
-}
-
-.range-years-buttons-container input[type="radio"] + label:hover {
-  background-color: rgba(192, 192, 192, 0.8);
-  color: black;
-}
 
 .title-chart {
   /*margin-left: 30%;*/
