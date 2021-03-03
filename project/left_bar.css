@@ -10,7 +10,7 @@
 }
 
 .py_1 {
-  padding-top: 5px;
+  padding-top: 80px;
   padding-bottom: 10px;
   margin-bottom: 8px;
 }
@@ -182,7 +182,7 @@ ul#country_list {
 .range-years-buttons-container input[type="radio"] + label {
   background-color: #fafbfc; /* background */
   border: 1px solid #1b1f2326; /* border */
-  padding: 8px 13px; /* Some padding */
+  padding: 8px 18px; /* Some padding */
 
   cursor: pointer; /* Pointer/hand icon */
   float: left; /* Float the buttons side by side */

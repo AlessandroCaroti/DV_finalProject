@@ -303,17 +303,9 @@ h3 {
   stroke: none;
 }
 
-/*#stripechart{
-
- margin-left: 4%;
- margin-top: 3%;
- height: 120px;
-
-}*/
 
 /* -----------------------------END CHART STYLE--------------------------------------*/
 
-/*Dropdown menu -> to remove at the end, only for testing*/
 
 /*--------------- LEGEND STYLE -------------------------------------------*/
 
@@ -425,7 +417,6 @@ table {
 }
 
 #table_container h2 {
-  /*margin-left: 5%;*/
   text-align: center;
 }
 
@@ -541,9 +532,12 @@ table {
 /*---------------------------------------------------------NAVIGATION PANEL STYLE-----------------------------------------------------------*/
 
 .navbar{
+  
   width: 100%;
   height: 72px;
   overflow:hidden;
+  position: absolute;
+  z-index: 99;
 }
 
 .navbar ul{
@@ -562,6 +556,8 @@ table {
   position: relative;
   float: left;
   height: 100%;
+  width: max-content;
+  min-width: 3%;
 }
 
 .navbar ul li a{
@@ -615,12 +611,10 @@ table {
 
 
 #contributors-drop{
-
   margin-left: 30px;
-  width: 180px;
+  width: 150px;
   height: 72px;
   position: absolute ;
-  /*right: 0.5%;*/
   left: 89%
 }
 
@@ -631,9 +625,8 @@ table {
 }
 
 
-
 #contributors-div{
-  width: 180px;
+  width: 165px;
   height: 160px;
   display: none;
   position: absolute;
@@ -657,7 +650,6 @@ table {
 
 #contributors-div ul li a{
   color:black;
- 
   width: 138px;
   font-size: 14px;
 
@@ -676,21 +668,18 @@ table {
 
 }
 
-#logo-git{
-  display: inline;
-
-}
 
 #elem-logo-git{
-  
-  
-  position: absolute;
-  top:1.5%;
-  left: 89%;
+
+  position: relative;
+  float: right;
+  right: 9%;
+  bottom: -16%;
   width: 45px;
   height: 45px;
   border-radius: 100%;
 }
+
 
 #elem-logo-git:hover {
   filter: hue-rotate(0deg) saturate(0%) brightness(75%) opacity(30%);
@@ -699,9 +688,9 @@ table {
 
 .links_page{
   
-  position: relative;
-  left: 10%;
- 
+ position: relative;
+ left: 10%;
+
 }
 
 
@@ -716,7 +705,6 @@ table {
 }
 
 .links_page:last-child:after{
-  
     opacity: 0%;
 }
 
@@ -740,7 +728,7 @@ html {
   width: 45px;
   height: 45px;
   right: 1%;
-  margin-top: -2%;
+  margin-top: 1%;
   z-index: 99;
   display: none;
   cursor:pointer;
