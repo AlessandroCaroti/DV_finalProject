@@ -158,6 +158,10 @@ ul#country_list {
 
 .center {
   margin: auto;
+  text-align: center;
+  align-items: center;
+  align-self: center;
+  align-content: center;
 }
 
 /*-------------------------------------------------------------*/
@@ -237,54 +241,6 @@ input[type="radio"] {
   border-right-color: rgba(0, 0, 0, 0);
 }
 
-
-/*
-.btn-group {
-  padding: 0px 4px;
-}
-
-.btn-group button {
-  background-color: #fafbfc; /* background 
-  border: 1px solid #1b1f2326; /* border 
-  padding: 5px 16px; /* Some padding 
-  cursor: pointer; /* Pointer/hand icon 
-  float: left; /* Float the buttons side by side 
-  line-height: 20px;
-  
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
-    sans-serif, Apple Color Emoji, Segoe UI Emoji !important;
-
-  color: #070663; /*rgb(3, 102, 214); /* White text 
-  font-size: 18px;
-  text-align: center;
-  text-size-adjust: 100%;
-  text-decoration-line: none;
-  text-decoration-style: solid;
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-.btn-group.top_btn {
-  border-bottom: none;
-}
-.btn-group.left_btn {
-  border-right: none;
-}
-
-/* Clear floats (clearfix hack) 
-.btn-group:after {
-  content: "";
-  clear: both;
-  display: table;
-}
-
-/* Add a background color on hover 
-.btn-group button:hover {
-  background-color: #f300cb;
-}
-
-*/
-
 /*--------------------------------------------------------------*/
 
 .rate_of_change {
@@ -328,4 +284,8 @@ input[type="radio"] {
   white-space: normal;
   font-size: 0.8em;
   padding-left: 5px;
+}
+
+.description_container{
+  padding-bottom: 5px;
 }
