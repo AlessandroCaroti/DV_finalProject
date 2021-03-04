@@ -68,9 +68,9 @@ function init_slider(min, max, step) {
   d3.select("#sliderYear")
     .on("mousewheel", function (event) {
 
+      event.preventDefault();
       event.stopPropagation();
-
-      // da gestire in modo diverso, col mouse si muove di due in due
+      
       let val = sliderAlternativeHandle.value();
       let move_step = wheelDistance(event);
       let next_val = parseInt(val + move_step);
@@ -90,11 +90,14 @@ function init_slider(min, max, step) {
       load_tempYear(next_val, default_transition);
       d3.select("#sliderLabel").text("Year: " + next_val);
 
+
+
     })
     .on("mouseenter", function () {
       
       // disable page scrolling 
-      //document.getElementsById('body').onwheel = function(){ return false; }
+      d3.select("body").classed("stop-scrolling", true);
+
 
       d3.select("div#sliderYear")
         .select("g .parameter-value")
@@ -105,6 +108,9 @@ function init_slider(min, max, step) {
     })
     .on("mouseleave", function () {
       
+      // allow page scrolling 
+      d3.select("body").classed("stop-scrolling", false);
+
 
       d3.select("div#sliderYear")
         .select("g .parameter-value")

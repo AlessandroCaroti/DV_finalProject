@@ -7,6 +7,11 @@ body {
 
 }
 
+.stop-scrolling {
+  position: static; 
+  overflow-y:auto;
+}
+
 .sidenav {
   height: 100%;
   width: 240px;

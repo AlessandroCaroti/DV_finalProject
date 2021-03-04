@@ -7,13 +7,11 @@ const h_map = 500;
 
 var projection;
 var map_container;
-//var colorsRange = ["rgb(5, 48, 97)", "white", "rgb(103, 0, 31)"];
 var colorScale;
 var unknown_temp = "#999999"; // color indicating there is no data for such country in that year
 var default_transition = 500;
 var n_levels;
 var cur_level;
-//var colorsRange = ["blue", "white", "red"];
 
 var geoGenerator;
 
@@ -630,5 +628,4 @@ function load_map() {
 
 //                   END FILES LOADING                    //
 // ****************************************************** //
-// ****************************************************** //
-//                   DOVE INIZIA TUTTO                    //
+
