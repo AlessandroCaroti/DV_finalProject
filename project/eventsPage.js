@@ -43,3 +43,13 @@ function NavBarDropDownEvt() {
   }
 
 
+  function collapseMenuEvt() {
+
+    var drop_div = document.getElementById("links-collapse-drop");
+
+    if ( drop_div.style.display == "" || drop_div.style.display == "none")
+      drop_div.style.display = "block";
+  
+    else 
+      drop_div.style.display = "none";
+    }
