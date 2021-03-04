@@ -27,10 +27,10 @@ function NavBarDropDownEvt() {
     var sideDiv = document.getElementById("selectionCountry_countainer");
     if (document.body.scrollTop > 40 || document.documentElement.scrollTop > 40) {
      btn.style.display = "block";
-     sideDiv.style.paddingTop = "5px";
+     sideDiv.style.paddingTop = "2px";
     } else {
      btn.style.display = "none";
-     sideDiv.style.paddingTop = "80px";
+     sideDiv.style.paddingTop = "75px";
     }
 
     sideDiv.style.transition ="0.3s ease-in-out";
