@@ -4,7 +4,9 @@ body {
   margin-top: 0%;
   margin-left: 0%;
   margin-right: 0%;
+
 }
+
 .sidenav {
   height: 100%;
   width: 232px;
@@ -544,6 +546,7 @@ table {
   height: 72px;
   position: absolute;
   z-index: 2;
+ 
 }
 
 .navbar ul{
@@ -701,6 +704,7 @@ table {
   left: 12%;
   width: auto;
   height: 100%;
+  overflow-x: hidden;
   
 }
 
