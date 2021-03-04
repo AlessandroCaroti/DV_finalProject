@@ -33,7 +33,7 @@ function NavBarDropDownEvt() {
      sideDiv.style.paddingTop = "80px";
     }
 
-    sideDiv.style.transition ="0.3s linear";
+    sideDiv.style.transition ="0.3s ease-in-out";
 
   }
   
