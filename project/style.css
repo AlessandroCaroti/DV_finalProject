@@ -216,6 +216,11 @@ text#label-legend {
   font-weight: bold;
 }
 
+.parameter-value{
+  overscroll-behavior-x: contain;
+
+}
+
 /* styles to manage tranision display*/
 
 .shown_level {
