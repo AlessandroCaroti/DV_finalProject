@@ -42,4 +42,13 @@ function NavBarDropDownEvt() {
     document.documentElement.scrollTop = 0; 
   }
 
+function updateRangeData(value){
 
+  // update map
+  tmp_file_suffix = (value == "annual") ? "/Annual" : (value == "five_years") ? "/5-year" : (value == "ten_years") ? "/10-year" : "/20-year";
+  tmp_file_suffix = tmp_file_suffix.concat("_mean.csv");
+  load_tempYear(sliderAlternativeHandle.value(), default_transition);
+
+  // update charts
+  changeDataRangeYears()
+}

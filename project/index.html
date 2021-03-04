@@ -58,7 +58,7 @@
   <!-----------------------------MAP SCRIPTS------------------------------------------>
 </head>
 
-<body>
+<body id="body"> 
 
   <!-- SCREEN LOADER -->
   <div id="loader-wrapper">
@@ -141,19 +141,19 @@
       <h2>Data averaged on:</h2>
       <div class="range-years-buttons-container">
         <input class="checkbox-range" type="radio" name="btn-range-year" value="annual" id="btn_annual"
-          onclick="changeDataRangeYears()" />
+          onclick="updateRangeData(this.value)" />
         <label id="label-btn_annual" for="btn_annual"> 1 Year </label>
   
         <input class="checkbox-range" type="radio" name="btn-range-year" value="five_years" id="btn_five"
-          onclick="changeDataRangeYears()" />
+          onclick="updateRangeData(this.value)" />
         <label id="label-btn_five" for="btn_five"> 5 Year </label>
   
         <input class="checkbox-range" type="radio" name="btn-range-year" checked="checked" value="ten_years" id="btn_ten"
-          onclick="changeDataRangeYears()" />
+          onclick="updateRangeData(this.value)" />
         <label id="label-btn_ten" for="btn_ten"> 10 Year </label>
   
         <input class="checkbox-range" type="radio" name="btn-range-year" value="twenty_years" id="btn_twenty"
-          onclick="changeDataRangeYears()" />
+          onclick="updateRangeData(this.value)" />
         <label id="label-btn_twenty" for="btn_twenty">20 Years</label>
       </div>
     </div>

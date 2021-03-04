@@ -68,6 +68,8 @@ function init_slider(min, max, step) {
   d3.select("#sliderYear")
     .on("mousewheel", function (event) {
 
+      event.stopPropagation();
+
       // da gestire in modo diverso, col mouse si muove di due in due
       let val = sliderAlternativeHandle.value();
       let move_step = wheelDistance(event);
@@ -90,6 +92,10 @@ function init_slider(min, max, step) {
 
     })
     .on("mouseenter", function () {
+      
+      // disable page scrolling 
+      //document.getElementsById('body').onwheel = function(){ return false; }
+
       d3.select("div#sliderYear")
         .select("g .parameter-value")
         .select("text")
@@ -98,6 +104,8 @@ function init_slider(min, max, step) {
         .classed("not-hover", false);
     })
     .on("mouseleave", function () {
+      
+
       d3.select("div#sliderYear")
         .select("g .parameter-value")
         .select("text")
@@ -148,6 +156,9 @@ function stop_animation() {
   clearInterval(animation_func);
   animation_func = undefined;
 
+  // show play button
+  play()
+
   // enable possibility to use the slider
   enable_menu();
 
@@ -193,6 +204,12 @@ function disable_menu() {
 
   // if open, close it
   closeMenu();
+
+  // disable button 
+  d3.select(".range-years-buttons-container").style("pointer-events", "none");
+
+  // change opacity 
+  d3.select(".range-years-buttons-container").style("opacity", "0.5");
 }
 
 function enable_menu() {
@@ -201,6 +218,9 @@ function enable_menu() {
 
   d3.select("#setting_btn_open").style("pointer-events", "auto");
   d3.select("#setting_btn_open").style("opacity", "1.0");
+
+  d3.select(".range-years-buttons-container").style("pointer-events", "auto");
+  d3.select(".range-years-buttons-container").style("opacity", "1.0");
 }
 
 function closeMenu() {
