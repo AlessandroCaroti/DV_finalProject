@@ -702,9 +702,9 @@ table {
 #links-container {
   position: relative;
   left: 12%;
-  width: auto;
+  width: max-content;
   height: 100%;
-  overflow-x: hidden;
+  overflow: hidden;
   
 }
 
