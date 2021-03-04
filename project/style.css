@@ -9,7 +9,7 @@ body {
 
 .sidenav {
   height: 100%;
-  width: 232px;
+  width: 240px;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -24,7 +24,7 @@ body {
 }
 
 .main {
-  margin-left: 272px; /* Same as the width of the sidenav */
+  margin-left: 280px; /* Same as the width of the sidenav */
   background-color: #999999;
 }
 
