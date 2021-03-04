@@ -9,12 +9,13 @@ body {
 
 .sidenav {
   height: 100%;
-  width: 232px;
+  width: 240px;
   position: fixed;
   z-index: 1;
   left: 0;
   background-color: white;
   overflow-x: hidden;
+  overflow-y: auto;
   padding-top: 20px;
   padding-right: 20px !important;
   padding-left: 20px !important;
@@ -24,7 +25,7 @@ body {
 }
 
 .main {
-  margin-left: 272px; /* Same as the width of the sidenav */
+  margin-left: 280px; /* Same as the width of the sidenav */
   background-color: #999999;
 }
 
