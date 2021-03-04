@@ -1,229 +1,229 @@
-,Country,Anomaly,Unc.
-0,Afghanistan,,
-1,Albania,-0.713,0.506
-2,Algeria,-0.813,0.573
-3,American Samoa,,
-4,Andorra,-0.48100000000000004,0.557
-5,Angola,,
-6,Anguilla,-1.103,0.304
-7,Antarctica,,
-8,Antigua and Barbuda,-0.9420000000000001,0.374
-9,Argentina,-0.519,1.186
-10,Armenia,-0.855,0.579
-11,Aruba,-1.115,0.45799999999999996
-12,Australia,,
-13,Austria,-0.348,0.474
-14,Azerbaijan,-0.823,0.47700000000000004
-15,Bahamas,-1.188,0.321
-16,Bahrain,,
-17,Bangladesh,,
-18,Barbados,-0.934,0.396
-19,Belarus,-0.027999999999999997,0.442
-20,Belgium,0.434,0.493
-21,Belize,-0.821,0.7190000000000001
-22,Benin,,
-23,Bhutan,,
-24,Bolivia,,
-25,Bosnia and Herzegovina,-0.54,0.55
-26,Botswana,,
-27,Brazil,-0.778,0.392
-28,British Virgin Islands,-1.113,0.315
-29,Bulgaria,-0.764,0.418
-30,Burkina Faso,,
-31,Burundi,,
-32,Cambodia,,
-33,Cameroon,,
-34,Canada,-0.757,0.7959999999999999
-35,Cape Verde,-0.992,0.47200000000000003
-36,Cayman Islands,-1.1059999999999999,0.327
-37,Central African Republic,,
-38,Chad,,
-39,Chile,,
-40,China,-0.722,0.467
-41,Colombia,,
-42,Comoros,,
-43,Congo,,
-44,Costa Rica,-0.708,0.718
-45,Croatia,-0.47,0.578
-46,Cuba,-1.092,0.43799999999999994
-47,Curaçao,-1.052,0.43
-48,Cyprus,-0.968,0.643
-49,Czechia,-0.34600000000000003,0.387
-50,Côte d'Ivoire,-0.9690000000000001,0.446
-51,Dem. Rep. Congo,,
-52,Denmark,0.265,0.523
-53,Djibouti,,
-54,Dominica,-0.935,0.35700000000000004
-55,Dominican Republic,-1.07,0.45399999999999996
-56,Ecuador,,
-57,Egypt,,
-58,El Salvador,-0.7090000000000001,0.7929999999999999
-59,Equatorial Guinea,,
-60,Eritrea,,
-61,Estonia,-0.175,0.5479999999999999
-62,eSwatini,-0.903,0.611
-63,Ethiopia,,
-64,Falkland Islands (Islas Malvinas),,
-65,Faroe Islands,-0.067,0.5770000000000001
-66,Fiji,,
-67,Finland,-0.775,0.7120000000000001
-68,France,0.013999999999999999,0.5720000000000001
-69,French Guiana,-1.111,0.395
-70,French Polynesia,,
-71,French Southern and Antarctic Lands,,
-72,Gabon,,
-73,Gambia,,
-74,Georgia,-0.833,0.485
-75,Germany,0.152,0.48100000000000004
-76,Ghana,,
-77,Greece,-0.861,0.5379999999999999
-78,Greenland,-0.736,1.045
-79,Grenada,-0.9740000000000001,0.43700000000000006
-80,Guadeloupe,-1.099,0.311
-81,Guam,,
-82,Guatemala,-0.753,0.807
-83,Guernsey,0.37200000000000005,0.373
-84,Guinea,,
-85,Guinea-Bissau,,
-86,Guyana,-0.973,0.445
-87,Haiti,-1.074,0.485
-88,Heard Island and McDonald Islands,,
-89,Honduras,-0.7809999999999999,0.701
-90,Hong Kong,-0.9470000000000001,0.29600000000000004
-91,Hungary,-0.43700000000000006,0.514
-92,Iceland,-0.256,0.642
-93,India,,
-94,Indonesia,,
-95,Iran,,
-96,Iraq,-0.953,0.7829999999999999
-97,Ireland,0.168,0.547
-98,Isle of Man,0.345,0.371
-99,Israel,-0.991,0.713
-100,Italy,-0.603,0.532
-101,Jamaica,-1.065,0.5489999999999999
-102,Japan,,
-103,Jersey,0.37200000000000005,0.373
-104,Jordan,-1.011,0.767
-105,Kazakhstan,-1.071,0.775
-106,Kenya,,
-107,Kiribati,,
-108,Kuwait,,
-109,Kyrgyzstan,,
-110,Laos,,
-111,Latvia,-0.061,0.544
-112,Lebanon,-0.9359999999999999,0.687
-113,Lesotho,,
-114,Liberia,,
-115,Libya,,
-116,Liechtenstein,-0.185,0.498
-117,Lithuania,-0.044000000000000004,0.536
-118,Luxembourg,0.355,0.494
-119,Macau,-0.965,0.312
-120,Macedonia,-0.726,0.493
-121,Madagascar,,
-122,Malawi,,
-123,Malaysia,,
-124,Mali,,
-125,Malta,-0.768,0.47600000000000003
-126,Martinique,-1.087,0.29600000000000004
-127,Mauritania,,
-128,Mauritius,-1.111,0.526
-129,Mayotte,-1.048,0.452
-130,Mexico,-1.082,0.8959999999999999
-131,Micronesia,,
-132,Moldova,-0.45899999999999996,0.282
-133,Monaco,-0.57,0.5579999999999999
-134,Mongolia,-0.716,0.752
-135,Montenegro,-0.623,0.513
-136,Montserrat,-1.102,0.315
-137,Morocco,-0.716,0.622
-138,Mozambique,,
-139,Myanmar,-1.165,0.518
-140,Namibia,,
-141,Nepal,,
-142,Netherlands,0.433,0.474
-143,New Caledonia,,
-144,New Zealand,-0.09699999999999999,1.1740000000000002
-145,Nicaragua,-0.7659999999999999,0.69
-146,Niger,,
-147,Nigeria,,
-148,Niue,,
-149,North Korea,-0.461,0.7490000000000001
-150,Northern Mariana Islands,,
-151,Norway,-0.44,0.7290000000000001
-152,Oman,,
-153,Pakistan,,
-154,Palau,,
-155,Palestina,-1.11,0.655
-156,Panama,,
-157,Papua New Guinea,,
-158,Paraguay,-0.698,0.838
-159,Peru,,
-160,Philippines,,
-161,Poland,-0.147,0.52
-162,Portugal,-0.531,0.52
-163,Puerto Rico,-1.032,0.41
-164,Qatar,,
-165,Reunion,-1.172,0.573
-166,Romania,-0.595,0.32
-167,Russia,-0.8190000000000001,0.8170000000000001
-168,Rwanda,,
-169,Saint Barthélemy,-0.97,0.385
-170,Saint Kitts and Nevis,-0.9670000000000001,0.364
-171,Saint Lucia,-0.9390000000000001,0.382
-172,Saint Martin,-1.103,0.304
-173,Saint Pierre and Miquelon,-0.9209999999999999,0.821
-174,Saint Vincent and the Grenadines,-0.948,0.379
-175,Samoa,,
-176,San Marino,-0.509,0.599
-177,Sao Tome and Principe,,
-178,Saudi Arabia,,
-179,Senegal,,
-180,Serbia,-0.616,0.49700000000000005
-181,Seychelles,,
-182,Sierra Leone,,
-183,Singapore,,
-184,Sint Maarten,-1.103,0.304
-185,Slovakia,-0.41700000000000004,0.5529999999999999
-186,Slovenia,-0.40399999999999997,0.615
-187,Solomon Islands,,
-188,Somalia,,
-189,South Africa,,
-190,South Georgia and the South Sandwich Isla,,
-191,South Korea,-0.48,0.894
-192,Spain,-0.519,0.499
-193,Sri Lanka,-0.8320000000000001,0.9390000000000001
-194,Sudan,,
-195,Suriname,-0.9229999999999999,0.44
-196,Svalbard and Jan Mayen,-0.982,1.609
-197,Sweden,-0.299,0.643
-198,Switzerland,-0.223,0.513
-199,Syria,-0.9179999999999999,0.698
-200,Taiwan,-0.69,0.626
-201,Tajikistan,,
-202,Tanzania,,
-203,Thailand,,
-204,Timor-Leste,,
-205,Togo,,
-206,Tonga,,
-207,Trinidad and Tobago,-0.975,0.423
-208,Tunisia,-0.79,0.531
-209,Turkey,-0.8909999999999999,0.5920000000000001
-210,Turkmenistan,-0.88,0.727
-211,Turks and Caicas Islands,-1.16,0.392
-212,Uganda,,
-213,Ukraine,-0.182,0.37200000000000005
-214,United Arab Emirates,,
-215,United Kingdom,0.293,0.491
-216,United States of America,-1.2309999999999999,0.511
-217,Uruguay,0.136,2.09
-218,Uzbekistan,-0.9540000000000001,0.7879999999999999
-219,Venezuela,-1.0190000000000001,0.456
-220,Vietnam,,
-221,Virgin Islands,-0.97,0.375
-222,Western Sahara,,
-223,Yemen,,
-224,Zambia,,
-225,Zimbabwe,,
-226,Åland,-0.231,0.551
-227,Global Land,-0.838,0.32899999999999996
+Country,Anomaly
+Afghanistan,
+Albania,-0.713
+Algeria,-0.813
+American Samoa,
+Andorra,-0.48100000000000004
+Angola,
+Anguilla,-1.103
+Antarctica,
+Antigua and Barbuda,-0.9420000000000001
+Argentina,-0.519
+Armenia,-0.855
+Aruba,-1.115
+Australia,
+Austria,-0.348
+Azerbaijan,-0.823
+Bahamas,-1.188
+Bahrain,
+Bangladesh,
+Barbados,-0.934
+Belarus,-0.027999999999999997
+Belgium,0.434
+Belize,-0.821
+Benin,
+Bhutan,
+Bolivia,
+Bosnia and Herzegovina,-0.54
+Botswana,
+Brazil,-0.778
+British Virgin Islands,-1.113
+Bulgaria,-0.764
+Burkina Faso,
+Burundi,
+Cambodia,
+Cameroon,
+Canada,-0.757
+Cape Verde,-0.992
+Cayman Islands,-1.1059999999999999
+Central African Republic,
+Chad,
+Chile,
+China,-0.722
+Colombia,
+Comoros,
+Congo,
+Costa Rica,-0.708
+Croatia,-0.47
+Cuba,-1.092
+Curaçao,-1.052
+Cyprus,-0.968
+Czechia,-0.34600000000000003
+Côte d'Ivoire,-0.9690000000000001
+Dem. Rep. Congo,
+Denmark,0.265
+Djibouti,
+Dominica,-0.935
+Dominican Republic,-1.07
+Ecuador,
+Egypt,
+El Salvador,-0.7090000000000001
+Equatorial Guinea,
+Eritrea,
+Estonia,-0.175
+eSwatini,-0.903
+Ethiopia,
+Falkland Islands (Islas Malvinas),
+Faroe Islands,-0.067
+Fiji,
+Finland,-0.775
+France,0.013999999999999999
+French Guiana,-1.111
+French Polynesia,
+French Southern and Antarctic Lands,
+Gabon,
+Gambia,
+Georgia,-0.833
+Germany,0.152
+Ghana,
+Greece,-0.861
+Greenland,-0.736
+Grenada,-0.9740000000000001
+Guadeloupe,-1.099
+Guam,
+Guatemala,-0.753
+Guernsey,0.37200000000000005
+Guinea,
+Guinea-Bissau,
+Guyana,-0.973
+Haiti,-1.074
+Heard Island and McDonald Islands,
+Honduras,-0.7809999999999999
+Hong Kong,-0.9470000000000001
+Hungary,-0.43700000000000006
+Iceland,-0.256
+India,
+Indonesia,
+Iran,
+Iraq,-0.953
+Ireland,0.168
+Isle of Man,0.345
+Israel,-0.991
+Italy,-0.603
+Jamaica,-1.065
+Japan,
+Jersey,0.37200000000000005
+Jordan,-1.011
+Kazakhstan,-1.071
+Kenya,
+Kiribati,
+Kuwait,
+Kyrgyzstan,
+Laos,
+Latvia,-0.061
+Lebanon,-0.9359999999999999
+Lesotho,
+Liberia,
+Libya,
+Liechtenstein,-0.185
+Lithuania,-0.044000000000000004
+Luxembourg,0.355
+Macau,-0.965
+Macedonia,-0.726
+Madagascar,
+Malawi,
+Malaysia,
+Mali,
+Malta,-0.768
+Martinique,-1.087
+Mauritania,
+Mauritius,-1.111
+Mayotte,-1.048
+Mexico,-1.082
+Micronesia,
+Moldova,-0.45899999999999996
+Monaco,-0.57
+Mongolia,-0.716
+Montenegro,-0.623
+Montserrat,-1.102
+Morocco,-0.716
+Mozambique,
+Myanmar,-1.165
+Namibia,
+Nepal,
+Netherlands,0.433
+New Caledonia,
+New Zealand,-0.09699999999999999
+Nicaragua,-0.7659999999999999
+Niger,
+Nigeria,
+Niue,
+North Korea,-0.461
+Northern Mariana Islands,
+Norway,-0.44
+Oman,
+Pakistan,
+Palau,
+Palestina,-1.11
+Panama,
+Papua New Guinea,
+Paraguay,-0.698
+Peru,
+Philippines,
+Poland,-0.147
+Portugal,-0.531
+Puerto Rico,-1.032
+Qatar,
+Reunion,-1.172
+Romania,-0.595
+Russia,-0.8190000000000001
+Rwanda,
+Saint Barthélemy,-0.97
+Saint Kitts and Nevis,-0.9670000000000001
+Saint Lucia,-0.9390000000000001
+Saint Martin,-1.103
+Saint Pierre and Miquelon,-0.9209999999999999
+Saint Vincent and the Grenadines,-0.948
+Samoa,
+San Marino,-0.509
+Sao Tome and Principe,
+Saudi Arabia,
+Senegal,
+Serbia,-0.616
+Seychelles,
+Sierra Leone,
+Singapore,
+Sint Maarten,-1.103
+Slovakia,-0.41700000000000004
+Slovenia,-0.40399999999999997
+Solomon Islands,
+Somalia,
+South Africa,
+South Georgia and the South Sandwich Isla,
+South Korea,-0.48
+Spain,-0.519
+Sri Lanka,-0.8320000000000001
+Sudan,
+Suriname,-0.9229999999999999
+Svalbard and Jan Mayen,-0.982
+Sweden,-0.299
+Switzerland,-0.223
+Syria,-0.9179999999999999
+Taiwan,-0.69
+Tajikistan,
+Tanzania,
+Thailand,
+Timor-Leste,
+Togo,
+Tonga,
+Trinidad and Tobago,-0.975
+Tunisia,-0.79
+Turkey,-0.8909999999999999
+Turkmenistan,-0.88
+Turks and Caicas Islands,-1.16
+Uganda,
+Ukraine,-0.182
+United Arab Emirates,
+United Kingdom,0.293
+United States of America,-1.2309999999999999
+Uruguay,0.136
+Uzbekistan,-0.9540000000000001
+Venezuela,-1.0190000000000001
+Vietnam,
+Virgin Islands,-0.97
+Western Sahara,
+Yemen,
+Zambia,
+Zimbabwe,
+Åland,-0.231
+Global Land,-0.838
