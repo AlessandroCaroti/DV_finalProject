@@ -639,44 +639,57 @@ table {
 
 
 #contributors-div{
-  width: 165px;
-  height: 160px;
+  width: 170px;
+  height: max-content;
+  background-color:rgba(255,255,255,0.9);
   display: none;
   position: absolute;
-  border: #000 solid 1px;
-  top: 74px;
-
-}
-
-
-#contributors-div ul { 
-  position: absolute;
+  border:lightgray solid 1px;
   left: 0;
-  padding-left: 0;
-  display: none;
-  height: 100%;
+  top: 105%;
+  border-radius: 15px;
+  box-shadow: 1px 1px  5px #aaaaaa;
+
+}
+
+#contributors-div span{
+
   width: 100%;
-  background-color: #fff;
- 
 }
 
 
-#contributors-div ul li a{
+#contributors-div span a{
   color:black;
-  width: 138px;
   font-size: 14px;
+  
+}
+
+#contributors-div:before {
+  position: absolute;
+  top: -15px;
+  left: 70px;
+  display: inline-block;
+  border-right: 15px solid transparent;
+  border-bottom: 15px solid #ccc;
+  border-left: 15px solid transparent;
+  border-bottom-color: rgba(0, 0, 0, 0.2);
+  content: '';
+}
+
+#contributors-div:after {
+  position: absolute;
+  top: -14px;
+  left: 70px;
+  display: inline-block;
+  border-right: 14px solid transparent;
+  border-bottom: 14px solid #ffffff;
+  border-left: 14px solid transparent;
+  content: '';
 
 }
 
-#contributors-div ul li {
-  background-color: white;
-  height: 33.3333%;
-  width: 100%;
-  text-align: center;
 
-}
-
-#contributors-div ul li:hover{
+#contributors-div span:hover{
   background-color: rgba(192, 192, 192, 0.5);
 
 }
@@ -734,10 +747,30 @@ table {
   border-bottom: 14px solid #ffffff;
   border-left: 14px solid transparent;
   content: '';
+
 }
 
 #links-collapse-drop span a{
-  color: black;
+  color: black; 
+}
+#links-collapse-drop span {
+  width: 100%;
+}
+
+#links-collapse-drop span:last-child{
+  
+  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+
+#links-collapse-drop span:nth-child(){
+
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+#links-collapse-drop span:hover{
+  background-color: rgba(192, 192, 192, 0.5) ;
 }
 
 .span-collapse{
@@ -753,8 +786,6 @@ table {
   width: max-content;
   height: 100%;
   overflow: hidden;
- 
-  
 }
 
 
