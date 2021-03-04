@@ -88,6 +88,11 @@ div.tooltip-map {
   align-content: center;
 }
 
+#map-containter h1{
+
+  margin-top: 10%;
+}
+
 .btn {
   fill: rgb(243, 243, 243);
   stroke: black;
