@@ -751,24 +751,34 @@ table {
   color: rgba(192, 192, 192, 0.3);
 }
 
-@media (max-width: 1500px) {
+@media (max-width: 1520px) {
   #links-container span:nth-child(n+6) {  display: none;}
   #links-container span:nth-child(n+6):after{ display: none;}
 }
 
-@media (max-width: 1300px) {
+@media (max-width: 1355px) {
   #links-container span:nth-child(n+5) {  display: none;}
   #links-container span:nth-child(n+5):after{ display: none;}
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1153px) {
   #links-container span:nth-child(n+4) {  display: none;}
   #links-container span:nth-child(n+4):after{ display: none;}
 }
 
-@media (max-width: 500px) {
-  #links-container span:nth-child(n+4) {  display: none;}
-  #links-container span:nth-child(n+4):after{ display: none;}
+@media (max-width: 933px) {
+  #links-container span:nth-child(n+3) {  display: none;}
+  #links-container span:nth-child(n+3):after{ display: none;}
+}
+
+@media (max-width: 779px) {
+  #links-container span:nth-child(n+2) {  display: none;}
+  #links-container span:nth-child(n+2):after{ display: none;}
+}
+
+@media (max-width: 629px) {
+  #links-container span:nth-child(n+1) {  display: none;}
+  #links-container span:nth-child(n+1):after{ display: none;}
 }
 
  
