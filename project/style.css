@@ -823,7 +823,7 @@ color: black;
 }
 
 
-@media (min-width: 1500px) {
+@media (min-width: 1550px) {
   #collapse-btn {
       display: none;
   }
