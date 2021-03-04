@@ -216,6 +216,11 @@ text#label-legend {
   font-weight: bold;
 }
 
+.parameter-value{
+  overscroll-behavior-x: contain;
+
+}
+
 /* styles to manage tranision display*/
 
 .shown_level {
@@ -694,15 +699,41 @@ table {
 }
 
 
-.links_page{
+#links-container {
+  position: relative;
+  left: 12%;
+  width: auto;
+  height: 100%;
   
- position: relative;
- left: 10%;
+}
+
+
+@media (max-width: 100%) {
+  #links-container span:nth-child(n+6){  display: none;}
+}
+
+
+
+#links-container span a{ 
+
+  padding-left: 25px;
+  padding-right: 15px;
+  text-decoration: none;
+  color: white;
+  font-size: 100%;
+  position: relative;
+  top:25px
+}
+
+#links-container span{
+  position: relative;
+  display: inline-block;
+  height: 100%;
 
 }
 
 
-.links_page:after{
+#links-container span:after{
   content:"";
     position:absolute;
     top:20%;
@@ -712,8 +743,18 @@ table {
     background: lightgray;
 }
 
-.links_page:last-child:after{
+
+
+#links-container span:last-child:after{
     opacity: 0%;
+}
+
+
+/*
+.links_page{
+  display: inline-block;
+  position: absolute;
+  left: 15%;
 }
 
 .links_page a{
@@ -726,6 +767,7 @@ table {
   color: rgba(192, 192, 192, 0.3);
 }
 
+  */
 
 html {
   scroll-behavior: smooth;
