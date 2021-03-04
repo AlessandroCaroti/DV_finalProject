@@ -9,7 +9,7 @@ body {
 
 .sidenav {
   height: 100%;
-  width: 232px;
+  width: 240px;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -24,7 +24,7 @@ body {
 }
 
 .main {
-  margin-left: 272px; /* Same as the width of the sidenav */
+  margin-left: 280px; /* Same as the width of the sidenav */
   background-color: #999999;
 }
 
@@ -90,9 +90,9 @@ div.tooltip-map {
   align-content: center;
 }
 
-#map-containter h1{
+#map-containter{
 
-  margin-top: 10%;
+  margin-top: 120px;
 }
 
 .btn {
@@ -699,16 +699,38 @@ table {
 }
 
 
+#links-collapse-drop{
+  width: 165px;
+  height: max-content;
+  background-color: #fff;
+  display: none;
+  position: absolute;
+  border: #000 solid 1px;
+  left: 0;
+  top: 102%;
+  text-align: center;
+  border-radius: 15px;
+  
+}
+
+#links-collapse-drop span a{
+color: black;
+}
+
+.span-collapse{
+  display: none;
+}
+
+
 #links-container {
   position: relative;
   left: 12%;
   width: max-content;
   height: 100%;
   overflow: hidden;
+ 
   
 }
-
-
 
 
 #links-container span a{ 
@@ -751,37 +773,62 @@ table {
   color: rgba(192, 192, 192, 0.3);
 }
 
-@media (max-width: 1520px) {
+#collapse-btn{
+
+  position: relative;
+  top: 15%;
+  right: -120%;
+}
+
+#collapse-btn:hover{
+
+  filter: hue-rotate(0deg) saturate(0%) brightness(75%) opacity(30%);
+  
+}
+
+@media (max-width: 1550px) {
   #links-container span:nth-child(n+6) {  display: none;}
   #links-container span:nth-child(n+6):after{ display: none;}
+  .span-collapse:nth-child(n+6) {  display: block;}
 }
 
-@media (max-width: 1355px) {
+@media (max-width: 1396px) {
   #links-container span:nth-child(n+5) {  display: none;}
   #links-container span:nth-child(n+5):after{ display: none;}
+  .span-collapse:nth-child(n+5) {  display: block;}
 }
 
-@media (max-width: 1153px) {
+@media (max-width: 1189px) {
   #links-container span:nth-child(n+4) {  display: none;}
   #links-container span:nth-child(n+4):after{ display: none;}
+  .span-collapse:nth-child(n+4) {  display: block;}
 }
 
-@media (max-width: 933px) {
+@media (max-width: 976px) {
   #links-container span:nth-child(n+3) {  display: none;}
   #links-container span:nth-child(n+3):after{ display: none;}
+  .span-collapse:nth-child(n+3) {  display: block;}
 }
 
-@media (max-width: 779px) {
+@media (max-width: 823px) {
   #links-container span:nth-child(n+2) {  display: none;}
   #links-container span:nth-child(n+2):after{ display: none;}
+  .span-collapse:nth-child(n+2) {  display: block;}
 }
 
-@media (max-width: 629px) {
+@media (max-width: 675px) {
   #links-container span:nth-child(n+1) {  display: none;}
   #links-container span:nth-child(n+1):after{ display: none;}
+  .span-collapse:nth-child(n+1) {  display: block;}
 }
 
- 
+
+@media (min-width: 1500px) {
+  #collapse-btn {
+      display: none;
+  }
+}
+
 
 html {
   scroll-behavior: smooth;
