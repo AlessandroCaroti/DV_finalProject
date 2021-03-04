@@ -700,25 +700,50 @@ table {
 
 
 #links-collapse-drop{
-  width: 165px;
+  width: 220px;
   height: max-content;
-  background-color: #fff;
+  background-color:rgba(255,255,255,0.9);
   display: none;
   position: absolute;
-  border: #000 solid 1px;
-  left: 0;
+  border:lightgray solid 1px;
+  left: 25%;
   top: 102%;
-  text-align: center;
   border-radius: 15px;
-  
+  box-shadow: 1px 1px  5px #aaaaaa;
+   
+}
+
+#links-collapse-drop:before {
+  position: absolute;
+  top: -15px;
+  left: 53px;
+  display: inline-block;
+  border-right: 15px solid transparent;
+  border-bottom: 15px solid #ccc;
+  border-left: 15px solid transparent;
+  border-bottom-color: rgba(0, 0, 0, 0.2);
+  content: '';
+}
+
+#links-collapse-drop:after {
+  position: absolute;
+  top: -14px;
+  left: 53px;
+  display: inline-block;
+  border-right: 14px solid transparent;
+  border-bottom: 14px solid #ffffff;
+  border-left: 14px solid transparent;
+  content: '';
 }
 
 #links-collapse-drop span a{
-color: black;
+  color: black;
 }
 
 .span-collapse{
   display: none;
+  width: max-content;
+  text-align: center;
 }
 
 
@@ -762,8 +787,6 @@ color: black;
     height:60%;
     background: lightgray;
 }
-
-
 
 #links-container span:last-child:after{
     opacity: 0%;
