@@ -7,6 +7,8 @@ import numpy as np
 dataTmp_folder = "./download_data/data/counties"
 dataYear_folder = "./download_data/data/years"
 
+first_year = None
+
 global_dict = {}
 
 maxTmp = -9999
@@ -14,14 +16,16 @@ minTmp = 99999
 
 
 def group_year(df):
-
+    global first_year
     year_list = df.loc[:, "Year": "Month"]
     year_dict = {}
     find_start = False
     for idx, (year, month) in enumerate(year_list.values.tolist()):
-        if (year not in year_dict or month == 5) and (find_start or not np.isnan(df.loc[idx, "Annual Anomaly"])):
+        if year >= 1750 and (year not in year_dict or month == 5):
             year_dict[year] = idx
-            find_start = True
+            if first_year is None and (find_start or not np.isnan(df.loc[idx, "Annual Anomaly"])):
+                first_year = year
+                find_start = True
     return year_dict
 
 
@@ -75,7 +79,7 @@ for year in global_dict.keys():
 
 print()
 new_row = {"Average": ["Annual"],
-           "First_year": [sorted(global_dict.keys())[0]],
+           "First_year": [first_year],
            "Last_year": [sorted(global_dict.keys())[-1]],
            "min_temp": [minTmp],
            "max_tmp": [maxTmp]}
