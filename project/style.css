@@ -823,10 +823,9 @@ color: black;
 }
 
 
-@media (min-width: 1550px) {
-  #collapse-btn {
-      display: none;
-  }
+@media (min-width: 1560px) {
+  #collapse-btn { display: none;}
+  #links-collapse-drop{ opacity: 0%;}
 }
 
 
