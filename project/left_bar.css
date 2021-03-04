@@ -288,3 +288,15 @@ input[type="radio"] {
 .description_container{
   padding-bottom: 5px;
 }
+
+.separator{
+  color: #636363;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.separator::selection {
+  background: none;
+}

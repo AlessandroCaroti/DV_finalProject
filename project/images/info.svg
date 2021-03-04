@@ -1,0 +1,10 @@
+<svg width="19px" height="19px" viewBox="0 0 19 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve">
+    <g id="storyboards" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="sl-date-title_tooltip" transform="translate(-258.000000, -686.000000)">
+            <g id="icon" transform="translate(258.000000, 686.000000)">
+                <circle id="Oval" fill="#EAEAEA" cx="9.5" cy="9.5" r="9.5"></circle>
+                <path d="M10.664,7.028 C10.076,7.028 9.668,6.596 9.668,6.056 C9.668,5.408 10.244,4.892 10.844,4.892 C11.396,4.892 11.804,5.336 11.804,5.876 C11.804,6.488 11.252,7.028 10.664,7.028 Z M8.06,14 L9.356,7.796 L11.384,7.796 L10.088,14 L8.06,14 Z" id="i" fill="#222"></path>
+            </g>
+        </g>
+    </g>
+</svg>
