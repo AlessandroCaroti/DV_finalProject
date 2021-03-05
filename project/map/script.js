@@ -250,14 +250,14 @@ function country_selected(country) {
 // ******************************************************** //
 //                    START ZOOM SECTION                    //
 
-var max_zoom = 8;
+var max_zoom = 10;
 var zoomIn_scale = 1.2,
   zoomOut_scale = 0.8,
   curr_zoomScale = 1;
 
 var zoom = d3
   .zoom()
-  .extent(d=> [[0, 0], [w_map, h_map]])
+  .extent(d => [[0, 0], [w_map, h_map]])
   .scaleExtent([1, max_zoom])
   .on("zoom", (event) => {
     curr_zoomScale = event.transform.k;
@@ -489,7 +489,7 @@ function init_zoomBtns() {
       map_container
               .transition()
               .call(zoom.scaleBy, zoomIn_scale);
-    });
+            });
 
   d3.select("#zoom-out")
     .select("path")
