@@ -1,4 +1,4 @@
-.sidenav h2 {
+.sidenav  h2 {
   font-size: 18px;
   margin-top: 0;
   margin-bottom: 8px;
@@ -167,6 +167,30 @@ ul#country_list {
 /*-------------------------------------------------------------*/
 /* DATA AVERAGE SELECTION STYLE */
 
+#data-averaged-title{
+ width: max-content;
+}
+
+#data-averaged-title h2, #info-btn-avg{
+  float: left;
+}
+
+#info-btn-avg{
+
+  position: relative;
+  left: 10%;
+  bottom: -4px;
+}
+
+#info-btn-avg:hover{
+  filter: hue-rotate(0deg) saturate(0%) brightness(75%) opacity(80%);
+}
+
+
+.tooltip-map{
+  position: absolute;
+  z-index: 5;
+}
 .range-years-buttons-container {
   padding: 0 5px;
   width: 250px;

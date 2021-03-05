@@ -64,4 +64,30 @@ function collapseMenuEvt() {
 }
 
 
-console.log(d3.select(".span-collapse"))
+function drawInfoTooltip(event) {
+
+
+  var tooltip = d3.select("#tooltip-info").classed("tooltip-map",true);
+
+
+  tooltip.transition();
+  var tipText = String(
+    "<p> DAPPU MANGIA I GATTI ARROSTO. COTTURA LENTA NEL FORNO</p>" 
+    
+  );
+  
+  tooltip
+    .style("left", String(event.pageX + 20) + "px")
+    .style("top", String(event.pageY - 20) + "px")
+    .style("display", "block")
+    .html(tipText);
+}
+
+function removeInfoTooltip() {
+  var tooltip = d3.select("#tooltip-info");
+  tooltip.style("display", "none");
+}
+
+d3.select("#info-btn-avg")
+  .on("mouseover", drawInfoTooltip)
+  .on("mouseleave", removeInfoTooltip)
