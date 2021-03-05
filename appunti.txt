@@ -1,5 +1,4 @@
 TO DO:
--completare il menù della mappa
 
 TO FIX:
 -rendere non interagibile le cose inutili, come il testo degli anni sotto lo slider
