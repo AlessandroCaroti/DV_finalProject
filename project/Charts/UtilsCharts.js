@@ -439,15 +439,7 @@ function getHotColdStyle(hot_cold_list, d) {
       "stroke-width: 2px;" +
       "stroke-opacity:80%;";
     return style;
-  } else {
-    var style_base =
-      "stroke: lightgray;" +
-      "fill: none;" +
-      "stroke-width: 1px;" +
-      "stroke-opacity: 50%;";
-
-    return style_base;
-  }
+  } 
 }
 
 function createHotColdLegend(id_container, hottest_temp, coldest_temp) {

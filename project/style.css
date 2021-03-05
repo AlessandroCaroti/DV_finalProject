@@ -475,6 +475,18 @@ table {
   stroke-opacity: 40%;
 }
 
+.grey-path{
+  stroke: lightgray;
+  fill: none;
+  stroke-width: 2px;
+  stroke-opacity: 50%;
+}
+
+.grey-path:hover{
+  stroke: #777;
+  stroke-opacity: 80%;
+}
+
 /*---------------------------END Coldest Year style--------------------------------*/
 
 /*---------------------------START SEASONAL LINECHART STYLE--------------------------------*/
@@ -723,7 +735,8 @@ color: rgba(192, 192, 192, 0.5);
 
   position: relative;
   float: right;
-  bottom: -19%;
+  right: -%;
+  bottom: -16%;
   width: 45px;
   height: 45px;
   border-radius: 100%;
@@ -735,7 +748,9 @@ color: rgba(192, 192, 192, 0.5);
 }
 
 
+
 /*Collapse DropDown Menu */
+
 #links-collapse-drop{
   width: 220px;
   height: max-content;
@@ -855,14 +870,14 @@ color: rgba(192, 192, 192, 0.5) ;
   
 }
 
-@media (max-width: 75%) {
+@media (max-width: 1550px) {
   #links-container span:nth-child(n+6) {  display: none;}
   #links-container span:nth-child(n+6):after{ display: none;}
   .span-collapse:nth-child(n+6) {  display: block;}
  
 }
 
-@media (max-width: 50%) {
+@media (max-width: 1396px) {
   #links-container span:nth-child(n+5) {  display: none;}
   #links-container span:nth-child(n+5):after{ display: none;}
   .span-collapse:nth-child(n+5) {  
@@ -872,7 +887,7 @@ color: rgba(192, 192, 192, 0.5) ;
 
 }
 
-@media (max-width: 25%) {
+@media (max-width: 1189px) {
   #links-container span:nth-child(n+4) {  display: none;}
   #links-container span:nth-child(n+4):after{ display: none;}
   .span-collapse:nth-child(n+4) {  
@@ -883,7 +898,7 @@ color: rgba(192, 192, 192, 0.5) ;
 
 }
 
-@media (max-width: 15%) {
+@media (max-width: 976px) {
   #links-container span:nth-child(n+3) {  display: none;}
   #links-container span:nth-child(n+3):after{ display: none;}
   .span-collapse:nth-child(n+3) {  
