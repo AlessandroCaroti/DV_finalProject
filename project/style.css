@@ -475,18 +475,6 @@ table {
   stroke-opacity: 40%;
 }
 
-.grey-path{
-  stroke: lightgray;
-  fill: none;
-  stroke-width: 2px;
-  stroke-opacity: 50%;
-}
-
-.grey-path:hover{
-  stroke: #777;
-  stroke-opacity: 80%;
-}
-
 /*---------------------------END Coldest Year style--------------------------------*/
 
 /*---------------------------START SEASONAL LINECHART STYLE--------------------------------*/
@@ -735,7 +723,7 @@ color: rgba(192, 192, 192, 0.5);
 
   position: relative;
   float: right;
-  bottom: -16%;
+  bottom: -19%;
   width: 45px;
   height: 45px;
   border-radius: 100%;
@@ -747,9 +735,7 @@ color: rgba(192, 192, 192, 0.5);
 }
 
 
-
 /*Collapse DropDown Menu */
-
 #links-collapse-drop{
   width: 220px;
   height: max-content;
