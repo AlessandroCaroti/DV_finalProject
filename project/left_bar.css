@@ -187,6 +187,23 @@ ul#country_list {
 }
 
 
+#tooltip-info{
+    position: absolute;
+    width: auto;
+    height: auto;
+    padding: 5px;
+    text-align: center;
+    font-size: 11px;
+    font-family: sans-serif;
+    border: 1px solid gray;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+    display: none;
+    opacity: 0.95;
+    z-index: 99;
+  }
+
 
 .range-years-buttons-container {
   padding: 0 5px;
