@@ -310,7 +310,7 @@ function zoom_in(country) {
     y = (bounds[0][1] + bounds[1][1]) / 2,
     scale = Math.max(
       1,
-      Math.min(max_zoom, 0.9 / Math.max(dx / w_map, dy / h_map))
+      Math.min(max_zoom, 0.9 / Math.max(dx / w_map / 3, dy / h_map / 3))
     ),
     translate = [/* w_map/2 */ - scale * x, h_map / 2 - scale * y];
 
