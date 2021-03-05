@@ -78,7 +78,7 @@ svg text::selection {
   background: none;
 }
 
-div.tooltip-map {
+div.tooltip {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -191,7 +191,7 @@ div.tooltip-map {
   padding: 0px;
 }
 
-.tooltip-map {
+.tooltip {
   position: absolute;
   width: auto;
   height: auto;
@@ -304,7 +304,7 @@ h3 {
   fill: none;
 }
 
-#linechart .tooltip-map {
+#linechart .tooltip {
   text-align: left;
 }
 #linechart {

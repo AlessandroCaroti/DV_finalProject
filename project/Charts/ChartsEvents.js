@@ -27,7 +27,7 @@ function drawTooltipLineChart(self, event, x, data, tooltipLine, id_chart, heigh
   var label = document.getElementById("label-"+btn.id)
   var range_name = label.innerHTML;
 
-  var tooltip = d3.select(id_chart + " .tooltip-map");
+  var tooltip = d3.select(id_chart + " .tooltip");
 
   const date = x.invert(d3.pointer(event, self.node())[0]);
 
@@ -81,7 +81,7 @@ function drawTooltipLineChart(self, event, x, data, tooltipLine, id_chart, heigh
 }
 
 function removeTooltipLineChart(tooltipLine, id_chart) {
-  var tooltip = d3.select(id_chart + " .tooltip-map");
+  var tooltip = d3.select(id_chart + " .tooltip");
   if (tooltip) tooltip.style("display", "none");
   if (tooltipLine) tooltipLine.attr("stroke", "none");
 }
@@ -91,7 +91,7 @@ function removeTooltipLineChart(tooltipLine, id_chart) {
 function stripesEnter(event, d) {
 
   var range_year = getCheckedValue("btn-range-year").value;
-  var tooltip = d3.select("#stripechart .tooltip-map");
+  var tooltip = d3.select("#stripechart .tooltip");
 
   tooltip.transition();
   var tipText = String(
@@ -113,12 +113,12 @@ function stripesEnter(event, d) {
 }
 
 function stripesLeave() {
-  var tooltip = d3.select("#stripechart .tooltip-map");
+  var tooltip = d3.select("#stripechart .tooltip");
   if (tooltip) tooltip.style("display", "none");
 }
 
 function stripesMove(){
-  var tooltip = d3.select("#stripechart .tooltip-map");
+  var tooltip = d3.select("#stripechart .tooltip");
   tooltip
     .style("left", String(event.pageX + 20) + "px")
     .style("top", String(event.pageY - 20) + "px");
