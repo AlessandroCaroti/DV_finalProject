@@ -257,6 +257,7 @@ var zoomIn_scale = 1.2,
 
 var zoom = d3
   .zoom()
+  .extent(d=> [[0, 0], [w_map, h_map]])
   .scaleExtent([1, max_zoom])
   .on("zoom", (event) => {
     curr_zoomScale = event.transform.k;
@@ -347,7 +348,9 @@ var borderCountryScale = d3
 var widthGridScale = d3.scaleLinear().domain([1, max_zoom]).range([0.2, 0.05]);
 
 function update_strokes() {
+
   var new_strokeWidth = borderCountryScale(curr_zoomScale);
+
   //update country
   map_container
     .selectAll("path.country")
@@ -471,6 +474,7 @@ function changeView() {
 }
 
 function init_zoomBtns() {
+
   d3.select("#zoom-reset")
     .select("rect")
     .on("click", function () {
@@ -481,14 +485,17 @@ function init_zoomBtns() {
     .select("path")
     .on("click", function () {
       debug_log("ZOOM_IN");
-      map_container.transition().call(zoom.scaleBy, zoomIn_scale);
-    });
+
+      map_container
+              .transition()
+              .call(zoom.scaleBy, zoomIn_scale);
+            });
 
   d3.select("#zoom-out")
     .select("path")
     .on("click", function () {
       debug_log("ZOOM_OUT");
-      map_container.transition().call(zoom.scaleBy, zoomOut_scale);
+      map_container.transition().call(zoom.scaleBy, zoomOut_scale );
     });
 }
 
