@@ -489,7 +489,7 @@ function init_zoomBtns() {
       map_container
               .transition()
               .call(zoom.scaleBy, zoomIn_scale);
-            });
+    });
 
   d3.select("#zoom-out")
     .select("path")
