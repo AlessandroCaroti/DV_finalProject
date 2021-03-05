@@ -67,11 +67,11 @@ div.all-slider{
   padding-bottom: 10px;
 }
 
-g.slider{
+.handle:hover{
   cursor:grab;
 }
 
-.handle{
+.handle:active{
   cursor:grabbing;
 }
 

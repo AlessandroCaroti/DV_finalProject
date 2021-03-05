@@ -1,5 +1,4 @@
 TO DO:
--cambiare il cursore sullo slider
 -completare il menù della mappa
 -aggiungere al menù mappa l'oprione di cambiare lo zoom massimo
 
