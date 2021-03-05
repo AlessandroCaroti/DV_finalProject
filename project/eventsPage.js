@@ -67,7 +67,7 @@ function collapseMenuEvt() {
 function drawInfoTooltip(event) {
 
 
-  var tooltip = d3.select("#tooltip-info").classed("tooltip-map",true);
+  var tooltip = d3.select("#tooltip-info")
 
 
   tooltip.transition();

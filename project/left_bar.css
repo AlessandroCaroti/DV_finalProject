@@ -187,10 +187,7 @@ ul#country_list {
 }
 
 
-.tooltip-map{
-  position: absolute;
-  z-index: 5;
-}
+
 .range-years-buttons-container {
   padding: 0 5px;
   width: 250px;
