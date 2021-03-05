@@ -578,7 +578,6 @@ table {
 .navbar ul li a{
   display: inline-block;
   text-decoration: none;
-  color: #fff;
   letter-spacing: 1px;
   padding: 15px;
   transition: all ease 0.3s;
@@ -608,18 +607,25 @@ table {
 
 }
 
-.dropdown-navbar:hover a {
-  
-  transition:  0.01s;
-  color: rgba(192, 192, 192, 0.3);
+.button-nav-bar-logo a{
+
+  color: white;
+
+}
+
+#contributors:hover{
+
+  color: rgba(192, 192, 192, 0.5);
+  transition: all 0.1s;
 }
 
 
 #bracket_drop_nav{
-  position: absolute;
-  bottom: 38%;
+  position: relative;
+  left: -5%;
+  
 }
-.dropdown-navbar:hover #bracket_drop_nav{
+#contributors-drop:hover #bracket_drop_nav{
   transition:  0.01s;
   filter: hue-rotate(0deg) saturate(0%) brightness(75%) opacity(30%);
 }
@@ -627,18 +633,15 @@ table {
 
 #contributors-drop{
   margin-left: 30px;
-  width: 150px;
-  height: 72px;
   position: relative ;
   float: right;
-  right: 1.5%;
+  right: 1.8%;
  
 }
 
 #contributors{
   font-size: large;
   margin-top: 6.5%;
-  padding-right: 3px;
 
 }
 
@@ -646,34 +649,35 @@ table {
 #contributors-div{
   width: 168px;
   height: max-content;
-  background-color:rgba(255,255,255,0.9);
+  background-color:rgba(255,255,255, 1);
   display: none;
   position: absolute;
   border:lightgray solid 1px;
-  left: 0;
-  top: 105%;
+  left: -1%;
+  top: 102%;
   border-radius: 15px;
   box-shadow: 1px 1px  5px #aaaaaa;
 
 }
 
-#contributors-div span{
-  position: relative;
-  width: 100%;
-  height: 33.333%;
+.contributors-span {
+  display: inline-block;
   text-align: center;
-
-}
-
-
-#contributors-div span a{
-  position: relative;
-  color:black;
-  font-size: smaller;
   width: 100%;
   height: 100%;
-  
+  font-size: smaller;
+ 
 }
+
+
+.contributors-span a{
+  color: black;
+  height: 100%;
+
+} 
+
+
+
 
 #contributors-div:before {
   position: absolute;
@@ -701,14 +705,14 @@ table {
 
 
 #contributors-div span:hover a{
-  background-color: rgba(192, 192, 192, 0.5);
+color: rgba(192, 192, 192, 0.5);
 }
 
-#contributors-div span:last-child a{
+#contributors-div span:last-child {
   border-bottom-right-radius: 15px;
   border-bottom-left-radius: 15px;
 }
-#contributors-div span:first-child a{
+#contributors-div span:first-child {
   border-top-right-radius: 15px;
   border-top-left-radius: 15px;
 }
@@ -719,7 +723,7 @@ table {
 
   position: relative;
   float: right;
-  right: -1%;
+  right: -%;
   bottom: -16%;
   width: 45px;
   height: 45px;
@@ -731,6 +735,9 @@ table {
   filter: hue-rotate(0deg) saturate(0%) brightness(75%) opacity(30%);
 }
 
+
+
+/*Collapse DropDown Menu */
 
 #links-collapse-drop{
   width: 220px;
@@ -770,35 +777,28 @@ table {
 
 }
 
-#links-collapse-drop span a{
+.links_page-collapse{
   color: black; 
 }
-#links-collapse-drop span {
-  width: 100%;
-}
 
-#links-collapse-drop span:last-child{
-  
-  border-bottom-right-radius: 15px;
-  border-bottom-left-radius: 15px;
-}
 
-#links-collapse-drop span:nth-child(){
 
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
-}
 
-#links-collapse-drop span:hover{
-  background-color: rgba(192, 192, 192, 0.5) ;
+.span-collapse:hover a{
+color: rgba(192, 192, 192, 0.5) ;
 }
 
 .span-collapse{
   display: none;
-  width: max-content;
   text-align: center;
+  width: 100%;
+  height: 100%;
+  color: black; 
+  
+
 }
 
+/*Links Main NavaBar Style*/
 
 #links-container {
   position: relative;
@@ -809,7 +809,7 @@ table {
 }
 
 
-#links-container span a{ 
+.links_page{ 
 
   padding-left: 10px;
   padding-right: 10px;
@@ -821,13 +821,13 @@ table {
   font-family: sans-serif;
 }
 
-#links-container span{
+.links-span{
   position: relative;
   display: inline-block;
   height: 100%;
 }
 
-#links-container span:after{
+.links-span:after{
   content:"";
     position:absolute;
     top:20%;
@@ -837,11 +837,11 @@ table {
     background: lightgray;
 }
 
-#links-container span:last-child:after{
+.links-span:last-child:after{
     opacity: 0%;
 }
 
-#links-container span:hover a{
+.links-span:hover a{
   color: rgba(192, 192, 192, 0.3);
 }
 
@@ -862,36 +862,55 @@ table {
   #links-container span:nth-child(n+6) {  display: none;}
   #links-container span:nth-child(n+6):after{ display: none;}
   .span-collapse:nth-child(n+6) {  display: block;}
+ 
 }
 
 @media (max-width: 1396px) {
   #links-container span:nth-child(n+5) {  display: none;}
   #links-container span:nth-child(n+5):after{ display: none;}
-  .span-collapse:nth-child(n+5) {  display: block;}
+  .span-collapse:nth-child(n+5) {  
+    display: block;  
+  
+  }
+
 }
 
 @media (max-width: 1189px) {
   #links-container span:nth-child(n+4) {  display: none;}
   #links-container span:nth-child(n+4):after{ display: none;}
-  .span-collapse:nth-child(n+4) {  display: block;}
+  .span-collapse:nth-child(n+4) {  
+    display: block;
+
+  
+  }
+
 }
 
 @media (max-width: 976px) {
   #links-container span:nth-child(n+3) {  display: none;}
   #links-container span:nth-child(n+3):after{ display: none;}
-  .span-collapse:nth-child(n+3) {  display: block;}
+  .span-collapse:nth-child(n+3) {  
+    display: block; 
+  }
+
 }
 
 @media (max-width: 823px) {
   #links-container span:nth-child(n+2) {  display: none;}
-  #links-container span:nth-child(n+2):after{ display: none;}
-  .span-collapse:nth-child(n+2) {  display: block;}
+  #links-container span:nth-child(n+2):after{ 
+    display: none;
+  }
+ 
+
 }
 
 @media (max-width: 675px) {
   #links-container span:nth-child(n+1) {  display: none;}
   #links-container span:nth-child(n+1):after{ display: none;}
-  .span-collapse:nth-child(n+1) {  display: block;}
+  .span-collapse:nth-child(n+1) {  
+    display: block;
+  
+  }
 }
 
 @media (min-width: 1560px) {

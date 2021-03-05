@@ -74,9 +74,10 @@
     <ul id="main-nav">
       <li id="logo-elem" class="button-nav-bar-logo"> <img id="logo" src="../project/images/Global_Warming_icon.svg"
           alt="Global_Warming_icon"></li>
+      
       <li class="button-nav-bar-logo"> <a href="http://berkeleyearth.org/" target="_blank" id="title-logo">Berkley
           Earth</a> </li>
-      <li id="contributors-drop" class="dropdown-navbar" onclick="NavBarDropDownEvt()">
+      <li id="contributors-drop" class="button-nav-bar-logo" onclick="NavBarDropDownEvt()">
 
         <a href="#" id="contributors">Contributors</a>
 
@@ -84,11 +85,10 @@
           width="13" />
 
         <div id="contributors-div">
-          
-
-            <span> <a href="https://github.com/LazyRacc00n" target="_blank">Jacopo Dapueto</a></span>
-            <span> <a href="https://github.com/simocampi" target="_blank">Simone Campisi</a></span>
-            <span> <a href="https://github.com/AlessandroCaroti" target="_blank">Alessandro Caroti</a></span>
+        
+            <span class="contributors-span"> <a href="https://github.com/LazyRacc00n" target="_blank">Jacopo Dapueto</a></span>
+            <span class="contributors-span"> <a href="https://github.com/simocampi" target="_blank">Simone Campisi</a></span>
+            <span class="contributors-span"> <a href="https://github.com/AlessandroCaroti" target="_blank">Alessandro Caroti</a></span>
           
         </div>
       </li>
@@ -120,12 +120,12 @@
       
       <div id="links-container">
 
-        <span><a class="links_page" href="#svg-map">Map</a></span>
-        <span><a class="links_page" href="#stripechart">Climate Stripes</a></span>
-        <span><a class="links_page" href="#linechart">Climate Change</a></span>
-        <span><a class="links_page" href="#table_container">Mean Rate Of Changes</a></span>
-        <span><a class="links_page" href="#container-h-c">Temperature Records</a></span>
-        <span><a class="links_page" href="#seasonal_changes_graphic">Seasonal Changes</a></span>
+        <span class="links-span"><a class="links_page" href="#svg-map">Map</a></span>
+        <span class="links-span"><a class="links_page" href="#stripechart">Climate Stripes</a></span>
+        <span class="links-span"><a class="links_page" href="#linechart">Climate Change</a></span>
+        <span class="links-span"><a class="links_page" href="#table_container">Mean Rate Of Changes</a></span>
+        <span class="links-span"><a class="links_page" href="#container-h-c">Temperature Records</a></span>
+        <span class="links-span"><a class="links_page" href="#seasonal_changes_graphic">Seasonal Changes</a></span>
 
       </div>
 
@@ -421,6 +421,7 @@
     <script>
       window.onload = init_page();
       window.onscroll = function() {scrollFunction()};
+
     </script>
   </body>
 </html>

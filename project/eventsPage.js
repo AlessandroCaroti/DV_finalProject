@@ -51,7 +51,8 @@ function updateRangeData(value){
   // update charts
   changeDataRangeYears()
 }
-  function collapseMenuEvt() {
+
+function collapseMenuEvt() {
 
     var drop_div = document.getElementById("links-collapse-drop");
 
@@ -60,4 +61,7 @@ function updateRangeData(value){
   
     else 
       drop_div.style.display = "none";
-    }
+}
+
+
+console.log(d3.select(".span-collapse"))
