@@ -6,7 +6,7 @@ h1 = 37;
 p = 2;
 
 w2=250;
-h2=225;
+h2=240;
 
 //STYLE OPEN
 d3.select("#setting_btn_open").attr("d", roundedRect(x, y, w1, h1, 3));
