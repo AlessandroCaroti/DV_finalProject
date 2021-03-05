@@ -110,7 +110,7 @@ function update_colors(temperatures, time_trasition) {
     elements.attr("anomaly", d["ANOMALY"]);
 
     // update tooltip
-    let tooltip = d3.select(".tooltip-map");
+    let tooltip = d3.select("#tooltip-map");
     if (tooltip.select(".tooltip-name").html() === d.Country) {
       tooltip
         .select(".tooltip-anomaly")
@@ -148,7 +148,7 @@ function country_events() {
     d3.select(".selected_country").moveToFront();
 
     // hide tooltip
-    d3.select(".tooltip-map").style("display", "none");
+    d3.select("#tooltip-map").style("display", "none");
 
     // reset the stroke width to the original one
     var orginal_stroke = borderCountryScale(curr_zoomScale);
@@ -165,14 +165,14 @@ function country_events() {
       let anomaly = d3.select(this).attr("anomaly");
 
       // show tooltip
-      d3.select(".tooltip-map")
+      d3.select("#tooltip-map")
         .style("top", event.pageY + 13 + "px")
         .style("left", event.pageX + 13 + "px")
         .style("display", "block")
         .select(".tooltip-name")
         .html(b.properties.name);
 
-      d3.select(".tooltip-map")
+      d3.select("#tooltip-map")
         .select(".tooltip-anomaly")
         .datum(anomaly)
         .html((d) => {
@@ -192,7 +192,7 @@ function country_events() {
     })
     .on("mousemove", function (event, b) {
       // update position tooltip
-      d3.select(".tooltip-map")
+      d3.select("#tooltip-map")
         .style("top", event.pageY + 13 + "px")
         .style("left", event.pageX + 13 + "px");
     });
@@ -274,7 +274,7 @@ var zoom = d3
     map_container.selectAll("path").attr("transform", event.transform);
 
     // hide tooltip
-    d3.select(".tooltip-map").style("display", "none");
+    d3.select("#tooltip-map").style("display", "none");
 
     // change border width
     update_strokes();
@@ -284,7 +284,7 @@ var zoom = d3
     let cur_country = map_container.select(".highlighted_country");
 
     if (!cur_country.empty())
-      d3.select(".tooltip-map").style("display", "block");
+      d3.select("#tooltip-map").style("display", "block");
 
     //shown new level
     let new_level = levelScale(curr_zoomScale);
