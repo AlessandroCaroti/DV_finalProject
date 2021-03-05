@@ -5,7 +5,7 @@ function init_page() {
   load_map();
 
   // trovare modo automatico per trovare min e max
-  init_slider(1743, 2020, 1);
+  init_slider(1750, 2020, 1);
 
   init_map_controls();
   allDeafaultDataset();
