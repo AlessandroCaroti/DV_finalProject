@@ -67,6 +67,14 @@ div.all-slider{
   padding-bottom: 10px;
 }
 
+g.slider{
+  cursor:grab;
+}
+
+.handle{
+  cursor:grabbing;
+}
+
 /* DIABLE ALL SVG TEXT */
 svg text {
   -webkit-user-select: none;
