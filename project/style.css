@@ -751,6 +751,7 @@ color: rgba(192, 192, 192, 0.5);
 
 
 #elem-logo-git:hover {
+  cursor: pointer;
   filter: hue-rotate(0deg) saturate(0%) brightness(75%) opacity(30%);
 }
 
@@ -914,7 +915,7 @@ color: rgba(192, 192, 192, 0.5) ;
 
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 750px) {
   #links-container span:nth-child(n+2) {  display: none;}
   #links-container span:nth-child(n+2):after{ 
     display: none;
@@ -923,7 +924,7 @@ color: rgba(192, 192, 192, 0.5) ;
 
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 650px) {
   #links-container span:nth-child(n+1) {  display: none;}
   #links-container span:nth-child(n+1):after{ display: none;}
   .span-collapse:nth-child(n+1) {  
