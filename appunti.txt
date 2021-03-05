@@ -19,7 +19,6 @@ DA DISCUTERE:
 -discutere come caricare i file, e se vale la pena salvarseli
 
 DA CHIEDERE:
--l'incertezza per la mappa viene usata? nope
 
 ------------------------------------------------------------------------------------
 Presentazione progetto:
