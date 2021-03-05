@@ -134,14 +134,19 @@ function createHottestColdestLineChart(data){
                     .data(dataMonthly)
                     .enter()
                     .append("path")
-                      .attr("d", valueline_annual)
-                      .attr("id", function(d){
+                    .attr("d", valueline_annual)
+                    .attr("id", function(d){
                         if(isInList(d[0].Year, hot_cold_list))
                             return String("path-"+ getIdxList(d[0].Year, hot_cold_list));
                           })
-                      .attr("style", (d) => getHotColdStyle(hot_cold_list,d))
-                      .on("mouseover", function(event, d){ hotColdMouseEnter(this)})
-                      .on("mouseout", function(event, d){ hotColdMouseLeave(this)})
+                    .attr("class", function(d){
+                      
+                      if(!isInList(d[0].Year, hot_cold_list))
+                          return String("grey-path");
+                    })
+                    .attr("style", (d) => getHotColdStyle(hot_cold_list,d))
+                    .on("mouseover", function(event, d){ hotColdMouseEnter(this)})
+                    .on("mouseout", function(event, d){ hotColdMouseLeave(this)})
   
     
     svg.append("g")
@@ -209,6 +214,11 @@ function UpdateHottestColdestLineChart(data){
             if(isInList(d[0].Year, hot_cold_list))
                 return String("path-"+ getIdxList(d[0].Year, hot_cold_list));
               })
+          .attr("class", function(d){
+                      
+                if(!isInList(d[0].Year, hot_cold_list))
+                    return String("grey-path");
+          })  
           .on("mouseover", function(){ hotColdMouseEnter(this)})
           .on("mouseout", function(){ hotColdMouseLeave(this)})
 

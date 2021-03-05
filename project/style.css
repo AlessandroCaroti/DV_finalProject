@@ -723,8 +723,7 @@ color: rgba(192, 192, 192, 0.5);
 
   position: relative;
   float: right;
-  right: -%;
-  bottom: -16%;
+  bottom: -19%;
   width: 45px;
   height: 45px;
   border-radius: 100%;
@@ -736,9 +735,7 @@ color: rgba(192, 192, 192, 0.5);
 }
 
 
-
 /*Collapse DropDown Menu */
-
 #links-collapse-drop{
   width: 220px;
   height: max-content;
@@ -858,14 +855,14 @@ color: rgba(192, 192, 192, 0.5) ;
   
 }
 
-@media (max-width: 1550px) {
+@media (max-width: 75%) {
   #links-container span:nth-child(n+6) {  display: none;}
   #links-container span:nth-child(n+6):after{ display: none;}
   .span-collapse:nth-child(n+6) {  display: block;}
  
 }
 
-@media (max-width: 1396px) {
+@media (max-width: 50%) {
   #links-container span:nth-child(n+5) {  display: none;}
   #links-container span:nth-child(n+5):after{ display: none;}
   .span-collapse:nth-child(n+5) {  
@@ -875,7 +872,7 @@ color: rgba(192, 192, 192, 0.5) ;
 
 }
 
-@media (max-width: 1189px) {
+@media (max-width: 25%) {
   #links-container span:nth-child(n+4) {  display: none;}
   #links-container span:nth-child(n+4):after{ display: none;}
   .span-collapse:nth-child(n+4) {  
@@ -886,7 +883,7 @@ color: rgba(192, 192, 192, 0.5) ;
 
 }
 
-@media (max-width: 976px) {
+@media (max-width: 15%) {
   #links-container span:nth-child(n+3) {  display: none;}
   #links-container span:nth-child(n+3):after{ display: none;}
   .span-collapse:nth-child(n+3) {  
