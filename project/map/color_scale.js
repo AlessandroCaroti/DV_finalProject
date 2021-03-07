@@ -1,7 +1,7 @@
  // da trovare modo per trovare min e max automaticamente 
  var min_scale = -3.0;
  var max_scale = +3.8;
- var width_legend = 500; // width of the legend axis
+ var width_legend = h_map; // width of the legend axis
  var n_ticks = 11;
  var step_list = [];
  var step_color_list = [];
@@ -52,9 +52,10 @@ function set_colorScale(){
                                         .tickSize(13);
 
     var axis = d3.select('.legend-anomaly')
+                .attr("width", h_map);
     // generate axis
     
-    axis.attr("transform", "translate(" +   (w_map - width_legend + bar_step * 2 ) +","+ 40  +" )") 
+    axis.attr("transform", "translate(" +   0 +","+ 500  +" ) rotate(-90 0 0)") 
             .call(anomaly_axis);
 
     // draw bars
