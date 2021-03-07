@@ -199,6 +199,7 @@ function styleLastYearsLines(d, dataLastYears) {
     if (dataLastYears[i][0].year == d[0].year) return colorsYears[i];
 }
 
+
 function createDeafaultSeasonalLinechart(data, dataSeasonalBaseline) {
   var title = document.getElementById("title-seasonal").innerHTML;
   document.getElementById("title-seasonal").innerHTML =
@@ -224,57 +225,45 @@ function createDeafaultSeasonalLinechart(data, dataSeasonalBaseline) {
   var valuelineSeasonalBaseline = getLineGeneratorsSeasonal(x, y);
 
   //Add X, Y axess
-  svg
-    .append("g")
-    .attr("transform", "translate(0," + height + ")")
-    .attr("class", "x_axis_seasonal")
-    .call(d3.axisBottom(x).tickFormat(d3.timeFormat("%b")));
+  svg.select("g.x_axis_seasonal")
+  .attr("transform", "translate(0," + height + ")")
+  .call(d3.axisBottom(x).tickFormat(d3.timeFormat("%b")));
 
   svg.select("g.y_axis_seasonal").call(d3.axisLeft(y));
   lineChartGridline("x_axis_seasonal", "y_axis_seasonal");
+ 
 
-  svg
-    .append("g")
-    .attr("class", "uncertainty")
-    .attr("id", "baseline-unc")
+  svg.select(".uncertainty")
     .selectAll("path")
     .data([seasonalData])
     .enter()
     .append("path")
     .attr("d", valuelineSeasonalBaseline[0]);
 
-  svg
-    .append("g")
-    .attr("class", "line-seasonal-baseline")
+  svg.select(".line-seasonal-baseline")
     .selectAll("path")
     .data([seasonalData])
     .enter()
     .append("path")
-    .attr("d", valuelineSeasonalBaseline[1]);
+    .attr("d", valuelineSeasonalBaseline[1])
+    
+    
 
-  svg
-    .append("g")
-    .attr("class", "seasonal-range-line")
-    .attr("id", "seasonal-range-max")
+  svg.select("#seasonal-range-max")
     .selectAll("path")
     .data([seasonalData])
     .enter()
     .append("path")
     .attr("d", valuelineSeasonalBaseline[2]);
-
-  svg
-    .append("g")
-    .attr("class", "seasonal-range-line")
-    .attr("id", "seasonal-range-min")
-    .selectAll("path")
-    .data([seasonalData])
-    .enter()
-    .append("path")
-    .attr("d", valuelineSeasonalBaseline[3]);
-
-  svg
-    .append("g")
-    .attr("class", "last-years-lines")
+ 
+  svg.select("#seasonal-range-min")
+      .selectAll("path")
+      .data([seasonalData])
+      .enter()
+      .append("path")
+      .attr("d", valuelineSeasonalBaseline[3]);
+   
+  svg.select(".last-years-lines")
     .selectAll("path")
     .data(lastYearsData)
     .enter()
@@ -282,8 +271,6 @@ function createDeafaultSeasonalLinechart(data, dataSeasonalBaseline) {
     .attr("id", (d) => d[0].year)
     .attr("stroke", (d) => styleLastYearsLines(d, lastYearsData))
     .attr("d", valuelineSeasonalBaseline[4]);
-
-  
   
 
   var tooltipLine = svg
@@ -310,9 +297,10 @@ function createDeafaultSeasonalLinechart(data, dataSeasonalBaseline) {
     )
     .on("mouseout", () => removeTooltipSeasonal(tooltipLine));
 
-  createSeasonalLineChartLegend(svg, lastYearsData);
+    createSeasonalLineChartLegend(svg, lastYearsData);
+    
+  
 
-  svg.select("g.y_axis_seasonal").raise();
 }
 
 function updateSeasonalLineChart(data, dataSeasonalBaseline) {
@@ -330,6 +318,15 @@ function updateSeasonalLineChart(data, dataSeasonalBaseline) {
   var svg = d3.select("#seasonal_changes_graphic svg g");
   var valuelineSeasonalBaseline = getLineGeneratorsSeasonal(x, y);
 
+
+   // update  y Axis
+   d3.select(".y_axis_seasonal")
+   .transition()
+   .duration(500)
+   .call(d3.axisLeft(y));
+
+  updateLineChartGridline("x_axis_seasonal", "y_axis_seasonal");
+
   var baseline_unc = d3
     .select("#baseline-unc")
     .selectAll("path")
@@ -342,6 +339,7 @@ function updateSeasonalLineChart(data, dataSeasonalBaseline) {
     .merge(baseline_unc)
     .attr("d", valuelineSeasonalBaseline[0]);
 
+
   var baseline = d3
     .select(".line-seasonal-baseline")
     .selectAll("path")
@@ -352,6 +350,7 @@ function updateSeasonalLineChart(data, dataSeasonalBaseline) {
     .append("path")
     .merge(baseline)
     .attr("d", valuelineSeasonalBaseline[1]);
+ 
 
   var range_max = d3
     .select("#seasonal-range-max")
@@ -363,6 +362,7 @@ function updateSeasonalLineChart(data, dataSeasonalBaseline) {
     .append("path")
     .merge(range_max)
     .attr("d", valuelineSeasonalBaseline[2]);
+  
 
   var range_min = d3
     .select("#seasonal-range-min")
@@ -374,12 +374,14 @@ function updateSeasonalLineChart(data, dataSeasonalBaseline) {
     .append("path")
     .merge(range_min)
     .attr("d", valuelineSeasonalBaseline[3]);
-
+    
   var lastYearLine = d3
     .select(".last-years-lines")
     .selectAll("path")
     .data(lastYearsData);
+  
   lastYearLine.exit().remove();
+  
   lastYearLine
     .enter()
     .append("g")
@@ -404,14 +406,7 @@ function updateSeasonalLineChart(data, dataSeasonalBaseline) {
     )
     .on("mouseout", () => removeTooltipSeasonal(tooltipLine));
 
-  updateSeasonalLegend(lastYearsData, svg);
+   updateSeasonalLegend(lastYearsData, svg);
 
-  // update  y Axis
-  d3.select(".y_axis_seasonal")
-    .raise()
-    .transition()
-    .duration(500)
-    .call(d3.axisLeft(y));
-
-  updateLineChartGridline("x_axis_seasonal", "y_axis_seasonal");
+ 
 }

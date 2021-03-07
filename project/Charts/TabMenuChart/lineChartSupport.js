@@ -1,7 +1,3 @@
-
-
-
-
 function changeDataRangeYears() {
  
     var dataFile = document.getElementById("input_countrySelection").value

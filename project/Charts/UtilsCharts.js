@@ -150,6 +150,8 @@ function lineChartGridline(x_axis_class, y_axis_class){
   var y_axis_grid= String("g."+y_axis_class+" g.tick")
   var x_axis_grid= String("g."+x_axis_class+" g.tick")
 
+  console.log(x_axis_grid)
+
   d3.selectAll(y_axis_grid) 
     .append("line") 
     .attr("class", "gridline")
