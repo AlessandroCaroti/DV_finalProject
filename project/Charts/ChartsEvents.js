@@ -20,11 +20,18 @@ function click_tab(evt, graphic_name) {
 
 // Functions to Draw and Remove the tooltip
 // given the x position find the corresponding value
-function drawTooltipLineChart(self, event, x, data, tooltipLine, id_chart, height) {
-  
-  var btn = getCheckedValue("btn-range-year")
+function drawTooltipLineChart(
+  self,
+  event,
+  x,
+  data,
+  tooltipLine,
+  id_chart,
+  height
+) {
+  var btn = getCheckedValue("btn-range-year");
 
-  var label = document.getElementById("label-"+btn.id)
+  var label = document.getElementById("label-" + btn.id);
   var range_name = label.innerHTML;
 
   var tooltip = d3.select(id_chart + " .tooltip");
@@ -43,8 +50,6 @@ function drawTooltipLineChart(self, event, x, data, tooltipLine, id_chart, heigh
     .attr("y1", 0)
     .attr("y2", height);
 
-
- 
   var tipText = String(
     "<b> <p style='text-align: center; font-size: 15px;'>" +
       elem.date.getFullYear() +
@@ -89,7 +94,6 @@ function removeTooltipLineChart(tooltipLine, id_chart) {
 //--------------------------------STRIPE CHART TOOLTIP----------------------------------------
 
 function stripesEnter(event, d) {
-
   var range_year = getCheckedValue("btn-range-year").value;
   var tooltip = d3.select("#stripechart .tooltip");
 
@@ -97,11 +101,14 @@ function stripesEnter(event, d) {
   var tipText = String(
     "<p style='text-align: center; font-weight: bold; font-size: 13px'> " +
       d.Year +
-      "</p>" +"<p style='text-align: center; font-weight: bold; font-size: 12px'> "+
-      (isNaN( d[range_year+"_anomaly"])?"unknown" : d[range_year+"_anomaly"].toFixed(2)+
-      " &deg;C " ) +
-      
-      (isNaN( d[range_year+"_anomaly"])?"": (" &plusmn; " + d[range_year+"_unc"].toFixed(2) )) +
+      "</p>" +
+      "<p style='text-align: center; font-weight: bold; font-size: 12px'> " +
+      (isNaN(d[range_year + "_anomaly"])
+        ? "unknown"
+        : d[range_year + "_anomaly"].toFixed(2) + " &deg;C ") +
+      (isNaN(d[range_year + "_anomaly"])
+        ? ""
+        : " &plusmn; " + d[range_year + "_unc"].toFixed(2)) +
       " </p>"
   );
 
@@ -117,7 +124,7 @@ function stripesLeave() {
   if (tooltip) tooltip.style("display", "none");
 }
 
-function stripesMove(){
+function stripesMove() {
   var tooltip = d3.select("#stripechart .tooltip");
   tooltip
     .style("left", String(event.pageX + 20) + "px")
@@ -126,13 +133,25 @@ function stripesMove(){
 
 //--------------------------------- TOOLTIP SEASONAL LINECHART --------------------------------------------
 
-function drawTooltipSeasonal(tipBox, event,x, data, tooltipLine, lastYearsData ) {
+function drawTooltipSeasonal(
+  tipBox,
+  event,
+  x,
+  data,
+  tooltipLine,
+  lastYearsData
+) {
   var tooltip = d3.select("#tooltip-seasonal-changes");
 
-  const date = x.invert(d3.pointer(event, tipBox.node())[0] );
+  const date = x.invert(d3.pointer(event, tipBox.node())[0]);
 
   //find the element of the corresponding month
-  var elem = data.find((d) => (d.month -1 == date.getMonth() + 1 && date.getDate() >= 15) || (d.month -1 == date.getMonth() && date.getDate() < 15) || ( date.getDate() >= 15  && date.getMonth() == 11 && d.month  == 1));
+  var elem = data.find(
+    (d) =>
+      (d.month - 1 == date.getMonth() + 1 && date.getDate() >= 15) ||
+      (d.month - 1 == date.getMonth() && date.getDate() < 15) ||
+      (date.getDate() >= 15 && date.getMonth() == 11 && d.month == 1)
+  );
 
   tooltipLine
     .attr("stroke", "black")
@@ -181,60 +200,47 @@ function removeTooltipSeasonal(tooltipLine) {
 
 //------------------------------------------HOTTTEST-COLDEST LINECHART -------------------------------------------------------------------
 
+function hotColdTextLegendEnter(event, d) {
+  var idx = this.id.split("-")[3];
 
-function hotColdTextLegendEnter(event, d){
-  
-  var idx= this.id.split("-")[3];
-  
-  var idx_text= "hot-cold-text-"+idx;
-  d3.select("#"+idx_text).style("font-weight", "bold")
-                                .style("text-decoration", "underline");
-           
-  d3.select("#path-"+idx).style("stroke-width", "6px");
+  var idx_text = "hot-cold-text-" + idx;
+  d3.select("#" + idx_text)
+    .style("font-weight", "bold")
+    .style("text-decoration", "underline");
 
-  d3.select("#path-"+idx).moveToFront();
+  d3.select("#path-" + idx).style("stroke-width", "6px");
 
+  d3.select("#path-" + idx).moveToFront();
 }
 
+function hotColdTextLegendLeave(event, d) {
+  var idx = this.id.split("-")[3];
 
+  var idx_text = "hot-cold-text-" + idx;
+  d3.select("#" + idx_text)
+    .style("font-weight", "normal")
+    .style("text-decoration", "none");
 
-function hotColdTextLegendLeave(event, d){
-  var idx= this.id.split("-")[3];
-
-  var idx_text= "hot-cold-text-"+idx
-  d3.select("#"+idx_text).style("font-weight", "normal")
-                        .style("text-decoration", "none");
-  
-  
-  d3.select("#path-"+idx).style("stroke-width", "2px");
-
+  d3.select("#path-" + idx).style("stroke-width", "2px");
 }
-
 
 function hotColdMouseEnter(self) {
-  
   var idx = self.id.split("-")[1];
 
-  d3.select(self).style("stroke-width", "6px")
-                                .moveToFront();
+  d3.select(self).style("stroke-width", "6px").moveToFront();
 
-
-    d3.select("#hot-cold-text-" + idx)
-      .style("font-weight", "bold")
-      .style("text-decoration", "underline")
-      .style("text-decoration-color", "black");
-
+  d3.select("#hot-cold-text-" + idx)
+    .style("font-weight", "bold")
+    .style("text-decoration", "underline")
+    .style("text-decoration-color", "black");
 }
 
-function hotColdMouseLeave(self){
-  
+function hotColdMouseLeave(self) {
   var idx = self.id.split("-")[1];
-  
+
   d3.select(self).style("stroke-width", "2px");
 
   d3.select("#hot-cold-text-" + idx)
-      .style("font-weight", "normal")
-      .style("text-decoration", "none");
-  }
-
-
+    .style("font-weight", "normal")
+    .style("text-decoration", "none");
+}

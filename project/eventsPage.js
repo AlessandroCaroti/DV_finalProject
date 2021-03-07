@@ -60,11 +60,9 @@ function drawInfoTooltip(event) {
 
   tooltip.transition();
   var tipText = String(
-    "<p style='text-align: left; padding-right: 5px; padding-left: 5px; font-size: 12px;' >"
-    
-    +"Possibility to choose between data averaged in different interval of years." +
-
-    '<br> E.g. " 5 Years " refers to the average of data of the previous 5 years.' +
+    "<p style='text-align: left; padding-right: 5px; padding-left: 5px; font-size: 12px;' >" +
+      "Possibility to choose between data averaged in different interval of years." +
+      '<br> E.g. " 5 Years " refers to the average of data of the previous 5 years.' +
       "</p>"
   );
 
