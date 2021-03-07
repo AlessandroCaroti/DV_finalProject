@@ -56,7 +56,7 @@ function set_colorScale(){
     // generate axis
     
     axis.attr("transform", "translate(" + 40 +","+ 600  +" ) rotate(-90 0 0)") 
-            .call(anomaly_axis);
+                                                                .call(anomaly_axis);
 
     // draw bars
     var rects = axis.selectAll("rect")
@@ -75,23 +75,24 @@ function set_colorScale(){
           .attr("height", "15px")
           .style("fill", d => d)
     
+    var axis_unkown = d3.select("#legend-no_data");
     
-    axis.append("rect")
-            .attr("x", quantizeBarScale(max_scale) + 2 * rect_width)
-            .attr("y", "-10")
+    axis_unkown.append("rect")
+            .attr("x", quantizeBarScale(max_scale) + 8 * rect_width)
+            .attr("y", "10")
             .attr("width", rect_width)
             .attr("height", "15px")
             .style("fill", "#999999");
       
-    axis.append("rect")
-            .attr("x", quantizeBarScale(max_scale) + 7 * rect_width/2)
-            .attr("y", "-10")
+    axis_unkown.append("rect")
+            .attr("x", quantizeBarScale(max_scale) + 20 * rect_width/2)
+            .attr("y", "10")
             .attr("width", rect_width)
             .attr("height", "15px")
             .style("fill", "url(#diagonalHatch)");
     
             
-    axis.append("g")
+    axis_unkown.append("g")
             .classed("tick", true)
             .attr("transform", "translate(" + (width_legend + 2 * (width_legend / n_ticks)) + ", 0)")
             .append("text")
@@ -101,7 +102,7 @@ function set_colorScale(){
             .attr("dy", "0.71em")
             .html("unknown");
 
-    axis.append("g")
+    axis_unkown.append("g")
             .classed("tick", true)
             .attr("transform", "translate(" + (width_legend + 7 * (width_legend / n_ticks)/2) + ", 0)")
             .append("text")
@@ -113,6 +114,7 @@ function set_colorScale(){
     
     // change axis style
     axis.selectAll(".tick").selectAll("text")
+         .attr("transform", "rotate(90 0 0) translate(30, -24)")
           .attr("dy", "0.91em")
           .style("font-size", "14px");
 
