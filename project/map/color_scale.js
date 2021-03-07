@@ -52,7 +52,7 @@ function set_colorScale(){
                                         .tickSize(13);
 
     var axis = d3.select('.legend-anomaly')
-                .attr("width", h_map);
+
     // generate axis
     
     axis.attr("transform", "translate(" +   0 +","+ 600  +" ) rotate(-90 0 0)") 
