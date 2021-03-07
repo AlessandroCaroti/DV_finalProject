@@ -406,3 +406,15 @@ Poligon pos. extracted: 9
 Polygon removed from the orignal country: YES
 ########################################################################
 
+MAP VERSION 35
+
+Orginal mapVersion: 34
+Log time: 2021-03-07 16:27:28.289127
+
+Orginal Name: Norway
+New Name: Bouvet Island
+Id: 9999
+Poligon pos. extracted: 74
+Polygon removed from the orignal country: YES
+########################################################################
+
