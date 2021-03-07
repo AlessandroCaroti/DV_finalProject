@@ -150,33 +150,36 @@ function lineChartGridline(x_axis_class, y_axis_class){
   var y_axis_grid= String("g."+y_axis_class+" g.tick")
   var x_axis_grid= String("g."+x_axis_class+" g.tick")
 
-  console.log(x_axis_grid)
+
 
   d3.selectAll(y_axis_grid) 
     .append("line") 
     .attr("class", "gridline")
-    .attr("x1", 1) 
-    .attr("y1", 1)
+    .attr("id", "y_gridline")
+    .attr("x1", 0) 
+    .attr("y1", 0)
     .attr("x2", width)
-    .attr("y2", 1);
+    .attr("y2", 0);
   
   d3.selectAll(x_axis_grid) 
     .append("line") 
     .attr("class", "gridline")
-    .attr("x1", 1) 
-    .attr("y1", -height)
+    .attr("id", "x_gridline")
+    .attr("x1",1) 
+    .attr("y1", 0)
     .attr("x2", 1)
-    .attr("y2", 1)
+    .attr("y2", -height )
 }
 
 
 function updateLineChartGridline(x_axis_class, y_axis_class){
 
-  d3.select(".gridline").remove()
+
   lineChartGridline(x_axis_class,y_axis_class);
+
+
+
 }
-
-
 
 //-------------------------------------------------------TABLE-----------------------------------------
 

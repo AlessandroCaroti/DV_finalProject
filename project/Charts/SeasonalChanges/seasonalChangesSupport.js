@@ -224,14 +224,41 @@ function createDeafaultSeasonalLinechart(data, dataSeasonalBaseline) {
 
   var valuelineSeasonalBaseline = getLineGeneratorsSeasonal(x, y);
 
-  //Add X, Y axess
+  
+  var xAxis= d3.axisBottom(x).tickFormat(d3.timeFormat("%b"));
+  var yAxis= d3.axisLeft(y);
+  
+  
+  
+  
+  var xGrid = (g) => g
+      .attr('class', 'gridline')
+      .selectAll('line')
+      .data(x.ticks())
+      .join('line')
+      .attr('x1', d => x(d))
+      .attr('x2', d => x(d))
+      .attr('y1', margin.top)
+      .attr('y2', height - margin.bottom)
+
+  var yGrid = (g) => g
+      .attr('class', 'gridline')
+      .selectAll('line')
+      .data(y.ticks())
+      .join('line')
+      .attr('x1', margin.left)
+      .attr('x2', width - margin.right)
+      .attr('y1', d => y(d))
+      .attr('y2', d => y(d))
+      
+      
+     //Add X, Y axess
   svg.select("g.x_axis_seasonal")
   .attr("transform", "translate(0," + height + ")")
-  .call(d3.axisBottom(x).tickFormat(d3.timeFormat("%b")));
+  .call(xAxis);
 
-  svg.select("g.y_axis_seasonal").call(d3.axisLeft(y));
+  svg.select("g.y_axis_seasonal").call(yAxis);
   lineChartGridline("x_axis_seasonal", "y_axis_seasonal");
- 
 
   svg.select(".uncertainty")
     .selectAll("path")
@@ -248,7 +275,6 @@ function createDeafaultSeasonalLinechart(data, dataSeasonalBaseline) {
     .attr("d", valuelineSeasonalBaseline[1])
     
     
-
   svg.select("#seasonal-range-max")
     .selectAll("path")
     .data([seasonalData])
@@ -298,7 +324,10 @@ function createDeafaultSeasonalLinechart(data, dataSeasonalBaseline) {
     .on("mouseout", () => removeTooltipSeasonal(tooltipLine));
 
     createSeasonalLineChartLegend(svg, lastYearsData);
-    
+
+      
+
+ 
   
 
 }
@@ -407,6 +436,6 @@ function updateSeasonalLineChart(data, dataSeasonalBaseline) {
     .on("mouseout", () => removeTooltipSeasonal(tooltipLine));
 
    updateSeasonalLegend(lastYearsData, svg);
-
+ 
  
 }

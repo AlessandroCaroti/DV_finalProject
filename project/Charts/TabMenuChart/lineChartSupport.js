@@ -281,7 +281,9 @@ function updateAxis(x_axis_class, y_axis_class, x, y){
         // update  y Axis
     d3.select(y_axis_class)
     .transition().duration(500)
-    .call(d3.axisLeft(y).tickSizeOuter(0));    
+    .call(d3.axisLeft(y).tickSizeOuter(0));
+
+    
 
 }
 
@@ -304,7 +306,6 @@ function updateLineChart(data, grafic_class){
     
     //.graphics
     var svg = d3.select(grafic_class);
-    //updateGrid("#linechart", x, y,svg, 12, 10);
     
     //re-define the lines generator
     // .defined(...) => are not considered the NaN values
@@ -317,6 +318,9 @@ function updateLineChart(data, grafic_class){
     //Update the area that represents the uncertainty                      
     UpdateUncertainty(data, x, y);
     
+    updateRangeNameLegend(svg);
+    updateAxis(".x_axis", ".y_axis", x, y);  
+  
 
     var annual_line= svg.select(".line_chart_annual").selectAll("path").data([data]);
     annual_line.exit().remove();
@@ -366,10 +370,8 @@ function updateLineChart(data, grafic_class){
                          .on('mousemove', (event) => drawTooltipLineChart(tipBox, event, x, data, tooltipLine, "#linechart", height))
                          .on('mouseout', () => removeTooltipLineChart(tooltipLine,"#linechart")); 
     
-    
-    updateRangeNameLegend(svg);
-    updateAxis(".x_axis", ".y_axis", x, y);  
     updateLineChartGridline("x_axis", "y_axis");
+
  
 
 }
