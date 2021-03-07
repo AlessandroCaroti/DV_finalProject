@@ -141,9 +141,11 @@ function country_events() {
       .raise()
       .classed("highlighted_country", true)
       .style("stroke-width", borderCountryScale(curr_zoomScale) * over_stroke); // increase stroke width to make country more visible
+
   });
 
   map_container.selectAll(".country").on("mouseleave ", function (event, b) {
+
     d3.select(".highlighted_country").classed("highlighted_country", false);
     d3.select(".selected_country").moveToFront();
 
@@ -152,9 +154,11 @@ function country_events() {
 
     // reset the stroke width to the original one
     var orginal_stroke = borderCountryScale(curr_zoomScale);
+
     if (b === selected_country) {
       orginal_stroke = orginal_stroke * selected_stroke;
     }
+    
     d3.select(this).style("stroke-width", orginal_stroke);
   });
 
@@ -191,6 +195,8 @@ function country_events() {
         });
     })
     .on("mousemove", function (event, b) {
+
+      
       // update position tooltip
       d3.select("#tooltip-map")
         .style("top", event.pageY + 13 + "px")
@@ -430,7 +436,7 @@ function showLevel(level) {
     .raise()
     .style("opacity", 1);
 
-  // create events on new elements+
+  // create events on new elements
   country_events();
 
   // update highlighted country path
@@ -464,6 +470,8 @@ function init_map_controls() {
 }
 
 function changeView() {
+
+  
   if (!initial_view) {
     debug_log("RESET_ZOOM");
     reset_zoom();

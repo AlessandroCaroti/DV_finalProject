@@ -68,7 +68,13 @@ function reset_and_hide() {
 
   changeAllData("Global Land");
 
-  reset_zoom();
+  //deselect the previus country
+  d3.select(".selected_country").style(
+    "stroke-width",
+    borderCountryScale(curr_zoomScale)
+  );
+
+  set_globe_icon();
   d3.select(".selected_country").classed("selected_country", false);
   selected_country = null;
 }

@@ -154,7 +154,7 @@ zoomManager();
 
 var region_list = [];
 
-d3.json("../../download_data/data/map/countries-10m.json", function (error, world) {
+d3.json("../../data/map/countries-10m_V34_6.json", function (error, world) {
   if (error) {
     console.log(error);
     throw error;
@@ -163,7 +163,7 @@ d3.json("../../download_data/data/map/countries-10m.json", function (error, worl
   console.log(world);
   let topology = world;
   topology = topojson.presimplify(topology);
-  //topology = topojson.simplify(topology, 0.1);
+  topology = topojson.simplify(topology, 0.01);
 
   drawMap(topology);
   console.log(country_list.sort());
