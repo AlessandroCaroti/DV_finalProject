@@ -22,7 +22,7 @@ var country_no_data; // list of countries with no associated data
 var selected_country = null;
 
 // FILES & DIRECTORY PATH VARIABLE
-map_file = "../../data/map/countries-10m_v34_6.json";
+map_file = "../../data/map/countries-10m_v35_6.json";
 tmp_file_prefix = "../../data/years/";
 tmp_file_suffix = "/10-year_mean.csv";
 countries_file = "../../data/15_countries_list.csv";
@@ -316,7 +316,7 @@ function zoom_in(country) {
     y = (bounds[0][1] + bounds[1][1]) / 2,
     scale = Math.max(
       1,
-      Math.min(max_zoom, 0.9 / Math.max(dx / w_map / 3, dy / h_map / 3))
+      Math.min(max_zoom, 0.9 / Math.max(dx / w_map, dy / h_map))
     ),
     translate = [/* w_map/2 */ - scale * x, h_map / 2 - scale * y];
 
