@@ -56,22 +56,26 @@ function collapseMenuEvt() {
 }
 
 function drawInfoTooltip(event) {
-  var tooltip = d3.select("#tooltip-info");
+  
+  var tooltip = d3.select("#data-averaged-title .tooltip");
 
   tooltip.transition();
   var tipText = String(
-    "<p> Ti che te tachet i tac tacum i tac a mi, mi tacat no i tac a ti: tacheti ti i to tac ti che te tachet i tac! </p>"
+    "<p>Possibility to choose between data average in different periods. <br> </p>"
   );
+  
+
 
   tooltip
-    .style("left", String(event.pageX + 20) + "px")
-    .style("top", String(event.pageY - 20) + "px")
+    .style("left", String(event.clientX + 30) + "px")
+    .style("top", String(event.clientY - 40) + "px")
     .style("display", "block")
+    .style("width", "150px")
     .html(tipText);
 }
 
 function removeInfoTooltip() {
-  var tooltip = d3.select("#tooltip-info");
+  var tooltip = d3.select("#data-averaged-title .tooltip");
   tooltip.style("display", "none");
 }
 
