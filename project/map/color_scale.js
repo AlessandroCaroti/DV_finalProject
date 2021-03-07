@@ -55,7 +55,7 @@ function set_colorScale(){
                 .attr("width", h_map);
     // generate axis
     
-    axis.attr("transform", "translate(" +   0 +","+ 500  +" ) rotate(-90 0 0)") 
+    axis.attr("transform", "translate(" +   0 +","+ 600  +" ) rotate(-90 0 0)") 
             .call(anomaly_axis);
 
     // draw bars
