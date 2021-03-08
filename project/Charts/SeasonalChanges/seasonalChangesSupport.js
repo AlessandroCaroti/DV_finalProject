@@ -230,26 +230,6 @@ function createDeafaultSeasonalLinechart(data, dataSeasonalBaseline) {
   
   
   
-  
-  var xGrid = (g) => g
-      .attr('class', 'gridline')
-      .selectAll('line')
-      .data(x.ticks())
-      .join('line')
-      .attr('x1', d => x(d))
-      .attr('x2', d => x(d))
-      .attr('y1', margin.top)
-      .attr('y2', height - margin.bottom)
-
-  var yGrid = (g) => g
-      .attr('class', 'gridline')
-      .selectAll('line')
-      .data(y.ticks())
-      .join('line')
-      .attr('x1', margin.left)
-      .attr('x2', width - margin.right)
-      .attr('y1', d => y(d))
-      .attr('y2', d => y(d))
       
       
      //Add X, Y axess
