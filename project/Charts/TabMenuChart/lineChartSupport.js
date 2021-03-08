@@ -264,8 +264,6 @@ function createDefaultLineChart(data){
 
     createLineChartLegend(svg, btn_ten);
 
-   
-   
   }
 
 
