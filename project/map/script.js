@@ -24,7 +24,7 @@ var selected_country = null;
 // FILES & DIRECTORY PATH VARIABLE
 map_file = "../../data/map/countries-10m_v35_6.json";
 tmp_file_prefix = "../../data/years/";
-tmp_file_suffix = "/10-year_mean.csv";
+tmp_file_suffix = "/Annual_mean.csv";
 countries_file = "../../data/15_countries_list.csv";
 
 //                    END GLOBAL VARIABLE                   //
