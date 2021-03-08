@@ -1,7 +1,7 @@
  // da trovare modo per trovare min e max automaticamente 
  var min_scale = -3.0;
  var max_scale = +3.8;
- var width_legend = h_map; // width of the legend axis
+ var width_legend = h_map - 20; // width of the legend axis
  var n_ticks = 11;
  var step_list = [];
  var step_color_list = [];
@@ -75,17 +75,18 @@ function set_colorScale(){
           .attr("height", "15px")
           .style("fill", d => d)
     
-    var axis_unkown = d3.select("#legend-no_data");
+    var axis_unkown = d3.select("#legend-no_data")
+                            .attr("transform", "translate(-553, 0)");
     
     axis_unkown.append("rect")
-            .attr("x", quantizeBarScale(max_scale) + 8 * rect_width)
+            .attr("x", quantizeBarScale(max_scale) + 3 * rect_width/2)
             .attr("y", "10")
             .attr("width", rect_width)
             .attr("height", "15px")
             .style("fill", "#999999");
       
     axis_unkown.append("rect")
-            .attr("x", quantizeBarScale(max_scale) + 20 * rect_width/2)
+            .attr("x", quantizeBarScale(max_scale) + 3 * rect_width)
             .attr("y", "10")
             .attr("width", rect_width)
             .attr("height", "15px")
@@ -94,7 +95,7 @@ function set_colorScale(){
             
     axis_unkown.append("g")
             .classed("tick", true)
-            .attr("transform", "translate(" + (width_legend + 2 * (width_legend / n_ticks)) + ", 0)")
+            .attr("transform", "translate(" + (width_legend + 2 * (width_legend / n_ticks)/2 - 10) + ", 20)")
             .append("text")
             .attr("fill", "currentColor")
             .attr("y", "9")
@@ -104,7 +105,7 @@ function set_colorScale(){
 
     axis_unkown.append("g")
             .classed("tick", true)
-            .attr("transform", "translate(" + (width_legend + 7 * (width_legend / n_ticks)/2) + ", 0)")
+            .attr("transform", "translate(" + (width_legend + 2 * (width_legend / n_ticks) + 20) + ", 20)")
             .append("text")
             .attr("fill", "currentColor")
             .attr("y", "9")
@@ -118,25 +119,23 @@ function set_colorScale(){
           .attr("dy", "0.91em")
           .style("font-size", "14px");
 
-    /*axis.selectAll(".tick")
-          .moveToFront();*/
-
     axis.select(".domain").remove();
 
     // move label
     d3.select("#label-legend")
-            .attr("x", ((w_map / bar_step) + 90))
-            .attr("y", "-15")
+            .attr("transform", "rotate(180 0 0)")
+            .attr("x", "-225")
+            .attr("y", "-55")
             .style("fill", "black")
             .style("font-size", "15px")
             .raise();
     
-    d3.select("#global-anomaly")
+    /*d3.select("#global-anomaly")
               .attr("x", width_legend + 2 * (width_legend / n_ticks) + 150)
               .attr("y", "0")
               .style("fill", "black")
               .style("font-size", "15px")
-              .style("font-weight", "bold");
+              .style("font-weight", "bold");*/
 
     //init_legendSpace();
   }
