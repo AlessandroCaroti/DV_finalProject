@@ -1,4 +1,3 @@
-
 var sliderAlternativeHandle;
 var step_slider;
 var min_slider;
@@ -8,11 +7,10 @@ var id_slider = "draggable";
 // variable useful for the animation
 var animation_func;
 var cur_year;
-var animation_duration = 2.4 // in minutes
+var animation_duration = 2.4; // in minutes
 
 // LOAD SLIDER YEAR
 function init_slider(min, max, step) {
-
   step_slider = step;
   min_slider = min;
   max_slider = max;
@@ -29,6 +27,7 @@ function init_slider(min, max, step) {
     .handle(d3.symbol().type(d3.symbolCircle).size(200)())
     .on("end", (val) => {
       d3.select("#sliderLabel").text("Year: " + d3.format("0")(val));
+      update_year(val);
       load_tempYear(val, default_transition);
     });
 
@@ -52,52 +51,41 @@ function init_slider(min, max, step) {
     .classed("not-hover", true);
 
   // aesthetic adjustment
-  d3.select(".axis")
-    .selectAll("text")
-    .attr("y", "10");
+  d3.select(".axis").selectAll("text").attr("y", "10");
 
-  d3.select("#svg-slider")
-    .style("width", "600px");
+  d3.select("#svg-slider").style("width", "600px");
 
   // setting an id to the slider
-  d3.select("g.parameter-value").select("path")
+  d3.select("g.parameter-value")
+    .select("path")
     .attr("id", id_slider)
     .style("outline", "none");
 
   // scroll wheel event
   d3.select("#sliderYear")
     .on("mousewheel", function (event) {
-
       event.preventDefault();
       event.stopPropagation();
-      
+
       let val = sliderAlternativeHandle.value();
       let move_step = wheelDistance(event);
       let next_val = parseInt(val + move_step);
 
-      if (next_val == val)
-        return;
+      if (next_val == val) return;
 
+      if (next_val > max_slider) next_val = max_slider;
 
-      if (next_val > max_slider)
-        next_val = max_slider;
-
-      if (next_val < min_slider)
-        next_val = min_slider;
+      if (next_val < min_slider) next_val = min_slider;
 
       // change position slider
       sliderAlternativeHandle.value(next_val);
       load_tempYear(next_val, default_transition);
+      update_year(next_val);
       d3.select("#sliderLabel").text("Year: " + next_val);
-
-
-
     })
     .on("mouseenter", function () {
-      
-      // disable page scrolling 
+      // disable page scrolling
       d3.select("body").classed("stop-scrolling", true);
-
 
       d3.select("div#sliderYear")
         .select("g .parameter-value")
@@ -107,10 +95,8 @@ function init_slider(min, max, step) {
         .classed("not-hover", false);
     })
     .on("mouseleave", function () {
-      
-      // allow page scrolling 
+      // allow page scrolling
       d3.select("body").classed("stop-scrolling", false);
-
 
       d3.select("div#sliderYear")
         .select("g .parameter-value")
@@ -119,34 +105,30 @@ function init_slider(min, max, step) {
         .classed("hover", false)
         .classed("not-hover", true);
     });
-
 }
 
 function control_animation() {
-
-
   // function is running and can be STOPPED
   if (typeof animation_func != "undefined") {
     stop_animation();
-    // make visible play buttom 
+    // make visible play buttom
     play();
-  }
-  else {
+  } else {
     // no function is instanciated so START
     start_animation();
     // make visible stop button
     stop();
   }
-
 }
 
 function start_animation() {
-
   // get speed
   let speed = speed_options[selected_opt_idx];
 
   var total_milliseconds = (animation_duration * 60000) / speed; // 60000 milliseconds in one minute
-  var time_wait = total_milliseconds / ((endYear_selected - startYear_selected) / step_slider); //  total time / (N° years) 
+  var time_wait =
+    total_milliseconds /
+    ((endYear_selected - startYear_selected) / step_slider); //  total time / (N° years)
   cur_year = startYear_selected;
 
   // disable possibility to use the slider
@@ -157,13 +139,12 @@ function start_animation() {
 }
 
 function stop_animation() {
-
   // stop animation
   clearInterval(animation_func);
   animation_func = undefined;
 
   // show play button
-  play()
+  play();
 
   // enable possibility to use the slider
   enable_menu();
@@ -173,9 +154,7 @@ function stop_animation() {
   d3.select("#sliderLabel").text("Year: " + sliderAlternativeHandle.value());
 }
 
-
 function increment_step_slider(transition_time) {
-
   // set new value
   d3.select("#sliderLabel").text("Year: " + cur_year);
   // load temperatures
@@ -185,36 +164,31 @@ function increment_step_slider(transition_time) {
   return cur_year;
 }
 
-
 async function animation_years(trasition_time) {
-
   let year = await increment_step_slider(trasition_time);
 
   // at the end of the animation
-  if (year == max_slider + step_slider)
-    stop_animation();
-
+  if (year == max_slider + step_slider) stop_animation();
 }
 
 function disable_menu() {
-
   // disable slider
   d3.select("#svg-slider").style("pointer-events", "none");
-  // change opacity 
+  // change opacity
   d3.select("#svg-slider").style("opacity", "0.5");
 
   // disable animation menu
   d3.select("#setting_btn_open").style("pointer-events", "none");
-  // change opacity 
+  // change opacity
   d3.select("#setting_btn_open").style("opacity", "0.5");
 
   // if open, close it
   closeMenu();
 
-  // disable button 
+  // disable button
   d3.select(".range-years-buttons-container").style("pointer-events", "none");
 
-  // change opacity 
+  // change opacity
   d3.select(".range-years-buttons-container").style("opacity", "0.5");
 }
 
@@ -240,14 +214,14 @@ function closeMenu() {
 }
 
 function wheelDistance(e) {
-  //console.log(e); 
+  //console.log(e);
   if (!e) {
     e = window.event;
   }
   var w = e.wheelDeltaY,
     d = e.detail;
   if (d) {
-    return -d / 3; // Firefox; 
+    return -d / 3; // Firefox;
   }
   //console.log(w);
 
@@ -255,6 +229,6 @@ function wheelDistance(e) {
     w = w * 50
   }*/
 
-  // IE, Safari, Chrome & other browsers 
+  // IE, Safari, Chrome & other browsers
   return w / 120;
-} 
+}

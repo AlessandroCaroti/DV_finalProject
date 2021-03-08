@@ -189,7 +189,7 @@
     </div>
      
     <!-- GLOBAL INFO -->
-    <div class="border_bottom py_2 col_wrapper">
+    <div class="border_bottom py_2 col_wrapper" id="global_info_container">
       <div style="padding-bottom: 0px;">
         <div class="title">Global Temperature</div>
         <div class="sub_title">LATEST ANNUAL AVERAGE ANOMALY: 2020</div>
@@ -200,10 +200,11 @@
         </div>
       </div>
       <div class="center separator">~</div>
-      <div style="padding-top: 4px;">
+      <div style="padding-top: 4px;" id="selected_year_info">
         <div class="sub_title">SELECTED YEAR ANNUAL AVERAGE ANOMALY:<br> 1969</div>
         <div class="rate_of_change row_wrapper center">
-          <img src="/project/images/down-arrow-svgrepo-com.svg" alt="" height="30" width="25">
+          <img src="/project/images/up-arrow-svgrepo-com.svg" height="30" width="25" id="img_yearSelected_up" style="display: inline;">
+          <img src="/project/images/down-arrow-svgrepo-com.svg" height="30" width="25" id="img_yearSelected_down" style="display: none;">
           <div class="change_value">- 0.26</div>
           <div class="units"> °C since 1980</div>
         </div>
@@ -440,6 +441,8 @@
   <script src="/project/map/map_menu.js"></script>
   <script src="/project/map/select_country.js"></script>
   <script src="/project/eventsPage.js"></script>
+  <script src="/project/map/leftSide_bar.js"></script>
+
   <script>
     window.onload = init_page();
     window.onscroll = function() {scrollFunction()};

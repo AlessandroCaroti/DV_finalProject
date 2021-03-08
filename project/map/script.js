@@ -625,6 +625,7 @@ function load_map() {
       drawLevel(topology, 1);
 
       load_tempYear("2020", default_transition);
+      update_year("2020");
 
       // number of levels
       n_levels = 2;
