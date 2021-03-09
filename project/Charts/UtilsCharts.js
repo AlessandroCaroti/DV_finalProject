@@ -5,7 +5,7 @@
 //-------------------------------------------LINECHARTS----------------------------------------
 
 //Support functions for the LineChart
-var isAnnual = false;
+
 
 function annualDataStyle() {
   d3.select("#legend-annual-line").remove();
@@ -52,6 +52,7 @@ function createLineChartLegend(svg) {
       .attr("class", "legend")
       .text("Annual Average Temperature")
       .attr("id", "legend-annual-text");
+
   }
 
   var label = document.getElementById("label-" + btn.id);
@@ -62,6 +63,7 @@ function createLineChartLegend(svg) {
     y_unc = 32;
   var stroke = "red";
   if (btn.value == "annual") {
+    
     y1_range_name = 23;
     y2_range_name = 23;
     y_unc = 15;
@@ -70,8 +72,9 @@ function createLineChartLegend(svg) {
     d3.select(".line_chart_range_years")
       .style("stroke", stroke)
       .style("stroke-width","1px");
+  
   }
-
+ 
   legend
     .append("rect")
     .attr("x", 15)
@@ -123,12 +126,11 @@ function updateRangeNameLegend(svg) {
   d3.select(".legend").remove();
   createLineChartLegend(svg, btn);
 
-  if (btn.value == "annual") {
-    annualDataStyle();
-    isAnnual = true;
-  }
+  if (btn.value == "annual")  annualDataStyle();
 
-  if (isAnnual && btn.value != "annual") {
+
+  if (btn.value != "annual") {
+
     var legend = d3.select("legend-square-linechart");
     legend
       .append("line")
@@ -157,40 +159,11 @@ function updateRangeNameLegend(svg) {
       .attr("y2", 32)
       .style("stroke", "red");
     d3.select("#range-name-legend").attr("y", 32);
-
-    isAnnual = false;
   }
 
   d3.select("#range-name-legend").html(
     range_name + " Average Temperature with uncertainty"
   );
-}
-
-function lineChartGridline(x_axis_class, y_axis_class) {
-  var y_axis_grid = String("g." + y_axis_class + " g.tick");
-  var x_axis_grid = String("g." + x_axis_class + " g.tick");
-
-  d3.selectAll(y_axis_grid)
-    .append("line")
-    .attr("class", "gridline")
-    .attr("id", "y_gridline")
-    .attr("x1", 0)
-    .attr("y1", 0)
-    .attr("x2", width)
-    .attr("y2", 0);
-
-  d3.selectAll(x_axis_grid)
-    .append("line")
-    .attr("class", "gridline")
-    .attr("id", "x_gridline")
-    .attr("x1", 1)
-    .attr("y1", 0)
-    .attr("x2", 1)
-    .attr("y2", -height);
-}
-
-function updateLineChartGridline(x_axis_class, y_axis_class) {
-  lineChartGridline(x_axis_class, y_axis_class);
 }
 
 //-------------------------------------------------------TABLE-----------------------------------------

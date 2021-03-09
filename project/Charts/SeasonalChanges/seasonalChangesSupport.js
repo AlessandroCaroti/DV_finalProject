@@ -237,7 +237,7 @@ function createDeafaultSeasonalLinechart(data, dataSeasonalBaseline) {
   .call(xAxis);
 
   svg.select("g.y_axis_seasonal").call(yAxis);
-  lineChartGridline("x_axis_seasonal", "y_axis_seasonal");
+ 
 
 
   svg

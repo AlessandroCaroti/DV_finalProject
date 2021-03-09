@@ -418,7 +418,7 @@ function updateLineChart(data, grafic_class) {
     )
     .on("mouseout", () => removeTooltipLineChart(tooltipLine, "#linechart"));
 
-  updateLineChartGridline("x_axis", "y_axis");
+
 
   
   svg
