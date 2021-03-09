@@ -1,3 +1,5 @@
+/** @format */
+
 //UTILS FOR THE CHARTS: LEGENDS AND OTHER
 
 //-------------------------------------------LINECHARTS----------------------------------------
@@ -5,8 +7,23 @@
 //Support functions for the LineChart
 var isAnnual = false;
 
+function annualDataStyle() {
+  d3.select("#legend-annual-line").remove();
+  d3.select("#legend-annual-text").remove();
+
+  d3.select("#range-name-unc").attr("y", 15);
+
+  d3.select("#range-name-line")
+    .attr("y1", 23)
+    .attr("y2", 23)
+    .style("stroke", "steelblue");
+
+  d3.select("#range-name-legend").attr("y", 23);
+}
+
 //Create the legend of the Linechart
 function createLineChartLegend(svg) {
+  var btn = getCheckedValue("btn-range-year");
   legend = svg.append("g").attr("class", "legend");
 
   legend
@@ -18,50 +35,66 @@ function createLineChartLegend(svg) {
     .attr("class", "legend-square")
     .attr("id", "legend-square-linechart");
 
-  legend
-    .append("line")
-    .attr("x1", 15)
-    .attr("x2", 30)
-    .attr("y1", 15)
-    .attr("y2", 15)
-    .attr("class", "line_chart_annual")
-    .attr("id", "legend-annual-line");
+  if (btn.value != "annual") {
+    legend
+      .append("line")
+      .attr("x1", 15)
+      .attr("x2", 30)
+      .attr("y1", 15)
+      .attr("y2", 15)
+      .attr("class", "line_chart_annual")
+      .attr("id", "legend-annual-line");
 
-  legend
-    .append("text")
-    .attr("x", 37)
-    .attr("y", 15)
-    .attr("class", "legend")
-    .text("Annual Average Temperature")
-    .attr("id", "legend-annual-text");
+    legend
+      .append("text")
+      .attr("x", 37)
+      .attr("y", 15)
+      .attr("class", "legend")
+      .text("Annual Average Temperature")
+      .attr("id", "legend-annual-text");
+  }
+
+  var label = document.getElementById("label-" + btn.id);
+  var range_name = label.innerHTML;
+
+  var y1_range_name = 32,
+    y2_range_name = 32,
+    y_unc = 32;
+  var stroke = "red";
+  if (btn.value == "annual") {
+    y1_range_name = 23;
+    y2_range_name = 23;
+    y_unc = 15;
+    
+    stroke = "steelblue";
+    d3.select(".line_chart_range_years")
+      .style("stroke", stroke)
+      .style("stroke-width","1px");
+  }
 
   legend
     .append("rect")
     .attr("x", 15)
     .attr("width", 15)
-    .attr("y", 24)
+    .attr("y", y_unc)
     .attr("height", 16)
     .attr("class", "uncertainty")
     .attr("id", "range-name-unc");
-
-  var btn = getCheckedValue("btn-range-year");
-
-  var label = document.getElementById("label-" + btn.id);
-  var range_name = label.innerHTML;
 
   legend
     .append("line")
     .attr("x1", 15)
     .attr("x2", 30)
-    .attr("y1", 32)
-    .attr("y2", 32)
+    .attr("y1", y1_range_name)
+    .attr("y2", y2_range_name)
     .attr("class", "line_chart_range_years")
-    .attr("id", "range-name-line");
+    .attr("id", "range-name-line")
+    .style("stroke", stroke);
 
   legend
     .append("text")
     .attr("x", 37)
-    .attr("y", 32)
+    .attr("y", y1_range_name)
     .attr("class", "legend")
     .attr("id", "range-name-legend")
     .html(range_name + " Average Temperature with uncertainty");
@@ -91,23 +124,11 @@ function updateRangeNameLegend(svg) {
   createLineChartLegend(svg, btn);
 
   if (btn.value == "annual") {
-
-    d3.select("#legend-annual-line").remove();
-    d3.select("#legend-annual-text").remove();
-
-    d3.select("#range-name-unc").attr("y", 15);
-
-    d3.select("#range-name-line")
-      .attr("y1", 23)
-      .attr("y2", 23)
-      .style("stroke", "steelblue");
-
-    d3.select("#range-name-legend").attr("y", 23);
+    annualDataStyle();
     isAnnual = true;
   }
 
   if (isAnnual && btn.value != "annual") {
-    
     var legend = d3.select("legend-square-linechart");
     legend
       .append("line")
@@ -145,40 +166,31 @@ function updateRangeNameLegend(svg) {
   );
 }
 
-function lineChartGridline(x_axis_class, y_axis_class){
+function lineChartGridline(x_axis_class, y_axis_class) {
+  var y_axis_grid = String("g." + y_axis_class + " g.tick");
+  var x_axis_grid = String("g." + x_axis_class + " g.tick");
 
-  var y_axis_grid= String("g."+y_axis_class+" g.tick")
-  var x_axis_grid= String("g."+x_axis_class+" g.tick")
-
-
-
-  d3.selectAll(y_axis_grid) 
-    .append("line") 
+  d3.selectAll(y_axis_grid)
+    .append("line")
     .attr("class", "gridline")
     .attr("id", "y_gridline")
-    .attr("x1", 0) 
+    .attr("x1", 0)
     .attr("y1", 0)
     .attr("x2", width)
     .attr("y2", 0);
-  
-  d3.selectAll(x_axis_grid) 
-    .append("line") 
+
+  d3.selectAll(x_axis_grid)
+    .append("line")
     .attr("class", "gridline")
     .attr("id", "x_gridline")
-    .attr("x1",1) 
+    .attr("x1", 1)
     .attr("y1", 0)
     .attr("x2", 1)
-    .attr("y2", -height )
+    .attr("y2", -height);
 }
 
-
-function updateLineChartGridline(x_axis_class, y_axis_class){
-
-
-  lineChartGridline(x_axis_class,y_axis_class);
-
-
-
+function updateLineChartGridline(x_axis_class, y_axis_class) {
+  lineChartGridline(x_axis_class, y_axis_class);
 }
 
 //-------------------------------------------------------TABLE-----------------------------------------
@@ -444,7 +456,7 @@ function getHotColdStyle(hot_cold_list, d) {
       "stroke-width: 2px;" +
       "stroke-opacity:80%;";
     return style;
-  } 
+  }
 }
 
 function createHotColdLegend(id_container, hottest_temp, coldest_temp) {
@@ -583,4 +595,3 @@ function updateHotColdLegend(hot_cold_list) {
 }
 
 //-----------------------------------------------------------------------------------------
-

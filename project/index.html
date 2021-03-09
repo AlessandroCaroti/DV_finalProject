@@ -170,15 +170,15 @@
 
     </div>
       <div class="range-years-buttons-container">
-        <input class="checkbox-range" type="radio" name="btn-range-year" checked="checked" value="annual" id="btn_annual"
+        <input class="checkbox-range" type="radio" name="btn-range-year"  value="annual" checked="checked"  id="btn_annual"
           onclick="updateRangeData(this.value)" />
         <label id="label-btn_annual" for="btn_annual"> 1 Year </label>
   
-        <input class="checkbox-range" type="radio" name="btn-range-year" value="five_years" id="btn_five"
+        <input class="checkbox-range" type="radio" name="btn-range-year" value="five_years"  id="btn_five"
           onclick="updateRangeData(this.value)" />
         <label id="label-btn_five" for="btn_five"> 5 Year </label>
   
-        <input class="checkbox-range" type="radio" name="btn-range-year"  value="ten_years" id="btn_ten"
+        <input class="checkbox-range" type="radio" name="btn-range-year"  value="ten_years"  id="btn_ten"
           onclick="updateRangeData(this.value)" />
         <label id="label-btn_ten" for="btn_ten"> 10 Year </label>
   
@@ -396,6 +396,19 @@
           Regional Climate Change
         </h2>
         <div class="tooltip" id="tooltip_line"></div>
+
+        <svg>
+        <g class="graphics">
+          <g class="uncertainty"></g>
+          <g class="y_axis"></g>
+          <g class="x_axis"></g>
+          <g class="line_chart_annual"></g>
+          <g class="line_chart_range_years"></g>
+          <g class="baselines"></g>
+        </g>
+
+      </svg>
+
       </div>
 
       <hr />
