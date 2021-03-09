@@ -62,7 +62,7 @@ function init_slider(min, max, step) {
     .style("outline", "none");
 
   // scroll wheel event
-  d3.select("#sliderYear")
+  d3.select(".slider")
     .on("mousewheel", function (event) {
       event.preventDefault();
       event.stopPropagation();
@@ -71,7 +71,8 @@ function init_slider(min, max, step) {
       let move_step = wheelDistance(event);
       let next_val = parseInt(val + move_step);
 
-      if (next_val == val) return;
+      console.log(next_val, val);
+      if (parseInt(next_val) == parseInt(val)) return;
 
       if (next_val > max_slider) next_val = max_slider;
 
