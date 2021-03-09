@@ -1,156 +1,156 @@
 Country,Anomaly
 Afghanistan,
-Albania,-0.934
-Algeria,-0.6970000000000001
+Albania,-0.818
+Algeria,-0.679
 American Samoa,
-Andorra,-0.835
+Andorra,-0.73
 Angola,
-Anguilla,-0.7390000000000001
+Anguilla,-0.7659999999999999
 Antarctica,
-Antigua and Barbuda,-0.621
+Antigua and Barbuda,-0.655
 Argentina,
-Armenia,-1.1740000000000002
-Aruba,-0.836
+Armenia,-0.86
+Aruba,-0.795
 Australia,
-Austria,-1.147
-Azerbaijan,-1.15
-Bahamas,-0.675
+Austria,-0.6920000000000001
+Azerbaijan,-0.799
+Bahamas,-0.716
 Bahrain,
 Bangladesh,
-Barbados,-0.603
-Belarus,-0.61
-Belgium,-0.924
-Belize,-0.998
+Barbados,-0.64
+Belarus,-0.214
+Belgium,-0.34600000000000003
+Belize,-1.012
 Benin,
 Bhutan,
 Bolivia,
-Bosnia and Herzegovina,-0.938
+Bosnia and Herzegovina,-0.7240000000000001
 Botswana,
 Brazil,
-British Virgin Islands,-0.7609999999999999
-Bulgaria,-0.84
+British Virgin Islands,-0.78
+Bulgaria,-0.624
 Burkina Faso,
 Burundi,
-Cambodia,-0.38799999999999996
+Cambodia,-0.355
 Cameroon,
-Canada,-0.557
+Canada,-0.57
 Cape Verde,
-Cayman Islands,-0.8390000000000001
+Cayman Islands,-0.841
 Central African Republic,
 Chad,
 Chile,
-China,-0.28800000000000003
+China,-0.23199999999999998
 Colombia,
 Comoros,
 Congo,
 Costa Rica,
-Croatia,-0.9790000000000001
-Cuba,-0.693
-Curaçao,-0.7909999999999999
-Cyprus,-0.818
-Czechia,-1.161
+Croatia,-0.71
+Cuba,-0.688
+Curaçao,-0.763
+Cyprus,-0.8059999999999999
+Czechia,-0.589
 Côte d'Ivoire,
 Dem. Rep. Congo,
-Denmark,-0.449
+Denmark,-0.203
 Djibouti,
-Dominica,-0.6
-Dominican Republic,-0.642
+Dominica,-0.63
+Dominican Republic,-0.617
 Ecuador,
 Egypt,
 El Salvador,
 Equatorial Guinea,
 Eritrea,
-Estonia,-0.063
+Estonia,0.126
 eSwatini,
 Ethiopia,
 Falkland Islands (Islas Malvinas),
-Faroe Islands,-0.222
+Faroe Islands,-0.3
 Fiji,
-Finland,0.32899999999999996
-France,-0.774
-French Guiana,-0.738
+Finland,0.369
+France,-0.445
+French Guiana,-0.76
 French Polynesia,
 French Southern and Antarctic Lands,
 Gabon,
 Gambia,
-Georgia,-1.2329999999999999
-Germany,-0.9940000000000001
+Georgia,-0.858
+Germany,-0.45399999999999996
 Ghana,
-Greece,-0.941
-Greenland,-0.915
-Grenada,-0.621
-Guadeloupe,-0.732
+Greece,-0.871
+Greenland,-1.06
+Grenada,-0.653
+Guadeloupe,-0.758
 Guam,
 Guatemala,
-Guernsey,-0.509
+Guernsey,-0.214
 Guinea,
 Guinea-Bissau,
-Guyana,-0.713
-Haiti,-0.6509999999999999
+Guyana,-0.738
+Haiti,-0.612
 Heard Island and McDonald Islands,
 Honduras,
-Hong Kong,-0.278
-Hungary,-1.058
-Iceland,-0.304
+Hong Kong,-0.207
+Hungary,-0.637
+Iceland,-0.511
 India,
 Indonesia,
 Iran,
-Iraq,-0.887
-Ireland,-0.521
-Isle of Man,-0.361
+Iraq,-0.7829999999999999
+Ireland,-0.327
+Isle of Man,-0.141
 Israel,
-Italy,-0.927
-Jamaica,-0.7340000000000001
-Japan,-0.746
-Jersey,-0.509
+Italy,-0.7809999999999999
+Jamaica,-0.672
+Japan,-0.726
+Jersey,-0.214
 Jordan,
-Kazakhstan,-0.425
+Kazakhstan,-0.11599999999999999
 Kenya,
 Kiribati,
 Kuwait,
 Kyrgyzstan,
-Laos,-0.27899999999999997
-Latvia,-0.303
-Lebanon,-0.8270000000000001
+Laos,-0.226
+Latvia,-0.048
+Lebanon,-0.784
 Lesotho,
 Liberia,
 Libya,
-Liechtenstein,-1.088
-Lithuania,-0.473
-Luxembourg,-0.9790000000000001
-Macau,-0.284
-Macedonia,-0.909
+Liechtenstein,-0.6729999999999999
+Lithuania,-0.16899999999999998
+Luxembourg,-0.4
+Macau,-0.212
+Macedonia,-0.76
 Madagascar,
 Malawi,
 Malaysia,
 Mali,
-Malta,-0.9
-Martinique,-0.71
+Malta,-0.9279999999999999
+Martinique,-0.736
 Mauritania,
-Mauritius,-0.573
-Mayotte,-0.596
-Mexico,-0.7170000000000001
+Mauritius,-0.601
+Mayotte,-0.5820000000000001
+Mexico,-0.813
 Micronesia,
-Moldova,-0.968
-Monaco,-0.759
-Mongolia,-0.326
-Montenegro,-0.894
-Montserrat,-0.737
-Morocco,-0.5589999999999999
+Moldova,-0.5579999999999999
+Monaco,-0.55
+Mongolia,-0.18600000000000003
+Montenegro,-0.7290000000000001
+Montserrat,-0.763
+Morocco,-0.583
 Mozambique,
-Myanmar,-0.488
+Myanmar,-0.473
 Namibia,
 Nepal,
-Netherlands,-0.907
+Netherlands,-0.379
 New Caledonia,
-New Zealand,-0.059000000000000004
+New Zealand,-0.031
 Nicaragua,
 Niger,
 Nigeria,
 Niue,
-North Korea,-0.5529999999999999
+North Korea,-0.457
 Northern Mariana Islands,
-Norway,0.256
+Norway,0.22899999999999998
 Oman,
 Pakistan,
 Palau,
@@ -160,70 +160,70 @@ Papua New Guinea,
 Paraguay,
 Peru,
 Philippines,
-Poland,-0.816
-Portugal,-0.5589999999999999
-Puerto Rico,-0.629
+Poland,-0.38799999999999996
+Portugal,-0.561
+Puerto Rico,-0.635
 Qatar,
-Reunion,-0.629
-Romania,-0.893
-Russia,-0.102
+Reunion,-0.655
+Romania,-0.546
+Russia,0.011000000000000001
 Rwanda,
-Saint Barthélemy,-0.628
-Saint Kitts and Nevis,-0.633
-Saint Lucia,-0.61
-Saint Martin,-0.7390000000000001
-Saint Pierre and Miquelon,-1.046
-Saint Vincent and the Grenadines,-0.616
+Saint Barthélemy,-0.662
+Saint Kitts and Nevis,-0.664
+Saint Lucia,-0.642
+Saint Martin,-0.7659999999999999
+Saint Pierre and Miquelon,-0.855
+Saint Vincent and the Grenadines,-0.645
 Samoa,
-San Marino,-0.946
+San Marino,-0.763
 Sao Tome and Principe,
 Saudi Arabia,
 Senegal,
-Serbia,-0.893
+Serbia,-0.617
 Seychelles,
 Sierra Leone,
-Singapore,-0.664
-Sint Maarten,-0.7390000000000001
-Slovakia,-1.107
-Slovenia,-1.005
+Singapore,-0.73
+Sint Maarten,-0.7659999999999999
+Slovakia,-0.613
+Slovenia,-0.7140000000000001
 Solomon Islands,
 Somalia,
 South Africa,
 South Georgia and the South Sandwich Isla,
-South Korea,-0.78
-Spain,-0.631
-Sri Lanka,-0.406
+South Korea,-0.74
+Spain,-0.5770000000000001
+Sri Lanka,-0.38
 Sudan,
-Suriname,-0.6990000000000001
-Svalbard and Jan Mayen,0.172
-Sweden,0.293
-Switzerland,-0.99
-Syria,-0.909
-Taiwan,-0.391
+Suriname,-0.7240000000000001
+Svalbard and Jan Mayen,-0.006
+Sweden,0.309
+Switzerland,-0.586
+Syria,-0.8140000000000001
+Taiwan,-0.366
 Tajikistan,
 Tanzania,
-Thailand,-0.39
+Thailand,-0.36
 Timor-Leste,
 Togo,
 Tonga,
-Trinidad and Tobago,-0.65
-Tunisia,-0.763
-Turkey,-0.98
-Turkmenistan,-0.753
-Turks and Caicas Islands,-0.768
+Trinidad and Tobago,-0.675
+Tunisia,-0.7509999999999999
+Turkey,-0.83
+Turkmenistan,-0.479
+Turks and Caicas Islands,-0.769
 Uganda,
-Ukraine,-0.958
+Ukraine,-0.46799999999999997
 United Arab Emirates,
-United Kingdom,-0.56
-United States of America,-0.243
+United Kingdom,-0.324
+United States of America,-0.20800000000000002
 Uruguay,
-Uzbekistan,-0.633
-Venezuela,-0.7040000000000001
-Vietnam,-0.3
-Virgin Islands,-0.618
+Uzbekistan,-0.358
+Venezuela,-0.6920000000000001
+Vietnam,-0.252
+Virgin Islands,-0.644
 Western Sahara,
 Yemen,
 Zambia,
 Zimbabwe,
-Åland,0.183
-Global Land,-0.45299999999999996
+Åland,0.209
+Global Land,-0.4

@@ -1,9 +1,9 @@
 Country,Anomaly
 Afghanistan,
-Albania,-0.649
+Albania,-0.638
 Algeria,
 American Samoa,
-Andorra,-0.647
+Andorra,-0.5660000000000001
 Angola,
 Anguilla,
 Antarctica,
@@ -12,19 +12,19 @@ Argentina,
 Armenia,
 Aruba,
 Australia,
-Austria,-0.7070000000000001
+Austria,-0.7040000000000001
 Azerbaijan,
 Bahamas,
 Bahrain,
 Bangladesh,
 Barbados,
-Belarus,-0.23600000000000002
-Belgium,-0.785
+Belarus,-0.306
+Belgium,-0.753
 Belize,
 Benin,
 Bhutan,
 Bolivia,
-Bosnia and Herzegovina,-0.65
+Bosnia and Herzegovina,-0.636
 Botswana,
 Brazil,
 British Virgin Islands,
@@ -44,14 +44,14 @@ Colombia,
 Comoros,
 Congo,
 Costa Rica,
-Croatia,-0.6629999999999999
+Croatia,-0.648
 Cuba,
 Curaçao,
 Cyprus,
-Czechia,-0.442
+Czechia,-0.467
 Côte d'Ivoire,
 Dem. Rep. Congo,
-Denmark,-0.028999999999999998
+Denmark,-0.064
 Djibouti,
 Dominica,
 Dominican Republic,
@@ -60,21 +60,21 @@ Egypt,
 El Salvador,
 Equatorial Guinea,
 Eritrea,
-Estonia,0.264
+Estonia,0.175
 eSwatini,
 Ethiopia,
 Falkland Islands (Islas Malvinas),
-Faroe Islands,-0.139
+Faroe Islands,-0.11800000000000001
 Fiji,
-Finland,0.5379999999999999
-France,-0.782
+Finland,0.46299999999999997
+France,-0.708
 French Guiana,
 French Polynesia,
 French Southern and Antarctic Lands,
 Gabon,
 Gambia,
 Georgia,
-Germany,-0.608
+Germany,-0.628
 Ghana,
 Greece,
 Greenland,
@@ -82,7 +82,7 @@ Grenada,
 Guadeloupe,
 Guam,
 Guatemala,
-Guernsey,-0.782
+Guernsey,-0.6729999999999999
 Guinea,
 Guinea-Bissau,
 Guyana,
@@ -90,19 +90,19 @@ Haiti,
 Heard Island and McDonald Islands,
 Honduras,
 Hong Kong,
-Hungary,-0.6659999999999999
+Hungary,-0.677
 Iceland,
 India,
 Indonesia,
 Iran,
 Iraq,
-Ireland,-0.868
-Isle of Man,-0.787
+Ireland,-0.774
+Isle of Man,-0.6859999999999999
 Israel,
-Italy,-0.654
+Italy,-0.608
 Jamaica,
 Japan,
-Jersey,-0.782
+Jersey,-0.6729999999999999
 Jordan,
 Kazakhstan,
 Kenya,
@@ -110,16 +110,16 @@ Kiribati,
 Kuwait,
 Kyrgyzstan,
 Laos,
-Latvia,0.128
+Latvia,0.042
 Lebanon,
 Lesotho,
 Liberia,
 Libya,
-Liechtenstein,-0.7759999999999999
-Lithuania,-0.022000000000000002
-Luxembourg,-0.799
+Liechtenstein,-0.759
+Lithuania,-0.10099999999999999
+Luxembourg,-0.782
 Macau,
-Macedonia,-0.6559999999999999
+Macedonia,-0.652
 Madagascar,
 Malawi,
 Malaysia,
@@ -131,17 +131,17 @@ Mauritius,
 Mayotte,
 Mexico,
 Micronesia,
-Moldova,-0.612
-Monaco,-0.614
+Moldova,-0.65
+Monaco,-0.531
 Mongolia,
-Montenegro,-0.628
+Montenegro,-0.618
 Montserrat,
 Morocco,
 Mozambique,
 Myanmar,
 Namibia,
 Nepal,
-Netherlands,-0.624
+Netherlands,-0.611
 New Caledonia,
 New Zealand,
 Nicaragua,
@@ -150,7 +150,7 @@ Nigeria,
 Niue,
 North Korea,
 Northern Mariana Islands,
-Norway,0.593
+Norway,0.547
 Oman,
 Pakistan,
 Palau,
@@ -160,44 +160,44 @@ Papua New Guinea,
 Paraguay,
 Peru,
 Philippines,
-Poland,-0.36200000000000004
+Poland,-0.415
 Portugal,
 Puerto Rico,
 Qatar,
 Reunion,
-Romania,-0.644
+Romania,-0.6659999999999999
 Russia,
 Rwanda,
 Saint Barthélemy,
 Saint Kitts and Nevis,
 Saint Lucia,
 Saint Martin,
-Saint Pierre and Miquelon,-0.48700000000000004
+Saint Pierre and Miquelon,-0.521
 Saint Vincent and the Grenadines,
 Samoa,
-San Marino,-0.682
+San Marino,-0.643
 Sao Tome and Principe,
 Saudi Arabia,
 Senegal,
-Serbia,-0.42
+Serbia,-0.42200000000000004
 Seychelles,
 Sierra Leone,
 Singapore,
 Sint Maarten,
-Slovakia,-0.654
-Slovenia,-0.677
+Slovakia,-0.6779999999999999
+Slovenia,-0.659
 Solomon Islands,
 Somalia,
 South Africa,
 South Georgia and the South Sandwich Isla,
 South Korea,
-Spain,-0.654
+Spain,-0.584
 Sri Lanka,
 Sudan,
 Suriname,
-Svalbard and Jan Mayen,0.299
-Sweden,0.647
-Switzerland,-0.818
+Svalbard and Jan Mayen,0.278
+Sweden,0.581
+Switzerland,-0.782
 Syria,
 Taiwan,
 Tajikistan,
@@ -212,9 +212,9 @@ Turkey,
 Turkmenistan,
 Turks and Caicas Islands,
 Uganda,
-Ukraine,-0.537
+Ukraine,-0.586
 United Arab Emirates,
-United Kingdom,-0.773
+United Kingdom,-0.68
 United States of America,
 Uruguay,
 Uzbekistan,
@@ -225,5 +225,5 @@ Western Sahara,
 Yemen,
 Zambia,
 Zimbabwe,
-Åland,0.5710000000000001
-Global Land,-0.385
+Åland,0.47700000000000004
+Global Land,-0.40700000000000003
