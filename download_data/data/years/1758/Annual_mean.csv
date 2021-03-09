@@ -1,9 +1,9 @@
 Country,Anomaly
 Afghanistan,
-Albania,-1.8559999999999999
+Albania,-1.7109999999999999
 Algeria,
 American Samoa,
-Andorra,-1.354
+Andorra,-1.195
 Angola,
 Anguilla,
 Antarctica,
@@ -12,23 +12,23 @@ Argentina,
 Armenia,
 Aruba,
 Australia,
-Austria,-1.2930000000000001
+Austria,-1.139
 Azerbaijan,
-Bahamas,
+Bahamas,-2.6430000000000002
 Bahrain,
 Bangladesh,
 Barbados,
-Belarus,-1.903
-Belgium,-0.8740000000000001
+Belarus,-1.765
+Belgium,-0.758
 Belize,
 Benin,
 Bhutan,
 Bolivia,
-Bosnia and Herzegovina,-1.6119999999999999
+Bosnia and Herzegovina,-1.465
 Botswana,
 Brazil,
 British Virgin Islands,
-Bulgaria,-2.011
+Bulgaria,-1.871
 Burkina Faso,
 Burundi,
 Cambodia,
@@ -44,14 +44,14 @@ Colombia,
 Comoros,
 Congo,
 Costa Rica,
-Croatia,-1.507
+Croatia,-1.361
 Cuba,
 Curaçao,
 Cyprus,
-Czechia,-1.376
+Czechia,-1.16
 Côte d'Ivoire,
 Dem. Rep. Congo,
-Denmark,-1.021
+Denmark,-1.01
 Djibouti,
 Dominica,
 Dominican Republic,
@@ -60,21 +60,21 @@ Egypt,
 El Salvador,
 Equatorial Guinea,
 Eritrea,
-Estonia,-1.8559999999999999
+Estonia,-1.7309999999999999
 eSwatini,
 Ethiopia,
 Falkland Islands (Islas Malvinas),
-Faroe Islands,-1.9409999999999998
+Faroe Islands,-1.886
 Fiji,
-Finland,-2.037
-France,-1.176
+Finland,-1.9280000000000002
+France,-1.043
 French Guiana,
 French Polynesia,
 French Southern and Antarctic Lands,
 Gabon,
 Gambia,
 Georgia,
-Germany,-1.032
+Germany,-0.892
 Ghana,
 Greece,
 Greenland,
@@ -82,7 +82,7 @@ Grenada,
 Guadeloupe,
 Guam,
 Guatemala,
-Guernsey,-1.5019999999999998
+Guernsey,-1.382
 Guinea,
 Guinea-Bissau,
 Guyana,
@@ -90,19 +90,19 @@ Haiti,
 Heard Island and McDonald Islands,
 Honduras,
 Hong Kong,
-Hungary,-1.62
+Hungary,-1.473
 Iceland,
 India,
 Indonesia,
 Iran,
 Iraq,
-Ireland,-1.49
-Isle of Man,-1.4369999999999998
+Ireland,-1.436
+Isle of Man,-1.36
 Israel,
-Italy,-1.443
+Italy,-1.2770000000000001
 Jamaica,
 Japan,
-Jersey,-1.5019999999999998
+Jersey,-1.382
 Jordan,
 Kazakhstan,
 Kenya,
@@ -110,16 +110,16 @@ Kiribati,
 Kuwait,
 Kyrgyzstan,
 Laos,
-Latvia,-1.73
+Latvia,-1.6219999999999999
 Lebanon,
 Lesotho,
 Liberia,
 Libya,
-Liechtenstein,-1.14
-Lithuania,-1.642
-Luxembourg,-0.9359999999999999
+Liechtenstein,-0.977
+Lithuania,-1.538
+Luxembourg,-0.804
 Macau,
-Macedonia,-1.91
+Macedonia,-1.767
 Madagascar,
 Malawi,
 Malaysia,
@@ -131,17 +131,17 @@ Mauritius,
 Mayotte,
 Mexico,
 Micronesia,
-Moldova,-2.083
-Monaco,-1.159
+Moldova,-1.943
+Monaco,-0.96
 Mongolia,
-Montenegro,-1.746
+Montenegro,-1.6
 Montserrat,
 Morocco,
 Mozambique,
 Myanmar,
 Namibia,
 Nepal,
-Netherlands,-0.777
+Netherlands,-0.6859999999999999
 New Caledonia,
 New Zealand,
 Nicaragua,
@@ -150,7 +150,7 @@ Nigeria,
 Niue,
 North Korea,
 Northern Mariana Islands,
-Norway,-1.6640000000000001
+Norway,-1.6440000000000001
 Oman,
 Pakistan,
 Palau,
@@ -160,32 +160,32 @@ Papua New Guinea,
 Paraguay,
 Peru,
 Philippines,
-Poland,-1.4409999999999998
+Poland,-1.3230000000000002
 Portugal,
 Puerto Rico,
 Qatar,
 Reunion,
-Romania,-1.9380000000000002
+Romania,-1.796
 Russia,
 Rwanda,
 Saint Barthélemy,
 Saint Kitts and Nevis,
 Saint Lucia,
 Saint Martin,
-Saint Pierre and Miquelon,-2.998
+Saint Pierre and Miquelon,-2.9189999999999996
 Saint Vincent and the Grenadines,
 Samoa,
-San Marino,-1.4280000000000002
+San Marino,-1.278
 Sao Tome and Principe,
 Saudi Arabia,
 Senegal,
-Serbia,-1.953
+Serbia,-1.692
 Seychelles,
 Sierra Leone,
 Singapore,
 Sint Maarten,
-Slovakia,-1.5959999999999999
-Slovenia,-1.393
+Slovakia,-1.4509999999999998
+Slovenia,-1.249
 Solomon Islands,
 Somalia,
 South Africa,
@@ -196,8 +196,8 @@ Sri Lanka,
 Sudan,
 Suriname,
 Svalbard and Jan Mayen,
-Sweden,-1.521
-Switzerland,-1.125
+Sweden,-1.516
+Switzerland,-0.966
 Syria,
 Taiwan,
 Tajikistan,
@@ -212,9 +212,9 @@ Turkey,
 Turkmenistan,
 Turks and Caicas Islands,
 Uganda,
-Ukraine,-2.133
+Ukraine,-1.992
 United Arab Emirates,
-United Kingdom,-1.2309999999999999
+United Kingdom,-1.183
 United States of America,
 Uruguay,
 Uzbekistan,
@@ -225,5 +225,5 @@ Western Sahara,
 Yemen,
 Zambia,
 Zimbabwe,
-Åland,-1.321
-Global Land,-2.29
+Åland,-1.3419999999999999
+Global Land,-2.195

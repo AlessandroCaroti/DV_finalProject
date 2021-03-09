@@ -1,9 +1,9 @@
 Country,Anomaly
 Afghanistan,
-Albania,0.16399999999999998
+Albania,-0.159
 Algeria,
 American Samoa,
-Andorra,0.14800000000000002
+Andorra,-0.122
 Angola,
 Anguilla,
 Antarctica,
@@ -12,23 +12,23 @@ Argentina,
 Armenia,
 Aruba,
 Australia,
-Austria,-0.111
+Austria,-0.5379999999999999
 Azerbaijan,
 Bahamas,
 Bahrain,
 Bangladesh,
 Barbados,
-Belarus,-0.111
-Belgium,-0.043
+Belarus,-0.5
+Belgium,-0.326
 Belize,
 Benin,
 Bhutan,
 Bolivia,
-Bosnia and Herzegovina,0.083
+Bosnia and Herzegovina,-0.293
 Botswana,
 Brazil,
 British Virgin Islands,
-Bulgaria,0.11800000000000001
+Bulgaria,-0.226
 Burkina Faso,
 Burundi,
 Cambodia,
@@ -44,14 +44,14 @@ Colombia,
 Comoros,
 Congo,
 Costa Rica,
-Croatia,0.032
+Croatia,-0.35700000000000004
 Cuba,
 Curaçao,
 Cyprus,
-Czechia,-0.14800000000000002
+Czechia,-0.568
 Côte d'Ivoire,
 Dem. Rep. Congo,
-Denmark,-0.27699999999999997
+Denmark,-0.336
 Djibouti,
 Dominica,
 Dominican Republic,
@@ -60,21 +60,21 @@ Egypt,
 El Salvador,
 Equatorial Guinea,
 Eritrea,
-Estonia,-0.488
+Estonia,-0.527
 eSwatini,
 Ethiopia,
 Falkland Islands (Islas Malvinas),
-Faroe Islands,-0.127
+Faroe Islands,0.071
 Fiji,
-Finland,-0.696
-France,0.07
+Finland,-0.529
+France,-0.217
 French Guiana,
 French Polynesia,
 French Southern and Antarctic Lands,
 Gabon,
 Gambia,
 Georgia,
-Germany,-0.07200000000000001
+Germany,-0.40399999999999997
 Ghana,
 Greece,
 Greenland,
@@ -82,7 +82,7 @@ Grenada,
 Guadeloupe,
 Guam,
 Guatemala,
-Guernsey,0.342
+Guernsey,0.23
 Guinea,
 Guinea-Bissau,
 Guyana,
@@ -90,19 +90,19 @@ Haiti,
 Heard Island and McDonald Islands,
 Honduras,
 Hong Kong,
-Hungary,-0.19399999999999998
+Hungary,-0.622
 Iceland,
 India,
 Indonesia,
 Iran,
 Iraq,
-Ireland,-0.239
-Isle of Man,-0.057999999999999996
+Ireland,-0.141
+Isle of Man,0.068
 Israel,
-Italy,0.231
+Italy,-0.1
 Jamaica,
 Japan,
-Jersey,0.342
+Jersey,0.23
 Jordan,
 Kazakhstan,
 Kenya,
@@ -110,38 +110,38 @@ Kiribati,
 Kuwait,
 Kyrgyzstan,
 Laos,
-Latvia,-0.318
+Latvia,-0.488
 Lebanon,
 Lesotho,
 Liberia,
 Libya,
-Liechtenstein,0.076
-Lithuania,-0.203
-Luxembourg,-0.026000000000000002
+Liechtenstein,-0.353
+Lithuania,-0.495
+Luxembourg,-0.361
 Macau,
-Macedonia,0.139
+Macedonia,-0.192
 Madagascar,
 Malawi,
 Malaysia,
 Mali,
-Malta,0.37799999999999995
+Malta,0.149
 Martinique,
 Mauritania,
 Mauritius,
 Mayotte,
 Mexico,
 Micronesia,
-Moldova,-0.001
-Monaco,0.289
+Moldova,-0.406
+Monaco,-0.059000000000000004
 Mongolia,
-Montenegro,0.146
+Montenegro,-0.205
 Montserrat,
 Morocco,
 Mozambique,
 Myanmar,
 Namibia,
 Nepal,
-Netherlands,-0.08900000000000001
+Netherlands,-0.297
 New Caledonia,
 New Zealand,
 Nicaragua,
@@ -150,7 +150,7 @@ Nigeria,
 Niue,
 North Korea,
 Northern Mariana Islands,
-Norway,-0.34299999999999997
+Norway,-0.23199999999999998
 Oman,
 Pakistan,
 Palau,
@@ -160,12 +160,12 @@ Papua New Guinea,
 Paraguay,
 Peru,
 Philippines,
-Poland,-0.192
-Portugal,0.16399999999999998
+Poland,-0.581
+Portugal,0.055
 Puerto Rico,
 Qatar,
 Reunion,
-Romania,-0.02
+Romania,-0.419
 Russia,
 Rwanda,
 Saint Barthélemy,
@@ -175,29 +175,29 @@ Saint Martin,
 Saint Pierre and Miquelon,
 Saint Vincent and the Grenadines,
 Samoa,
-San Marino,0.17800000000000002
+San Marino,-0.172
 Sao Tome and Principe,
 Saudi Arabia,
 Senegal,
-Serbia,0.331
+Serbia,-0.006999999999999999
 Seychelles,
 Sierra Leone,
 Singapore,
 Sint Maarten,
-Slovakia,-0.311
-Slovenia,0.032
+Slovakia,-0.752
+Slovenia,-0.36200000000000004
 Solomon Islands,
 Somalia,
 South Africa,
 South Georgia and the South Sandwich Isla,
 South Korea,
-Spain,0.162
+Spain,-0.005
 Sri Lanka,
 Sudan,
 Suriname,
-Svalbard and Jan Mayen,0.6409999999999999
-Sweden,-0.494
-Switzerland,0.063
+Svalbard and Jan Mayen,0.778
+Sweden,-0.392
+Switzerland,-0.36
 Syria,
 Taiwan,
 Tajikistan,
@@ -212,9 +212,9 @@ Turkey,
 Turkmenistan,
 Turks and Caicas Islands,
 Uganda,
-Ukraine,0.002
+Ukraine,-0.392
 United Arab Emirates,
-United Kingdom,-0.302
+United Kingdom,-0.244
 United States of America,
 Uruguay,
 Uzbekistan,
@@ -225,5 +225,5 @@ Western Sahara,
 Yemen,
 Zambia,
 Zimbabwe,
-Åland,-0.589
-Global Land,0.332
+Åland,-0.486
+Global Land,0.297

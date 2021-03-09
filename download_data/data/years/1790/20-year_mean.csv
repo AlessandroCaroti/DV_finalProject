@@ -1,9 +1,9 @@
 Country,Anomaly
 Afghanistan,
-Albania,-0.22
+Albania,-0.225
 Algeria,
 American Samoa,
-Andorra,-0.182
+Andorra,-0.19
 Angola,
 Anguilla,
 Antarctica,
@@ -12,23 +12,23 @@ Argentina,
 Armenia,
 Aruba,
 Australia,
-Austria,-0.133
+Austria,-0.14300000000000002
 Azerbaijan,
 Bahamas,
 Bahrain,
 Bangladesh,
 Barbados,
 Belarus,-0.209
-Belgium,-0.28800000000000003
+Belgium,-0.29600000000000004
 Belize,
 Benin,
 Bhutan,
 Bolivia,
-Bosnia and Herzegovina,-0.142
+Bosnia and Herzegovina,-0.149
 Botswana,
 Brazil,
 British Virgin Islands,
-Bulgaria,-0.258
+Bulgaria,-0.261
 Burkina Faso,
 Burundi,
 Cambodia,
@@ -44,14 +44,14 @@ Colombia,
 Comoros,
 Congo,
 Costa Rica,
-Croatia,-0.125
+Croatia,-0.133
 Cuba,
 Curaçao,
 Cyprus,
-Czechia,-0.187
+Czechia,-0.19399999999999998
 Côte d'Ivoire,
 Dem. Rep. Congo,
-Denmark,-0.29100000000000004
+Denmark,-0.298
 Djibouti,
 Dominica,
 Dominican Republic,
@@ -60,21 +60,21 @@ Egypt,
 El Salvador,
 Equatorial Guinea,
 Eritrea,
-Estonia,-0.195
+Estonia,-0.19699999999999998
 eSwatini,
 Ethiopia,
 Falkland Islands (Islas Malvinas),
-Faroe Islands,-0.34
+Faroe Islands,-0.345
 Fiji,
-Finland,-0.21
-France,-0.252
+Finland,-0.213
+France,-0.261
 French Guiana,
 French Polynesia,
 French Southern and Antarctic Lands,
 Gabon,
 Gambia,
 Georgia,
-Germany,-0.225
+Germany,-0.235
 Ghana,
 Greece,
 Greenland,
@@ -82,7 +82,7 @@ Grenada,
 Guadeloupe,
 Guam,
 Guatemala,
-Guernsey,-0.258
+Guernsey,-0.267
 Guinea,
 Guinea-Bissau,
 Guyana,
@@ -90,19 +90,19 @@ Haiti,
 Heard Island and McDonald Islands,
 Honduras,
 Hong Kong,
-Hungary,-0.205
+Hungary,-0.21
 Iceland,
 India,
 Indonesia,
 Iran,
 Iraq,
-Ireland,-0.48200000000000004
-Isle of Man,-0.297
+Ireland,-0.486
+Isle of Man,-0.304
 Israel,
-Italy,-0.145
+Italy,-0.153
 Jamaica,
 Japan,
-Jersey,-0.258
+Jersey,-0.267
 Jordan,
 Kazakhstan,
 Kenya,
@@ -110,38 +110,38 @@ Kiribati,
 Kuwait,
 Kyrgyzstan,
 Laos,
-Latvia,-0.18899999999999997
+Latvia,-0.191
 Lebanon,
 Lesotho,
 Liberia,
 Libya,
-Liechtenstein,-0.135
-Lithuania,-0.195
-Luxembourg,-0.264
+Liechtenstein,-0.15
+Lithuania,-0.19699999999999998
+Luxembourg,-0.273
 Macau,
-Macedonia,-0.237
+Macedonia,-0.24100000000000002
 Madagascar,
 Malawi,
 Malaysia,
 Mali,
-Malta,-0.141
+Malta,-0.146
 Martinique,
 Mauritania,
 Mauritius,
 Mayotte,
 Mexico,
 Micronesia,
-Moldova,-0.295
-Monaco,-0.14800000000000002
+Moldova,-0.29600000000000004
+Monaco,-0.157
 Mongolia,
-Montenegro,-0.165
+Montenegro,-0.17
 Montserrat,
 Morocco,
 Mozambique,
 Myanmar,
 Namibia,
 Nepal,
-Netherlands,-0.294
+Netherlands,-0.302
 New Caledonia,
 New Zealand,
 Nicaragua,
@@ -150,7 +150,7 @@ Nigeria,
 Niue,
 North Korea,
 Northern Mariana Islands,
-Norway,-0.244
+Norway,-0.249
 Oman,
 Pakistan,
 Palau,
@@ -160,44 +160,44 @@ Papua New Guinea,
 Paraguay,
 Peru,
 Philippines,
-Poland,-0.215
-Portugal,-0.32299999999999995
+Poland,-0.22
+Portugal,-0.327
 Puerto Rico,
 Qatar,
 Reunion,
-Romania,-0.259
+Romania,-0.262
 Russia,
 Rwanda,
 Saint Barthélemy,
 Saint Kitts and Nevis,
 Saint Lucia,
 Saint Martin,
-Saint Pierre and Miquelon,-0.674
+Saint Pierre and Miquelon,-0.677
 Saint Vincent and the Grenadines,
 Samoa,
-San Marino,-0.107
+San Marino,-0.11599999999999999
 Sao Tome and Principe,
 Saudi Arabia,
 Senegal,
-Serbia,-0.084
+Serbia,-0.09
 Seychelles,
 Sierra Leone,
 Singapore,
 Sint Maarten,
-Slovakia,-0.249
-Slovenia,-0.098
+Slovakia,-0.254
+Slovenia,-0.107
 Solomon Islands,
 Somalia,
 South Africa,
 South Georgia and the South Sandwich Isla,
 South Korea,
-Spain,-0.259
+Spain,-0.264
 Sri Lanka,
 Sudan,
 Suriname,
-Svalbard and Jan Mayen,-0.055999999999999994
-Sweden,-0.237
-Switzerland,-0.182
+Svalbard and Jan Mayen,-0.061
+Sweden,-0.243
+Switzerland,-0.19399999999999998
 Syria,
 Taiwan,
 Tajikistan,
@@ -214,7 +214,7 @@ Turks and Caicas Islands,
 Uganda,
 Ukraine,-0.29600000000000004
 United Arab Emirates,
-United Kingdom,-0.452
+United Kingdom,-0.457
 United States of America,
 Uruguay,
 Uzbekistan,
@@ -225,5 +225,5 @@ Western Sahara,
 Yemen,
 Zambia,
 Zimbabwe,
-Åland,-0.256
-Global Land,-0.34700000000000003
+Åland,-0.263
+Global Land,-0.348

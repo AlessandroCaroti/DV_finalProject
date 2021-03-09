@@ -1,9 +1,9 @@
 Country,Anomaly
 Afghanistan,
-Albania,-0.188
+Albania,-0.028999999999999998
 Algeria,
 American Samoa,
-Andorra,0.053
+Andorra,0.293
 Angola,
 Anguilla,
 Antarctica,
@@ -12,23 +12,23 @@ Argentina,
 Armenia,
 Aruba,
 Australia,
-Austria,0.396
+Austria,0.618
 Azerbaijan,
 Bahamas,
 Bahrain,
 Bangladesh,
 Barbados,
-Belarus,0.21600000000000003
-Belgium,0.45
+Belarus,0.193
+Belgium,0.65
 Belize,
 Benin,
 Bhutan,
 Bolivia,
-Bosnia and Herzegovina,0.063
+Bosnia and Herzegovina,0.237
 Botswana,
 Brazil,
 British Virgin Islands,
-Bulgaria,-0.205
+Bulgaria,-0.07400000000000001
 Burkina Faso,
 Burundi,
 Cambodia,
@@ -44,14 +44,14 @@ Colombia,
 Comoros,
 Congo,
 Costa Rica,
-Croatia,0.162
+Croatia,0.34700000000000003
 Cuba,
 Curaçao,
 Cyprus,
-Czechia,0.5720000000000001
+Czechia,0.695
 Côte d'Ivoire,
 Dem. Rep. Congo,
-Denmark,0.669
+Denmark,0.6759999999999999
 Djibouti,
 Dominica,
 Dominican Republic,
@@ -60,21 +60,21 @@ Egypt,
 El Salvador,
 Equatorial Guinea,
 Eritrea,
-Estonia,0.282
+Estonia,0.106
 eSwatini,
 Ethiopia,
 Falkland Islands (Islas Malvinas),
-Faroe Islands,0.303
+Faroe Islands,0.331
 Fiji,
-Finland,-0.113
-France,0.249
+Finland,-0.366
+France,0.494
 French Guiana,
 French Polynesia,
 French Southern and Antarctic Lands,
 Gabon,
 Gambia,
 Georgia,
-Germany,0.596
+Germany,0.7490000000000001
 Ghana,
 Greece,
 Greenland,
@@ -82,7 +82,7 @@ Grenada,
 Guadeloupe,
 Guam,
 Guatemala,
-Guernsey,0.419
+Guernsey,0.628
 Guinea,
 Guinea-Bissau,
 Guyana,
@@ -90,19 +90,19 @@ Haiti,
 Heard Island and McDonald Islands,
 Honduras,
 Hong Kong,
-Hungary,0.254
+Hungary,0.387
 Iceland,
 India,
 Indonesia,
 Iran,
 Iraq,
-Ireland,0.24
-Isle of Man,0.563
+Ireland,0.389
+Isle of Man,0.6859999999999999
 Israel,
-Italy,-0.043
+Italy,0.16399999999999998
 Jamaica,
 Japan,
-Jersey,0.419
+Jersey,0.628
 Jordan,
 Kazakhstan,
 Kenya,
@@ -110,38 +110,38 @@ Kiribati,
 Kuwait,
 Kyrgyzstan,
 Laos,
-Latvia,0.39899999999999997
+Latvia,0.278
 Lebanon,
 Lesotho,
 Liberia,
 Libya,
-Liechtenstein,0.33299999999999996
-Lithuania,0.47600000000000003
-Luxembourg,0.434
+Liechtenstein,0.633
+Lithuania,0.41
+Luxembourg,0.655
 Macau,
-Macedonia,-0.195
+Macedonia,-0.045
 Madagascar,
 Malawi,
 Malaysia,
 Mali,
-Malta,-0.276
+Malta,-0.111
 Martinique,
 Mauritania,
 Mauritius,
 Mayotte,
 Mexico,
 Micronesia,
-Moldova,-0.133
-Monaco,0.048
+Moldova,-0.048
+Monaco,0.267
 Mongolia,
-Montenegro,-0.059000000000000004
+Montenegro,0.102
 Montserrat,
 Morocco,
 Mozambique,
 Myanmar,
 Namibia,
 Nepal,
-Netherlands,0.524
+Netherlands,0.659
 New Caledonia,
 New Zealand,
 Nicaragua,
@@ -150,7 +150,7 @@ Nigeria,
 Niue,
 North Korea,
 Northern Mariana Islands,
-Norway,0.162
+Norway,0.075
 Oman,
 Pakistan,
 Palau,
@@ -160,44 +160,44 @@ Papua New Guinea,
 Paraguay,
 Peru,
 Philippines,
-Poland,0.5720000000000001
-Portugal,-0.29100000000000004
+Poland,0.623
+Portugal,-0.09699999999999999
 Puerto Rico,
 Qatar,
 Reunion,
-Romania,-0.045
+Romania,0.066
 Russia,
 Rwanda,
 Saint Barthélemy,
 Saint Kitts and Nevis,
 Saint Lucia,
 Saint Martin,
-Saint Pierre and Miquelon,-0.596
+Saint Pierre and Miquelon,-0.56
 Saint Vincent and the Grenadines,
 Samoa,
-San Marino,0.055
+San Marino,0.261
 Sao Tome and Principe,
 Saudi Arabia,
 Senegal,
-Serbia,0.214
+Serbia,0.322
 Seychelles,
 Sierra Leone,
 Singapore,
 Sint Maarten,
-Slovakia,0.35
-Slovenia,0.23399999999999999
+Slovakia,0.456
+Slovenia,0.445
 Solomon Islands,
 Somalia,
 South Africa,
 South Georgia and the South Sandwich Isla,
 South Korea,
-Spain,-0.156
+Spain,0.059000000000000004
 Sri Lanka,
 Sudan,
 Suriname,
-Svalbard and Jan Mayen,-0.252
-Sweden,0.324
-Switzerland,0.22399999999999998
+Svalbard and Jan Mayen,-0.284
+Sweden,0.185
+Switzerland,0.501
 Syria,
 Taiwan,
 Tajikistan,
@@ -212,9 +212,9 @@ Turkey,
 Turkmenistan,
 Turks and Caicas Islands,
 Uganda,
-Ukraine,-0.147
+Ukraine,-0.086
 United Arab Emirates,
-United Kingdom,0.429
+United Kingdom,0.5589999999999999
 United States of America,
 Uruguay,
 Uzbekistan,
@@ -225,5 +225,5 @@ Western Sahara,
 Yemen,
 Zambia,
 Zimbabwe,
-Åland,0.45
-Global Land,-0.551
+Åland,0.284
+Global Land,-0.45
