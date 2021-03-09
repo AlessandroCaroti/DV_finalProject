@@ -517,11 +517,15 @@ table {
   font-weight: bold;
 }
 
-.gridline {
+
+.grid line {
   stroke: lightgrey;
-  stroke-opacity: 0.8;
+  stroke-opacity: 0.7;
   shape-rendering: crispEdges;
-  stroke-dasharray: 5px;
+  stroke-dasharray: 6px;}
+
+.grid path {
+  stroke-width: 0;
 }
 
 /*---------------------------END SEASONAL STYLE--------------------------------*/
