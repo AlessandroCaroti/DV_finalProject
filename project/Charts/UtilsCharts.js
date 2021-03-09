@@ -18,7 +18,7 @@ function annualDataStyle() {
     .attr("y2", 23)
     .style("stroke", "steelblue");
 
-  d3.select("#range-name-legend").attr("y", 23);
+  d3.select("#range-name-legend").attr("y", 26);
 }
 
 //Create the legend of the Linechart
@@ -96,8 +96,8 @@ function createLineChartLegend(svg) {
 
   legend
     .append("text")
-    .attr("x", 37)
-    .attr("y", y1_range_name)
+    .attr("x", 39)
+    .attr("y", y2_range_name+3)
     .attr("class", "legend")
     .attr("id", "range-name-legend")
     .html(range_name + " Average Temperature with uncertainty");
@@ -126,7 +126,6 @@ function updateRangeNameLegend(svg) {
   d3.select(".legend").remove();
   createLineChartLegend(svg, btn);
 
-  if (btn.value == "annual")  annualDataStyle();
 
 
   if (btn.value != "annual") {
@@ -158,12 +157,15 @@ function updateRangeNameLegend(svg) {
       .attr("y1", 32)
       .attr("y2", 32)
       .style("stroke", "red");
-    d3.select("#range-name-legend").attr("y", 32);
-  }
+    d3.select("#range-name-legend");
+
+    
+  }else 
+      annualDataStyle();
 
   d3.select("#range-name-legend").html(
     range_name + " Average Temperature with uncertainty"
-  );
+  )
 }
 
 //-------------------------------------------------------TABLE-----------------------------------------
