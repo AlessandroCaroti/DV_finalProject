@@ -119,14 +119,13 @@ function createLineChartLegend(svg) {
 }
 
 function updateRangeNameLegend(svg) {
+  
   var btn = getCheckedValue("btn-range-year");
   var label = document.getElementById("label-" + btn.id);
   var range_name = label.innerHTML;
 
   d3.select(".legend").remove();
   createLineChartLegend(svg, btn);
-
-
 
   if (btn.value != "annual") {
 
