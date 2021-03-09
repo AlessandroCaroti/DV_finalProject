@@ -197,7 +197,7 @@ function UpdateHottestColdestLineChart(data){
 
   var dataMonthly = getMonthlyData(data, hottest_temp, coldest_temp);
        
-  var scales = getScalesHottestColdest(data);
+  var scales = getScalesHottestColdest(dataMonthly);
   var x = scales[0] 
   var y =  scales[1]
 
