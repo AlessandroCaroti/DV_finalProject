@@ -17,18 +17,29 @@ function getLineGeneratorsHottestColdest(x, y){
 
 function getScalesHottestColdest(data){
   
-  var m =[];
-    monthList.forEach((d)=>{
-        m.push( parseMonth(d));
+  var x_data =[];
+  monthList.forEach((d)=>{
+    x_data.push( parseMonth(d));
       })
     
+  var y_data = [];
+  
+  data.forEach(row => {
+
+    row.forEach(element =>{
+      y_data.push(element.monthly_value);
+
+    })
+    
+  });
+
     var x = d3.scaleTime()
-              .domain(d3.extent(m, function(d) { return d }))
+              .domain(d3.extent(x_data, function(d) { return d }))
               .range([ 0, width ]);             
 
-           // Add Y axis
+    //  Y axis
     var y = d3.scaleLinear()
-               .domain(d3.extent(data, function(d) { return d.monthly_value}))
+               .domain([d3.min(y_data) - 0.5, d3.max(y_data) + 0.5])
                .range([height, 0 ]);
   
     return [x, y];
@@ -115,9 +126,9 @@ function createHottestColdestLineChart(data){
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
                 
                 
-    var scales = getScalesHottestColdest(data);
-    var x = scales[0] 
-    var y =  scales[1]
+    var scales = getScalesHottestColdest(dataMonthly);
+    var x = scales[0];
+    var y =  scales[1];
 
    
     
@@ -186,7 +197,7 @@ function UpdateHottestColdestLineChart(data){
 
   var dataMonthly = getMonthlyData(data, hottest_temp, coldest_temp);
        
-  var scales = getScalesHottestColdest(data);
+  var scales = getScalesHottestColdest(dataMonthly);
   var x = scales[0] 
   var y =  scales[1]
 
