@@ -22,7 +22,7 @@ def group_year(df):
     year_dict = {}
     find_start = False
     for idx, (year, month) in enumerate(year_list.values.tolist()):
-        if year >= 1750 and (year not in year_dict or month == 5):
+        if year >= 1750 and month == 6:
             year_dict[year] = idx
         if (first_year is None or year < first_year) and (not np.isnan(df.loc[idx, "Ten-year Anomaly"])):
             first_year = year
