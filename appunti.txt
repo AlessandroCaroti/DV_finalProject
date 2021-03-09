@@ -15,6 +15,8 @@ DA DISCUTERE:
 
 DA CHIEDERE:
 
+DA AGGIUNGERE NEL MENU' LATERALE:
+
 ------------------------------------------------------------------------------------
 Presentazione progetto:
 -what(all dataset), why, how
