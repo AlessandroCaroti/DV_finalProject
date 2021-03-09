@@ -198,6 +198,7 @@ function getCheckedValue(groupName) {
   return null;
 }
 
+
 function createDefaultLineChart(data) {
   // set titles
   var title = document.getElementById("title-climate-changes").innerHTML;
@@ -220,14 +221,30 @@ function createDefaultLineChart(data) {
   var x = scales[0];
   var y = scales[1];
 
+  var x_axis = d3.axisBottom(x).tickSizeOuter(0);
+  var y_axis = d3.axisLeft(y).tickSizeOuter(0);
+
+
+
+
   svg
-    .select(".x_axis")
-    .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(x).tickSizeOuter(0));
+      .select("#x_grid_linechart")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x)
+          .tickSize(-height)
+          .tickFormat("")
+      )
 
-  svg.select(".y_axis").call(d3.axisLeft(y).tickSizeOuter(0));
+  // add the Y gridlines
+  svg.select("#y_grid_linechart")			
+      .call(d3.axisLeft(y)
+          .tickSize(-width)
+          .tickFormat("")
+      )
 
-  lineChartGridline("x_axis", "y_axis");
+
+
+  //lineChartGridline("x_axis", "y_axis");
 
   var lineGenerators = getLineGenerators(x, y);
   var valueline_annual = lineGenerators[0];
@@ -286,6 +303,14 @@ function createDefaultLineChart(data) {
     .on("mouseout", () => removeTooltipLineChart(tooltipLine, "#linechart"));
 
   createLineChartLegend(svg, btn_ten);
+
+  svg
+    .select(".x_axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(x_axis);
+
+  svg.select(".y_axis").call(y_axis);
+
 }
 
 //Update the X and Y axes
@@ -394,4 +419,24 @@ function updateLineChart(data, grafic_class) {
     .on("mouseout", () => removeTooltipLineChart(tooltipLine, "#linechart"));
 
   updateLineChartGridline("x_axis", "y_axis");
+
+  
+  svg
+      .select("#x_grid_linechart")
+      .transition()
+      .duration(500)
+      .call(d3.axisBottom(x)
+          .tickSize(-height)
+          .tickFormat("")
+      )
+
+  // add the Y gridlines
+  svg.select("#y_grid_linechart")
+      .transition()
+      .duration(500)
+      .call(d3.axisLeft(y)
+          .tickSize(-width)
+          .tickFormat("")
+      )
+
 }
