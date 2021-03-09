@@ -27,6 +27,7 @@ function getScalesHottestColdest(data){
   data.forEach(row => {
 
     row.forEach(element =>{
+
       y_data.push(element.monthly_value);
 
     })
@@ -63,7 +64,7 @@ function getMonthlyData(data, hottestYears, coldestYears){
 
         var row = {};
         row["month"] = d.Month;
-        row["monthly_value"] = d.monthly_value;
+        row["monthly_value"] = d.annual_anomaly;
         row["Year"] = d.Year;
         row["annual_anomaly"] = d.annual_anomaly;
         row["zero_val"] = 0;
