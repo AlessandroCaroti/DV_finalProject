@@ -90,17 +90,15 @@ function getScalesSeasonal(data, dataSeasonal) {
       d3.min(data, function (d) {
         return (
           +dataSeasonal.seasonalBaseline[getMonthName(d.Month)] +
-          d.monthly_value -
-          6
+          d.monthly_value 
         );
-      }),
+      }) -6,
       d3.max(data, function (d) {
         return (
           +dataSeasonal.seasonalBaseline[getMonthName(d.Month)] +
-          d.monthly_value +
-          10
+          d.monthly_value 
         );
-      }),
+      }) +10,
     ])
     .range([height, 0]);
 
