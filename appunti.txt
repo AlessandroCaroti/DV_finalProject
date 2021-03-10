@@ -3,6 +3,7 @@ TO DO:
 - Buttare la pagina in un convalidatore HTML5
 
 TO FIX:
+- certi paesi se selezionati vengono zoomanti ma non compaiono perchè il secondo livello non viene renderizzato
 
 PROBLEMI NEMU' SELEZIONE COUNTRY:
 
