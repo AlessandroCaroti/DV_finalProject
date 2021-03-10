@@ -15,6 +15,7 @@ DA DISCUTERE:
 -unire la stripe con il grafico sotto
 -nel grafico Anomalies Records quando si fà l'over mostrare nella leggenda l'anno e l'anomalia se
  se non è già tra i più caldi/freddi
+-non aggoirnare la pagina quando la regione selezionata è la setssa di quella precedente
 
 DA CHIEDERE:
 
