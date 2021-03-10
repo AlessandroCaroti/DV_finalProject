@@ -207,7 +207,7 @@ function hotColdTextLegendLeave(event, d) {
   d3.select("#path-" + idx).style("stroke-width", "2px");
 }
 
-function hotColdMouseEnter(self) {
+function hotColdMouseEnter(self,event, d, hot_cold_list) {
   var idx = self.id.split("-")[1];
 
   d3.select(self).style("stroke-width", "6px").moveToFront();
@@ -216,6 +216,20 @@ function hotColdMouseEnter(self) {
     .style("font-weight", "bold")
     .style("text-decoration", "underline")
     .style("text-decoration-color", "black");
+
+  if(!isInList(d[0].Year, hot_cold_list) ){
+
+    d3.select("#selected_line").html(
+      d[0].Year +
+        "&nbsp &nbsp" +
+        (d[5].annual_anomaly > 0
+          ? "+" + d[5].annual_anomaly.toFixed(2)
+          : d[5].annual_anomaly.toFixed(2)) +
+        " &deg;C"
+    );
+
+  }
+  
 }
 
 function hotColdMouseLeave(self) {
@@ -226,4 +240,6 @@ function hotColdMouseLeave(self) {
   d3.select("#hot-cold-text-" + idx)
     .style("font-weight", "normal")
     .style("text-decoration", "none");
+
+  d3.select("#selected_line").html("");
 }

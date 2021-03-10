@@ -69,8 +69,7 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp) {
     .append("svg")
     .attr("id", "legend_hot_cold")
     .attr("width", 270)
-    .attr("height", 500)
-    .append("g");
+    .attr("height", 460);
   var curX = 50;
   var curY = 25;
 
@@ -88,13 +87,14 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp) {
 
   var id_idx = 0;
   hottest_temp.forEach((el) => {
-    curY += 35;
+    curY += 30;
+    
 
     legend
       .append("rect")
       .attr("x", curX)
       .attr("width", 20)
-      .attr("y", curY)
+      .attr("y", curY-10)
       .attr("height", 20)
       .attr("fill", el.color_value);
 
@@ -102,7 +102,7 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp) {
       .append("text")
       .attr("class", "text-legend")
       .attr("x", curX + 35)
-      .attr("y", curY + 15)
+      .attr("y", curY + 5)
       .attr("id", "hot-cold-text-" + id_idx)
       .html(
         el.Year +
@@ -128,7 +128,7 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp) {
     id_idx++;
   });
 
-  curY += 60;
+  curY += 45;
   legend
     .append("text")
     .attr("x", curX - 20)
@@ -137,13 +137,13 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp) {
     .text("Top 5 Coldest Anomalies");
 
   coldest_temp.forEach((el) => {
-    curY += 35;
+    curY += 30;
 
     legend
       .append("rect")
       .attr("x", curX)
       .attr("width", 20)
-      .attr("y", curY)
+      .attr("y", curY-15)
       .attr("height", 20)
       .attr("fill", el.color_value);
 
@@ -151,7 +151,7 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp) {
       .append("text")
       .attr("class", "text-legend")
       .attr("x", curX + 35)
-      .attr("y", curY + 15)
+      .attr("y", curY )
       .attr("id", "hot-cold-text-" + id_idx)
       .html(
         el.Year +
@@ -167,7 +167,7 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp) {
       .attr("id", "hot-cold-rect-" + id_idx)
       .attr("x", curX - 5)
       .attr("width", 150)
-      .attr("y", curY - 5)
+      .attr("y", curY - 5 )
       .attr("height", 28)
       .style("fill", "white")
       .style("opacity", "0%")
@@ -178,14 +178,31 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp) {
     id_idx++;
 
   });
+  console.log(  )
+  legend
+      .append("line")
+      .attr("y1", curY + 30)
+      .attr("y2", curY + 30)
+      .attr("x1", 30)
+      .attr("x2", legend.attr("width")-30)
+      .style("stroke", "gray")
+      .style("stroke-width", "1px")
 
+  legend
+      .append("rect")
+      .attr("x", curX)
+      .attr("width", 20)
+      .attr("y", curY+50)
+      .attr("height", 20)
+      .attr("fill", "lightgray");
+  
   legend
       .append("text")
       .attr("class", "text-legend")
-      .attr("x", curX + 35)
-      .attr("y", curY + 15 + 35 )
-      .attr("id", "selected_line");
-
+      .attr("x", curX + 35 )
+      .attr("y", curY + 65 )
+      .attr("id", "selected_line")
+      .html("");
 
 }
 
@@ -392,7 +409,7 @@ function createHottestColdestLineChart(data){
                           return String("grey-path");
                     })
                     .attr("style", (d) => getHotColdStyle(hot_cold_list,d))
-                    .on("mouseover", function(event, d){ hotColdMouseEnter(this)})
+                    .on("mouseover", function(event, d){ hotColdMouseEnter(this, event, d, hot_cold_list)})
                     .on("mouseout", function(event, d){ hotColdMouseLeave(this)})
   
     
@@ -466,7 +483,7 @@ function UpdateHottestColdestLineChart(data){
                 if(!isInList(d[0].Year, hot_cold_list))
                     return String("grey-path");
           })  
-          .on("mouseover", function(){ hotColdMouseEnter(this)})
+          .on("mouseover", function(event, d){ hotColdMouseEnter(this, event, d, hot_cold_list)})
           .on("mouseout", function(){ hotColdMouseLeave(this)})
 
   var zeroLine = d3.select(".zero-line").selectAll("path").data(dataMonthly);
