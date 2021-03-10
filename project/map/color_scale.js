@@ -130,31 +130,7 @@ function set_colorScale(){
             .style("font-size", "15px")
             .raise();
     
-    /*d3.select("#global-anomaly")
-              .attr("x", width_legend + 2 * (width_legend / n_ticks) + 150)
-              .attr("y", "0")
-              .style("fill", "black")
-              .style("font-size", "15px")
-              .style("font-weight", "bold");*/
-
-    //init_legendSpace();
+    
   }
 
-  function init_legendSpace() {
-
-    var bBox = document.getElementById("legend-anomaly").getBBox();
   
-    var gap = 5,
-      w_1 = bBox.width + gap * 2,
-      w_2 = bBox.width,
-      x = bBox.x - gap;
-  
-    d3.select(".legend-anomaly")
-      .select("path")
-      .attr("d", roundedFigure_1(x, bBox.y + 26, w_1, w_2, -37))
-      .style("fill", "white")
-      .style("stroke", "black")
-      .style("stroke-width", 0.5);
-
-    console.log(bBox)
-  }
