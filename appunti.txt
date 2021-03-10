@@ -1,20 +1,18 @@
 TO DO:
+- sistemare i file con dentro roba a caso
+
 
 TO FIX:
--rendere non interagibile le cose inutili, come il testo degli anni sotto lo slider
--mettere a posto il css principale
 
 PROBLEMI NEMU' SELEZIONE COUNTRY:
 
 IDEE:
-- da aggiungere nel menù laterale anche gli anni in cui sono stati misurata la baseline (tipo in piccino sotto la temperatura)
 - 95% di confidenza da mettere nella legenda 
 
 
 DA DISCUTERE:
--aggiungere lo zoom sul grafico sotto le stripe
--rendere interagibile il menù_mappa durante l'animazione, per lo meno il cambio della velocità
 -unire la stripe con il grafico sotto
+-stripe meno ciccionosa
 
 
 DA CHIEDERE:
