@@ -173,6 +173,7 @@ function updateGrid(idChart, x, y, svg, n_tickX = 8, n_tickY = 8) {
 // to the annual_value and ten_years_value
 function parseDataAttributes(data, baseline, region = "NaN") {
   data.forEach((d) => {
+    
     d.date = parseTime(d.Year + "-" + d.Month);
     d.annual_anomaly = parseFloat(d["Annual Anomaly"]);
     d.annual_unc = parseFloat(d["Annual Unc."]);

@@ -173,7 +173,7 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp) {
       .style("opacity", "0%")
       .on("mouseenter", hotColdTextLegendEnter)
       .on("mouseleave", hotColdTextLegendLeave);
-      
+
 
     id_idx++;
   });
@@ -271,9 +271,14 @@ function getAverageTemperature(data) {
 }
 
 function getHottestYears(data) {
-  var temperatures = getAverageTemperature(data).sort(
+  
+  var dataFiltered=getAverageTemperature(data).filter((el)=> !isNaN(el.annual_value))
+  
+  var temperatures = dataFiltered.sort(
     (x, y) => x.annual_value - y.annual_value
   );
+
+
   var hottest_year = [];
   var color_list = ["#FF0020", "#FF4600", "#FF7800", "#FFaa00", "#FFe600"];
   var j = 0;
@@ -294,7 +299,9 @@ function getHottestYears(data) {
 }
 
 function getColdestYears(data) {
-  var temperatures = getAverageTemperature(data).sort(
+  var dataFiltered=getAverageTemperature(data).filter((el)=> !isNaN(el.annual_value))
+  
+  var temperatures = dataFiltered.sort(
     (x, y) => x.annual_value - y.annual_value
   );
 
