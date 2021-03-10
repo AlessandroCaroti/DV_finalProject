@@ -61,13 +61,13 @@ function createLineChartLegend(svg) {
   var y1_range_name = 32,
     y2_range_name = 32,
     y_unc = 32;
-  //var stroke_color = "purple";
+  var stroke_color = "red";
   if (btn.value == "annual") {
     
     y1_range_name = 23;
     y2_range_name = 23;
     y_unc = 15;
-    //stroke_color="steelblue"
+    stroke_color="steelblue"
   
   }
 
@@ -90,7 +90,7 @@ function createLineChartLegend(svg) {
     .attr("y2", y2_range_name)
     .attr("class", "line_chart_range_years")
     .attr("id", "range-name-line")
-    //.style("stroke", stroke_color);
+    .style("stroke", stroke_color);
 
   legend
     .append("text")
@@ -153,7 +153,7 @@ function updateRangeNameLegend(svg) {
     d3.select("#range-name-line")
       .attr("y1", 32)
       .attr("y2", 32)
-      //.style("stroke", "red");
+      .style("stroke", "red");
 
     
   }else 
