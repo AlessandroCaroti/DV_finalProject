@@ -227,9 +227,8 @@ function createDeafaultSeasonalLinechart(data, dataSeasonalBaseline) {
   var yAxis= d3.axisLeft(y);
   
   
-  
        
-     //Add X, Y axess
+  //Add X, Y axess
   svg.select("g.x_axis_seasonal")
   .attr("transform", "translate(0," + height + ")")
   .call(xAxis);
@@ -318,10 +317,6 @@ svg.select("#y_grid_seasonal")
 
     createSeasonalLineChartLegend(svg, lastYearsData);
 
-      
-
- 
-  
 
 }
 
