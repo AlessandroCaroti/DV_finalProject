@@ -176,7 +176,17 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp) {
 
 
     id_idx++;
+
   });
+
+  legend
+      .append("text")
+      .attr("class", "text-legend")
+      .attr("x", curX + 35)
+      .attr("y", curY + 15 + 35 )
+      .attr("id", "selected_line");
+
+
 }
 
 function updateHotColdLegend(hot_cold_list) {
