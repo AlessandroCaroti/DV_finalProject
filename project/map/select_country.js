@@ -1,6 +1,7 @@
 const input_source = document.getElementById("input_countrySelection");
 const selectionCountry_list = d3.select("#country_list");
 var curr_over = null;
+var prev_country = null;
 var k = 0;
 
 // EVENT HANDLERS
@@ -36,7 +37,7 @@ const keydownHandlwe = function (event) {
       d3.select(curr_over).classed("country_option_over", false);
       curr_over = curr_over.previousElementSibling;
       d3.select(curr_over).classed("country_option_over", true);
-      
+
       //scroll if outside the view box
       if (curr_over.getBoundingClientRect().y < 163) {
         k += curr_over.getBoundingClientRect().y - 163;
@@ -46,7 +47,7 @@ const keydownHandlwe = function (event) {
   } else if (event.key === "Escape") {
     hide_options();
   }
-}
+};
 
 input_source.addEventListener("input", inputHandler);
 input_source.addEventListener("blur", blurHandler);
@@ -106,9 +107,9 @@ function update_otionsCountry(options) {
       d3.select(curr_over).classed("country_option_over", true);
     })
     .html((d) => d);
-  
+
   //Set the selected to the 1° one
-  if (curr_over != null){
+  if (curr_over != null) {
     d3.select(curr_over).classed("country_option_over", false);
   }
   selectionCountry_list
@@ -129,8 +130,11 @@ function find_matches(string, list_of_sting) {
 }
 
 function update_mainPage(new_country) {
-  // update charts
-  console.log(new_country);
-  changeCountry(new_country);
-  changeAllData(new_country);
+  if (new_country != prev_country) {
+    prev_country = new_country;
+    // update charts
+    console.log(new_country);
+    changeCountry(new_country);
+    changeAllData(new_country);
+  }
 }

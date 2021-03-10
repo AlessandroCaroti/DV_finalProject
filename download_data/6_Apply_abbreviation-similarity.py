@@ -3,7 +3,7 @@ import json
 import io
 import os
 
-mapFile_path = "./download_data/data/map/countries-10m_V35.json"
+mapFile_path = "./download_data/data/map/countries-10m_V37.json"
 abbreviationFile_path = "./download_data/extra-data/4_abbreviation.csv"
 similarityFile_path = "./download_data/extra-data/5_similarity.csv"
 
