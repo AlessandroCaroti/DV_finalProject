@@ -225,31 +225,29 @@ function getMonthlyData(data, hottestYears, coldestYears){
 
    
     var years = Object.keys(monthlyData);
-    var years_every10=[];
-    var data_every10=[];
+    var years_every5=[];
+    var data_every5=[];
 
     //data every 10 years
-    for( var i=0; i < years.length; i+=10) years_every10.push(years[i])
+    for( var i=0; i < years.length; i+=5) years_every5.push(years[i])
   
     // add hootest coldest years
     for(var i=0; i< hottestYears.length; i++){
 
-      years_every10.push(coldestYears[i].Year);
-      years_every10.push(hottestYears[i].Year);
+      years_every5.push(coldestYears[i].Year);
+      years_every5.push(hottestYears[i].Year);
     
     }
     
-    years_every10 = years_every10.filter(getUniqueValue);
+    years_every5 = years_every5.filter(getUniqueValue);
 
-    years_every10.forEach( (y)=>{
+    years_every5.forEach( (y)=>{
         
-      data_every10.push( monthlyData[y])
+      data_every5.push( monthlyData[y])
 
     })
 
- 
-
-   return data_every10;
+   return data_every5;
 
 }
 
