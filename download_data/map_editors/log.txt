@@ -442,3 +442,15 @@ Poligon pos. extracted: 2
 Polygon removed from the orignal country: YES
 ########################################################################
 
+MAP VERSION 38
+
+Orginal mapVersion: 37
+Log time: 2021-03-10 11:38:18.244731
+
+Orginal Name: Netherlands
+New Name: Caribbean Netherlands
+Id: 9999
+Poligon pos. extracted: 9
+Polygon removed from the orignal country: YES
+########################################################################
+
