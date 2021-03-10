@@ -12,6 +12,9 @@ IDEE:
 DA DISCUTERE:
 -aggiungere lo zoom sul grafico sotto le stripe
 -rendere interagibile il menù_mappa durante l'animazione, per lo meno il cambio della velocità
+-unire la stripe con il grafico sotto
+-nel grafico Anomalies Records quando si fà l'over mostrare nella leggenda l'anno e l'anomalia se
+ se non è già tra i più caldi/freddi
 
 DA CHIEDERE:
 
