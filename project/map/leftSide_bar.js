@@ -13,7 +13,7 @@ function update_year(year) {
   d3.csv(annual_tempFile)
     .then(function (data) {
       global_anomaly = parseFloat(data[data.length - 1].Anomaly).toFixed(2);
-      temp_value.html(global_anomaly);
+      temp_value.html(global_anomaly+" °C");
 
       if (global_anomaly < 0) {
         image_containerUp.style("display", "none");

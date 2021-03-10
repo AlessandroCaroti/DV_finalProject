@@ -163,6 +163,7 @@ ul#country_list {
 }
 
 .center {
+  float: none;
   margin: auto;
   text-align: center;
   align-items: center;
