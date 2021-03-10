@@ -345,11 +345,10 @@ function createHottestColdestLineChart(data){
     var dataMonthly = getMonthlyData(data, hottest_temp, coldest_temp);
 
     var svg = d3.select("#container-h-c")
-                .append("svg")
-                .attr("id","graphics")
+                .select("svg#graphics")
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
-                .append("g")
+                .select("g")
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
                 
                 

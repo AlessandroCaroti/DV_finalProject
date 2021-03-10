@@ -425,7 +425,7 @@
         </p>
         <div class="tooltip" id="tooltip_line"></div>
 
-        <svg>
+        <svg style="overflow: visible;">
           <g class="graphics">
             <g class="x_axis_label" > <text>Years</text></g>
             <g class="y_axis_label"> <text> anomaly (°C)</text></g>
@@ -477,6 +477,12 @@
           <i> Series of coloured stripes chronologically ordered to visually shows long-term anomaly from 1750 to 2020.
             The gray stripes represents the missing data. </i>
         </p>
+        <svg id="graphics" style="overflow: visible;">
+          <g>
+            <g class="x_axis_label" > <text>Months</text></g>
+            <g class="y_axis_label"> <text> anomaly (°C)</text></g>
+          </g>
+        </svg>
         <div class="tooltip" id="tooltip-hot-cold"></div>
       </div>
 
@@ -492,11 +498,11 @@
           <i> Series of coloured stripes chronologically ordered to visually shows long-term anomaly from 1750 to 2020.
             The gray stripes represents the missing data. </i>
         </p>
-        <svg>
+        <svg style="overflow: visible;">
           <g class="chart">
             
-            <g class="x_axis_label" > <text>Years</text></g>
-            <g class="y_axis_label"> <text> anomaly (°C)</text></g>
+            <g class="x_axis_label" > <text>Months</text></g>
+            <g class="y_axis_label"> <text> Absolute temperature (°C)</text></g>
 
             <g id="x_grid_seasonal" class="grid"></g>
             <g id="y_grid_seasonal" class="grid"></g>

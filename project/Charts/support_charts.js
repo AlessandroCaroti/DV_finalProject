@@ -77,7 +77,13 @@ function allDeafaultDataset() {
               //alert("Unable To Load The Dataset!!");
               throw error;
             });
-        
+            
+            // 
+            d3.selectAll(".x_axis_label")
+              .attr("transform", "translate(" + width /2 + ", 480)")
+            
+            d3.selectAll(".y_axis_label")
+              .attr("transform", "translate( -50 , " + (height /2 + 60) + " ) rotate(-90 0 0)")
         })
         .catch((error) => {
           console.log(error);

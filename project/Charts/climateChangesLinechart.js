@@ -310,7 +310,7 @@ function createDefaultLineChart(data) {
     .call(x_axis);
 
   svg.select(".y_axis").call(y_axis);
-
+  
 }
 
 //Update the X and Y axes
