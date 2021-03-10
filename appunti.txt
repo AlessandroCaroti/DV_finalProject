@@ -1,6 +1,6 @@
 TO DO:
 - sistemare i file con dentro roba a caso
-
+- Buttare la pagina in un convalidatore HTML5
 
 TO FIX:
 
