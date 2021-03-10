@@ -246,7 +246,7 @@ text#label-legend {
 
 
 .chart-container {
-  width: 950px;
+  /*width: 950px;*/
   height: auto;
   padding: 50px 50px 50px 50px;
   margin: auto;
