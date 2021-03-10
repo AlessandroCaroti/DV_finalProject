@@ -243,16 +243,7 @@ text#label-legend {
 
 /*--------------------------------- TAB MENU STYLE -------------------------------------*/
 
-#tab_menu {
-  float: center;
-  width: 900px;
-  height: 500px;
-}
 
-.tab {
-  overflow: hidden;
-  margin-left: 6%;
-}
 
 .chart-container {
   width: 950px;
@@ -261,8 +252,6 @@ text#label-legend {
   margin: auto;
   margin-top: 3%;
 }
-
-
 
 
 .title-chart {
@@ -284,15 +273,14 @@ h3 {
 
 /*------------------- LINECHART STYLE -------------------------------*/
 
-.graphics .line_chart_annual {
-  stroke-width: 1px;
+.line_chart_annual {
   stroke: steelblue;
   fill: none;
 }
 
-.graphics .line_chart_range_years {
-  stroke-width: 2px;
+.line_chart_range_years {
   stroke: red;
+  stroke-width: 1px;
   fill: none;
 }
 

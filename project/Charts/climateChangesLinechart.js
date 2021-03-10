@@ -390,7 +390,7 @@ function updateLineChart(data, grafic_class) {
     .style("stroke-width", function (d) {
       var range_year = getCheckedValue("btn-range-year").value;
       if (range_year == "annual") return "1px";
-      else return "2px";
+ 
     });
 
   var base_line = svg.select(".baselines").selectAll("path").data([data]);
