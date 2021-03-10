@@ -22,7 +22,7 @@ var country_no_data; // list of countries with no associated data
 var selected_country = null;
 
 // FILES & DIRECTORY PATH VARIABLE
-map_file = "../../data/map/countries-10m_v38_6.json";
+map_file = "../../data/map/countries-10m_V38_6.json";
 tmp_file_prefix = "../../data/years/";
 tmp_file_suffix = "/Annual_mean.csv";
 countries_file = "../../data/15_countries_list.csv";
