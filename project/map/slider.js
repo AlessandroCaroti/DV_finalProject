@@ -71,7 +71,6 @@ function init_slider(min, max, step) {
       let move_step = wheelDistance(event);
       let next_val = parseInt(val + move_step);
 
-      console.log(next_val, val);
       if (parseInt(next_val) == parseInt(val)) return;
 
       if (next_val > max_slider) next_val = max_slider;
