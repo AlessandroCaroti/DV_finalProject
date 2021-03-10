@@ -27,7 +27,7 @@
   <script src="/project/utils/RoundedRect.js"></script>
   <script src="/project/utils/utils.js"></script>
   <script src="/project/InitPage.js"></script>
-  
+
 
   <!----------------------------------CHARTS FILES----------------------------------------->
 
@@ -39,7 +39,7 @@
 
   <!-----------------------------TAB MENU SCRIPTS-------------------------------------------->
   <script src="/project/Charts/climateChangesLinechart.js"></script>
-  
+
   <script src="/project/Charts/climateStripes.js"></script>
 
   <!------------------------------- TABLE SCRIPTS-------------------------------------------->
@@ -55,10 +55,10 @@
   <script src="/project/Charts/anomaliesRecords.js"></script>
 
   <!-----------------------------MAP SCRIPTS------------------------------------------>
- 
+
 </head>
 
-<body id="body"> 
+<body id="body">
 
   <!-- SCREEN LOADER -->
   <div id="loader-wrapper">
@@ -74,7 +74,7 @@
     <ul id="main-nav">
       <li id="logo-elem" class="button-nav-bar-logo"> <img id="logo" src="../project/images/Global_Warming_icon.svg"
           alt="Global_Warming_icon"></li>
-      
+
       <li class="button-nav-bar-logo"> <a href="http://berkeleyearth.org/" target="_blank" id="title-logo">Berkley
           Earth</a> </li>
       <li id="contributors-drop" class="button-nav-bar-logo" onclick="NavBarDropDownEvt()">
@@ -85,39 +85,46 @@
           width="13" />
 
         <div id="contributors-div">
-        
-            <span class="contributors-span"> <a href="https://github.com/LazyRacc00n" target="_blank">Jacopo Dapueto</a></span>
-            <span class="contributors-span"> <a href="https://github.com/simocampi" target="_blank">Simone Campisi</a></span>
-            <span class="contributors-span"> <a href="https://github.com/AlessandroCaroti" target="_blank">Alessandro Caroti</a></span>
-          
+
+          <span class="contributors-span"> <a href="https://github.com/LazyRacc00n" target="_blank">Jacopo
+              Dapueto</a></span>
+          <span class="contributors-span"> <a href="https://github.com/simocampi" target="_blank">Simone
+              Campisi</a></span>
+          <span class="contributors-span"> <a href="https://github.com/AlessandroCaroti" target="_blank">Alessandro
+              Caroti</a></span>
+
         </div>
       </li>
 
       <li id="elem-logo-git"> <img id="log-git" src="../project/images/github-icon-white-6.jpg" height="45" width="45"
           alt="logo-git" onclick="window.open('https://github.com/AlessandroCaroti/DV_finalProject', '_blank');" />
       </li>
-      
+
       <li id="#menu-colapse-elem">
 
-        <svg id="collapse-btn" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="45" width="45" onclick="collapseMenuEvt()"> 
-          <image id="collapse-img"  xlink:href="../project/images/collapse-menu.svg"  height="30" width="30" x=10 y=8 />
+        <svg id="collapse-btn" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="45"
+          width="45" onclick="collapseMenuEvt()">
+          <image id="collapse-img" xlink:href="../project/images/collapse-menu.svg" height="30" width="30" x=10 y=8 />
         </svg>
-        
+
         <div id="links-collapse-drop">
 
-          <span class="span-collapse">  <a class="links_page-collapse" href="#map">Map</a></span>
+          <span class="span-collapse"> <a class="links_page-collapse" href="#map">Map</a></span>
           <span class="span-collapse"><a class="links_page-collapse" href="#stripechart">Climate Stripes</a></span>
           <span class="span-collapse"><a class="links_page-collapse" href="#linechart">Climate Change</a></span>
-          <span class="span-collapse"><a class="links_page-collapse" href="#table_container">Mean Rate Of Changes</a></span>
-          <span class="span-collapse"><a class="links_page-collapse" href="#container-h-c">Temperature Records</a></span>
-          <span class="span-collapse"><a class="links_page-collapse" href="#seasonal_changes_graphic">Seasonal Changes</a></span>
-  
+          <span class="span-collapse"><a class="links_page-collapse" href="#table_container">Mean Rate Of
+              Changes</a></span>
+          <span class="span-collapse"><a class="links_page-collapse" href="#container-h-c">Temperature
+              Records</a></span>
+          <span class="span-collapse"><a class="links_page-collapse" href="#seasonal_changes_graphic">Seasonal
+              Changes</a></span>
+
         </div>
 
 
       </li>
-    
-      
+
+
       <div id="links-container">
 
         <span class="links-span"><a class="links_page" href="#svg-map">Map</a></span>
@@ -141,13 +148,8 @@
       <h2>Country:</h2>
       <div id="input_container" class="py_3">
         <form id="form_selectCountry">
-          <input id="input_countrySelection" 
-              autocomplete="off" 
-              value="" 
-              placeholder="Select a country..."
-              onfocus="this.select();showAllData()"
-              spellcheck="false"
-              type="text">
+          <input id="input_countrySelection" autocomplete="off" value="" placeholder="Select a country..."
+            onfocus="this.select();showAllData()" spellcheck="false" type="text">
           <button id="reset_countrySelection" type="button" onclick="this.blur();reset_and_hide();">x</button>
         </form>
       </div>
@@ -158,36 +160,36 @@
     </div>
 
     <!-- AVERAGE SELECTION -->
-    
-    <div id="selectionAverage_container" class="border_bottom py_2">
-     <div id="data-averaged-title"> 
-       
-        <h2>Data averaged on:</h2> 
-        
-        <img id="info-btn-avg"  src="../project/images/info.svg"  height="25" width="25"   />
-        
-        <div id="tooltip-info" class="tooltip" ></div>
 
-    </div>
+    <div id="selectionAverage_container" class="border_bottom py_2">
+      <div id="data-averaged-title">
+
+        <h2>Data averaged on:</h2>
+
+        <img id="info-btn-avg" src="../project/images/info.svg" height="25" width="25" />
+
+        <div id="tooltip-info" class="tooltip"></div>
+
+      </div>
       <div class="range-years-buttons-container">
-        <input class="checkbox-range" type="radio" name="btn-range-year"  value="annual" checked="checked"  id="btn_annual"
-          onclick="updateRangeData(this.value)" />
+        <input class="checkbox-range" type="radio" name="btn-range-year" value="annual" checked="checked"
+          id="btn_annual" onclick="updateRangeData(this.value)" />
         <label id="label-btn_annual" for="btn_annual"> 1 Year </label>
-  
-        <input class="checkbox-range" type="radio" name="btn-range-year" value="five_years"  id="btn_five"
+
+        <input class="checkbox-range" type="radio" name="btn-range-year" value="five_years" id="btn_five"
           onclick="updateRangeData(this.value)" />
         <label id="label-btn_five" for="btn_five"> 5 Year </label>
-  
-        <input class="checkbox-range" type="radio" name="btn-range-year"  value="ten_years"  id="btn_ten"
+
+        <input class="checkbox-range" type="radio" name="btn-range-year" value="ten_years" id="btn_ten"
           onclick="updateRangeData(this.value)" />
         <label id="label-btn_ten" for="btn_ten"> 10 Year </label>
-  
+
         <input class="checkbox-range" type="radio" name="btn-range-year" value="twenty_years" id="btn_twenty"
           onclick="updateRangeData(this.value)" />
         <label id="label-btn_twenty" for="btn_twenty">20 Year</label>
       </div>
     </div>
-     
+
     <!-- GLOBAL INFO -->
     <div class="border_bottom py_2 col_wrapper" id="global_info_container">
       <div style="padding-bottom: 0px;">
@@ -203,8 +205,10 @@
       <div style="padding-top: 4px;" id="selected_year_info">
         <div class="sub_title">SELECTED YEAR ANNUAL AVERAGE ANOMALY:<br> 1969</div>
         <div class="rate_of_change row_wrapper center">
-          <img src="/project/images/up-arrow-svgrepo-com.svg" height="30" width="25" id="img_yearSelected_up" style="display: inline;">
-          <img src="/project/images/down-arrow-svgrepo-com.svg" height="30" width="25" id="img_yearSelected_down" style="display: none;">
+          <img src="/project/images/up-arrow-svgrepo-com.svg" height="30" width="25" id="img_yearSelected_up"
+            style="display: inline;">
+          <img src="/project/images/down-arrow-svgrepo-com.svg" height="30" width="25" id="img_yearSelected_down"
+            style="display: none;">
           <div class="change_value">- 0.26</div>
           <div class="units"> °C since 1980</div>
         </div>
@@ -220,135 +224,139 @@
       </div>
     </div>
 
-    
-  
-    
+
+
+
   </div>
 
   <!-- MAIN PAGE -->
   <div class="main">
     <!-- START MAP -->
     <div class="col_wrapper">
-      
-      <svg id="btn-back-top" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" onclick="topFunction()"> 
-        
+
+      <svg id="btn-back-top" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+        onclick="topFunction()">
+
         <circle cx="22.5" cy="22.5" r="20" stroke="black" stroke-width="1" fill="none" />
-        <image id="bracket-btn"  xlink:href="../project/images/angular bracket back top.svg"  height="25" width="25" x=10 y=8 />
+        <image id="bracket-btn" xlink:href="../project/images/angular bracket back top.svg" height="25" width="25" x=10
+          y=8 />
 
       </svg>
 
-      <div id="map-containter" class="container" >
+      <div id="map-containter" class="container">
         <h1 style="text-align: center; color: #0070a1">
           Berkeley Earth Data
         </h1>
 
         <div id="all_map" class="col_wrapper">
-          
 
-          <div class="row_wrapper" >
 
-          <div style="width: 90%;">
-            <div class="all-slider" id="svg-slider">
-              <div id="sliderYear"></div>
+          <div class="row_wrapper">
+
+            <div style="width: 90%;">
+              <div class="all-slider" id="svg-slider">
+                <div id="sliderYear"></div>
+              </div>
+              <svg class="view-map" id="svg-map" width="100%">
+                <rect class="background" width="100%" height="100%"></rect>
+
+                <!-- GLOBE SVG LAYER -->
+                <svg id="map" style="overflow: visible" x="50%">
+
+                  <defs>
+                    <pattern id="diagonalHatch" width="5" height="5" patternTransform="rotate(45 0 0)"
+                      patternUnits="userSpaceOnUse">
+                      <rect width="5" height="5" style="fill:#999999;"></rect>
+                      <line x1="0" y1="0" x2="0" y2="10" style="stroke:black; stroke-width:2; " />
+                    </pattern>
+                  </defs>
+
+                  <path class="background_globe" d=""></path>
+                  <g id="map_graticule"></g>
+                  <g id="level_0"></g>
+                  <g id="level_1"></g>
+                </svg>
+
+                <g class="zoom-controls" transform="translate(10, 10)">
+                  <g id="zoom-in" transform="translate(0, 0)">
+                    <path class="btn" d=""></path>
+                  </g>
+                  <g id="zoom-reset" transform="translate(0, 31)">
+                    <rect class="btn" width="5" height="5"></rect>
+                  </g>
+                  <g id="zoom-out" transform="translate(0, 62)">
+                    <path class="btn" d=""></path>
+                  </g>
+                  <g id="animation" transform="translate(0,110)">
+                    <path class="btn" d=""></path>
+                  </g>
+                </g>
+
+                <!-- YEARS SVG LAYER -->
+                <svg id="year_svg" style="overflow: visible" x="50%">
+                  <path d=""></path>
+                  <text id="sliderLabel" y="27" pointer-events="none" style="font-size: 30px"></text>
+                </svg>
+
+                <!-- MENU' SVG LAYER -->
+                <svg id="setting_group" y="10" x="97%" style="overflow: visible">
+                  <path id="menu_map" d="" visibility="hidden"></path>
+                  <path id="setting_btn_open" class="btn" d=""></path>
+                  <image id="setting_icon_open" height="0" width="0" />
+                  <g id="munu_parts" visibility="hidden">
+                    <path id="setting_btn_close" class="btn" d=""></path>
+                    <image id="setting_icon_close" height="0" width="0" />
+                    <text id="text_setting" style="font-size: 20px">SETTING</text>
+                    <g id="animation_speed_group">
+                      <text id="text_animation" style="font-size: 13px">
+                        Animation speed:
+                      </text>
+                      <line id="speed_line" style="stroke: black; stroke-width: 2"></line>
+                      <circle id="slider_ball" r="4" stroke="black" fill="white"></circle>
+                      <g>
+                        <circle id="decrease_back" class="btn" r="10"></circle>
+                        <path id="decrease_speed" d="" style="stroke: black; stroke-width: 0.5"></path>
+                      </g>
+                      <g>
+                        <circle id="increase_back" class="btn" r="10"></circle>
+                        <path id="increase_speed" stroke-width="2" d=""
+                          style="fill: none; stroke: black; stroke-width: 0.5"></path>
+                      </g>
+                    </g>
+                    <g id="range_slider_group">
+                      <text id="text_range" style="font-size: 13px">
+                        Animation years:
+                      </text>
+                      <text id="start_year" style="
+                        font-size: 12px;
+                        font-family: 'Times New Roman', serif;
+                      "></text>
+                      <text id="end_year" style="
+                        font-size: 12px;
+                        font-family: 'Times New Roman', serif;
+                      "></text>
+                      <path id="range_line" style="stroke: black; stroke-width: 1; fill: aliceblue" d=""></path>
+                      <rect id="selected_range" style="fill: lightseagreen" height="0" width="0"></rect>
+                      <circle id="slider_ball_year_start" r="5" stroke="black" fill="white"></circle>
+                      <circle id="slider_ball_year_end" r="5" stroke="black" fill="white"></circle>
+                    </g>
+                  </g>
+                </svg>
+              </svg>
             </div>
-          <svg class="view-map" id="svg-map" width="100%" >
-            <rect class="background" width="100%" height="100%"></rect>
 
-            <!-- GLOBE SVG LAYER -->
-            <svg id="map" style="overflow: visible" x="50%" >
 
-              <defs>
-                <pattern id="diagonalHatch" width="5" height="5" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
-                  <rect width="5" height="5" style="fill:#999999;"></rect>
-                  <line x1="0" y1="0" x2="0" y2="10" style="stroke:black; stroke-width:2; " />
-                </pattern>
-              </defs>
-
-              <path class="background_globe" d=""></path>
-              <g id="map_graticule"></g>
-              <g id="level_0"></g>
-              <g id="level_1"></g>
-            </svg>
-
-            <g class="zoom-controls" transform="translate(10, 10)">
-              <g id="zoom-in" transform="translate(0, 0)">
-                <path class="btn" d=""></path>
-              </g>
-              <g id="zoom-reset" transform="translate(0, 31)">
-                <rect class="btn" width="5" height="5"></rect>
-              </g>
-              <g id="zoom-out" transform="translate(0, 62)">
-                <path class="btn" d=""></path>
-              </g>
-              <g id="animation" transform="translate(0,110)">
-                <path class="btn" d=""></path>
-              </g>
-            </g>
-
-            <!-- YEARS SVG LAYER -->
-            <svg id="year_svg" style="overflow: visible" x="50%">
-              <path d=""></path>
-              <text id="sliderLabel" y="27" pointer-events="none" style="font-size: 30px"></text>
-            </svg>
-
-            <!-- MENU' SVG LAYER -->
-            <svg id="setting_group" y="10" x="97%" style="overflow: visible">
-              <path id="menu_map" d="" visibility="hidden"></path>
-              <path id="setting_btn_open" class="btn" d=""></path>
-              <image id="setting_icon_open" height="0" width="0" />
-              <g id="munu_parts" visibility="hidden">
-                <path id="setting_btn_close" class="btn" d=""></path>
-                <image id="setting_icon_close" height="0" width="0" />
-                <text id="text_setting" style="font-size: 20px">SETTING</text>
-                <g id="animation_speed_group">
-                  <text id="text_animation" style="font-size: 13px">
-                    Animation speed:
-                  </text>
-                  <line id="speed_line" style="stroke: black; stroke-width: 2"></line>
-                  <circle id="slider_ball" r="4" stroke="black" fill="white"></circle>
-                  <g>
-                    <circle id="decrease_back" class="btn" r="10"></circle>
-                    <path id="decrease_speed" d="" style="stroke: black; stroke-width: 0.5"></path>
-                  </g>
-                  <g>
-                    <circle id="increase_back" class="btn" r="10"></circle>
-                    <path id="increase_speed" stroke-width="2" d=""
-                      style="fill: none; stroke: black; stroke-width: 0.5"></path>
-                  </g>
-                </g>
-                <g id="range_slider_group">
-                  <text id="text_range" style="font-size: 13px">
-                    Animation years:
-                  </text>
-                  <text id="start_year" style="
-                        font-size: 12px;
-                        font-family: 'Times New Roman', serif;
-                      "></text>
-                  <text id="end_year" style="
-                        font-size: 12px;
-                        font-family: 'Times New Roman', serif;
-                      "></text>
-                  <path id="range_line" style="stroke: black; stroke-width: 1; fill: aliceblue" d=""></path>
-                  <rect id="selected_range" style="fill: lightseagreen" height="0" width="0"></rect>
-                  <circle id="slider_ball_year_start" r="5" stroke="black" fill="white"></circle>
-                  <circle id="slider_ball_year_end" r="5" stroke="black" fill="white"></circle>
-                </g>
-              </g>
-            </svg>
-          </svg>
-          </div>
-
-          
             <svg width="15%" style="overflow: visible;">
 
               <defs>
-                <pattern id="diagonalHatch" width="5" height="5" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+                <pattern id="diagonalHatch" width="5" height="5" patternTransform="rotate(45 0 0)"
+                  patternUnits="userSpaceOnUse">
                   <rect width="5" height="5" style="fill:#999999;"></rect>
                   <line x1="0" y1="0" x2="0" y2="10" style="stroke:black; stroke-width:1; " />
                 </pattern>
               </defs>
 
-              <g class="legend-anomaly" id="legend-anomaly" >
+              <g class="legend-anomaly" id="legend-anomaly">
                 <text id="label-legend">Anomaly Temperature (°C)</text>
                 <path d=""></path>
                 <g class="axis-anomaly"></g>
@@ -357,17 +365,17 @@
             </svg>
           </div>
 
-        <div class="row_wrapper" style="overflow: visible;">
-          <div style = "width: 90%; height: 100%">
-            <p></p>
+          <div class="row_wrapper" style="overflow: visible;">
+            <div style="width: 90%; height: 100%">
+              <p></p>
+            </div>
+
+            <svg style=" width: 15%; overflow: visible;">
+              <g id="legend-no_data"></g>
+
+            </svg>
           </div>
 
-          <svg style=" width: 15%; overflow: visible;">
-              <g id="legend-no_data"></g>
-            
-          </svg>
-        </div>
-      
 
           <div class="tooltip" id="tooltip-map">
             <div class="tooltip-name"></div>
@@ -382,47 +390,57 @@
 
       <!------------------------------START CLIMATE STRIPES------------------------------------------->
 
-        
-        <div class="chart-container" id="stripechart">
-          <h2 id="title-stripes-changes" class="title-chart" >
-            Climate Stripes
-          </h2>
-          <p style=" text-align: center; position: relative; float: inline-sta; bottom: 30%; left: 8%; width:812px; margin-bottom: 20px; padding:0; font-size: larger;">
-            <i> Series of coloured stripes chronologically ordered to visually shows long-term anomaly from 1750 to 2020.
+
+      <div class="chart-container" id="stripechart">
+        <h2 id="title-stripes-changes" class="title-chart">
+          Climate Stripes
+        </h2>
+        <p
+          style=" text-align: center; position: relative; float: inline-sta; bottom: 30%; left: 8%; width:812px; margin-bottom: 20px; padding:0; font-size: larger;">
+          <i> Series of coloured stripes chronologically ordered to visually shows long-term anomaly from 1750 to 2020.
             The gray stripes represents the missing data. </i>
-          </p>
-          <div class="tooltip" id="tooltip_stripes"></div>
-        </div>
-          
- 
+        </p>
+        <div class="tooltip" id="tooltip_stripes"></div>
+      </div>
+
+
       <hr />
 
       <div class="chart-container" id="linechart">
         <h2 id="title-climate-changes" class="title-chart">
           Regional Climate Change
         </h2>
-        <p style=" text-align: center; position: relative; float: inline-sta; bottom: 30%; left: 3%; width:812px; margin-bottom: 20px; padding:0; font-size: larger;">
-          <i> Series of coloured stripes chronologically ordered to visually shows long-term anomaly from 1750 to 2020.
-          The gray stripes represents the missing data. </i>
+        <p
+          style=" text-align: justify; position: relative; float: inline-sta; bottom: 30%; left: 3%; width:812px; margin-bottom: 20px; padding:0; font-size: larger;">
+            The linechart shows the trend of the temperatures for the years available for the selected country.
+            Temperatures are in Celsius and reported as anomalies relative to the
+            Jan 1951-Dec 1980 average. Uncertainties represent the 95% confidence
+            interval for statistical noise and spatial undersampling effects. Such 
+            uncertainties are expected to account for the effects of random 
+            noise as well as random biases affecting station trends and random 
+            shifts in station baselines.
+            If the rage of year, selected from the left sidebar is higher than 1 is showed the comparision 
+            between the annual and the data averaged on the selected year.
+        
         </p>
         <div class="tooltip" id="tooltip_line"></div>
 
         <svg>
-        <g class="graphics">
-           
-          <g id="x_grid_linechart" class="grid"></g>
-          <g id="y_grid_linechart" class="grid"></g>
-          
-          <g class="uncertainty"></g>
-      
-          <g class="line_chart_annual"></g>
-          <g class="line_chart_range_years"></g>
-          <g class="baselines"></g>
-          <g class="y_axis"></g>
-          <g class="x_axis"></g>
-        </g>
+          <g class="graphics">
 
-      </svg>
+            <g id="x_grid_linechart" class="grid"></g>
+            <g id="y_grid_linechart" class="grid"></g>
+
+            <g class="uncertainty"></g>
+
+            <g class="line_chart_annual"></g>
+            <g class="line_chart_range_years"></g>
+            <g class="baselines"></g>
+            <g class="y_axis"></g>
+            <g class="x_axis"></g>
+          </g>
+
+        </svg>
 
       </div>
 
@@ -438,9 +456,10 @@
 
       <div id="table_container" class="chart-container">
         <h2 id="title-table">Mean Rate of Change ( °C / Year )</h2>
-        <p style=" text-align: center; position: relative; float: inline-sta; bottom: 30%; left: 6%; width:812px; margin-bottom: 20px; padding:0; font-size: larger;">
+        <p
+          style=" text-align: center; position: relative; float: inline-sta; bottom: 30%; left: 6%; width:812px; margin-bottom: 20px; padding:0; font-size: larger;">
           <i> Series of coloured stripes chronologically ordered to visually shows long-term anomaly from 1750 to 2020.
-          The gray stripes represents the missing data. </i>
+            The gray stripes represents the missing data. </i>
         </p>
         <div class="tooltip" id="tooltip_table"></div>
       </div>
@@ -452,9 +471,10 @@
 
       <div id="container-h-c" class="chart-container">
         <h2 id="title-hot-cold" class="title-chart">Anomalies Records</h2>
-         <p style=" text-align: center; position: relative; float: inline-sta; bottom: 30%; left: 15%; width:812px; margin-bottom: 20px; padding:0; font-size: larger;">
+        <p
+          style=" text-align: center; position: relative; float: inline-sta; bottom: 30%; left: 15%; width:812px; margin-bottom: 20px; padding:0; font-size: larger;">
           <i> Series of coloured stripes chronologically ordered to visually shows long-term anomaly from 1750 to 2020.
-          The gray stripes represents the missing data. </i>
+            The gray stripes represents the missing data. </i>
         </p>
         <div class="tooltip" id="tooltip-hot-cold"></div>
       </div>
@@ -466,29 +486,30 @@
 
       <div id="seasonal_changes_graphic" class="chart-container">
         <h2 id="title-seasonal" class="title-chart">Seasonal Changes</h2>
-        <p style=" text-align: center; position: relative; float: inline-sta; bottom: 30%; left: 6%; width:812px; margin-bottom: 20px; padding:0; font-size: larger;">
+        <p
+          style=" text-align: center; position: relative; float: inline-sta; bottom: 30%; left: 6%; width:812px; margin-bottom: 20px; padding:0; font-size: larger;">
           <i> Series of coloured stripes chronologically ordered to visually shows long-term anomaly from 1750 to 2020.
-          The gray stripes represents the missing data. </i>
+            The gray stripes represents the missing data. </i>
         </p>
         <svg>
           <g class="chart">
             <g id="x_grid_seasonal" class="grid"></g>
             <g id="y_grid_seasonal" class="grid"></g>
-          
+
             <g class="uncertainty" id="baseline-unc"></g>
-     
+
             <g class="line-seasonal-baseline"></g>
             <g class="seasonal-range-line" id="seasonal-range-max"></g>
             <g class="seasonal-range-line" id="seasonal-range-min"></g>
             <g class="last-years-lines"></g>
             <g class="y_axis_seasonal"></g>
             <g class="x_axis_seasonal"></g>
-         
+
           </g>
         </svg>
         <div class="tooltip" id="tooltip-seasonal-changes"></div>
       </div>
-      
+
       <hr />
       <!------------------------------END SEASONAL LINECHART------------------------------------------->
     </div>
@@ -505,11 +526,13 @@
 
   <script>
     window.onload = init_page();
-    window.onscroll = function() {scrollFunction()};
-
+    window.onscroll = function () {
+      scrollFunction()
+    };
   </script>
 
-  
+
 
 </body>
+
 </html>
