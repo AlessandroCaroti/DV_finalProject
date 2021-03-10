@@ -5,7 +5,7 @@ var map_container;
 var curr_polygon = -1;
 var c = [0, 0];
 
-var ragion_name = "Norway";
+var ragion_name = "Netherlands";
 
 // MODIFICARE PER CAMBIARE LE DIMENSIONI DELLA MAPPA
 var w = 1000;
@@ -111,7 +111,7 @@ zoomManager();
 
 var region_list = [];
 
-d3.json("../../data/map/countries-10m_V35.json", function (error, world) {
+d3.json("../../data/map/countries-10m_V38_6.json", function (error, world) {
   if (error) {
     console.log(error);
     throw error;

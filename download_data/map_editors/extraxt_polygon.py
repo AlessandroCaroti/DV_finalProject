@@ -12,7 +12,7 @@ map_fileName = "countries-10m"
 map_version = -1              # -1-> last vesrion, 0-> original file
 
 # Nome dello Stato da cercare
-country_name = "Norway"
+country_name = "Netherlands"
 new_countryName = None
 pol_to_extract = None
 new_id = None

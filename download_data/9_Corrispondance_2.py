@@ -3,7 +3,7 @@ import pandas as pd
 import json
 import io
 
-mapFile_path = "./download_data/data/map/countries-10m_V35_6.json"
+mapFile_path = "./download_data/data/map/countries-10m_V38_6.json"
 countriesCsv_path = "./download_data/extra-data/8_countries.csv"
 
 
