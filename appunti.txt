@@ -8,6 +8,11 @@ PROBLEMI NEMU' SELEZIONE COUNTRY:
 -se si usa il tasto invio, non so per quale motivo parte pure l'evento su click
 
 IDEE:
+- da aggiungere nel menù laterale anche gli anni in cui sono stati misurata la baseline (tipo in piccino sotto la temperatura)
+- Asse y dei grafici da mettere l'unità di smisura
+- 95% di confidenza da mettere nella legenda 
+- lo strokes rosso nell climate change più piccolo
+
 
 DA DISCUTERE:
 -aggiungere lo zoom sul grafico sotto le stripe
