@@ -150,7 +150,7 @@ function drawTooltipSeasonal(
     "Average (1951-1980): " +
     String(elem.seasonalBaseline.toFixed(1)) +
     " &deg;C" +
-    "<br/>95% Range (1951-1980): " +
+    "<br/>Min-Max Temp Range: " +
     "[ " +
     String((elem.seasonalBaseline - elem.unc).toFixed(2)) +
     " &deg;C  -  " +
