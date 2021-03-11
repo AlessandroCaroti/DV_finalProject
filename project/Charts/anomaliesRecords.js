@@ -47,7 +47,7 @@ function getScalesHottestColdest(data){
 
 }
 
-function getHotColdStyle(hot_cold_list, d) {
+function getAnomaliesRecordsStyle(hot_cold_list, d) {
   if (isInList(d[0].Year, hot_cold_list)) {
     var idx = getIdxList(d[0].Year, hot_cold_list);
 
@@ -62,7 +62,7 @@ function getHotColdStyle(hot_cold_list, d) {
   }
 }
 
-function createHotColdLegend(id_container, hottest_temp, coldest_temp) {
+function createAnomaliesRecordsLegend(id_container, hottest_temp, coldest_temp) {
   container = d3.select("#" + id_container);
 
   var legend = container
@@ -122,8 +122,8 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp) {
       .attr("height", 28)
       .style("fill", "white")
       .style("opacity", "0%")
-      .on("mouseenter", hotColdTextLegendEnter)
-      .on("mouseleave", hotColdTextLegendLeave);
+      .on("mouseenter", anomaliesRecordsTextLegendEnter)
+      .on("mouseleave", anomaliesRecordsTextLegendLeave);
 
     id_idx++;
   });
@@ -171,8 +171,8 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp) {
       .attr("height", 28)
       .style("fill", "white")
       .style("opacity", "0%")
-      .on("mouseenter", hotColdTextLegendEnter)
-      .on("mouseleave", hotColdTextLegendLeave);
+      .on("mouseenter", anomaliesRecordsTextLegendEnter)
+      .on("mouseleave", anomaliesRecordsTextLegendLeave);
 
 
     id_idx++;
@@ -206,7 +206,7 @@ function createHotColdLegend(id_container, hottest_temp, coldest_temp) {
 
 }
 
-function updateHotColdLegend(hot_cold_list) {
+function updateAnomaliesRecordsLegend(hot_cold_list) {
   var id_idx = 0;
   hot_cold_list.forEach((el) => {
     d3.select("#hot-cold-text-" + id_idx)
@@ -218,8 +218,8 @@ function updateHotColdLegend(hot_cold_list) {
             : el.annual_anomaly.toFixed(2)) +
           " &deg;C"
       )
-      .on("mouseenter", hotColdTextLegendEnter)
-      .on("mouseleave", hotColdTextLegendLeave);
+      .on("mouseenter", anomaliesRecordsTextLegendEnter)
+      .on("mouseleave", anomaliesRecordsTextLegendLeave);
 
     id_idx++;
   });
@@ -408,9 +408,9 @@ function createHottestColdestLineChart(data){
                       if(!isInList(d[0].Year, hot_cold_list))
                           return String("grey-path");
                     })
-                    .attr("style", (d) => getHotColdStyle(hot_cold_list,d))
-                    .on("mouseover", function(event, d){ hotColdMouseEnter(this, event, d, hot_cold_list)})
-                    .on("mouseout", function(event, d){ hotColdMouseLeave(this)})
+                    .attr("style", (d) => getAnomaliesRecordsStyle(hot_cold_list,d))
+                    .on("mouseover", function(event, d){ anomaliesRecordsMouseEnter(this, event, d, hot_cold_list)})
+                    .on("mouseout", function(event, d){ anomaliesRecordsMouseLeave(this)})
   
     
     svg.append("g")
@@ -421,7 +421,7 @@ function createHottestColdestLineChart(data){
         .append("path")
         .attr("d", zero_line)
              
-    createHotColdLegend("container-h-c", hottest_temp, coldest_temp);
+    createAnomaliesRecordsLegend("container-h-c", hottest_temp, coldest_temp);
 
     svg.append("g")
     .attr("transform", "translate(0," + height + ")")
@@ -473,7 +473,7 @@ function UpdateHottestColdestLineChart(data){
           .append("path")
           .merge(line)
           .attr("d", valueline_annual)
-          .attr("style", (d) => getHotColdStyle(hot_cold_list,d))
+          .attr("style", (d) => getAnomaliesRecordsStyle(hot_cold_list,d))
           .attr("id", function(d){
             if(isInList(d[0].Year, hot_cold_list))
                 return String("path-"+ getIdxList(d[0].Year, hot_cold_list));
@@ -483,8 +483,8 @@ function UpdateHottestColdestLineChart(data){
                 if(!isInList(d[0].Year, hot_cold_list))
                     return String("grey-path");
           })  
-          .on("mouseover", function(event, d){ hotColdMouseEnter(this, event, d, hot_cold_list)})
-          .on("mouseout", function(){ hotColdMouseLeave(this)})
+          .on("mouseover", function(event, d){ anomaliesRecordsMouseEnter(this, event, d, hot_cold_list)})
+          .on("mouseout", function(){ anomaliesRecordsMouseLeave(this)})
 
   var zeroLine = d3.select(".zero-line").selectAll("path").data(dataMonthly);
 
@@ -495,8 +495,73 @@ function UpdateHottestColdestLineChart(data){
           .append("path")
           .merge(zeroLine)
           .attr("d", zero_line)
-  updateHotColdLegend(hot_cold_list);
+  updateAnomaliesRecordsLegend(hot_cold_list);
  
 
 
+}
+
+
+
+//-------------------------EVENTS ANOMALIES RECORDS ----------------------------------------------
+
+function anomaliesRecordsTextLegendEnter(event, d) {
+  var idx = this.id.split("-")[3];
+
+  var idx_text = "hot-cold-text-" + idx;
+  d3.select("#" + idx_text)
+    .style("font-weight", "bold")
+    .style("text-decoration", "underline");
+
+  d3.select("#path-" + idx).style("stroke-width", "6px");
+
+  d3.select("#path-" + idx).moveToFront();
+}
+
+function anomaliesRecordsTextLegendLeave(event, d) {
+  var idx = this.id.split("-")[3];
+
+  var idx_text = "hot-cold-text-" + idx;
+  d3.select("#" + idx_text)
+    .style("font-weight", "normal")
+    .style("text-decoration", "none");
+
+  d3.select("#path-" + idx).style("stroke-width", "2px");
+}
+
+function anomaliesRecordsMouseEnter(self,event, d, hot_cold_list) {
+  var idx = self.id.split("-")[1];
+
+  d3.select(self).style("stroke-width", "6px").moveToFront();
+
+  d3.select("#hot-cold-text-" + idx)
+    .style("font-weight", "bold")
+    .style("text-decoration", "underline")
+    .style("text-decoration-color", "black");
+
+  if(!isInList(d[0].Year, hot_cold_list) ){
+
+    d3.select("#selected_line").html(
+      d[0].Year +
+        "&nbsp &nbsp" +
+        (d[5].annual_anomaly > 0
+          ? "+" + d[5].annual_anomaly.toFixed(2)
+          : d[5].annual_anomaly.toFixed(2)) +
+        " &deg;C"
+    );
+
+  }
+  
+}
+
+function anomaliesRecordsMouseLeave(self) {
+  var idx = self.id.split("-")[1];
+
+  d3.select(self).style("stroke-width", "2px");
+
+  d3.select("#hot-cold-text-" + idx)
+    .style("font-weight", "normal")
+    .style("text-decoration", "none");
+
+  d3.select("#selected_line").html("");
 }

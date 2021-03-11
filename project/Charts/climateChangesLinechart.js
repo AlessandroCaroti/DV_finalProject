@@ -565,3 +565,79 @@ function updateLineChart(data, grafic_class) {
     .duration(500)
     .call(d3.axisLeft(y).tickSize(-width).tickFormat(""));
 }
+
+
+
+/*------------------------------------- EVENTS CLIMATE CHANGES LINECHART-----------------------------------------  */
+
+
+function drawTooltipLineChart(
+  self,
+  event,
+  x,
+  data,
+  tooltipLine,
+  id_chart,
+  height
+) {
+  var btn = getCheckedValue("btn-range-year");
+
+  var label = document.getElementById("label-" + btn.id);
+  var range_name = label.innerHTML;
+
+  var tooltip = d3.select(id_chart + " .tooltip");
+
+  const date = x.invert(d3.pointer(event, self.node())[0]);
+
+  //find date correspondece comparing difference in milliseconds
+  var elem = data.find(
+    (d) => Math.abs(d.date - date) < 1000 * 60 * 60 * 24 * 16
+  );
+
+  tooltipLine
+    .attr("stroke", "black")
+    .attr("x1", x(date))
+    .attr("x2", x(date))
+    .attr("y1", 0)
+    .attr("y2", height);
+
+  var tipText = String(
+    "<b> <p style='text-align: center; font-size: 15px;'>" +
+      elem.date.getFullYear() +
+      "</p>" +
+      "Baseline: " +
+      elem.baseline +
+      " &deg;C <br/>" +
+      "Annual  Avg: " +
+      elem.annual_value.toFixed(2) +
+      " &deg;C " +
+      " &plusmn; " +
+      elem.annual_unc.toFixed(2) +
+      "<br/>" +
+      (btn.value != "annual"
+        ? String(
+            range_name +
+              "  Avg: " +
+              elem[btn.value + "_value"].toFixed(2) +
+              " &deg;C " +
+              " &plusmn; " +
+              elem[btn.value + "_unc"].toFixed(2) +
+              "</b>"
+          )
+        : "")
+  );
+
+  tooltip
+    .html("")
+    .style("display", "block")
+    .style("left", String(event.pageX + 20) + "px")
+    .style("top", String(event.pageY - 20) + "px")
+    .append("div")
+    .html(tipText);
+}
+
+function removeTooltipLineChart(tooltipLine, id_chart) {
+  var tooltip = d3.select(id_chart + " .tooltip");
+  if (tooltip) tooltip.style("display", "none");
+  if (tooltipLine) tooltipLine.attr("stroke", "none");
+}

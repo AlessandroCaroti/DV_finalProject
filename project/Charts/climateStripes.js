@@ -163,3 +163,48 @@ function updateStripesChart(data){
             .on("mouseout", stripesLeave)
                     
 }
+
+
+
+
+/*--------------------------------------- CLIMATE STRIPES EVENTS -------------------------------------------- */
+
+
+function stripesEnter(event, d) {
+    var range_year = getCheckedValue("btn-range-year").value;
+    var tooltip = d3.select("#stripechart .tooltip");
+  
+    tooltip.transition();
+    var tipText = String(
+      "<p style='text-align: center; font-weight: bold; font-size: 13px'> " +
+        d.Year +
+        "</p>" +
+        "<p style='text-align: center; font-weight: bold; font-size: 12px'> " +
+        (isNaN(d[range_year + "_anomaly"])
+          ? "unknown"
+          : d[range_year + "_anomaly"].toFixed(2) + " &deg;C ") +
+        (isNaN(d[range_year + "_anomaly"])
+          ? ""
+          : " &plusmn; " + d[range_year + "_unc"].toFixed(2)) +
+        " </p>"
+    );
+  
+    tooltip
+      .style("left", String(event.pageX + 20) + "px")
+      .style("top", String(event.pageY - 20) + "px")
+      .style("display", "block")
+      .html(tipText);
+  }
+  
+  function stripesLeave() {
+    var tooltip = d3.select("#stripechart .tooltip");
+    if (tooltip) tooltip.style("display", "none");
+  }
+  
+  function stripesMove() {
+    var tooltip = d3.select("#stripechart .tooltip");
+    tooltip
+      .style("left", String(event.pageX + 20) + "px")
+      .style("top", String(event.pageY - 20) + "px");
+  }
+  
