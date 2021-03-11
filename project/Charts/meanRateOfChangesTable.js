@@ -58,13 +58,13 @@ function drawContinentTable(baseline, update){
 
 }
 
-
+// read Data for the table and add rows for each generalization present in the info of the country
 function readDataTable(data_country, dataFile, baseline, update = false, global = false) {
 
   DATA_TABLE = [];
 
   if (!update){
-    createEmptyTable(data_country, baseline)
+    createDefaultTable(data_country, baseline)
     var title = document.getElementById("title-table").innerHTML;
     document.getElementById("title-table").innerHTML = title + " - "+ data_country[0].region;
     return;
@@ -136,6 +136,7 @@ function dataEvery50Years(data) {
   return data_2;
 }
 
+//add a row to the table
 function addRowData(data50, dataTable) {
   var row = {};
 
@@ -214,9 +215,10 @@ function table_data(data) {
   return dataTable;
 }
 
-function createEmptyTable(dataCountry,baseline) {
+
+//create the table with the header, global land and the continets
+function createDefaultTable(dataCountry,baseline) {
  
-  
   var svg = d3
     .select("#table_container")
     .attr("width", width_table + margin_table.left + margin_table.right)
@@ -323,10 +325,8 @@ function addRowTable(data) {
  
 }
 
-
+// update the rows of the table
 function updateRowsTable(data) {
-  
- 
 
   table_data(data);
 
