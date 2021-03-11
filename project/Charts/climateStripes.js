@@ -165,8 +165,6 @@ function updateStripesChart(data){
 }
 
 
-
-
 /*--------------------------------------- CLIMATE STRIPES EVENTS -------------------------------------------- */
 
 

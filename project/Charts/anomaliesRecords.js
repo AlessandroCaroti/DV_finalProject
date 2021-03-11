@@ -502,7 +502,6 @@ function UpdateHottestColdestLineChart(data){
 }
 
 
-
 //-------------------------EVENTS ANOMALIES RECORDS ----------------------------------------------
 
 function anomaliesRecordsTextLegendEnter(event, d) {
