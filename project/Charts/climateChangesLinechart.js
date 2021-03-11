@@ -1,5 +1,152 @@
 /** @format */
 
+function annualDataStyle() {
+  d3.select("#legend-annual-line").remove();
+  d3.select("#legend-annual-text").remove();
+
+  d3.select("#range-name-unc").attr("y", 15);
+
+  d3.select("#range-name-line")
+    .attr("y1", 23)
+    .attr("y2", 23)
+    .style("stroke", "steelblue");
+
+  d3.select("#range-name-legend").attr("y", 26);
+}
+
+//Create the legend of the Linechart
+function createLineChartLegend(svg) {
+  var btn = getCheckedValue("btn-range-year");
+  legend = svg.append("g").attr("class", "legend");
+
+  legend
+    .append("rect")
+    .attr("x", 10)
+    .attr("width", 290)
+    .attr("y", 1)
+    .attr("height", 60)
+    .attr("class", "legend-square")
+    .attr("id", "legend-square-linechart");
+
+  if (btn.value != "annual") {
+    legend
+      .append("line")
+      .attr("x1", 15)
+      .attr("x2", 30)
+      .attr("y1", 15)
+      .attr("y2", 15)
+      .attr("class", "line_chart_annual")
+      .attr("id", "legend-annual-line");
+
+    legend
+      .append("text")
+      .attr("x", 37)
+      .attr("y", 15)
+      .attr("class", "legend")
+      .text("Annual Average Temperature")
+      .attr("id", "legend-annual-text");
+  }
+
+  var label = document.getElementById("label-" + btn.id);
+  var range_name = label.innerHTML;
+
+  var y1_range_name = 32,
+    y2_range_name = 32,
+    y_unc = 32;
+  var stroke_color = "red";
+  if (btn.value == "annual") {
+    y1_range_name = 23;
+    y2_range_name = 23;
+    y_unc = 15;
+    stroke_color = "steelblue";
+  }
+
+  legend
+    .append("rect")
+    .attr("x", 15)
+    .attr("width", 15)
+    .attr("y", y_unc)
+    .attr("height", 16)
+    .attr("class", "uncertainty")
+    .attr("id", "range-name-unc");
+
+  legend
+    .append("line")
+    .attr("x1", 15)
+    .attr("x2", 30)
+    .attr("y1", y1_range_name)
+    .attr("y2", y2_range_name)
+    .attr("class", "line_chart_range_years")
+    .attr("id", "range-name-line")
+    .style("stroke", stroke_color);
+
+  legend
+    .append("text")
+    .attr("x", 39)
+    .attr("y", y2_range_name + 3)
+    .attr("class", "legend")
+    .attr("id", "range-name-legend")
+    .html(range_name + " Average Temperature with uncertainty");
+
+  legend
+    .append("line")
+    .attr("x1", 15)
+    .attr("x2", 30)
+    .attr("y1", 48)
+    .attr("y2", 48)
+    .attr("class", "baselines");
+
+  legend
+    .append("text")
+    .attr("x", 37)
+    .attr("y", 50)
+    .attr("class", "legend")
+    .text("Baseline Temperature");
+}
+
+function updateRangeNameLegend(svg) {
+  var btn = getCheckedValue("btn-range-year");
+  var label = document.getElementById("label-" + btn.id);
+  var range_name = label.innerHTML;
+
+  d3.select(".legend").remove();
+  createLineChartLegend(svg, btn);
+
+  if (btn.value != "annual") {
+    var legend = d3.select("legend-square-linechart");
+    legend
+      .append("line")
+      .attr("x1", 15)
+      .attr("x2", 30)
+      .attr("y1", 15)
+      .attr("y2", 15)
+      .attr("class", "line_chart_annual")
+      .attr("id", "legend-annual-line");
+
+    legend
+      .append("text")
+      .attr("x", 37)
+      .attr("y", 15)
+      .attr("class", "legend")
+      .text("Annual Average Temperature")
+      .attr("id", "legend-annual-text");
+
+    d3.select("#range-name-unc")
+      .attr("y", 24)
+      .attr("class", "uncertainty")
+      .attr("id", "range-name-unc");
+
+    d3.select("#range-name-line")
+      .attr("y1", 32)
+      .attr("y2", 32)
+      .style("stroke", "red");
+  } else annualDataStyle();
+
+  d3.select("#range-name-legend").html(
+    range_name + " Average Temperature with uncertainty"
+  );
+}
+
 function changeDataRangeYears() {
   var dataFile = document.getElementById("input_countrySelection").value;
   var folder;
@@ -198,7 +345,6 @@ function getCheckedValue(groupName) {
   return null;
 }
 
-
 function createDefaultLineChart(data) {
   // set titles
   var title = document.getElementById("title-climate-changes").innerHTML;
@@ -224,25 +370,15 @@ function createDefaultLineChart(data) {
   var x_axis = d3.axisBottom(x).tickSizeOuter(0);
   var y_axis = d3.axisLeft(y).tickSizeOuter(0);
 
-
-
-
   svg
-      .select("#x_grid_linechart")
-      .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x)
-          .tickSize(-height)
-          .tickFormat("")
-      )
+    .select("#x_grid_linechart")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x).tickSize(-height).tickFormat(""));
 
   // add the Y gridlines
-  svg.select("#y_grid_linechart")			
-      .call(d3.axisLeft(y)
-          .tickSize(-width)
-          .tickFormat("")
-      )
-
-
+  svg
+    .select("#y_grid_linechart")
+    .call(d3.axisLeft(y).tickSize(-width).tickFormat(""));
 
   //lineChartGridline("x_axis", "y_axis");
 
@@ -310,7 +446,6 @@ function createDefaultLineChart(data) {
     .call(x_axis);
 
   svg.select(".y_axis").call(y_axis);
-  
 }
 
 //Update the X and Y axes
@@ -390,7 +525,6 @@ function updateLineChart(data, grafic_class) {
     .style("stroke-width", function (d) {
       var range_year = getCheckedValue("btn-range-year").value;
       if (range_year == "annual") return "1px";
- 
     });
 
   var base_line = svg.select(".baselines").selectAll("path").data([data]);
@@ -418,25 +552,16 @@ function updateLineChart(data, grafic_class) {
     )
     .on("mouseout", () => removeTooltipLineChart(tooltipLine, "#linechart"));
 
-
-
-  
   svg
-      .select("#x_grid_linechart")
-      .transition()
-      .duration(500)
-      .call(d3.axisBottom(x)
-          .tickSize(-height)
-          .tickFormat("")
-      )
+    .select("#x_grid_linechart")
+    .transition()
+    .duration(500)
+    .call(d3.axisBottom(x).tickSize(-height).tickFormat(""));
 
   // add the Y gridlines
-  svg.select("#y_grid_linechart")
-      .transition()
-      .duration(500)
-      .call(d3.axisLeft(y)
-          .tickSize(-width)
-          .tickFormat("")
-      )
-
+  svg
+    .select("#y_grid_linechart")
+    .transition()
+    .duration(500)
+    .call(d3.axisLeft(y).tickSize(-width).tickFormat(""));
 }

@@ -1,6 +1,94 @@
 //Global Variables
 var colorsYears = ["red", "blue", "green"];
 
+
+
+//Create the legend of the Seasonal Linechart
+function createSeasonalLineChartLegend(svg, dataLastYears) {
+  legend = svg.append("g").attr("class", "legend");
+
+  var curY = 15;
+
+  legend
+    .append("rect")
+    .attr("x", 10)
+    .attr("width", 250)
+    .attr("y", 1)
+    .attr("height", 100)
+    .attr("class", "legend-square")
+    .attr("id", "legend-square-seasonal");
+
+  legend
+    .append("line")
+    .attr("x1", 15)
+    .attr("x2", 39)
+    .attr("y1", curY)
+    .attr("y2", curY)
+    .attr("class", "seasonal-range-line");
+
+  legend
+    .append("text")
+    .attr("x", 40)
+    .attr("y", curY + 3)
+    .attr("class", "legend")
+    .attr("id", "text-range")
+    .html(
+      "Min-Max Range Temp. Untill " +
+        dataLastYears[dataLastYears.length - 1][0].year
+    );
+
+  curY += 15;
+  legend
+    .append("rect")
+    .attr("x", 15)
+    .attr("width", 15)
+    .attr("y", curY)
+    .attr("height", 16)
+    .attr("class", "uncertainty");
+
+  legend
+    .append("line")
+    .attr("x1", 15)
+    .attr("x2", 30)
+    .attr("y1", curY + 8)
+    .attr("y2", curY + 8)
+    .attr("class", "line-seasonal-baseline");
+
+  legend
+    .append("text")
+    .attr("x", 40)
+    .attr("y", curY + 11)
+    .attr("class", "legend")
+    .html("1951-1980 average with 95% of confidence");
+
+  curY += 12;
+  var id_idx = 0;
+  for (var i = 0; i < dataLastYears.length; i++) {
+    curY += 15;
+    legend
+      .append("line")
+      .attr("x1", 15)
+      .attr("x2", 30)
+      .attr("y1", curY)
+      .attr("y2", curY)
+      .attr("stroke", colorsYears[i]);
+
+    legend
+      .append("text")
+      .attr("x", 40)
+      .attr("y", curY + 3)
+      .attr("class", "legend")
+      .html("Monthly Temperatures of " + dataLastYears[i][0].year)
+      .attr("id", "legend-text-" + id_idx);
+    id_idx++;
+  }
+}
+
+function updateSeasonalLegend(dataLastYears, svg) {
+  d3.select("#legend-square-seasonal").remove();
+  createSeasonalLineChartLegend(svg, dataLastYears);
+}
+
 function parseSeasonalBaseline(data, region = "NaN") {
   data.seasonalBaseline = data[0];
   data.seasonalUnc = data[1];

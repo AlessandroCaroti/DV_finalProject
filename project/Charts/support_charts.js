@@ -66,7 +66,7 @@ function allDeafaultDataset() {
               parseDataAttributes(data, baseline, dataFile);
               createDefaultLineChart(data);
               createDefaultStripesChart(data);
-              readDataTableFinal(data, dataFile, baseline, false, true);
+              readDataTable(data, dataFile, baseline, false, true);
               createHottestColdestLineChart(data);
 
               parseSeasonalBaseline(dataBaseline, dataFile);
@@ -125,7 +125,7 @@ function changeAllData(dataFile) {
               //Update StripesChart
               updateStripesChart(data);
               //Update Table
-              readDataTableFinal(data, dataFile, baseline, true, (dataFile == "Global Land") ? true : false);
+              readDataTable(data, dataFile, baseline, true, (dataFile == "Global Land") ? true : false);
               //Update Hottest Coldest Linechart
               UpdateHottestColdestLineChart(data);
               parseSeasonalBaseline(dataBaseline, dataFile);

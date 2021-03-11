@@ -12,6 +12,26 @@ var height_table = (full_width * 9) / 16 - margin_table.top - margin_table.botto
 
 
 
+
+
+
+//save temperature to compute mean rate of changes
+function getYearTemperatures(row_table) {
+  var temperatures = [];
+  years_table.forEach((year) => {
+    temperatures[year] = row_table[year].temp;
+  });
+
+  return temperatures;
+}
+
+
+//compute mean rate of changes
+function getMeanRateOfChange(temp1, temp2, year_temp1, year_temp2) {
+  return (temp2 - temp1) / (year_temp2 - year_temp1);
+}
+
+//draw conntinent in the table
 function drawContinentTable(baseline, update){
 
   var continent_list = ["Africa","Asia","Europe", "North America","South America","Oceania"];
@@ -39,7 +59,7 @@ function drawContinentTable(baseline, update){
 }
 
 
-function readDataTableFinal(data_country, dataFile, baseline, update = false, global = false) {
+function readDataTable(data_country, dataFile, baseline, update = false, global = false) {
 
   DATA_TABLE = [];
 
