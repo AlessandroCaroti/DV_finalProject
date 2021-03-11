@@ -1,6 +1,7 @@
 TO DO:
 - sistemare i file con dentro roba a caso
 - Buttare la pagina in un convalidatore HTML5
+- deprivatizzare il progetto prima della consegna
 
 TO FIX:
 - certi paesi se selezionati vengono zoomanti ma non compaiono perchè il secondo livello non viene renderizzato
