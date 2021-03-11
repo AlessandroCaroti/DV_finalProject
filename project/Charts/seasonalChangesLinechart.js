@@ -84,6 +84,7 @@ function createSeasonalLineChartLegend(svg, dataLastYears) {
   }
 }
 
+// Update legends
 function updateSeasonalLegend(dataLastYears, svg) {
   d3.select("#legend-square-seasonal").remove();
   createSeasonalLineChartLegend(svg, dataLastYears);
@@ -95,6 +96,81 @@ function parseSeasonalBaseline(data, region = "NaN") {
   data.region = region;
 }
 
+//----------------- EVENTS SEASONAL LINECHART-------------------------------------------------------
+
+
+function drawTooltipSeasonal(
+  tipBox,
+  event,
+  x,
+  data,
+  tooltipLine,
+  lastYearsData
+) {
+  var tooltip = d3.select("#tooltip-seasonal-changes");
+
+  const date = x.invert(d3.pointer(event, tipBox.node())[0]);
+
+  //find the element of the corresponding month
+  var elem = data.find(
+    (d) =>
+      (d.month - 1 == date.getMonth() + 1 && date.getDate() >= 15) ||
+      (d.month - 1 == date.getMonth() && date.getDate() < 15) ||
+      (date.getDate() >= 15 && date.getMonth() == 11 && d.month == 1)
+  );
+
+  tooltipLine
+    .attr("stroke", "black")
+    .attr("x1", x(parseMonth(elem.month)))
+    .attr("x2", x(parseMonth(elem.month)))
+    .attr("y1", 0)
+    .attr("y2", height);
+
+  var tipText =
+    "<p id='text-tip-seasonal'>" +
+    getFullMonthName(elem.month) +
+    "</p>" +
+    "Average (1951-1980): " +
+    String(elem.seasonalBaseline.toFixed(1)) +
+    " &deg;C" +
+    "<br/>Min-Max Temp Range: " +
+    "[ " +
+    String((elem.seasonalBaseline - elem.unc).toFixed(2)) +
+    " &deg;C  -  " +
+    String((elem.seasonalBaseline + elem.unc).toFixed(2)) +
+    " &deg;C  ]";
+
+  for (var i = 0; i < lastYearsData.length; i++) {
+    var row = lastYearsData[i].filter((d) => d.month == elem.month)[0];
+
+    if (row != undefined)
+      tipText +=
+        "<br/>" + row.year + ": " + row.monthlyTemp.toFixed(2) + " &deg;C";
+    else tipText += "<br/>" + lastYearsData[i][0].year + ": NaN";
+  }
+
+  tooltip
+    .html("")
+    .style("display", "block")
+    .style("left", String(event.pageX + 20) + "px")
+    .style("top", String(event.pageY - 20) + "px")
+    .append("div")
+    .html(tipText);
+}
+
+function removeTooltipSeasonal(tooltipLine) {
+  var tooltip = d3.select("#tooltip-seasonal-changes");
+  if (tooltip) tooltip.style("display", "none");
+  if (tooltipLine) tooltipLine.attr("stroke", "none");
+}
+
+
+//-------------------------------------------------------------------------------------------------
+
+
+//--------------------- SUPPORT TO DRAW SEASONAL LINECHARTS----------------------------------------------------------
+
+//GENERATORS FOR THE PATHS
 function getLineGeneratorsSeasonal(x, y) {
   var valuelineUnc = d3
     .area()
