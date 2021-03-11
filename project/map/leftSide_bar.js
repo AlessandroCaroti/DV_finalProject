@@ -13,7 +13,9 @@ function update_year(year) {
   d3.csv(annual_tempFile)
     .then(function (data) {
       global_anomaly = parseFloat(data[data.length - 1].Anomaly).toFixed(2);
+      console.log(global_anomaly)
       temp_value.html(global_anomaly+" °C");
+      console.log(temp_value)
 
       if (global_anomaly < 0) {
         image_containerUp.style("display", "none");
@@ -29,3 +31,35 @@ function update_year(year) {
       throw error;
     });
 }
+
+
+/***********************************************************/
+//  SLIDER
+var slideIndex = 1;
+showSlides(slideIndex);
+
+// Next/previous controls
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+// Thumbnail image controls
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  //var dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+  }
+  //for (i = 0; i < dots.length; i++) {
+  //    dots[i].className = dots[i].className.replace(" active", "");
+  //}
+  slides[slideIndex-1].style.display = "block";
+  //dots[slideIndex-1].className += " active";
+} 

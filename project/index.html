@@ -165,7 +165,7 @@
 
         <h2>Data averaged on:</h2>
 
-        <img id="info-btn-avg" src="../project/images/info.svg" height="25" width="25" />
+        <img id="info-btn-avg" src="../project/images/info.svg" height="25" width="25"  alt=""/>
 
         <div id="tooltip-info" class="tooltip"></div>
 
@@ -189,42 +189,79 @@
       </div>
     </div>
 
-    <!-- GLOBAL INFO -->
-    <div class="border_bottom py_2 col_wrapper" id="global_info_container">
-      <div style="padding-bottom: 0px;">
-        <div class="title">Global Temperature</div>
-        <div class="sub_title">LATEST ANNUAL AVERAGE ANOMALY: 2020</div>
-        <div class="rate_of_change row_wrapper center">
-          <img src="/project/images/up-arrow-svgrepo-com.svg" alt="" height="30" width="25">
-          <div class="change_value">1.51 °C</div>
+    <div class="slideshow-container">
+      <!-- Next and previous buttons -->
+      <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+      <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+      <!-- GLOBAL INFO -->
+      <div class="border_bottom py_2 col_wrapper mySlides fade" id="global_info_container">
+        <div style="padding-bottom: 0px;">
+          <div class="title">Global Temperature</div>
+          <div class="sub_title">LATEST ANNUAL AVERAGE ANOMALY: 2020</div>
+          <div class="rate_of_change row_wrapper center">
+            <img src="/project/images/up-arrow-svgrepo-com.svg" alt="" height="30" width="25">
+            <div class="change_value">1.51 °C</div>
+          </div>
+        </div>
+        <div class="center separator">~</div>
+        <div style="padding-top: 4px;" id="selected_year_info">
+          <div class="sub_title">SELECTED YEAR ANNUAL AVERAGE ANOMALY:<br> 1969</div>
+          <div class="rate_of_change row_wrapper center"  style="display: block;">
+            <img src="/project/images/up-arrow-svgrepo-com.svg" height="30" width="25" id="img_yearSelected_up"
+              style="display: inline;"  alt="">
+            <img src="/project/images/down-arrow-svgrepo-com.svg" height="30" width="25" id="img_yearSelected_down"
+              style="display: none;"  alt="">
+            <div class="change_value">- 0.26 °C</div>
+          </div>
+        </div>
+        <div class="center" style="color: #636363;">~</div>
+        <div style="padding-top: 4px;">
+          <div class="sub_title">ESTIMATED BASELINE ABSOLUTE TEMPERATURE:</div>
+          <div class="rate_of_change row_wrapper center">
+            <svg height="30" width="25"></svg>
+            <div class="change_value">+8.60 °C</div>
+            <div class="units"> +/- 0.05</div>
+          </div>
+          <div class="units" style="margin: auto; text-align: center; display: block !important;">Averaging data from 1751 to 1980</div>
         </div>
       </div>
-      <div class="center separator">~</div>
-      <div style="padding-top: 4px;" id="selected_year_info">
-        <div class="sub_title">SELECTED YEAR ANNUAL AVERAGE ANOMALY:<br> 1969</div>
-        <div class="rate_of_change row_wrapper center"  style="display: block;">
-          <img src="/project/images/up-arrow-svgrepo-com.svg" height="30" width="25" id="img_yearSelected_up"
-            style="display: inline;">
-          <img src="/project/images/down-arrow-svgrepo-com.svg" height="30" width="25" id="img_yearSelected_down"
-            style="display: none;">
-          <div class="change_value">- 0.26 °C</div>
+
+      <!-- SELECTED INFO -->
+      <div class="border_bottom py_2 col_wrapper mySlides fade" id="TO_SET_1">
+        <div style="padding-bottom: 0px;">
+          <div class="title">Italy Temperature</div>
+          <div class="sub_title">LATEST ANNUAL AVERAGE ANOMALY: 2020</div>
+          <div class="rate_of_change row_wrapper center">
+            <img src="/project/images/up-arrow-svgrepo-com.svg" alt="" height="30" width="25">
+            <div class="change_value">0.36 °C</div>
+          </div>
+        </div>
+        <div class="center separator">~</div>
+        <div style="padding-top: 4px;" id="TO_SET_2">
+          <div class="sub_title">SELECTED YEAR ANNUAL AVERAGE ANOMALY:<br> 1969</div>
+          <div class="rate_of_change row_wrapper center"  style="display: block;">
+            <img src="/project/images/up-arrow-svgrepo-com.svg" height="30" width="25" id="TO_SET_3"
+              style="display: inline;"  alt="">
+            <img src="/project/images/down-arrow-svgrepo-com.svg" height="30" width="25" id="TO_SET_4"
+              style="display: none;"  alt="">
+            <div class="change_value">1.32 °C</div>
+          </div>
+        </div>
+        <div class="center" style="color: #636363;">~</div>
+        <div style="padding-top: 4px;">
+          <div class="sub_title">ESTIMATED BASELINE ABSOLUTE TEMPERATURE:</div>
+          <div class="rate_of_change row_wrapper center">
+            <svg height="30" width="25"></svg>
+            <div class="change_value">+12.79 °C</div>
+            <div class="units"> +/- 0.22</div>
+          </div>
+          <div class="units" style="margin: auto; text-align: center; display: block !important;">Averaging data from 1751 to 1980</div>
         </div>
       </div>
-      <div class="center" style="color: #636363;">~</div>
-      <div style="padding-top: 4px;">
-        <div class="sub_title">ESTIMATED BASELINE ABSOLUTE TEMPERATURE:</div>
-        <div class="rate_of_change row_wrapper center">
-          <svg height="30" width="25"></svg>
-          <div class="change_value">+8.60 °C</div>
-          <div class="units"> +/- 0.05</div>
-        </div>
-        <div class="units" style="margin: auto; text-align: center; display: block !important;">Averaging data from 1751 to 1980</div>
-      </div>
+
+      
     </div>
-
-
-
-
   </div>
 
   <!-- MAIN PAGE -->
