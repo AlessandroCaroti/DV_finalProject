@@ -221,9 +221,8 @@ function country_events() {
 
     // if is the same country the path is deselected
     if (!previous.empty() && previous.attr("id") == this.id &&  selected_country === b) {
-      d3.select("#input_countrySelection").property("value", "");
-      selected_country = null;
-      set_globe_icon();
+   
+      reset_and_hide();
       return;
     }
 
@@ -620,7 +619,7 @@ function load_map() {
       // second layer with more details
       topology = world;
       topology = topojson.presimplify(topology);
-      topology = topojson.simplify(topology, 0.01);
+      topology = topojson.simplify(topology, 0.005);
 
       drawLevel(topology, 1);
 
