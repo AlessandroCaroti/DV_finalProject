@@ -251,11 +251,21 @@ text#label-legend {
   padding: 50px 50px 50px 50px;
   margin: auto;
   margin-top: 3%;
+  align-items: center;
+}
+
+#stripechart{
+
+  padding-bottom: 0;
+  height: 210px;
+  width: 960px;
 }
 
 
+
+
 .title-chart {
-  /*margin-left: 30%;*/
+
   font-size: 25px;
   text-align: center;
   font-weight: bold;
