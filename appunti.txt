@@ -13,7 +13,6 @@ IDEE:
 
 
 DA DISCUTERE:
--unire la stripe con il grafico sotto
 -stripe meno ciccionosa
 
 
