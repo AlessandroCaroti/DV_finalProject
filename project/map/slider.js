@@ -86,6 +86,7 @@ function init_slider(min, max, step) {
     .on("mouseenter", function () {
       // disable page scrolling
       d3.select("body").classed("stop-scrolling", true);
+      
 
       d3.select("div#sliderYear")
         .select("g .parameter-value")

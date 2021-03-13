@@ -5,6 +5,7 @@ TO DO:
 
 TO FIX:
 - certi paesi se selezionati vengono zoomanti ma non compaiono perchè il secondo livello non viene renderizzato
+- seleziono con l'invio non cambia la mappa
 
 PROBLEMI NEMU' SELEZIONE COUNTRY:
 
