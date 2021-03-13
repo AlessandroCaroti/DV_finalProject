@@ -62,7 +62,7 @@ function init_slider(min, max, step) {
     .style("outline", "none");
 
   // scroll wheel event
-  d3.select(".slider")
+  d3.select("#sliderYear")
     .on("mousewheel", function (event) {
       event.preventDefault();
       event.stopPropagation();
@@ -86,7 +86,6 @@ function init_slider(min, max, step) {
     .on("mouseenter", function () {
       // disable page scrolling
       d3.select("body").classed("stop-scrolling", true);
-      
 
       d3.select("div#sliderYear")
         .select("g .parameter-value")
