@@ -69,13 +69,14 @@ function init_slider(min, max, step) {
 
       let val = sliderAlternativeHandle.value();
       let move_step = wheelDistance(event);
-      let next_val = parseInt(val + move_step);
-
-      if (parseInt(next_val) == parseInt(val)) return;
+      let next_val = parseInt(val + move_step);      
 
       if (next_val > max_slider) next_val = max_slider;
 
       if (next_val < min_slider) next_val = min_slider;
+
+      // no need to update
+      if (Number(next_val) == Number(val)) return;
 
       // change position slider
       sliderAlternativeHandle.value(next_val);
@@ -223,11 +224,6 @@ function wheelDistance(e) {
   if (d) {
     return -d / 3; // Firefox;
   }
-  //console.log(w);
-
-  /*if(w > 0){
-    w = w * 50
-  }*/
 
   // IE, Safari, Chrome & other browsers
   return w / 120;
