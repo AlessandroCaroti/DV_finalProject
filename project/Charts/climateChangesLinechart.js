@@ -351,9 +351,7 @@ function createDefaultLineChart(data) {
   document.getElementById("title-climate-changes").innerHTML =
     title + " - " + data[0].region;
 
-  title = document.getElementById("title-stripes-changes").innerHTML;
-  document.getElementById("title-stripes-changes").innerHTML =
-    title + " - " + data[0].region;
+
   //default button
 
   var svg = d3
@@ -471,10 +469,7 @@ function updateLineChart(data, grafic_class) {
   document.getElementById("title-climate-changes").innerHTML =
     title[0] + " - " + data[0].region;
 
-  title = document.getElementById("title-stripes-changes").innerHTML.split("-");
-  document.getElementById("title-stripes-changes").innerHTML =
-    title[0] + " - " + data[0].region;
-
+ 
   //Get scales and update axis
   var scales = getScales(data);
   var x = scales[0];
