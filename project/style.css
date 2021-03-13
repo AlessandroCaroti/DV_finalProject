@@ -66,6 +66,11 @@ div.all-slider{
   padding-bottom: 10px;
 }
 
+#sliderYear {
+  height: 350;
+  cursor: ew-resize;
+}
+
 /* DIABLE ALL SVG TEXT */
 svg text {
   -webkit-user-select: none;
