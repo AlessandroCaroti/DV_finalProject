@@ -223,8 +223,7 @@ function createDefaultTable(dataCountry,baseline) {
     .select("#table_container")
     .attr("width", width_table + margin_table.left + margin_table.right)
     .attr("height", height_table + margin_table.top + margin_table.bottom)
-    .append("g")
-    .attr("class", "table_mean_rate")
+    .select("g.table_mean_rate")
     .attr(
       "transform",
       "translate(" + margin_table.left + "," + margin_table.top + ")"
