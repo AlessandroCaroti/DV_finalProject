@@ -90,7 +90,7 @@ function set_colorScale(){
             .attr("y", "10")
             .attr("width", rect_width)
             .attr("height", "15px")
-            .style("fill", "url(#diagonalHatch)");
+            .style("fill", "url(#diagonalHatch_legend)");
     
             
     axis_unkown.append("g")
