@@ -619,7 +619,7 @@ function load_map() {
       // second layer with more details
       topology = world;
       topology = topojson.presimplify(topology);
-      topology = topojson.simplify(topology, 0.01);
+      topology = topojson.simplify(topology, 0.005);
 
       drawLevel(topology, 1);
 
