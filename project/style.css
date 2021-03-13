@@ -755,14 +755,14 @@ color: rgba(192, 192, 192, 0.5);
 /*Collapse DropDown Menu */
 
 #links-collapse-drop{
-  width: 220px;
+  width: 165px;
   height: max-content;
-  background-color:rgba(255,255,255,0.9);
+  background-color:rgba(255,255,255,1);
   display: none;
   position: absolute;
   border:lightgray solid 1px;
   left: 25%;
-  top: 102%;
+  top: 100%;
   border-radius: 15px;
   box-shadow: 1px 1px  5px #aaaaaa;
    
@@ -771,11 +771,11 @@ color: rgba(192, 192, 192, 0.5);
 #links-collapse-drop:before {
   position: absolute;
   top: -15px;
-  left: 53px;
+  left: 15px;
   display: inline-block;
-  border-right: 15px solid transparent;
+  border-right: 10px solid transparent;
   border-bottom: 15px solid #ccc;
-  border-left: 15px solid transparent;
+  border-left: 10px solid transparent;
   border-bottom-color: rgba(0, 0, 0, 0.2);
   content: '';
 }
@@ -783,17 +783,18 @@ color: rgba(192, 192, 192, 0.5);
 #links-collapse-drop:after {
   position: absolute;
   top: -14px;
-  left: 53px;
+  left: 15px;
   display: inline-block;
-  border-right: 14px solid transparent;
+  border-right: 10px solid transparent;
   border-bottom: 14px solid #ffffff;
-  border-left: 14px solid transparent;
+  border-left: 10px solid transparent;
   content: '';
 
 }
 
 .links_page-collapse{
   color: black; 
+  font-size: 90%;
 }
 
 
@@ -809,6 +810,7 @@ color: rgba(192, 192, 192, 0.5) ;
   width: 100%;
   height: 100%;
   color: black; 
+  font-size: 70%;
   
 
 }
@@ -816,11 +818,12 @@ color: rgba(192, 192, 192, 0.5) ;
 /*Links Main NavaBar Style*/
 
 #links-container {
-  position: relative;
-  left: 7%;
-  width: max-content;
+ 
+  width: 500px;
   height: 100%;
-  overflow: hidden;
+
+  display: inline;
+
 }
 
 
@@ -830,11 +833,18 @@ color: rgba(192, 192, 192, 0.5) ;
   padding-right: 10px;
   text-decoration: none;
   color: white;
-  font-size: 80%;
+  font-size: 70%;
   position: relative;
-  top:25px;
+  top:13px;
   font-family: sans-serif;
 }
+
+#links-li{
+  width: max-content;
+  position: relative;
+  left: 3%;
+}
+
 
 .links-span{
   position: relative;
@@ -864,7 +874,7 @@ color: rgba(192, 192, 192, 0.5) ;
 
   position: relative;
   top: 15%;
-  right: -120%;
+  right: 20%;
 }
 
 #collapse-btn:hover{
