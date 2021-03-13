@@ -221,9 +221,8 @@ function country_events() {
 
     // if is the same country the path is deselected
     if (!previous.empty() && previous.attr("id") == this.id &&  selected_country === b) {
-      d3.select("#input_countrySelection").property("value", "");
-      selected_country = null;
-      set_globe_icon();
+   
+      reset_and_hide();
       return;
     }
 
