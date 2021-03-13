@@ -67,8 +67,9 @@ div.all-slider{
 }
 
 #sliderYear {
-  height: 350;
+  height: 50px;
   cursor: ew-resize;
+  margin-bottom: 80px;
 }
 
 /* DIABLE ALL SVG TEXT */
