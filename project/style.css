@@ -459,11 +459,7 @@ table {
   margin: auto;
 }
 
-.title-legend-h-c {
-  font-weight: bold;
-  font-family: sans-serif;
-  text-align: center;
-}
+
 
 .zero-line {
   fill: none;
@@ -577,7 +573,6 @@ table {
   font-family: sans-serif;
 
 }
-
 
 .navbar ul li{
   display: inline-block;
