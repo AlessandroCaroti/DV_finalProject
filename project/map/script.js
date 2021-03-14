@@ -38,7 +38,7 @@ function drawMap(world) {
   svg = d3.select("#svg-map").attr("height", h_map);
   map_container = svg.select("#map").call(zoom);
 
-  svg_bBox = document.getElementById("sliderLabel").getBBox();
+  svg_bBox = document.getElementById("svg-map").getBBox();
   w_map = svg_bBox.width;
 
   projection = d3
@@ -262,7 +262,7 @@ var zoomIn_scale = 1.2,
 
 var zoom = d3
   .zoom()
-  .extent(d => [[0, 0], [w_map, h_map]])
+  .extent(d => [[0, 0], [0, h_map]])
   .scaleExtent([1, max_zoom])
   .on("zoom", (event) => {
     curr_zoomScale = event.transform.k;
@@ -315,10 +315,11 @@ function zoom_in(country) {
     y = (bounds[0][1] + bounds[1][1]) / 2,
     scale = Math.max(
       1,
-      Math.min(max_zoom, 0.9 / Math.max(dx / w_map, dy / h_map))
+      Math.min(max_zoom, 1 / Math.max(dx / w_map, dy / h_map))
     ),
     translate = [/* w_map/2 */ - scale * x, h_map / 2 - scale * y];
-
+      console.log(scale,
+         1 / Math.max(dx / w_map, dy / h_map), Math.max(dx / w_map, dy / h_map))
   map_container
     .transition()
     .duration(1000)
