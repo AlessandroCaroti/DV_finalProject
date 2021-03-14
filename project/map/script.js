@@ -255,7 +255,7 @@ function country_selected(country) {
 // ******************************************************** //
 //                    START ZOOM SECTION                    //
 
-var max_zoom = 15;
+var max_zoom = 10;
 var zoomIn_scale = 1.2,
   zoomOut_scale = 0.8,
   curr_zoomScale = 1;
