@@ -59,7 +59,7 @@ function createSeasonalLineChartLegend(svg, dataLastYears) {
     .attr("x", 40)
     .attr("y", curY + 11)
     .attr("class", "legend")
-    .html("1951-1980 average with 95% of confidence");
+    .html("1951-1980 average with uncertainty");
 
   curY += 12;
   var id_idx = 0;
