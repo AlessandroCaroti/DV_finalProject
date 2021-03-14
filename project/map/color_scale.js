@@ -114,10 +114,15 @@ function set_colorScale(){
             .html("no data");
     
     // change axis style
-    axis.selectAll(".tick").selectAll("text")
+    axis.selectAll(".tick")
+         .selectAll("text")
          .attr("transform", "rotate(90 0 0) translate(30, -24)")
           .attr("dy", "0.91em")
           .style("font-size", "14px");
+
+    axis.selectAll(".tick")
+          .selectAll("line")
+              .attr("stroke" , "gray");
 
     axis.select(".domain").remove();
 
