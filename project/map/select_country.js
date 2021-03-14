@@ -18,8 +18,12 @@ const blurHandler = async function () {
 
 const keydownHandlwe = function (event) {
   if (event.key === "Enter") {
-    update_mainPage(curr_over.id);
+    input_source.value = curr_over.id;
+
     hide_options();
+    input_source.blur();
+
+    update_mainPage(input_source.value);
   } else if (event.key === "ArrowDown") {
     if (curr_over.nextElementSibling != null) {
       d3.select(curr_over).classed("country_option_over", false);
