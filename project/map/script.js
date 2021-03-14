@@ -318,8 +318,7 @@ function zoom_in(country) {
       Math.min(max_zoom, 0.9 / Math.max(dx / w_map, dy / h_map))
     ),
     translate = [/* w_map/2 */ - scale * x, h_map / 2 - scale * y];
-      console.log(scale,
-         1 / Math.max(dx / w_map, dy / h_map), Math.max(dx / w_map, dy / h_map))
+  
   map_container
     .transition()
     .duration(1000)
