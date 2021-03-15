@@ -42,7 +42,8 @@ function drawMap(world) {
   w_map = svg_bBox.width;
 
   projection = d3
-    .geoNaturalEarth1()
+    //.geoNaturalEarth1()
+    .geoOrthographic()
     .scale(140)
     .translate([0, h_map / 2]);
 
