@@ -171,6 +171,7 @@ div.tooltip {
 .handle:focus {
   stroke: #777;
   fill: #ececec;
+  outline: none;
 }
 
 .hover {
@@ -965,6 +966,4 @@ html {
 #btn-back-top circle:hover{
   fill: rgb(202, 202, 202, 0.9);
 }
-
-
 
