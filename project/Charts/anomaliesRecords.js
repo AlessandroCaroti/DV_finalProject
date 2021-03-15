@@ -178,7 +178,7 @@ function createAnomaliesRecordsLegend(id_container, hottest_temp, coldest_temp) 
     id_idx++;
 
   });
-  console.log(  )
+
   legend
       .append("line")
       .attr("y1", curY + 30)
