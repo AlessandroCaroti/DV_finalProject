@@ -462,17 +462,19 @@
 
       <!-- START TABLE -->
 
-      <div id="table_container" class="chart-container">
+      <div id="table_container" class="chart-container" style="overflow: visible;" >
         
+        <div id="title-table-container" style="margin-bottom: 30px; overflow: visible;">
+          
+          <h2 id="title-table" class="table-title-elem">Mean Rate of Change ( °C / Years )</h2>
+        
+          <img id="info-btn-table" class="table-title-elem"  alt="info-btn" src="../project/images/info.svg" height="25" width="25" style="top: 3px; left: 21%;" />
+          <div id="tooltip-info-table" class="tooltip"></div>
+        </div>
 
-        <h2 id="title-table">Mean Rate of Change ( °C / Years )</h2>
-
+        
+        
         <g class="table_mean_rate"></g>
-        <p
-          style=" text-align: justify; position: relative;  bottom: 30%; left: 6%; width:812px; margin-bottom: 20px; padding:0; font-size: 75%;">
-          The light blue cells represent the first annual
-          available temperature. The others contain the annual temperature increasement of the previous years.
-        </p>
 
       </div>
 

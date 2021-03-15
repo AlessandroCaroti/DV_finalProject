@@ -55,31 +55,53 @@ function collapseMenuEvt() {
   else drop_div.style.display = "none";
 }
 
-function drawInfoTooltip(event) {
-  var tooltip = d3.select("#data-averaged-title .tooltip");
+function drawInfoTooltip(event, tipText, titleContainer, tableInfo=false) {
+  var tooltip = d3.select("#"+titleContainer+" .tooltip");
 
   tooltip.transition();
-  var tipText = String(
-    
-    "<p style='text-align: left; padding-right: 5px; padding-left: 5px; font-size: 12px;' >" +
-      "Choose data averaged on different intervals of years." +
-      '<br> E.g. "5 Year" refers to the average of data of the previous 5 years.' +
-      "</p>"
-  );
+  var yPos;
+  if(!tableInfo) yPos= event.clientY;
+  else  
+      yPos = event.pageY;
 
   tooltip
-    .style("left", String(event.clientX + 40) + "px")
-    .style("top", String(event.clientY - 55) + "px")
+    .style("left", (event.pageX+30)+"px" )
+    .style("top", (yPos-50)+ "px" )
     .style("display", "block")
     .style("width", "150px")
     .html(tipText);
 }
 
-function removeInfoTooltip() {
-  var tooltip = d3.select("#data-averaged-title .tooltip");
+function removeInfoTooltip(titleContainer) {
+  var tooltip = d3.select("#"+titleContainer+" .tooltip");
   tooltip.style("display", "none");
 }
 
+
+var tipTextSideBar = String(
+    
+  "<p style='text-align: left; padding-right: 5px; padding-left: 5px; font-size: 12px;' >" +
+    "Choose data averaged on different intervals of years." +
+    '<br> E.g. "5 Year" refers to the average of data of the previous 5 years.' +
+    "</p>"
+);
+
+var tipTextTableInfo = String(
+    
+  "<p style='text-align: left; padding-right: 3px; padding-left: 3px; font-size: 12px;' >"   
+  +"The light blue cells represent the first annual"
+  +"available temperature. The others contain the annual temperature increasement of the previous years."
+  +"</p>"
+);
+
+
+
 d3.select("#info-btn-avg")
-  .on("mouseover", drawInfoTooltip)
-  .on("mouseleave", removeInfoTooltip);
+  .on("mouseenter", (event, d)=>drawInfoTooltip(event, tipTextSideBar, "data-averaged-title" ))
+  .on("mouseleave", ()=>removeInfoTooltip("data-averaged-title"));
+
+
+
+d3.select("#info-btn-table")
+  .on("mouseenter", (event, d)=>drawInfoTooltip(event, tipTextTableInfo, "table_container", true ))
+  .on("mouseleave", ()=>removeInfoTooltip("table_container"));

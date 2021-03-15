@@ -249,8 +249,6 @@ text#label-legend {
 
 /*--------------------------------- TAB MENU STYLE -------------------------------------*/
 
-
-
 .chart-container {
   /*width: 950px;*/
   height: auto;
@@ -264,13 +262,10 @@ text#label-legend {
 
   padding-bottom: 0;
   margin-top: 0;
-  
   height: 210px;
   width: 960px;
+
 }
-
-
-
 
 .title-chart {
 
@@ -282,6 +277,15 @@ text#label-legend {
 
 #title-table {
   color: #0070a1;
+}
+
+
+.table-title-elem{
+
+  display: inline;
+  position: relative;
+  left: 20%;
+  
 }
 
 h3 {
@@ -325,7 +329,6 @@ h3 {
 
 /* -----------------------------END CHART STYLE--------------------------------------*/
 
-
 /*--------------- LEGEND STYLE -------------------------------------------*/
 
 .legend {
@@ -360,6 +363,12 @@ text.legend {
 /* END TAB MENU LINECHART */
 
 /*-----------------------------------START STYLE TABLE-----------------------------------*/
+
+#info-btn-table:hover{
+  filter: hue-rotate(0deg) saturate(0%) brightness(75%) opacity(80%);
+}
+
+
 
 #table_container {
   width: 950px;
@@ -875,7 +884,7 @@ color: rgba(192, 192, 192, 0.5) ;
 
   position: relative;
   top: 15%;
-  right: 20%;
+  right: -23%;
 }
 
 #collapse-btn:hover{
