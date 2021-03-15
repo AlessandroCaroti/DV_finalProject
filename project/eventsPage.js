@@ -95,11 +95,9 @@ var tipTextTableInfo = String(
 );
 
 
-
 d3.select("#info-btn-avg")
   .on("mouseenter", (event, d)=>drawInfoTooltip(event, tipTextSideBar, "data-averaged-title" ))
   .on("mouseleave", ()=>removeInfoTooltip("data-averaged-title"));
-
 
 
 d3.select("#info-btn-table")

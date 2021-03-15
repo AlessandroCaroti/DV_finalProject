@@ -852,7 +852,7 @@ color: rgba(192, 192, 192, 0.5) ;
 #links-li{
   width: max-content;
   position: relative;
-  left: 3%;
+  left: 6%;
 }
 
 
@@ -894,16 +894,16 @@ color: rgba(192, 192, 192, 0.5) ;
 }
 
 @media screen and (max-width: 1500px) {
-  #links-container span:nth-child(n+6) {  display: none;}
-  #links-container span:nth-child(n+6):after{ display: none;}
-  .span-collapse:nth-child(n+6) {  display: block;}
+  #links-container span:nth-child(n+5) {  display: none;}
+  #links-container span:nth-child(n+5):after{ display: none;}
+  .span-collapse:nth-child(n+5) {  display: block;}
  
 }
 
 @media screen and (max-width: 1300px) {
-  #links-container span:nth-child(n+5) {  display: none;}
-  #links-container span:nth-child(n+5):after{ display: none;}
-  .span-collapse:nth-child(n+5) {  
+  #links-container span:nth-child(n+4) {  display: none;}
+  #links-container span:nth-child(n+4):after{ display: none;}
+  .span-collapse:nth-child(n+4) {  
     display: block;  
   
   }
@@ -911,9 +911,9 @@ color: rgba(192, 192, 192, 0.5) ;
 }
 
 @media screen and (max-width: 1100px) {
-  #links-container span:nth-child(n+4) {  display: none;}
-  #links-container span:nth-child(n+4):after{ display: none;}
-  .span-collapse:nth-child(n+4) {  
+  #links-container span:nth-child(n+3) {  display: none;}
+  #links-container span:nth-child(n+3):after{ display: none;}
+  .span-collapse:nth-child(n+3) {  
     display: block;
 
   }
@@ -921,30 +921,20 @@ color: rgba(192, 192, 192, 0.5) ;
 }
 
 @media screen and (max-width: 950px) {
-  #links-container span:nth-child(n+3) {  display: none;}
-  #links-container span:nth-child(n+3):after{ display: none;}
-  .span-collapse:nth-child(n+3) {  
+  #links-container span:nth-child(n+2) {  display: none;}
+  #links-container span:nth-child(n+2):after{ display: none;}
+  .span-collapse:nth-child(n+2) {  
     display: block; 
   }
 
 }
 
 @media screen and (max-width: 770px) {
-  #links-container span:nth-child(n+2) {  display: none;}
-  #links-container span:nth-child(n+2):after{ 
+  #links-container span:nth-child(n+1) {  display: none;}
+  #links-container span:nth-child(n+1):after{ 
     display: none;
   }
  
-
-}
-
-@media screen and (max-width: 650px) {
-  #links-container span:nth-child(n+1) {  display: none;}
-  #links-container span:nth-child(n+1):after{ display: none;}
-  .span-collapse:nth-child(n+1) {  
-    display: block;
-  
-  }
 }
 
 @media screen and (min-width: 1500px) {
