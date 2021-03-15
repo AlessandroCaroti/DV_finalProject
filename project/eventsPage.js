@@ -89,8 +89,8 @@ var tipTextSideBar = String(
 var tipTextTableInfo = String(
     
   "<p style='text-align: left; padding-right: 3px; padding-left: 3px; font-size: 12px;' >"   
-  +"The light blue cells represent the first annual "
-  +"available temperature. The others contain the annual temperature increasement of the previous years."
+  +"The light blue cells represent the first available annual "
+  +" temperature. The others contain the annual temperature increasement of the previous years."
   +"</p>"
 );
 
