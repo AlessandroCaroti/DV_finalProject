@@ -36,6 +36,7 @@ function drawMap(world) {
   debug_log("DRAW-MAP");
 
   svg = d3.select("#svg-map").attr("height", h_map);
+
   map_container = svg.select("#map").call(zoom);
 
   svg_bBox = document.getElementById("svg-map").getBBox();
@@ -265,6 +266,7 @@ var zoom = d3
   .extent(d => [[0, 0], [0, h_map]])
   .scaleExtent([1, max_zoom])
   .on("zoom", (event) => {
+    
     curr_zoomScale = event.transform.k;
 
     if (curr_zoomScale != 1) {
