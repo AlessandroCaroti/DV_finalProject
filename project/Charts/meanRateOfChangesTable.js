@@ -220,14 +220,10 @@ function table_data(data) {
 function createDefaultTable(dataCountry,baseline) {
  
   var svg = d3
-    .select("#table_container")
+    .select("#table-svg")
     .attr("width", width_table + margin_table.left + margin_table.right)
-    .attr("height", height_table + margin_table.top + margin_table.bottom)
-    .select("g.table_mean_rate")
-    .attr(
-      "transform",
-      "translate(" + margin_table.left + "," + margin_table.top + ")"
-    );
+    .attr("height", height_table + margin_table.top + margin_table.bottom);
+
 
   var table = svg.append("table").attr("class", "mean_rate"),
     thead = table.append("thead").attr("class", "thead_table"),
