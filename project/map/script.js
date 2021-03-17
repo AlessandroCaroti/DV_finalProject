@@ -35,9 +35,9 @@ countries_file = "../../data/15_countries_list.csv";
 function drawMap(world) {
   debug_log("DRAW-MAP");
 
-  svg = d3.select("#svg-map").attr("height", h_map);
+  svg = d3.select("#svg-map").attr("height", h_map).call(zoom);
 
-  map_container = svg.select("#map").call(zoom);
+  map_container = svg.select("#map");
 
   svg_bBox = document.getElementById("svg-map").getBBox();
   w_map = svg_bBox.width;
@@ -45,7 +45,7 @@ function drawMap(world) {
   projection = d3
     .geoNaturalEarth1()
     .scale(140)
-    .translate([0, h_map / 2]);
+    .translate([w_map/2, h_map / 2]);
 
   geoGenerator = d3.geoPath().projection(projection);
 
@@ -257,13 +257,13 @@ function country_selected(country) {
 //                    START ZOOM SECTION                    //
 
 var max_zoom = 10;
-var zoomIn_scale = 1.2,
-  zoomOut_scale = 0.8,
+var zoomIn_scale = 1.5,
+  zoomOut_scale = 0.5,
   curr_zoomScale = 1;
 
 var zoom = d3
   .zoom()
-  .extent(d => [[0, 0], [0, h_map]])
+  .extent(d => [[0, 0], [w_map, h_map]])
   .scaleExtent([1, max_zoom])
   .on("zoom", (event) => {
     
@@ -319,7 +319,7 @@ function zoom_in(country) {
       1,
       Math.min(max_zoom, 0.9 / Math.max(dx / w_map, dy / h_map))
     ),
-    translate = [/* w_map/2 */ - scale * x, h_map / 2 - scale * y];
+    translate = [w_map/2 - scale * x, h_map / 2 - scale * y];
   
   map_container
     .transition()
