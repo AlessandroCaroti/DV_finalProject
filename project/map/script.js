@@ -36,6 +36,7 @@ function drawMap(world) {
   debug_log("DRAW-MAP");
 
   svg = d3.select("#svg-map").attr("height", h_map);
+  svg.on("wheel", () => {}); // FIX https://github.com/d3/d3-zoom/issues/231#issuecomment-802164698
 
   map_container = svg.select("#map").call(zoom);
 
