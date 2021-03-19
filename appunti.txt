@@ -1,4 +1,5 @@
 TO DO:
+- rimmuovere librerie non più usate presenti nell'html
 - sistemare i file con dentro roba a caso
 - Buttare la pagina in un convalidatore HTML5
 - deprivatizzare il progetto prima della consegna
