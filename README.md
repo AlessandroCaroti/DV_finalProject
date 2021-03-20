@@ -1,4 +1,4 @@
-# Data Visualization: Data Visualization
+# Data Visualization: Final Project
 
  WebPage Berkeley Earth Temperature - DataVisualization project
 
