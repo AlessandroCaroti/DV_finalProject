@@ -42,7 +42,7 @@ The <b> Charts </b> folder containts the javascript files which implement the ot
 Is possible to view the webpage <a href="http://rmplst.me/project/"> here (not always available)</a>.
 
 ### WebPage preview:
-![alt text](https://github.com/AlessandroCaroti/DV_finalProject/blob/main/preview.png?raw=true)
+<kbd>![alt text](https://github.com/AlessandroCaroti/DV_finalProject/blob/main/preview.png?raw=true)</kbd>
 
 <b>Contributors:</b>
 <ul>
