@@ -21,8 +21,8 @@ The folder <b> map </b> contains all the javascript files which implement the ma
 The folder <b> Charts </b> containts the javascript files which implement the other charts:
 <ul>
     <li> The linechart for the <a href="https://github.com/AlessandroCaroti/DV_finalProject/blob/main/project/Charts/climateChangesLinechart.js"> climate changes </a>; </li>
-    <li> The <a href="https://github.com/AlessandroCaroti/DV_finalProject/blob/main/project/Charts/climateStripes.js"> climate stripes </a>; </li>
-    <li> The <a href="https://github.com/AlessandroCaroti/DV_finalProject/blob/main/project/Charts/meanRateOfChangesTable.js"> mean rate of changes table </a>;</li>
+    <li> The <a href="https://github.com/AlessandroCaroti/DV_finalProject/blob/main/project/Charts/climateStripes.js"> climate stripes</a>; </li>
+    <li> The <a href="https://github.com/AlessandroCaroti/DV_finalProject/blob/main/project/Charts/meanRateOfChangesTable.js"> mean rate of changes table</a>;</li>
     <li> The group of linecharts for the <a href="https://github.com/AlessandroCaroti/DV_finalProject/blob/main/project/Charts/anomaliesRecords.js"> anomalies record </a>;</li>
     <li> The linechart of <a href="https://github.com/AlessandroCaroti/DV_finalProject/blob/main/project/Charts/anomaliesRecords.js"> seasonal changes</a>.</li>
 </ul>
