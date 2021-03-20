@@ -1,6 +1,6 @@
 # Data Visualization: Final Project
 
-<a href="http://rmplst.me/project/"> WebPage (not always available) </a> Berkeley Earth Temperature - Data Visualization project
+WebPage Berkeley Earth Temperature - Data Visualization project
 
 ### Execution:
 - Execute with server the main html: <i> index.html </i>.
@@ -32,6 +32,7 @@ Then, in the file <i> support_charts.js </i> there are all the function to load 
 <br/> 
 <br/>
 
+Is possible to view the webpage <a href="http://rmplst.me/project/"> here (not always available) </a>.
 
 <b>Contributors:</b>
 <ul>
