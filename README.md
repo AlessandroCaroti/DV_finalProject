@@ -24,7 +24,7 @@ The folder <b> Charts </b> containts the javascript files which implement the ot
     <li> The <a href="https://github.com/AlessandroCaroti/DV_finalProject/blob/main/project/Charts/climateStripes.js"> climate stripes </a>; </li>
     <li> The <a href="https://github.com/AlessandroCaroti/DV_finalProject/blob/main/project/Charts/meanRateOfChangesTable.js"> mean rate of changes table </a>;</li>
     <li> The group of linecharts for the <a href="https://github.com/AlessandroCaroti/DV_finalProject/blob/main/project/Charts/anomaliesRecords.js"> anomalies record </a>;</li>
-    <li> The linechart of <a href="https://github.com/AlessandroCaroti/DV_finalProject/blob/main/project/Charts/anomaliesRecords.js"> seasonal changes</a>;</li>
+    <li> The linechart of <a href="https://github.com/AlessandroCaroti/DV_finalProject/blob/main/project/Charts/anomaliesRecords.js"> seasonal changes</a>.</li>
 </ul>
 Then, in the file <i> support_charts.js </i> there are all the function to load all the chart and update them whenever the data changes. <i> UltilsCharts.js</i> contains the common utility function for all the charts.
 
