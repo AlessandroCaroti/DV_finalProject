@@ -2,14 +2,15 @@
 
  WebPage Berkeley Earth Temperature - DataVisualization project
 
+### Execution:
+- Execute with server the main html: <i> index.html </i>.
+- If the laptop has a screen of 13'', reduce the zoom of the page to 75%.
+<br/>
+
  - In the <strong><a href="https://github.com/AlessandroCaroti/DV_finalProject/tree/main/project"> project</a></strong> folder there is the file <i> index.html </i> that is the html of the webpage, with the corresponding style, contained in the file <i> style.css</i>. The file <i> InitPage.js </i> and <i>eventsPages.js</i> contain respetively the function to inizialiaze all the elements in the webpage and the main events of the page. Instaead left_bar.css is the style for the side bar, and loader.css is the style for the loading page. 
  - The <strong><a href="https://github.com/AlessandroCaroti/DV_finalProject/tree/main/data"> data</a></strong> folder contain all the data needed for the page.<br>
  - In the <strong><a href="https://github.com/AlessandroCaroti/DV_finalProject/tree/main/download_data"> download_data</a></strong> folder there is the code that allow to download and reorganize the row data from the <a href="http://berkeleyearth.org/">Berkeley website</a>.<br>
 <br/>
-
-### Execution:
-- Execute with server the main html: <i> index.html </i>.
-- If the laptop has a screen of 13'', reduce the zoom of the page to 75%.
 
 <br/> 
 The folder <b> map </b> contains all the javascript files which implement the map with all the relative features. <i>color_scale.js</i> containts the function for the map's colors, <i> map_btn.js </i> implements the map's buttons, instead the menu of the map is implemented in <i>menu_map.js</i>. All then events and and the main function of the map (plot, update...etc) are in <i> script.js</i>. The implementation of the dropdown menu to select a country is in <i>select_country.js</i>, instead the slider and the events for the choise of the years range are implemented in <i> slider.js </i> and in <i> leftSide_bar.js </i>
