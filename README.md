@@ -21,13 +21,13 @@ The folder <b> map </b> contains all the javascript files which implement the ma
  <li> <i>color_scale.js</i> contains the functions for the color scale and the legend;</li>
  <li> <i> map_btn.js </i> implements the buttons to control the zoom and the panning;</li>
  <li> the menu of the animation is implemented in <i>menu_map.js</i>;</li>
- <li> The slider for the choice of the year is implemented in <i> slider.js </i>;</li>
+ <li> The slider for the choice of the year is implemented in <i>slider.js</i>;</li>
  <li> The implementation of the dropdown menu to select data relate to a country is in <i>select_country.js</i>;</li>
  <li>all events and the main functions of the map (plot, update...etc) are in <i> script.js</i>;</li>
 </ul>
 
 <br/><br/>
-The folder <b> Charts </b> containts the javascript files which implement the other charts:
+The <b> Charts </b> folder containts the javascript files which implement the other charts:
 <ul>
     <li> The linechart for the <a href="https://github.com/AlessandroCaroti/DV_finalProject/blob/main/project/Charts/climateChangesLinechart.js"> climate changes</a>; </li>
     <li> The <a href="https://github.com/AlessandroCaroti/DV_finalProject/blob/main/project/Charts/climateStripes.js"> climate stripes</a>; </li>
@@ -35,7 +35,6 @@ The folder <b> Charts </b> containts the javascript files which implement the ot
     <li> The group of linecharts for the <a href="https://github.com/AlessandroCaroti/DV_finalProject/blob/main/project/Charts/anomaliesRecords.js"> anomalies record</a>;</li>
     <li> The linechart of <a href="https://github.com/AlessandroCaroti/DV_finalProject/blob/main/project/Charts/anomaliesRecords.js"> seasonal changes</a>;</li>
 </ul>
-Then, in the file <i> support_charts.js </i> there are all the function to load all the chart and update them whenever the data changes. <i> UltilsCharts.js</i> contains the common utility function for all the charts.
 
 
 <br/> 
