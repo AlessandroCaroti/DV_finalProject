@@ -37,8 +37,7 @@ The <b> Charts </b> folder containts the javascript files which implement the ot
 </ul>
 
 
-<br/> 
-<br/>
+---
 
 Is possible to view the webpage <a href="http://rmplst.me/project/"> here (not always available)</a>.
 
