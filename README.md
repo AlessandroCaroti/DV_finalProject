@@ -9,7 +9,7 @@ WebPage Berkeley Earth Temperature - Data Visualization project
 
 ### Folder Structure:
 
- - In the <strong><a href="https://github.com/AlessandroCaroti/DV_finalProject/tree/main/project"> project</a></strong> folder there is the file <i> index.html </i> that is the html of the webpage, with the corresponding style, contained in the file <i> style.css</i>. The file <i> InitPage.js </i> and <i>eventsPages.js</i> contain respetively the function to inizialiaze all the elements in the webpage and the main events of the page. Instaead left_bar.css is the style for the side bar, and loader.css is the style for the loading page. 
+ - In the <strong><a href="https://github.com/AlessandroCaroti/DV_finalProject/tree/main/project"> project</a></strong> folder there is the file <i> index.html </i> that is the html of the webpage, with the corresponding style, contained in the file <i> style.css</i>. The file <i> InitPage.js </i> and <i>eventsPages.js</i> contain respetively the function to inizialiaze all the elements in the webpage and the main events of the page. Instead left_bar.css is the style for the side bar, and loader.css is the style for the loading page. 
  - The <strong><a href="https://github.com/AlessandroCaroti/DV_finalProject/tree/main/data"> data</a></strong> folder contain all the data needed for the page.<br>
  - In the <strong><a href="https://github.com/AlessandroCaroti/DV_finalProject/tree/main/download_data"> download_data</a></strong> folder there is the code that allow to download and reorganize the row data from the <a href="http://berkeleyearth.org/">Berkeley website</a>.<br>
 <br/>
