@@ -73,7 +73,7 @@ function readDataTable(data_country, dataFile, baseline, update = false, global 
     document.getElementById("title-table").innerHTML = title[0] + " - "+ data_country[0].region;
   }
      
-  var folder = "counties";
+  var folder = "countries";
 
   if (global){
     folder = "regions";

@@ -3,7 +3,7 @@ import json
 import io, os
 
 mapFile_path = "./download_data/data/map/countries-10m_V38_6.json"
-countries_directory = "./download_data/data/counties"
+countries_directory = "./download_data/data/countries"
 
 
 def compute_corrisponcance(countries_Temp, countries_Map):

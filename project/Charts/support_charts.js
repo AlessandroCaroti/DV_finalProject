@@ -16,7 +16,7 @@ function initBaselineAndInfo(dataFile, global = false) {
   var folder;
 
   if (global) folder = "regions";
-  else folder = "counties";
+  else folder = "countries";
 
   d3.json(
     "/../data/" + folder + "/" + dataFile + "/" + dataFile + "_info.json"
@@ -46,7 +46,7 @@ function allDeafaultDataset() {
   if (dataFile == "") {
     dataFile = "Global Land";
     folder = "regions";
-  } else folder = "counties";
+  } else folder = "countries";
   //initBaselineAndInfo(dataFile, true);input_countrySelection
   var csv = "/../../data/" + folder + "/" + dataFile + "/" + dataFile +"_anomalyTable.csv";
   var json = "/../../data/" + folder + "/" + dataFile + "/" + dataFile + "_info.json";
@@ -99,7 +99,7 @@ function allDeafaultDataset() {
 
 function changeAllData(dataFile) {
 
-  var folder = "counties";
+  var folder = "countries";
   if(dataFile == "Global Land")
     folder = "regions";
   

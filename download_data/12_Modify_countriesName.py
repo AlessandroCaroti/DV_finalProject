@@ -3,7 +3,7 @@ import json
 import io
 import os
 
-countriesData_path = "./download_data/data/counties"
+countriesData_path = "./download_data/data/countries"
 countriesToModifyList_path = "./download_data/extra-data/12_toRename(created_manually).csv"
 
 if __name__ == "__main__":

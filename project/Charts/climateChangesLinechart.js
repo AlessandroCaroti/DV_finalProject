@@ -154,7 +154,7 @@ function changeDataRangeYears() {
   if (dataFile == "") {
     dataFile = "Global Land";
     folder = "regions";
-  } else folder = "counties";
+  } else folder = "countries";
 
   var csv =
     "/../data/" +

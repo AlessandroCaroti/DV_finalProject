@@ -3,7 +3,7 @@ import json
 import io, os
 
 mapFile_path = "./download_data/data/map/countries-10m_V35_6.json"
-countries_directory = "./download_data/data/counties"
+countries_directory = "./download_data/data/countries"
 
 def extraxtCountry_from_map(map_file):
     countryName_list = []
