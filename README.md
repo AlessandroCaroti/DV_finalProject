@@ -15,7 +15,16 @@ WebPage Berkeley Earth Temperature - Data Visualization project
 <br/>
 
 <br/> 
-The folder <b> map </b> contains all the javascript files which implement the map with all the relative features. <i>color_scale.js</i> contains the functions for the color scale and the legend, <i> map_btn.js </i> implements the buttons, instead the menu of the animation is implemented in <i>menu_map.js</i>. Then all events and and the main function of the map (plot, update...etc) are in <i> script.js</i>. The implementation of the dropdown menu to select a country is in <i>select_country.js</i>, instead the slider and the events for the choise of the years range are implemented in <i> slider.js </i> and in <i> leftSide_bar.js </i>
+
+The folder <b> map </b> contains all the javascript files which implement the map with all the relative features.
+<ul>
+ <li> <i>color_scale.js</i> contains the functions for the color scale and the legend;</li>
+ <li> <i> map_btn.js </i> implements the buttons to control the zoom and the panning;</li>
+ <li> the menu of the animation is implemented in <i>menu_map.js</i>;</li>
+ <li> The slider for the choice of the year is implemented in <i> slider.js </i>;</li>
+ <li> The implementation of the dropdown menu to select data relate to a country is in <i>select_country.js</i>;</li>
+ <li>all events and the main functions of the map (plot, update...etc) are in <i> script.js</i>;</li>
+</ul>
 
 <br/><br/>
 The folder <b> Charts </b> containts the javascript files which implement the other charts:
