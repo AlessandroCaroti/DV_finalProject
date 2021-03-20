@@ -41,7 +41,7 @@ if __name__ == "__main__":
     regions = []
 
     print("This will take some times,", end=" ")
-    print("{} counties to process...".format(len(countries)))
+    print("{} countries to process...".format(len(countries)))
 
     for i, country in enumerate(countries):
         print(i, end=", ", flush=True)

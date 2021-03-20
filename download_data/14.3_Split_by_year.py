@@ -4,7 +4,7 @@ import os
 import json
 import numpy as np
 
-dataTmp_folder = "./download_data/data/counties"
+dataTmp_folder = "./download_data/data/countries"
 dataYear_folder = "./download_data/data/years"
 
 first_year = None
