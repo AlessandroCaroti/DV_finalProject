@@ -5,8 +5,26 @@
  -The <strong><a href="https://github.com/AlessandroCaroti/DV_finalProject/tree/main/data"> data</a></strong> folder contain all the data needed for the page<br>
  -In the <strong><a href="https://github.com/AlessandroCaroti/DV_finalProject/tree/main/download_data"> download_data</a></strong> folder there is the code that allow to download and reorganize the row data from the <a href="http://berkeleyearth.org/">Berkeley website</a>.<br>
 
-In the folder <b> project </b> there is the file <i> index.html </i> that is the html of the webpage.
+In the folder <b> project </b> there is the file <i> index.html </i> that is the html of the webpage, with the corresponding style, contained in the file <i> style.css</i>. The file <i> InitPage.js </i> and <i>eventsPages.js</i> contain respetively the function to inizialiaze all the elements in the webpage and the main events of the page. Instaead left_bar.css is the style for the side bar, and loader.css is the style for the loading page.
 <br/>
+The folder <b> map </b> containts all the javascript files which implement the map with all the relative features and  the slider.
+The folder <b> Charts </b> containts the javascript files which implement the other charts:
+<ul>
+    <li> The linechart for the <a href="https://github.com/AlessandroCaroti/DV_finalProject/blob/main/project/Charts/climateChangesLinechart.js"> climate changes </a>; </li>
+    <li> The <a href="https://github.com/AlessandroCaroti/DV_finalProject/blob/main/project/Charts/climateStripes.js"> climate stripes </a>; </li>
+    <li> The <a href="https://github.com/AlessandroCaroti/DV_finalProject/blob/main/project/Charts/meanRateOfChangesTable.js"> mean rate of changes table </a>;</li>
+    <li> The group of linecharts for the <a href="https://github.com/AlessandroCaroti/DV_finalProject/blob/main/project/Charts/anomaliesRecords.js"> anomalies record </a>;</li>
+    <li> The linechart of <a href="https://github.com/AlessandroCaroti/DV_finalProject/blob/main/project/Charts/anomaliesRecords.js"> seasonal changes</a>;</li>
+    
+
+</ul>
+
+
+
+<br/> 
+<br/>
+
+
 <b>Contributors:</b>
 <ul>
  <li><a href="https://github.com/AlessandroCaroti">Alessandro Caroti</a></li>
