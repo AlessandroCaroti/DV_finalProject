@@ -41,7 +41,10 @@ Then, in the file <i> support_charts.js </i> there are all the function to load 
 <br/> 
 <br/>
 
-Is possible to view the webpage <a href="http://rmplst.me/project/"> here (not always available) </a>.
+Is possible to view the webpage <a href="http://rmplst.me/project/"> here (not always available)</a>.
+
+### WebPage preview:
+![alt text](https://github.com/AlessandroCaroti/DV_finalProject/blob/main/preview.png?raw=true)
 
 <b>Contributors:</b>
 <ul>
