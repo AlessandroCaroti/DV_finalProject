@@ -81,7 +81,7 @@ for year in global_dict.keys():
         dataYear_folder+"/"+str(year)+"/5-year_mean.csv", index=False)
 
 print()
-new_row = {"Average": "five_year",
+new_row = {"Average": "five_years",
            "First_year": first_year,
            "Last_year": last_year,
            "min_temp": minTmp,
