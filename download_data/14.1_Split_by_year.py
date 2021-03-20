@@ -8,6 +8,7 @@ dataTmp_folder = "./download_data/data/counties"
 dataYear_folder = "./download_data/data/years"
 
 first_year = None
+last_year = None
 
 global_dict = {}
 
@@ -16,7 +17,7 @@ minTmp = 99999
 
 
 def group_year(df):
-    global first_year
+    global first_year, last_year
     year_list = df.loc[:, "Year": "Month"]
     year_dict = {}
     find_start = False
@@ -25,6 +26,8 @@ def group_year(df):
             year_dict[year] = idx
         if (first_year is None or year < first_year) and (not np.isnan(df.loc[idx, "Annual Anomaly"])):
             first_year = year
+        if (not np.isnan(df.loc[idx, "Annual Anomaly"])):
+            last_year = year
     return year_dict
 
 
@@ -77,9 +80,9 @@ for year in global_dict.keys():
         dataYear_folder+"/"+str(year)+"/Annual_mean.csv", index=False)
 
 print()
-new_row = {"Average": ["Annual"],
+new_row = {"Average": ["annuals"],
            "First_year": [first_year],
-           "Last_year": [sorted(global_dict.keys())[-1]],
+           "Last_year": [last_year],
            "min_temp": [minTmp],
            "max_tmp": [maxTmp]}
 df = pd.DataFrame.from_dict(new_row)
