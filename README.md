@@ -3,7 +3,7 @@
 WebPage Berkeley Earth Temperature - Data Visualization project
 
 ### Execution:
-- Execute a server with <i> index.html </i> as main html.
+- Execute a server with <i> project/index.html </i> as main html.
 - If the laptop has a screen of 13'', reduce the zoom of the page to 75%.
 <br/>
 
