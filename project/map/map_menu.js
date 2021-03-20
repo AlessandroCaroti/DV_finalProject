@@ -239,7 +239,6 @@ function init_yearDivision(){
         years_division[row.Average] = {first_year : parseInt(row.First_year), last_year : parseInt(row.Last_year)}
       })
 
-      console.log(years_division)
     })
     .catch(function (error) {
       console.log(error);
