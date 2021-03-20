@@ -1,4 +1,5 @@
-# DV_finalProject
+# Data Visualization: Data Visualization
+<img href="https://github.com/AlessandroCaroti/DV_finalProject/blob/main/project/images/Global_Warming_icon.svg" > </img>
  WebPage Berkeley Earth Temperature - DataVisualization project
 
  -The <strong><a href="https://github.com/AlessandroCaroti/DV_finalProject/tree/main/project"> project</a></strong> folder there is <br>
