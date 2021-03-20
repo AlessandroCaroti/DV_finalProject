@@ -8,6 +8,6 @@
 <b>Contributors:</b>
 <ul>
  <li><a href="https://github.com/AlessandroCaroti">Alessandro Caroti</a></li>
- <li><a href="https://github.com/simocampi"><del>Simone Campisi</del></a></li>
- <li><a href="https://github.com/LazyRacc00n">Jacopo Dapueto</a></li>
+ <li><a href="https://github.com/simocampi">Simone Campisi</del></a></li>
+ <li><a href="https://github.com/LazyRacc00n"><del>Jacopo Dapueto</a></li>
 </ul>
