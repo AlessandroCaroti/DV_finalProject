@@ -636,7 +636,7 @@ function load_map() {
       set_colorScale();
       draw_legend();
 
-      $("body").addClass("loaded");
+      d3.select("body").classed("loaded", true);
     })
     .catch((error) => {
       console.log(error);
