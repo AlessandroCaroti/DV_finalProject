@@ -16,7 +16,7 @@ WebPage Berkeley Earth Temperature - Data Visualization project
 
 <br/> 
 
-The folder <b> map </b> contains all the javascript files which implement the map with all the relative features.
+The <b> map </b> folder contains all the javascript files which implement the map with all the relative features.
 <ul>
  <li> <i>color_scale.js</i> contains the functions for the color scale and the legend;</li>
  <li> <i> map_btn.js </i> implements the buttons to control the zoom and the panning;</li>
