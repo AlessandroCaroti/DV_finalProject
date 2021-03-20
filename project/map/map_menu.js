@@ -115,7 +115,10 @@ d3.select("#slider_ball_year_start").call(d3.drag()
                                       .on("start", () => {d3.select("#slider_ball_year_start").attr("r", 6);
                                                           d3.select("#start_year").style("font-weight","bold");})
                                       .on("drag", (event) => {
-                                        if(event.x >= start_line_2 && event.x < (endYear_pos-twenty_year_gap)){
+
+                                        let first_year = years_division[getCheckedValue("btn-range-year").value].first_year;
+
+                                        if(event.x >= start_line_2 && event.x < (endYear_pos-twenty_year_gap) && event.x >= year_scale(parseInt(first_year))){
                                           startYear_pos = event.x
                                           startYear_selected = Math.floor(year_scale.invert(startYear_pos));
                                           d3.select("#slider_ball_year_start").attr("cx",startYear_pos)
@@ -123,7 +126,7 @@ d3.select("#slider_ball_year_start").call(d3.drag()
                                           d3.select("#start_year").attr("x", startYear_pos-12).text(startYear_selected)
                                         }
                                       })
-                                      .on("end", () => {console.log(startYear_selected)
+                                      .on("end", () => {
                                                         d3.select("#slider_ball_year_start").raise().attr("r", 5);
                                                         d3.select("#start_year").style("font-weight","normal");}))
 
@@ -132,7 +135,10 @@ d3.select("#slider_ball_year_end").call(d3.drag()
                                       .on("start", () => {d3.select("#slider_ball_year_end").attr("r", 6);
                                                           d3.select("#end_year").style("font-weight","bold");})
                                       .on("drag", (event) => {
-                                        if(event.x > (startYear_pos+twenty_year_gap) && event.x <= end_line_2){
+
+                                        let last_year = years_division[getCheckedValue("btn-range-year").value].last_year;
+
+                                        if(event.x > (startYear_pos+twenty_year_gap) && event.x <= end_line_2 && event.x <= year_scale(parseInt(last_year) + 1 )){
                                           endYear_pos = event.x
                                           endYear_selected = Math.ceil((year_scale.invert(endYear_pos)));
                                           d3.select("#slider_ball_year_end").attr("cx",endYear_pos)
@@ -140,7 +146,7 @@ d3.select("#slider_ball_year_end").call(d3.drag()
                                           d3.select("#end_year").attr("x", endYear_pos-8).text(endYear_selected)
                                         }
                                       })
-                                      .on("end", () => {console.log(startYear_selected)
+                                      .on("end", () => {
                                                         d3.select("#slider_ball_year_end").attr("r", 5);
                                                         d3.select("#end_year").style("font-weight","normal");}))
 var curr_year_k = 1750
@@ -195,3 +201,47 @@ d3.select("#setting_btn_close").on("click", function () {
     });
   d3.select("#munu_parts").selectAll("*").attr("visibility", "hidden");
 });
+
+
+// EVENT RANGE SELECTED
+function updateSliderBalls(){
+
+  let first_year = years_division[getCheckedValue("btn-range-year").value].first_year;
+  let last_year = years_division[getCheckedValue("btn-range-year").value].last_year;
+
+  // update slider ball start year
+  d3.select("#slider_ball_year_start").attr("cx",year_scale(first_year)).attr("cy",y_l_2+2).raise();
+  d3.select("#start_year").text(first_year);
+
+
+  // update slider ball end year
+  d3.select("#slider_ball_year_end").attr("cx",year_scale(last_year)).attr("cy",y_l_2+2).raise();
+  d3.select("#end_year").text(last_year);
+
+
+  d3.select("#selected_range").attr("x",year_scale(first_year)).attr("width",year_scale(last_year)-year_scale(first_year));
+
+  // update variable
+  startYear_pos = year_scale(first_year);
+  startYear_selected = first_year;
+
+  endYear_pos = year_scale(last_year)
+  endYear_selected = last_year;
+}
+
+// INITIALIZATION YEAR DIVISION 
+function init_yearDivision(){
+
+  d3.csv("../../data/14.4_info_yearsDivision.csv")
+    .then(function(data){
+
+      data.forEach(function(row){
+        years_division[row.Average] = {first_year : parseInt(row.First_year), last_year : parseInt(row.Last_year)}
+      })
+
+    })
+    .catch(function (error) {
+      console.log(error);
+      throw error;
+    });
+}
