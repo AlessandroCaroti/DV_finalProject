@@ -36,5 +36,5 @@ Then, in the file <i> support_charts.js </i> there are all the function to load 
 <ul>
  <li><a href="https://github.com/AlessandroCaroti">Alessandro Caroti</a></li>
  <li><a href="https://github.com/simocampi">Simone Campisi</del></a></li>
- <li><a href="https://github.com/LazyRacc00n"><del>Jacopo Dapueto</a></li>
+ <li><a href="https://github.com/LazyRacc00n">Jacopo Dapueto</a></li>
 </ul>
