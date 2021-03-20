@@ -1,6 +1,6 @@
 TO DO:
-- rimmuovere librerie non più usate presenti nell'html
-- sistemare i file con dentro roba a caso
+- chrome 13' -> zoom pagina 75%
+- completare il readme
 - Buttare la pagina in un convalidatore HTML5
 - deprivatizzare il progetto prima della consegna
 
@@ -12,7 +12,6 @@ IDEE:
 
 
 DA DISCUTERE:
-bom vi prego
 
 DA CHIEDERE:
 
