@@ -12,7 +12,7 @@ var unknown_temp = "#999999"; // color indicating there is no data for such coun
 var default_transition = 500;
 var n_levels;
 var cur_level;
-
+var years_division = {};
 var geoGenerator;
 
 var country_list_map = []; // List of the name of the countries present in the map
@@ -469,6 +469,7 @@ function init_map_controls() {
   init_zoomBtns();
   init_animationBtn();
   init_yearSpace();
+  init_yearDivision();
 }
 
 function changeView() {

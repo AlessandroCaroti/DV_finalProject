@@ -227,3 +227,4 @@ function wheelDistance(e) {
   // IE, Safari, Chrome & other browsers
   return w / 120;
 }
+
