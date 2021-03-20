@@ -7,7 +7,7 @@
 <br/>
 ### Execution:
 - Execute with server the main html: <i> index.html </i>.
-- if the laptop has a screen of 13'', reduce the zoom of the page to 75%.
+- If the laptop has a screen of 13'', reduce the zoom of the page to 75%.
 
 <br/> 
 
