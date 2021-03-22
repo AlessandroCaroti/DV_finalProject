@@ -39,7 +39,7 @@ The <b> Charts </b> folder containts the javascript files which implement the ot
 
 ---
 
-Is possible to view the webpage <a href="http://rmplst.me/project/"> here (not always available)</a>.
+Is possible to view the webpage <a href="http://rmplst.me/project/" target="_blank"> here (not always available)</a>.
 
 ### WebPage preview:
 <kbd>![alt text](https://github.com/AlessandroCaroti/DV_finalProject/blob/main/preview.png?raw=true)</kbd>
