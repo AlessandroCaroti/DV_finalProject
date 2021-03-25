@@ -184,6 +184,7 @@ function getLineGeneratorsSeasonal(x, y) {
       return y(d.seasonalBaseline - d.unc);
     });
 
+    
   var valuelineSeasonalBaseline = d3
     .line()
     .x(function (d) {
