@@ -3,7 +3,7 @@
 WebPage Berkeley Earth Temperature - Data Visualization project
 
 ### Execution:
-- Execute a server with <i> project/index.html </i> as main html.
+- Execute a server with <b><i>project/index.html</i></b> as main html.
 - If the laptop has a screen of 13'', reduce the zoom of the page to 75%.
 <br/>
 
@@ -39,10 +39,10 @@ The <b> Charts </b> folder containts the javascript files which implement the ot
 
 ---
 
-Is possible to view the webpage <a href="http://rmplst.me/project/"> here (not always available)</a>.
+Is possible to view the webpage <a href="http://rmplst.me/project/" rel="noopener noreferrer" target="_blank"> here (not always available)</a>.
 
 ### WebPage preview:
-![alt text](https://github.com/AlessandroCaroti/DV_finalProject/blob/main/preview.png?raw=true)
+<kbd>![alt text](https://github.com/AlessandroCaroti/DV_finalProject/blob/main/preview.png?raw=true)</kbd>
 
 <b>Contributors:</b>
 <ul>
